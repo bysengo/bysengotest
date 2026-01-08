@@ -1,0 +1,341 @@
+<!-- Sengo Landing Page - Custom Code for Squarespace -->
+<!-- Instructions: Add this to a Code Block in Squarespace or inject via Settings > Advanced > Code Injection -->
+
+<style>
+  .sengo-landing {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+
+  /* Hero Section */
+  .sengo-hero {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .sengo-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    line-height: 1.2;
+    color: #1a1a1a;
+  }
+
+  .sengo-hero-image {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    margin: 0 auto 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Logo Slider */
+  .sengo-logo-section {
+    margin: 60px 0;
+    overflow: hidden;
+    padding: 30px 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+
+  .sengo-logo-section p {
+    text-align: center;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #666;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .logo-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .logo-track {
+    display: flex;
+    animation: scroll 20s linear infinite;
+    width: fit-content;
+  }
+
+  .logo-track:hover {
+    animation-play-state: paused;
+  }
+
+  .logo-item {
+    flex: 0 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-item img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  .logo-item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Subtext Section */
+  .sengo-subtext {
+    text-align: center;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #444;
+    margin: 60px auto;
+    max-width: 800px;
+  }
+
+  /* Thesis Section */
+  .sengo-thesis {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 40px;
+    border-radius: 12px;
+    margin: 60px 0;
+    text-align: center;
+  }
+
+  .sengo-thesis h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+
+  .sengo-thesis p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    opacity: 0.95;
+  }
+
+  /* Pathway Buttons */
+  .pathway-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  .pathway-btn {
+    padding: 18px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 3px solid white;
+    background: transparent;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .pathway-btn:hover {
+    background: white;
+    color: #667eea;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .pathway-btn.active {
+    background: white;
+    color: #667eea;
+  }
+
+  /* Email Section */
+  .sengo-email-section {
+    text-align: center;
+    margin: 80px 0;
+    padding: 60px 40px;
+    background: #f8f9fa;
+    border-radius: 12px;
+  }
+
+  .sengo-email-section h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+  }
+
+  .sengo-email-section p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sengo-hero h1 {
+      font-size: 2rem;
+    }
+
+    .sengo-thesis {
+      padding: 40px 20px;
+    }
+
+    .sengo-thesis h2 {
+      font-size: 1.5rem;
+    }
+
+    .pathway-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pathway-btn {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .logo-item {
+      padding: 0 30px;
+    }
+
+    .logo-item img {
+      height: 30px;
+    }
+  }
+</style>
+
+<div class="sengo-landing">
+
+  <!-- Hero Section -->
+  <div class="sengo-hero">
+    <h1>Empowering the Next Generation of Founders</h1>
+    <img src="YOUR_HERO_IMAGE_URL_HERE" alt="Sengo Hero" class="sengo-hero-image">
+  </div>
+
+  <!-- Logo Slider -->
+  <div class="sengo-logo-section">
+    <p>As Featured In</p>
+    <div class="logo-slider">
+      <div class="logo-track">
+        <!-- First set of logos -->
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+        </div>
+        <!-- Duplicate set for seamless loop -->
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtext -->
+  <div class="sengo-subtext">
+    <p>Sengo is revolutionizing how founders and funders connect, collaborate, and create lasting impact in the entrepreneurial ecosystem.</p>
+  </div>
+
+  <!-- Thesis Section with Pathway Selection -->
+  <div class="sengo-thesis">
+    <h2>Choose Your Path</h2>
+    <p>
+      At Sengo, we believe in democratizing access to capital and opportunity.
+      Whether you're building the next big thing, investing in innovation, or doing both—
+      we're here to support your journey. Select your pathway below to get started.
+    </p>
+
+    <div class="pathway-buttons">
+      <button class="pathway-btn" data-pathway="founder">I'm a Founder</button>
+      <button class="pathway-btn" data-pathway="funder">I'm a Funder</button>
+      <button class="pathway-btn" data-pathway="both">I'm Both</button>
+    </div>
+  </div>
+
+  <!-- Email Capture Section -->
+  <div class="sengo-email-section">
+    <h3>Stay Connected</h3>
+    <p>Join our community and be the first to know about updates, opportunities, and events.</p>
+
+    <!-- REPLACE THIS COMMENT WITH YOUR SQUARESPACE FORM BLOCK -->
+    <!-- Instructions:
+         1. In Squarespace, add a Form Block here
+         2. Configure your form fields (email, name, etc.)
+         3. The form will inherit the styling from this section
+    -->
+    <div class="squarespace-form-placeholder">
+      <p style="color: #999; font-style: italic;">
+        [Add your Squarespace Form Block here]
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Pathway button interaction
+  document.addEventListener('DOMContentLoaded', function() {
+    const pathwayButtons = document.querySelectorAll('.pathway-btn');
+
+    pathwayButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        pathwayButtons.forEach(btn => btn.classList.remove('active'));
+
+        // Add active class to clicked button
+        this.classList.add('active');
+
+        // Get the selected pathway
+        const pathway = this.getAttribute('data-pathway');
+
+        // You can store this in localStorage or send to analytics
+        localStorage.setItem('selectedPathway', pathway);
+
+        // Optional: Log to console or send to analytics
+        console.log('Selected pathway:', pathway);
+
+        // Optional: You can add custom tracking here
+        // Example: gtag('event', 'pathway_selected', { pathway: pathway });
+      });
+    });
+  });
+</script>
