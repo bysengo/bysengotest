@@ -396,9 +396,9 @@
     </p>
 
     <div class="pathway-buttons">
-      <button class="pathway-btn" data-pathway="founder">I'm a Founder</button>
-      <button class="pathway-btn" data-pathway="funder">I'm a Funder</button>
-      <button class="pathway-btn" data-pathway="both">I'm Both</button>
+      <button class="pathway-btn" onclick="selectPathway(this, 'founder')">I'm a Founder</button>
+      <button class="pathway-btn" onclick="selectPathway(this, 'funder')">I'm a Funder</button>
+      <button class="pathway-btn" onclick="selectPathway(this, 'both')">I'm Both</button>
     </div>
   </div>
 
@@ -426,30 +426,27 @@
 </div>
 
 <script>
-  // Pathway button interaction
-  document.addEventListener('DOMContentLoaded', function() {
-    const pathwayButtons = document.querySelectorAll('.pathway-btn');
-
-    pathwayButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        // Remove active class from all buttons
-        pathwayButtons.forEach(btn => btn.classList.remove('active'));
-
-        // Add active class to clicked button
-        this.classList.add('active');
-
-        // Get the selected pathway
-        const pathway = this.getAttribute('data-pathway');
-
-        // Store in localStorage
-        localStorage.setItem('selectedPathway', pathway);
-
-        // Log to console
-        console.log('Selected pathway:', pathway);
-
-        // Optional: Add your analytics tracking here
-        // Example: gtag('event', 'pathway_selected', { pathway: pathway });
-      });
+  // Pathway button interaction - works reliably in Squarespace
+  function selectPathway(button, pathway) {
+    // Remove active class from all buttons
+    var buttons = document.querySelectorAll('.pathway-btn');
+    buttons.forEach(function(btn) {
+      btn.classList.remove('active');
     });
-  });
+
+    // Add active class to clicked button
+    button.classList.add('active');
+
+    // Store in localStorage
+    localStorage.setItem('selectedPathway', pathway);
+
+    // Log to console
+    console.log('Selected pathway:', pathway);
+
+    // Optional: Add your analytics tracking here
+    // Example: gtag('event', 'pathway_selected', { pathway: pathway });
+
+    // Optional: Scroll to email form
+    // document.querySelector('.sengo-email-section').scrollIntoView({ behavior: 'smooth' });
+  }
 </script>
