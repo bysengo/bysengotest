@@ -1,0 +1,517 @@
+<!-- Sengo Landing Page - PLAYFUL DOODLE VERSION -->
+<!-- Version 1: Hand-drawn elements, scribbles, marker highlights, polaroid vibes -->
+
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&family=Caveat:wght@400;500;600;700&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .sengo-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+  }
+
+  /* Playful doodle decorations */
+  .doodle-circle {
+    position: absolute;
+    border: 3px solid #D57028;
+    border-radius: 50%;
+    transform: rotate(-5deg);
+  }
+
+  .doodle-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .doodle-underline::after {
+    content: '';
+    position: absolute;
+    left: -5%;
+    bottom: -8px;
+    width: 110%;
+    height: 12px;
+    background: #D57028;
+    opacity: 0.4;
+    transform: rotate(-1deg);
+    z-index: -1;
+  }
+
+  .doodle-x {
+    position: absolute;
+    font-family: 'Caveat', cursive;
+    font-size: 4rem;
+    color: #D57028;
+    font-weight: bold;
+    transform: rotate(-15deg);
+    opacity: 0.7;
+  }
+
+  /* Logo Slider with polaroid frames */
+  .sengo-logo-section {
+    margin: 60px 0;
+    overflow: hidden;
+    padding: 50px 0;
+    background: white;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .sengo-logo-section::before {
+    content: '★';
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: #D57028;
+  }
+
+  .sengo-logo-section p {
+    text-align: center;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #67441A;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .logo-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .logo-track {
+    display: flex;
+    animation: scroll 25s linear infinite;
+    width: fit-content;
+  }
+
+  .logo-track:hover {
+    animation-play-state: paused;
+  }
+
+  .logo-item {
+    flex: 0 0 auto;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .logo-item img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+
+  .logo-item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Subtext with hand-drawn element */
+  .sengo-subtext {
+    text-align: center;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #67441A;
+    margin: 80px auto;
+    max-width: 850px;
+    font-weight: 500;
+    position: relative;
+  }
+
+  .sengo-subtext::before {
+    content: '→';
+    position: absolute;
+    left: -60px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-10deg);
+    font-size: 3rem;
+    color: #717E36;
+    font-family: 'Caveat', cursive;
+  }
+
+  /* Stats with playful frames */
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 80px 0;
+    position: relative;
+  }
+
+  .stat-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    border: 4px solid #1B3533;
+    transition: all 0.3s ease;
+    position: relative;
+    transform: rotate(0deg);
+  }
+
+  .stat-card:nth-child(1) {
+    transform: rotate(-2deg);
+  }
+
+  .stat-card:nth-child(2) {
+    transform: rotate(1deg);
+  }
+
+  .stat-card:nth-child(3) {
+    transform: rotate(-1deg);
+  }
+
+  .stat-card:hover {
+    transform: rotate(0deg) translateY(-10px);
+    box-shadow: 0 20px 50px rgba(27, 53, 51, 0.15);
+  }
+
+  .stat-card::before {
+    content: '✦';
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    font-size: 2rem;
+    color: #D57028;
+  }
+
+  .stat-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #1B3533;
+    margin-bottom: 10px;
+    font-family: 'Arimo', sans-serif;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    color: #67441A;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Thesis Section - playful style */
+  .sengo-thesis {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: #F3EDE7;
+    padding: 80px 50px;
+    border-radius: 30px;
+    margin: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: visible;
+  }
+
+  .sengo-thesis::before {
+    content: '~';
+    position: absolute;
+    top: -30px;
+    left: 40px;
+    font-size: 6rem;
+    color: #AF8145;
+    font-family: 'Caveat', cursive;
+    transform: rotate(-20deg);
+  }
+
+  .sengo-thesis::after {
+    content: '◡';
+    position: absolute;
+    bottom: -20px;
+    right: 50px;
+    font-size: 5rem;
+    color: #AF8145;
+    font-family: 'Caveat', cursive;
+  }
+
+  .sengo-thesis h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 7rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sengo-thesis p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    margin-bottom: 50px;
+    opacity: 0.95;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Impact Badge - playful style */
+  .impact-badge {
+    display: inline-block;
+    background: #D57028;
+    color: white;
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    position: relative;
+    transform: rotate(-2deg);
+  }
+
+  .impact-badge::after {
+    content: '✨';
+    position: absolute;
+    right: -25px;
+    top: -10px;
+    font-size: 1.5rem;
+  }
+
+  /* Pathway Buttons - playful rounded */
+  .pathway-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pathway-btn {
+    padding: 22px 55px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border: 4px solid #F3EDE7;
+    background: transparent;
+    color: #F3EDE7;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+  }
+
+  .pathway-btn:hover {
+    background: #D57028;
+    border-color: #D57028;
+    transform: translateY(-5px) rotate(2deg);
+    box-shadow: 0 15px 40px rgba(213, 112, 40, 0.4);
+  }
+
+  .pathway-btn.active {
+    background: #D57028;
+    border-color: #D57028;
+    color: white;
+    transform: rotate(-1deg);
+  }
+
+  /* Email Section */
+  .sengo-email-section {
+    text-align: center;
+    margin: 100px 0;
+    padding: 80px 50px;
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 10px 40px rgba(27, 53, 51, 0.08);
+    position: relative;
+  }
+
+  .sengo-email-section::before {
+    content: '♡';
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    font-size: 3rem;
+    color: #717E36;
+    font-family: 'Caveat', cursive;
+  }
+
+  .sengo-email-section .impact-badge {
+    background: #717E36;
+  }
+
+  .sengo-email-section h3 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 7rem;
+    margin-bottom: 20px;
+    color: #1B3533;
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .sengo-email-section h3::after {
+    content: '';
+    position: absolute;
+    left: 20%;
+    bottom: -10px;
+    width: 60%;
+    height: 8px;
+    background: #AF8145;
+    opacity: 0.3;
+    transform: rotate(-1deg);
+  }
+
+  .sengo-email-section p {
+    font-size: 1.15rem;
+    color: #67441A;
+    margin-bottom: 40px;
+    font-weight: 500;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sengo-thesis h2,
+    .sengo-email-section h3 {
+      font-size: 3.5rem;
+    }
+
+    .sengo-subtext::before {
+      display: none;
+    }
+
+    .pathway-btn {
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .stat-card {
+      transform: rotate(0deg) !important;
+    }
+  }
+</style>
+
+<div class="sengo-content">
+
+  <!-- Logo Slider -->
+  <div class="sengo-logo-section">
+    <p>As Featured In</p>
+    <div class="logo-slider">
+      <div class="logo-track">
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtext -->
+  <div class="sengo-subtext">
+    <p>Sengo is <span class="doodle-underline">revolutionizing</span> how founders and funders connect, collaborate, and create lasting impact in the entrepreneurial ecosystem.</p>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <div class="stat-number">90+</div>
+      <div class="stat-label">Annual Touchpoints</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">600</div>
+      <div class="stat-label">App Members</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">$5M+</div>
+      <div class="stat-label">Raised by Founders</div>
+    </div>
+  </div>
+
+  <!-- Thesis Section -->
+  <div class="sengo-thesis">
+    <span class="impact-badge">Choose Your Path</span>
+    <h2>Join the Movement</h2>
+    <p>
+      Whether you're building the next big thing, investing in innovation, or doing both—
+      we're here to support your journey.
+    </p>
+
+    <div class="pathway-buttons">
+      <button class="pathway-btn" onclick="selectPathway(this, 'founder')">I'm a Founder</button>
+      <button class="pathway-btn" onclick="selectPathway(this, 'funder')">I'm a Funder</button>
+      <button class="pathway-btn" onclick="selectPathway(this, 'both')">I'm Both</button>
+    </div>
+  </div>
+
+  <!-- Email Section -->
+  <div class="sengo-email-section">
+    <span class="impact-badge">Stay Connected</span>
+    <h3>Get Early Access</h3>
+    <p>Join our community and be the first to know about partnership opportunities, events, and updates.</p>
+
+    <div style="padding: 40px; background: #F3EDE7; border-radius: 20px; border: 3px dashed #D57028;">
+      <p style="color: #67441A; font-style: italic; margin: 0;">
+        [Add your Squarespace Form Block here]
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function selectPathway(button, pathway) {
+    var buttons = document.querySelectorAll('.pathway-btn');
+    buttons.forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+    button.classList.add('active');
+    localStorage.setItem('selectedPathway', pathway);
+    console.log('Selected pathway:', pathway);
+  }
+</script>

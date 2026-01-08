@@ -1,0 +1,496 @@
+<!-- Sengo Landing Page - ORGANIC BOTANICAL VERSION -->
+<!-- Version 2: Soft botanical illustrations, clean minimalist, natural aesthetic -->
+
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .sengo-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+  }
+
+  /* Botanical decorative elements */
+  .botanical-accent {
+    position: absolute;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  .botanical-leaf-1 {
+    top: 100px;
+    right: 50px;
+    width: 120px;
+    height: 120px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 Q80 30 80 60 Q80 80 50 90 Q50 60 50 10" fill="%23717E36" stroke="%23717E36" stroke-width="1.5" fill="none"/><path d="M50 30 L70 50" stroke="%23717E36" stroke-width="1"/><path d="M50 45 L65 60" stroke="%23717E36" stroke-width="1"/></svg>') no-repeat center;
+    background-size: contain;
+  }
+
+  .botanical-branch {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M20 180 Q50 100 100 50" stroke="%23AF8145" stroke-width="2" fill="none"/><circle cx="30" cy="160" r="8" fill="%23AF8145" opacity="0.3"/><circle cx="50" cy="130" r="6" fill="%23AF8145" opacity="0.3"/><circle cx="70" cy="100" r="7" fill="%23AF8145" opacity="0.3"/><circle cx="90" cy="70" r="5" fill="%23AF8145" opacity="0.3"/></svg>') no-repeat;
+    background-size: contain;
+    opacity: 0.2;
+  }
+
+  /* Logo Slider - minimal clean */
+  .sengo-logo-section {
+    margin: 80px 0;
+    overflow: hidden;
+    padding: 50px 20px;
+    background: linear-gradient(to bottom, #ffffff 0%, #F3EDE7 100%);
+    border-radius: 0;
+    position: relative;
+  }
+
+  .sengo-logo-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #717E36, transparent);
+  }
+
+  .sengo-logo-section p {
+    text-align: center;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #67441A;
+    margin-bottom: 40px;
+    font-weight: 600;
+    opacity: 0.7;
+  }
+
+  .logo-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .logo-track {
+    display: flex;
+    animation: scroll 30s linear infinite;
+    width: fit-content;
+  }
+
+  .logo-track:hover {
+    animation-play-state: paused;
+  }
+
+  .logo-item {
+    flex: 0 0 auto;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-item img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.4;
+    transition: all 0.4s ease;
+  }
+
+  .logo-item:hover img {
+    filter: grayscale(0%);
+    opacity: 0.9;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Subtext - clean and spacious */
+  .sengo-subtext {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 2;
+    color: #67441A;
+    margin: 100px auto;
+    max-width: 750px;
+    font-weight: 400;
+    position: relative;
+  }
+
+  .sengo-subtext::before,
+  .sengo-subtext::after {
+    content: '❋';
+    position: absolute;
+    font-size: 1.5rem;
+    color: #AF8145;
+    opacity: 0.3;
+  }
+
+  .sengo-subtext::before {
+    left: -40px;
+    top: 0;
+  }
+
+  .sengo-subtext::after {
+    right: -40px;
+    bottom: 0;
+  }
+
+  /* Stats - minimal cards with botanical accents */
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin: 100px 0;
+    position: relative;
+  }
+
+  .stat-card {
+    background: white;
+    padding: 50px 30px;
+    border-radius: 0;
+    text-align: center;
+    border: none;
+    border-left: 6px solid #717E36;
+    transition: all 0.4s ease;
+    position: relative;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><circle cx="25" cy="25" r="3" fill="%23AF8145" opacity="0.3"/><circle cx="15" cy="15" r="2" fill="%23AF8145" opacity="0.2"/><circle cx="35" cy="15" r="2" fill="%23AF8145" opacity="0.2"/><circle cx="15" cy="35" r="2" fill="%23AF8145" opacity="0.2"/><circle cx="35" cy="35" r="2" fill="%23AF8145" opacity="0.2"/></svg>') no-repeat center;
+    opacity: 0.5;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 50px rgba(113, 126, 54, 0.12);
+    border-left-color: #D57028;
+  }
+
+  .stat-number {
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: #1B3533;
+    margin-bottom: 15px;
+    font-family: 'Arimo', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: #67441A;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+  }
+
+  /* Thesis Section - organic gradient */
+  .sengo-thesis {
+    background: linear-gradient(135deg, #1B3533 0%, #717E36 100%);
+    color: #F3EDE7;
+    padding: 100px 60px;
+    border-radius: 0;
+    margin: 120px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sengo-thesis::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(175, 129, 69, 0.15) 0%, transparent 70%);
+  }
+
+  .sengo-thesis::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.1) 0%, transparent 70%);
+  }
+
+  .sengo-thesis h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 6.5rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sengo-thesis p {
+    font-size: 1.1rem;
+    line-height: 2;
+    margin-bottom: 60px;
+    opacity: 0.9;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Impact Badge - minimal */
+  .impact-badge {
+    display: inline-block;
+    background: transparent;
+    color: #F3EDE7;
+    padding: 8px 0;
+    border-radius: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #D57028;
+  }
+
+  /* Pathway Buttons - organic rounded */
+  .pathway-buttons {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pathway-btn {
+    padding: 20px 50px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border: 2px solid #F3EDE7;
+    background: transparent;
+    color: #F3EDE7;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .pathway-btn:hover {
+    background: rgba(243, 237, 231, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .pathway-btn.active {
+    background: #F3EDE7;
+    border-color: #F3EDE7;
+    color: #1B3533;
+  }
+
+  /* Email Section - clean botanical */
+  .sengo-email-section {
+    text-align: center;
+    margin: 120px 0;
+    padding: 100px 60px;
+    background: linear-gradient(to bottom, white 0%, #F3EDE7 100%);
+    border-radius: 0;
+    position: relative;
+  }
+
+  .sengo-email-section::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 20 Q40 40 50 60 Q60 40 50 20" stroke="%23717E36" stroke-width="1.5" fill="none"/><path d="M50 30 Q35 45 50 60" stroke="%23717E36" stroke-width="1" fill="none" opacity="0.5"/><path d="M50 30 Q65 45 50 60" stroke="%23717E36" stroke-width="1" fill="none" opacity="0.5"/></svg>') no-repeat center;
+    opacity: 0.15;
+  }
+
+  .sengo-email-section .impact-badge {
+    color: #717E36;
+    border-bottom-color: #717E36;
+  }
+
+  .sengo-email-section h3 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 6.5rem;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    color: #1B3533;
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+  }
+
+  .sengo-email-section p {
+    font-size: 1.1rem;
+    color: #67441A;
+    margin-bottom: 50px;
+    font-weight: 400;
+    line-height: 1.8;
+    opacity: 0.8;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sengo-thesis h2,
+    .sengo-email-section h3 {
+      font-size: 3rem;
+    }
+
+    .sengo-subtext::before,
+    .sengo-subtext::after {
+      display: none;
+    }
+
+    .pathway-btn {
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .botanical-leaf-1,
+    .botanical-branch {
+      display: none;
+    }
+  }
+</style>
+
+<div class="sengo-content">
+
+  <!-- Decorative botanical elements -->
+  <div class="botanical-leaf-1 botanical-accent"></div>
+
+  <!-- Logo Slider -->
+  <div class="sengo-logo-section">
+    <p>As Featured In</p>
+    <div class="logo-slider">
+      <div class="logo-track">
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+        </div>
+        <!-- Duplicate -->
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtext -->
+  <div class="sengo-subtext">
+    <p>Sengo is revolutionizing how founders and funders connect, collaborate, and create lasting impact in the entrepreneurial ecosystem.</p>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <div class="stat-number">90+</div>
+      <div class="stat-label">Annual Touchpoints</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">600</div>
+      <div class="stat-label">App Members</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">$5M+</div>
+      <div class="stat-label">Raised by Founders</div>
+    </div>
+  </div>
+
+  <!-- Thesis Section -->
+  <div class="sengo-thesis">
+    <span class="impact-badge">Choose Your Path</span>
+    <h2>Join the Movement</h2>
+    <p>
+      Whether you're building the next big thing, investing in innovation, or doing both—we're here to support your journey.
+    </p>
+
+    <div class="pathway-buttons">
+      <button class="pathway-btn" onclick="selectPathway(this, 'founder')">i'm a founder</button>
+      <button class="pathway-btn" onclick="selectPathway(this, 'funder')">i'm a funder</button>
+      <button class="pathway-btn" onclick="selectPathway(this, 'both')">i'm both</button>
+    </div>
+  </div>
+
+  <!-- Email Section -->
+  <div class="sengo-email-section">
+    <span class="impact-badge">Stay Connected</span>
+    <h3>Get Early Access</h3>
+    <p>Join our community and be the first to know about partnership opportunities, events, and updates.</p>
+
+    <div style="padding: 50px; background: white; border-radius: 0; border: 1px solid #D57028; border-left: 6px solid #717E36;">
+      <p style="color: #67441A; font-style: italic; margin: 0; opacity: 0.6;">
+        [Add your Squarespace Form Block here]
+      </p>
+    </div>
+  </div>
+
+  <div class="botanical-branch" style="bottom: 100px; left: 50px;"></div>
+
+</div>
+
+<script>
+  function selectPathway(button, pathway) {
+    var buttons = document.querySelectorAll('.pathway-btn');
+    buttons.forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+    button.classList.add('active');
+    localStorage.setItem('selectedPathway', pathway);
+    console.log('Selected pathway:', pathway);
+  }
+</script>

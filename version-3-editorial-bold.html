@@ -1,0 +1,526 @@
+<!-- Sengo Landing Page - EDITORIAL BOLD VERSION -->
+<!-- Version 3: Magazine-style with hand-drawn accents, bold statements, energetic marks -->
+
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Permanent+Marker&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .sengo-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+  }
+
+  /* Hand-drawn editorial marks */
+  .mark-x {
+    position: absolute;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 5rem;
+    color: #D57028;
+    opacity: 0.6;
+    transform: rotate(-15deg);
+  }
+
+  .mark-circle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 4px solid #D57028;
+    border-radius: 50%;
+    opacity: 0.4;
+    transform: rotate(10deg);
+  }
+
+  .mark-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .mark-underline::after {
+    content: '';
+    position: absolute;
+    left: -3%;
+    bottom: 0;
+    width: 106%;
+    height: 6px;
+    background: #AF8145;
+    transform: rotate(-1deg) scaleX(1.05);
+  }
+
+  .mark-arrow {
+    font-family: 'Permanent Marker', cursive;
+    color: #D57028;
+    font-size: 2rem;
+  }
+
+  /* Logo Slider - bold editorial */
+  .sengo-logo-section {
+    margin: 60px 0;
+    overflow: hidden;
+    padding: 40px 0;
+    background: #1B3533;
+    border-radius: 0;
+    position: relative;
+  }
+
+  .sengo-logo-section::before {
+    content: '///////';
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.5rem;
+    color: #D57028;
+    opacity: 0.5;
+    letter-spacing: 5px;
+  }
+
+  .sengo-logo-section p {
+    text-align: center;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #F3EDE7;
+    margin-bottom: 30px;
+    font-weight: 900;
+  }
+
+  .logo-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .logo-track {
+    display: flex;
+    animation: scroll 20s linear infinite;
+    width: fit-content;
+  }
+
+  .logo-track:hover {
+    animation-play-state: paused;
+  }
+
+  .logo-item {
+    flex: 0 0 auto;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-item img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+
+  .logo-item:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Subtext - bold statement */
+  .sengo-subtext {
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #1B3533;
+    margin: 100px auto;
+    max-width: 900px;
+    font-weight: 700;
+    position: relative;
+  }
+
+  .sengo-subtext::before {
+    content: '!!';
+    position: absolute;
+    left: -50px;
+    top: 0;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 3rem;
+    color: #D57028;
+    opacity: 0.4;
+  }
+
+  /* Stats - bold boxes */
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 80px 0;
+    position: relative;
+  }
+
+  .stat-card {
+    background: white;
+    padding: 50px 30px;
+    border-radius: 0;
+    text-align: center;
+    border: 5px solid #1B3533;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 10px 10px 0 #F3EDE7;
+  }
+
+  .stat-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 15px 15px 0 #D57028;
+  }
+
+  .stat-card::after {
+    content: '✱';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2rem;
+    color: #D57028;
+    opacity: 0.3;
+  }
+
+  .stat-number {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #1B3533;
+    margin-bottom: 10px;
+    font-family: 'Arimo', sans-serif;
+    letter-spacing: -0.05em;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    color: #67441A;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* Thesis Section - editorial bold */
+  .sengo-thesis {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: #F3EDE7;
+    padding: 80px 50px;
+    border-radius: 0;
+    margin: 100px 0;
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    border: 6px solid #1B3533;
+    box-shadow: 15px 15px 0 #AF8145;
+  }
+
+  .sengo-thesis::before {
+    content: 'X';
+    position: absolute;
+    top: -30px;
+    right: 50px;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 6rem;
+    color: #D57028;
+    opacity: 0.6;
+    transform: rotate(10deg);
+  }
+
+  .sengo-thesis h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 8rem;
+    margin-bottom: 30px;
+    font-weight: 900;
+    line-height: 0.75;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sengo-thesis p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 50px;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Impact Badge - editorial style */
+  .impact-badge {
+    display: inline-block;
+    background: #D57028;
+    color: #1B3533;
+    padding: 12px 35px;
+    border-radius: 0;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    transform: rotate(-2deg);
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+  }
+
+  /* Pathway Buttons - bold editorial */
+  .pathway-buttons {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pathway-btn {
+    padding: 22px 55px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    border: 4px solid #F3EDE7;
+    background: transparent;
+    color: #F3EDE7;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Arimo', sans-serif;
+    position: relative;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+  }
+
+  .pathway-btn:hover {
+    background: #D57028;
+    border-color: #D57028;
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 rgba(0,0,0,0.3);
+  }
+
+  .pathway-btn.active {
+    background: #F3EDE7;
+    border-color: #F3EDE7;
+    color: #1B3533;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 #D57028;
+  }
+
+  /* Email Section - editorial */
+  .sengo-email-section {
+    text-align: center;
+    margin: 100px 0;
+    padding: 80px 50px;
+    background: white;
+    border-radius: 0;
+    position: relative;
+    border: 5px solid #1B3533;
+    box-shadow: 12px 12px 0 #F3EDE7;
+  }
+
+  .sengo-email-section::before {
+    content: '→';
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 4rem;
+    color: #717E36;
+    opacity: 0.3;
+    transform: rotate(-30deg);
+  }
+
+  .sengo-email-section .impact-badge {
+    background: #717E36;
+    color: white;
+  }
+
+  .sengo-email-section h3 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 7.5rem;
+    margin-bottom: 20px;
+    color: #1B3533;
+    font-weight: 900;
+    line-height: 0.75;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .sengo-email-section h3::before {
+    content: '///';
+    position: absolute;
+    top: -20px;
+    left: 10%;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.5rem;
+    color: #D57028;
+    opacity: 0.4;
+    letter-spacing: 3px;
+  }
+
+  .sengo-email-section p {
+    font-size: 1.15rem;
+    color: #67441A;
+    margin-bottom: 40px;
+    font-weight: 600;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sengo-thesis {
+      box-shadow: 8px 8px 0 #AF8145;
+    }
+
+    .sengo-thesis h2 {
+      font-size: 3.5rem;
+    }
+
+    .sengo-email-section h3 {
+      font-size: 3rem;
+    }
+
+    .sengo-email-section {
+      box-shadow: 6px 6px 0 #F3EDE7;
+    }
+
+    .pathway-btn {
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .stat-card {
+      box-shadow: 5px 5px 0 #F3EDE7;
+    }
+
+    .mark-x,
+    .mark-circle,
+    .sengo-subtext::before,
+    .sengo-thesis::before,
+    .sengo-email-section::before {
+      display: none;
+    }
+  }
+</style>
+
+<div class="sengo-content">
+
+  <!-- Editorial marks -->
+  <div class="mark-circle" style="top: 50px; right: 100px;"></div>
+
+  <!-- Logo Slider -->
+  <div class="sengo-logo-section">
+    <p>As Featured In</p>
+    <div class="logo-slider">
+      <div class="logo-track">
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+        </div>
+        <!-- Duplicate -->
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtext -->
+  <div class="sengo-subtext">
+    <p>We're <span class="mark-underline">revolutionizing</span> how founders & funders connect.</p>
+  </div>
+
+  <div class="mark-x" style="top: 400px; right: 50px;">X</div>
+
+  <!-- Stats Section -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <div class="stat-number">90+</div>
+      <div class="stat-label">Annual Touchpoints</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">600</div>
+      <div class="stat-label">App Members</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">$5M+</div>
+      <div class="stat-label">Raised by Founders</div>
+    </div>
+  </div>
+
+  <!-- Thesis Section -->
+  <div class="sengo-thesis">
+    <span class="impact-badge">Choose Path</span>
+    <h2>Join The Movement</h2>
+    <p>
+      Building the future? Investing in it? Or both? We're here for founders, funders, and everyone in between.
+    </p>
+
+    <div class="pathway-buttons">
+      <button class="pathway-btn" onclick="selectPathway(this, 'founder')">Founder</button>
+      <button class="pathway-btn" onclick="selectPathway(this, 'funder')">Funder</button>
+      <button class="pathway-btn" onclick="selectPathway(this, 'both')">Both</button>
+    </div>
+  </div>
+
+  <div class="mark-circle" style="bottom: 200px; left: 80px; width: 150px; height: 150px;"></div>
+
+  <!-- Email Section -->
+  <div class="sengo-email-section">
+    <span class="impact-badge">Stay Connected</span>
+    <h3>Get Access</h3>
+    <p>First to know about opportunities, events, and what's next.</p>
+
+    <div style="padding: 50px; background: #F3EDE7; border-radius: 0; border: 4px solid #1B3533; box-shadow: 6px 6px 0 #D57028;">
+      <p style="color: #1B3533; font-weight: 700; margin: 0; text-transform: uppercase; letter-spacing: 2px;">
+        [Add Squarespace Form Block]
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function selectPathway(button, pathway) {
+    var buttons = document.querySelectorAll('.pathway-btn');
+    buttons.forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+    button.classList.add('active');
+    localStorage.setItem('selectedPathway', pathway);
+    console.log('Selected pathway:', pathway);
+  }
+</script>
