@@ -19,18 +19,22 @@
 
   /* Image placeholder styling */
   .image-placeholder {
-    background: #F3EDE7;
-    border: 3px dashed #D57028;
+    background: linear-gradient(135deg, #F3EDE7 0%, #E8DFD4 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #67441A;
-    font-weight: 600;
+    color: #AF8145;
+    font-weight: 500;
     text-align: center;
     padding: 20px;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .image-placeholder:hover {
+    opacity: 0.8;
   }
 
   /* Logo Slider - bold editorial */
@@ -150,14 +154,15 @@
     padding: 50px 30px;
     border-radius: 0;
     text-align: center;
-    border: 5px solid #1B3533;
-    transition: all 0.3s ease;
-    box-shadow: 10px 10px 0 #F3EDE7;
+    border: 1px solid rgba(27, 53, 51, 0.1);
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 20px rgba(27, 53, 51, 0.08);
   }
 
   .stat-card:hover {
-    transform: translate(-5px, -5px);
-    box-shadow: 15px 15px 0 #D57028;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(27, 53, 51, 0.15);
+    border-color: rgba(213, 112, 40, 0.3);
   }
 
   .stat-number {
@@ -186,12 +191,11 @@
   .sengo-thesis {
     background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
     color: #F3EDE7;
-    padding: 80px 50px;
+    padding: 100px 60px;
     border-radius: 0;
-    margin: 100px 0;
+    margin: 120px 0;
     position: relative;
-    border: 6px solid #1B3533;
-    box-shadow: 15px 15px 0 #AF8145;
+    box-shadow: 0 20px 60px rgba(27, 53, 51, 0.25);
   }
 
   .thesis-content {
@@ -222,16 +226,16 @@
   /* Impact Badge - editorial style */
   .impact-badge {
     display: inline-block;
-    background: #D57028;
-    color: #1B3533;
-    padding: 12px 35px;
+    background: rgba(243, 237, 231, 0.15);
+    color: #F3EDE7;
+    padding: 10px 30px;
     border-radius: 0;
-    font-size: 1rem;
-    font-weight: 900;
+    font-size: 0.85rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     margin-bottom: 30px;
-    box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+    border: 1px solid rgba(243, 237, 231, 0.3);
   }
 
   /* Pathway section with images */
@@ -260,43 +264,42 @@
   }
 
   .pathway-btn {
-    padding: 22px 55px;
-    font-size: 1.2rem;
-    font-weight: 900;
-    border: 4px solid #F3EDE7;
-    background: transparent;
+    padding: 24px 60px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 2px solid rgba(243, 237, 231, 0.4);
+    background: rgba(243, 237, 231, 0.05);
     color: #F3EDE7;
     border-radius: 0;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     font-family: 'Arimo', sans-serif;
-    box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
   }
 
   .pathway-btn:hover {
-    background: #D57028;
+    background: rgba(213, 112, 40, 0.2);
     border-color: #D57028;
-    transform: translate(-3px, -3px);
-    box-shadow: 9px 9px 0 rgba(0,0,0,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   }
 
   .pathway-btn.active {
     background: #F3EDE7;
     border-color: #F3EDE7;
     color: #1B3533;
-    transform: translate(-2px, -2px);
-    box-shadow: 8px 8px 0 #D57028;
+    box-shadow: 0 8px 25px rgba(243, 237, 231, 0.4);
   }
 
   /* Community showcase section */
   .community-showcase {
-    margin: 100px 0;
+    margin: 120px 0;
     background: white;
-    border: 5px solid #1B3533;
-    box-shadow: 12px 12px 0 #F3EDE7;
-    padding: 60px 40px;
+    border: 1px solid rgba(27, 53, 51, 0.08);
+    box-shadow: 0 15px 50px rgba(27, 53, 51, 0.1);
+    padding: 80px 60px;
   }
 
   .community-showcase h3 {
@@ -343,11 +346,17 @@
     }
 
     .sengo-thesis {
-      box-shadow: 8px 8px 0 #AF8145;
+      padding: 60px 30px;
+      margin: 80px 0;
     }
 
     .sengo-thesis h2 {
       font-size: 3.5rem;
+    }
+
+    .community-showcase {
+      padding: 50px 30px;
+      margin: 80px 0;
     }
 
     .community-showcase h3 {
@@ -358,16 +367,16 @@
       width: 100%;
     }
 
-    .stat-card {
-      box-shadow: 5px 5px 0 #F3EDE7;
-    }
-
     .stats-grid {
       grid-template-columns: 1fr;
     }
 
     .pathway-images {
       order: 2;
+    }
+
+    .subtext-content p {
+      font-size: 1.1rem;
     }
   }
 </style>
