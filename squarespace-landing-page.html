@@ -1,54 +1,39 @@
-<!-- Sengo Landing Page - Custom Code for Squarespace -->
-<!-- Instructions: Add this to a Code Block in Squarespace or inject via Settings > Advanced > Code Injection -->
+<!-- Sengo Landing Page Code Block for Squarespace -->
+<!-- Add this to a Code Block on your Squarespace page -->
+<!-- Build your header/hero above this block using Squarespace's native tools -->
 
 <style>
-  .sengo-landing {
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .sengo-content {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  }
-
-  /* Hero Section */
-  .sengo-hero {
-    text-align: center;
-    margin-bottom: 60px;
-  }
-
-  .sengo-hero h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    line-height: 1.2;
-    color: #1a1a1a;
-  }
-
-  .sengo-hero-image {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    margin: 0 auto 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   /* Logo Slider */
   .sengo-logo-section {
     margin: 60px 0;
     overflow: hidden;
-    padding: 30px 0;
-    background: #f8f9fa;
-    border-radius: 8px;
+    padding: 40px 0;
+    background: white;
+    border-radius: 12px;
   }
 
   .sengo-logo-section p {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #666;
-    margin-bottom: 20px;
-    font-weight: 600;
+    letter-spacing: 3px;
+    color: #67441A;
+    margin-bottom: 30px;
+    font-weight: 700;
   }
 
   .logo-slider {
@@ -59,7 +44,7 @@
 
   .logo-track {
     display: flex;
-    animation: scroll 20s linear infinite;
+    animation: scroll 25s linear infinite;
     width: fit-content;
   }
 
@@ -69,18 +54,18 @@
 
   .logo-item {
     flex: 0 0 auto;
-    padding: 0 40px;
+    padding: 0 50px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .logo-item img {
-    height: 40px;
+    height: 45px;
     width: auto;
     object-fit: contain;
     filter: grayscale(100%);
-    opacity: 0.6;
+    opacity: 0.5;
     transition: all 0.3s ease;
   }
 
@@ -103,32 +88,55 @@
     text-align: center;
     font-size: 1.25rem;
     line-height: 1.8;
-    color: #444;
-    margin: 60px auto;
-    max-width: 800px;
+    color: #67441A;
+    margin: 80px auto;
+    max-width: 850px;
+    font-weight: 500;
   }
 
   /* Thesis Section */
   .sengo-thesis {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 60px 40px;
-    border-radius: 12px;
-    margin: 60px 0;
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: #F3EDE7;
+    padding: 80px 50px;
+    border-radius: 16px;
+    margin: 80px 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sengo-thesis::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.1) 0%, transparent 70%);
+    pointer-events: none;
   }
 
   .sengo-thesis h2 {
-    font-size: 2rem;
+    font-family: 'Arimo', sans-serif;
+    font-size: 7rem;
     margin-bottom: 30px;
-    font-weight: 600;
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
   }
 
   .sengo-thesis p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 40px;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    margin-bottom: 50px;
     opacity: 0.95;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
   }
 
   /* Pathway Buttons */
@@ -137,68 +145,156 @@
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 40px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
   }
 
   .pathway-btn {
-    padding: 18px 40px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border: 3px solid white;
+    padding: 20px 50px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border: 3px solid #F3EDE7;
     background: transparent;
-    color: white;
-    border-radius: 50px;
+    color: #F3EDE7;
+    border-radius: 60px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pathway-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #D57028;
+    transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .pathway-btn:hover::before {
+    width: 300%;
+    height: 300%;
   }
 
   .pathway-btn:hover {
-    background: white;
-    color: #667eea;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-color: #D57028;
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(213, 112, 40, 0.3);
   }
 
   .pathway-btn.active {
-    background: white;
-    color: #667eea;
+    background: #D57028;
+    border-color: #D57028;
+    color: white;
+  }
+
+  /* Impact Badge */
+  .impact-badge {
+    display: inline-block;
+    background: #D57028;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
   }
 
   /* Email Section */
   .sengo-email-section {
     text-align: center;
-    margin: 80px 0;
-    padding: 60px 40px;
-    background: #f8f9fa;
-    border-radius: 12px;
+    margin: 100px 0;
+    padding: 80px 50px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(27, 53, 51, 0.08);
+  }
+
+  .sengo-email-section .impact-badge {
+    background: #717E36;
   }
 
   .sengo-email-section h3 {
-    font-size: 2rem;
+    font-family: 'Arimo', sans-serif;
+    font-size: 7rem;
     margin-bottom: 20px;
-    color: #1a1a1a;
+    color: #1B3533;
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
   }
 
   .sengo-email-section p {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 30px;
+    font-size: 1.15rem;
+    color: #67441A;
+    margin-bottom: 40px;
+    font-weight: 500;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 80px 0;
+  }
+
+  .stat-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    text-align: center;
+    border-top: 4px solid #D57028;
+    transition: all 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(27, 53, 51, 0.12);
+  }
+
+  .stat-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #1B3533;
+    margin-bottom: 10px;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    color: #67441A;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   /* Responsive Design */
   @media (max-width: 768px) {
-    .sengo-hero h1 {
-      font-size: 2rem;
-    }
-
     .sengo-thesis {
-      padding: 40px 20px;
+      padding: 50px 30px;
     }
 
     .sengo-thesis h2 {
-      font-size: 1.5rem;
+      font-size: 3.5rem;
+      line-height: 0.8;
+    }
+
+    .sengo-email-section h3 {
+      font-size: 3.5rem;
+      line-height: 0.8;
     }
 
     .pathway-buttons {
@@ -208,7 +304,7 @@
 
     .pathway-btn {
       width: 100%;
-      max-width: 300px;
+      max-width: 320px;
     }
 
     .logo-item {
@@ -216,18 +312,16 @@
     }
 
     .logo-item img {
-      height: 30px;
+      height: 35px;
+    }
+
+    .stat-number {
+      font-size: 2.2rem;
     }
   }
 </style>
 
-<div class="sengo-landing">
-
-  <!-- Hero Section -->
-  <div class="sengo-hero">
-    <h1>Empowering the Next Generation of Founders</h1>
-    <img src="YOUR_HERO_IMAGE_URL_HERE" alt="Sengo Hero" class="sengo-hero-image">
-  </div>
+<div class="sengo-content">
 
   <!-- Logo Slider -->
   <div class="sengo-logo-section">
@@ -272,16 +366,33 @@
 
   <!-- Subtext -->
   <div class="sengo-subtext">
-    <p>Sengo is revolutionizing how founders and funders connect, collaborate, and create lasting impact in the entrepreneurial ecosystem.</p>
+    <p>Sengo is revolutionizing how founders and funders connect, collaborate, and create lasting impact in the entrepreneurial ecosystem. We're democratizing access to capital and opportunity for underrepresented founders.</p>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <div class="stat-number">90+</div>
+      <div class="stat-label">Annual Touchpoints</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">600</div>
+      <div class="stat-label">App Members</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">$5M+</div>
+      <div class="stat-label">Raised by Founders</div>
+    </div>
   </div>
 
   <!-- Thesis Section with Pathway Selection -->
   <div class="sengo-thesis">
-    <h2>Choose Your Path</h2>
+    <span class="impact-badge">Choose Your Path</span>
+    <h2>Join the Movement</h2>
     <p>
-      At Sengo, we believe in democratizing access to capital and opportunity.
       Whether you're building the next big thing, investing in innovation, or doing both—
-      we're here to support your journey. Select your pathway below to get started.
+      we're here to support your journey. Sengo believes in democratizing access to capital
+      and creating pathways for founders and funders to connect authentically.
     </p>
 
     <div class="pathway-buttons">
@@ -293,18 +404,21 @@
 
   <!-- Email Capture Section -->
   <div class="sengo-email-section">
-    <h3>Stay Connected</h3>
-    <p>Join our community and be the first to know about updates, opportunities, and events.</p>
+    <span class="impact-badge">Stay Connected</span>
+    <h3>Get Early Access</h3>
+    <p>Join our community and be the first to know about partnership opportunities, events, and updates.</p>
 
-    <!-- REPLACE THIS COMMENT WITH YOUR SQUARESPACE FORM BLOCK -->
-    <!-- Instructions:
-         1. In Squarespace, add a Form Block here
-         2. Configure your form fields (email, name, etc.)
-         3. The form will inherit the styling from this section
+    <!-- ADD YOUR SQUARESPACE FORM BLOCK HERE -->
+    <!--
+      Instructions:
+      1. Delete this comment block
+      2. Click the + icon to add a block
+      3. Select "Form" from the blocks menu
+      4. Configure your form fields (email, name, etc.)
     -->
-    <div class="squarespace-form-placeholder">
-      <p style="color: #999; font-style: italic;">
-        [Add your Squarespace Form Block here]
+    <div style="padding: 40px; background: #F3EDE7; border-radius: 12px; border: 2px dashed #D57028;">
+      <p style="color: #67441A; font-style: italic; margin: 0;">
+        [Add your Squarespace Form Block here by clicking + and selecting Form]
       </p>
     </div>
   </div>
@@ -327,13 +441,13 @@
         // Get the selected pathway
         const pathway = this.getAttribute('data-pathway');
 
-        // You can store this in localStorage or send to analytics
+        // Store in localStorage
         localStorage.setItem('selectedPathway', pathway);
 
-        // Optional: Log to console or send to analytics
+        // Log to console
         console.log('Selected pathway:', pathway);
 
-        // Optional: You can add custom tracking here
+        // Optional: Add your analytics tracking here
         // Example: gtag('event', 'pathway_selected', { pathway: pathway });
       });
     });
