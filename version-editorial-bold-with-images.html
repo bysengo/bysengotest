@@ -1,0 +1,525 @@
+<!-- Sengo Landing Page - EDITORIAL BOLD (Clean with Image Placeholders) -->
+<!-- Version: Editorial style with bold typography, box shadows, and image spots -->
+
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .sengo-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+  }
+
+  /* Image placeholder styling */
+  .image-placeholder {
+    background: #F3EDE7;
+    border: 3px dashed #D57028;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #67441A;
+    font-weight: 600;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Logo Slider - bold editorial */
+  .sengo-logo-section {
+    margin: 60px 0;
+    overflow: hidden;
+    padding: 40px 0;
+    background: #1B3533;
+    border-radius: 0;
+    position: relative;
+  }
+
+  .sengo-logo-section p {
+    text-align: center;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #F3EDE7;
+    margin-bottom: 30px;
+    font-weight: 900;
+  }
+
+  .logo-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .logo-track {
+    display: flex;
+    animation: scroll 20s linear infinite;
+    width: fit-content;
+  }
+
+  .logo-track:hover {
+    animation-play-state: paused;
+  }
+
+  .logo-item {
+    flex: 0 0 auto;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-item img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+
+  .logo-item:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Subtext with image collage */
+  .subtext-with-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 100px 0;
+    align-items: center;
+  }
+
+  .subtext-content {
+    padding: 40px;
+  }
+
+  .subtext-content p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: #1B3533;
+    font-weight: 700;
+  }
+
+  .image-collage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .image-collage .image-placeholder {
+    height: 250px;
+  }
+
+  .image-collage .image-placeholder:first-child {
+    grid-column: 1 / -1;
+    height: 300px;
+  }
+
+  /* Stats - bold boxes with image */
+  .stats-with-image {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin: 100px 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .stat-card {
+    background: white;
+    padding: 50px 30px;
+    border-radius: 0;
+    text-align: center;
+    border: 5px solid #1B3533;
+    transition: all 0.3s ease;
+    box-shadow: 10px 10px 0 #F3EDE7;
+  }
+
+  .stat-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 15px 15px 0 #D57028;
+  }
+
+  .stat-number {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #1B3533;
+    margin-bottom: 10px;
+    font-family: 'Arimo', sans-serif;
+    letter-spacing: -0.05em;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    color: #67441A;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .stats-image {
+    height: 100%;
+    min-height: 400px;
+  }
+
+  /* Thesis Section - editorial bold with images */
+  .sengo-thesis {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: #F3EDE7;
+    padding: 80px 50px;
+    border-radius: 0;
+    margin: 100px 0;
+    position: relative;
+    border: 6px solid #1B3533;
+    box-shadow: 15px 15px 0 #AF8145;
+  }
+
+  .thesis-content {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .sengo-thesis h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 8rem;
+    margin-bottom: 30px;
+    font-weight: 900;
+    line-height: 0.75;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+  }
+
+  .sengo-thesis p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 50px;
+    font-weight: 500;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Impact Badge - editorial style */
+  .impact-badge {
+    display: inline-block;
+    background: #D57028;
+    color: #1B3533;
+    padding: 12px 35px;
+    border-radius: 0;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+  }
+
+  /* Pathway section with images */
+  .pathway-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .pathway-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .pathway-images .image-placeholder {
+    height: 200px;
+  }
+
+  .pathway-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .pathway-btn {
+    padding: 22px 55px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    border: 4px solid #F3EDE7;
+    background: transparent;
+    color: #F3EDE7;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Arimo', sans-serif;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+  }
+
+  .pathway-btn:hover {
+    background: #D57028;
+    border-color: #D57028;
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 rgba(0,0,0,0.3);
+  }
+
+  .pathway-btn.active {
+    background: #F3EDE7;
+    border-color: #F3EDE7;
+    color: #1B3533;
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 #D57028;
+  }
+
+  /* Community showcase section */
+  .community-showcase {
+    margin: 100px 0;
+    background: white;
+    border: 5px solid #1B3533;
+    box-shadow: 12px 12px 0 #F3EDE7;
+    padding: 60px 40px;
+  }
+
+  .community-showcase h3 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 5rem;
+    margin-bottom: 40px;
+    color: #1B3533;
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .community-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+
+  .community-grid .image-placeholder {
+    height: 300px;
+  }
+
+  .community-grid .image-placeholder:first-child {
+    grid-column: 1 / 3;
+    height: 400px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 968px) {
+    .subtext-with-images,
+    .stats-with-image,
+    .pathway-section {
+      grid-template-columns: 1fr;
+    }
+
+    .community-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .community-grid .image-placeholder:first-child {
+      grid-column: 1;
+    }
+
+    .sengo-thesis {
+      box-shadow: 8px 8px 0 #AF8145;
+    }
+
+    .sengo-thesis h2 {
+      font-size: 3.5rem;
+    }
+
+    .community-showcase h3 {
+      font-size: 3rem;
+    }
+
+    .pathway-btn {
+      width: 100%;
+    }
+
+    .stat-card {
+      box-shadow: 5px 5px 0 #F3EDE7;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pathway-images {
+      order: 2;
+    }
+  }
+</style>
+
+<div class="sengo-content">
+
+  <!-- Logo Slider -->
+  <div class="sengo-logo-section">
+    <p>As Featured In</p>
+    <div class="logo-slider">
+      <div class="logo-track">
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+        </div>
+        <!-- Duplicate -->
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtext with Image Collage -->
+  <div class="subtext-with-images">
+    <div class="subtext-content">
+      <p>We're revolutionizing how founders & funders connect, collaborate, and create lasting impact.</p>
+    </div>
+    <div class="image-collage">
+      <div class="image-placeholder">
+        [Replace with your image]
+      </div>
+      <div class="image-placeholder">
+        [Replace with your image]
+      </div>
+      <div class="image-placeholder">
+        [Replace with your image]
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Section with Side Image -->
+  <div class="stats-with-image">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">90+</div>
+        <div class="stat-label">Annual Touchpoints</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">600</div>
+        <div class="stat-label">App Members</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">$5M+</div>
+        <div class="stat-label">Raised by Founders</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">167X</div>
+        <div class="stat-label">Return on Grants</div>
+      </div>
+    </div>
+    <div class="image-placeholder stats-image">
+      [Replace with your image]
+    </div>
+  </div>
+
+  <!-- Thesis Section with Pathway Selection -->
+  <div class="sengo-thesis">
+    <div class="thesis-content">
+      <span class="impact-badge">Choose Path</span>
+      <h2>Join The Movement</h2>
+      <p>
+        Building the future? Investing in it? Or both? We're here for founders, funders, and everyone in between.
+      </p>
+    </div>
+
+    <div class="pathway-section">
+      <div class="pathway-images">
+        <div class="image-placeholder">
+          [Replace with your image]
+        </div>
+        <div class="image-placeholder">
+          [Replace with your image]
+        </div>
+        <div class="image-placeholder">
+          [Replace with your image]
+        </div>
+        <div class="image-placeholder">
+          [Replace with your image]
+        </div>
+      </div>
+
+      <div class="pathway-buttons">
+        <button class="pathway-btn" onclick="selectPathway(this, 'founder')">Founder</button>
+        <button class="pathway-btn" onclick="selectPathway(this, 'funder')">Funder</button>
+        <button class="pathway-btn" onclick="selectPathway(this, 'both')">Both</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Community Showcase -->
+  <div class="community-showcase">
+    <h3>Our Community</h3>
+    <div class="community-grid">
+      <div class="image-placeholder">
+        [Replace with your image]
+      </div>
+      <div class="image-placeholder">
+        [Replace with your image]
+      </div>
+      <div class="image-placeholder">
+        [Replace with your image]
+      </div>
+      <div class="image-placeholder">
+        [Replace with your image]
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function selectPathway(button, pathway) {
+    var buttons = document.querySelectorAll('.pathway-btn');
+    buttons.forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+    button.classList.add('active');
+    localStorage.setItem('selectedPathway', pathway);
+    console.log('Selected pathway:', pathway);
+  }
+</script>
