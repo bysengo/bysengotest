@@ -204,11 +204,11 @@
       position: relative;
       background-image: url('https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/4908da60-873d-4e56-8879-dfe89b418da2/Screenshot+2026-01-09+at+7.10.48%E2%80%AFPM.png?format=750w');
       background-size: cover;
-      background-position: center;
+      background-position: center top;
       background-repeat: no-repeat;
       border-radius: 12px;
       overflow: hidden;
-      padding: 60px 40px;
+      padding: 40px 40px 35px;
     }
 
     .benefits-section::before {
@@ -218,7 +218,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.85) 60%, rgba(0, 0, 0, 0.9) 100%);
       z-index: 1;
     }
 
@@ -232,7 +232,7 @@
       font-size: 3rem;
       color: #F3EDE7;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 25px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: -0.02em;
@@ -241,7 +241,7 @@
     .benefits-checklist {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 25px;
+      gap: 12px 25px;
       max-width: 1000px;
       margin: 0 auto;
     }
@@ -250,7 +250,7 @@
       display: flex;
       align-items: flex-start;
       gap: 15px;
-      padding: 15px 0;
+      padding: 8px 0;
     }
 
     .benefit-item::before {
@@ -273,39 +273,50 @@
       font-size: 1.15rem;
       font-weight: 500;
       color: #F3EDE7;
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
     .benefit-item.with-image {
       position: relative;
       display: grid;
-      grid-template-columns: 28px 1fr 120px;
+      grid-template-columns: 28px 1fr auto;
       gap: 15px;
       align-items: center;
+      grid-row: span 3;
     }
 
     .benefit-item.with-image::before {
       margin-top: 0;
+      align-self: start;
+      margin-top: 2px;
     }
 
     .benefit-item-image {
-      width: 120px;
-      height: auto;
+      width: auto;
+      height: 100px;
+      max-width: 80px;
       border-radius: 8px;
       box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
+      object-fit: contain;
     }
 
     @media (max-width: 968px) {
       .benefits-section {
-        padding: 40px 20px;
+        padding: 30px 20px 25px;
       }
 
       .benefits-checklist {
         grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .benefit-item {
+        padding: 6px 0;
       }
 
       .benefit-item.with-image {
         grid-template-columns: 28px 1fr;
+        grid-row: span 1;
       }
 
       .benefit-item-image {
