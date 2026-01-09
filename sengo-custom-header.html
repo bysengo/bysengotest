@@ -47,10 +47,6 @@
                  0 0 40px rgba(213, 112, 40, 0.2);
   }
 
-  .sengo-logo-spacer {
-    width: 50px;
-  }
-
   .sengo-nav-menu {
     display: flex;
     gap: 30px;
@@ -73,10 +69,10 @@
 
   .sengo-nav-link:hover {
     color: #D57028;
-    text-shadow: 0 0 20px rgba(213, 112, 40, 0.6),
-                 0 0 30px rgba(213, 112, 40, 0.4),
-                 0 0 40px rgba(213, 112, 40, 0.2);
-    transform: translateY(-2px);
+    text-shadow: 0 0 30px rgba(213, 112, 40, 1),
+                 0 0 50px rgba(213, 112, 40, 0.8),
+                 0 0 70px rgba(213, 112, 40, 0.6);
+    transform: translateY(-5px);
   }
 
   .sengo-nav-button {
@@ -98,10 +94,10 @@
     background: transparent;
     border-color: #D57028;
     color: #D57028;
-    box-shadow: 0 0 20px rgba(213, 112, 40, 0.6),
-                0 0 30px rgba(213, 112, 40, 0.4),
-                0 0 40px rgba(213, 112, 40, 0.2);
-    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(213, 112, 40, 1),
+                0 0 50px rgba(213, 112, 40, 0.8),
+                0 0 70px rgba(213, 112, 40, 0.6);
+    transform: translateY(-5px);
   }
 
   /* Mobile Menu Toggle */
@@ -124,6 +120,7 @@
   @media (max-width: 768px) {
     .sengo-header-container {
       padding: 0 20px;
+      justify-content: space-between;
     }
 
     .sengo-logo {
@@ -132,6 +129,8 @@
 
     .sengo-mobile-toggle {
       display: block;
+      position: absolute;
+      right: 20px;
     }
 
     .sengo-nav-menu {
@@ -162,16 +161,13 @@
 <!-- Header HTML -->
 <header class="sengo-header">
   <div class="sengo-header-container">
-    <!-- Empty logo space for alignment -->
-    <div class="sengo-logo-spacer"></div>
-
     <!-- Mobile Menu Toggle -->
     <button class="sengo-mobile-toggle" onclick="toggleSengoMenu()" aria-label="Toggle menu">
       ☰
     </button>
 
     <!-- Navigation Menu - UPDATE LINKS TO YOUR PAGES -->
-    <nav style="margin-left: auto;">
+    <nav>
       <ul class="sengo-nav-menu" id="sengoNavMenu">
         <li><a href="/" class="sengo-nav-link">Home</a></li>
         <li><a href="/for-founders" class="sengo-nav-link">For Founders</a></li>
