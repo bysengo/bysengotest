@@ -91,12 +91,21 @@ nav a,
   margin: 0 0.75rem !important;
 }
 
-/* Force line break before Founders link */
-.header-nav-item:nth-child(4) {
-  flex-basis: 100% !important; /* Forces new line */
+/* Force line break AFTER Pitch (3rd item) to start new row */
+.header-nav-item:nth-child(3)::after {
+  content: '' !important;
+  flex-basis: 100% !important;
   height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  width: 0 !important;
+}
+
+/* Ensure second row items (Founders, Funders, All Access) don't grow to fill space */
+.header-nav-item:nth-child(4),
+.header-nav-item:nth-child(5),
+.header-nav-item:nth-child(6) {
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
 }
 
 /* Style signup links (Founders, Funders, All Access) in orange */
