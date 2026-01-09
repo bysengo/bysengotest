@@ -19,6 +19,10 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #F3EDE7;
@@ -83,7 +87,31 @@
       font-size: 1.5rem;
       color: #67441A;
       font-weight: 400;
-      margin: 0;
+      margin: 0 0 25px 0;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 18px 50px;
+      background: #D57028;
+      color: white;
+      text-decoration: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hero-cta:hover {
+      background: #C56020;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.5);
     }
 
     /* Freebie Section - Side by Side */
@@ -190,6 +218,36 @@
     .freebie-form button:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(27, 53, 51, 0.4);
+    }
+
+    /* Style Kajabi embedded form buttons */
+    .freebie-form button[type="submit"],
+    .freebie-form input[type="submit"],
+    .freebie-form .kjb-btn,
+    .freebie-form [class*="submit"],
+    .freebie-form [class*="button"] {
+      padding: 12px 28px !important;
+      background: #1B3533 !important;
+      color: #F3EDE7 !important;
+      border: none !important;
+      border-radius: 8px !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-weight: 600 !important;
+      font-size: 0.9rem !important;
+      cursor: pointer !important;
+      transition: all 0.3s ease !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+    }
+
+    .freebie-form button[type="submit"]:hover,
+    .freebie-form input[type="submit"]:hover,
+    .freebie-form .kjb-btn:hover,
+    .freebie-form [class*="submit"]:hover,
+    .freebie-form [class*="button"]:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 20px rgba(27, 53, 51, 0.4) !important;
+      background: #2a4a47 !important;
     }
 
     .freebie-microcopy {
@@ -867,6 +925,7 @@
     <div class="checkout-hero">
       <h1>Join Sengo as a Founder</h1>
       <p>Fundraising infrastructure for founders building real impact</p>
+      <a href="#pricing" class="hero-cta">Enroll Now</a>
     </div>
 
     <!-- Freebie Section - Side by Side -->
@@ -1005,7 +1064,7 @@
 </div>
 
 <!-- Pricing Options - Cream Background -->
-<div class="full-width-section section-cream">
+<div id="pricing" class="full-width-section section-cream">
   <div class="content-wrapper">
     <div class="pricing-section">
       <h2>Choose Your Membership</h2>
