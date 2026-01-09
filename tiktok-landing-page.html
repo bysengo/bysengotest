@@ -26,6 +26,7 @@
             line-height: 1.7;
             overflow-x: hidden;
             padding: 20px;
+            min-height: 100vh;
         }
 
         .container {
@@ -249,7 +250,8 @@
             }
         }
 
-        /* Extra responsive tweaks */
+        /* Responsive Design */
+        /* Small phones */
         @media (max-width: 400px) {
             body {
                 padding: 15px;
@@ -280,9 +282,167 @@
             }
         }
 
-        @media (min-width: 500px) {
+        /* Tablets and small desktop */
+        @media (min-width: 600px) {
+            body {
+                padding: 40px;
+                font-size: 1.1rem;
+            }
+
             .container {
-                padding: 40px 0;
+                max-width: 650px;
+                padding: 50px 0;
+            }
+
+            .profile-section {
+                margin-bottom: 50px;
+            }
+
+            .profile-image {
+                width: 140px;
+                height: 140px;
+                font-size: 3.5rem;
+            }
+
+            .profile-section h1 {
+                font-size: 3rem;
+            }
+
+            .profile-section .tagline {
+                font-size: 1.25rem;
+            }
+
+            .bio-section {
+                padding: 40px 45px;
+                margin-bottom: 40px;
+            }
+
+            .bio-section p {
+                font-size: 1.15rem;
+                margin-bottom: 18px;
+            }
+
+            .download-section {
+                padding: 45px 45px;
+                margin-bottom: 35px;
+            }
+
+            .download-section h2 {
+                font-size: 1.9rem;
+                margin-bottom: 18px;
+            }
+
+            .download-section .description {
+                font-size: 1.1rem;
+                margin-bottom: 30px;
+            }
+
+            .email-form {
+                gap: 15px;
+            }
+
+            .email-form input[type="email"] {
+                font-size: 1.05rem;
+                padding: 18px 24px;
+            }
+
+            .email-form button {
+                font-size: 1.1rem;
+                padding: 18px 40px;
+            }
+
+            .cta-link {
+                padding: 25px;
+            }
+
+            .cta-link .link-title {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+
+            .cta-link .link-description {
+                font-size: 1.05rem;
+            }
+
+            .footer {
+                margin-top: 50px;
+            }
+
+            .footer p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Large desktop */
+        @media (min-width: 900px) {
+            body {
+                padding: 60px;
+            }
+
+            .container {
+                max-width: 700px;
+                padding: 60px 0;
+            }
+
+            .profile-section {
+                margin-bottom: 60px;
+            }
+
+            .profile-image {
+                width: 160px;
+                height: 160px;
+                font-size: 4rem;
+                margin-bottom: 25px;
+            }
+
+            .profile-section h1 {
+                font-size: 3.5rem;
+                margin-bottom: 15px;
+            }
+
+            .profile-section .tagline {
+                font-size: 1.35rem;
+            }
+
+            .bio-section {
+                padding: 50px 55px;
+                margin-bottom: 45px;
+            }
+
+            .bio-section p {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+
+            .download-section {
+                padding: 50px 55px;
+                margin-bottom: 40px;
+            }
+
+            .download-section h2 {
+                font-size: 2.1rem;
+                margin-bottom: 20px;
+            }
+
+            .download-section .description {
+                font-size: 1.15rem;
+                margin-bottom: 35px;
+            }
+
+            .cta-link {
+                padding: 30px;
+            }
+
+            .cta-link .link-title {
+                font-size: 1.6rem;
+            }
+
+            .cta-link .link-description {
+                font-size: 1.1rem;
+            }
+
+            .footer {
+                margin-top: 60px;
             }
         }
     </style>
