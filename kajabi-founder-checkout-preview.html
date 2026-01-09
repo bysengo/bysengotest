@@ -163,7 +163,7 @@
     .benefits-section h2 {
       font-family: 'Arimo', sans-serif;
       font-size: 3rem;
-      color: #1B3533;
+      color: #F3EDE7;
       text-align: center;
       margin-bottom: 40px;
       font-weight: 700;
@@ -179,17 +179,18 @@
     }
 
     .benefit-item {
-      background: white;
+      background: rgba(243, 237, 231, 0.1);
       padding: 30px;
       border-radius: 12px;
-      border: 2px solid rgba(213, 112, 40, 0.2);
+      border: 2px solid rgba(213, 112, 40, 0.3);
       transition: all 0.3s ease;
     }
 
     .benefit-item:hover {
       border-color: #D57028;
       transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(213, 112, 40, 0.2);
+      box-shadow: 0 15px 35px rgba(213, 112, 40, 0.3);
+      background: rgba(243, 237, 231, 0.15);
     }
 
     .benefit-item::before {
@@ -209,7 +210,7 @@
     .benefit-item span {
       font-size: 1.1rem;
       font-weight: 500;
-      color: #1B3533;
+      color: #F3EDE7;
     }
 
     /* For/Not For Section */
@@ -502,6 +503,15 @@
       font-size: 1.1rem;
       color: #67441A;
       font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .reassurance-item:hover {
+      color: #D57028;
+      text-shadow: 0 0 15px rgba(213, 112, 40, 0.6),
+                   0 0 25px rgba(213, 112, 40, 0.4);
+      transform: translateY(-2px);
     }
 
     .reassurance-item::before {
@@ -614,8 +624,8 @@
   </div>
 </div>
 
-<!-- Membership Benefits - White Background -->
-<div class="full-width-section section-white">
+<!-- Membership Benefits - Dark Gradient Background -->
+<div class="full-width-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%); padding: 80px 20px;">
   <div class="content-wrapper">
     <div class="benefits-section">
       <h2>Your Founder Membership Includes</h2>
