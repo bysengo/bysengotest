@@ -1,0 +1,50 @@
+/* Custom CSS to make Squarespace Header use Montserrat font */
+/* Add this to Design > Custom CSS in your Squarespace site */
+
+/* Import Montserrat if not already loaded */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Site Title / Logo Text */
+.header-title-text a,
+.header-title-logo a,
+.site-title,
+.site-title a {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Navigation Menu Links */
+.header-nav-item a,
+.header-nav-folder-item a,
+nav a,
+.header-menu-nav-item a {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Mobile Menu */
+.header-menu-nav-item,
+.header-menu-nav-folder,
+.mobile-nav-item a {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Header Actions (buttons, etc) */
+.header-actions-action,
+.btn,
+.header-skip-link {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Announcement Bar */
+.sqs-announcement-bar-text,
+.sqs-announcement-bar-text p {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Optional: Adjust font weights to match your design */
+.header-title-text a {
+  font-weight: 600; /* Adjust as needed: 300, 400, 500, 600, 700, 800, 900 */
+}
+
+.header-nav-item a {
+  font-weight: 500; /* Adjust as needed */
+}
