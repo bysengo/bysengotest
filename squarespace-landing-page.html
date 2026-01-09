@@ -201,37 +201,9 @@
     right: 0;
   }
 
-  /* Center accent marks */
-  .sengo-subtext p::before,
-  .sengo-subtext p::after {
-    content: '';
-    position: absolute;
-    width: 60px;
-    height: 3px;
-    background: #D57028;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.4s ease 1s;
-  }
-
-  .sengo-subtext p::before {
-    top: 0;
-  }
-
-  .sengo-subtext p::after {
-    bottom: 0;
-  }
-
-  .sengo-subtext.visible p::before,
-  .sengo-subtext.visible p::after {
-    opacity: 1;
-  }
-
   .sengo-subtext p {
     margin: 0;
     color: #1B3533;
-    position: relative;
   }
 
   /* Thesis Section */
