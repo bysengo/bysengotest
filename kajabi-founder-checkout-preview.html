@@ -1,0 +1,720 @@
+<!-- Sengo Founder Membership Checkout Page - Kajabi Preview -->
+<!-- This is a PREVIEW matching your landing page style -->
+<!-- Replace [KAJABI CHECKOUT EMBED] placeholders with actual Kajabi embed codes -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Sengo as a Founder</title>
+
+  <style>
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F3EDE7;
+      color: #1B3533;
+      line-height: 1.6;
+    }
+
+    .checkout-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    /* Hero Section */
+    .checkout-hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .checkout-hero h1 {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 5rem;
+      font-weight: 400;
+      line-height: 0.94;
+      color: #1B3533;
+      letter-spacing: -0.077em;
+      margin-bottom: 20px;
+    }
+
+    .checkout-hero p {
+      font-size: 1.5rem;
+      color: #67441A;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    /* Freebie Section */
+    .freebie-section {
+      background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
+      border-radius: 16px;
+      padding: 50px 40px;
+      margin-bottom: 60px;
+      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.15);
+    }
+
+    .freebie-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2rem;
+      color: #F3EDE7;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .freebie-section p {
+      color: #F3EDE7;
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      opacity: 0.95;
+    }
+
+    .freebie-form {
+      display: flex;
+      gap: 15px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      flex-wrap: wrap;
+    }
+
+    .freebie-form input[type="email"] {
+      flex: 1;
+      min-width: 250px;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      background: white;
+    }
+
+    .freebie-form button {
+      padding: 15px 35px;
+      background: #1B3533;
+      color: #F3EDE7;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .freebie-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(27, 53, 51, 0.4);
+    }
+
+    .freebie-microcopy {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #F3EDE7;
+      opacity: 0.85;
+    }
+
+    /* Membership Benefits */
+    .benefits-section {
+      margin-bottom: 60px;
+    }
+
+    .benefits-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      color: #1B3533;
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .benefit-item {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      border: 2px solid rgba(213, 112, 40, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .benefit-item:hover {
+      border-color: #D57028;
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(213, 112, 40, 0.2);
+    }
+
+    .benefit-item::before {
+      content: '✓';
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background: #D57028;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      margin-right: 15px;
+      font-weight: 700;
+    }
+
+    .benefit-item span {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #1B3533;
+    }
+
+    /* For/Not For Section */
+    .target-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .target-box {
+      background: white;
+      padding: 40px 35px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(27, 53, 51, 0.1);
+    }
+
+    .target-box.for {
+      border-top: 4px solid #D57028;
+    }
+
+    .target-box.not-for {
+      border-top: 4px solid #67441A;
+    }
+
+    .target-box h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .target-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .target-box li {
+      padding: 12px 0;
+      padding-left: 35px;
+      position: relative;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .target-box.for li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .target-box.not-for li::before {
+      content: '✗';
+      position: absolute;
+      left: 0;
+      color: #67441A;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .pricing-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      color: #1B3533;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .pricing-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 700px;
+      margin: 40px auto;
+    }
+
+    .pricing-card {
+      background: white;
+      border: 3px solid #D57028;
+      border-radius: 16px;
+      padding: 40px 30px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card.featured {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      color: #F3EDE7;
+      transform: scale(1.05);
+    }
+
+    .pricing-card.featured::before {
+      content: 'BEST VALUE';
+      position: absolute;
+      top: 15px;
+      right: -35px;
+      background: #D57028;
+      color: white;
+      padding: 5px 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transform: rotate(45deg);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(213, 112, 40, 0.3);
+    }
+
+    .pricing-card.featured:hover {
+      transform: scale(1.05) translateY(-8px);
+    }
+
+    .pricing-price {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #D57028;
+    }
+
+    .pricing-card.featured .pricing-price {
+      color: #F3EDE7;
+    }
+
+    .pricing-term {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .pricing-note {
+      font-size: 0.95rem;
+      color: #67441A;
+      margin-top: 15px;
+      font-style: italic;
+    }
+
+    .pricing-card.featured .pricing-note {
+      color: #F3EDE7;
+      opacity: 0.85;
+    }
+
+    /* Kajabi Checkout Placeholder */
+    .kajabi-checkout-placeholder {
+      background: #f9f9f9;
+      border: 2px dashed #D57028;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      margin: 20px 0;
+      font-family: monospace;
+      color: #67441A;
+    }
+
+    /* Stats & Testimonial */
+    .social-proof {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      border-radius: 16px;
+      padding: 50px 40px;
+      text-align: center;
+      margin-bottom: 60px;
+      color: #F3EDE7;
+    }
+
+    .stat-highlight {
+      font-size: 4rem;
+      font-weight: 900;
+      color: #F3EDE7;
+      margin-bottom: 15px;
+    }
+
+    .stat-label {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .testimonial {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    /* Upsell Section */
+    .upsell-section {
+      background: white;
+      border: 3px solid #AF8145;
+      border-radius: 16px;
+      padding: 50px 40px;
+      margin-bottom: 60px;
+    }
+
+    .upsell-section h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.5rem;
+      color: #1B3533;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .upsell-section p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
+
+    .upsell-includes {
+      background: #F3EDE7;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .upsell-includes h4 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #1B3533;
+      font-weight: 600;
+    }
+
+    .upsell-includes ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .upsell-includes li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+      font-size: 1.05rem;
+    }
+
+    .upsell-includes li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+    }
+
+    .upsell-cta {
+      display: inline-block;
+      padding: 20px 50px;
+      background: #D57028;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .upsell-cta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.4);
+    }
+
+    /* Reassurance */
+    .reassurance {
+      text-align: center;
+      padding: 40px 20px;
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 40px;
+    }
+
+    .reassurance-items {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .reassurance-item {
+      font-size: 1.1rem;
+      color: #67441A;
+      font-weight: 500;
+    }
+
+    .reassurance-item::before {
+      content: '✓';
+      display: inline-block;
+      margin-right: 10px;
+      color: #D57028;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .checkout-container {
+        padding: 40px 20px;
+      }
+
+      .checkout-hero h1 {
+        font-size: 3rem;
+      }
+
+      .checkout-hero p {
+        font-size: 1.2rem;
+      }
+
+      .freebie-section {
+        padding: 35px 25px;
+      }
+
+      .freebie-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .freebie-form {
+        flex-direction: column;
+      }
+
+      .freebie-form input[type="email"],
+      .freebie-form button {
+        width: 100%;
+      }
+
+      .benefits-section h2,
+      .pricing-section h2 {
+        font-size: 2rem;
+      }
+
+      .target-section {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-options {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-card.featured {
+        transform: scale(1);
+      }
+
+      .pricing-card.featured:hover {
+        transform: translateY(-8px);
+      }
+
+      .stat-highlight {
+        font-size: 2.5rem;
+      }
+
+      .upsell-section {
+        padding: 35px 25px;
+      }
+
+      .upsell-section h3 {
+        font-size: 1.8rem;
+      }
+
+      .reassurance-items {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="checkout-container">
+
+  <!-- Hero Section -->
+  <div class="checkout-hero">
+    <h1>Join Sengo as a Founder</h1>
+    <p>Fundraising infrastructure for founders building real impact</p>
+  </div>
+
+  <!-- Freebie Section -->
+  <div class="freebie-section">
+    <h2>Not sure if you're ready to raise yet?</h2>
+    <p>Get the Sengo Fundability Rubric to assess your readiness and next steps before committing.</p>
+
+    <!-- Replace this form with your actual email capture system -->
+    <form class="freebie-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Get the Fundability Rubric</button>
+    </form>
+
+    <p class="freebie-microcopy">Included with membership · No pressure to raise</p>
+  </div>
+
+  <!-- Membership Benefits -->
+  <div class="benefits-section">
+    <h2>Your Founder Membership Includes</h2>
+
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <span>Fundability education + tools</span>
+      </div>
+      <div class="benefit-item">
+        <span>A community of support with monthly virtual meet-ups</span>
+      </div>
+      <div class="benefit-item">
+        <span>Chat, posting, and connecting</span>
+      </div>
+      <div class="benefit-item">
+        <span>Dealflow submission for investors on the platform</span>
+      </div>
+      <div class="benefit-item">
+        <span>Access to grants</span>
+      </div>
+      <div class="benefit-item">
+        <span>Founder resources & playbooks</span>
+      </div>
+      <div class="benefit-item">
+        <span>Visibility within the Sengo ecosystem</span>
+      </div>
+      <div class="benefit-item">
+        <span>Ongoing support as your business evolves</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Target Audience -->
+  <div class="target-section">
+    <div class="target-box for">
+      <h3>This is for founders who:</h3>
+      <ul>
+        <li>Are building a real business</li>
+        <li>Care about ownership, impact, and alignment</li>
+        <li>Want to understand types of capital they can pursue</li>
+      </ul>
+    </div>
+
+    <div class="target-box not-for">
+      <h3>This is not for founders looking for:</h3>
+      <ul>
+        <li>Guaranteed funding</li>
+        <li>Investor lists or shortcuts</li>
+        <li>Hype/promo without foundations</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Pricing Options -->
+  <div class="pricing-section">
+    <h2>Choose Your Membership</h2>
+
+    <div class="pricing-options">
+      <div class="pricing-card featured">
+        <div class="pricing-price">$160</div>
+        <div class="pricing-term">per year</div>
+        <p class="pricing-note">Many founders choose annual for long-term focus.</p>
+
+        <!-- REPLACE WITH KAJABI ANNUAL CHECKOUT EMBED -->
+        <div class="kajabi-checkout-placeholder">
+          [INSERT KAJABI ANNUAL CHECKOUT BUTTON HERE]
+        </div>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-price">$15</div>
+        <div class="pricing-term">per month</div>
+        <p class="pricing-note">Flexible monthly membership option.</p>
+
+        <!-- REPLACE WITH KAJABI MONTHLY CHECKOUT EMBED -->
+        <div class="kajabi-checkout-placeholder">
+          [INSERT KAJABI MONTHLY CHECKOUT BUTTON HERE]
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Social Proof -->
+  <div class="social-proof">
+    <div class="stat-highlight">$30K+</div>
+    <div class="stat-label">in grants deployed in 2025</div>
+
+    <div class="testimonial">
+      "Sengo gave me the tools and confidence to approach fundraising strategically—I finally understood what investors were looking for."
+    </div>
+  </div>
+
+  <!-- Upsell: 1:1 Support -->
+  <div class="upsell-section">
+    <h3>Want more hands-on support?</h3>
+    <p>Some founders want strategic, personalized guidance as they prepare to raise—or decide whether they should. Our 1:1 support is designed to meet you where you are.</p>
+
+    <div class="upsell-includes">
+      <h4>What's Included:</h4>
+      <ul>
+        <li>A fundraising roadmap tied to your company's growth milestones</li>
+        <li>Strategic support on valuation, tranche sizing, and use of funds</li>
+        <li>Pitch deck and investor messaging refinement</li>
+        <li>Monthly strategy sessions to maintain momentum and adapt</li>
+        <li>Curated introductions to aligned investors within Sengo's network</li>
+        <li>Light support during investor calls and due diligence preparation</li>
+        <li>Ongoing advisory access between sessions (email / async support)</li>
+      </ul>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="#" class="upsell-cta">Learn about 1:1 fundraising support</a>
+      <p style="margin-top: 15px; color: #67441A; font-size: 0.95rem;">(Sliding scale: $500–$2,000)</p>
+    </div>
+  </div>
+
+  <!-- Checkout Reassurance -->
+  <div class="reassurance">
+    <div class="reassurance-items">
+      <div class="reassurance-item">Cancel anytime</div>
+      <div class="reassurance-item">Community membership, not a fundraising obligation</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
