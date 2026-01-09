@@ -171,31 +171,67 @@
     max-width: 700px;
     font-weight: 500;
     padding: 30px 0;
-    border-top: 3px solid #D57028;
-    border-bottom: 3px solid #D57028;
     position: relative;
   }
 
+  /* Animated border lines - start from center */
   .sengo-subtext::before,
   .sengo-subtext::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    background: #D57028;
+    left: 50%;
+    right: 50%;
+    transition: left 0.8s ease 0.2s, right 0.8s ease 0.2s;
+  }
+
+  .sengo-subtext::before {
+    top: 0;
+  }
+
+  .sengo-subtext::after {
+    bottom: 0;
+  }
+
+  /* Expand to full width when visible */
+  .sengo-subtext.visible::before,
+  .sengo-subtext.visible::after {
+    left: 0;
+    right: 0;
+  }
+
+  /* Center accent marks */
+  .sengo-subtext p::before,
+  .sengo-subtext p::after {
     content: '';
     position: absolute;
     width: 60px;
     height: 3px;
     background: #D57028;
-    top: -3px;
     left: 50%;
     transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.4s ease 1s;
   }
 
-  .sengo-subtext::after {
-    top: auto;
-    bottom: -3px;
+  .sengo-subtext p::before {
+    top: 0;
+  }
+
+  .sengo-subtext p::after {
+    bottom: 0;
+  }
+
+  .sengo-subtext.visible p::before,
+  .sengo-subtext.visible p::after {
+    opacity: 1;
   }
 
   .sengo-subtext p {
     margin: 0;
     color: #1B3533;
+    position: relative;
   }
 
   /* Thesis Section */
