@@ -31,12 +31,12 @@
   }
 
   .sengo-hero h1 {
-    font-family: 'Arimo', sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 6.5rem;
-    font-weight: 900;
+    font-weight: 700;
     line-height: 0.85;
     color: #1B3533;
-    letter-spacing: -0.077em;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
     max-width: 900px;
     margin: 0;
@@ -353,6 +353,73 @@
     letter-spacing: 2px;
   }
 
+  /* About Us Section */
+  .about-us-section {
+    margin: 100px 0;
+    text-align: center;
+  }
+
+  .about-us-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    color: #1B3533;
+    margin-bottom: 60px;
+  }
+
+  .about-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+  }
+
+  .about-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 4/5;
+    background: #F3EDE7;
+  }
+
+  .about-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+    filter: brightness(0.6);
+  }
+
+  .about-card:hover .about-card-image {
+    filter: brightness(1);
+    transform: scale(1.05);
+  }
+
+  .about-card-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(27, 53, 51, 0.9) 0%, transparent 100%);
+    color: #F3EDE7;
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    z-index: 2;
+    transition: all 0.3s ease;
+  }
+
+  .about-card:hover .about-card-title {
+    background: linear-gradient(to top, rgba(213, 112, 40, 0.9) 0%, transparent 100%);
+  }
+
   /* Responsive Design */
   @media (max-width: 768px) {
     .sengo-hero {
@@ -399,6 +466,15 @@
 
     .stat-number {
       font-size: 2.5rem;
+    }
+
+    .about-us-section h2 {
+      font-size: 2.5rem;
+    }
+
+    .about-card-title {
+      font-size: 1.3rem;
+      padding: 20px;
     }
   }
 </style>
@@ -469,6 +545,29 @@
     <div class="stat-card">
       <div class="stat-number">$5M+</div>
       <div class="stat-label">Raised by Founders</div>
+    </div>
+  </div>
+
+  <!-- About Us Section -->
+  <div class="about-us-section fade-in-up">
+    <h2>What We Offer</h2>
+    <div class="about-cards">
+      <div class="about-card">
+        <img class="about-card-image" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" alt="Education">
+        <div class="about-card-title">Education</div>
+      </div>
+      <div class="about-card">
+        <img class="about-card-image" src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80" alt="Dealflow">
+        <div class="about-card-title">Dealflow</div>
+      </div>
+      <div class="about-card">
+        <img class="about-card-image" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" alt="Funding Resources">
+        <div class="about-card-title">Funding Resources</div>
+      </div>
+      <div class="about-card">
+        <img class="about-card-image" src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80" alt="Events">
+        <div class="about-card-title">Events</div>
+      </div>
     </div>
   </div>
 
