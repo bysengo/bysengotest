@@ -1,0 +1,257 @@
+<!-- Sengo Custom Header - Standalone Component -->
+<!-- Copy this entire block and paste into any page where you want the header -->
+
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+  /* Reset for header only */
+  .sengo-header * {
+    box-sizing: border-box;
+  }
+
+  /* Header Navigation */
+  .sengo-header {
+    background: #1B3533;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(27, 53, 51, 0.2);
+    width: 100%;
+  }
+
+  .sengo-header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  .sengo-nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .sengo-nav-right {
+    margin-left: auto;
+  }
+
+  .sengo-mobile-login {
+    display: none;
+  }
+
+  .sengo-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #F3EDE7;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+
+  .sengo-logo:hover {
+    color: #D57028;
+    text-shadow: 0 0 20px rgba(213, 112, 40, 0.6),
+                 0 0 30px rgba(213, 112, 40, 0.4),
+                 0 0 40px rgba(213, 112, 40, 0.2);
+  }
+
+  .sengo-nav-menu {
+    display: flex;
+    gap: 45px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sengo-nav-link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #F3EDE7;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .sengo-nav-link:hover {
+    color: #D57028 !important;
+    text-shadow: 0 0 30px rgba(213, 112, 40, 1),
+                 0 0 50px rgba(213, 112, 40, 0.8),
+                 0 0 70px rgba(213, 112, 40, 0.6);
+    transform: translateY(-15px);
+  }
+
+  .sengo-nav-button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #F3EDE7;
+    background: #D57028;
+    padding: 10px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: 2px solid #D57028;
+  }
+
+  .sengo-nav-button:hover {
+    background: transparent;
+    border-color: #D57028;
+    color: #D57028 !important;
+    box-shadow: 0 0 30px rgba(213, 112, 40, 1),
+                0 0 50px rgba(213, 112, 40, 0.8),
+                0 0 70px rgba(213, 112, 40, 0.6);
+    transform: translateY(-15px);
+  }
+
+  /* Mobile Menu Toggle */
+  .sengo-mobile-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #F3EDE7;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+  }
+
+  .sengo-mobile-toggle:hover {
+    color: #D57028;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sengo-header-container {
+      padding: 0 20px;
+      justify-content: center;
+    }
+
+    .sengo-logo {
+      font-size: 1.4rem;
+    }
+
+    .sengo-mobile-toggle {
+      display: block;
+      position: absolute;
+      left: 20px;
+    }
+
+    .sengo-nav-center {
+      position: static;
+      transform: none;
+    }
+
+    .sengo-nav-right {
+      display: none;
+    }
+
+    .sengo-mobile-login {
+      display: block;
+    }
+
+    .sengo-nav-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #1B3533;
+      flex-direction: column;
+      padding: 20px;
+      gap: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .sengo-nav-menu.active {
+      display: flex;
+    }
+
+    .sengo-nav-menu.active::after {
+      content: '';
+      display: block;
+      width: 100%;
+    }
+
+    .sengo-nav-menu.active .sengo-nav-button-mobile {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .sengo-nav-button {
+      width: 100%;
+      text-align: center;
+      display: block;
+    }
+  }
+</style>
+
+<!-- Header HTML -->
+<header class="sengo-header">
+  <div class="sengo-header-container">
+    <!-- Mobile Menu Toggle -->
+    <button class="sengo-mobile-toggle" onclick="toggleSengoMenu()" aria-label="Toggle menu">
+      ☰
+    </button>
+
+    <!-- Centered Navigation Menu -->
+    <nav class="sengo-nav-center">
+      <ul class="sengo-nav-menu" id="sengoNavMenu">
+        <li><a href="/" class="sengo-nav-link">Home</a></li>
+        <li><a href="https://www.bysengo.com/grant" class="sengo-nav-link">Grants</a></li>
+        <li><a href="https://www.bysengo.com/pitch" class="sengo-nav-link">Pitch</a></li>
+        <li><a href="https://app.bysengo.com/founder-enrollment" class="sengo-nav-link">Founders</a></li>
+        <li><a href="https://app.bysengo.com/investor-enrollment" class="sengo-nav-link">Funders</a></li>
+        <li><a href="https://app.bysengo.com/allaccess-enrollment" class="sengo-nav-link">All Access</a></li>
+        <li class="sengo-mobile-login"><a href="/login" class="sengo-nav-button">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- Right-aligned Login Button (Desktop Only) -->
+    <div class="sengo-nav-right">
+      <a href="/login" class="sengo-nav-button">Login</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle function
+  function toggleSengoMenu() {
+    const navMenu = document.getElementById('sengoNavMenu');
+    navMenu.classList.toggle('active');
+  }
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const navMenu = document.getElementById('sengoNavMenu');
+    const menuToggle = document.querySelector('.sengo-mobile-toggle');
+
+    if (navMenu && menuToggle) {
+      if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+        navMenu.classList.remove('active');
+      }
+    }
+  });
+
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('.sengo-nav-link, .sengo-nav-button').forEach(function(link) {
+    link.addEventListener('click', function() {
+      const navMenu = document.getElementById('sengoNavMenu');
+      if (navMenu) {
+        navMenu.classList.remove('active');
+      }
+    });
+  });
+</script>
