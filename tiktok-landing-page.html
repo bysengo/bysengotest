@@ -43,18 +43,42 @@
             animation: fadeIn 0.8s ease forwards;
         }
 
+        .profile-image-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+
         .profile-image {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
+            object-fit: cover;
             box-shadow: 0 4px 20px rgba(213, 112, 40, 0.2);
+            border: 3px solid white;
+        }
+
+        .name-sticker {
+            position: absolute;
+            bottom: -10px;
+            right: -15px;
+            background: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            border: 2px solid #D57028;
+            box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
+            transform: rotate(-5deg);
+            z-index: 10;
+        }
+
+        .name-sticker span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #1B3533;
+            text-transform: lowercase;
+            white-space: nowrap;
         }
 
         .profile-section h1 {
@@ -305,10 +329,24 @@
                 font-size: 2rem;
             }
 
+            .profile-image-container {
+                width: 100px;
+                height: 100px;
+            }
+
             .profile-image {
                 width: 100px;
                 height: 100px;
-                font-size: 2.5rem;
+            }
+
+            .name-sticker {
+                bottom: -8px;
+                right: -12px;
+                padding: 6px 10px;
+            }
+
+            .name-sticker span {
+                font-size: 0.65rem;
             }
 
             .social-buttons {
@@ -367,10 +405,24 @@
                 margin-right: 8px;
             }
 
+            .profile-image-container {
+                width: 140px;
+                height: 140px;
+            }
+
             .profile-image {
                 width: 140px;
                 height: 140px;
-                font-size: 3.5rem;
+            }
+
+            .name-sticker {
+                bottom: -12px;
+                right: -18px;
+                padding: 10px 16px;
+            }
+
+            .name-sticker span {
+                font-size: 0.8rem;
             }
 
             .profile-section h1 {
@@ -471,11 +523,25 @@
                 font-size: 1.4rem;
             }
 
+            .profile-image-container {
+                width: 160px;
+                height: 160px;
+                margin-bottom: 25px;
+            }
+
             .profile-image {
                 width: 160px;
                 height: 160px;
-                font-size: 4rem;
-                margin-bottom: 25px;
+            }
+
+            .name-sticker {
+                bottom: -12px;
+                right: -20px;
+                padding: 12px 18px;
+            }
+
+            .name-sticker span {
+                font-size: 0.85rem;
             }
 
             .profile-section h1 {
@@ -534,10 +600,13 @@
     <div class="container">
         <!-- Profile Section -->
         <div class="profile-section">
-            <div class="profile-image">
-                👋
+            <div class="profile-image-container">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/8d83844d-08fb-40bc-a1b4-188dac27acb6/Untitled+%28Instagram+Post+%2845%29%29.gif?format=750w" alt="Ila B Corcoran" class="profile-image">
+                <div class="name-sticker">
+                    <span>hi I'm Ila B Corcoran</span>
+                </div>
             </div>
-            <h1>Hey, I'm [Your Name]</h1>
+            <h1>Hey, I'm Ila B Corcoran</h1>
             <p class="tagline">Building community for founders & funders</p>
         </div>
 
