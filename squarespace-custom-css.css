@@ -10,21 +10,19 @@
    STEP 1: Add Navigation Items
    Go to: Pages > Main Navigation > Add/Edit Links
 
-   Add these items in this exact order:
+   Add these items in this exact order (ALL will appear on ONE LINE):
 
-   First Row (regular links):
    1. Home → / (homepage)
    2. Grants → https://www.bysengo.com/grant
    3. Pitch → https://www.bysengo.com/pitch
-
-   Second Row (signup links - will appear in ORANGE):
-   4. Founders → https://app.bysengo.com/founder-enrollment
-   5. Funders → https://app.bysengo.com/investor-enrollment
-   6. All Access → https://app.bysengo.com/allaccess-enrollment
+   4. Founders → https://app.bysengo.com/founder-enrollment (ORANGE)
+   5. Funders → https://app.bysengo.com/investor-enrollment (ORANGE)
+   6. All Access → https://app.bysengo.com/allaccess-enrollment (ORANGE)
 
    The CSS will automatically:
-   - Put Founders, Funders, All Access on a second line
-   - Style them in orange (#D57028) to indicate they're signup links
+   - Keep ALL links on one single line
+   - Style Founders, Funders, All Access in orange (#D57028) to indicate signup links
+   - Use tight spacing to fit everything
 
    STEP 2: Add Login Button to Header
    Go to: Design > Site Styles > Header
@@ -79,33 +77,17 @@ nav a,
   position: relative;
 }
 
-/* Navigation Layout - First row: Home, Grants, Pitch | Second row: Founders, Funders, All Access */
+/* Navigation Layout - All links on one line */
 .header-nav-list {
-  gap: 1.5rem !important;
-  flex-wrap: wrap !important; /* Allow items to wrap to second line */
+  gap: 1.2rem !important; /* Tight spacing to fit all items on one line */
+  flex-wrap: nowrap !important; /* Prevent wrapping */
   justify-content: center !important;
 }
 
 .header-nav-item {
   padding: 0 !important;
-  margin: 0 0.75rem !important;
-}
-
-/* Force line break AFTER Pitch (3rd item) to start new row */
-.header-nav-item:nth-child(3)::after {
-  content: '' !important;
-  flex-basis: 100% !important;
-  height: 0 !important;
-  width: 0 !important;
-}
-
-/* Ensure second row items (Founders, Funders, All Access) don't grow to fill space */
-.header-nav-item:nth-child(4),
-.header-nav-item:nth-child(5),
-.header-nav-item:nth-child(6) {
-  flex-grow: 0 !important;
-  flex-shrink: 0 !important;
-  flex-basis: auto !important;
+  margin: 0 0.6rem !important; /* Reduced margin for tighter spacing */
+  flex-shrink: 0 !important; /* Prevent items from shrinking */
 }
 
 /* Style signup links (Founders, Funders, All Access) in orange */
