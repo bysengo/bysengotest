@@ -5,33 +5,33 @@
    NAVIGATION SETUP INSTRUCTIONS
    ============================================
 
-   Before applying this CSS, set up your Squarespace navigation with these exact items:
+   Before applying this CSS, set up your Squarespace navigation:
 
+   STEP 1: Add Navigation Items
    Go to: Pages > Main Navigation > Add/Edit Links
 
-   Navigation Items (in order):
+   Add these items (in order):
 
-   1. Home
-      Link: / (homepage)
+   1. Home → / (homepage)
+   2. Grants → https://www.bysengo.com/grant
+   3. Pitch → https://www.bysengo.com/pitch
+   4. Founders → https://app.bysengo.com/founder-enrollment
+   5. Funders → https://app.bysengo.com/investor-enrollment
+   6. All Access → https://app.bysengo.com/allaccess-enrollment
 
-   2. Grants
-      Link: https://www.bysengo.com/grant
+   STEP 2: Add Login Button to Header
+   Go to: Design > Site Styles > Header
 
-   3. Pitch
-      Link: https://www.bysengo.com/pitch
+   - Find "Header Actions" or "Buttons" section
+   - Add a button with text "Login"
+   - Link to: /login (or your login page URL)
+   - The CSS below will automatically style it with orange background
 
-   4. Founders
-      Link: https://app.bysengo.com/founder-enrollment
+   Alternative: If no button option exists in your template:
+   - Add Login as a regular nav item
+   - The hover effects will still apply
 
-   5. Funders
-      Link: https://app.bysengo.com/investor-enrollment
-
-   6. All Access
-      Link: https://app.bysengo.com/allaccess-enrollment
-
-   7. Login (button)
-      Link: /login (or your login page URL)
-      Note: Style this as a button in Squarespace header settings
+   NOTE: The tight spacing ensures all items fit on one line
 
    ============================================ */
 
@@ -74,6 +74,16 @@ nav a,
   position: relative;
 }
 
+/* Tighter Navigation Spacing - Keeps all items on one line */
+.header-nav-list {
+  gap: 1.5rem !important; /* Reduced from default ~2.5rem */
+}
+
+.header-nav-item {
+  padding: 0 !important;
+  margin: 0 0.75rem !important; /* Tight spacing between items */
+}
+
 /* Navigation Link Hover - Orange Glow (matches standalone header) */
 .header-nav-item a:hover,
 .header-nav-folder-item a:hover,
@@ -101,22 +111,36 @@ nav a,
   transform: translateY(-15px) !important;
 }
 
-/* Header Actions (buttons, etc) */
+/* Header Actions (Login Button, etc) */
+.header-actions,
 .header-actions-action,
-.btn,
+.header-actions .btn,
 .header-skip-link {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Login Button Styling */
+.header-actions-action,
+.header-actions .btn,
+.header-actions a {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-size: 0.85rem !important;
   font-weight: 500 !important;
   letter-spacing: 0.5px !important;
   text-transform: uppercase !important;
+  background: #D57028 !important;
+  color: #F3EDE7 !important;
+  border: 2px solid #D57028 !important;
   border-radius: 30px !important;
   padding: 10px 24px !important;
   transition: all 0.3s ease !important;
+  text-decoration: none !important;
 }
 
+/* Login Button Hover */
 .header-actions-action:hover,
-.btn:hover {
+.header-actions .btn:hover,
+.header-actions a:hover {
   background: transparent !important;
   border-color: #D57028 !important;
   color: #D57028 !important;
