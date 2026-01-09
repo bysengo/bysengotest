@@ -164,17 +164,38 @@
   /* Subtext Section */
   .sengo-subtext {
     text-align: center;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #D57028;
-    margin: 30px auto;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #1B3533;
+    margin: 40px auto;
     max-width: 700px;
-    font-weight: 500;
+    font-weight: 600;
+    padding: 30px 0;
+    border-top: 3px solid #D57028;
+    border-bottom: 3px solid #D57028;
+    position: relative;
+  }
+
+  .sengo-subtext::before,
+  .sengo-subtext::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background: #D57028;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .sengo-subtext::after {
+    top: auto;
+    bottom: -3px;
   }
 
   .sengo-subtext p {
     margin: 0;
-    color: #D57028;
+    color: #1B3533;
   }
 
   /* Thesis Section */
