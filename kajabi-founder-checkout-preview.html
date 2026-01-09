@@ -158,7 +158,6 @@
 
     /* Membership Benefits */
     .benefits-section {
-      margin-bottom: 60px;
     }
 
     .benefits-section h2 {
@@ -218,7 +217,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 30px;
-      margin-bottom: 60px;
     }
 
     .target-box {
@@ -279,7 +277,6 @@
     /* Pricing Section */
     .pricing-section {
       text-align: center;
-      margin-bottom: 60px;
     }
 
     .pricing-section h2 {
@@ -382,11 +379,7 @@
 
     /* Stats & Testimonial */
     .social-proof {
-      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
-      border-radius: 16px;
-      padding: 50px 40px;
       text-align: center;
-      margin-bottom: 60px;
       color: #F3EDE7;
     }
 
@@ -418,7 +411,6 @@
       border: 3px solid #AF8145;
       border-radius: 16px;
       padding: 50px 40px;
-      margin-bottom: 60px;
     }
 
     .upsell-section h3 {
@@ -496,10 +488,7 @@
     /* Reassurance */
     .reassurance {
       text-align: center;
-      padding: 40px 20px;
-      background: white;
-      border-radius: 16px;
-      margin-bottom: 40px;
+      padding: 20px 20px;
     }
 
     .reassurance-items {
@@ -690,75 +679,87 @@
 <div class="full-width-section section-cream">
   <div class="content-wrapper">
     <div class="pricing-section">
-    <h2>Choose Your Membership</h2>
+      <h2>Choose Your Membership</h2>
 
-    <div class="pricing-options">
-      <div class="pricing-card featured">
-        <div class="pricing-price">$160</div>
-        <div class="pricing-term">per year</div>
-        <p class="pricing-note">Many founders choose annual for long-term focus.</p>
+      <div class="pricing-options">
+        <div class="pricing-card featured">
+          <div class="pricing-price">$160</div>
+          <div class="pricing-term">per year</div>
+          <p class="pricing-note">Many founders choose annual for long-term focus.</p>
 
-        <!-- REPLACE WITH KAJABI ANNUAL CHECKOUT EMBED -->
-        <div class="kajabi-checkout-placeholder">
-          [INSERT KAJABI ANNUAL CHECKOUT BUTTON HERE]
+          <!-- REPLACE WITH KAJABI ANNUAL CHECKOUT EMBED -->
+          <div class="kajabi-checkout-placeholder">
+            [INSERT KAJABI ANNUAL CHECKOUT BUTTON HERE]
+          </div>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-price">$15</div>
+          <div class="pricing-term">per month</div>
+          <p class="pricing-note">Flexible monthly membership option.</p>
+
+          <!-- REPLACE WITH KAJABI MONTHLY CHECKOUT EMBED -->
+          <div class="kajabi-checkout-placeholder">
+            [INSERT KAJABI MONTHLY CHECKOUT BUTTON HERE]
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
-      <div class="pricing-card">
-        <div class="pricing-price">$15</div>
-        <div class="pricing-term">per month</div>
-        <p class="pricing-note">Flexible monthly membership option.</p>
+<!-- Social Proof - Dark Gradient Background -->
+<div class="full-width-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%); padding: 80px 20px;">
+  <div class="content-wrapper">
+    <div class="social-proof">
+      <div class="stat-highlight">$30K+</div>
+      <div class="stat-label">in grants deployed in 2025</div>
 
-        <!-- REPLACE WITH KAJABI MONTHLY CHECKOUT EMBED -->
-        <div class="kajabi-checkout-placeholder">
-          [INSERT KAJABI MONTHLY CHECKOUT BUTTON HERE]
-        </div>
+      <div class="testimonial">
+        "Sengo gave me the tools and confidence to approach fundraising strategically—I finally understood what investors were looking for."
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Social Proof -->
-  <div class="social-proof">
-    <div class="stat-highlight">$30K+</div>
-    <div class="stat-label">in grants deployed in 2025</div>
+<!-- Upsell: 1:1 Support - White Background -->
+<div class="full-width-section section-white">
+  <div class="content-wrapper">
+    <div class="upsell-section">
+      <h3>Want more hands-on support?</h3>
+      <p>Some founders want strategic, personalized guidance as they prepare to raise—or decide whether they should. Our 1:1 support is designed to meet you where you are.</p>
 
-    <div class="testimonial">
-      "Sengo gave me the tools and confidence to approach fundraising strategically—I finally understood what investors were looking for."
+      <div class="upsell-includes">
+        <h4>What's Included:</h4>
+        <ul>
+          <li>A fundraising roadmap tied to your company's growth milestones</li>
+          <li>Strategic support on valuation, tranche sizing, and use of funds</li>
+          <li>Pitch deck and investor messaging refinement</li>
+          <li>Monthly strategy sessions to maintain momentum and adapt</li>
+          <li>Curated introductions to aligned investors within Sengo's network</li>
+          <li>Light support during investor calls and due diligence preparation</li>
+          <li>Ongoing advisory access between sessions (email / async support)</li>
+        </ul>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="#" class="upsell-cta">Learn about 1:1 fundraising support</a>
+        <p style="margin-top: 15px; color: #67441A; font-size: 0.95rem;">(Sliding scale: $500–$2,000)</p>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- Upsell: 1:1 Support -->
-  <div class="upsell-section">
-    <h3>Want more hands-on support?</h3>
-    <p>Some founders want strategic, personalized guidance as they prepare to raise—or decide whether they should. Our 1:1 support is designed to meet you where you are.</p>
-
-    <div class="upsell-includes">
-      <h4>What's Included:</h4>
-      <ul>
-        <li>A fundraising roadmap tied to your company's growth milestones</li>
-        <li>Strategic support on valuation, tranche sizing, and use of funds</li>
-        <li>Pitch deck and investor messaging refinement</li>
-        <li>Monthly strategy sessions to maintain momentum and adapt</li>
-        <li>Curated introductions to aligned investors within Sengo's network</li>
-        <li>Light support during investor calls and due diligence preparation</li>
-        <li>Ongoing advisory access between sessions (email / async support)</li>
-      </ul>
-    </div>
-
-    <div style="text-align: center;">
-      <a href="#" class="upsell-cta">Learn about 1:1 fundraising support</a>
-      <p style="margin-top: 15px; color: #67441A; font-size: 0.95rem;">(Sliding scale: $500–$2,000)</p>
+<!-- Checkout Reassurance - Light Tan Background -->
+<div class="full-width-section section-light-tan">
+  <div class="content-wrapper">
+    <div class="reassurance">
+      <div class="reassurance-items">
+        <div class="reassurance-item">Cancel anytime</div>
+        <div class="reassurance-item">Community membership, not a fundraising obligation</div>
+      </div>
     </div>
   </div>
-
-  <!-- Checkout Reassurance -->
-  <div class="reassurance">
-    <div class="reassurance-items">
-      <div class="reassurance-item">Cancel anytime</div>
-      <div class="reassurance-item">Community membership, not a fundraising obligation</div>
-    </div>
-  </div>
-
 </div>
 
 </body>
