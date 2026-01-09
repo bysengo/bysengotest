@@ -784,7 +784,7 @@
           <span>Access to curated dealflow from vetted founders</span>
         </div>
         <div class="benefit-card">
-          <span>Review pitch decks and company profiles in the app</span>
+          <span>Review pitch decks and investment opportunities in the app</span>
         </div>
         <div class="benefit-card">
           <span>Attend live pitch events with Q&A sessions</span>
@@ -796,7 +796,7 @@
           <span>Learn investment best practices and due diligence</span>
         </div>
         <div class="benefit-card">
-          <span>Track your portfolio and investment opportunities</span>
+          <span>Post, chat, and connect with founders or funders in the app</span>
         </div>
         <div class="benefit-card">
           <span>Ongoing support as you build your investing portfolio</span>
@@ -811,7 +811,7 @@
   <div class="content-wrapper">
     <div class="dealflow-section">
       <h2>Curated Dealflow & Live Pitches</h2>
-      <p>Access high-quality investment opportunities from founders who've completed our fundraising readiness program. Every founder you review has been through education, preparation, and vetting.</p>
+      <p>Access high-quality investment education and hear from founders who've utilized our fundraising education and support.</p>
 
       <div class="dealflow-features">
         <div class="feature-box">
@@ -828,8 +828,8 @@
 
         <div class="feature-box">
           <div class="feature-icon">✓</div>
-          <h3>Vetted Founders</h3>
-          <p>Every founder has completed fundraising education and readiness assessments.</p>
+          <h3>Explore Founders</h3>
+          <p>Every founder has access to Sengo's fundraising education and readiness assessments before they submit.</p>
         </div>
       </div>
     </div>
@@ -841,16 +841,16 @@
   <div class="content-wrapper">
     <div class="stats-grid">
       <div class="stat-item">
-        <div class="stat-number">50+</div>
+        <div class="stat-number" id="stat-founders">0</div>
         <div class="stat-label">Founders in the network</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">$31K</div>
-        <div class="stat-label">Deployed in grants</div>
+        <div class="stat-number" id="stat-raised">$0</div>
+        <div class="stat-label">Raised by our founders in 2025</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">12</div>
-        <div class="stat-label">Monthly pitch events held</div>
+        <div class="stat-number" id="stat-funded">0</div>
+        <div class="stat-label">Founders funded by Sengo</div>
       </div>
     </div>
   </div>
@@ -894,8 +894,8 @@
 
       <div class="pricing-card">
         <div class="pricing-header">
-          <div class="pricing-price">$10<span style="font-size: 1.5rem; font-weight: 600;">/mo</span></div>
-          <div class="pricing-term">or $100/year</div>
+          <div class="pricing-price">$100<span style="font-size: 1.5rem; font-weight: 600;">/yr</span></div>
+          <div class="pricing-term">or $10/mo</div>
           <p class="pricing-note">Full access to dealflow, community, and events</p>
         </div>
 
@@ -909,14 +909,14 @@
 <div class="full-width-section section-white">
   <div class="content-wrapper">
     <div class="capital-circle-section">
-      <h3>Ready to commit capital? Join the Capital Circle.</h3>
-      <p class="intro">Make an annual investment commitment while contributing to grant programming that supports early-stage founders. <strong>Sengo does not collect, hold, or manage your investment dollars.</strong> You invest directly in founders of your choice.</p>
+      <h3>Looking to go deeper? Join the Capital Circle.</h3>
+      <p class="intro">Join select funders who make an annual investment commitment while contributing to grant programming that supports early-stage founders. <strong>Sengo does not collect, hold, or manage your investment dollars.</strong> You invest directly in founders of your choice.</p>
 
       <div class="commitment-box">
-        <h4>Capital Circle Membership Includes:</h4>
+        <h4>Here's how our Capital Circle works:</h4>
         <ul>
-          <li>Annual commitment to invest $5k+ in Sengo founders</li>
-          <li>30% of your commitment supports grant monies via our non-profit partner</li>
+          <li>Annual non-binding commitment to invest $5k+ in Sengo founders</li>
+          <li>30% of your commitment is collected as a tax deductible donation to supports grant monies via our non-profit partner</li>
           <li>Participate on the grant programming committee</li>
           <li>Quarterly strategy sessions with the Sengo team</li>
           <li>Co-investment opportunities with experienced investors</li>
@@ -1138,6 +1138,52 @@
       }
     });
   });
+
+  // Animated Counter for Stats
+  function animateStat(elementId, targetValue, suffix = '', prefix = '', duration = 2000) {
+    const element = document.getElementById(elementId);
+    const steps = 50;
+    const increment = targetValue / steps;
+    const stepDuration = duration / steps;
+    let currentValue = 0;
+
+    const timer = setInterval(() => {
+      currentValue += increment;
+      if (currentValue >= targetValue) {
+        currentValue = targetValue;
+        clearInterval(timer);
+      }
+
+      let displayValue;
+      if (targetValue >= 1000) {
+        displayValue = Math.floor(currentValue).toLocaleString('en-US');
+      } else {
+        displayValue = Math.floor(currentValue);
+      }
+
+      element.textContent = prefix + displayValue + suffix;
+    }, stepDuration);
+  }
+
+  // Start stat animations when elements are in viewport
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Animate all three stats
+        animateStat('stat-founders', 6000, '+', '', 2000);
+        animateStat('stat-raised', 5, 'M+', '$', 2000);
+        animateStat('stat-funded', 18, '+', '', 2000);
+
+        // Unobserve after animation starts
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const statsSection = document.querySelector('.stats-grid');
+  if (statsSection) {
+    statsObserver.observe(statsSection);
+  }
 </script>
 
 </body>
