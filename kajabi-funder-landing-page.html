@@ -375,10 +375,19 @@
 
     /* Capital Circle Upsell */
     .capital-circle-section {
-      background: white;
-      border: 3px solid #AF8145;
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      border: 3px solid #717e36;
       border-radius: 16px;
       padding: 50px 40px;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .capital-circle-section:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(113, 126, 54, 0.4),
+                  0 10px 30px rgba(0, 0, 0, 0.5);
+      border-color: #8a9c42;
     }
 
     .capital-circle-section h3 {
@@ -397,14 +406,19 @@
 
     .capital-circle-section p.intro {
       font-size: 1.2rem;
-      color: #67441A;
+      color: #F3EDE7;
       margin-bottom: 30px;
       text-align: center;
       line-height: 1.7;
     }
 
+    .capital-circle-section p.intro strong {
+      color: #AF8145;
+    }
+
     .commitment-box {
-      background: #F3EDE7;
+      background: rgba(243, 237, 231, 0.1);
+      border: 2px solid rgba(243, 237, 231, 0.2);
       border-radius: 12px;
       padding: 30px;
       margin-bottom: 30px;
@@ -413,7 +427,7 @@
     .commitment-box h4 {
       font-size: 1.3rem;
       margin-bottom: 15px;
-      color: #1B3533;
+      color: #F3EDE7;
       font-weight: 600;
     }
 
@@ -427,14 +441,16 @@
       padding-left: 30px;
       position: relative;
       font-size: 1.05rem;
+      color: #F3EDE7;
     }
 
     .commitment-box li::before {
       content: '→';
       position: absolute;
       left: 0;
-      color: #D57028;
+      color: #717e36;
       font-weight: 700;
+      font-size: 1.2rem;
     }
 
     .upsell-cta {
@@ -905,8 +921,8 @@
   </div>
 </div>
 
-<!-- Capital Circle Upsell - White Background -->
-<div class="full-width-section section-white">
+<!-- Capital Circle Upsell - Light Tan Background -->
+<div class="full-width-section section-light-tan">
   <div class="content-wrapper">
     <div class="capital-circle-section">
       <h3>Looking to go deeper? Join the Capital Circle.</h3>
@@ -926,7 +942,7 @@
 
       <div style="text-align: center;">
         <a href="#" class="upsell-cta">Learn about the Capital Circle</a>
-        <p style="margin-top: 15px; color: #67441A; font-size: 0.95rem;">Annual commitment: $5k+</p>
+        <p style="margin-top: 15px; color: #F3EDE7; font-size: 0.95rem; opacity: 0.85;">Annual commitment: $5k+</p>
       </div>
     </div>
   </div>
