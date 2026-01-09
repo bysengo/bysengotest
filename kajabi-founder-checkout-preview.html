@@ -410,11 +410,12 @@
     }
 
     .stat-highlight {
-      font-size: 6.5rem;
+      font-size: 8rem;
       font-weight: 900;
-      color: #F3EDE7;
+      color: #4CAF50;
       margin-bottom: 20px;
       line-height: 1;
+      text-shadow: 0 0 30px rgba(76, 175, 80, 0.5);
     }
 
     .stat-label {
@@ -432,104 +433,81 @@
       opacity: 0.95;
     }
 
-    /* Rotating Testimonials */
+    /* Side-by-Side Testimonials */
     .rotating-testimonials {
       text-align: center;
-      padding: 40px 20px;
-      max-width: 800px;
+      padding: 20px 20px 30px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
     .testimonial-container {
-      position: relative;
-      min-height: 250px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
     }
 
     .testimonial-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
-    }
-
-    .testimonial-slide.active {
+      gap: 12px;
       opacity: 1;
-      position: relative;
     }
 
     .testimonial-headshot {
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #D57028;
+      border: 2px solid #D57028;
       box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
     }
 
     .testimonial-quote {
-      font-size: 1.2rem;
+      font-size: 0.95rem;
       font-style: italic;
-      line-height: 1.7;
+      line-height: 1.5;
       color: #1B3533;
-      margin: 20px 0;
+      margin: 0;
     }
 
     .testimonial-author {
       font-weight: 600;
       color: #D57028;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
+      margin-top: 8px;
     }
 
     .testimonial-title {
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       color: #67441A;
       opacity: 0.9;
     }
 
-    .testimonial-dots {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 30px;
-    }
-
-    .testimonial-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #D57028;
-      opacity: 0.3;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .testimonial-dot.active {
-      opacity: 1;
-      transform: scale(1.2);
+    @media (max-width: 768px) {
+      .testimonial-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
     }
 
     /* Founder Bio Section */
     .founder-bio {
       display: flex;
       align-items: center;
-      gap: 40px;
-      padding: 50px 20px;
+      gap: 30px;
+      padding: 30px 20px;
       max-width: 900px;
       margin: 0 auto;
     }
 
     .founder-headshot {
-      width: 200px;
-      height: 200px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #D57028;
+      border: 3px solid #D57028;
       box-shadow: 0 8px 30px rgba(213, 112, 40, 0.3);
       flex-shrink: 0;
     }
@@ -540,24 +518,24 @@
 
     .founder-content h3 {
       font-family: 'Arimo', sans-serif;
-      font-size: 2rem;
+      font-size: 1.6rem;
       color: #1B3533;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       font-weight: 700;
     }
 
     .founder-content .founder-title {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #D57028;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
 
     .founder-content p {
-      font-size: 1.05rem;
-      line-height: 1.7;
+      font-size: 0.95rem;
+      line-height: 1.6;
       color: #1B3533;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     @media (max-width: 768px) {
@@ -751,7 +729,7 @@
       }
 
       .stat-highlight {
-        font-size: 3.5rem;
+        font-size: 4.5rem;
       }
 
       .upsell-section {
@@ -795,13 +773,13 @@
   </div>
 </div>
 
-<!-- Rotating Testimonials - White Background -->
-<div class="full-width-section section-white">
+<!-- Side-by-Side Testimonials - White Background -->
+<div class="full-width-section section-white" style="padding: 15px 20px;">
   <div class="content-wrapper">
     <div class="rotating-testimonials">
       <div class="testimonial-container">
         <!-- Testimonial 1 -->
-        <div class="testimonial-slide active">
+        <div class="testimonial-slide">
           <img src="https://i.pravatar.cc/150?img=1" alt="Sarah Chen" class="testimonial-headshot">
           <div class="testimonial-quote">
             "Sengo gave me the tools and confidence to approach fundraising strategically—I finally understood what investors were looking for."
@@ -830,19 +808,12 @@
           <div class="testimonial-title">Founder, EdTech Innovations</div>
         </div>
       </div>
-
-      <!-- Dots Navigation -->
-      <div class="testimonial-dots">
-        <span class="testimonial-dot active" data-slide="0"></span>
-        <span class="testimonial-dot" data-slide="1"></span>
-        <span class="testimonial-dot" data-slide="2"></span>
-      </div>
     </div>
   </div>
 </div>
 
 <!-- Membership Benefits - Dark Gradient Background -->
-<div class="full-width-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%); padding: 80px 20px;">
+<div class="full-width-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%); padding: 50px 20px;">
   <div class="content-wrapper">
     <div class="benefits-section">
       <h2>Your Founder Membership Includes</h2>
@@ -949,7 +920,7 @@
 </div>
 
 <!-- Founder Bio - Cream Background -->
-<div class="full-width-section section-cream">
+<div class="full-width-section section-cream" style="padding: 20px 20px;">
   <div class="content-wrapper">
     <div class="founder-bio">
       <!-- REPLACE THIS WITH ILA CORCORAN'S ACTUAL HEADSHOT -->
@@ -1006,35 +977,6 @@
 </div>
 
 <script>
-  // Rotating Testimonials
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.testimonial-slide');
-  const dots = document.querySelectorAll('.testimonial-dot');
-
-  function showSlide(index) {
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-
-    slides[index].classList.add('active');
-    dots[index].classList.add('active');
-  }
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }
-
-  // Auto-rotate every 5 seconds
-  setInterval(nextSlide, 5000);
-
-  // Click handlers for dots
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-      currentSlide = index;
-      showSlide(currentSlide);
-    });
-  });
-
   // Animated Counter for Grant Amount
   function animateCounter() {
     const counter = document.getElementById('grant-counter');
