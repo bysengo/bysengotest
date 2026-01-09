@@ -28,121 +28,6 @@
       padding: 0;
     }
 
-    /* Header Navigation */
-    .site-header {
-      background: #1B3533;
-      padding: 20px 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 20px rgba(27, 53, 51, 0.2);
-    }
-
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .site-logo {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #F3EDE7;
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-    }
-
-    .site-logo:hover {
-      color: #D57028;
-      text-shadow: 0 0 15px rgba(213, 112, 40, 0.6);
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 30px;
-      align-items: center;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-link {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      color: #F3EDE7;
-      text-decoration: none;
-      letter-spacing: 0.3px;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .nav-link:hover {
-      color: #D57028;
-      text-shadow: 0 0 15px rgba(213, 112, 40, 0.6),
-                   0 0 25px rgba(213, 112, 40, 0.4);
-      transform: translateY(-2px);
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #D57028;
-      transition: width 0.3s ease;
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    .nav-button {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #F3EDE7;
-      background: #D57028;
-      padding: 12px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-      border: 2px solid #D57028;
-    }
-
-    .nav-button:hover {
-      background: transparent;
-      border-color: #D57028;
-      color: #D57028;
-      box-shadow: 0 0 20px rgba(213, 112, 40, 0.6),
-                  0 0 30px rgba(213, 112, 40, 0.4);
-      transform: translateY(-2px);
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-toggle {
-      display: none;
-      background: transparent;
-      border: none;
-      color: #F3EDE7;
-      font-size: 1.8rem;
-      cursor: pointer;
-      padding: 5px;
-    }
-
-    .mobile-menu-toggle:hover {
-      color: #D57028;
-    }
-
     /* Section Backgrounds for Color Segmentation */
     .section-cream {
       background: #F3EDE7;
@@ -659,45 +544,6 @@
 
     /* Responsive Design */
     @media (max-width: 768px) {
-      /* Mobile Header */
-      .header-container {
-        padding: 0 20px;
-      }
-
-      .site-logo {
-        font-size: 1.4rem;
-      }
-
-      .mobile-menu-toggle {
-        display: block;
-      }
-
-      .nav-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: #1B3533;
-        flex-direction: column;
-        padding: 20px;
-        gap: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      }
-
-      .nav-menu.active {
-        display: flex;
-      }
-
-      .nav-link::after {
-        display: none;
-      }
-
-      .nav-button {
-        width: 100%;
-        text-align: center;
-      }
-
       .checkout-container {
         padding: 40px 20px;
       }
@@ -773,31 +619,6 @@
   </style>
 </head>
 <body>
-
-<!-- Header Navigation -->
-<header class="site-header">
-  <div class="header-container">
-    <!-- Logo/Site Title -->
-    <a href="/" class="site-logo">Sengo</a>
-
-    <!-- Mobile Menu Toggle -->
-    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-      ☰
-    </button>
-
-    <!-- Navigation Menu -->
-    <nav>
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="/" class="nav-link">Home</a></li>
-        <li><a href="/about" class="nav-link">About</a></li>
-        <li><a href="/for-founders" class="nav-link">For Founders</a></li>
-        <li><a href="/for-funders" class="nav-link">For Funders</a></li>
-        <li><a href="/resources" class="nav-link">Resources</a></li>
-        <li><a href="/login" class="nav-button">Login</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
 
 <!-- Hero Section - Cream Background -->
 <div class="full-width-section section-cream">
@@ -973,24 +794,6 @@
     </div>
   </div>
 </div>
-
-<script>
-  // Mobile menu toggle function
-  function toggleMobileMenu() {
-    const navMenu = document.getElementById('navMenu');
-    navMenu.classList.toggle('active');
-  }
-
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', function(event) {
-    const navMenu = document.getElementById('navMenu');
-    const menuToggle = document.querySelector('.mobile-menu-toggle');
-
-    if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-      navMenu.classList.remove('active');
-    }
-  });
-</script>
 
 </body>
 </html>
