@@ -258,6 +258,13 @@
     }
 
     /* Membership Benefits */
+    .benefits-wrapper {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+
     .benefits-section {
       position: relative;
       background-image: url('https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/4908da60-873d-4e56-8879-dfe89b418da2/Screenshot+2026-01-09+at+7.10.48%E2%80%AFPM.png?format=750w');
@@ -334,31 +341,28 @@
       line-height: 1.5;
     }
 
-    .benefit-item.with-image {
-      position: relative;
-      display: grid;
-      grid-template-columns: 28px 1fr auto;
-      gap: 15px;
-      align-items: center;
-      grid-row: span 3;
+    .floating-iphone {
+      width: 220px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(213, 112, 40, 0.5),
+                  0 10px 30px rgba(0, 0, 0, 0.3);
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
     }
 
-    .benefit-item.with-image::before {
-      margin-top: 0;
-      align-self: start;
-      margin-top: 2px;
-    }
-
-    .benefit-item-image {
-      width: auto;
-      height: 100px;
-      max-width: 80px;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
-      object-fit: contain;
+    .floating-iphone:hover {
+      transform: translateY(-30px) scale(1.02);
+      box-shadow: 0 30px 80px rgba(213, 112, 40, 0.6),
+                  0 15px 40px rgba(0, 0, 0, 0.4);
     }
 
     @media (max-width: 968px) {
+      .benefits-wrapper {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
       .benefits-section {
         padding: 30px 20px 25px;
       }
@@ -372,12 +376,7 @@
         padding: 6px 0;
       }
 
-      .benefit-item.with-image {
-        grid-template-columns: 28px 1fr;
-        grid-row: span 1;
-      }
-
-      .benefit-item-image {
+      .floating-iphone {
         display: none;
       }
     }
@@ -755,10 +754,10 @@
     .upsell-section h3 {
       font-family: 'Arimo', sans-serif;
       font-size: 2.5rem;
-      color: #1B3533;
+      color: #4CAF50;
       margin-bottom: 20px;
       font-weight: 700;
-      text-transform: uppercase;
+      text-transform: none;
       letter-spacing: -0.02em;
     }
 
@@ -1003,37 +1002,41 @@
 <!-- Membership Benefits - Dark Gradient Background -->
 <div class="full-width-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%); padding: 50px 20px;">
   <div class="content-wrapper">
-    <div class="benefits-section">
-      <h2>Your Founder Membership Includes</h2>
+    <div class="benefits-wrapper">
+      <div class="benefits-section">
+        <h2>Your Founder Membership Includes</h2>
 
-      <!-- 2-Column Checklist with Background Image -->
-      <div class="benefits-checklist">
-        <div class="benefit-item">
-          <span>Fundability education + tools</span>
-        </div>
-        <div class="benefit-item">
-          <span>A community of support with monthly virtual meet-ups</span>
-        </div>
-        <div class="benefit-item">
-          <span>Chat, posting, and connecting</span>
-        </div>
-        <div class="benefit-item with-image">
-          <span>Dealflow submission for investors on the platform</span>
-          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/b3cb2446-0f89-49b6-af7f-145a4d503cc5/iPhone+Screenshots.png?format=750w" alt="Dealflow iPhone App" class="benefit-item-image">
-        </div>
-        <div class="benefit-item">
-          <span>Access to grants</span>
-        </div>
-        <div class="benefit-item">
-          <span>Founder resources & playbooks</span>
-        </div>
-        <div class="benefit-item">
-          <span>Visibility within the Sengo ecosystem</span>
-        </div>
-        <div class="benefit-item">
-          <span>Ongoing support as your business evolves</span>
+        <!-- 2-Column Checklist with Background Image -->
+        <div class="benefits-checklist">
+          <div class="benefit-item">
+            <span>Fundability education + tools</span>
+          </div>
+          <div class="benefit-item">
+            <span>A community of support with monthly virtual meet-ups</span>
+          </div>
+          <div class="benefit-item">
+            <span>Chat, posting, and connecting</span>
+          </div>
+          <div class="benefit-item">
+            <span>Dealflow submission for investors on the platform</span>
+          </div>
+          <div class="benefit-item">
+            <span>Access to grants</span>
+          </div>
+          <div class="benefit-item">
+            <span>Founder resources & playbooks</span>
+          </div>
+          <div class="benefit-item">
+            <span>Visibility within the Sengo ecosystem</span>
+          </div>
+          <div class="benefit-item">
+            <span>Ongoing support as your business evolves</span>
+          </div>
         </div>
       </div>
+
+      <!-- Floating iPhone Image -->
+      <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/b3cb2446-0f89-49b6-af7f-145a4d503cc5/iPhone+Screenshots.png?format=750w" alt="Dealflow iPhone App" class="floating-iphone">
     </div>
   </div>
 </div>
@@ -1134,7 +1137,7 @@
 <div class="full-width-section section-white">
   <div class="content-wrapper">
     <div class="upsell-section">
-      <h3>Want more hands-on support?</h3>
+      <h3>I'm fundraising and I want 1:1 partnership.</h3>
       <p>Some founders want strategic, personalized guidance as they prepare to raise—or decide whether they should. Our 1:1 support is designed to meet you where you are.</p>
 
       <div class="upsell-includes">
@@ -1151,7 +1154,7 @@
       </div>
 
       <div style="text-align: center;">
-        <a href="#" class="upsell-cta">Learn about 1:1 fundraising support</a>
+        <a href="https://calendly.com/ila-bysengo/fundraising" class="upsell-cta" target="_blank" rel="noopener noreferrer">Learn about 1:1 fundraising support</a>
         <p style="margin-top: 15px; color: #67441A; font-size: 0.95rem;">(Sliding scale: $500–$2,000)</p>
       </div>
     </div>
