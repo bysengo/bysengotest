@@ -51,24 +51,27 @@
     transition: all 0.3s ease;
   }
 
-  .sengo-logo img {
-    height: 60px;
-    width: auto;
-    display: block;
-  }
-
-  .sengo-logo:hover {
-    opacity: 0.8;
-    transform: scale(1.05);
+  .sengo-logo .sengo-nav-button {
+    margin: 0;
   }
 
   .sengo-nav-menu {
     display: flex;
-    gap: 45px;
+    flex-wrap: wrap;
+    gap: 15px 45px;
     align-items: center;
+    justify-content: center;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  /* Force line break before Funders (5th item) */
+  .sengo-nav-menu li:nth-child(5)::before {
+    content: '';
+    flex-basis: 100%;
+    height: 0;
+    order: -1;
   }
 
   .sengo-nav-link {
@@ -88,6 +91,12 @@
                  0 0 50px rgba(213, 112, 40, 0.8),
                  0 0 70px rgba(213, 112, 40, 0.6);
     transform: translateY(-15px);
+  }
+
+  .sengo-nav-menu li:nth-child(4) .sengo-nav-link,
+  .sengo-nav-menu li:nth-child(5) .sengo-nav-link,
+  .sengo-nav-menu li:nth-child(6) .sengo-nav-link {
+    color: #D57028;
   }
 
   .sengo-nav-button {
@@ -140,10 +149,6 @@
 
     .sengo-logo {
       order: 1;
-    }
-
-    .sengo-logo img {
-      height: 45px;
     }
 
     .sengo-mobile-toggle {
@@ -206,10 +211,10 @@
 <!-- Header HTML -->
 <header class="sengo-header">
   <div class="sengo-header-container">
-    <!-- Logo -->
-    <a href="https://www.bysengo.com/home" class="sengo-logo">
-      <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/935cdcca-044d-4f58-a1fc-7aee0373104f/Sengo+2.PNG?format=1500w" alt="Sengo">
-    </a>
+    <!-- Login Button (Left) -->
+    <div class="sengo-logo">
+      <a href="/login" class="sengo-nav-button">Login</a>
+    </div>
 
     <!-- Mobile Menu Toggle -->
     <button class="sengo-mobile-toggle" onclick="toggleSengoMenu()" aria-label="Toggle menu">
@@ -229,9 +234,8 @@
       </ul>
     </nav>
 
-    <!-- Right-aligned Login Button (Desktop Only) -->
+    <!-- Right Side (Empty) -->
     <div class="sengo-nav-right">
-      <a href="/login" class="sengo-nav-button">Login</a>
     </div>
   </div>
 </header>
