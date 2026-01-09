@@ -1,179 +1,239 @@
 /* Custom CSS to make Squarespace Footer use Montserrat font */
 /* Add this to Design > Custom CSS in your Squarespace site */
-
-/* Import Montserrat if not already loaded */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+/* Place AFTER the header CSS code */
 
 /* Footer Container */
-.footer-sections,
+footer,
 .footer,
-#footer {
+#footer,
+.footer-wrapper,
+.site-footer,
+[data-section-id*="footer"] {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
 /* Footer Headings */
+footer h1, footer h2, footer h3, footer h4, footer h5, footer h6,
+.footer h1, .footer h2, .footer h3, .footer h4, .footer h5, .footer h6,
+#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6,
 .footer-title,
-.footer h2,
-.footer h3,
-.footer h4 {
+.sqs-block-html h1, .sqs-block-html h2, .sqs-block-html h3,
+.sqs-block-html h4, .sqs-block-html h5, .sqs-block-html h6 {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
 }
 
 /* Footer Links */
-.footer-nav-item a,
+footer a,
 .footer a,
+#footer a,
+.footer-nav-item a,
 .footer-links a,
-.footer-menu-item a {
+.footer-menu-item a,
+.sqs-block-html a {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  text-decoration: none;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
 }
 
 /* Footer Link Hover - Orange Glow */
-.footer-nav-item a:hover,
+footer a:hover,
 .footer a:hover,
+#footer a:hover,
+.footer-nav-item a:hover,
 .footer-links a:hover,
-.footer-menu-item a:hover {
+.footer-menu-item a:hover,
+.sqs-block-html a:hover {
   color: #D57028 !important;
   text-shadow: 0 0 15px rgba(213, 112, 40, 0.6),
-               0 0 25px rgba(213, 112, 40, 0.4);
-  transform: translateY(-2px);
+               0 0 25px rgba(213, 112, 40, 0.4) !important;
+  transform: translateY(-2px) !important;
 }
 
 /* Footer Text/Paragraphs */
+footer p,
 .footer p,
+#footer p,
 .footer-text,
-.footer-description {
+.footer-description,
+.sqs-block-html p {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 400;
-  line-height: 1.6;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
 }
 
 /* Footer Buttons */
+footer .btn,
+footer button,
 .footer .btn,
 .footer button,
+#footer .btn,
+#footer button,
 .footer-button {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  border-radius: 50px;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  transition: all 0.3s ease !important;
+  border-radius: 50px !important;
 }
 
+footer .btn:hover,
+footer button:hover,
 .footer .btn:hover,
 .footer button:hover,
+#footer .btn:hover,
+#footer button:hover,
 .footer-button:hover {
   background-color: #D57028 !important;
   border-color: #D57028 !important;
   box-shadow: 0 0 20px rgba(213, 112, 40, 0.5),
-              0 0 30px rgba(213, 112, 40, 0.3);
-  transform: translateY(-3px);
+              0 0 30px rgba(213, 112, 40, 0.3) !important;
+  transform: translateY(-3px) !important;
 }
 
 /* Social Icons */
+footer .social-icons a,
 .footer-social-links a,
+.footer .social-icons a,
+#footer .social-icons a,
 .social-icons a,
 .footer .social-icon {
-  transition: all 0.3s ease;
+  transition: all 0.3s ease !important;
 }
 
+footer .social-icons a:hover,
 .footer-social-links a:hover,
+.footer .social-icons a:hover,
+#footer .social-icons a:hover,
 .social-icons a:hover,
 .footer .social-icon:hover {
   color: #D57028 !important;
-  transform: translateY(-3px) scale(1.1);
-  filter: drop-shadow(0 0 10px rgba(213, 112, 40, 0.6));
+  transform: translateY(-3px) scale(1.1) !important;
+  filter: drop-shadow(0 0 10px rgba(213, 112, 40, 0.6)) !important;
 }
 
 /* Newsletter/Email Form in Footer */
+footer input[type="email"],
+footer input[type="text"],
 .footer input[type="email"],
 .footer input[type="text"],
+#footer input[type="email"],
+#footer input[type="text"],
 .newsletter-form input {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 400;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  font-weight: 400 !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
 }
 
+footer input[type="email"]:focus,
+footer input[type="text"]:focus,
 .footer input[type="email"]:focus,
 .footer input[type="text"]:focus,
+#footer input[type="email"]:focus,
+#footer input[type="text"]:focus,
 .newsletter-form input:focus {
   border-color: #D57028 !important;
-  box-shadow: 0 0 0 2px rgba(213, 112, 40, 0.2);
+  box-shadow: 0 0 0 2px rgba(213, 112, 40, 0.2) !important;
 }
 
+footer input[type="submit"],
+footer button[type="submit"],
 .footer input[type="submit"],
+.footer button[type="submit"],
+#footer input[type="submit"],
+#footer button[type="submit"],
 .newsletter-form button[type="submit"] {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 600;
-  text-transform: uppercase;
-  background-color: #1B3533;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  background-color: #1B3533 !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
 }
 
+footer input[type="submit"]:hover,
+footer button[type="submit"]:hover,
 .footer input[type="submit"]:hover,
+.footer button[type="submit"]:hover,
+#footer input[type="submit"]:hover,
+#footer button[type="submit"]:hover,
 .newsletter-form button[type="submit"]:hover {
   background-color: #D57028 !important;
-  box-shadow: 0 0 20px rgba(213, 112, 40, 0.5);
-  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(213, 112, 40, 0.5) !important;
+  transform: translateY(-2px) !important;
 }
 
 /* Copyright/Fine Print */
+footer .copyright,
 .footer-copyright,
+.footer .copyright,
+#footer .copyright,
 .copyright,
 .footer-info {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 400;
-  font-size: 0.85rem;
-  opacity: 0.8;
+  font-weight: 400 !important;
+  font-size: 0.85rem !important;
+  opacity: 0.8 !important;
 }
 
 /* Footer Columns */
+footer .footer-col,
+footer .sqs-block,
 .footer-col,
-.footer-block {
+.footer-block,
+.footer .sqs-block {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
 /* Responsive Font Sizing */
 @media screen and (max-width: 768px) {
-  .footer-title,
-  .footer h2,
-  .footer h3 {
+  footer h1, footer h2, footer h3,
+  .footer h1, .footer h2, .footer h3,
+  #footer h1, #footer h2, #footer h3,
+  .footer-title {
     font-size: 1.1rem !important;
   }
 
-  .footer p,
-  .footer a,
+  footer p, footer a,
+  .footer p, .footer a,
+  #footer p, #footer a,
   .footer-nav-item a {
     font-size: 0.9rem !important;
   }
 
+  footer .copyright,
   .footer-copyright,
+  .footer .copyright,
+  #footer .copyright,
   .copyright {
     font-size: 0.75rem !important;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .footer-title,
-  .footer h2,
-  .footer h3 {
+  footer h1, footer h2, footer h3,
+  .footer h1, .footer h2, .footer h3,
+  #footer h1, #footer h2, #footer h3,
+  .footer-title {
     font-size: 1rem !important;
   }
 
-  .footer p,
-  .footer a,
+  footer p, footer a,
+  .footer p, .footer a,
+  #footer p, #footer a,
   .footer-nav-item a {
     font-size: 0.85rem !important;
   }
 
+  footer .copyright,
   .footer-copyright,
+  .footer .copyright,
+  #footer .copyright,
   .copyright {
     font-size: 0.7rem !important;
   }
