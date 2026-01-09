@@ -641,9 +641,11 @@
     // Optional: Add your analytics tracking here
     // Example: gtag('event', 'pathway_selected', { pathway: pathway });
 
-    // Redirect to enrollment page for founders
+    // Redirect to enrollment pages
     if (pathway === 'founder') {
       window.location.href = 'https://app.bysengo.com/founder-enrollment';
+    } else if (pathway === 'funder') {
+      window.location.href = 'https://app.bysengo.com/investor-enrollment';
     }
 
     // Optional: Scroll to email form for other pathways
