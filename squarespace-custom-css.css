@@ -10,14 +10,21 @@
    STEP 1: Add Navigation Items
    Go to: Pages > Main Navigation > Add/Edit Links
 
-   Add these items (in order):
+   Add these items in this exact order:
 
+   First Row (regular links):
    1. Home → / (homepage)
    2. Grants → https://www.bysengo.com/grant
    3. Pitch → https://www.bysengo.com/pitch
+
+   Second Row (signup links - will appear in ORANGE):
    4. Founders → https://app.bysengo.com/founder-enrollment
    5. Funders → https://app.bysengo.com/investor-enrollment
    6. All Access → https://app.bysengo.com/allaccess-enrollment
+
+   The CSS will automatically:
+   - Put Founders, Funders, All Access on a second line
+   - Style them in orange (#D57028) to indicate they're signup links
 
    STEP 2: Add Login Button to Header
    Go to: Design > Site Styles > Header
@@ -25,13 +32,11 @@
    - Find "Header Actions" or "Buttons" section
    - Add a button with text "Login"
    - Link to: /login (or your login page URL)
-   - The CSS below will automatically style it with orange background
+   - The CSS will style it with orange background and glow effects
 
    Alternative: If no button option exists in your template:
    - Add Login as a regular nav item
    - The hover effects will still apply
-
-   NOTE: The tight spacing ensures all items fit on one line
 
    ============================================ */
 
@@ -74,14 +79,49 @@ nav a,
   position: relative;
 }
 
-/* Tighter Navigation Spacing - Keeps all items on one line */
+/* Navigation Layout - First row: Home, Grants, Pitch | Second row: Founders, Funders, All Access */
 .header-nav-list {
-  gap: 1.5rem !important; /* Reduced from default ~2.5rem */
+  gap: 1.5rem !important;
+  flex-wrap: wrap !important; /* Allow items to wrap to second line */
+  justify-content: center !important;
 }
 
 .header-nav-item {
   padding: 0 !important;
-  margin: 0 0.75rem !important; /* Tight spacing between items */
+  margin: 0 0.75rem !important;
+}
+
+/* Force line break before Founders link */
+.header-nav-item:nth-child(4) {
+  flex-basis: 100% !important; /* Forces new line */
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Style signup links (Founders, Funders, All Access) in orange */
+.header-nav-item:nth-child(4) a,
+.header-nav-item:nth-child(5) a,
+.header-nav-item:nth-child(6) a,
+.header-nav-item a[href*="founder-enrollment"],
+.header-nav-item a[href*="investor-enrollment"],
+.header-nav-item a[href*="allaccess-enrollment"] {
+  color: #D57028 !important;
+  font-weight: 500 !important;
+}
+
+/* Orange signup links hover - enhanced glow */
+.header-nav-item:nth-child(4) a:hover,
+.header-nav-item:nth-child(5) a:hover,
+.header-nav-item:nth-child(6) a:hover,
+.header-nav-item a[href*="founder-enrollment"]:hover,
+.header-nav-item a[href*="investor-enrollment"]:hover,
+.header-nav-item a[href*="allaccess-enrollment"]:hover {
+  color: #D57028 !important;
+  text-shadow: 0 0 30px rgba(213, 112, 40, 1),
+               0 0 50px rgba(213, 112, 40, 0.8),
+               0 0 70px rgba(213, 112, 40, 0.6) !important;
+  transform: translateY(-15px) !important;
 }
 
 /* Navigation Link Hover - Orange Glow (matches standalone header) */
@@ -474,7 +514,7 @@ div[class*="form"] label {
   color: #1B3533 !important;
 }
 
-/* Input Fields - Comprehensive Coverage */
+/* Input Fields - Comprehensive Coverage with Montserrat font and dark teal text */
 .form-wrapper input[type="text"],
 .form-wrapper input[type="email"],
 .form-wrapper input[type="tel"],
@@ -515,12 +555,16 @@ textarea.textarea,
 select.select,
 .field-list input,
 .field-list textarea,
-.field-list select {
+.field-list select,
+.sqs-block-form .field-list input,
+.sqs-block-form .field-list textarea,
+.sqs-block-form .field-list select {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-weight: 400 !important;
   font-size: 1rem !important;
   line-height: 1.6 !important;
   letter-spacing: 0.2px !important;
+  color: #1B3533 !important; /* Dark teal text color for all form inputs */
 }
 
 /* Input Placeholder Text */
@@ -533,9 +577,11 @@ select.select,
 input::placeholder,
 textarea::placeholder,
 .field-element input::placeholder,
-.field-element textarea::placeholder {
+.field-element textarea::placeholder,
+select::placeholder {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-weight: 400 !important;
+  color: #1B3533 !important; /* Dark teal for placeholder */
   opacity: 0.6 !important;
 }
 
