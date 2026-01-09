@@ -45,6 +45,10 @@
     text-shadow: 0 0 15px rgba(213, 112, 40, 0.6);
   }
 
+  .sengo-logo-spacer {
+    width: 50px;
+  }
+
   .sengo-nav-menu {
     display: flex;
     gap: 30px;
@@ -173,8 +177,8 @@
 <!-- Header HTML -->
 <header class="sengo-header">
   <div class="sengo-header-container">
-    <!-- Logo/Site Title - UPDATE HREF TO YOUR HOME PAGE -->
-    <a href="/" class="sengo-logo">Sengo</a>
+    <!-- Empty logo space for alignment -->
+    <div class="sengo-logo-spacer"></div>
 
     <!-- Mobile Menu Toggle -->
     <button class="sengo-mobile-toggle" onclick="toggleSengoMenu()" aria-label="Toggle menu">
@@ -182,13 +186,11 @@
     </button>
 
     <!-- Navigation Menu - UPDATE LINKS TO YOUR PAGES -->
-    <nav>
+    <nav style="margin-left: auto;">
       <ul class="sengo-nav-menu" id="sengoNavMenu">
         <li><a href="/" class="sengo-nav-link">Home</a></li>
-        <li><a href="/about" class="sengo-nav-link">About</a></li>
         <li><a href="/for-founders" class="sengo-nav-link">For Founders</a></li>
         <li><a href="/for-funders" class="sengo-nav-link">For Funders</a></li>
-        <li><a href="/resources" class="sengo-nav-link">Resources</a></li>
         <li><a href="/login" class="sengo-nav-button">Login</a></li>
       </ul>
     </nav>
