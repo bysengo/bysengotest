@@ -360,30 +360,39 @@
       line-height: 1.4;
     }
 
-    /* Kajabi Checkout Container - Flexible sizing */
-    .kajabi-checkout-container {
+    /* Checkout Button */
+    .checkout-button {
+      display: block;
       width: 100%;
-      min-height: 200px;
+      padding: 18px 30px;
       margin-top: 20px;
-    }
-
-    .kajabi-checkout-container iframe,
-    .kajabi-checkout-container form {
-      width: 100% !important;
-      max-width: 100% !important;
-    }
-
-    /* Development placeholder only */
-    .kajabi-checkout-placeholder {
-      background: #f9f9f9;
-      border: 2px dashed #D57028;
-      border-radius: 8px;
-      padding: 40px 20px;
+      background: #D57028;
+      color: white;
+      text-decoration: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
       text-align: center;
-      font-family: monospace;
-      color: #67441A;
-      font-size: 0.9rem;
-      line-height: 1.6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .checkout-button:hover {
+      background: #C56020;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.5);
+    }
+
+    .pricing-card.featured .checkout-button {
+      background: #1B3533;
+    }
+
+    .pricing-card.featured .checkout-button:hover {
+      background: #D57028;
     }
 
     /* Stats & Testimonial */
@@ -710,12 +719,8 @@
             <p class="pricing-note">Best value · Full year access</p>
           </div>
 
-          <!-- REPLACE WITH KAJABI ANNUAL CHECKOUT EMBED -->
-          <div class="kajabi-checkout-container">
-            <div class="kajabi-checkout-placeholder">
-              Paste your Kajabi annual<br>checkout embed code here
-            </div>
-          </div>
+          <!-- REPLACE href="#" WITH YOUR KAJABI ANNUAL CHECKOUT LINK -->
+          <a href="#" class="checkout-button">Join Annual Membership</a>
         </div>
 
         <!-- Monthly Membership -->
@@ -726,12 +731,8 @@
             <p class="pricing-note">Flexible · Cancel anytime</p>
           </div>
 
-          <!-- REPLACE WITH KAJABI MONTHLY CHECKOUT EMBED -->
-          <div class="kajabi-checkout-container">
-            <div class="kajabi-checkout-placeholder">
-              Paste your Kajabi monthly<br>checkout embed code here
-            </div>
-          </div>
+          <!-- REPLACE href="#" WITH YOUR KAJABI MONTHLY CHECKOUT LINK -->
+          <a href="#" class="checkout-button">Join Monthly Membership</a>
         </div>
       </div>
     </div>
