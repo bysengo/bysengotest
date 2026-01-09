@@ -29,6 +29,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    flex-wrap: wrap;
   }
 
   .sengo-nav-center {
@@ -46,20 +47,19 @@
   }
 
   .sengo-logo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #F3EDE7;
-    text-decoration: none;
-    letter-spacing: 0.5px;
+    display: block;
     transition: all 0.3s ease;
   }
 
+  .sengo-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
   .sengo-logo:hover {
-    color: #D57028;
-    text-shadow: 0 0 20px rgba(213, 112, 40, 0.6),
-                 0 0 30px rgba(213, 112, 40, 0.4),
-                 0 0 40px rgba(213, 112, 40, 0.2);
+    opacity: 0.8;
+    transform: scale(1.05);
   }
 
   .sengo-nav-menu {
@@ -135,22 +135,27 @@
   @media (max-width: 768px) {
     .sengo-header-container {
       padding: 0 20px;
-      justify-content: center;
+      justify-content: space-between;
     }
 
     .sengo-logo {
-      font-size: 1.4rem;
+      order: 1;
+    }
+
+    .sengo-logo img {
+      height: 32px;
     }
 
     .sengo-mobile-toggle {
       display: block;
-      position: absolute;
-      left: 20px;
+      order: 0;
     }
 
     .sengo-nav-center {
       position: static;
       transform: none;
+      order: 3;
+      width: 100%;
     }
 
     .sengo-nav-right {
@@ -201,6 +206,11 @@
 <!-- Header HTML -->
 <header class="sengo-header">
   <div class="sengo-header-container">
+    <!-- Logo -->
+    <a href="/" class="sengo-logo">
+      <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/935cdcca-044d-4f58-a1fc-7aee0373104f/Sengo+2.PNG?format=1500w" alt="Sengo">
+    </a>
+
     <!-- Mobile Menu Toggle -->
     <button class="sengo-mobile-toggle" onclick="toggleSengoMenu()" aria-label="Toggle menu">
       ☰
