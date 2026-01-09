@@ -214,29 +214,19 @@
       letter-spacing: -0.02em;
     }
 
-    .benefits-content {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 40px;
-      align-items: start;
-    }
-
-    .benefits-images {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .benefits-images img {
+    .benefits-hero-image {
       width: 100%;
+      margin-bottom: 40px;
       border-radius: 12px;
       box-shadow: 0 8px 30px rgba(213, 112, 40, 0.3);
     }
 
     .benefits-checklist {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .benefit-item {
@@ -269,17 +259,36 @@
       line-height: 1.6;
     }
 
+    .benefit-item.with-image {
+      position: relative;
+      display: grid;
+      grid-template-columns: 28px 1fr 120px;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .benefit-item.with-image::before {
+      margin-top: 0;
+    }
+
+    .benefit-item-image {
+      width: 120px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
+    }
+
     @media (max-width: 968px) {
-      .benefits-content {
+      .benefits-checklist {
         grid-template-columns: 1fr;
       }
 
-      .benefits-images {
-        order: 2;
+      .benefit-item.with-image {
+        grid-template-columns: 28px 1fr;
       }
 
-      .benefits-checklist {
-        order: 1;
+      .benefit-item-image {
+        display: none;
       }
     }
 
@@ -906,39 +915,35 @@
     <div class="benefits-section">
       <h2>Your Founder Membership Includes</h2>
 
-      <div class="benefits-content">
-        <!-- Left Column: Images -->
-        <div class="benefits-images">
-          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/4908da60-873d-4e56-8879-dfe89b418da2/Screenshot+2026-01-09+at+7.10.48%E2%80%AFPM.png?format=750w" alt="Sengo Platform Screenshot">
-          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/b3cb2446-0f89-49b6-af7f-145a4d503cc5/iPhone+Screenshots.png?format=750w" alt="Dealflow iPhone Screenshots">
-        </div>
+      <!-- Full-Width Hero Image -->
+      <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/4908da60-873d-4e56-8879-dfe89b418da2/Screenshot+2026-01-09+at+7.10.48%E2%80%AFPM.png?format=750w" alt="Sengo Platform Screenshot" class="benefits-hero-image">
 
-        <!-- Right Column: Checklist -->
-        <div class="benefits-checklist">
-          <div class="benefit-item">
-            <span>Fundability education + tools</span>
-          </div>
-          <div class="benefit-item">
-            <span>A community of support with monthly virtual meet-ups</span>
-          </div>
-          <div class="benefit-item">
-            <span>Chat, posting, and connecting</span>
-          </div>
-          <div class="benefit-item">
-            <span>Dealflow submission for investors on the platform</span>
-          </div>
-          <div class="benefit-item">
-            <span>Access to grants</span>
-          </div>
-          <div class="benefit-item">
-            <span>Founder resources & playbooks</span>
-          </div>
-          <div class="benefit-item">
-            <span>Visibility within the Sengo ecosystem</span>
-          </div>
-          <div class="benefit-item">
-            <span>Ongoing support as your business evolves</span>
-          </div>
+      <!-- 2-Column Checklist -->
+      <div class="benefits-checklist">
+        <div class="benefit-item">
+          <span>Fundability education + tools</span>
+        </div>
+        <div class="benefit-item">
+          <span>A community of support with monthly virtual meet-ups</span>
+        </div>
+        <div class="benefit-item">
+          <span>Chat, posting, and connecting</span>
+        </div>
+        <div class="benefit-item with-image">
+          <span>Dealflow submission for investors on the platform</span>
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/b3cb2446-0f89-49b6-af7f-145a4d503cc5/iPhone+Screenshots.png?format=750w" alt="Dealflow iPhone App" class="benefit-item-image">
+        </div>
+        <div class="benefit-item">
+          <span>Access to grants</span>
+        </div>
+        <div class="benefit-item">
+          <span>Founder resources & playbooks</span>
+        </div>
+        <div class="benefit-item">
+          <span>Visibility within the Sengo ecosystem</span>
+        </div>
+        <div class="benefit-item">
+          <span>Ongoing support as your business evolves</span>
         </div>
       </div>
     </div>
