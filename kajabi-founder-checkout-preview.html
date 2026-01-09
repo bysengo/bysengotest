@@ -201,6 +201,30 @@
 
     /* Membership Benefits */
     .benefits-section {
+      position: relative;
+      background-image: url('https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/4908da60-873d-4e56-8879-dfe89b418da2/Screenshot+2026-01-09+at+7.10.48%E2%80%AFPM.png?format=750w');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 12px;
+      overflow: hidden;
+      padding: 60px 40px;
+    }
+
+    .benefits-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 1;
+    }
+
+    .benefits-section > * {
+      position: relative;
+      z-index: 2;
     }
 
     .benefits-section h2 {
@@ -212,13 +236,6 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: -0.02em;
-    }
-
-    .benefits-hero-image {
-      width: 100%;
-      margin-bottom: 40px;
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(213, 112, 40, 0.3);
     }
 
     .benefits-checklist {
@@ -279,6 +296,10 @@
     }
 
     @media (max-width: 968px) {
+      .benefits-section {
+        padding: 40px 20px;
+      }
+
       .benefits-checklist {
         grid-template-columns: 1fr;
       }
@@ -915,10 +936,7 @@
     <div class="benefits-section">
       <h2>Your Founder Membership Includes</h2>
 
-      <!-- Full-Width Hero Image -->
-      <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/4908da60-873d-4e56-8879-dfe89b418da2/Screenshot+2026-01-09+at+7.10.48%E2%80%AFPM.png?format=750w" alt="Sengo Platform Screenshot" class="benefits-hero-image">
-
-      <!-- 2-Column Checklist -->
+      <!-- 2-Column Checklist with Background Image -->
       <div class="benefits-checklist">
         <div class="benefit-item">
           <span>Fundability education + tools</span>
