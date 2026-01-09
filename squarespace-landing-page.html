@@ -33,11 +33,11 @@
   .sengo-hero h1 {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 6.5rem;
-    font-weight: 400;
-    line-height: 0.94;
+    font-weight: 700;
+    line-height: 0.85;
     color: #1B3533;
-    letter-spacing: -0.077em;
-    text-transform: none;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
     max-width: 900px;
     margin: 0;
   }
@@ -193,6 +193,7 @@
     line-height: 0.8;
     letter-spacing: -0.077em;
     text-transform: uppercase;
+    color: #F3EDE7;
     position: relative;
     z-index: 1;
   }
@@ -201,7 +202,7 @@
     font-size: 1.15rem;
     line-height: 1.9;
     margin-bottom: 50px;
-    color: #717E36;
+    opacity: 0.95;
     font-weight: 400;
     position: relative;
     z-index: 1;
@@ -285,9 +286,9 @@
     text-align: center;
     margin: 100px 0;
     padding: 80px 50px;
-    background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
+    background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
     border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(213, 112, 40, 0.25);
+    box-shadow: 0 20px 60px rgba(27, 53, 51, 0.25);
   }
 
   .sengo-email-section .impact-badge {
@@ -352,13 +353,13 @@
     text-transform: uppercase;
     letter-spacing: 2px;
   }
+ /* About Us Section */
 
-  /* About Us Section */
   .about-us-section {
     margin: 100px 0;
     text-align: center;
-  }
 
+  }
   .about-us-section h2 {
     font-family: 'Arimo', sans-serif;
     font-size: 4rem;
@@ -368,58 +369,8 @@
     text-transform: uppercase;
     color: #1B3533;
     margin-bottom: 60px;
-  }
 
-  .about-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
   }
-
-  .about-card {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    cursor: pointer;
-    aspect-ratio: 4/5;
-    background: #F3EDE7;
-  }
-
-  .about-card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: all 0.5s ease;
-    filter: brightness(0.6);
-  }
-
-  .about-card:hover .about-card-image {
-    filter: brightness(1);
-    transform: scale(1.05);
-  }
-
-  .about-card-title {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 30px;
-    background: linear-gradient(to top, rgba(27, 53, 51, 0.9) 0%, transparent 100%);
-    color: #F3EDE7;
-    font-family: 'Arimo', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
-    z-index: 2;
-    transition: all 0.3s ease;
-  }
-
-  .about-card:hover .about-card-title {
-    background: linear-gradient(to top, rgba(213, 112, 40, 0.9) 0%, transparent 100%);
-  }
-
   /* Responsive Design */
   @media (max-width: 768px) {
     .sengo-hero {
@@ -429,7 +380,7 @@
 
     .sengo-hero h1 {
       font-size: 3.5rem;
-      line-height: 0.94;
+      line-height: 0.85;
     }
 
     .sengo-thesis {
@@ -467,15 +418,6 @@
     .stat-number {
       font-size: 2.5rem;
     }
-
-    .about-us-section h2 {
-      font-size: 2.5rem;
-    }
-
-    .about-card-title {
-      font-size: 1.3rem;
-      padding: 20px;
-    }
   }
 </style>
 
@@ -493,35 +435,41 @@
       <div class="logo-track">
         <!-- First set of logos -->
         <div class="logo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/8b90e9cb-7454-491d-95d3-07fb06e284d1/Social+Media+Squares+v2+%28Presentation+%2843%29%29.png?format=750w" alt="Forbes">
         </div>
         <div class="logo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/34e27655-e182-4ac4-b8df-9bb9eb891719/3.png?format=750w" alt="NerdWallet">
         </div>
         <div class="logo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/5ef4f0b5-fc3a-4614-a8d8-4903795b8d65/4.png?format=750w" alt="Build in Tulsa">
         </div>
         <div class="logo-item">
-          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/95081a5b-b209-4ac8-83f8-33874282fd7d/2.png?format=750w" alt="Nasdaq">
         </div>
         <div class="logo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/ff429dd9-458f-450c-9784-f0f2eb701da9/5.png?format=750w" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/9a8a7346-142e-46fa-a453-2c4bf1b9b16f/1.png?format=750w" alt="Business Insider">
         </div>
         <!-- Duplicate set for seamless loop -->
         <div class="logo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Forbes_logo.svg" alt="Forbes">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/8b90e9cb-7454-491d-95d3-07fb06e284d1/Social+Media+Squares+v2+%28Presentation+%2843%29%29.png?format=750w" alt="Forbes">
         </div>
         <div class="logo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/NerdWallet_logo.svg" alt="NerdWallet">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/34e27655-e182-4ac4-b8df-9bb9eb891719/3.png?format=750w" alt="NerdWallet">
         </div>
         <div class="logo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Nasdaq_Logo.svg" alt="Nasdaq">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/5ef4f0b5-fc3a-4614-a8d8-4903795b8d65/4.png?format=750w" alt="Build in Tulsa">
         </div>
         <div class="logo-item">
-          <img src="https://images.squarespace-cdn.com/content/v1/5c5f0b2c7eb88c5fe8b0c2c1/1549662883374-4D0FVQZ9P0YVZJ6QXVQB/BGV+Logo+Black.png" alt="Black Girl Ventures">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/95081a5b-b209-4ac8-83f8-33874282fd7d/2.png?format=750w" alt="Nasdaq">
         </div>
         <div class="logo-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Business_Insider_Logo.svg" alt="Business Insider">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/ff429dd9-458f-450c-9784-f0f2eb701da9/5.png?format=750w" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/9a8a7346-142e-46fa-a453-2c4bf1b9b16f/1.png?format=750w" alt="Business Insider">
         </div>
       </div>
     </div>
@@ -529,7 +477,7 @@
 
   <!-- Subtext -->
   <div class="sengo-subtext fade-in-up">
-    <p>Sengo is revolutionizing how founders and funders connect, collaborate, and create lasting impact in the entrepreneurial ecosystem. We're democratizing access to capital and opportunity for underrepresented founders.</p>
+    <p>Sengo is revolutionizing how founders and funders connect, collaborate, and create lasting impact. We help companies prepare to scale, and help funders learn how to invest in them.</p>
   </div>
 
   <!-- Stats Section -->
@@ -544,30 +492,7 @@
     </div>
     <div class="stat-card">
       <div class="stat-number">$5M+</div>
-      <div class="stat-label">Raised by Founders</div>
-    </div>
-  </div>
-
-  <!-- About Us Section -->
-  <div class="about-us-section fade-in-up">
-    <h2>What We Offer</h2>
-    <div class="about-cards">
-      <div class="about-card">
-        <img class="about-card-image" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" alt="Education">
-        <div class="about-card-title">Education</div>
-      </div>
-      <div class="about-card">
-        <img class="about-card-image" src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80" alt="Dealflow">
-        <div class="about-card-title">Dealflow</div>
-      </div>
-      <div class="about-card">
-        <img class="about-card-image" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" alt="Funding Resources">
-        <div class="about-card-title">Funding Resources</div>
-      </div>
-      <div class="about-card">
-        <img class="about-card-image" src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80" alt="Events">
-        <div class="about-card-title">Events</div>
-      </div>
+      <div class="stat-label">Raised by Founders in 2025</div>
     </div>
   </div>
 
@@ -591,8 +516,8 @@
   <!-- Email Capture Section -->
   <div class="sengo-email-section fade-in-up">
     <span class="impact-badge">Stay Connected</span>
-    <h3>Get Early Access</h3>
-    <p>Join our community and be the first to know about partnership opportunities, events, and updates.</p>
+    <h3>Get In The Know</h3>
+    <p>Join our email list and be the first to know our latest news.</p>
   </div>
 
 </div>
