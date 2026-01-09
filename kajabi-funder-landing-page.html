@@ -111,6 +111,23 @@
       box-shadow: 0 15px 40px rgba(213, 112, 40, 0.5);
     }
 
+    .hero-cta.faq-cta {
+      background: #717e36;
+      margin-left: 15px;
+    }
+
+    .hero-cta.faq-cta:hover {
+      background: #5f6b2e;
+      box-shadow: 0 15px 40px rgba(113, 126, 54, 0.5);
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
     /* Benefits Section */
     .benefits-section {
       position: relative;
@@ -559,10 +576,39 @@
       font-size: 3rem;
       color: #1B3533;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: -0.02em;
+    }
+
+    .faq-header-cta {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .faq-join-button {
+      display: inline-block;
+      padding: 18px 50px;
+      background: #D57028;
+      color: white;
+      text-decoration: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .faq-join-button:hover {
+      background: #C56020;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.5);
     }
 
     .faq-item {
@@ -716,7 +762,10 @@
     <div class="hero-section">
       <h1>Join Sengo as a Funder</h1>
       <p>Build your angel investing portfolio while supporting impact-driven founders</p>
-      <a href="#membership" class="hero-cta">Explore Membership</a>
+      <div class="hero-buttons">
+        <a href="#membership" class="hero-cta">Explore Membership</a>
+        <a href="#faqs" class="hero-cta faq-cta">FAQs</a>
+      </div>
     </div>
   </div>
 </div>
@@ -845,12 +894,12 @@
 
       <div class="pricing-card">
         <div class="pricing-header">
-          <div class="pricing-price">$200</div>
-          <div class="pricing-term">per year</div>
+          <div class="pricing-price">$10<span style="font-size: 1.5rem; font-weight: 600;">/mo</span></div>
+          <div class="pricing-term">or $100/year</div>
           <p class="pricing-note">Full access to dealflow, community, and events</p>
         </div>
 
-        <a href="#" class="cta-button">Join as a Funder</a>
+        <a href="https://app.bysengo.com/offers/BGMPY9cY/checkout" class="cta-button" target="_blank" rel="noopener noreferrer">Join as a Funder</a>
       </div>
     </div>
   </div>
@@ -896,10 +945,13 @@
 </div>
 
 <!-- FAQ Section - Cream Background -->
-<div class="full-width-section section-cream">
+<div id="faqs" class="full-width-section section-cream">
   <div class="content-wrapper">
     <div class="faq-section">
       <h2>Funder Member FAQs</h2>
+      <div class="faq-header-cta">
+        <a href="#membership" class="faq-join-button">Join as a Funder</a>
+      </div>
 
       <div class="faq-item">
         <button class="faq-question">
