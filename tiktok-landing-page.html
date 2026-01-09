@@ -32,49 +32,66 @@
         .container {
             max-width: 500px;
             margin: 0 auto;
-            padding: 30px 0;
+            padding: 10px 0 30px;
         }
 
         /* Profile Section */
         .profile-section {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             opacity: 0;
             animation: fadeIn 0.8s ease forwards;
         }
 
         .profile-image-container {
             position: relative;
+            width: 280px;
+            height: 500px;
+            margin: 0 auto 25px;
+            background: #1B3533;
+            border-radius: 35px;
+            padding: 12px;
+            box-shadow: 0 8px 30px rgba(27, 53, 51, 0.3);
+        }
+
+        /* iPhone notch */
+        .profile-image-container::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
+            height: 25px;
+            background: #1B3533;
+            border-radius: 0 0 20px 20px;
+            z-index: 5;
         }
 
         .profile-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
             object-fit: cover;
-            box-shadow: 0 4px 20px rgba(213, 112, 40, 0.2);
-            border: 3px solid white;
+            display: block;
         }
 
         .name-sticker {
             position: absolute;
-            bottom: -10px;
-            right: -15px;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
             background: white;
-            padding: 8px 14px;
-            border-radius: 20px;
+            padding: 10px 18px;
+            border-radius: 25px;
             border: 2px solid #D57028;
-            box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
-            transform: rotate(-5deg);
+            box-shadow: 0 6px 20px rgba(213, 112, 40, 0.4);
             z-index: 10;
         }
 
         .name-sticker span {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #1B3533;
             text-transform: lowercase;
@@ -317,12 +334,16 @@
         /* Small phones */
         @media (max-width: 400px) {
             body {
-                padding: 15px;
+                padding: 10px;
                 font-size: 1rem;
             }
 
             .container {
-                padding: 20px 0;
+                padding: 5px 0 20px;
+            }
+
+            .profile-section {
+                margin-bottom: 25px;
             }
 
             .profile-section h1 {
@@ -330,23 +351,29 @@
             }
 
             .profile-image-container {
+                width: 240px;
+                height: 430px;
+                padding: 10px;
+                border-radius: 30px;
+            }
+
+            .profile-image-container::before {
+                top: 10px;
                 width: 100px;
-                height: 100px;
+                height: 22px;
             }
 
             .profile-image {
-                width: 100px;
-                height: 100px;
+                border-radius: 22px;
             }
 
             .name-sticker {
-                bottom: -8px;
-                right: -12px;
-                padding: 6px 10px;
+                bottom: 15px;
+                padding: 8px 14px;
             }
 
             .name-sticker span {
-                font-size: 0.65rem;
+                font-size: 0.75rem;
             }
 
             .social-buttons {
@@ -377,17 +404,17 @@
         /* Tablets and small desktop */
         @media (min-width: 600px) {
             body {
-                padding: 40px;
+                padding: 30px;
                 font-size: 1.1rem;
             }
 
             .container {
                 max-width: 750px;
-                padding: 50px 0;
+                padding: 20px 0 50px;
             }
 
             .profile-section {
-                margin-bottom: 50px;
+                margin-bottom: 40px;
             }
 
             .social-buttons {
@@ -406,23 +433,30 @@
             }
 
             .profile-image-container {
-                width: 140px;
-                height: 140px;
+                width: 300px;
+                height: 540px;
+                padding: 12px;
+                border-radius: 35px;
+                margin-bottom: 30px;
+            }
+
+            .profile-image-container::before {
+                top: 12px;
+                width: 120px;
+                height: 25px;
             }
 
             .profile-image {
-                width: 140px;
-                height: 140px;
+                border-radius: 25px;
             }
 
             .name-sticker {
-                bottom: -12px;
-                right: -18px;
-                padding: 10px 16px;
+                bottom: 22px;
+                padding: 11px 20px;
             }
 
             .name-sticker span {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }
 
             .profile-section h1 {
@@ -497,16 +531,16 @@
         /* Large desktop */
         @media (min-width: 900px) {
             body {
-                padding: 60px;
+                padding: 40px;
             }
 
             .container {
                 max-width: 900px;
-                padding: 60px 0;
+                padding: 30px 0 60px;
             }
 
             .profile-section {
-                margin-bottom: 60px;
+                margin-bottom: 50px;
             }
 
             .social-buttons {
@@ -524,24 +558,30 @@
             }
 
             .profile-image-container {
-                width: 160px;
-                height: 160px;
-                margin-bottom: 25px;
+                width: 320px;
+                height: 580px;
+                padding: 14px;
+                border-radius: 40px;
+                margin-bottom: 35px;
+            }
+
+            .profile-image-container::before {
+                top: 14px;
+                width: 130px;
+                height: 28px;
             }
 
             .profile-image {
-                width: 160px;
-                height: 160px;
+                border-radius: 28px;
             }
 
             .name-sticker {
-                bottom: -12px;
-                right: -20px;
-                padding: 12px 18px;
+                bottom: 25px;
+                padding: 12px 22px;
             }
 
             .name-sticker span {
-                font-size: 0.85rem;
+                font-size: 0.95rem;
             }
 
             .profile-section h1 {
