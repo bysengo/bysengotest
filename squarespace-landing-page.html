@@ -20,13 +20,14 @@
 
   /* Hero Section */
   .sengo-hero {
-    min-height: 70vh;
+    min-height: 50vh;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     text-align: left;
-    padding: 100px 20px;
-    margin-bottom: 80px;
+    padding: 40px 20px 20px;
+    margin-bottom: 40px;
     position: relative;
   }
 
@@ -39,7 +40,16 @@
     letter-spacing: -0.077em;
     text-transform: none;
     max-width: 900px;
+    margin: 0 0 20px 0;
+  }
+
+  .sengo-hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #67441A;
     margin: 0;
+    max-width: 600px;
   }
 
   /* Scroll animations */
@@ -87,9 +97,9 @@
 
   /* Logo Slider */
   .sengo-logo-section {
-    margin: 60px 0;
+    margin: 20px 0 40px;
     overflow: hidden;
-    padding: 40px 0;
+    padding: 30px 0;
     background: #1B3533;
     border-radius: 12px;
   }
@@ -157,7 +167,7 @@
     font-size: 1.25rem;
     line-height: 1.8;
     color: #67441A;
-    margin: 80px auto;
+    margin: 40px auto;
     max-width: 850px;
     font-weight: 500;
   }
@@ -166,9 +176,9 @@
   .sengo-thesis {
     background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
     color: #F3EDE7;
-    padding: 80px 50px;
+    padding: 60px 50px;
     border-radius: 16px;
-    margin: 80px 0;
+    margin: 60px 0;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -284,8 +294,8 @@
   /* Email Section */
   .sengo-email-section {
     text-align: center;
-    margin: 100px 0;
-    padding: 80px 50px;
+    margin: 60px 0;
+    padding: 60px 50px;
     background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(27, 53, 51, 0.25);
@@ -321,7 +331,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    margin: 80px 0;
+    margin: 40px 0;
   }
 
   .stat-card {
@@ -353,30 +363,16 @@
     text-transform: uppercase;
     letter-spacing: 2px;
   }
- /* About Us Section */
-
+  /* About Us Section */
   .about-us-section {
-    margin: 100px 0;
+    margin: 60px 0;
     text-align: center;
-
-  }
-  .about-us-section h2 {
-    font-family: 'Arimo', sans-serif;
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.077em;
-    text-transform: uppercase;
-    color: #1B3533;
-    margin-bottom: 60px;
-
   }
 
   .about-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
   }
 
   .about-card {
@@ -425,13 +421,17 @@
   /* Responsive Design */
   @media (max-width: 768px) {
     .sengo-hero {
-      min-height: 50vh;
-      padding: 60px 20px;
+      min-height: 40vh;
+      padding: 30px 20px 20px;
     }
 
     .sengo-hero h1 {
       font-size: 3.5rem;
       line-height: 0.94;
+    }
+
+    .sengo-hero-subtitle {
+      font-size: 1rem;
     }
 
     .sengo-thesis {
@@ -470,13 +470,14 @@
       font-size: 2.5rem;
     }
 
-    .about-us-section h2 {
-      font-size: 2.5rem;
+    .about-cards {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
     }
 
     .about-card-title {
-      font-size: 1.3rem;
-      padding: 20px;
+      font-size: 1.1rem;
+      padding: 15px;
     }
   }
 </style>
@@ -486,6 +487,7 @@
   <!-- Hero Section -->
   <div class="sengo-hero fade-in">
     <h1>Reimagining Fundraising and Investing</h1>
+    <p class="sengo-hero-subtitle">Closing the wealth gap in private assets</p>
   </div>
 
   <!-- Logo Slider -->
@@ -575,7 +577,6 @@
 
   <!-- About Us Section -->
   <div class="about-us-section fade-in-up">
-    <h2>What We Offer</h2>
     <div class="about-cards">
       <div class="about-card">
         <img class="about-card-image" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" alt="Education">
