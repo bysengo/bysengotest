@@ -240,6 +240,9 @@
     color: #F3EDE7;
     position: relative;
     z-index: 1;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
   }
 
   .sengo-thesis p {
@@ -454,6 +457,10 @@
 
   /* Responsive Design */
   @media (max-width: 768px) {
+    .sengo-content {
+      padding: 40px 20px 20px;
+    }
+
     .sengo-hero {
       min-height: 40vh;
       padding: 30px 20px 20px;
@@ -475,6 +482,7 @@
     .sengo-thesis h2 {
       font-size: 3.5rem;
       line-height: 0.8;
+      word-break: break-word;
     }
 
     .sengo-email-section h3 {
@@ -520,7 +528,7 @@
 
   <!-- Hero Section -->
   <div class="sengo-hero fade-in">
-    <h1>Reimagining Fundraising and Investing</h1>
+    <h1>Reimagining fundraising and investing.</h1>
     <p class="sengo-hero-subtitle">Closing the wealth gap in private assets</p>
   </div>
 
