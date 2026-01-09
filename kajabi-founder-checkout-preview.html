@@ -265,6 +265,23 @@
       align-items: center;
     }
 
+    .iphone-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .iphone-caption {
+      font-size: 0.95rem;
+      color: #F3EDE7;
+      text-align: center;
+      max-width: 350px;
+      line-height: 1.6;
+      font-style: italic;
+      opacity: 0.9;
+    }
+
     .benefits-section {
       position: relative;
       background-image: url('https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/4908da60-873d-4e56-8879-dfe89b418da2/Screenshot+2026-01-09+at+7.10.48%E2%80%AFPM.png?format=750w');
@@ -377,7 +394,7 @@
         padding: 6px 0;
       }
 
-      .floating-iphone {
+      .iphone-container {
         display: none;
       }
     }
@@ -1039,8 +1056,11 @@
         </div>
       </div>
 
-      <!-- Floating iPhone Image -->
-      <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/b3cb2446-0f89-49b6-af7f-145a4d503cc5/iPhone+Screenshots.png?format=750w" alt="Dealflow iPhone App" class="floating-iphone">
+      <!-- Floating iPhone Image with Caption -->
+      <div class="iphone-container">
+        <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/b3cb2446-0f89-49b6-af7f-145a4d503cc5/iPhone+Screenshots.png?format=750w" alt="Dealflow iPhone App" class="floating-iphone">
+        <p class="iphone-caption">Dealflow submission enables us to publish select founders to investors on our platform for funding consideration.</p>
+      </div>
     </div>
   </div>
 </div>
