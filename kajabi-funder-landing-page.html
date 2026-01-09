@@ -533,6 +533,118 @@
       font-size: 1.3rem;
     }
 
+    /* Disclaimer */
+    .disclaimer-section {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .disclaimer-text {
+      font-size: 0.85rem;
+      color: #67441A;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      color: #1B3533;
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .faq-item {
+      background: white;
+      border: 2px solid #D57028;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px 25px;
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1B3533;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: rgba(213, 112, 40, 0.1);
+    }
+
+    .faq-icon {
+      font-size: 1.5rem;
+      color: #D57028;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 25px;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 1000px;
+      padding: 0 25px 20px 25px;
+    }
+
+    .faq-answer p {
+      font-size: 1rem;
+      color: #67441A;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .faq-answer ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 10px 0;
+    }
+
+    .faq-answer li {
+      padding: 5px 0 5px 20px;
+      position: relative;
+      font-size: 1rem;
+      color: #67441A;
+      line-height: 1.6;
+    }
+
+    .faq-answer li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .page-container {
@@ -603,7 +715,7 @@
   <div class="content-wrapper">
     <div class="hero-section">
       <h1>Join Sengo as a Funder</h1>
-      <p>Build your angel investing practice while supporting impact-driven founders</p>
+      <p>Build your angel investing portfolio while supporting impact-driven founders</p>
       <a href="#membership" class="hero-cta">Explore Membership</a>
     </div>
   </div>
@@ -638,7 +750,7 @@
           <span>Track your portfolio and investment opportunities</span>
         </div>
         <div class="benefit-card">
-          <span>Ongoing support as you build your investing practice</span>
+          <span>Ongoing support as you build your investing portfolio</span>
         </div>
       </div>
     </div>
@@ -729,7 +841,7 @@
   <div class="content-wrapper">
     <div class="pricing-section">
       <h2>Funder Membership</h2>
-      <p class="intro">Join the community of angels building their investment practice.</p>
+      <p class="intro">Join the community of angels building their investment portfolio.</p>
 
       <div class="pricing-card">
         <div class="pricing-header">
@@ -749,15 +861,14 @@
   <div class="content-wrapper">
     <div class="capital-circle-section">
       <h3>Ready to commit capital? Join the Capital Circle.</h3>
-      <p class="intro">Make an annual investment commitment while contributing to grant programming that supports early-stage founders.</p>
+      <p class="intro">Make an annual investment commitment while contributing to grant programming that supports early-stage founders. <strong>Sengo does not collect, hold, or manage your investment dollars.</strong> You invest directly in founders of your choice.</p>
 
       <div class="commitment-box">
         <h4>Capital Circle Membership Includes:</h4>
         <ul>
-          <li>Annual commitment to invest $5,000–$10,000 in Sengo founders</li>
+          <li>Annual commitment to invest $5k+ in Sengo founders</li>
           <li>30% of your commitment supports grant monies via our non-profit partner</li>
           <li>Participate on the grant programming committee</li>
-          <li>Priority access to the highest-potential deals</li>
           <li>Quarterly strategy sessions with the Sengo team</li>
           <li>Co-investment opportunities with experienced investors</li>
           <li>Direct impact on which founders receive grant funding</li>
@@ -766,7 +877,7 @@
 
       <div style="text-align: center;">
         <a href="#" class="upsell-cta">Learn about the Capital Circle</a>
-        <p style="margin-top: 15px; color: #67441A; font-size: 0.95rem;">Annual commitment: $5,000–$10,000</p>
+        <p style="margin-top: 15px; color: #67441A; font-size: 0.95rem;">Annual commitment: $5k+</p>
       </div>
     </div>
   </div>
@@ -783,6 +894,199 @@
     </div>
   </div>
 </div>
+
+<!-- FAQ Section - Cream Background -->
+<div class="full-width-section section-cream">
+  <div class="content-wrapper">
+    <div class="faq-section">
+      <h2>Funder Member FAQs</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is there any investment commitment required to join?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. Funder Membership does not require any capital commitment. Joining Sengo as a funder gives you access to education, community, deal visibility, and events — you decide if, when, and how you invest.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Am I required to invest in any company?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Never. You can join purely to learn, observe, and build relationships. Investing is always optional and at your own discretion.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is Sengo a fund or syndicate?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. Sengo is not a venture fund, SPV, or syndicate. We are a community and education platform that curates founders, opportunities, and education so funders can make informed decisions independently.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What types of investment opportunities will I see?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Funder members may get visibility into:</p>
+          <ul>
+            <li>Early-stage startups</li>
+            <li>Community-backed companies</li>
+            <li>Consumer, tech, and culture-driven brands</li>
+            <li>Grant-supported and revenue-generating businesses</li>
+          </ul>
+          <p>Opportunities vary by stage and structure (e.g. SAFE, equity, debt, Reg CF), and not all opportunities are open to all investors.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Do I need to be an accredited investor?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. Some opportunities may require accreditation, but many do not. Sengo is designed to support both accredited and non-accredited funders in learning about investing. Funders are responsible for determining their own eligibility (including any accredited or sophisticated investor requirements) before participating in any investment opportunity.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is this financial advice?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. Sengo does not provide financial, legal, or tax advice.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What's the difference between a Funder Member and an Angel Group?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Angel groups often require:</p>
+          <ul>
+            <li>Minimum annual checks</li>
+            <li>Formal voting</li>
+            <li>Capital pooling</li>
+            <li>Long-term commitments</li>
+          </ul>
+          <p>Sengo Funder Membership offers:</p>
+          <ul>
+            <li>No minimum investment</li>
+            <li>No pooled capital</li>
+            <li>No obligation to invest</li>
+            <li>Education-first access</li>
+            <li>Relationship-driven deal flow</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How active do I need to be?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>As active as you want. Some members attend events and pitch sessions regularly. Others stay plugged in via emails and community updates. There is no participation requirement.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Can I invest alongside friends or my community?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes — and many funders do. Sengo is built around collective learning and relationship-driven capital, making it easy to explore opportunities with peers while still investing individually.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How does Sengo make money if there's no investment requirement?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Sengo earns revenue through:</p>
+          <ul>
+            <li>Membership subscriptions</li>
+            <li>Events and programming</li>
+            <li>Platform services for founders</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Can I cancel my membership at any time?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes. Funder Membership is flexible and can be canceled at any time through your account.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Who is Funder Membership best for?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Funder Membership is ideal if you:</p>
+          <ul>
+            <li>Are capital-curious but not ready to commit</li>
+            <li>Want exposure to private markets</li>
+            <li>Care about backing underrepresented founders</li>
+            <li>Want to learn before writing checks</li>
+            <li>Prefer optionality over obligation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Disclaimer - White Background -->
+<div class="full-width-section section-white">
+  <div class="content-wrapper">
+    <div class="disclaimer-section">
+      <p class="disclaimer-text">
+        <strong>Important Disclaimer:</strong> Sengo is not soliciting the sale of securities. Membership provides access to education, community, and investment opportunities, but does not constitute an offer to sell or a solicitation of an offer to buy any security. Early-stage investing involves significant risk, including the potential loss of capital. Past performance is not indicative of future results. All investment decisions are made at your own discretion and risk.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // FAQ Accordion functionality
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const faqItem = button.parentElement;
+      const isActive = faqItem.classList.contains('active');
+
+      // Close all FAQ items
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      // Open clicked item if it wasn't active
+      if (!isActive) {
+        faqItem.classList.add('active');
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
