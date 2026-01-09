@@ -26,7 +26,7 @@
     margin: 0 auto;
     padding: 0 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
 
@@ -62,8 +62,8 @@
 
   .sengo-nav-link {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 400;
     color: #F3EDE7;
     text-decoration: none;
     letter-spacing: 0.3px;
@@ -79,28 +79,13 @@
     transform: translateY(-2px);
   }
 
-  .sengo-nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #D57028;
-    transition: width 0.3s ease;
-  }
-
-  .sengo-nav-link:hover::after {
-    width: 100%;
-  }
-
   .sengo-nav-button {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 500;
     color: #F3EDE7;
     background: #D57028;
-    padding: 12px 28px;
+    padding: 10px 24px;
     border-radius: 30px;
     text-decoration: none;
     text-transform: uppercase;
@@ -164,10 +149,6 @@
 
     .sengo-nav-menu.active {
       display: flex;
-    }
-
-    .sengo-nav-link::after {
-      display: none;
     }
 
     .sengo-nav-button {
