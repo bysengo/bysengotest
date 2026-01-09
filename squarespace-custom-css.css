@@ -1,6 +1,40 @@
 /* Custom CSS for Squarespace - Sengo Branding */
 /* Add this to Design > Custom CSS in your Squarespace site */
 
+/* ============================================
+   NAVIGATION SETUP INSTRUCTIONS
+   ============================================
+
+   Before applying this CSS, set up your Squarespace navigation with these exact items:
+
+   Go to: Pages > Main Navigation > Add/Edit Links
+
+   Navigation Items (in order):
+
+   1. Home
+      Link: / (homepage)
+
+   2. Grants
+      Link: https://www.bysengo.com/grant
+
+   3. Pitch
+      Link: https://www.bysengo.com/pitch
+
+   4. Founders
+      Link: https://app.bysengo.com/founder-enrollment
+
+   5. Funders
+      Link: https://app.bysengo.com/investor-enrollment
+
+   6. All Access
+      Link: https://app.bysengo.com/allaccess-enrollment
+
+   7. Login (button)
+      Link: /login (or your login page URL)
+      Note: Style this as a button in Squarespace header settings
+
+   ============================================ */
+
 /* ===== HEADER STYLING ===== */
 
 /* Import Montserrat if not already loaded */
