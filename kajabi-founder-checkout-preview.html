@@ -223,18 +223,24 @@
     }
 
     .target-box {
-      background: white;
       padding: 40px 35px;
       border-radius: 16px;
       box-shadow: 0 5px 20px rgba(27, 53, 51, 0.1);
     }
 
     .target-box.for {
-      border-top: 4px solid #D57028;
+      background: linear-gradient(135deg, #F3EDE7 0%, #FAF7F4 100%);
+      border: 3px solid #D57028;
     }
 
     .target-box.not-for {
-      border-top: 4px solid #67441A;
+      background: linear-gradient(135deg, #1B3533 0%, #2a4a47 100%);
+      border: 3px solid #67441A;
+    }
+
+    .target-box.not-for h3,
+    .target-box.not-for li {
+      color: #F3EDE7;
     }
 
     .target-box h3 {
@@ -272,7 +278,7 @@
       content: '✗';
       position: absolute;
       left: 0;
-      color: #67441A;
+      color: #D57028;
       font-weight: 700;
       font-size: 1.2rem;
     }
@@ -423,6 +429,150 @@
       font-style: italic;
       line-height: 1.8;
       opacity: 0.95;
+    }
+
+    /* Rotating Testimonials */
+    .rotating-testimonials {
+      text-align: center;
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .testimonial-container {
+      position: relative;
+      min-height: 300px;
+    }
+
+    .testimonial-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .testimonial-slide.active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .testimonial-headshot {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #D57028;
+      box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
+    }
+
+    .testimonial-quote {
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.7;
+      color: #1B3533;
+      margin: 20px 0;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: #D57028;
+      font-size: 1.1rem;
+    }
+
+    .testimonial-title {
+      font-size: 0.95rem;
+      color: #67441A;
+      opacity: 0.9;
+    }
+
+    .testimonial-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .testimonial-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #D57028;
+      opacity: 0.3;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-dot.active {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    /* Founder Bio Section */
+    .founder-bio {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .founder-headshot {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #D57028;
+      box-shadow: 0 8px 30px rgba(213, 112, 40, 0.3);
+      flex-shrink: 0;
+    }
+
+    .founder-content {
+      flex: 1;
+    }
+
+    .founder-content h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2rem;
+      color: #1B3533;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .founder-content .founder-title {
+      font-size: 1.1rem;
+      color: #D57028;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .founder-content p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #1B3533;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .founder-bio {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .founder-headshot {
+        width: 150px;
+        height: 150px;
+      }
+
+      .founder-content h3 {
+        font-size: 1.6rem;
+      }
     }
 
     /* Upsell Section */
@@ -644,6 +794,69 @@
   </div>
 </div>
 
+<!-- Rotating Testimonials - White Background -->
+<div class="full-width-section section-white">
+  <div class="content-wrapper">
+    <div class="rotating-testimonials">
+      <div class="testimonial-container">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-slide active">
+          <img src="https://i.pravatar.cc/150?img=1" alt="Sarah Chen" class="testimonial-headshot">
+          <div class="testimonial-quote">
+            "Sengo gave me the tools and confidence to approach fundraising strategically—I finally understood what investors were looking for."
+          </div>
+          <div class="testimonial-author">Sarah Chen</div>
+          <div class="testimonial-title">Founder, GreenTech Solutions</div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-slide">
+          <img src="https://i.pravatar.cc/150?img=5" alt="Marcus Johnson" class="testimonial-headshot">
+          <div class="testimonial-quote">
+            "The community support alone is worth it. Having other founders who understand the journey made all the difference."
+          </div>
+          <div class="testimonial-author">Marcus Johnson</div>
+          <div class="testimonial-title">Founder, HealthBridge</div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-slide">
+          <img src="https://i.pravatar.cc/150?img=9" alt="Priya Patel" class="testimonial-headshot">
+          <div class="testimonial-quote">
+            "I went from confused about fundraising to having a clear roadmap. The resources and guidance were exactly what I needed."
+          </div>
+          <div class="testimonial-author">Priya Patel</div>
+          <div class="testimonial-title">Founder, EdTech Innovations</div>
+        </div>
+      </div>
+
+      <!-- Dots Navigation -->
+      <div class="testimonial-dots">
+        <span class="testimonial-dot active" data-slide="0"></span>
+        <span class="testimonial-dot" data-slide="1"></span>
+        <span class="testimonial-dot" data-slide="2"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Founder Bio - Cream Background -->
+<div class="full-width-section section-cream">
+  <div class="content-wrapper">
+    <div class="founder-bio">
+      <!-- REPLACE THIS WITH ILA CORCORAN'S ACTUAL HEADSHOT -->
+      <img src="https://i.pravatar.cc/200?img=10" alt="Ila Corcoran" class="founder-headshot">
+
+      <div class="founder-content">
+        <h3>Ila Corcoran</h3>
+        <div class="founder-title">Founder & CEO, Sengo</div>
+        <p>Ila founded Sengo to reimagine how founders access capital and build sustainable businesses. With years of experience in venture capital and entrepreneurship, she understands both sides of the fundraising table.</p>
+        <p>Her mission is to democratize access to funding and create pathways for founders who are building real businesses with lasting impact—not just chasing the next unicorn.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Membership Benefits - Dark Gradient Background -->
 <div class="full-width-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%); padding: 80px 20px;">
   <div class="content-wrapper">
@@ -745,12 +958,8 @@
 <div class="full-width-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%); padding: 80px 20px;">
   <div class="content-wrapper">
     <div class="social-proof">
-      <div class="stat-highlight">$30K+</div>
+      <div class="stat-highlight" id="grant-counter">$0</div>
       <div class="stat-label">in grants deployed in 2025</div>
-
-      <div class="testimonial">
-        "Sengo gave me the tools and confidence to approach fundraising strategically—I finally understood what investors were looking for."
-      </div>
     </div>
   </div>
 </div>
@@ -794,6 +1003,75 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Rotating Testimonials
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.testimonial-slide');
+  const dots = document.querySelectorAll('.testimonial-dot');
+
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  // Auto-rotate every 5 seconds
+  setInterval(nextSlide, 5000);
+
+  // Click handlers for dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentSlide = index;
+      showSlide(currentSlide);
+    });
+  });
+
+  // Animated Counter for Grant Amount
+  function animateCounter() {
+    const counter = document.getElementById('grant-counter');
+    const targetAmount = 31250;
+    const duration = 2000; // 2 seconds
+    const steps = 50;
+    const increment = targetAmount / steps;
+    const stepDuration = duration / steps;
+    let currentAmount = 0;
+
+    const timer = setInterval(() => {
+      currentAmount += increment;
+      if (currentAmount >= targetAmount) {
+        currentAmount = targetAmount;
+        clearInterval(timer);
+      }
+
+      // Format with commas
+      const formattedAmount = Math.floor(currentAmount).toLocaleString('en-US');
+      counter.textContent = '$' + formattedAmount;
+    }, stepDuration);
+  }
+
+  // Start counter animation when element is in viewport
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const grantCounter = document.getElementById('grant-counter');
+  if (grantCounter) {
+    observer.observe(grantCounter);
+  }
+</script>
 
 </body>
 </html>
