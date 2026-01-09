@@ -10,6 +10,18 @@
 .site-title,
 .site-title a {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Site Title Hover - Orange Glow */
+.header-title-text a:hover,
+.header-title-logo a:hover,
+.site-title a:hover {
+  color: #D57028 !important;
+  text-shadow: 0 0 20px rgba(213, 112, 40, 0.6),
+               0 0 30px rgba(213, 112, 40, 0.4),
+               0 0 40px rgba(213, 112, 40, 0.2);
 }
 
 /* Navigation Menu Links */
@@ -18,6 +30,20 @@
 nav a,
 .header-menu-nav-item a {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Navigation Link Hover - Orange Glow */
+.header-nav-item a:hover,
+.header-nav-folder-item a:hover,
+.header-menu-nav-item a:hover {
+  color: #D57028 !important;
+  text-shadow: 0 0 15px rgba(213, 112, 40, 0.6),
+               0 0 25px rgba(213, 112, 40, 0.4),
+               0 0 35px rgba(213, 112, 40, 0.2);
+  transform: translateY(-2px);
 }
 
 /* Mobile Menu */
@@ -25,6 +51,13 @@ nav a,
 .header-menu-nav-folder,
 .mobile-nav-item a {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-item a:hover {
+  color: #D57028 !important;
+  text-shadow: 0 0 15px rgba(213, 112, 40, 0.6),
+               0 0 25px rgba(213, 112, 40, 0.4);
 }
 
 /* Header Actions (buttons, etc) */
@@ -32,6 +65,16 @@ nav a,
 .btn,
 .header-skip-link {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  transition: all 0.3s ease;
+}
+
+.header-actions-action:hover,
+.btn:hover {
+  background-color: #D57028 !important;
+  border-color: #D57028 !important;
+  box-shadow: 0 0 20px rgba(213, 112, 40, 0.5),
+              0 0 30px rgba(213, 112, 40, 0.3);
+  transform: translateY(-2px);
 }
 
 /* Announcement Bar */
@@ -40,11 +83,43 @@ nav a,
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
-/* Optional: Adjust font weights to match your design */
-.header-title-text a {
-  font-weight: 600; /* Adjust as needed: 300, 400, 500, 600, 700, 800, 900 */
+/* Responsive Font Sizing */
+@media screen and (max-width: 1024px) {
+  .header-title-text a,
+  .site-title a {
+    font-size: 1.5rem !important;
+  }
+
+  .header-nav-item a,
+  .header-menu-nav-item a {
+    font-size: 0.95rem !important;
+  }
 }
 
-.header-nav-item a {
-  font-weight: 500; /* Adjust as needed */
+@media screen and (max-width: 768px) {
+  .header-title-text a,
+  .site-title a {
+    font-size: 1.3rem !important;
+  }
+
+  .header-nav-item a,
+  .header-menu-nav-item a {
+    font-size: 0.9rem !important;
+  }
+
+  .header-menu-nav-item {
+    padding: 12px 20px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header-title-text a,
+  .site-title a {
+    font-size: 1.1rem !important;
+  }
+
+  .header-nav-item a,
+  .header-menu-nav-item a {
+    font-size: 0.85rem !important;
+  }
 }
