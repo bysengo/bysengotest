@@ -26,10 +26,39 @@
       line-height: 1.6;
     }
 
+    /* Section Backgrounds for Color Segmentation */
+    .section-cream {
+      background: #F3EDE7;
+    }
+
+    .section-white {
+      background: #FFFFFF;
+    }
+
+    .section-light-tan {
+      background: #FAF7F4;
+    }
+
     .checkout-container {
       max-width: 1000px;
       margin: 0 auto;
       padding: 60px 20px;
+    }
+
+    /* Full-width section wrapper */
+    .full-width-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 60px 20px;
+    }
+
+    .full-width-section .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     /* Hero Section */
@@ -55,60 +84,60 @@
       margin: 0;
     }
 
-    /* Freebie Section */
+    /* Freebie Section - Compact */
     .freebie-section {
       background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
-      border-radius: 16px;
-      padding: 50px 40px;
-      margin-bottom: 60px;
-      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.15);
+      border-radius: 12px;
+      padding: 30px 35px;
+      margin-bottom: 50px;
+      box-shadow: 0 8px 30px rgba(27, 53, 51, 0.15);
     }
 
     .freebie-section h2 {
-      font-family: 'Arimo', sans-serif;
-      font-size: 2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
       color: #F3EDE7;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
+      letter-spacing: 0.02em;
     }
 
     .freebie-section p {
       color: #F3EDE7;
-      font-size: 1.1rem;
-      margin-bottom: 25px;
+      font-size: 0.95rem;
+      margin-bottom: 20px;
       opacity: 0.95;
+      line-height: 1.5;
     }
 
     .freebie-form {
       display: flex;
-      gap: 15px;
-      max-width: 600px;
-      margin: 0 auto 20px;
+      gap: 12px;
+      max-width: 550px;
+      margin: 0 auto 15px;
       flex-wrap: wrap;
     }
 
     .freebie-form input[type="email"] {
       flex: 1;
-      min-width: 250px;
-      padding: 15px 20px;
+      min-width: 220px;
+      padding: 12px 18px;
       border: none;
       border-radius: 8px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
       background: white;
     }
 
     .freebie-form button {
-      padding: 15px 35px;
+      padding: 12px 28px;
       background: #1B3533;
       color: #F3EDE7;
       border: none;
       border-radius: 8px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.3s ease;
       text-transform: uppercase;
@@ -122,7 +151,7 @@
 
     .freebie-microcopy {
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #F3EDE7;
       opacity: 0.85;
     }
@@ -510,11 +539,15 @@
       }
 
       .freebie-section {
-        padding: 35px 25px;
+        padding: 25px 20px;
       }
 
       .freebie-section h2 {
-        font-size: 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      .freebie-section p {
+        font-size: 0.9rem;
       }
 
       .freebie-form {
@@ -568,83 +601,95 @@
 </head>
 <body>
 
-<div class="checkout-container">
+<!-- Hero Section - Cream Background -->
+<div class="full-width-section section-cream">
+  <div class="content-wrapper">
+    <div class="checkout-hero">
+      <h1>Join Sengo as a Founder</h1>
+      <p>Fundraising infrastructure for founders building real impact</p>
+    </div>
 
-  <!-- Hero Section -->
-  <div class="checkout-hero">
-    <h1>Join Sengo as a Founder</h1>
-    <p>Fundraising infrastructure for founders building real impact</p>
+    <!-- Freebie Section -->
+    <div class="freebie-section">
+      <h2>Not sure if you're ready to raise yet?</h2>
+      <p>Get the Sengo Fundability Rubric to assess your readiness and next steps before committing.</p>
+
+      <!-- Replace this form with your actual email capture system -->
+      <form class="freebie-form">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Get the Fundability Rubric</button>
+      </form>
+
+      <p class="freebie-microcopy">Included with membership · No pressure to raise</p>
+    </div>
   </div>
+</div>
 
-  <!-- Freebie Section -->
-  <div class="freebie-section">
-    <h2>Not sure if you're ready to raise yet?</h2>
-    <p>Get the Sengo Fundability Rubric to assess your readiness and next steps before committing.</p>
+<!-- Membership Benefits - White Background -->
+<div class="full-width-section section-white">
+  <div class="content-wrapper">
+    <div class="benefits-section">
+      <h2>Your Founder Membership Includes</h2>
 
-    <!-- Replace this form with your actual email capture system -->
-    <form class="freebie-form">
-      <input type="email" placeholder="Enter your email" required>
-      <button type="submit">Get the Fundability Rubric</button>
-    </form>
-
-    <p class="freebie-microcopy">Included with membership · No pressure to raise</p>
-  </div>
-
-  <!-- Membership Benefits -->
-  <div class="benefits-section">
-    <h2>Your Founder Membership Includes</h2>
-
-    <div class="benefits-grid">
-      <div class="benefit-item">
-        <span>Fundability education + tools</span>
-      </div>
-      <div class="benefit-item">
-        <span>A community of support with monthly virtual meet-ups</span>
-      </div>
-      <div class="benefit-item">
-        <span>Chat, posting, and connecting</span>
-      </div>
-      <div class="benefit-item">
-        <span>Dealflow submission for investors on the platform</span>
-      </div>
-      <div class="benefit-item">
-        <span>Access to grants</span>
-      </div>
-      <div class="benefit-item">
-        <span>Founder resources & playbooks</span>
-      </div>
-      <div class="benefit-item">
-        <span>Visibility within the Sengo ecosystem</span>
-      </div>
-      <div class="benefit-item">
-        <span>Ongoing support as your business evolves</span>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <span>Fundability education + tools</span>
+        </div>
+        <div class="benefit-item">
+          <span>A community of support with monthly virtual meet-ups</span>
+        </div>
+        <div class="benefit-item">
+          <span>Chat, posting, and connecting</span>
+        </div>
+        <div class="benefit-item">
+          <span>Dealflow submission for investors on the platform</span>
+        </div>
+        <div class="benefit-item">
+          <span>Access to grants</span>
+        </div>
+        <div class="benefit-item">
+          <span>Founder resources & playbooks</span>
+        </div>
+        <div class="benefit-item">
+          <span>Visibility within the Sengo ecosystem</span>
+        </div>
+        <div class="benefit-item">
+          <span>Ongoing support as your business evolves</span>
+        </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Target Audience -->
-  <div class="target-section">
-    <div class="target-box for">
-      <h3>This is for founders who:</h3>
-      <ul>
-        <li>Are building a real business</li>
-        <li>Care about ownership, impact, and alignment</li>
-        <li>Want to understand types of capital they can pursue</li>
-      </ul>
-    </div>
+<!-- Target Audience - Light Tan Background -->
+<div class="full-width-section section-light-tan">
+  <div class="content-wrapper">
+    <div class="target-section">
+      <div class="target-box for">
+        <h3>This is for founders who:</h3>
+        <ul>
+          <li>Are building a real business</li>
+          <li>Care about ownership, impact, and alignment</li>
+          <li>Want to understand types of capital they can pursue</li>
+        </ul>
+      </div>
 
-    <div class="target-box not-for">
-      <h3>This is not for founders looking for:</h3>
-      <ul>
-        <li>Guaranteed funding</li>
-        <li>Investor lists or shortcuts</li>
-        <li>Hype/promo without foundations</li>
-      </ul>
+      <div class="target-box not-for">
+        <h3>This is not for founders looking for:</h3>
+        <ul>
+          <li>Guaranteed funding</li>
+          <li>Investor lists or shortcuts</li>
+          <li>Hype/promo without foundations</li>
+        </ul>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- Pricing Options -->
-  <div class="pricing-section">
+<!-- Pricing Options - Cream Background -->
+<div class="full-width-section section-cream">
+  <div class="content-wrapper">
+    <div class="pricing-section">
     <h2>Choose Your Membership</h2>
 
     <div class="pricing-options">
