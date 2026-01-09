@@ -66,13 +66,13 @@
     /* Hero Section */
     .checkout-hero {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 35px;
     }
 
     .checkout-hero h1 {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 5rem;
-      font-weight: 400;
+      font-weight: 500;
       line-height: 0.94;
       color: #1B3533;
       letter-spacing: -0.077em;
@@ -92,7 +92,7 @@
       grid-template-columns: 1fr auto 1fr;
       gap: 25px;
       align-items: center;
-      margin-bottom: 50px;
+      margin-bottom: 25px;
     }
 
     .freebie-content {
@@ -214,46 +214,73 @@
       letter-spacing: -0.02em;
     }
 
-    .benefits-grid {
+    .benefits-content {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-bottom: 40px;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .benefits-images {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .benefits-images img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(213, 112, 40, 0.3);
+    }
+
+    .benefits-checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     .benefit-item {
-      background: rgba(243, 237, 231, 0.1);
-      padding: 30px;
-      border-radius: 12px;
-      border: 2px solid rgba(213, 112, 40, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .benefit-item:hover {
-      border-color: #D57028;
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(213, 112, 40, 0.3);
-      background: rgba(243, 237, 231, 0.15);
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 15px 0;
     }
 
     .benefit-item::before {
       content: '✓';
-      display: inline-block;
-      width: 30px;
-      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
       background: #D57028;
       color: white;
       border-radius: 50%;
-      text-align: center;
-      line-height: 30px;
-      margin-right: 15px;
       font-weight: 700;
+      font-size: 1rem;
+      margin-top: 2px;
     }
 
     .benefit-item span {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 500;
       color: #F3EDE7;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 968px) {
+      .benefits-content {
+        grid-template-columns: 1fr;
+      }
+
+      .benefits-images {
+        order: 2;
+      }
+
+      .benefits-checklist {
+        order: 1;
+      }
     }
 
     /* For/Not For Section */
@@ -477,7 +504,7 @@
     /* Side-by-Side Testimonials */
     .rotating-testimonials {
       text-align: center;
-      padding: 20px 20px 30px;
+      padding: 10px 20px 20px;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -825,7 +852,7 @@
 </div>
 
 <!-- Side-by-Side Testimonials - White Background -->
-<div class="full-width-section section-white" style="padding: 15px 20px;">
+<div class="full-width-section section-white" style="padding: 5px 20px 15px;">
   <div class="content-wrapper">
     <div class="rotating-testimonials">
       <div class="testimonial-container">
@@ -879,30 +906,39 @@
     <div class="benefits-section">
       <h2>Your Founder Membership Includes</h2>
 
-      <div class="benefits-grid">
-        <div class="benefit-item">
-          <span>Fundability education + tools</span>
+      <div class="benefits-content">
+        <!-- Left Column: Images -->
+        <div class="benefits-images">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/4908da60-873d-4e56-8879-dfe89b418da2/Screenshot+2026-01-09+at+7.10.48%E2%80%AFPM.png?format=750w" alt="Sengo Platform Screenshot">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/b3cb2446-0f89-49b6-af7f-145a4d503cc5/iPhone+Screenshots.png?format=750w" alt="Dealflow iPhone Screenshots">
         </div>
-        <div class="benefit-item">
-          <span>A community of support with monthly virtual meet-ups</span>
-        </div>
-        <div class="benefit-item">
-          <span>Chat, posting, and connecting</span>
-        </div>
-        <div class="benefit-item">
-          <span>Dealflow submission for investors on the platform</span>
-        </div>
-        <div class="benefit-item">
-          <span>Access to grants</span>
-        </div>
-        <div class="benefit-item">
-          <span>Founder resources & playbooks</span>
-        </div>
-        <div class="benefit-item">
-          <span>Visibility within the Sengo ecosystem</span>
-        </div>
-        <div class="benefit-item">
-          <span>Ongoing support as your business evolves</span>
+
+        <!-- Right Column: Checklist -->
+        <div class="benefits-checklist">
+          <div class="benefit-item">
+            <span>Fundability education + tools</span>
+          </div>
+          <div class="benefit-item">
+            <span>A community of support with monthly virtual meet-ups</span>
+          </div>
+          <div class="benefit-item">
+            <span>Chat, posting, and connecting</span>
+          </div>
+          <div class="benefit-item">
+            <span>Dealflow submission for investors on the platform</span>
+          </div>
+          <div class="benefit-item">
+            <span>Access to grants</span>
+          </div>
+          <div class="benefit-item">
+            <span>Founder resources & playbooks</span>
+          </div>
+          <div class="benefit-item">
+            <span>Visibility within the Sengo ecosystem</span>
+          </div>
+          <div class="benefit-item">
+            <span>Ongoing support as your business evolves</span>
+          </div>
         </div>
       </div>
     </div>
