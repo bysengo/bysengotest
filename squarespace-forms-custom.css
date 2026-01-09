@@ -9,42 +9,75 @@
 .sqs-block-form,
 .newsletter-form,
 .form-block,
+.field-list,
+.fields,
 #footer-sections .newsletter-form-wrapper {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
-/* Form Labels */
+/* Form Labels - AGGRESSIVE TARGETING */
 .form-wrapper label,
 .sqs-block-form label,
 .field-label,
 .newsletter-form label,
 form label,
 .form-item label,
-.caption {
+.caption,
+.field-list label,
+.fields label,
+div[class*="field"] label,
+div[class*="form"] label,
+label.form-label,
+.sqs-editable-text label {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-weight: 500 !important;
   letter-spacing: 0.3px !important;
   color: #1B3533 !important;
 }
 
-/* Input Fields */
+/* Input Fields - ULTRA AGGRESSIVE TARGETING */
+/* Target every possible input variation */
+input,
+textarea,
+select,
+.form-wrapper input,
+.form-wrapper textarea,
+.form-wrapper select,
 .form-wrapper input[type="text"],
 .form-wrapper input[type="email"],
 .form-wrapper input[type="tel"],
 .form-wrapper input[type="url"],
 .form-wrapper input[type="password"],
 .form-wrapper input[type="number"],
-.form-wrapper textarea,
-.form-wrapper select,
 .sqs-block-form input,
 .sqs-block-form textarea,
 .sqs-block-form select,
+.sqs-block-form input[type="text"],
+.sqs-block-form input[type="email"],
 .newsletter-form input,
+.field-list input,
+.field-list textarea,
+.fields input,
+.fields textarea,
 input[type="text"],
 input[type="email"],
 input[type="tel"],
-textarea,
-select {
+input[type="url"],
+input[type="password"],
+input[type="number"],
+input[name*="name"],
+input[name*="Name"],
+input[name*="first"],
+input[name*="last"],
+input[name*="email"],
+input[name*="Email"],
+div[class*="field"] input,
+div[class*="form"] input,
+div[class*="field"] textarea,
+div[class*="form"] textarea,
+.sqs-editable-text input,
+.field-element input,
+.field-element textarea {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-weight: 400 !important;
   font-size: 1rem !important;
@@ -52,14 +85,22 @@ select {
   letter-spacing: 0.2px !important;
 }
 
-/* Input Placeholder Text */
+/* Input Placeholder Text - AGGRESSIVE */
+input::placeholder,
+textarea::placeholder,
+select::placeholder,
 .form-wrapper input::placeholder,
 .form-wrapper textarea::placeholder,
 .sqs-block-form input::placeholder,
 .sqs-block-form textarea::placeholder,
 .newsletter-form input::placeholder,
-input::placeholder,
-textarea::placeholder {
+.field-list input::placeholder,
+.fields input::placeholder,
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[name*="name"]::placeholder,
+input[name*="first"]::placeholder,
+input[name*="last"]::placeholder {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-weight: 400 !important;
   opacity: 0.6 !important;
@@ -101,7 +142,10 @@ input[type="submit"]:hover {
   transform: translateY(-2px) !important;
 }
 
-/* Form Field Focus State */
+/* Form Field Focus State - AGGRESSIVE */
+input:focus,
+textarea:focus,
+select:focus,
 .form-wrapper input:focus,
 .form-wrapper textarea:focus,
 .form-wrapper select:focus,
@@ -109,9 +153,15 @@ input[type="submit"]:hover {
 .sqs-block-form textarea:focus,
 .sqs-block-form select:focus,
 .newsletter-form input:focus,
-input:focus,
-textarea:focus,
-select:focus {
+.field-list input:focus,
+.field-list textarea:focus,
+.fields input:focus,
+.fields textarea:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[name*="name"]:focus,
+input[name*="first"]:focus,
+input[name*="last"]:focus {
   border-color: #D57028 !important;
   outline: none !important;
   box-shadow: 0 0 0 2px rgba(213, 112, 40, 0.2) !important;
