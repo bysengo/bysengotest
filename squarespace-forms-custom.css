@@ -1,0 +1,196 @@
+/* Custom Form Styling for Squarespace - Montserrat Font */
+/* Add this to Custom CSS in Design > Custom CSS */
+
+/* Import Montserrat font family */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* Form Container */
+.form-wrapper,
+.sqs-block-form,
+.newsletter-form,
+.form-block,
+#footer-sections .newsletter-form-wrapper {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Form Labels */
+.form-wrapper label,
+.sqs-block-form label,
+.field-label,
+.newsletter-form label,
+form label,
+.form-item label,
+.caption {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px !important;
+  color: #1B3533 !important;
+}
+
+/* Input Fields */
+.form-wrapper input[type="text"],
+.form-wrapper input[type="email"],
+.form-wrapper input[type="tel"],
+.form-wrapper input[type="url"],
+.form-wrapper input[type="password"],
+.form-wrapper input[type="number"],
+.form-wrapper textarea,
+.form-wrapper select,
+.sqs-block-form input,
+.sqs-block-form textarea,
+.sqs-block-form select,
+.newsletter-form input,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0.2px !important;
+}
+
+/* Input Placeholder Text */
+.form-wrapper input::placeholder,
+.form-wrapper textarea::placeholder,
+.sqs-block-form input::placeholder,
+.sqs-block-form textarea::placeholder,
+.newsletter-form input::placeholder,
+input::placeholder,
+textarea::placeholder {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 400 !important;
+  opacity: 0.6 !important;
+}
+
+/* Submit Buttons */
+.form-wrapper button[type="submit"],
+.form-wrapper input[type="submit"],
+.sqs-block-form button[type="submit"],
+.sqs-block-form input[type="submit"],
+.newsletter-form button,
+.newsletter-form-button,
+.sqs-editable-button,
+button[type="submit"],
+input[type="submit"],
+.button,
+.btn {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Button Hover Effect - Orange Glow */
+.form-wrapper button[type="submit"]:hover,
+.form-wrapper input[type="submit"]:hover,
+.sqs-block-form button[type="submit"]:hover,
+.sqs-block-form input[type="submit"]:hover,
+.newsletter-form button:hover,
+.newsletter-form-button:hover,
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background-color: #D57028 !important;
+  border-color: #D57028 !important;
+  box-shadow: 0 0 15px rgba(213, 112, 40, 0.6),
+              0 0 25px rgba(213, 112, 40, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Form Field Focus State */
+.form-wrapper input:focus,
+.form-wrapper textarea:focus,
+.form-wrapper select:focus,
+.sqs-block-form input:focus,
+.sqs-block-form textarea:focus,
+.sqs-block-form select:focus,
+.newsletter-form input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #D57028 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(213, 112, 40, 0.2) !important;
+}
+
+/* Form Description/Help Text */
+.form-wrapper .description,
+.form-wrapper .field-description,
+.sqs-block-form .description,
+.caption,
+.form-item-description {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Radio Buttons & Checkboxes Labels */
+.form-wrapper .option label,
+.form-wrapper input[type="radio"] + label,
+.form-wrapper input[type="checkbox"] + label,
+.sqs-block-form .option label,
+.field-element label {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 400 !important;
+}
+
+/* Form Titles/Headings */
+.form-wrapper h1,
+.form-wrapper h2,
+.form-wrapper h3,
+.sqs-block-form h1,
+.sqs-block-form h2,
+.sqs-block-form h3,
+.newsletter-form-header-title {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Error Messages */
+.form-wrapper .error,
+.form-wrapper .field-error,
+.sqs-block-form .error,
+.field-error,
+.form-submission-text.error {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 500 !important;
+}
+
+/* Success Messages */
+.form-wrapper .success,
+.form-wrapper .form-submission-text,
+.sqs-block-form .form-submission-text,
+.form-submission-text {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 500 !important;
+}
+
+/* Required Field Indicator */
+.required,
+.form-wrapper .required,
+.sqs-block-form .required {
+  color: #D57028 !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .form-wrapper label,
+  .sqs-block-form label,
+  form label {
+    font-size: 0.95rem !important;
+  }
+
+  .form-wrapper input,
+  .form-wrapper textarea,
+  .form-wrapper select,
+  .sqs-block-form input,
+  .sqs-block-form textarea {
+    font-size: 0.95rem !important;
+  }
+}
