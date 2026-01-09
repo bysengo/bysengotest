@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investor Questionnaire - Sengo</title>
+
+  <!-- Google Fonts - Arimo and Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 0; background: #F3EDE7;">
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Questionnaire Container */
+  .questionnaire-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    background: #F3EDE7;
+  }
+
+  /* Questionnaire Section */
+  .questionnaire-section {
+    background: white;
+    padding: 60px 50px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(27, 53, 51, 0.08);
+    margin-bottom: 40px;
+  }
+
+  /* Impact Badge */
+  .impact-badge {
+    display: inline-block;
+    background: #D57028;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  /* Heading */
+  .questionnaire-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 4rem;
+    margin-bottom: 15px;
+    color: #1B3533;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .questionnaire-section .subtitle {
+    font-size: 1.15rem;
+    color: #67441A;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  /* Form Styles */
+  .questionnaire-form {
+    width: 100%;
+  }
+
+  .form-group {
+    margin-bottom: 30px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1B3533;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .form-label .required {
+    color: #D57028;
+    margin-left: 4px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    padding: 18px 25px;
+    border: 2px solid #D57028;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-family: 'Montserrat', sans-serif;
+    background: #F3EDE7;
+    transition: all 0.3s ease;
+    color: #1B3533;
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: #1B3533;
+    background: white;
+    box-shadow: 0 5px 20px rgba(27, 53, 51, 0.1);
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: #67441A;
+    opacity: 0.6;
+  }
+
+  .form-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23D57028' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 20px;
+    padding-right: 50px;
+  }
+
+  .form-select option {
+    background: white;
+    color: #1B3533;
+  }
+
+  /* Radio and Checkbox Groups */
+  .form-radio-group,
+  .form-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .form-radio-option,
+  .form-checkbox-option {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border: 2px solid #D57028;
+    border-radius: 12px;
+    background: #F3EDE7;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .form-radio-option:hover,
+  .form-checkbox-option:hover {
+    background: white;
+    box-shadow: 0 5px 15px rgba(27, 53, 51, 0.08);
+  }
+
+  .form-radio-option input[type="radio"],
+  .form-checkbox-option input[type="checkbox"] {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #D57028;
+  }
+
+  .form-radio-option label,
+  .form-checkbox-option label {
+    font-size: 1rem;
+    color: #1B3533;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .form-radio-option input:checked + label,
+  .form-checkbox-option input:checked + label {
+    font-weight: 600;
+  }
+
+  /* Helper Text */
+  .helper-text {
+    font-size: 0.9rem;
+    color: #67441A;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* Submit Button */
+  .submit-btn {
+    width: 100%;
+    padding: 22px;
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: white;
+    border: none;
+    border-radius: 60px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 10px 30px rgba(27, 53, 51, 0.2);
+    margin-top: 20px;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(27, 53, 51, 0.3);
+  }
+
+  .submit-btn:active {
+    transform: translateY(-1px);
+  }
+
+  /* Divider */
+  .form-divider {
+    height: 2px;
+    background: linear-gradient(to right, transparent, #D57028, transparent);
+    margin: 40px 0;
+    opacity: 0.3;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .questionnaire-section {
+      padding: 40px 25px;
+    }
+
+    .questionnaire-section h2 {
+      font-size: 2.5rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      padding: 15px 20px;
+      font-size: 1rem;
+    }
+
+    .submit-btn {
+      padding: 18px;
+      font-size: 1.1rem;
+    }
+
+    .form-radio-option,
+    .form-checkbox-option {
+      padding: 12px 15px;
+    }
+  }
+</style>
+
+<div class="questionnaire-container">
+
+  <!-- Questionnaire Section -->
+  <div class="questionnaire-section">
+    <span class="impact-badge">Investment Profile</span>
+    <h2>Tell Us About Your Investment Goals</h2>
+    <p class="subtitle">
+      Help us understand your investment preferences and goals so we can provide you with the best opportunities and personalized experience within the Sengo community.
+    </p>
+
+    <!-- Embedded Questionnaire Form -->
+    <div class="questionnaire-form" id="embeddedFormContainer">
+      <!-- The external form will be embedded here -->
+      <script src="https://app.bysengo.com/forms/2149385524/embed.js"></script>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Add animation on load
+  window.addEventListener('load', function() {
+    const section = document.querySelector('.questionnaire-section');
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(20px)';
+
+    setTimeout(function() {
+      section.style.transition = 'all 0.6s ease';
+      section.style.opacity = '1';
+      section.style.transform = 'translateY(0)';
+    }, 100);
+  });
+
+  // Style the embedded form to match the site design
+  // This applies additional styling to form elements loaded by the embed script
+  window.addEventListener('load', function() {
+    // Wait for embedded form to load
+    setTimeout(function() {
+      const embeddedContainer = document.getElementById('embeddedFormContainer');
+
+      // Apply styles to embedded form inputs
+      const inputs = embeddedContainer.querySelectorAll('input, select, textarea');
+      inputs.forEach(function(input) {
+        input.style.fontFamily = "'Montserrat', sans-serif";
+      });
+
+      // Style embedded form buttons
+      const buttons = embeddedContainer.querySelectorAll('button');
+      buttons.forEach(function(button) {
+        button.style.fontFamily = "'Montserrat', sans-serif";
+      });
+    }, 500);
+  });
+</script>
+
+</body>
+</html>
