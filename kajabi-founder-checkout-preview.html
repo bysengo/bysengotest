@@ -698,18 +698,24 @@
       .rotating-testimonials {
         position: relative;
         overflow: hidden;
+        max-width: 100%;
+        width: 100%;
       }
 
       .testimonial-container {
         display: flex;
         transition: transform 0.3s ease;
         gap: 0;
+        width: 100%;
+        max-width: 100%;
       }
 
       .testimonial-slide {
         min-width: 100%;
+        width: 100%;
         flex-shrink: 0;
         padding: 0 20px;
+        box-sizing: border-box;
       }
 
       .testimonial-nav {
