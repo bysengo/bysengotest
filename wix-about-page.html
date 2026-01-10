@@ -9,7 +9,7 @@
   <!-- Fonts (same as your file, just used more "sleekly") -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600&family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -64,7 +64,7 @@
       background: radial-gradient(1200px 600px at 50% 30%, var(--bg-accent) 0%, var(--bg-main) 60%);
     }
 
-    /* Soft, subtle background shape (no "blob" vibe) */
+    /* Soft, subtle background shape with image */
     .hero::before{
       content:"";
       position:absolute;
@@ -74,10 +74,15 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -55%);
-      background: linear-gradient(135deg, rgba(201,122,99,0.14), rgba(201,122,99,0.06));
-      filter: blur(2px);
+      background-image:
+        linear-gradient(135deg, rgba(247,247,246,0.7), rgba(247,247,246,0.5)),
+        url('https://media.licdn.com/dms/image/v2/D5622AQGYRJ7vrtFqmg/feedshare-shrink_1280/B56ZtcsyE6G0As-/0/1766786842038?e=1769644800&v=beta&t=ojYDSEH9AGOy_qljVr6a6ZhyOcX6iVqgR4SangDah_o');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(1px);
       border-radius: 48px;
-      opacity: 1;
+      opacity: 0.6;
       z-index:0;
     }
 
@@ -89,9 +94,9 @@
     }
 
     .hero h1{
-      font-family: "Playfair Display", serif;
-      font-weight: 800;
-      letter-spacing: -0.04em;
+      font-family: "Arimo", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
       line-height: 0.92;
       margin-bottom: 22px;
 
