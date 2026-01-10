@@ -107,6 +107,35 @@
       text-align: center;
     }
 
+    /* Member Badge */
+    .member-badge {
+      background: rgba(213, 112, 40, 0.1);
+      border: 2px solid #D57028;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin: 0 auto 20px;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .member-badge p {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      margin: 0;
+      color: #67441A;
+      font-weight: 600;
+    }
+
+    .help-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: #D57028;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
     /* Community Features */
     .community-features {
       display: grid;
@@ -246,6 +275,81 @@
       opacity: 0.9;
     }
 
+    /* Troubleshooting Popup */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .popup-overlay.active {
+      display: flex;
+    }
+
+    .popup-content {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 24px;
+      max-width: 400px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 1.5rem;
+      color: #1B3533;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .popup-content h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1B3533;
+    }
+
+    .popup-content p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #1B3533;
+      margin-bottom: 12px;
+    }
+
+    .popup-content ul {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    .popup-content li {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #1B3533;
+      margin-bottom: 10px;
+    }
+
+    .popup-content strong {
+      color: #D57028;
+    }
+
     /* Safe Area for notched devices */
     @supports (padding: max(0px)) {
       .mobile-container {
@@ -301,7 +405,14 @@
 
     <!-- Community Section -->
     <div class="mobile-community">
-      <h2>Join Our Community</h2>
+      <h2>Inside Our Community</h2>
+
+      <!-- Member Badge -->
+      <div class="member-badge">
+        <p>Already a member? You should see the Community and/or Courses tabs below.</p>
+        <span class="help-link" onclick="openTroubleshootingPopup()">Need help? Click here</span>
+      </div>
+
       <p>Connect with like-minded founders and funders. Access exclusive courses, engage in discussions, and unlock opportunities to grow your network.</p>
 
       <!-- Features Grid -->
@@ -366,5 +477,40 @@
     </div>
 
   </div>
+
+  <!-- Troubleshooting Popup -->
+  <div class="popup-overlay" id="troubleshootingPopup" onclick="closePopup(event)">
+    <div class="popup-content" onclick="event.stopPropagation()">
+      <button class="popup-close" onclick="closePopup()">&times;</button>
+      <h3>Troubleshooting</h3>
+      <p><strong>Can't see the Community or Courses tabs?</strong></p>
+      <p>Here are some common solutions:</p>
+      <ul>
+        <li><strong>Check Your Enrollment:</strong> Make sure you're enrolled in a Sengo membership plan that includes community access.</li>
+        <li><strong>Refresh the App:</strong> Close the app completely and reopen it. This can help load new tabs.</li>
+        <li><strong>Update the App:</strong> Check your app store for any available updates to the Sengo app.</li>
+        <li><strong>Log Out & Back In:</strong> Sometimes logging out and logging back in resolves display issues.</li>
+        <li><strong>Clear App Cache:</strong> On iOS, try offloading and reinstalling the app. On Android, clear the app cache in settings.</li>
+      </ul>
+      <p><strong>Still having issues?</strong></p>
+      <p>Contact our support team at <a href="mailto:support@bysengo.com" style="color: #D57028; text-decoration: underline;">support@bysengo.com</a> and we'll help you get access!</p>
+    </div>
+  </div>
+
+  <script>
+    function openTroubleshootingPopup() {
+      document.getElementById('troubleshootingPopup').classList.add('active');
+      // Prevent background scrolling when popup is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup(event) {
+      if (!event || event.target === document.getElementById('troubleshootingPopup')) {
+        document.getElementById('troubleshootingPopup').classList.remove('active');
+        // Re-enable background scrolling
+        document.body.style.overflow = 'auto';
+      }
+    }
+  </script>
 </body>
 </html>
