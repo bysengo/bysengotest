@@ -455,6 +455,118 @@
     background: linear-gradient(to top, rgba(213, 112, 40, 0.9) 0%, transparent 100%);
   }
 
+  /* Community Section */
+  .sengo-community {
+    background: #F3EDE7;
+    padding: 60px 50px;
+    border-radius: 16px;
+    margin: 60px 0;
+    text-align: center;
+    border: 3px solid #1B3533;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sengo-community::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .sengo-community h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 7rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    color: #1B3533;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sengo-community p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    margin-bottom: 50px;
+    color: #1B3533;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .community-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .community-btn {
+    padding: 20px 50px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border: 3px solid #1B3533;
+    background: #1B3533;
+    color: #F3EDE7;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .community-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #D57028;
+    transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .community-btn:hover::before {
+    width: 300%;
+    height: 300%;
+  }
+
+  .community-btn:hover {
+    border-color: #D57028;
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(213, 112, 40, 0.3);
+  }
+
+  .community-btn.secondary {
+    background: transparent;
+    color: #1B3533;
+  }
+
+  .community-btn.secondary:hover {
+    color: #F3EDE7;
+  }
+
   /* Responsive Design */
   @media (max-width: 768px) {
     .sengo-content {
@@ -520,6 +632,25 @@
     .about-card-title {
       font-size: 1.1rem;
       padding: 15px;
+    }
+
+    .sengo-community {
+      padding: 50px 30px;
+    }
+
+    .sengo-community h2 {
+      font-size: 3.5rem;
+      line-height: 0.8;
+    }
+
+    .community-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .community-btn {
+      width: 100%;
+      max-width: 320px;
     }
   }
 </style>
@@ -636,6 +767,22 @@
         <img class="about-card-image" src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/50bd3f7e-5112-46f2-93d9-74338190df59/BGIMRetreat-DP+Jolly_83.jpg?format=750w" alt="Events">
         <div class="about-card-title">Events</div>
       </div>
+    </div>
+  </div>
+
+  <!-- Community Section -->
+  <div class="sengo-community fade-in-up">
+    <h2>Join the Sengo Community</h2>
+    <p>
+      Connect with like-minded founders and funders in our vibrant community. Access exclusive courses,
+      engage in meaningful discussions, and unlock opportunities to grow your network. Whether you're
+      seeking funding, sharing insights, or learning from industry experts, the Sengo community is your
+      gateway to success.
+    </p>
+
+    <div class="community-buttons">
+      <a href="https://app.bysengo.com/community" class="community-btn">Access Community</a>
+      <a href="https://app.bysengo.com/allaccess-enrollment" class="community-btn secondary">Create Account</a>
     </div>
   </div>
 
