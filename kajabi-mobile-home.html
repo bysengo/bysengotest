@@ -32,8 +32,8 @@
 
     /* Hero Section */
     .mobile-hero {
-      background: #1B3533;
-      color: #F3EDE7;
+      background: #D57028;
+      color: #fff;
       padding: 32px 20px;
       text-align: center;
     }
@@ -43,12 +43,14 @@
       font-weight: 700;
       margin-bottom: 12px;
       line-height: 1.2;
+      color: #fff;
     }
 
     .mobile-hero p {
       font-size: 0.95rem;
-      opacity: 0.9;
+      opacity: 0.95;
       font-weight: 400;
+      color: #fff;
     }
 
     /* Stats Section */
@@ -58,12 +60,13 @@
       gap: 0;
       background: #fff;
       margin: 0;
+      border-bottom: 3px solid #D57028;
     }
 
     .stat-item {
       padding: 24px 12px;
       text-align: center;
-      border-right: 1px solid #e0e0e0;
+      border-right: 2px solid #F3EDE7;
     }
 
     .stat-item:last-child {
@@ -73,22 +76,22 @@
     .stat-number {
       font-size: 1.5rem;
       font-weight: 700;
-      color: #D57028;
+      color: #1B3533;
       margin-bottom: 6px;
     }
 
     .stat-label {
       font-size: 0.7rem;
-      color: #67441A;
+      color: #D57028;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     /* Community Section */
     .mobile-community {
       padding: 32px 20px;
-      background: #F3EDE7;
+      background: #fff;
     }
 
     .mobile-community h2 {
@@ -145,11 +148,12 @@
     }
 
     .feature-card {
-      background: #fff;
+      background: #F3EDE7;
       padding: 20px 16px;
       border-radius: 12px;
       text-align: center;
-      box-shadow: 0 2px 8px rgba(27, 53, 51, 0.08);
+      border: 2px solid #D57028;
+      box-shadow: 0 2px 8px rgba(213, 112, 40, 0.15);
     }
 
     .feature-icon {
@@ -213,9 +217,11 @@
 
     /* Benefits Section */
     .mobile-benefits {
-      background: #fff;
+      background: #F3EDE7;
       padding: 32px 20px;
       margin-top: 0;
+      border-top: 3px solid #D57028;
+      border-bottom: 3px solid #D57028;
     }
 
     .mobile-benefits h3 {
@@ -233,7 +239,7 @@
 
     .benefit-item {
       padding: 16px 0;
-      border-bottom: 1px solid #e0e0e0;
+      border-bottom: 2px solid #D57028;
       display: flex;
       align-items: flex-start;
       gap: 12px;
@@ -247,6 +253,7 @@
       font-size: 1.25rem;
       flex-shrink: 0;
       margin-top: 2px;
+      color: #D57028;
     }
 
     .benefit-text {
@@ -385,22 +392,31 @@
       }
 
       .mobile-hero {
-        background: #0f1a19;
-        border-bottom: 1px solid #2a3533;
+        background: #D57028;
+        border-bottom: none;
+      }
+
+      .mobile-hero h1,
+      .mobile-hero p {
+        color: #fff;
       }
 
       .mobile-stats {
         background: #242424;
-        border-top: 1px solid #333;
-        border-bottom: 1px solid #333;
+        border-top: 2px solid #D57028;
+        border-bottom: 3px solid #D57028;
       }
 
       .stat-item {
-        border-right-color: #333;
+        border-right-color: #3a3a3a;
+      }
+
+      .stat-number {
+        color: #F3EDE7;
       }
 
       .stat-label {
-        color: #AF8145;
+        color: #D57028;
       }
 
       .mobile-community {
@@ -413,7 +429,7 @@
       }
 
       .member-badge {
-        background: rgba(213, 112, 40, 0.15);
+        background: rgba(213, 112, 40, 0.2);
         border-color: #D57028;
       }
 
@@ -421,9 +437,13 @@
         color: #F3EDE7;
       }
 
+      .help-link {
+        color: #D57028;
+      }
+
       .feature-card {
-        background: #242424;
-        border: 1px solid #333;
+        background: #2a2a2a;
+        border-color: #D57028;
       }
 
       .feature-title {
@@ -432,8 +452,8 @@
 
       .mobile-benefits {
         background: #242424;
-        border-top: 1px solid #333;
-        border-bottom: 1px solid #333;
+        border-top-color: #D57028;
+        border-bottom-color: #D57028;
       }
 
       .mobile-benefits h3 {
@@ -441,7 +461,11 @@
       }
 
       .benefit-item {
-        border-bottom-color: #333;
+        border-bottom-color: #3a3a3a;
+      }
+
+      .benefit-icon {
+        color: #D57028;
       }
 
       .benefit-text {
@@ -449,12 +473,12 @@
       }
 
       .mobile-footer-cta {
-        background: linear-gradient(135deg, #0f1a19 0%, #3a2410 100%);
+        background: linear-gradient(135deg, #1B3533 0%, #3a2410 100%);
       }
 
       .popup-content {
-        background: #242424;
-        border: 1px solid #333;
+        background: #2a2a2a;
+        border: 2px solid #D57028;
       }
 
       .popup-close {
@@ -467,8 +491,12 @@
         color: #F3EDE7;
       }
 
+      .popup-content strong {
+        color: #D57028;
+      }
+
       .popup-overlay {
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.85);
       }
     }
   </style>
