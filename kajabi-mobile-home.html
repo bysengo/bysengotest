@@ -376,6 +376,101 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #1a1a1a;
+        color: #F3EDE7;
+      }
+
+      .mobile-hero {
+        background: #0f1a19;
+        border-bottom: 1px solid #2a3533;
+      }
+
+      .mobile-stats {
+        background: #242424;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+      }
+
+      .stat-item {
+        border-right-color: #333;
+      }
+
+      .stat-label {
+        color: #AF8145;
+      }
+
+      .mobile-community {
+        background: #1a1a1a;
+      }
+
+      .mobile-community h2,
+      .mobile-community p {
+        color: #F3EDE7;
+      }
+
+      .member-badge {
+        background: rgba(213, 112, 40, 0.15);
+        border-color: #D57028;
+      }
+
+      .member-badge p {
+        color: #F3EDE7;
+      }
+
+      .feature-card {
+        background: #242424;
+        border: 1px solid #333;
+      }
+
+      .feature-title {
+        color: #F3EDE7;
+      }
+
+      .mobile-benefits {
+        background: #242424;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+      }
+
+      .mobile-benefits h3 {
+        color: #F3EDE7;
+      }
+
+      .benefit-item {
+        border-bottom-color: #333;
+      }
+
+      .benefit-text {
+        color: #F3EDE7;
+      }
+
+      .mobile-footer-cta {
+        background: linear-gradient(135deg, #0f1a19 0%, #3a2410 100%);
+      }
+
+      .popup-content {
+        background: #242424;
+        border: 1px solid #333;
+      }
+
+      .popup-close {
+        color: #F3EDE7;
+      }
+
+      .popup-content h3,
+      .popup-content p,
+      .popup-content li {
+        color: #F3EDE7;
+      }
+
+      .popup-overlay {
+        background: rgba(0, 0, 0, 0.8);
+      }
+    }
   </style>
 </head>
 <body>
@@ -437,7 +532,7 @@
 
       <!-- Action Buttons -->
       <div class="mobile-actions">
-        <a href="https://app.bysengo.com/community" class="mobile-btn primary">Access Community</a>
+        <a href="https://app.bysengo.com/community" class="mobile-btn primary">Community, Click Below</a>
         <a href="https://app.bysengo.com/allaccess-enrollment" class="mobile-btn secondary">Create Account</a>
       </div>
     </div>
@@ -493,7 +588,7 @@
         <li><strong>Clear App Cache:</strong> On iOS, try offloading and reinstalling the app. On Android, clear the app cache in settings.</li>
       </ul>
       <p><strong>Still having issues?</strong></p>
-      <p>Contact our support team at <a href="mailto:support@bysengo.com" style="color: #D57028; text-decoration: underline;">support@bysengo.com</a> and we'll help you get access!</p>
+      <p>Contact our support team at <a href="mailto:hello@bysengo.com" style="color: #D57028; text-decoration: underline;">hello@bysengo.com</a> and we'll help you get access!</p>
     </div>
   </div>
 
