@@ -211,7 +211,7 @@
             margin-bottom: 25px;
             box-shadow: 0 4px 20px rgba(27, 53, 51, 0.15);
             opacity: 0;
-            animation: fadeIn 0.8s ease 0.4s forwards;
+            animation: fadeIn 0.8s ease 0.6s forwards;
         }
 
         .download-section h2 {
@@ -234,66 +234,10 @@
             opacity: 0.95;
         }
 
-        /* Form Styling */
-        .email-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .email-form input[type="email"] {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            padding: 16px 20px;
-            border: 2px solid rgba(243, 237, 231, 0.3);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.95);
-            color: #1B3533;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .email-form input[type="email"]::placeholder {
-            color: #67441A;
-            opacity: 0.6;
-        }
-
-        .email-form input[type="email"]:focus {
-            border-color: #D57028;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(213, 112, 40, 0.1);
-        }
-
-        .email-form button {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            padding: 16px 30px;
-            background: #D57028;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
-        }
-
-        .email-form button:hover {
-            background: #AF8145;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(213, 112, 40, 0.4);
-        }
-
-        .email-form button:active {
-            transform: translateY(0);
-        }
-
         /* Link Section */
         .link-section {
             opacity: 0;
-            animation: fadeIn 0.8s ease 0.6s forwards;
+            animation: fadeIn 0.8s ease 0.4s forwards;
         }
 
         .cta-link {
@@ -535,20 +479,6 @@
                 margin-bottom: 30px;
             }
 
-            .email-form {
-                gap: 15px;
-            }
-
-            .email-form input[type="email"] {
-                font-size: 1.05rem;
-                padding: 18px 24px;
-            }
-
-            .email-form button {
-                font-size: 1.1rem;
-                padding: 18px 40px;
-            }
-
             .cta-link {
                 padding: 25px;
             }
@@ -738,6 +668,16 @@
             </p>
         </div>
 
+        <!-- Link to Sengo -->
+        <div class="link-section">
+            <a href="https://sengo.com" class="cta-link" target="_blank">
+                <div class="link-title">Check Out Sengo</div>
+                <div class="link-description">
+                    Join 600+ members building the future of inclusive funding
+                </div>
+            </a>
+        </div>
+
         <!-- Free Download Section -->
         <div class="download-section">
             <h2>Free Angel Investing Starter Tool 📊</h2>
@@ -747,37 +687,11 @@
 
             <!--
                 ================================================
-                REPLACE THIS FORM WITH YOUR EMAIL SERVICE
+                ADD YOUR SQUARESPACE EMAIL FORM HERE
                 ================================================
-
-                Options:
-                - ConvertKit form embed
-                - Mailchimp form
-                - Beehiiv form
-                - Any other email service
-
-                Just paste your form code below and remove this comment
+                Paste your Squarespace email form block below
                 ================================================
             -->
-            <form class="email-form" action="#" method="POST">
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    required
-                >
-                <button type="submit">Get Free Tool</button>
-            </form>
-        </div>
-
-        <!-- Link to Sengo -->
-        <div class="link-section">
-            <a href="https://sengo.com" class="cta-link" target="_blank">
-                <div class="link-title">Check Out Sengo</div>
-                <div class="link-description">
-                    Join 600+ members building the future of inclusive funding
-                </div>
-            </a>
         </div>
 
         <!-- Footer -->
