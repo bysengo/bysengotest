@@ -78,7 +78,7 @@
         linear-gradient(135deg, rgba(247,247,246,0.7), rgba(247,247,246,0.5)),
         url('https://media.licdn.com/dms/image/v2/D5622AQGYRJ7vrtFqmg/feedshare-shrink_1280/B56ZtcsyE6G0As-/0/1766786842038?e=1769644800&v=beta&t=ojYDSEH9AGOy_qljVr6a6ZhyOcX6iVqgR4SangDah_o');
       background-size: cover;
-      background-position: center;
+      background-position: center top;
       background-repeat: no-repeat;
       filter: blur(1px);
       border-radius: 48px;
@@ -100,11 +100,9 @@
       line-height: 0.92;
       margin-bottom: 22px;
 
-      /* Sleek outline: thinner stroke, less "poster" */
+      /* Filled text instead of outline */
       font-size: clamp(3.2rem, 9vw, 7rem);
-      color: transparent;
-      -webkit-text-stroke: 1.5px var(--accent);
-      text-stroke: 1.5px var(--accent);
+      color: var(--accent);
     }
 
     .subtitle{
@@ -170,9 +168,32 @@
       color: var(--text-primary);
     }
 
+    /* BIO SECTION */
+    .bio-section{
+      padding: 92px 0 60px;
+      background: var(--bg-main);
+    }
+
+    .bio-text{
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .bio-text p{
+      margin-bottom: 1.5rem;
+    }
+
+    .bio-text p:last-child{
+      margin-bottom: 0;
+    }
+
     /* PHOTO SECTION */
     .photo-section{
-      padding: 92px 0;
+      padding: 60px 0 92px;
       background: var(--bg-main);
     }
 
@@ -415,10 +436,20 @@
     </div>
   </section>
 
+  <!-- BIO -->
+  <section class="bio-section">
+    <div class="container">
+      <div class="bio-text">
+        <p>Ila Corcoran's journey in real estate began from a pressing need for housing and the resources to support it—a mission that has fueled her work ever since. Since 2018, she has managed and overseen over $100 million in real estate transactions across the U.S., excelling in roles as an investor, asset manager, realtor, advisor, and financier. Ila is known for her expertise in navigating complex deal structures and nontraditional financing solutions, holding both a Series 65 securities license and a California real estate license.</p>
+
+        <p>In 2023, Ila founded Sengo, a financial services platform dedicated to democratizing access to private markets. Sengo emphasizes education and community, offering a space where founders and funders can connect meaningfully through events that go beyond traditional networking. With a mission to inspire community-minded innovation and resource sharing, Sengo is deconstructing barriers to funding and creating new pathways for diverse investors and founders to thrive.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- PHOTOS -->
   <section class="photo-section">
     <div class="container">
-      <h2 class="section-title">Moments</h2>
       <div class="photo-grid">
         <div class="photo-placeholder">[Insert Photo 1]</div>
         <div class="photo-placeholder">[Insert Photo 2]</div>
