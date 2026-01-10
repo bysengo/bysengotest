@@ -30,44 +30,83 @@
 
         /* Hero Section */
         .hero {
-            min-height: 80vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 100px 40px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            justify-content: flex-start;
+            text-align: left;
+            padding: 100px 60px;
+            background: transparent;
+            position: relative;
         }
 
-        /* Main Headlines - Display Serif, 5-7rem, Uppercase, Line-height: 0.9, Bold */
+        .hero-content {
+            max-width: 1200px;
+            margin-left: 0;
+        }
+
+        /* Main Headlines - Display Serif, Even Bigger, Colored, Off-center */
         .hero-content h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 7rem);
-            font-weight: 700;
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 800;
             letter-spacing: -2px;
             line-height: 0.9;
             margin-bottom: 40px;
             text-transform: uppercase;
-            color: #1a1a1a;
+            color: #d4a574;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
-        /* Sub-captions - Sans-Serif, 0.8rem, Max-width 200px */
+        /* Subtitle - Larger, readable description */
         .hero-content .subtitle {
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 1.2rem;
             font-weight: 300;
-            color: #4a4a4a;
-            max-width: 200px;
-            margin: 0 auto;
-            line-height: 1.6;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #fff;
+            max-width: 600px;
+            margin: 0 0 50px 0;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* My Work Section */
-        .work-section {
-            padding: 120px 40px;
-            background: #fff;
+        /* Social links in hero */
+        .hero .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 200px));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0;
+        }
+
+        .hero .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 30px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero .social-link:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-4px);
+        }
+
+        .hero .social-link span {
+            margin-left: 12px;
         }
 
         /* Section Labels - Sans-Serif, 0.75rem, Uppercase, Letter-spacing: 2px, Semi-bold */
@@ -80,21 +119,6 @@
             text-align: center;
             text-transform: uppercase;
             color: #1a1a1a;
-        }
-
-        /* Body Paragraphs - Sans-Serif, 1rem, Line-height: 1.6, Light weight (300) */
-        .work-description {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 300;
-            color: #2a2a2a;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-            line-height: 1.6;
-            padding: 40px;
-            border-left: 4px solid #1a1a1a;
-            background: #f8f9fa;
         }
 
         /* Photo Gallery */
@@ -139,7 +163,7 @@
 
         .connect-section .section-title {
             color: #fff;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         .social-links {
@@ -183,20 +207,10 @@
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
-            padding: 50px;
+            padding: 40px;
             background: rgba(255,255,255,0.05);
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .contact-form h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            text-align: center;
         }
 
         .form-group {
@@ -284,11 +298,14 @@
         /* Responsive */
         @media (max-width: 768px) {
             .hero {
-                min-height: 60vh;
-                padding: 60px 20px;
+                min-height: 100vh;
+                padding: 60px 30px;
             }
 
-            .work-section,
+            .hero-content h1 {
+                font-size: clamp(3rem, 10vw, 6rem);
+            }
+
             .photo-section,
             .connect-section {
                 padding: 80px 20px;
@@ -301,14 +318,14 @@
 
             .social-links {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 15px;
+            }
+
+            .hero .social-links {
+                grid-template-columns: 1fr;
             }
 
             .contact-form {
-                padding: 30px 20px;
-            }
-
-            .work-description {
                 padding: 30px 20px;
             }
         }
@@ -339,43 +356,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>About Me</h1>
-            <p class="subtitle">Building at the intersection of what matters most</p>
-        </div>
-    </section>
-
-    <!-- My Work Section -->
-    <section class="work-section">
-        <div class="container">
-            <h2 class="section-title">My Work</h2>
-            <div class="work-description">
-                Educator, founder, and investor at the intersection of capital, culture, and community.
-            </div>
-        </div>
-    </section>
-
-    <!-- Photo Section -->
-    <section class="photo-section">
-        <div class="container">
-            <h2 class="section-title">Moments</h2>
-            <div class="photo-grid">
-                <div class="photo-placeholder">
-                    [Insert Photo 1]
-                </div>
-                <div class="photo-placeholder">
-                    [Insert Photo 2]
-                </div>
-                <div class="photo-placeholder">
-                    [Insert Photo 3]
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Connect Section -->
-    <section class="connect-section">
-        <div class="container">
-            <h2 class="section-title">Connect</h2>
+            <h1>Ila B Corcoran</h1>
+            <p class="subtitle">Educator, founder, and investor at the intersection of capital, culture, and community.</p>
 
             <div class="social-links">
                 <a href="YOUR_SUBSTACK_URL" class="social-link" target="_blank">
@@ -407,10 +389,34 @@
                     <span>LinkedIn</span>
                 </a>
             </div>
+        </div>
+    </section>
+
+    <!-- Photo Section -->
+    <section class="photo-section">
+        <div class="container">
+            <h2 class="section-title">Moments</h2>
+            <div class="photo-grid">
+                <div class="photo-placeholder">
+                    [Insert Photo 1]
+                </div>
+                <div class="photo-placeholder">
+                    [Insert Photo 2]
+                </div>
+                <div class="photo-placeholder">
+                    [Insert Photo 3]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect Section -->
+    <section class="connect-section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
 
             <!-- Contact Form -->
             <div class="contact-form">
-                <h3>Get In Touch</h3>
                 <form action="#" method="POST">
                     <div class="form-group">
                         <label for="name">Name</label>
