@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sengo Community - Home</title>
+  <style>
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #F3EDE7;
+      color: #1B3533;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mobile-container {
+      max-width: 100%;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    /* Hero Section */
+    .mobile-hero {
+      background: #1B3533;
+      color: #F3EDE7;
+      padding: 32px 20px;
+      text-align: center;
+    }
+
+    .mobile-hero h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .mobile-hero p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    /* Stats Section */
+    .mobile-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      background: #fff;
+      margin: 0;
+    }
+
+    .stat-item {
+      padding: 24px 12px;
+      text-align: center;
+      border-right: 1px solid #e0e0e0;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #D57028;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #67441A;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    /* Community Section */
+    .mobile-community {
+      padding: 32px 20px;
+      background: #F3EDE7;
+    }
+
+    .mobile-community h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1B3533;
+      text-align: center;
+    }
+
+    .mobile-community p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      color: #1B3533;
+      text-align: center;
+    }
+
+    /* Community Features */
+    .community-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .feature-card {
+      background: #fff;
+      padding: 20px 16px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(27, 53, 51, 0.08);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .feature-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1B3533;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Action Buttons */
+    .mobile-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0;
+    }
+
+    .mobile-btn {
+      display: block;
+      width: 100%;
+      padding: 16px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-btn.primary {
+      background: #D57028;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(213, 112, 40, 0.3);
+    }
+
+    .mobile-btn.primary:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 6px rgba(213, 112, 40, 0.3);
+    }
+
+    .mobile-btn.secondary {
+      background: #1B3533;
+      color: #F3EDE7;
+      box-shadow: 0 4px 12px rgba(27, 53, 51, 0.2);
+    }
+
+    .mobile-btn.secondary:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 6px rgba(27, 53, 51, 0.2);
+    }
+
+    /* Benefits Section */
+    .mobile-benefits {
+      background: #fff;
+      padding: 32px 20px;
+      margin-top: 0;
+    }
+
+    .mobile-benefits h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #1B3533;
+      text-align: center;
+    }
+
+    .benefit-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .benefit-item {
+      padding: 16px 0;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .benefit-item:last-child {
+      border-bottom: none;
+    }
+
+    .benefit-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .benefit-text {
+      font-size: 0.9rem;
+      color: #1B3533;
+      font-weight: 500;
+    }
+
+    /* Footer CTA */
+    .mobile-footer-cta {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      padding: 32px 20px;
+      text-align: center;
+      color: #F3EDE7;
+    }
+
+    .mobile-footer-cta h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .mobile-footer-cta p {
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+      opacity: 0.9;
+    }
+
+    /* Safe Area for notched devices */
+    @supports (padding: max(0px)) {
+      .mobile-container {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+      }
+    }
+
+    /* Small devices adjustment */
+    @media (max-width: 360px) {
+      .mobile-hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .stat-number {
+        font-size: 1.25rem;
+      }
+
+      .stat-label {
+        font-size: 0.65rem;
+      }
+
+      .community-features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-container">
+
+    <!-- Hero Section -->
+    <div class="mobile-hero">
+      <h1>Welcome to Sengo</h1>
+      <p>Your community for founders & funders</p>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="mobile-stats">
+      <div class="stat-item">
+        <div class="stat-number">90+</div>
+        <div class="stat-label">Annual Events</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">600+</div>
+        <div class="stat-label">Members</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">$5M+</div>
+        <div class="stat-label">Raised</div>
+      </div>
+    </div>
+
+    <!-- Community Section -->
+    <div class="mobile-community">
+      <h2>Join Our Community</h2>
+      <p>Connect with like-minded founders and funders. Access exclusive courses, engage in discussions, and unlock opportunities to grow your network.</p>
+
+      <!-- Features Grid -->
+      <div class="community-features">
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <div class="feature-title">Education</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💼</div>
+          <div class="feature-title">Dealflow</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <div class="feature-title">Funding</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-title">Events</div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mobile-actions">
+        <a href="https://app.bysengo.com/community" class="mobile-btn primary">Access Community</a>
+        <a href="https://app.bysengo.com/allaccess-enrollment" class="mobile-btn secondary">Create Account</a>
+      </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="mobile-benefits">
+      <h3>What You'll Get</h3>
+      <ul class="benefit-list">
+        <li class="benefit-item">
+          <span class="benefit-icon">✓</span>
+          <span class="benefit-text">Exclusive access to courses on fundraising and investing</span>
+        </li>
+        <li class="benefit-item">
+          <span class="benefit-icon">✓</span>
+          <span class="benefit-text">Connect with vetted founders and investors</span>
+        </li>
+        <li class="benefit-item">
+          <span class="benefit-icon">✓</span>
+          <span class="benefit-text">Attend virtual and in-person networking events</span>
+        </li>
+        <li class="benefit-item">
+          <span class="benefit-icon">✓</span>
+          <span class="benefit-text">Access to funding resources and deal opportunities</span>
+        </li>
+        <li class="benefit-item">
+          <span class="benefit-icon">✓</span>
+          <span class="benefit-text">Learn from industry experts and successful founders</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Footer CTA -->
+    <div class="mobile-footer-cta">
+      <h3>Ready to Get Started?</h3>
+      <p>Join hundreds of founders and funders building the future together.</p>
+      <a href="https://app.bysengo.com/allaccess-enrollment" class="mobile-btn primary">Create Your Account</a>
+    </div>
+
+  </div>
+</body>
+</html>
