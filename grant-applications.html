@@ -1,0 +1,509 @@
+<!-- Sengo Grant Applications Page -->
+<!-- Add this to an Embed Block on your Squarespace page -->
+
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .sengo-grant-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Hero Section */
+  .sengo-grant-hero {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .sengo-grant-hero h1 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: #1B3533;
+    letter-spacing: -0.05em;
+    text-transform: none;
+    max-width: 900px;
+    margin: 0 0 20px 0;
+  }
+
+  .sengo-grant-hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #67441A;
+    margin: 0 0 10px 0;
+    max-width: 700px;
+  }
+
+  /* Impact Badge */
+  .impact-badge {
+    display: inline-block;
+    background: #D57028;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+  }
+
+  /* Description Section */
+  .grant-description {
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #1B3533;
+    margin: 0 auto 50px;
+    max-width: 800px;
+    font-weight: 400;
+    padding: 30px 40px;
+    position: relative;
+  }
+
+  /* Animated border lines */
+  .grant-description::before,
+  .grant-description::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    background: #D57028;
+    left: 50%;
+    right: 50%;
+    transition: left 0.8s ease 0.2s, right 0.8s ease 0.2s;
+  }
+
+  .grant-description::before {
+    top: 0;
+  }
+
+  .grant-description::after {
+    bottom: 0;
+  }
+
+  .grant-description.visible::before,
+  .grant-description.visible::after {
+    left: 0;
+    right: 0;
+  }
+
+  .grant-description p {
+    margin: 0;
+    color: #1B3533;
+  }
+
+  /* Airtable Embed Section */
+  .airtable-section {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    padding: 60px 40px;
+    border-radius: 16px;
+    margin: 40px 0 60px;
+    box-shadow: 0 20px 60px rgba(27, 53, 51, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .airtable-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .airtable-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+  }
+
+  .airtable-container iframe {
+    width: 100%;
+    min-height: 533px;
+    border: none;
+    border-radius: 8px;
+  }
+
+  /* Timeline Section */
+  .timeline-section {
+    margin: 60px 0;
+    text-align: center;
+  }
+
+  .timeline-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #1B3533;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  .timeline-subtitle {
+    font-size: 1.1rem;
+    color: #67441A;
+    margin-bottom: 50px;
+    font-weight: 500;
+  }
+
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .timeline-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    border: 3px solid #1B3533;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .timeline-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #D57028;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .timeline-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .timeline-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(27, 53, 51, 0.2);
+    border-color: #D57028;
+  }
+
+  .week-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #D57028;
+    margin-bottom: 15px;
+    font-family: 'Arimo', sans-serif;
+  }
+
+  .timeline-card h3 {
+    font-size: 1.1rem;
+    color: #1B3533;
+    font-weight: 700;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    text-align: center;
+    margin: 50px 0;
+    padding: 50px 40px;
+    background: #F3EDE7;
+    border-radius: 16px;
+    border: 2px solid #D57028;
+  }
+
+  .cta-section h3 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #1B3533;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    color: #67441A;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 18px 45px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: #D57028;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .cta-button:hover {
+    background: #1B3533;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(213, 112, 40, 0.3);
+  }
+
+  /* Info Section */
+  .grant-info-section {
+    text-align: center;
+    margin: 60px 0;
+    padding: 60px 50px;
+    background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(27, 53, 51, 0.25);
+  }
+
+  .grant-info-section .impact-badge {
+    background: rgba(243, 237, 231, 0.15);
+    color: #F3EDE7;
+    border: 1px solid rgba(243, 237, 231, 0.3);
+  }
+
+  .grant-info-section h3 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: #F3EDE7;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  .grant-info-section p {
+    font-size: 1.15rem;
+    color: #F3EDE7;
+    margin-bottom: 0;
+    font-weight: 400;
+    opacity: 0.95;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+
+  /* Scroll animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sengo-grant-content {
+      padding: 30px 15px;
+    }
+
+    .sengo-grant-hero {
+      min-height: 30vh;
+      padding: 30px 15px;
+    }
+
+    .sengo-grant-hero h1 {
+      font-size: 2.5rem;
+      line-height: 1.1;
+    }
+
+    .sengo-grant-hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .grant-description {
+      font-size: 1rem;
+      padding: 20px 20px;
+    }
+
+    .airtable-section {
+      padding: 40px 20px;
+    }
+
+    .airtable-container {
+      padding: 15px;
+    }
+
+    .airtable-container iframe {
+      min-height: 600px;
+    }
+
+    .grant-info-section {
+      padding: 40px 30px;
+    }
+
+    .grant-info-section h3 {
+      font-size: 2.5rem;
+    }
+
+    .grant-info-section p {
+      font-size: 1rem;
+    }
+
+    .timeline-section h2 {
+      font-size: 2rem;
+    }
+
+    .timeline-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .timeline-card {
+      padding: 30px 20px;
+    }
+
+    .cta-section {
+      padding: 40px 25px;
+    }
+
+    .cta-section h3 {
+      font-size: 1.5rem;
+    }
+
+    .cta-section p {
+      font-size: 1rem;
+    }
+
+    .cta-button {
+      padding: 15px 35px;
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<div class="sengo-grant-content">
+
+  <!-- Hero Section -->
+  <div class="sengo-grant-hero fade-in">
+    <span class="impact-badge">Funding Opportunity</span>
+    <h1>The Sengo Grant</h1>
+    <p class="sengo-grant-hero-subtitle">Capital + community for founders preparing to raise</p>
+  </div>
+
+  <!-- Description -->
+  <div class="grant-description fade-in-up">
+    <p><strong>Eligibility requires an active Sengo membership.</strong> Membership supports founder education, community programming, and the grant pool itself.</p>
+  </div>
+
+  <!-- Airtable Embed Section -->
+  <div class="airtable-section fade-in-up">
+    <div class="airtable-container">
+      <iframe class="airtable-embed" src="https://airtable.com/embed/apprQaZi5Xs3tfnLq/shrSY6kWTDyzWoxcy" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+    </div>
+  </div>
+
+  <!-- Timeline Section -->
+  <div class="timeline-section fade-in-up">
+    <span class="impact-badge">Your Journey</span>
+    <h2>4 Week Experience</h2>
+    <p class="timeline-subtitle">Sample 4 week experience for a grant applicant</p>
+
+    <div class="timeline-grid">
+      <div class="timeline-card">
+        <div class="week-number">Week 1</div>
+        <h3>Fundability Score + Feedback</h3>
+      </div>
+
+      <div class="timeline-card">
+        <div class="week-number">Week 2</div>
+        <h3>Office Hours / Investor AMA</h3>
+      </div>
+
+      <div class="timeline-card">
+        <div class="week-number">Week 3</div>
+        <h3>Deal Review or Grant Shortlist</h3>
+      </div>
+
+      <div class="timeline-card">
+        <div class="week-number">Week 4</div>
+        <h3>Capital Matchmaking / Demo Room</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="cta-section fade-in-up">
+    <h3>Not Sure?</h3>
+    <p>Check out our enrollment page to pick up your fundability score freebie</p>
+    <a href="https://app.bysengo.com/founder-enrollment" class="cta-button">View Enrollment Page</a>
+  </div>
+
+  <!-- Info Section -->
+  <div class="grant-info-section fade-in-up">
+    <span class="impact-badge">Questions?</span>
+    <h3>Need Help?</h3>
+    <p>If you have questions about the grant application process or need assistance, please don't hesitate to reach out to our team. We're here to support you every step of the way.</p>
+  </div>
+
+</div>
+
+<script>
+  // Scroll-triggered animations
+  document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for scroll animations
+    var observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    var animatedElements = document.querySelectorAll('.fade-in-up, .fade-in');
+    animatedElements.forEach(function(el) {
+      observer.observe(el);
+    });
+  });
+</script>
