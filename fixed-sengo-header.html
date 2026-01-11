@@ -143,13 +143,19 @@
 
   /* Responsive Design */
   @media (max-width: 768px) {
+    .sengo-header {
+      position: relative;
+    }
+
     .sengo-header-container {
       padding: 0 20px;
       justify-content: space-between;
+      overflow: visible;
     }
 
     .sengo-logo {
       order: 1;
+      z-index: 1001;
     }
 
     .sengo-mobile-toggle {
@@ -174,8 +180,8 @@
 
     .sengo-nav-menu {
       display: none;
-      position: absolute;
-      top: 100%;
+      position: fixed;
+      top: 60px;
       left: 0;
       right: 0;
       background: #1B3533;
@@ -184,20 +190,43 @@
       gap: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       z-index: 999;
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
     }
 
     .sengo-nav-menu.active {
-      display: flex;
+      display: flex !important;
+    }
+
+    .sengo-nav-menu li {
+      width: 100%;
     }
 
     .sengo-nav-menu li:nth-child(5)::before {
       display: none;
     }
 
+    .sengo-nav-link {
+      display: block;
+      padding: 12px 0;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .sengo-nav-link:hover {
+      transform: translateY(0);
+      text-shadow: none;
+    }
+
     .sengo-nav-button {
       width: 100%;
       text-align: center;
       display: block;
+      padding: 12px 24px;
+    }
+
+    .sengo-nav-button:hover {
+      transform: translateY(0);
     }
   }
 </style>
