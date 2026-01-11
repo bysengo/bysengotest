@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pitch Competition - Sengo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -63,11 +63,11 @@
         }
 
         .hero-title {
-            font-family: 'Arimo', 'Helvetica Neue', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 5rem;
-            font-weight: 700;
-            letter-spacing: -0.05em;
-            line-height: 0.9;
+            font-weight: 400;
+            letter-spacing: -0.077em;
+            line-height: 0.94;
             margin-bottom: 24px;
             color: #F3EDE7;
             animation: fadeInUp 0.8s ease-out;
@@ -100,43 +100,38 @@
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
             margin-bottom: 60px;
         }
 
         .info-card {
             background: white;
-            padding: 40px 32px;
-            border-radius: 16px;
-            border-top: 4px solid #D57028;
-            box-shadow: 0 4px 20px rgba(27, 53, 51, 0.08);
+            padding: 28px 24px;
+            border-radius: 12px;
+            border-top: 3px solid #D57028;
+            box-shadow: 0 2px 12px rgba(27, 53, 51, 0.06);
             transition: all 0.3s ease;
             animation: fadeIn 0.6s ease-out;
         }
 
         .info-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(27, 53, 51, 0.15);
-        }
-
-        .info-card-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(27, 53, 51, 0.12);
         }
 
         .info-card h3 {
-            font-family: 'Arimo', sans-serif;
-            font-size: 1.5rem;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: #1B3533;
         }
 
         .info-card p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #67441A;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         /* Application Section */
@@ -152,7 +147,7 @@
         }
 
         .section-title {
-            font-family: 'Arimo', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 3.5rem;
             font-weight: 700;
             letter-spacing: -0.04em;
@@ -190,7 +185,7 @@
         }
 
         .partners-section h2 {
-            font-family: 'Arimo', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 2rem;
             font-weight: 600;
             color: #1B3533;
@@ -199,36 +194,45 @@
         }
 
         .partners-grid {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto 48px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
             align-items: center;
             justify-items: center;
         }
 
-        .partner-link {
+        .partner-logo-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 20px;
             background: white;
             border-radius: 12px;
             transition: all 0.3s ease;
             text-decoration: none;
-            color: #1B3533;
-            font-weight: 600;
-            font-size: 1rem;
-            min-height: 100px;
             width: 100%;
+            height: 120px;
             box-shadow: 0 2px 12px rgba(27, 53, 51, 0.06);
         }
 
-        .partner-link:hover {
+        .partner-logo-link:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 24px rgba(27, 53, 51, 0.12);
-            color: #D57028;
+        }
+
+        .partner-logo {
+            max-width: 100%;
+            max-height: 80px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo-link:hover .partner-logo {
+            transform: scale(1.05);
         }
 
         .sponsor-cta {
@@ -243,7 +247,7 @@
         }
 
         .sponsor-cta h3 {
-            font-family: 'Arimo', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 2rem;
             font-weight: 600;
             color: #1B3533;
@@ -307,7 +311,7 @@
         }
 
         .watch-section h2 {
-            font-family: 'Arimo', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 3rem;
             font-weight: 700;
             color: white;
@@ -352,7 +356,7 @@
         }
 
         .schedule-info h3 {
-            font-family: 'Arimo', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 2rem;
             color: #F3EDE7;
             margin-bottom: 16px;
@@ -425,13 +429,17 @@
             }
 
             .partners-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
             }
 
-            .partner-link {
-                font-size: 0.95rem;
-                padding: 20px;
+            .partner-logo-link {
+                height: 100px;
+                padding: 16px;
+            }
+
+            .partner-logo {
+                max-height: 60px;
             }
 
             .sponsor-cta {
@@ -503,17 +511,14 @@
     <section class="info-section">
         <div class="info-grid">
             <div class="info-card fade-in-on-scroll">
-                <div class="info-card-icon">💰</div>
                 <h3>Cash Prize</h3>
                 <p>Winners receive cash prizes to help accelerate their startup's growth and bring their vision to life.</p>
             </div>
             <div class="info-card fade-in-on-scroll">
-                <div class="info-card-icon">👥</div>
                 <h3>Expert Panel</h3>
                 <p>Pitch to a panel of experienced investors, founders, and industry experts who provide actionable feedback.</p>
             </div>
             <div class="info-card fade-in-on-scroll">
-                <div class="info-card-icon">🎯</div>
                 <h3>Monthly Events</h3>
                 <p>Competitions held monthly, giving you regular opportunities to refine your pitch and compete.</p>
             </div>
@@ -537,20 +542,20 @@
     <section class="partners-section">
         <h2 class="fade-in-on-scroll">Past Partners & Sponsors</h2>
         <div class="partners-grid fade-in-on-scroll">
-            <a href="https://serenaventures.com/" target="_blank" rel="noopener noreferrer" class="partner-link">
-                Serena Ventures
+            <a href="https://serenaventures.com/" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/093694d8-c507-4ac5-968f-79c028b259e7/12.png?format=750w" alt="Serena Ventures" class="partner-logo">
             </a>
-            <a href="https://www.moodeaux.com/" target="_blank" rel="noopener noreferrer" class="partner-link">
-                Moodeaux
+            <a href="https://www.moodeaux.com/" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/0cf7666b-245c-4459-97db-2b72f5331fd4/13.png?format=750w" alt="Moodeaux" class="partner-logo">
             </a>
-            <a href="https://www.bipoccpg.com/" target="_blank" rel="noopener noreferrer" class="partner-link">
-                BIPOC CPG
+            <a href="https://www.bipoccpg.com/" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/92c4bc40-d4b0-44ca-880e-5aa901ee3a83/14.png?format=750w" alt="BIPOC CPG" class="partner-logo">
             </a>
-            <a href="https://www.helloalice.com/" target="_blank" rel="noopener noreferrer" class="partner-link">
-                Hello Alice
+            <a href="https://www.helloalice.com/" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/48a7a793-928a-4a6b-b2e5-010f4b474fc4/Hello+Alice++Sengo.png?format=750w" alt="Hello Alice" class="partner-logo">
             </a>
-            <a href="https://www.buildintulsa.com/" target="_blank" rel="noopener noreferrer" class="partner-link">
-                Build in Tulsa
+            <a href="https://www.buildintulsa.com/" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/63ecc668-1ab8-4ec4-b03f-edfc6e9d39de/15.png?format=750w" alt="Build in Tulsa" class="partner-logo">
             </a>
         </div>
 
