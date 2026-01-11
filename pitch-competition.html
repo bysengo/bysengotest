@@ -76,10 +76,12 @@
         .hero-subtitle {
             font-size: 1.35rem;
             font-weight: 400;
-            color: #F3EDE7;
+            color: #D57028;
             margin-bottom: 16px;
-            opacity: 0.95;
             animation: fadeInUp 0.8s ease-out 0.2s both;
+            text-shadow: 0 0 20px rgba(213, 112, 40, 0.6),
+                         0 0 40px rgba(213, 112, 40, 0.4),
+                         0 0 60px rgba(213, 112, 40, 0.2);
         }
 
         .hero-description {
@@ -180,7 +182,7 @@
         /* Partners Section */
         .partners-section {
             padding: 80px 20px;
-            background: #F3EDE7;
+            background: #1B3533;
             text-align: center;
         }
 
@@ -188,17 +190,17 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 2rem;
             font-weight: 600;
-            color: #1B3533;
+            color: #F3EDE7;
             margin-bottom: 48px;
             letter-spacing: -0.02em;
         }
 
         .partners-grid {
             max-width: 1100px;
-            margin: 0 auto 48px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 48px;
             align-items: center;
             justify-items: center;
         }
@@ -207,79 +209,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            background: white;
-            border-radius: 12px;
             transition: all 0.3s ease;
             text-decoration: none;
             width: 100%;
-            height: 120px;
-            box-shadow: 0 2px 12px rgba(27, 53, 51, 0.06);
+            padding: 12px;
         }
 
         .partner-logo-link:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(27, 53, 51, 0.12);
+            transform: scale(1.1);
         }
 
         .partner-logo {
             max-width: 100%;
-            max-height: 80px;
+            max-height: 70px;
             width: auto;
             height: auto;
             object-fit: contain;
             transition: all 0.3s ease;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
         }
 
         .partner-logo-link:hover .partner-logo {
-            transform: scale(1.05);
-        }
-
-        .sponsor-cta {
-            margin-top: 60px;
-            padding: 48px 32px;
-            background: white;
-            border-radius: 20px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            box-shadow: 0 4px 20px rgba(27, 53, 51, 0.08);
-        }
-
-        .sponsor-cta h3 {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #1B3533;
-            margin-bottom: 16px;
-        }
-
-        .sponsor-cta p {
-            font-size: 1.1rem;
-            color: #67441A;
-            margin-bottom: 32px;
-            line-height: 1.7;
-        }
-
-        .sponsor-btn {
-            display: inline-block;
-            padding: 18px 45px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: white;
-            background: #D57028;
-            border: none;
-            border-radius: 60px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(213, 112, 40, 0.3);
-        }
-
-        .sponsor-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(213, 112, 40, 0.4);
-            background: #AF8145;
+            opacity: 1;
         }
 
         /* Watch Section */
@@ -430,34 +382,11 @@
 
             .partners-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-            }
-
-            .partner-logo-link {
-                height: 100px;
-                padding: 16px;
+                gap: 32px;
             }
 
             .partner-logo {
-                max-height: 60px;
-            }
-
-            .sponsor-cta {
-                padding: 32px 24px;
-                margin-top: 40px;
-            }
-
-            .sponsor-cta h3 {
-                font-size: 1.7rem;
-            }
-
-            .sponsor-cta p {
-                font-size: 1rem;
-            }
-
-            .sponsor-btn {
-                padding: 16px 40px;
-                font-size: 1rem;
+                max-height: 50px;
             }
 
             .watch-section h2 {
@@ -525,19 +454,6 @@
         </div>
     </section>
 
-    <!-- Application Section -->
-    <section class="application-section">
-        <div class="section-header fade-in-on-scroll">
-            <h2 class="section-title">Apply to Compete</h2>
-            <p class="section-description">
-                Ready to showcase your startup? Fill out the application below to be considered for our next pitch competition.
-            </p>
-        </div>
-        <div class="form-container fade-in-on-scroll">
-            <iframe class="airtable-embed" src="https://airtable.com/embed/appNF0gmjUJ0o9NWT/shrJJV3FCNRYDcV5i" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
-        </div>
-    </section>
-
     <!-- Partners Section -->
     <section class="partners-section">
         <h2 class="fade-in-on-scroll">Past Partners & Sponsors</h2>
@@ -558,15 +474,18 @@
                 <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/63ecc668-1ab8-4ec4-b03f-edfc6e9d39de/15.png?format=750w" alt="Build in Tulsa" class="partner-logo">
             </a>
         </div>
+    </section>
 
-        <div class="sponsor-cta fade-in-on-scroll">
-            <h3>Become a Sponsor</h3>
-            <p>
-                Partner with us to support the next generation of diverse founders and gain visibility with our growing community.
+    <!-- Application Section -->
+    <section class="application-section">
+        <div class="section-header fade-in-on-scroll">
+            <h2 class="section-title">Apply to Compete</h2>
+            <p class="section-description">
+                Ready to showcase your startup? Fill out the application below to be considered for our next pitch competition.
             </p>
-            <a href="https://www.bysengo.com/contact" target="_blank" rel="noopener noreferrer" class="sponsor-btn">
-                Contact Us
-            </a>
+        </div>
+        <div class="form-container fade-in-on-scroll">
+            <iframe class="airtable-embed" src="https://airtable.com/embed/appNF0gmjUJ0o9NWT/shrJJV3FCNRYDcV5i" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
         </div>
     </section>
 
