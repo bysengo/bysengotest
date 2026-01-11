@@ -109,6 +109,37 @@
     color: #1B3533;
   }
 
+  /* Pre-Application Button */
+  .pre-application-cta {
+    text-align: center;
+    margin: 40px 0 30px;
+  }
+
+  .enrollment-button {
+    display: inline-block;
+    padding: 16px 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: transparent;
+    color: #1B3533;
+    border: 2px solid #1B3533;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: none;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .enrollment-button:hover {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: white;
+    border-color: #1B3533;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(27, 53, 51, 0.25);
+  }
+
   /* Airtable Embed Section */
   .airtable-section {
     background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
@@ -442,6 +473,15 @@
       padding: 15px 35px;
       font-size: 1rem;
     }
+
+    .pre-application-cta {
+      margin: 30px 0 20px;
+    }
+
+    .enrollment-button {
+      padding: 14px 30px;
+      font-size: 0.9rem;
+    }
   }
 </style>
 
@@ -490,6 +530,11 @@
         <p>Founders review their readiness across the four areas investors care most about: data, data room, narrative, and community — gaining clarity on next steps, whether pursuing capital now or continuing to build.</p>
       </div>
     </div>
+  </div>
+
+  <!-- Pre-Application CTA -->
+  <div class="pre-application-cta fade-in-up">
+    <a href="https://app.bysengo.com/founder-enrollment" target="_blank" rel="noopener noreferrer" class="enrollment-button">Take me to enrollment and then bring me back to apply!</a>
   </div>
 
   <!-- Airtable Embed Section -->
