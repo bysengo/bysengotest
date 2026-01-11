@@ -16,32 +16,41 @@
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
-  /* Top Badge */
-  .top-badge-container {
+  /* Glowing Application Text */
+  .application-glow {
     text-align: center;
     padding: 20px 0 10px;
+    margin-top: 20px;
   }
 
-  .application-badge {
-    display: inline-block;
-    background: #D57028;
-    color: white;
-    padding: 10px 35px;
-    border-radius: 40px;
-    font-size: 0.9rem;
+  .glow-text {
+    font-size: 1.3rem;
     font-weight: 700;
+    color: #D57028;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    box-shadow: 0 4px 20px rgba(213, 112, 40, 0.4);
-    animation: pulse 2s ease-in-out infinite;
+    letter-spacing: 2px;
+    font-family: 'Arimo', sans-serif;
+    text-shadow:
+      0 0 10px rgba(213, 112, 40, 0.8),
+      0 0 20px rgba(213, 112, 40, 0.6),
+      0 0 30px rgba(213, 112, 40, 0.4),
+      0 0 40px rgba(213, 112, 40, 0.2);
+    animation: glow 2s ease-in-out infinite alternate;
   }
 
-  @keyframes pulse {
-    0%, 100% {
-      box-shadow: 0 4px 20px rgba(213, 112, 40, 0.4);
+  @keyframes glow {
+    from {
+      text-shadow:
+        0 0 10px rgba(213, 112, 40, 0.8),
+        0 0 20px rgba(213, 112, 40, 0.6),
+        0 0 30px rgba(213, 112, 40, 0.4);
     }
-    50% {
-      box-shadow: 0 6px 25px rgba(213, 112, 40, 0.6);
+    to {
+      text-shadow:
+        0 0 15px rgba(213, 112, 40, 1),
+        0 0 30px rgba(213, 112, 40, 0.8),
+        0 0 45px rgba(213, 112, 40, 0.6),
+        0 0 60px rgba(213, 112, 40, 0.4);
     }
   }
 
@@ -430,13 +439,13 @@
       font-size: 1rem;
     }
 
-    .top-badge-container {
+    .application-glow {
       padding: 15px 0 5px;
+      margin-top: 15px;
     }
 
-    .application-badge {
-      font-size: 0.8rem;
-      padding: 8px 25px;
+    .glow-text {
+      font-size: 1rem;
     }
 
     .grant-description {
@@ -528,16 +537,16 @@
 
 <div class="sengo-grant-content">
 
-  <!-- Top Badge -->
-  <div class="top-badge-container fade-in">
-    <span class="application-badge">Application Below!</span>
-  </div>
-
   <!-- Hero Section -->
   <div class="sengo-grant-hero fade-in">
     <span class="impact-badge">Funding Opportunity</span>
     <h1>The Sengo Grant</h1>
     <p class="sengo-grant-hero-subtitle">Capital + community for founders preparing to raise</p>
+  </div>
+
+  <!-- Glowing Application Text -->
+  <div class="application-glow fade-in-up">
+    <div class="glow-text">Application Below!</div>
   </div>
 
   <!-- Description -->
