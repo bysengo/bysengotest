@@ -16,6 +16,35 @@
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
+  /* Top Badge */
+  .top-badge-container {
+    text-align: center;
+    padding: 20px 0 10px;
+  }
+
+  .application-badge {
+    display: inline-block;
+    background: #D57028;
+    color: white;
+    padding: 10px 35px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0 4px 20px rgba(213, 112, 40, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 4px 20px rgba(213, 112, 40, 0.4);
+    }
+    50% {
+      box-shadow: 0 6px 25px rgba(213, 112, 40, 0.6);
+    }
+  }
+
   /* Hero Section */
   .sengo-grant-hero {
     min-height: 40vh;
@@ -74,8 +103,11 @@
     margin: 0 auto 40px;
     max-width: 800px;
     font-weight: 400;
-    padding: 10px 40px 30px;
+    padding: 25px 40px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Animated border lines */
@@ -398,9 +430,18 @@
       font-size: 1rem;
     }
 
+    .top-badge-container {
+      padding: 15px 0 5px;
+    }
+
+    .application-badge {
+      font-size: 0.8rem;
+      padding: 8px 25px;
+    }
+
     .grant-description {
       font-size: 1rem;
-      padding: 10px 20px 20px;
+      padding: 20px 20px;
     }
 
     .airtable-section {
@@ -486,6 +527,11 @@
 </style>
 
 <div class="sengo-grant-content">
+
+  <!-- Top Badge -->
+  <div class="top-badge-container fade-in">
+    <span class="application-badge">Application Below!</span>
+  </div>
 
   <!-- Hero Section -->
   <div class="sengo-grant-hero fade-in">
