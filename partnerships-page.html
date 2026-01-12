@@ -667,6 +667,27 @@
     line-height: 1.5;
   }
 
+  .glow-text {
+    color: #D57028;
+    text-shadow: 0 0 10px rgba(213, 112, 40, 0.8),
+                 0 0 20px rgba(213, 112, 40, 0.6),
+                 0 0 30px rgba(213, 112, 40, 0.4);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(213, 112, 40, 0.8),
+                   0 0 20px rgba(213, 112, 40, 0.6),
+                   0 0 30px rgba(213, 112, 40, 0.4);
+    }
+    50% {
+      text-shadow: 0 0 15px rgba(213, 112, 40, 1),
+                   0 0 30px rgba(213, 112, 40, 0.8),
+                   0 0 45px rgba(213, 112, 40, 0.6);
+    }
+  }
+
   /* Community Profile Section */
   .community-section {
     background: #F3EDE7;
@@ -1093,18 +1114,18 @@
 
     <div class="reach-stats">
       <div class="reach-stat-card">
-        <div class="reach-stat-number">8,600</div>
+        <div class="reach-stat-number">9,000+</div>
         <div class="reach-stat-label">Organically-Built Email List</div>
       </div>
 
       <div class="reach-stat-card">
         <div class="reach-stat-number">46.8%</div>
-        <div class="reach-stat-label">Open Rate<br>4x Industry Average</div>
+        <div class="reach-stat-label">Open Rate<br><span class="glow-text">4x Industry Average</span></div>
       </div>
 
       <div class="reach-stat-card">
-        <div class="reach-stat-number">600</div>
-        <div class="reach-stat-label">App Members<br>35% Paid</div>
+        <div class="reach-stat-number">600+</div>
+        <div class="reach-stat-label">App Members</div>
       </div>
 
       <div class="reach-stat-card">
@@ -1152,11 +1173,6 @@
         </ul>
       </div>
     </div>
-
-    <div class="value-prop">
-      <span class="value-prop-arrow">↘</span>
-      These founders will raise capital. The question is whether you meet them at $3M pre-money or chase them at $30M.
-    </div>
   </div>
 
   <!-- Partnership Categories -->
@@ -1164,19 +1180,19 @@
     <h2>Partner With Us</h2>
 
     <div class="categories-grid">
-      <div class="category-card category-events">
-        <div class="category-label">Events</div>
-        <div class="category-price">$10K-25K</div>
-        <p class="category-description">
-          Brand awareness, speaking opportunities, direct attendee access
-        </p>
-      </div>
-
       <div class="category-card category-media">
         <div class="category-label">Media</div>
         <div class="category-price">$2K-$5K</div>
         <p class="category-description">
           Newsletter placements, content collaboration, consistent touchpoints
+        </p>
+      </div>
+
+      <div class="category-card category-events">
+        <div class="category-label">Events</div>
+        <div class="category-price">$10K-25K</div>
+        <p class="category-description">
+          Brand awareness, speaking opportunities, direct attendee access
         </p>
       </div>
 
