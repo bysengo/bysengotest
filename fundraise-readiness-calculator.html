@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundraise Readiness Calculator - Sengo</title>
+
+  <style>
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F3EDE7;
+      color: #1B3533;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Section Backgrounds */
+    .section-white {
+      background: #FFFFFF;
+    }
+
+    /* Full-width section wrapper */
+    .full-width-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 60px 20px;
+    }
+
+    .full-width-section .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Fundraise Readiness Calculator */
+    .calculator-section {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .calculator-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      color: #1B3533;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .calculator-section > p {
+      font-size: 1.1rem;
+      color: #67441A;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .calculator-form {
+      background: white;
+      border: 3px solid #D57028;
+      border-radius: 16px;
+      padding: 40px 35px;
+      text-align: left;
+    }
+
+    .question-group {
+      margin-bottom: 30px;
+      padding-bottom: 25px;
+      border-bottom: 2px solid rgba(213, 112, 40, 0.15);
+    }
+
+    .question-group:last-of-type {
+      border-bottom: none;
+    }
+
+    .question-label {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1B3533;
+      margin-bottom: 15px;
+      display: block;
+      line-height: 1.5;
+    }
+
+    .question-sublabel {
+      font-size: 0.9rem;
+      color: #67441A;
+      font-weight: 400;
+      margin-top: 5px;
+      opacity: 0.85;
+    }
+
+    .radio-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 15px;
+      background: #F3EDE7;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .radio-option:hover {
+      background: #FAF7F4;
+      transform: translateX(5px);
+    }
+
+    .radio-option input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: #D57028;
+    }
+
+    .radio-option label {
+      font-size: 0.95rem;
+      color: #1B3533;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .calculate-btn {
+      display: block;
+      width: 100%;
+      padding: 18px 30px;
+      margin-top: 30px;
+      background: #D57028;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .calculate-btn:hover {
+      background: #C56020;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.5);
+    }
+
+    .calculate-btn:disabled {
+      background: #999;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .results-section {
+      display: none;
+      margin-top: 40px;
+      padding: 40px 35px;
+      background: linear-gradient(135deg, #1B3533 0%, #2a4a47 100%);
+      border-radius: 16px;
+      color: #F3EDE7;
+    }
+
+    .results-section.visible {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .score-display {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .score-number {
+      font-size: 6rem;
+      font-weight: 900;
+      color: #D57028;
+      line-height: 1;
+      text-shadow: 0 0 30px rgba(213, 112, 40, 0.5);
+      margin-bottom: 10px;
+    }
+
+    .score-label {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #F3EDE7;
+    }
+
+    .score-message {
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .recommendations {
+      margin-top: 30px;
+    }
+
+    .recommendation-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    .recommendation-box h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      color: #D57028;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .recommendation-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .recommendation-box li {
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .recommendation-box li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+    }
+
+    .video-recommendation {
+      background: rgba(213, 112, 40, 0.15);
+      border-left: 4px solid #D57028;
+      padding: 15px 20px;
+      margin: 8px 0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .video-thumbnail {
+      flex-shrink: 0;
+      width: 120px;
+      height: 68px;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      background: #1B3533;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-thumbnail::after {
+      content: '▶';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 20px;
+      background: rgba(213, 112, 40, 0.9);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 3px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .video-content {
+      flex: 1;
+    }
+
+    .video-recommendation strong {
+      color: #D57028;
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+    }
+
+    .video-recommendation .video-description {
+      color: #F3EDE7;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .membership-cta-box {
+      background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .membership-cta-box p {
+      color: #F3EDE7;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .membership-cta-box a {
+      display: inline-block;
+      padding: 15px 40px;
+      background: #1B3533;
+      color: #F3EDE7;
+      text-decoration: none;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+
+    .membership-cta-box a:hover {
+      background: #2a4a47;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(27, 53, 51, 0.4);
+    }
+
+    .learning-alert {
+      background: rgba(213, 112, 40, 0.2);
+      border: 2px solid #D57028;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 25px 0;
+      color: #F3EDE7;
+    }
+
+    .learning-alert h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      color: #D57028;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .learning-alert p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      color: #F3EDE7;
+    }
+
+    .learning-alert ul {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+    }
+
+    .learning-alert li {
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #F3EDE7;
+    }
+
+    .learning-alert li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+      .calculator-section h2 {
+        font-size: 2rem;
+      }
+
+      .calculator-form {
+        padding: 30px 20px;
+      }
+
+      .results-section {
+        padding: 30px 20px;
+      }
+
+      .score-number {
+        font-size: 4rem;
+      }
+
+      .video-recommendation {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .video-thumbnail {
+        width: 100%;
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Fundraise Readiness Calculator -->
+<div class="full-width-section section-white">
+  <div class="content-wrapper">
+    <div class="calculator-section">
+      <h2>Assess Your Fundraise Readiness</h2>
+      <p>Answer these questions to understand where you stand and what funding options might make sense for your current stage.</p>
+
+      <div class="calculator-form">
+        <form id="readiness-form">
+          <!-- Pillar 1: The Foundation (Data & Strategy) -->
+          <div class="question-group">
+            <label class="question-label">
+              1. Do you have a continuous feedback loop tracking sector news, market data, and customer insights?
+              <span class="question-sublabel">The Foundation: Information Integrity</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q1" value="3" id="q1-3">
+                <label for="q1-3">Yes, I actively track and analyze market dynamics</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q1" value="2" id="q1-2">
+                <label for="q1-2">I have some processes but they're inconsistent</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q1" value="1" id="q1-1">
+                <label for="q1-1">No, I'm operating mostly on intuition</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q1" value="0" id="q1-0">
+                <label for="q1-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="question-group">
+            <label class="question-label">
+              2. Based on your market size (TAM/SAM/SOM), what type of business are you building?
+              <span class="question-sublabel">The Foundation: Market Dynamics</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q2" value="3" id="q2-3">
+                <label for="q2-3">Venture-scale (100x potential, large addressable market)</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q2" value="2" id="q2-2">
+                <label for="q2-2">Growth business (10-50x potential, medium market)</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q2" value="1" id="q2-1">
+                <label for="q2-1">Lifestyle/Niche business (sustainable but limited scale)</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q2" value="0" id="q2-0">
+                <label for="q2-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="question-group">
+            <label class="question-label">
+              3. Is your exit strategy aligned with typical investor timelines (5-10 years)?
+              <span class="question-sublabel">The Foundation: Exit Strategy</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q3" value="3" id="q3-3">
+                <label for="q3-3">Yes, clear exit path aligned with investor expectations</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q3" value="2" id="q3-2">
+                <label for="q3-2">I have some ideas but haven't validated with investors</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q3" value="1" id="q3-1">
+                <label for="q3-1">Not sure yet / building to hold long-term</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q3" value="0" id="q3-0">
+                <label for="q3-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 2: The Infrastructure (The Data Room) -->
+          <div class="question-group">
+            <label class="question-label">
+              4. Are your legal docs organized and ready for due diligence?
+              <span class="question-sublabel">The Infrastructure: Organizational Health</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q4" value="3" id="q4-3">
+                <label for="q4-3">Yes, incorporation, cap table, IP assignments all ready</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q4" value="2" id="q4-2">
+                <label for="q4-2">Partially organized, some gaps to fill</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q4" value="1" id="q4-1">
+                <label for="q4-1">No, significant work needed to get documents ready</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q4" value="0" id="q4-0">
+                <label for="q4-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="question-group">
+            <label class="question-label">
+              5. Can you quickly provide proof and documentation for your business claims?
+              <span class="question-sublabel">The Infrastructure: Transparency</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q5" value="3" id="q5-3">
+                <label for="q5-3">Yes, I have a data room or organized documentation</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q5" value="2" id="q5-2">
+                <label for="q5-2">Most things are documented but scattered</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q5" value="1" id="q5-1">
+                <label for="q5-1">No, would take significant time to compile</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q5" value="0" id="q5-0">
+                <label for="q5-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 3: The Momentum (Traction & Revenue) -->
+          <div class="question-group">
+            <label class="question-label">
+              6. What's your current revenue status?
+              <span class="question-sublabel">The Momentum: Revenue Status</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q6" value="3" id="q6-3">
+                <label for="q6-3">Revenue-generating with consistent growth metrics</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q6" value="2" id="q6-2">
+                <label for="q6-2">Early revenue or pilot customers</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q6" value="1" id="q6-1">
+                <label for="q6-1">Pre-revenue (vision/idea stage)</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q6" value="0" id="q6-0">
+                <label for="q6-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="question-group">
+            <label class="question-label">
+              7. What's your current product/business lifecycle phase?
+              <span class="question-sublabel">The Momentum: Lifecycle Phase</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q7" value="3" id="q7-3">
+                <label for="q7-3">Scaling (proven product-market fit)</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q7" value="2" id="q7-2">
+                <label for="q7-2">MVP launched with early users/feedback</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q7" value="1" id="q7-1">
+                <label for="q7-1">Idea stage (concept/planning phase)</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q7" value="0" id="q7-0">
+                <label for="q7-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 4: The Human Factor (Team & Community) -->
+          <div class="question-group">
+            <label class="question-label">
+              8. Does your team have the technical and operational expertise for your sector?
+              <span class="question-sublabel">The Human Factor: Founder/Team DNA</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q8" value="3" id="q8-3">
+                <label for="q8-3">Yes, strong domain expertise and proven track record</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q8" value="2" id="q8-2">
+                <label for="q8-2">Some expertise, but filling gaps with advisors/hires</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q8" value="1" id="q8-1">
+                <label for="q8-1">Learning as we go, limited sector experience</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q8" value="0" id="q8-0">
+                <label for="q8-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="question-group">
+            <label class="question-label">
+              9. Do you have a strong community or early adopters who validate your solution?
+              <span class="question-sublabel">The Human Factor: Community Moat</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q9" value="3" id="q9-3">
+                <label for="q9-3">Yes, "ride or die" audience actively engaged</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q9" value="2" id="q9-2">
+                <label for="q9-2">Small but growing community or customer base</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q9" value="1" id="q9-1">
+                <label for="q9-1">No community yet, still building awareness</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q9" value="0" id="q9-0">
+                <label for="q9-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillar 5: The Magnetism (The Narrative) -->
+          <div class="question-group">
+            <label class="question-label">
+              10. Is your story compelling and differentiated in a crowded market?
+              <span class="question-sublabel">The Magnetism: The Hook</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q10" value="3" id="q10-3">
+                <label for="q10-3">Yes, clear narrative that cuts through the noise</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q10" value="2" id="q10-2">
+                <label for="q10-2">Working on it, getting mixed feedback</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q10" value="1" id="q10-1">
+                <label for="q10-1">Still refining my pitch and positioning</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q10" value="0" id="q10-0">
+                <label for="q10-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="question-group">
+            <label class="question-label">
+              11. Does your data support the story you're telling?
+              <span class="question-sublabel">The Magnetism: Cohesion</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q11" value="3" id="q11-3">
+                <label for="q11-3">Yes, narrative backed by solid metrics and proof points</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q11" value="2" id="q11-2">
+                <label for="q11-2">Some data supports it, but gaps exist</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q11" value="1" id="q11-1">
+                <label for="q11-1">Still gathering data to validate claims</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q11" value="0" id="q11-0">
+                <label for="q11-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Pillars -->
+          <div class="question-group">
+            <label class="question-label">
+              12. Do you have clarity on how you'll use the funds you're raising?
+              <span class="question-sublabel">Use-of-Funds Clarity</span>
+            </label>
+            <div class="radio-options">
+              <div class="radio-option">
+                <input type="radio" name="q12" value="3" id="q12-3">
+                <label for="q12-3">Yes, detailed budget tied to specific milestones</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q12" value="2" id="q12-2">
+                <label for="q12-2">General idea but not fully detailed</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q12" value="1" id="q12-1">
+                <label for="q12-1">Not sure yet, still figuring out needs</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="q12" value="0" id="q12-0">
+                <label for="q12-0">I'm not sure / need guidance on where to start</label>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="calculate-btn">Calculate My Readiness Score</button>
+        </form>
+
+        <!-- Results Section -->
+        <div id="results" class="results-section">
+          <div class="score-display">
+            <div class="score-number" id="score-percentage">0%</div>
+            <div class="score-label" id="score-status">Your Fundraise Readiness</div>
+            <p class="score-message" id="score-description"></p>
+          </div>
+
+          <div class="recommendations">
+            <div class="recommendation-box">
+              <h3>Recommended Funding Types</h3>
+              <ul id="funding-recommendations"></ul>
+            </div>
+
+            <div class="recommendation-box">
+              <h3>Strengthen Your Position With These Resources</h3>
+              <div id="video-recommendations"></div>
+            </div>
+
+            <div class="membership-cta-box">
+              <p><strong>Want access to all these resources and more?</strong><br>Join Sengo to explore our full library of expert-led courses, connect with investors, and get the support you need to fundraise with confidence.</p>
+              <a href="#pricing">Become a Member</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Fundraise Readiness Calculator Logic
+  const readinessForm = document.getElementById('readiness-form');
+
+  if (readinessForm) {
+    readinessForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Calculate total score
+      const formData = new FormData(readinessForm);
+      let totalScore = 0;
+      let answeredQuestions = 0;
+      let notSureCount = 0;
+      const totalQuestions = 12;
+
+      // Track scores by pillar for targeted recommendations
+      const pillarScores = {
+        foundation: 0,      // Q1-Q3
+        infrastructure: 0,  // Q4-Q5
+        momentum: 0,        // Q6-Q7
+        humanFactor: 0,     // Q8-Q9
+        magnetism: 0,       // Q10-Q11
+        useOfFunds: 0       // Q12
+      };
+
+      for (let i = 1; i <= totalQuestions; i++) {
+        const value = formData.get(`q${i}`);
+        if (value) {
+          const score = parseInt(value);
+          totalScore += score;
+          answeredQuestions++;
+
+          // Track "not sure" responses
+          if (score === 0) {
+            notSureCount++;
+          }
+
+          // Assign to pillars
+          if (i >= 1 && i <= 3) pillarScores.foundation += score;
+          if (i >= 4 && i <= 5) pillarScores.infrastructure += score;
+          if (i >= 6 && i <= 7) pillarScores.momentum += score;
+          if (i >= 8 && i <= 9) pillarScores.humanFactor += score;
+          if (i >= 10 && i <= 11) pillarScores.magnetism += score;
+          if (i === 12) pillarScores.useOfFunds = score;
+        }
+      }
+
+      // Ensure all questions are answered
+      if (answeredQuestions < totalQuestions) {
+        alert('Please answer all questions to get your readiness score.');
+        return;
+      }
+
+      // Calculate percentage (max score is 36: 12 questions × 3 points each)
+      const maxScore = totalQuestions * 3;
+      const percentageScore = Math.round((totalScore / maxScore) * 100);
+
+      // Display results
+      displayResults(percentageScore, pillarScores, notSureCount);
+
+      // Scroll to results
+      document.getElementById('results').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
+  }
+
+  function displayResults(percentage, pillarScores, notSureCount) {
+    const resultsSection = document.getElementById('results');
+    const scorePercentage = document.getElementById('score-percentage');
+    const scoreStatus = document.getElementById('score-status');
+    const scoreDescription = document.getElementById('score-description');
+    const fundingRecs = document.getElementById('funding-recommendations');
+    const videoRecs = document.getElementById('video-recommendations');
+
+    // Show results section
+    resultsSection.classList.add('visible');
+
+    // Display score
+    scorePercentage.textContent = percentage + '%';
+
+    // Determine readiness level and messaging
+    let statusText, descriptionText, fundingTypes;
+
+    if (percentage >= 75) {
+      statusText = 'Strong Fundraising Position';
+      descriptionText = 'You have solid fundamentals in place. You\'re well-positioned to pursue institutional funding and should focus on refining your pitch and investor targeting strategy.';
+      fundingTypes = [
+        'Series A/B Venture Capital',
+        'Growth equity investors',
+        'Strategic corporate investors',
+        'Institutional angel groups'
+      ];
+    } else if (percentage >= 50) {
+      statusText = 'Early-Stage Ready';
+      descriptionText = 'You have a foundation to build on. Focus on strengthening your weak areas while exploring early-stage funding options. Investors will want to see traction and clearer metrics.';
+      fundingTypes = [
+        'Angel investors',
+        'Pre-seed and seed funds',
+        'Crowdfunding (equity or revenue-based)',
+        'CDFI loans (Community Development Financial Institutions)',
+        'Small business grants'
+      ];
+    } else if (percentage >= 30) {
+      statusText = 'Foundation Building Phase';
+      descriptionText = 'You\'re in the early stages. Before pursuing external investment, focus on strengthening your fundamentals, building traction, and getting your documentation in order.';
+      fundingTypes = [
+        'Bootstrapping (self-funding)',
+        'Friends and family rounds',
+        'Small grants and competitions',
+        'Revenue-based financing (if generating revenue)',
+        'Business credit lines'
+      ];
+    } else {
+      statusText = 'Pre-Fundraise Stage';
+      descriptionText = 'Focus on building your foundation before raising. Invest time in market validation, product development, and business fundamentals. Consider non-dilutive options to get started.';
+      fundingTypes = [
+        'Bootstrapping',
+        'Personal savings',
+        'Small business grants',
+        'Pitch competitions',
+        'Customer pre-orders or deposits'
+      ];
+    }
+
+    scoreStatus.textContent = statusText;
+    scoreDescription.textContent = descriptionText;
+
+    // Display funding recommendations
+    fundingRecs.innerHTML = fundingTypes.map(type => `<li>${type}</li>`).join('');
+
+    // Check if user needs foundational guidance (3+ "not sure" responses)
+    if (notSureCount >= 3) {
+      const learningAlert = `
+        <div class="learning-alert">
+          <h4>🎓 Start With The Fundamentals</h4>
+          <p>You selected "I'm not sure" for ${notSureCount} questions. That's okay! The Sengo community is designed to help founders like you build a strong foundation in fundraising vocabulary and strategy.</p>
+          <p><strong>Join the community to:</strong></p>
+          <ul>
+            <li>Learn key fundraising terms (TAM/SAM/SOM, cap tables, due diligence, etc.)</li>
+            <li>Understand what investors look for at each stage</li>
+            <li>Build your knowledge through expert-led courses and workshops</li>
+            <li>Connect with other founders on the same journey</li>
+          </ul>
+          <p style="margin-top: 15px; font-size: 0.95rem; opacity: 0.9;">The calculator shows you're in the early learning phase—and that's the perfect place to start building your fundraising confidence.</p>
+        </div>
+      `;
+      fundingRecs.insertAdjacentHTML('afterend', learningAlert);
+    }
+
+    // Video recommendations based on weak pillars
+    const videoRecommendations = getVideoRecommendations(pillarScores, percentage);
+    videoRecs.innerHTML = videoRecommendations.map(video =>
+      `<div class="video-recommendation">
+        <div class="video-thumbnail">
+          <img src="${video.thumbnail}" alt="${video.title}">
+        </div>
+        <div class="video-content">
+          <strong>${video.title}</strong>
+          <div class="video-description">${video.description}</div>
+        </div>
+      </div>`
+    ).join('');
+  }
+
+  function getVideoRecommendations(pillarScores, percentage) {
+    const recommendations = [];
+
+    // Normalize pillar scores to identify weakest areas
+    const normalizedScores = {
+      foundation: pillarScores.foundation / 9,        // Max 9 (3 questions × 3)
+      infrastructure: pillarScores.infrastructure / 6, // Max 6 (2 questions × 3)
+      momentum: pillarScores.momentum / 6,            // Max 6 (2 questions × 3)
+      humanFactor: pillarScores.humanFactor / 6,      // Max 6 (2 questions × 3)
+      magnetism: pillarScores.magnetism / 6,          // Max 6 (2 questions × 3)
+      useOfFunds: pillarScores.useOfFunds / 3         // Max 3 (1 question × 3)
+    };
+
+    // Always recommend pitch-related content if magnetism is weak
+    if (normalizedScores.magnetism < 0.67) {
+      recommendations.push({
+        title: 'Building Your 2026 Pitch Strategy With Dana Ammons',
+        description: 'Learn how to craft a compelling narrative that cuts through the noise and resonates with investors.',
+        thumbnail: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=225&fit=crop'
+      });
+      recommendations.push({
+        title: 'Pitch Prep with Amiah',
+        description: 'Get expert guidance on refining your pitch deck and investor messaging.',
+        thumbnail: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=225&fit=crop'
+      });
+    }
+
+    // Foundation & strategy recommendations
+    if (normalizedScores.foundation < 0.67) {
+      recommendations.push({
+        title: 'Building to Scale/Sell',
+        description: 'Understand different exit strategies and how to align your growth plans with investor expectations.',
+        thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=225&fit=crop'
+      });
+      recommendations.push({
+        title: 'Intro to Private Markets',
+        description: 'Learn the fundamentals of private market dynamics and what investors look for.',
+        thumbnail: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=225&fit=crop'
+      });
+    }
+
+    // Momentum & traction recommendations
+    if (normalizedScores.momentum < 0.67 || percentage < 50) {
+      recommendations.push({
+        title: 'Debt vs. Bootstrapping',
+        description: 'Explore non-dilutive funding options to build traction before raising equity.',
+        thumbnail: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&h=225&fit=crop'
+      });
+    }
+
+    // Capital fit recommendations
+    if (percentage >= 50) {
+      recommendations.push({
+        title: 'Finding Angels & VCs',
+        description: 'Strategies for identifying and connecting with the right investors for your stage and sector.',
+        thumbnail: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=225&fit=crop'
+      });
+    }
+
+    // Alternative funding options
+    if (percentage < 50) {
+      recommendations.push({
+        title: 'Demystifying CDFI Funding with Isaiah Coleman',
+        description: 'Learn about Community Development Financial Institutions and alternative funding sources.',
+        thumbnail: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&h=225&fit=crop'
+      });
+    }
+
+    // If they scored well, still give them advanced content
+    if (percentage >= 75 && recommendations.length < 2) {
+      recommendations.push({
+        title: 'Finding Angels & VCs',
+        description: 'Advanced strategies for investor targeting and relationship building.',
+        thumbnail: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=225&fit=crop'
+      });
+      recommendations.push({
+        title: 'Building Your 2026 Pitch Strategy With Dana Ammons',
+        description: 'Refine your narrative for sophisticated investors.',
+        thumbnail: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=225&fit=crop'
+      });
+    }
+
+    // Limit to top 4 recommendations
+    return recommendations.slice(0, 4);
+  }
+</script>
+
+</body>
+</html>
