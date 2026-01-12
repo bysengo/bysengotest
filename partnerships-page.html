@@ -1,0 +1,1421 @@
+<!-- Sengo Partnerships Page for Squarespace -->
+<!-- Add this to an Embed Block on your Squarespace partnerships page -->
+
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .partnerships-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Hero Section */
+  .partnerships-hero {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    padding: 40px 20px 20px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .partnerships-hero h1 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 6.5rem;
+    font-weight: 400;
+    line-height: 0.94;
+    color: #1B3533;
+    letter-spacing: -0.077em;
+    text-transform: none;
+    max-width: 900px;
+    margin: 0 0 20px 0;
+  }
+
+  .partnerships-hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #67441A;
+    margin: 0;
+    max-width: 700px;
+    line-height: 1.6;
+  }
+
+  .partnerships-hero-tagline {
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin: 30px 0 0 0;
+    font-style: italic;
+  }
+
+  /* Scroll animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+  }
+
+  /* Problem Section */
+  .problem-section {
+    background: #D57028;
+    color: #F3EDE7;
+    padding: 60px 50px;
+    border-radius: 16px;
+    margin: 60px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .problem-badge {
+    display: inline-block;
+    background: rgba(243, 237, 231, 0.15);
+    color: #F3EDE7;
+    border: 2px solid rgba(243, 237, 231, 0.3);
+    padding: 10px 30px;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+  }
+
+  .problem-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #F3EDE7;
+  }
+
+  .problem-section h2 .highlight {
+    color: #1B3533;
+    font-weight: 900;
+  }
+
+  .wealth-gap-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  .wealth-gap-stat {
+    text-align: left;
+  }
+
+  .wealth-gap-stat-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    opacity: 0.95;
+    font-weight: 400;
+    margin-bottom: 30px;
+  }
+
+  .wealth-gap-detail {
+    background: rgba(27, 53, 51, 0.3);
+    padding: 25px;
+    border-radius: 12px;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-top: 20px;
+  }
+
+  .wealth-gap-visual {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .stat-bubble {
+    background: rgba(27, 53, 51, 0.4);
+    border: 2px solid #1B3533;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .stat-bubble-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #F3EDE7;
+    margin-bottom: 10px;
+  }
+
+  .stat-bubble-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    line-height: 1.5;
+  }
+
+  /* Why Partners Choose Section */
+  .why-choose-section {
+    margin: 80px 0;
+  }
+
+  .why-choose-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    color: #1B3533;
+  }
+
+  .why-choose-subtitle {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #67441A;
+    font-weight: 400;
+    margin-bottom: 60px;
+    font-style: italic;
+  }
+
+  .why-reasons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .reason-card {
+    background: white;
+    border: 3px solid #1B3533;
+    border-radius: 16px;
+    padding: 40px;
+    transition: all 0.3s ease;
+  }
+
+  .reason-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(27, 53, 51, 0.2);
+    border-color: #D57028;
+  }
+
+  .reason-number {
+    display: inline-block;
+    background: #D57028;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-align: center;
+    line-height: 50px;
+    margin-bottom: 20px;
+  }
+
+  .reason-title {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .reason-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .reason-list li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #1B3533;
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .reason-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #D57028;
+    font-weight: 900;
+    font-size: 1.3rem;
+  }
+
+  /* Partnership Tiers Section */
+  .tiers-section {
+    margin: 80px 0;
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    padding: 80px 50px;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tiers-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .tiers-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 60px;
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    color: #F3EDE7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tier-card {
+    background: rgba(243, 237, 231, 0.95);
+    border: 3px solid transparent;
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .tier-card:hover {
+    transform: translateY(-10px);
+    border-color: #D57028;
+    box-shadow: 0 20px 50px rgba(213, 112, 40, 0.4);
+  }
+
+  .tier-name {
+    font-family: 'Arimo', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #1B3533;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .tier-price {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #D57028;
+    margin-bottom: 10px;
+  }
+
+  .tier-commitment {
+    font-size: 0.9rem;
+    color: #67441A;
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .tier-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+
+  .tier-features li {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #1B3533;
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .tier-features li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #D57028;
+    font-weight: 700;
+  }
+
+  /* Partnership Categories Section */
+  .categories-section {
+    margin: 80px 0;
+  }
+
+  .categories-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 60px;
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    color: #1B3533;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .category-card {
+    border: 3px solid #1B3533;
+    border-radius: 16px;
+    padding: 40px;
+    transition: all 0.3s ease;
+    background: #F3EDE7;
+  }
+
+  .category-card:hover {
+    transform: translateY(-5px);
+    border-color: #D57028;
+    box-shadow: 0 15px 40px rgba(213, 112, 40, 0.3);
+  }
+
+  .category-label {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  .category-events .category-label {
+    background: #D57028;
+    color: white;
+  }
+
+  .category-media .category-label {
+    background: #D57028;
+    color: white;
+  }
+
+  .category-platform .category-label {
+    background: #67441A;
+    color: white;
+  }
+
+  .category-ecosystem .category-label {
+    background: #1B3533;
+    color: white;
+  }
+
+  .category-price {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #1B3533;
+    margin-bottom: 15px;
+  }
+
+  .category-description {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #1B3533;
+    font-weight: 500;
+  }
+
+  /* Newsletter Section */
+  .newsletter-section {
+    background: #F3EDE7;
+    border: 4px solid #1B3533;
+    border-radius: 16px;
+    padding: 60px 50px;
+    margin: 80px 0;
+  }
+
+  .newsletter-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    color: #1B3533;
+  }
+
+  .newsletter-highlight {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #D57028;
+    font-weight: 700;
+    margin-bottom: 50px;
+  }
+
+  .newsletter-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  .newsletter-option {
+    background: white;
+    border: 2px solid #67441A;
+    border-radius: 12px;
+    padding: 30px 25px;
+  }
+
+  .newsletter-option-name {
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+  }
+
+  .newsletter-option-price {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #D57028;
+    margin-bottom: 20px;
+  }
+
+  .newsletter-option-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .newsletter-option-features li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #1B3533;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .newsletter-option-features li::before {
+    content: '▪';
+    position: absolute;
+    left: 0;
+    color: #D57028;
+  }
+
+  .newsletter-stats {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid #D57028;
+  }
+
+  .newsletter-stats-title {
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .newsletter-stats-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .newsletter-stats-list li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #1B3533;
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+  }
+
+  .newsletter-stats-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #D57028;
+    font-weight: 900;
+  }
+
+  /* Our Reach Section */
+  .reach-section {
+    margin: 80px 0;
+  }
+
+  .reach-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 7rem;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    color: #1B3533;
+  }
+
+  .reach-subtitle {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #D57028;
+    font-weight: 600;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .reach-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  .reach-stat-card {
+    background: #1B3533;
+    padding: 50px 30px;
+    border-radius: 12px;
+    text-align: center;
+    border: 3px solid #D57028;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reach-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(213, 112, 40, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .reach-stat-card:hover::before {
+    left: 100%;
+  }
+
+  .reach-stat-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(213, 112, 40, 0.4);
+  }
+
+  .reach-stat-number {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #D57028;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .reach-stat-label {
+    font-size: 1rem;
+    color: #F3EDE7;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    z-index: 1;
+    line-height: 1.5;
+  }
+
+  /* Community Profile Section */
+  .community-section {
+    background: #F3EDE7;
+    border: 4px solid #1B3533;
+    border-radius: 16px;
+    padding: 60px 50px;
+    margin: 80px 0;
+  }
+
+  .community-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    color: #1B3533;
+  }
+
+  .community-subtitle {
+    text-align: center;
+    font-size: 1.15rem;
+    color: #67441A;
+    font-weight: 500;
+    margin-bottom: 50px;
+    font-style: italic;
+  }
+
+  .community-profiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+
+  .profile-card {
+    background: white;
+    border: 2px solid #67441A;
+    border-radius: 12px;
+    padding: 35px;
+  }
+
+  .profile-title {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .profile-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .profile-list li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #1B3533;
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .profile-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #D57028;
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+
+  .value-prop {
+    background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
+    color: #F3EDE7;
+    padding: 40px;
+    border-radius: 60px;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 1.8;
+    font-weight: 600;
+    position: relative;
+    border: 4px solid #1B3533;
+  }
+
+  .value-prop-arrow {
+    display: inline-block;
+    font-size: 2.5rem;
+    margin-right: 20px;
+    transform: rotate(45deg);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: #F3EDE7;
+    padding: 80px 50px;
+    border-radius: 16px;
+    margin: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-badge {
+    display: inline-block;
+    background: rgba(243, 237, 231, 0.15);
+    color: #F3EDE7;
+    border: 2px solid rgba(243, 237, 231, 0.3);
+    padding: 10px 30px;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+  }
+
+  .cta-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 6rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    color: #F3EDE7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-section p {
+    font-size: 1.25rem;
+    line-height: 1.9;
+    margin-bottom: 50px;
+    opacity: 0.95;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-button {
+    padding: 25px 60px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    border: 3px solid #F3EDE7;
+    background: #D57028;
+    color: #F3EDE7;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #F3EDE7;
+    transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .cta-button:hover::before {
+    width: 300%;
+    height: 300%;
+  }
+
+  .cta-button:hover {
+    color: #1B3533;
+    border-color: #F3EDE7;
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(243, 237, 231, 0.3);
+  }
+
+  /* Logo Section */
+  .logo-section {
+    margin: 60px 0;
+    overflow: hidden;
+    padding: 40px 0;
+    background: #1B3533;
+    border-radius: 12px;
+  }
+
+  .logo-section p {
+    text-align: center;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #F3EDE7;
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+
+  .logo-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .logo-track {
+    display: flex;
+    animation: scroll 25s linear infinite;
+    width: fit-content;
+  }
+
+  .logo-track:hover {
+    animation-play-state: paused;
+  }
+
+  .logo-item {
+    flex: 0 0 auto;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-item img {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+
+  .logo-item:hover img {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 968px) {
+    .partnerships-hero h1 {
+      font-size: 4.5rem;
+    }
+
+    .tiers-grid,
+    .categories-grid,
+    .newsletter-options {
+      grid-template-columns: 1fr;
+    }
+
+    .reach-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .community-profiles {
+      grid-template-columns: 1fr;
+    }
+
+    .wealth-gap-content {
+      grid-template-columns: 1fr;
+    }
+
+    .why-choose-section h2,
+    .reach-section h2,
+    .tiers-section h2,
+    .categories-section h2,
+    .cta-section h2 {
+      font-size: 4rem;
+    }
+
+    .newsletter-section h2,
+    .community-section h2 {
+      font-size: 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .partnerships-hero h1 {
+      font-size: 3.5rem;
+    }
+
+    .partnerships-hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .partnerships-hero-tagline {
+      font-size: 1.3rem;
+    }
+
+    .problem-section,
+    .tiers-section,
+    .community-section,
+    .cta-section,
+    .newsletter-section {
+      padding: 40px 30px;
+    }
+
+    .why-choose-section h2,
+    .reach-section h2,
+    .tiers-section h2,
+    .categories-section h2,
+    .cta-section h2 {
+      font-size: 3rem;
+    }
+
+    .newsletter-section h2,
+    .community-section h2 {
+      font-size: 2.5rem;
+    }
+
+    .problem-section h2 {
+      font-size: 2.5rem;
+    }
+
+    .reach-stat-number {
+      font-size: 3rem;
+    }
+
+    .value-prop {
+      font-size: 1.1rem;
+      padding: 30px;
+    }
+
+    .tier-name {
+      font-size: 2rem;
+    }
+
+    .tier-price {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<div class="partnerships-content">
+
+  <!-- Hero Section -->
+  <div class="partnerships-hero fade-in">
+    <h1>Partner with Sengo.</h1>
+    <p class="partnerships-hero-subtitle">
+      Join us in democratizing access to capital and closing the wealth gap.
+      Connect with the next generation of wealth creators before traditional networks discover them.
+    </p>
+    <p class="partnerships-hero-tagline">It's Not About Impressions—It's About Impact</p>
+  </div>
+
+  <!-- Problem Section -->
+  <div class="problem-section fade-in-up">
+    <span class="problem-badge">The Problem</span>
+    <h2>There's a <span class="highlight">$14 trillion wealth gap</span> locking communities out of the fastest-growing asset class.</h2>
+
+    <div class="wealth-gap-content">
+      <div class="wealth-gap-stat">
+        <p class="wealth-gap-stat-text">
+          Underrepresented founders are shut out, while many funders lack pathways to invest.
+        </p>
+        <div class="wealth-gap-detail">
+          Private assets represent $13T in value and are projected to reach $23T by 2027.
+        </div>
+      </div>
+
+      <div class="wealth-gap-visual">
+        <div class="stat-bubble">
+          <div class="stat-bubble-number">98%</div>
+          <div class="stat-bubble-label">Not participating in private investing</div>
+        </div>
+        <div class="stat-bubble">
+          <div class="stat-bubble-number">49M</div>
+          <div class="stat-bubble-label">Eligible Americans excluded from private investing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Partners Choose Sengo -->
+  <div class="why-choose-section fade-in-up">
+    <h2>Why Partners Choose Sengo</h2>
+    <p class="why-choose-subtitle">Headline: It's Not About Impressions—It's About Impact</p>
+
+    <div class="why-reasons">
+      <div class="reason-card">
+        <div class="reason-number">1</div>
+        <div class="reason-title">Access to Capital-Ready Founders Traditional Networks Miss</div>
+        <ul class="reason-list">
+          <li>Women, POC, first-gen entrepreneurs with strong products and communities</li>
+          <li>Pre-seed to Series A stage, raising $500K–$2M</li>
+          <li>Vetted through community engagement (not just application submissions)</li>
+        </ul>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-number">2</div>
+        <div class="reason-title">Proven Track Record</div>
+        <ul class="reason-list">
+          <li>$30K deployed → $5M+ raised (167x capital multiplier)</li>
+          <li>50%+ newsletter open rate (4x industry standard)</li>
+          <li>$3K–$5K in sales per brand at Fashion X Futures</li>
+        </ul>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-number">3</div>
+        <div class="reason-title">Cultural Credibility</div>
+        <ul class="reason-list">
+          <li>Breaking Sound x Kanye's Sunday Service</li>
+          <li>ON Running partnerships</li>
+          <li>700-person Fashion X Futures events</li>
+          <li>These aren't transactional—they're cultural moments</li>
+        </ul>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-number">4</div>
+        <div class="reason-title">Measurable Outcomes</div>
+        <ul class="reason-list">
+          <li>We track: capital raised, revenue milestones, jobs created, follow-on funding</li>
+          <li>You get attribution: which founders you met, which invested, what happened next</li>
+          <li>Quarterly reporting on partnership ROI</li>
+        </ul>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-number">5</div>
+        <div class="reason-title">Community-First Philosophy</div>
+        <ul class="reason-list">
+          <li>Relationships over transactions</li>
+          <li>Long-term partnerships over one-off activations</li>
+          <li>We say no to partners who don't align with our values</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logo Section -->
+  <div class="logo-section fade-in-up">
+    <p>Past Partners & Press</p>
+    <div class="logo-slider">
+      <div class="logo-track">
+        <!-- First set -->
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/8b90e9cb-7454-491d-95d3-07fb06e284d1/Social+Media+Squares+v2+%28Presentation+%2843%29%29.png?format=750w" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/95081a5b-b209-4ac8-83f8-33874282fd7d/2.png?format=750w" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/9a8a7346-142e-46fa-a453-2c4bf1b9b16f/1.png?format=750w" alt="Business Insider">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/ff429dd9-458f-450c-9784-f0f2eb701da9/5.png?format=750w" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/5ef4f0b5-fc3a-4614-a8d8-4903795b8d65/4.png?format=750w" alt="Build in Tulsa">
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/8b90e9cb-7454-491d-95d3-07fb06e284d1/Social+Media+Squares+v2+%28Presentation+%2843%29%29.png?format=750w" alt="Forbes">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/95081a5b-b209-4ac8-83f8-33874282fd7d/2.png?format=750w" alt="Nasdaq">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/9a8a7346-142e-46fa-a453-2c4bf1b9b16f/1.png?format=750w" alt="Business Insider">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/ff429dd9-458f-450c-9784-f0f2eb701da9/5.png?format=750w" alt="Black Girl Ventures">
+        </div>
+        <div class="logo-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/5ef4f0b5-fc3a-4614-a8d8-4903795b8d65/4.png?format=750w" alt="Build in Tulsa">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partnership Tiers -->
+  <div class="tiers-section fade-in-up">
+    <h2>Partnership Tiers</h2>
+
+    <div class="tiers-grid">
+      <div class="tier-card">
+        <div class="tier-name">Impact</div>
+        <div class="tier-price">$25K</div>
+        <div class="tier-commitment">Commitment</div>
+        <ul class="tier-features">
+          <li>Named as prize sponsor (1st place $5K, 2nd place $2.5K)</li>
+          <li>Brand logo on event materials</li>
+          <li>Access to event recordings</li>
+          <li>Direct attendee contact list (opt-in)</li>
+          <li>Live keynote during event (2mins)</li>
+        </ul>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-name">Grow</div>
+        <div class="tier-price">$17K</div>
+        <div class="tier-commitment">Commitment</div>
+        <ul class="tier-features">
+          <li>Named as prize sponsor ($5K)</li>
+          <li>Brand logo on event materials</li>
+          <li>Access to event recordings</li>
+          <li>Direct attendee contact list (opt-in)</li>
+        </ul>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-name">Spark</div>
+        <div class="tier-price">$10K</div>
+        <div class="tier-commitment">Commitment</div>
+        <ul class="tier-features">
+          <li>Named as prize sponsor ($3K)</li>
+          <li>Brand logo on event materials</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partnership Categories -->
+  <div class="categories-section fade-in-up">
+    <h2>Partner With Us</h2>
+
+    <div class="categories-grid">
+      <div class="category-card category-events">
+        <div class="category-label">Events</div>
+        <div class="category-price">$10K-25K</div>
+        <p class="category-description">
+          Brand awareness, speaking opportunities, direct attendee access
+        </p>
+      </div>
+
+      <div class="category-card category-media">
+        <div class="category-label">Media</div>
+        <div class="category-price">$2K-$5K</div>
+        <p class="category-description">
+          Newsletter placements, content collaboration, consistent touchpoints
+        </p>
+      </div>
+
+      <div class="category-card category-platform">
+        <div class="category-label">Platform</div>
+        <div class="category-price">$10K-50K</div>
+        <p class="category-description">
+          Dealflow, priority founder access, curated intros
+        </p>
+      </div>
+
+      <div class="category-card category-ecosystem">
+        <div class="category-label">Ecosystem</div>
+        <div class="category-price">$75K+</div>
+        <p class="category-description">
+          Multi-channel presence, co-created programming
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newsletter Sponsorship -->
+  <div class="newsletter-section fade-in-up">
+    <h2>Newsletter Sponsorship</h2>
+    <p class="newsletter-highlight">46.8% Open Rate | 8,600+ Subscribers | Association with inclusive, high-integrity capital</p>
+
+    <div class="newsletter-options">
+      <div class="newsletter-option">
+        <div class="newsletter-option-name">Exclusive Banner</div>
+        <div class="newsletter-option-price">$1,500</div>
+        <p style="font-size: 0.85rem; color: #67441A; margin-bottom: 15px;">per newsletter</p>
+        <ul class="newsletter-option-features">
+          <li>Above-the-fold placement (first thing subscribers see)</li>
+          <li>100–150 word message in your voice</li>
+          <li>Logo and CTA button</li>
+          <li>Estimated impressions: 3,900+ (7,800 subscribers × 50% open rate)</li>
+          <li>Click-through tracking and performance report</li>
+        </ul>
+      </div>
+
+      <div class="newsletter-option">
+        <div class="newsletter-option-name">Featured Partner</div>
+        <div class="newsletter-option-price">$750</div>
+        <p style="font-size: 0.85rem; color: #67441A; margin-bottom: 15px;">per newsletter</p>
+        <ul class="newsletter-option-features">
+          <li>Mid-content placement (after main editorial content)</li>
+          <li>75-word message</li>
+          <li>Logo and CTA link</li>
+          <li>Social media mention (Instagram/LinkedIn story featuring your partnership)</li>
+        </ul>
+      </div>
+
+      <div class="newsletter-option">
+        <div class="newsletter-option-name">Community Spotlight</div>
+        <div class="newsletter-option-price">$500</div>
+        <p style="font-size: 0.85rem; color: #67441A; margin-bottom: 15px;">per newsletter</p>
+        <ul class="newsletter-option-features">
+          <li>Footer placement</li>
+          <li>50-word message</li>
+          <li>Ideal for: job listings, resources, tools, events</li>
+          <li>Logo and link</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="newsletter-stats">
+      <div class="newsletter-stats-title">Why Our Newsletter Performs</div>
+      <ul class="newsletter-stats-list">
+        <li>46.8%+ open rate (industry standard for business newsletters: 15–20%)</li>
+        <li>High engagement: Subscribers are action-oriented (raising, investing, building)</li>
+        <li>Every email delivers value (event invites, founder spotlights, capital education, community updates)</li>
+        <li>2026 Frequency: Weekly or bi-weekly (we test and optimize based on subscriber feedback)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Our Reach Section -->
+  <div class="reach-section fade-in-up">
+    <h2>Our Reach</h2>
+    <p class="reach-subtitle">Impact #s</p>
+
+    <div class="reach-stats">
+      <div class="reach-stat-card">
+        <div class="reach-stat-number">8,600</div>
+        <div class="reach-stat-label">Organically-Built Email List</div>
+      </div>
+
+      <div class="reach-stat-card">
+        <div class="reach-stat-number">46.8%</div>
+        <div class="reach-stat-label">Open Rate<br>4x Industry Average</div>
+      </div>
+
+      <div class="reach-stat-card">
+        <div class="reach-stat-number">600</div>
+        <div class="reach-stat-label">App Members<br>35% Paid</div>
+      </div>
+
+      <div class="reach-stat-card">
+        <div class="reach-stat-number">$5M+</div>
+        <div class="reach-stat-label">Raised YTD by<br>Grant Winners</div>
+      </div>
+
+      <div class="reach-stat-card">
+        <div class="reach-stat-number">$30K</div>
+        <div class="reach-stat-label">Deployed Through<br>Sponsored Grants</div>
+      </div>
+
+      <div class="reach-stat-card">
+        <div class="reach-stat-number">167X</div>
+        <div class="reach-stat-label">Multiplier on Grants<br>Given to Funds Raised</div>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-size: 1.2rem; color: #67441A; font-weight: 600; font-style: italic;">
+      Early access to engaged, vetted founders.
+    </p>
+  </div>
+
+  <!-- Community Profile Section -->
+  <div class="community-section fade-in-up">
+    <h2>Community Profile</h2>
+    <p class="community-subtitle">Who You'll Reach</p>
+
+    <div class="community-profiles">
+      <div class="profile-card">
+        <div class="profile-title">Founders</div>
+        <ul class="profile-list">
+          <li>Strong traction but limited access to early-stage capital</li>
+          <li>Pre-seed to Series A stage</li>
+          <li>Raising $500K-$2M rounds</li>
+        </ul>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-title">Funders</div>
+        <ul class="profile-list">
+          <li>Emerging LPs, angels, and unaccredited investors</li>
+          <li>Community members seeking responsible private market access</li>
+          <li>Family offices exploring impact investments</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="value-prop">
+      <span class="value-prop-arrow">↘</span>
+      These founders will raise capital. The question is whether you meet them at $3M pre-money or chase them at $30M.
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="cta-section fade-in-up">
+    <span class="cta-badge">Let's Connect</span>
+    <h2>Become a Partner</h2>
+    <p>
+      Whether you're looking to sponsor events, provide grants, connect with founders,
+      or explore investment opportunities—we'd love to discuss how we can work together
+      to democratize access to capital and create lasting impact.
+    </p>
+    <a href="mailto:partnerships@bysengo.com" class="cta-button">Get In Touch</a>
+  </div>
+
+</div>
+
+<script>
+  // Scroll-triggered animations
+  document.addEventListener('DOMContentLoaded', function() {
+    var observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    var animatedElements = document.querySelectorAll('.fade-in-up, .fade-in');
+    animatedElements.forEach(function(el) {
+      observer.observe(el);
+    });
+  });
+</script>
