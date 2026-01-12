@@ -775,7 +775,7 @@
             </div>
 
             <div class="recommendation-box">
-              <h3>Strengthen Your Position With These Resources</h3>
+              <h3>Start here, our past virtual events & education, for help!</h3>
               <div id="video-recommendations"></div>
             </div>
 
@@ -943,17 +943,31 @@
 
     // Video recommendations based on weak pillars
     const videoRecommendations = getVideoRecommendations(pillarScores, percentage);
-    videoRecs.innerHTML = videoRecommendations.map(video =>
-      `<div class="video-recommendation">
-        <div class="video-thumbnail">
-          <img src="${video.thumbnail}" alt="${video.title}">
-        </div>
-        <div class="video-content">
-          <strong>${video.title}</strong>
-          <div class="video-description">${video.description}</div>
-        </div>
-      </div>`
-    ).join('');
+    videoRecs.innerHTML = videoRecommendations.map(video => {
+      if (video.link) {
+        return `<a href="${video.link}" target="_blank" style="text-decoration: none; color: inherit;">
+          <div class="video-recommendation" style="cursor: pointer; transition: transform 0.2s ease;">
+            <div class="video-thumbnail">
+              <img src="${video.thumbnail}" alt="${video.title}">
+            </div>
+            <div class="video-content">
+              <strong>${video.title}</strong>
+              <div class="video-description">${video.description}</div>
+            </div>
+          </div>
+        </a>`;
+      } else {
+        return `<div class="video-recommendation">
+          <div class="video-thumbnail">
+            <img src="${video.thumbnail}" alt="${video.title}">
+          </div>
+          <div class="video-content">
+            <strong>${video.title}</strong>
+            <div class="video-description">${video.description}</div>
+          </div>
+        </div>`;
+      }
+    }).join('');
   }
 
   function getVideoRecommendations(pillarScores, percentage) {
@@ -1029,13 +1043,18 @@
       });
     }
 
+    // Special recommendation for perfect score
+    if (percentage === 100) {
+      recommendations.push({
+        title: 'Inquire about 1:1 Fundraising Help',
+        description: 'Ready to raise up to $3M? Book a personalized fundraising consultation.',
+        thumbnail: 'https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/661163c9-b66a-4e20-98e2-bf6bb1ef57b7/2.png?format=750w',
+        link: 'https://calendly.com/ila-bysengo/fundraising'
+      });
+    }
+
     // If they scored well, still give them advanced content
     if (percentage >= 75 && recommendations.length < 2) {
-      recommendations.push({
-        title: 'Finding Angels & VCs',
-        description: 'Advanced strategies for investor targeting and relationship building.',
-        thumbnail: 'https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/ed352a38-9bd8-428f-b23d-f49d024fcb22/6.png?format=750w'
-      });
       recommendations.push({
         title: 'Building Your 2026 Pitch Strategy With Dana Ammons',
         description: 'Refine your narrative for sophisticated investors.',
