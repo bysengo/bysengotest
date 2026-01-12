@@ -132,13 +132,23 @@
     color: #F3EDE7;
     font-size: 1.8rem;
     cursor: pointer;
-    padding: 5px;
+    padding: 10px 15px;
     line-height: 1;
     z-index: 1001;
+    position: relative;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: rgba(213, 112, 40, 0.3);
   }
 
-  .sengo-mobile-toggle:hover {
+  .sengo-mobile-toggle:hover,
+  .sengo-mobile-toggle:focus {
     color: #D57028;
+    outline: none;
+  }
+
+  .sengo-mobile-toggle:active {
+    color: #D57028;
+    transform: scale(0.95);
   }
 
   /* Responsive Design */
@@ -240,7 +250,7 @@
     </div>
 
     <!-- Mobile Menu Toggle -->
-    <button class="sengo-mobile-toggle" id="sengoMobileToggle" aria-label="Toggle menu" aria-expanded="false">
+    <button class="sengo-mobile-toggle" id="sengoMobileToggle" aria-label="Toggle menu" aria-expanded="false" onclick="window.toggleSengoMenu && window.toggleSengoMenu()">
       ☰
     </button>
 
@@ -264,37 +274,68 @@
 </header>
 
 <script>
+// Sengo Header Mobile Menu Script
 (function() {
   'use strict';
 
-  // Wait for DOM to be fully loaded
-  function initializeSengoHeader() {
-    const navMenu = document.getElementById('sengoNavMenu');
-    const menuToggle = document.getElementById('sengoMobileToggle');
+  console.log('Sengo header script loaded');
+
+  // Mobile menu toggle function
+  function toggleSengoMenu() {
+    var navMenu = document.getElementById('sengoNavMenu');
+    var menuToggle = document.getElementById('sengoMobileToggle');
 
     if (!navMenu || !menuToggle) {
-      console.error('Sengo header elements not found');
+      console.error('Sengo: Menu elements not found');
       return;
     }
 
-    // Mobile menu toggle function
-    function toggleSengoMenu() {
-      const isActive = navMenu.classList.contains('active');
+    var isActive = navMenu.classList.contains('active');
+    console.log('Sengo: Toggling menu. Currently active:', isActive);
 
-      if (isActive) {
-        navMenu.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      } else {
-        navMenu.classList.add('active');
-        menuToggle.setAttribute('aria-expanded', 'true');
-      }
+    if (isActive) {
+      navMenu.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      console.log('Sengo: Menu closed');
+    } else {
+      navMenu.classList.add('active');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      console.log('Sengo: Menu opened');
+    }
+  }
+
+  // Make function globally accessible as fallback
+  window.toggleSengoMenu = toggleSengoMenu;
+
+  // Initialize function
+  function initializeSengoHeader() {
+    console.log('Sengo: Initializing header');
+
+    var navMenu = document.getElementById('sengoNavMenu');
+    var menuToggle = document.getElementById('sengoMobileToggle');
+
+    if (!navMenu || !menuToggle) {
+      console.error('Sengo: Cannot find menu elements on init');
+      return;
     }
 
-    // Add click event to toggle button
+    console.log('Sengo: Menu elements found, attaching listeners');
+
+    // Add click event to toggle button (with both click and touchstart for mobile)
     menuToggle.addEventListener('click', function(e) {
+      e.preventDefault();
       e.stopPropagation();
+      console.log('Sengo: Toggle button clicked');
       toggleSengoMenu();
-    });
+    }, false);
+
+    // Also handle touch events for better mobile support
+    menuToggle.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('Sengo: Toggle button touched');
+      toggleSengoMenu();
+    }, { passive: false });
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
@@ -302,17 +343,19 @@
         if (navMenu.classList.contains('active')) {
           navMenu.classList.remove('active');
           menuToggle.setAttribute('aria-expanded', 'false');
+          console.log('Sengo: Menu closed (clicked outside)');
         }
       }
     });
 
     // Close mobile menu when clicking a link
-    const navLinks = navMenu.querySelectorAll('.sengo-nav-link, .sengo-nav-button');
+    var navLinks = navMenu.querySelectorAll('.sengo-nav-link, .sengo-nav-button');
     navLinks.forEach(function(link) {
       link.addEventListener('click', function() {
         if (navMenu.classList.contains('active')) {
           navMenu.classList.remove('active');
           menuToggle.setAttribute('aria-expanded', 'false');
+          console.log('Sengo: Menu closed (link clicked)');
         }
       });
     });
@@ -321,13 +364,27 @@
     navMenu.addEventListener('click', function(e) {
       e.stopPropagation();
     });
+
+    console.log('Sengo: Header initialized successfully');
   }
 
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeSengoHeader);
-  } else {
-    initializeSengoHeader();
+  // Try multiple initialization methods
+  function tryInit() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeSengoHeader);
+    } else {
+      initializeSengoHeader();
+    }
+
+    // Fallback: try again after a short delay
+    setTimeout(function() {
+      if (!document.getElementById('sengoNavMenu')) {
+        console.log('Sengo: Trying delayed init');
+        initializeSengoHeader();
+      }
+    }, 100);
   }
+
+  tryInit();
 })();
 </script>
