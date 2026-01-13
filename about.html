@@ -1,0 +1,640 @@
+<!-- Sleeker version of your About page with signature image and parallax effect -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+
+  <!-- Fonts (same as your file, just used more "sleekly") -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600&family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-main:#000000;
+      --bg-accent:#1a1a1a;
+      --surface:#ffffff;
+
+      --text-primary:#f5f5f5;
+      --text-secondary:#b0b0b0;
+
+      --accent:#f4e4a6;
+      --accent-soft:#e8d6cf;
+
+      --border:#e2e2e0;
+      --shadow: 0 14px 40px rgba(0,0,0,0.08);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.06);
+
+      --radius-xl: 28px;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+
+      --container: 1120px;
+
+      /* Parallax scroll variable */
+      --scroll-y: 0;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container{
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* HERO */
+    .hero{
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 96px 24px;
+      position:relative;
+      overflow:hidden;
+      background: var(--bg-main);
+    }
+
+    /* Soft, subtle background shape with image - square format with parallax */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:auto;
+      width: 700px;
+      height: 700px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      background-image:
+        linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.3)),
+        url('https://media.licdn.com/dms/image/v2/D5622AQGYRJ7vrtFqmg/feedshare-shrink_1280/B56ZtcsyE6G0As-/0/1766786842038?e=1769644800&v=beta&t=ojYDSEH9AGOy_qljVr6a6ZhyOcX6iVqgR4SangDah_o');
+      background-size: cover;
+      background-position: center calc(var(--scroll-y) * 1px);
+      background-repeat: no-repeat;
+      filter: blur(1px);
+      border-radius: 48px;
+      opacity: 0.6;
+      z-index:0;
+      transition: background-position 0.1s ease-out;
+    }
+
+    .hero-content{
+      max-width: 980px;
+      position:relative;
+      z-index:1;
+      animation: fadeInUp 0.7s ease-out;
+    }
+
+    /* Signature Image */
+    .hero-signature{
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      margin: 0 auto 22px;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+    }
+
+    .subtitle{
+      margin: 0 auto;
+      max-width: 720px;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .hero .social-links{
+      margin-top: 34px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .hero .social-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+
+      padding: 12px 18px;
+      border-radius: var(--radius-pill);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+
+      text-decoration:none;
+      color: var(--text-primary);
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+
+      box-shadow: none;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero .social-link:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(244,228,166,0.4);
+    }
+
+    .hero .social-link svg{
+      width: 18px;
+      height: 18px;
+      opacity: 0.9;
+    }
+
+    /* SECTION TITLES */
+    .section-title{
+      font-family: "Arimo", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-align:center;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      margin-bottom: 34px;
+      color: var(--text-primary);
+    }
+
+    /* AS SEEN IN SECTION */
+    .as-seen-in{
+      padding: 50px 0 30px;
+      background: var(--bg-main);
+      overflow: hidden;
+    }
+
+    .as-seen-in-label{
+      text-align: center;
+      font-family: "Inter", sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    .logo-scroll-container{
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .logo-scroll{
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      animation: scroll 20s linear infinite;
+    }
+
+    .logo-item{
+      flex-shrink: 0;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.6;
+      filter: grayscale(100%) brightness(1.5);
+      transition: opacity 0.3s ease, filter 0.3s ease;
+    }
+
+    .logo-item:hover{
+      opacity: 1;
+      filter: grayscale(0%) brightness(1);
+    }
+
+    .logo-item img{
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+    }
+
+    @keyframes scroll{
+      0%{ transform: translateX(0); }
+      100%{ transform: translateX(-50%); }
+    }
+
+    /* BIO SECTION */
+    .bio-section{
+      padding: 30px 0 40px;
+      background: var(--bg-main);
+    }
+
+    .bio-text{
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .bio-text p{
+      margin-bottom: 1.5rem;
+    }
+
+    .bio-text p:last-child{
+      margin-bottom: 0;
+    }
+
+    /* PHOTO SECTION */
+    .photo-section{
+      padding: 40px 0 60px;
+      background: var(--bg-main);
+    }
+
+    .photo-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    .photo-placeholder{
+      aspect-ratio: 3/4;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow-soft);
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* CONNECT SECTION */
+    .connect-section{
+      padding: 60px 0 80px;
+      background: #000000;
+      color: #ffffff;
+      position: relative;
+      overflow:hidden;
+    }
+
+    /* subtle top curve */
+    .connect-section::before{
+      content:"";
+      position:absolute;
+      top:-60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 120px;
+      background: var(--bg-main);
+      border-radius: 0 0 60% 60%;
+      opacity: 0;
+    }
+
+    .connect-section .section-title{
+      color: #ffffff;
+      margin-bottom: 40px;
+      position:relative;
+      z-index:1;
+    }
+
+    .social-links{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      max-width: 980px;
+      margin: 0 auto 38px;
+      position:relative;
+      z-index:1;
+    }
+
+    .social-link{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 18px 18px;
+      border-radius: var(--radius-lg);
+      text-decoration:none;
+
+      color: #ffffff;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .social-link:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(201,122,99,0.35);
+    }
+
+    /* FORM */
+    .contact-form{
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 34px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: calc(var(--radius-xl) + 4px);
+      box-shadow: var(--shadow);
+      position:relative;
+      z-index:1;
+    }
+
+    .form-group{ margin-bottom: 16px; }
+
+    label{
+      display:block;
+      margin-bottom: 8px;
+      color: #f5f5f5;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.01em;
+    }
+
+    input, textarea{
+      width:100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      color: #f5f5f5;
+      font: inherit;
+      font-size: 1rem;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    input::placeholder, textarea::placeholder{
+      color: rgba(255,255,255,0.4);
+    }
+
+    input:focus, textarea:focus{
+      outline:none;
+      border-color: rgba(244,228,166,0.6);
+      box-shadow: 0 0 0 4px rgba(244,228,166,0.15);
+    }
+
+    textarea{
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .submit-btn{
+      width: 100%;
+      margin-top: 6px;
+      padding: 14px 18px;
+      border: none;
+      border-radius: var(--radius-pill);
+      cursor:pointer;
+
+      background: var(--accent);
+      color: #000000;
+
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    .submit-btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(0.95);
+    }
+
+    /* FOOTER */
+    .footer{
+      padding: 40px 24px;
+      background: #000000;
+      color: rgba(255,255,255,0.5);
+      text-align:center;
+    }
+    .footer p{
+      font-size: 0.85rem;
+      font-weight: 400;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px){
+      .hero{
+        padding: 72px 18px;
+      }
+      .hero::before{
+        width: 90%;
+        height: 90vw;
+        max-height: 500px;
+        border-radius: 36px;
+      }
+      .hero-signature{
+        max-width: 90%;
+      }
+      .contact-form{
+        padding: 22px;
+      }
+      .hero .social-link{
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+
+    @keyframes fadeInUp{
+      from{ opacity:0; transform: translateY(18px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <!-- Signature Image instead of text -->
+      <img src="signature.png" alt="Ila B Corcoran" class="hero-signature">
+
+      <p class="subtitle">
+        Educator, founder, and investor at the intersection of capital, culture, and community.
+      </p>
+
+      <div class="social-links">
+        <a href="YOUR_SUBSTACK_URL" class="social-link" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+          </svg>
+          <span>Substack</span>
+        </a>
+
+        <a href="YOUR_BUSINESS_URL" class="social-link" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            <path d="M9 3v18M3 9h18M3 15h18M15 3v18"></path>
+          </svg>
+          <span>My Business</span>
+        </a>
+
+        <a href="YOUR_THREADS_URL" class="social-link" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.018-5.114.886-6.54 2.578C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.694 3.633 2.563 6.543 2.584 3.396-.02 5.824-1.367 7.217-4.004.532-1.007.855-2.188 1.001-3.619-.399.147-.856.246-1.363.292-1.142.104-2.084-.023-2.798-.378-1.067-.532-1.752-1.528-1.998-2.878-.158-.867-.023-1.636.426-2.29.467-.683 1.167-1.214 2.021-1.534 1.044-.392 2.187-.412 3.313-.06 1.156.363 2.099 1.079 2.81 2.134.685 1.021 1.07 2.294 1.146 3.797.086 1.676-.221 3.223-.91 4.596C21.106 22.017 18.112 23.98 12.186 24z"/>
+          </svg>
+          <span>Threads</span>
+        </a>
+
+        <a href="YOUR_LINKEDIN_URL" class="social-link" target="_blank" rel="noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AS SEEN IN -->
+  <section class="as-seen-in">
+    <div class="container">
+      <div class="as-seen-in-label">As Seen In</div>
+      <div class="logo-scroll-container">
+        <div class="logo-scroll">
+          <!-- Forbes Logo -->
+          <div class="logo-item">
+            <svg height="40" viewBox="0 0 200 40" fill="#ffffff">
+              <text x="10" y="30" font-family="Arial, sans-serif" font-size="32" font-weight="700">FORBES</text>
+            </svg>
+          </div>
+          <!-- Business Insider Logo -->
+          <div class="logo-item">
+            <svg height="40" viewBox="0 0 280 40" fill="#ffffff">
+              <text x="10" y="30" font-family="Arial, sans-serif" font-size="28" font-weight="700">BUSINESS INSIDER</text>
+            </svg>
+          </div>
+          <!-- Nasdaq Logo -->
+          <div class="logo-item">
+            <svg height="40" viewBox="0 0 200 40" fill="#ffffff">
+              <text x="10" y="30" font-family="Arial, sans-serif" font-size="32" font-weight="700">NASDAQ</text>
+            </svg>
+          </div>
+          <!-- Duplicate for continuous scroll -->
+          <div class="logo-item">
+            <svg height="40" viewBox="0 0 200 40" fill="#ffffff">
+              <text x="10" y="30" font-family="Arial, sans-serif" font-size="32" font-weight="700">FORBES</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg height="40" viewBox="0 0 280 40" fill="#ffffff">
+              <text x="10" y="30" font-family="Arial, sans-serif" font-size="28" font-weight="700">BUSINESS INSIDER</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg height="40" viewBox="0 0 200 40" fill="#ffffff">
+              <text x="10" y="30" font-family="Arial, sans-serif" font-size="32" font-weight="700">NASDAQ</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIO -->
+  <section class="bio-section">
+    <div class="container">
+      <div class="bio-text">
+        <p>Ila Corcoran's journey in real estate began from a pressing need for housing and the resources to support it—a mission that has fueled her work ever since. Since 2018, she has managed and overseen over $100 million in real estate transactions across the U.S., excelling in roles as an investor, asset manager, realtor, advisor, and financier. Ila is known for her expertise in navigating complex deal structures and nontraditional financing solutions, holding both a Series 65 securities license and a California real estate license.</p>
+
+        <p>In 2023, Ila founded Sengo, a financial services platform dedicated to democratizing access to private markets. Sengo emphasizes education and community, offering a space where founders and funders can connect meaningfully through events that go beyond traditional networking. With a mission to inspire community-minded innovation and resource sharing, Sengo is deconstructing barriers to funding and creating new pathways for diverse investors and founders to thrive.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTOS -->
+  <section class="photo-section">
+    <div class="container">
+      <div class="photo-grid">
+        <div class="photo-placeholder">[Insert Photo 1]</div>
+        <div class="photo-placeholder">[Insert Photo 2]</div>
+        <div class="photo-placeholder">[Insert Photo 3]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONNECT -->
+  <section class="connect-section">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+
+      <div class="contact-form">
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="your@email.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="What would you like to discuss?" required></textarea>
+          </div>
+
+          <button class="submit-btn" type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2026 All rights reserved.</p>
+  </footer>
+
+  <!-- Parallax Scroll Script -->
+  <script>
+    // Parallax effect for hero background
+    let ticking = false;
+
+    function updateParallax() {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      const heroHeight = document.querySelector('.hero').offsetHeight;
+
+      // Calculate scroll progress (0 at top, increases as you scroll)
+      // Adjust the multiplier to control parallax intensity
+      const parallaxOffset = scrollY * 0.3;
+
+      // Update CSS custom property
+      document.documentElement.style.setProperty('--scroll-y', parallaxOffset);
+
+      ticking = false;
+    }
+
+    function requestParallaxUpdate() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }
+
+    // Listen for scroll events
+    window.addEventListener('scroll', requestParallaxUpdate);
+
+    // Initialize on page load
+    updateParallax();
+  </script>
+</body>
+</html>
