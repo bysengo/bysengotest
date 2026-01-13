@@ -67,25 +67,25 @@
       background: var(--bg-main);
     }
 
-    /* Soft, subtle background shape with image - square format with parallax */
+    /* Large background image with parallax */
     .hero::before{
       content:"";
       position:absolute;
       inset:auto;
-      width: 700px;
-      height: 700px;
+      width: 95%;
+      height: 95vh;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -60%);
+      transform: translate(-50%, -50%);
       background-image:
-        linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.3)),
-        url('https://media.licdn.com/dms/image/v2/D5622AQGYRJ7vrtFqmg/feedshare-shrink_1280/B56ZtcsyE6G0As-/0/1766786842038?e=1769644800&v=beta&t=ojYDSEH9AGOy_qljVr6a6ZhyOcX6iVqgR4SangDah_o');
+        linear-gradient(135deg, rgba(0,0,0,0.35), rgba(0,0,0,0.25)),
+        url('hero-background.jpg');
       background-size: cover;
       background-position: center calc(var(--scroll-y) * 1px);
       background-repeat: no-repeat;
-      filter: blur(1px);
-      border-radius: 48px;
-      opacity: 0.6;
+      filter: blur(0.5px);
+      border-radius: 32px;
+      opacity: 0.75;
       z-index:0;
       transition: background-position 0.1s ease-out;
     }
@@ -95,16 +95,6 @@
       position:relative;
       z-index:1;
       animation: fadeInUp 0.7s ease-out;
-    }
-
-    /* Signature Image */
-    .hero-signature{
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-      margin: 0 auto 22px;
-      display: block;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
     }
 
     .subtitle{
@@ -442,9 +432,6 @@
         max-height: 500px;
         border-radius: 36px;
       }
-      .hero-signature{
-        max-width: 90%;
-      }
       .contact-form{
         padding: 22px;
       }
@@ -465,9 +452,6 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <!-- Signature Image instead of text -->
-      <img src="signature.png" alt="Ila B Corcoran" class="hero-signature">
-
       <p class="subtitle">
         Educator, founder, and investor at the intersection of capital, culture, and community.
       </p>
