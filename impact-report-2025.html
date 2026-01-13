@@ -131,6 +131,90 @@
       margin-bottom: 20px;
     }
 
+    /* Organizational Overview - Different Style */
+    .org-overview {
+      background: linear-gradient(135deg, rgba(213, 112, 40, 0.05) 0%, rgba(175, 129, 69, 0.05) 100%);
+      padding: 60px;
+      border-radius: 20px;
+      margin: 60px auto;
+      max-width: 1100px;
+      border: 2px solid rgba(213, 112, 40, 0.2);
+    }
+
+    .org-overview p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #1B3533;
+      margin-bottom: 20px;
+    }
+
+    /* Learnings Section - Card with gradient border */
+    .learnings-section {
+      background: white;
+      padding: 60px;
+      border-radius: 20px;
+      margin: 60px auto;
+      max-width: 1100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .learnings-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #D57028, #AF8145, #67441A);
+    }
+
+    .learnings-section p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #1B3533;
+      margin-bottom: 20px;
+    }
+
+    /* Looking Ahead - Dark theme */
+    .looking-ahead {
+      background: #1B3533;
+      padding: 60px;
+      border-radius: 20px;
+      margin: 60px auto;
+      max-width: 1100px;
+      box-shadow: 0 20px 50px rgba(27, 53, 51, 0.3);
+    }
+
+    .looking-ahead .section-title {
+      color: #F3EDE7;
+    }
+
+    .looking-ahead p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #F3EDE7;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    /* Ecosystem Section - Bordered style */
+    .ecosystem-section {
+      background: transparent;
+      padding: 60px;
+      border-radius: 20px;
+      margin: 60px auto;
+      max-width: 1100px;
+      border: 3px solid #D57028;
+    }
+
+    .ecosystem-section p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #1B3533;
+      margin-bottom: 20px;
+    }
+
     /* Highlights Grid */
     .highlights-grid {
       display: grid;
@@ -341,7 +425,7 @@
     /* Events Grid in Carousel */
     .events-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
       gap: 20px;
     }
 
@@ -351,11 +435,39 @@
       border-radius: 12px;
       border-left: 4px solid #D57028;
       transition: all 0.3s ease;
+      display: flex;
+      gap: 20px;
+      align-items: center;
     }
 
     .event-item:hover {
       transform: translateX(5px);
       box-shadow: 0 5px 15px rgba(213, 112, 40, 0.2);
+    }
+
+    .event-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #D3D3D3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .event-details {
+      flex: 1;
+    }
+
+    .event-meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
     }
 
     .event-type {
@@ -367,11 +479,20 @@
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 8px;
     }
 
     .event-type.virtual {
       background: #67441A;
+    }
+
+    .event-city {
+      display: inline-block;
+      color: #67441A;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(103, 68, 26, 0.1);
     }
 
     .event-name {
@@ -379,6 +500,13 @@
       color: #1B3533;
       font-size: 0.95rem;
       line-height: 1.4;
+    }
+
+    .event-date {
+      font-size: 0.85rem;
+      color: #67441A;
+      font-style: italic;
+      margin-top: 4px;
     }
 
     /* Case Study Carousel */
@@ -730,7 +858,7 @@
         max-width: 300px;
       }
 
-      .executive-summary {
+      .executive-summary, .org-overview, .learnings-section, .looking-ahead, .ecosystem-section {
         padding: 30px 20px;
       }
 
@@ -740,6 +868,15 @@
 
       .theory-section {
         padding: 30px 20px;
+      }
+
+      .event-item {
+        flex-direction: column;
+      }
+
+      .event-image {
+        width: 100%;
+        height: 150px;
       }
     }
   </style>
@@ -837,142 +974,325 @@
   <!-- Events Carousel -->
   <section class="container carousel-section">
     <h2 class="section-title" style="text-align: center;">2025 Events</h2>
-    <p class="section-subtitle" style="text-align: center; margin: 0 auto;">27 events with a near-even split: 48.15% virtual, 51.85% in-person</p>
+    <p class="section-subtitle" style="text-align: center; margin: 0 auto;">27 events in chronological order — spanning virtual and in-person experiences</p>
 
     <div class="carousel-container fade-in-up">
       <div class="carousel-track" id="eventsTrack">
-        <!-- Slide 1: Virtual Events Part 1 -->
+        <!-- Slide 1: Jan-March -->
         <div class="carousel-slide">
-          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">Virtual Events (Part 1)</h3>
+          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">January - March 2025</h3>
           <div class="events-grid">
             <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Virtual Pitch for $1,000 — September</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Welcome to Sengo Webinar</div>
+                <div class="event-date">January 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Virtual Pitch for $1,000 — October</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">Dallas</span>
+                </div>
+                <div class="event-name">Galentine's Wine Club</div>
+                <div class="event-date">February 21, 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Sengo Virtual Pitch Competition (CPG Edition)</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">Dallas</span>
+                </div>
+                <div class="event-name">Brunch Wine Club</div>
+                <div class="event-date">March 15, 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Pitch Prep with Amiah</div>
-            </div>
-            <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Practice Your Pitch with Sarah Anto</div>
-            </div>
-            <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Build Your 2026 Pitch Strategy</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">Dallas</span>
+                </div>
+                <div class="event-name">Sip Into Spring</div>
+                <div class="event-date">March 30, 2025</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Slide 2: Virtual Events Part 2 -->
+        <!-- Slide 2: April-June -->
         <div class="carousel-slide">
-          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">Virtual Events (Part 2)</h3>
+          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">April - June 2025</h3>
           <div class="events-grid">
             <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Private Markets 101 (Part 1)</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">Dallas</span>
+                </div>
+                <div class="event-name">Wine Club</div>
+                <div class="event-date">April 9, 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Demystifying CDFI Funding</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Private Markets 101 (Part 1)</div>
+                <div class="event-date">Spring 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Ask an Angel</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Demystifying CDFI Funding</div>
+                <div class="event-date">Spring 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Preparing to Raise Capital with Confidence</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">Los Angeles</span>
+                </div>
+                <div class="event-name">Fashion x Futures</div>
+                <div class="event-date">June 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Welcome to Sengo Webinar</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">New York</span>
+                </div>
+                <div class="event-name">GirlMath x Sengo: Wednesday Night Write-Off</div>
+                <div class="event-date">NY Tech Week, June 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Sengo Founder Meetup: Angels & VCs</div>
-            </div>
-            <div class="event-item">
-              <span class="event-type virtual">Virtual</span>
-              <div class="event-name">Sengo Founder Meetup: Social Enterprise & EdTech</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">New York</span>
+                </div>
+                <div class="event-name">NY Tech Week Mixer (Sengo x Little More)</div>
+                <div class="event-date">NY Tech Week, June 2025</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Slide 3: In-Person Events Part 1 -->
+        <!-- Slide 3: July-September -->
         <div class="carousel-slide">
-          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">In-Person Events (Part 1)</h3>
+          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">July - September 2025</h3>
           <div class="events-grid">
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">Fashion x Futures — Los Angeles (June)</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">New York</span>
+                </div>
+                <div class="event-name">Fashion x Futures</div>
+                <div class="event-date">July 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">Fashion x Futures — New York (July)</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">Los Angeles</span>
+                </div>
+                <div class="event-name">Spill the Tea: What's Really Happening in AI & Tech</div>
+                <div class="event-date">LA Tech Week, Summer 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">Fashion x Futures — LA Holiday Pop-Up</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Ask an Angel</div>
+                <div class="event-date">Summer 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">Galentine's Wine Club — Dallas</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Preparing to Raise Capital with Confidence</div>
+                <div class="event-date">Summer 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">Brunch Wine Club — Dallas</div>
-            </div>
-            <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">Sip Into Spring — Dallas</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Virtual Pitch for $1,000</div>
+                <div class="event-date">September 2025</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Slide 4: In-Person Events Part 2 -->
+        <!-- Slide 4: October-November -->
         <div class="carousel-slide">
-          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">In-Person Events (Part 2)</h3>
+          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">October - November 2025</h3>
           <div class="events-grid">
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">Wine Club — Dallas</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Virtual Pitch for $1,000</div>
+                <div class="event-date">October 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">GirlMath x Sengo: Wednesday Night Write-Off (NY Tech Week)</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Sengo Virtual Pitch Competition (CPG Edition)</div>
+                <div class="event-date">November 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">Spill the Tea: What's Really Happening in AI & Tech (LA Tech Week)</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Pitch Prep with Amiah</div>
+                <div class="event-date">Fall 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">NY Tech Week Mixer (Sengo x Little More)</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Practice Your Pitch with Sarah Anto</div>
+                <div class="event-date">Fall 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">BBOP Center x Sengo Founder Workshop</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">Los Angeles</span>
+                </div>
+                <div class="event-name">Fashion x Futures Holiday Pop-Up</div>
+                <div class="event-date">November 2025 (2-day event)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: November-December & International -->
+        <div class="carousel-slide">
+          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">Late 2025 & International Events</h3>
+          <div class="events-grid">
+            <div class="event-item">
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Build Your 2026 Pitch Strategy with Dana Ammons</div>
+                <div class="event-date">November/December 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">Funded & Fearless Workshop</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Sengo Founder Meetup: Angels & VCs</div>
+                <div class="event-date">Fall 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">Barcelona Black Women Entrepreneurs Mixer</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type virtual">Virtual</span>
+                </div>
+                <div class="event-name">Sengo Founder Meetup: Social Enterprise & EdTech</div>
+                <div class="event-date">Fall 2025</div>
+              </div>
             </div>
             <div class="event-item">
-              <span class="event-type">In-Person</span>
-              <div class="event-name">The Village Retreat — France</div>
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">Location TBD</span>
+                </div>
+                <div class="event-name">BBOP Center x Sengo Founder Workshop</div>
+                <div class="event-date">2025</div>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">Location TBD</span>
+                </div>
+                <div class="event-name">Funded & Fearless Workshop</div>
+                <div class="event-date">2025</div>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">Barcelona</span>
+                </div>
+                <div class="event-name">Barcelona Black Women Entrepreneurs Mixer</div>
+                <div class="event-date">2025</div>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-image">📸</div>
+              <div class="event-details">
+                <div class="event-meta">
+                  <span class="event-type">In-Person</span>
+                  <span class="event-city">France</span>
+                </div>
+                <div class="event-name">The Village Retreat</div>
+                <div class="event-date">2025</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1105,7 +1425,7 @@
 
   <!-- Organizational Overview -->
   <section class="container">
-    <div class="executive-summary fade-in-up">
+    <div class="org-overview fade-in-up">
       <h2 class="section-title">Organizational Overview</h2>
       <p>
         Sengo exists to democratize access to funding and investing by turning communities into capital engines. Traditional capital systems often exclude founders and everyday individuals from participating meaningfully in private markets. Sengo addresses this gap by combining education, third spaces, and compliant fundraising pathways.
@@ -1190,7 +1510,7 @@
 
   <!-- Learnings & Adjustments -->
   <section class="container">
-    <div class="executive-summary fade-in-up">
+    <div class="learnings-section fade-in-up">
       <h2 class="section-title">Learnings & Adjustments</h2>
       <p>
         In 2025, Sengo learned that <strong>events alone are not sufficient</strong> to drive sustained engagement or outcomes. While events create energy and visibility, the strongest results occurred when events were paired with education and clear next steps.
@@ -1209,7 +1529,7 @@
 
   <!-- Looking Ahead -->
   <section class="container">
-    <div class="executive-summary fade-in-up">
+    <div class="looking-ahead fade-in-up">
       <h2 class="section-title">Looking Ahead: 2026</h2>
       <p>
         In 2026, Sengo will focus on deepening investor participation, expanding its impact measurement tools, and scaling repeatable programming across new cities and sectors. We're committed to building infrastructure that creates lasting change—not just visibility.
@@ -1219,7 +1539,7 @@
 
   <!-- Ecosystem & Partnerships -->
   <section class="container">
-    <div class="executive-summary fade-in-up">
+    <div class="ecosystem-section fade-in-up">
       <h2 class="section-title">Ecosystem & Partnerships</h2>
       <p>
         Sengo collaborated with ecosystem partners including <strong>Honeycomb, BBOP Center, GirlMath, Build in Tulsa</strong>, and multiple community hosts and brand sponsors. These partnerships extended reach, reduced costs for founders, and strengthened trust across the ecosystem.
@@ -1250,7 +1570,7 @@
         track: document.getElementById('eventsTrack'),
         dots: document.getElementById('eventsDots'),
         currentIndex: 0,
-        totalSlides: 4
+        totalSlides: 5
       },
       caseStudies: {
         track: document.getElementById('caseStudiesTrack'),
