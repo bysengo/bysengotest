@@ -81,7 +81,7 @@
         linear-gradient(135deg, rgba(0,0,0,0.35), rgba(0,0,0,0.25)),
         url('https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/edd89a8b-342f-49d5-9c44-625e9b481f32/IMG_4246.JPG?format=1500w');
       background-size: cover;
-      background-position: center calc(var(--scroll-y) * 1px);
+      background-position: center calc(15% + var(--scroll-y) * 1px);
       background-repeat: no-repeat;
       filter: blur(0.5px);
       border-radius: 32px;
@@ -506,10 +506,11 @@
         max-height: none;
         border-radius: 0;
         transform: translate(-50%, -50%);
+        background-position: center calc(10% + var(--scroll-y) * 1px);
       }
       .hero-name{
         font-size: clamp(2rem, 8vw, 3rem);
-        margin-bottom: 650px;
+        margin-bottom: 350px;
         text-align: left;
       }
       .subtitle{
