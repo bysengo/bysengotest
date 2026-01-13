@@ -1,0 +1,1206 @@
+<!-- Sengo Funder Membership Landing Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Sengo as a Funder</title>
+
+  <style>
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F3EDE7;
+      color: #1B3533;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Section Backgrounds for Color Segmentation */
+    .section-cream {
+      background: #F3EDE7;
+    }
+
+    .section-white {
+      background: #FFFFFF;
+    }
+
+    .section-light-tan {
+      background: #FAF7F4;
+    }
+
+    .page-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    /* Full-width section wrapper */
+    .full-width-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 60px 20px;
+    }
+
+    .full-width-section .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .hero-section h1 {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 5rem;
+      font-weight: 500;
+      line-height: 0.94;
+      color: #1B3533;
+      letter-spacing: -0.077em;
+      margin-bottom: 20px;
+    }
+
+    .hero-section p {
+      font-size: 1.5rem;
+      color: #67441A;
+      font-weight: 400;
+      margin: 0 0 25px 0;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 18px 50px;
+      background: #D57028;
+      color: white;
+      text-decoration: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hero-cta:hover {
+      background: #C56020;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.5);
+    }
+
+    .hero-cta.faq-cta {
+      background: #717e36;
+      margin-left: 15px;
+    }
+
+    .hero-cta.faq-cta:hover {
+      background: #5f6b2e;
+      box-shadow: 0 15px 40px rgba(113, 126, 54, 0.5);
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    /* Benefits Section */
+    .benefits-section {
+      position: relative;
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      border-radius: 12px;
+      padding: 50px 40px;
+    }
+
+    .benefits-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      color: #F3EDE7;
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .benefit-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 10px 0;
+    }
+
+    .benefit-card::before {
+      content: '✓';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      background: #D57028;
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+
+    .benefit-card span {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #F3EDE7;
+      line-height: 1.5;
+    }
+
+    /* Deal Flow Section */
+    .dealflow-section {
+      text-align: center;
+    }
+
+    .dealflow-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      color: #1B3533;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .dealflow-section p {
+      font-size: 1.2rem;
+      color: #67441A;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .dealflow-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .feature-box {
+      background: white;
+      border: 3px solid #D57028;
+      border-radius: 16px;
+      padding: 30px 25px;
+      transition: all 0.3s ease;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.3);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .feature-box h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.3rem;
+      color: #1B3533;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .feature-box p {
+      font-size: 1rem;
+      color: #67441A;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      text-align: center;
+      color: #F3EDE7;
+      padding: 50px 20px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #717e36;
+      margin-bottom: 10px;
+      line-height: 1;
+      text-shadow: 0 0 30px rgba(113, 126, 54, 0.5);
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      text-align: center;
+    }
+
+    .pricing-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      color: #1B3533;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .pricing-section p.intro {
+      font-size: 1.1rem;
+      color: #67441A;
+      margin-bottom: 50px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pricing-card {
+      background: white;
+      border: 3px solid #D57028;
+      border-radius: 16px;
+      padding: 40px 30px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(213, 112, 40, 0.2);
+    }
+
+    .pricing-price {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #D57028;
+      margin-bottom: 5px;
+    }
+
+    .pricing-term {
+      font-size: 1.1rem;
+      color: #67441A;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .pricing-note {
+      font-size: 0.9rem;
+      color: #67441A;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    /* CTA Button */
+    .cta-button {
+      display: block;
+      width: 100%;
+      padding: 18px 30px;
+      margin-top: 20px;
+      background: #D57028;
+      color: white;
+      text-decoration: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      background: #C56020;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.5);
+    }
+
+    /* Capital Circle Upsell */
+    .capital-circle-section {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      border: 3px solid #717e36;
+      border-radius: 16px;
+      padding: 50px 40px;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .capital-circle-section:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(113, 126, 54, 0.4),
+                  0 10px 30px rgba(0, 0, 0, 0.5);
+      border-color: #8a9c42;
+    }
+
+    .capital-circle-section h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.5rem;
+      color: #717e36;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 30px rgba(113, 126, 54, 1),
+                   0 0 50px rgba(113, 126, 54, 0.8),
+                   0 0 70px rgba(113, 126, 54, 0.6);
+      text-align: center;
+    }
+
+    .capital-circle-section p.intro {
+      font-size: 1.2rem;
+      color: #F3EDE7;
+      margin-bottom: 30px;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    .capital-circle-section p.intro strong {
+      color: #AF8145;
+    }
+
+    .commitment-box {
+      background: rgba(243, 237, 231, 0.1);
+      border: 2px solid rgba(243, 237, 231, 0.2);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .commitment-box h4 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #F3EDE7;
+      font-weight: 600;
+    }
+
+    .commitment-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .commitment-box li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+      font-size: 1.05rem;
+      color: #F3EDE7;
+    }
+
+    .commitment-box li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #717e36;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .upsell-cta {
+      display: inline-block;
+      padding: 20px 50px;
+      background: #D57028;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .upsell-cta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.4);
+    }
+
+    /* Testimonials */
+    .testimonials-section {
+      text-align: center;
+      padding: 10px 20px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px 25px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .testimonial-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      opacity: 1;
+    }
+
+    .testimonial-headshot {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #D57028;
+      box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
+    }
+
+    .testimonial-quote {
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.5;
+      color: #1B3533;
+      margin: 0;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: #D57028;
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    .testimonial-title {
+      font-size: 0.85rem;
+      color: #67441A;
+      opacity: 0.9;
+    }
+
+    /* Reassurance */
+    .reassurance {
+      text-align: center;
+      padding: 20px 20px;
+    }
+
+    .reassurance-items {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .reassurance-item {
+      font-size: 1.1rem;
+      color: #67441A;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .reassurance-item:hover {
+      color: #D57028;
+      text-shadow: 0 0 15px rgba(213, 112, 40, 0.6),
+                   0 0 25px rgba(213, 112, 40, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .reassurance-item::before {
+      content: '✓';
+      display: inline-block;
+      margin-right: 10px;
+      color: #D57028;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    /* Disclaimer */
+    .disclaimer-section {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .disclaimer-text {
+      font-size: 0.85rem;
+      color: #67441A;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      color: #1B3533;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .faq-header-cta {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .faq-join-button {
+      display: inline-block;
+      padding: 18px 50px;
+      background: #D57028;
+      color: white;
+      text-decoration: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .faq-join-button:hover {
+      background: #C56020;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.5);
+    }
+
+    .faq-item {
+      background: white;
+      border: 2px solid #D57028;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px 25px;
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1B3533;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: rgba(213, 112, 40, 0.1);
+    }
+
+    .faq-icon {
+      font-size: 1.5rem;
+      color: #D57028;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 25px;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 1000px;
+      padding: 0 25px 20px 25px;
+    }
+
+    .faq-answer p {
+      font-size: 1rem;
+      color: #67441A;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .faq-answer ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 10px 0;
+    }
+
+    .faq-answer li {
+      padding: 5px 0 5px 20px;
+      position: relative;
+      font-size: 1rem;
+      color: #67441A;
+      line-height: 1.6;
+    }
+
+    .faq-answer li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .page-container {
+        padding: 40px 20px;
+      }
+
+      .hero-section h1 {
+        font-size: 3rem;
+      }
+
+      .hero-section p {
+        font-size: 1.2rem;
+      }
+
+      .benefits-section h2,
+      .dealflow-section h2,
+      .pricing-section h2 {
+        font-size: 2rem;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .dealflow-features {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .testimonial-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .pricing-card {
+        padding: 25px 15px;
+      }
+
+      .pricing-price {
+        font-size: 2.5rem;
+      }
+
+      .capital-circle-section {
+        padding: 35px 25px;
+      }
+
+      .capital-circle-section h3 {
+        font-size: 1.8rem;
+      }
+
+      .reassurance-items {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero Section - Cream Background -->
+<div class="full-width-section section-cream">
+  <div class="content-wrapper">
+    <div class="hero-section">
+      <h1>Join Sengo as a Funder</h1>
+      <p>Build your angel investing portfolio while supporting impact-driven founders</p>
+      <div class="hero-buttons">
+        <a href="#membership" class="hero-cta">Explore Membership</a>
+        <a href="#faqs" class="hero-cta faq-cta">FAQs</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Benefits Section - Dark Gradient Background -->
+<div class="full-width-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%); padding: 50px 20px;">
+  <div class="content-wrapper">
+    <div class="benefits-section" style="background: transparent; padding: 20px 0;">
+      <h2>Your Funder Membership Includes</h2>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <span>Monthly community meet-ups focused on angel investing education</span>
+        </div>
+        <div class="benefit-card">
+          <span>Access to curated dealflow from vetted founders</span>
+        </div>
+        <div class="benefit-card">
+          <span>Review pitch decks and investment opportunities in the app</span>
+        </div>
+        <div class="benefit-card">
+          <span>Attend live pitch events with Q&A sessions</span>
+        </div>
+        <div class="benefit-card">
+          <span>Connect with other angel investors in the network</span>
+        </div>
+        <div class="benefit-card">
+          <span>Learn investment best practices and due diligence</span>
+        </div>
+        <div class="benefit-card">
+          <span>Post, chat, and connect with founders or funders in the app</span>
+        </div>
+        <div class="benefit-card">
+          <span>Ongoing support as you build your investing portfolio</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Deal Flow Section - White Background -->
+<div class="full-width-section section-white">
+  <div class="content-wrapper">
+    <div class="dealflow-section">
+      <h2>Curated Dealflow & Live Pitches</h2>
+      <p>Access high-quality investment education and hear from founders who've utilized our fundraising education and support.</p>
+
+      <div class="dealflow-features">
+        <div class="feature-box">
+          <div class="feature-icon">📱</div>
+          <h3>Review in the App</h3>
+          <p>Browse founder profiles, pitch decks, and company metrics on your schedule.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">🎤</div>
+          <h3>Live Pitch Events</h3>
+          <p>Attend monthly pitch sessions with Q&A opportunities to dig deeper.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">✓</div>
+          <h3>Explore Founders</h3>
+          <p>Every founder has access to Sengo's fundraising education and readiness assessments before they submit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Section - Dark Gradient -->
+<div class="full-width-section stats-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);">
+  <div class="content-wrapper">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number" id="stat-founders">0</div>
+        <div class="stat-label">Founders in the network</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="stat-raised">$0</div>
+        <div class="stat-label">Raised by our founders in 2025</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="stat-funded">0</div>
+        <div class="stat-label">Founders funded by Sengo</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials - Light Tan Background -->
+<div class="full-width-section section-light-tan" style="padding: 5px 20px 15px;">
+  <div class="content-wrapper">
+    <div class="testimonials-section">
+      <div class="testimonial-container">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-slide">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23bbb'/%3E%3Ccircle cx='50' cy='35' r='18' fill='%23999'/%3E%3Cellipse cx='50' cy='75' rx='28' ry='20' fill='%23999'/%3E%3C/svg%3E" alt="Angel Investor" class="testimonial-headshot">
+          <div class="testimonial-quote">
+            "Love the content, as someone who has been trying to get into angel investing."
+          </div>
+          <div class="testimonial-author">Jay</div>
+          <div class="testimonial-title">Angel Investor</div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-slide">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23bbb'/%3E%3Ccircle cx='50' cy='35' r='18' fill='%23999'/%3E%3Cellipse cx='50' cy='75' rx='28' ry='20' fill='%23999'/%3E%3C/svg%3E" alt="Investor" class="testimonial-headshot">
+          <div class="testimonial-quote">
+            "I was really struggling with where and how to start, so I am thankful for you creating a space for people like me who are trying to navigate this space. "
+          </div>
+          <div class="testimonial-author">Anonymous</div>
+          <div class="testimonial-title">First-time Angel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pricing Section - Cream Background -->
+<div id="membership" class="full-width-section section-cream">
+  <div class="content-wrapper">
+    <div class="pricing-section">
+      <h2>Funder Membership</h2>
+      <p class="intro">Join the community of angels building their investment portfolio.</p>
+
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <div class="pricing-price">$100<span style="font-size: 1.5rem; font-weight: 600;">/yr</span></div>
+          <div class="pricing-term">or $10/mo</div>
+          <p class="pricing-note">Full access to dealflow, community, and events</p>
+        </div>
+
+        <a href="https://app.bysengo.com/offers/BGMPY9cY/checkout" class="cta-button" target="_blank" rel="noopener noreferrer">Join as a Funder</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Capital Circle Upsell - Light Tan Background -->
+<div class="full-width-section section-light-tan">
+  <div class="content-wrapper">
+    <div class="capital-circle-section">
+      <h3>Looking to go deeper? Join the Capital Circle.</h3>
+      <p class="intro">Join select funders who make an annual investment commitment while contributing to grant programming that supports early-stage founders. <strong>Sengo does not collect, hold, or manage your investment dollars.</strong> You invest directly in founders of your choice.</p>
+
+      <div class="commitment-box">
+        <h4>Here's how our Capital Circle works:</h4>
+        <ul>
+          <li>Annual non-binding commitment to invest $5k+ in Sengo founders</li>
+          <li>30% of your commitment is collected as a tax deductible contribution to our grant fund via our non-profit partner</li>
+          <li>Participate on the grant programming committee</li>
+          <li>Quarterly strategy sessions with the Sengo team</li>
+          <li>Co-investment opportunities with experienced investors</li>
+          <li>Direct impact on which founders receive grant funding</li>
+        </ul>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="https://calendly.com/ila-bysengo/capitalcircle" class="upsell-cta">Learn about the Capital Circle</a>
+        <p style="margin-top: 15px; color: #F3EDE7; font-size: 0.95rem; opacity: 0.85;">Annual commitment: $5k+</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reassurance - Light Tan Background -->
+<div class="full-width-section section-light-tan">
+  <div class="content-wrapper">
+    <div class="reassurance">
+      <div class="reassurance-items">
+        <div class="reassurance-item">No investment obligation with membership</div>
+        <div class="reassurance-item">Cancel anytime</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ Section - Cream Background -->
+<div id="faqs" class="full-width-section section-cream">
+  <div class="content-wrapper">
+    <div class="faq-section">
+      <h2>Funder Member FAQs</h2>
+      <div class="faq-header-cta">
+        <a href="#membership" class="faq-join-button">Join as a Funder</a>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is there any investment commitment required to join?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. Funder Membership does not require any capital commitment. Joining Sengo as a funder gives you access to education, community, deal visibility, and events — you decide if, when, and how you invest.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Am I required to invest in any company?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Never. You can join purely to learn, observe, and build relationships. Investing is always optional and at your own discretion.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is Sengo a fund or syndicate?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. Sengo is not a venture fund, SPV, or syndicate. We are a community and education platform that curates founders, opportunities, and education so funders can make informed decisions independently.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What types of investment opportunities will I see?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Funder members may get visibility into:</p>
+          <ul>
+            <li>Early-stage startups</li>
+            <li>Community-backed companies</li>
+            <li>Consumer, tech, and culture-driven brands</li>
+            <li>Grant-supported and revenue-generating businesses</li>
+          </ul>
+          <p>Opportunities vary by stage and structure (e.g. SAFE, equity, debt, Reg CF), and not all opportunities are open to all investors.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Do I need to be an accredited investor?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. Some opportunities may require accreditation, but many do not. Sengo is designed to support both accredited and non-accredited funders in learning about investing. Funders are responsible for determining their own eligibility (including any accredited or sophisticated investor requirements) before participating in any investment opportunity.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is this financial advice?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. Sengo does not provide financial, legal, or tax advice.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What's the difference between a Funder Member and an Angel Group?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Angel groups often require:</p>
+          <ul>
+            <li>Minimum annual checks</li>
+            <li>Formal voting</li>
+            <li>Capital pooling</li>
+            <li>Long-term commitments</li>
+          </ul>
+          <p>Sengo Funder Membership offers:</p>
+          <ul>
+            <li>No minimum investment</li>
+            <li>No pooled capital</li>
+            <li>No obligation to invest</li>
+            <li>Education-first access</li>
+            <li>Relationship-driven deal flow</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How active do I need to be?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>As active as you want. Some members attend events and pitch sessions regularly. Others stay plugged in via emails and community updates. There is no participation requirement.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Can I invest alongside friends or my community?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes — and many funders do. Sengo is built around collective learning and relationship-driven capital, making it easy to explore opportunities with peers while still investing individually.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How does Sengo make money if there's no investment requirement?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Sengo earns revenue through:</p>
+          <ul>
+            <li>Membership subscriptions</li>
+            <li>Events and programming</li>
+            <li>Platform services for founders</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Can I cancel my membership at any time?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes. Funder Membership is flexible and can be canceled at any time through your account.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Who is Funder Membership best for?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Funder Membership is ideal if you:</p>
+          <ul>
+            <li>Are capital-curious but not ready to commit</li>
+            <li>Want exposure to private markets</li>
+            <li>Care about backing underrepresented founders</li>
+            <li>Want to learn before writing checks</li>
+            <li>Prefer optionality over obligation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Disclaimer - White Background -->
+<div class="full-width-section section-white">
+  <div class="content-wrapper">
+    <div class="disclaimer-section">
+      <p class="disclaimer-text">
+        <strong>Important Disclaimer:</strong> Sengo is not soliciting the sale of securities. Membership provides access to education, community, and investment opportunities, but does not constitute an offer to sell or a solicitation of an offer to buy any security. Early-stage investing involves significant risk, including the potential loss of capital. Past performance is not indicative of future results. All investment decisions are made at your own discretion and risk.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // FAQ Accordion functionality
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const faqItem = button.parentElement;
+      const isActive = faqItem.classList.contains('active');
+
+      // Close all FAQ items
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      // Open clicked item if it wasn't active
+      if (!isActive) {
+        faqItem.classList.add('active');
+      }
+    });
+  });
+
+  // Animated Counter for Stats
+  function animateStat(elementId, targetValue, suffix = '', prefix = '', duration = 2000) {
+    const element = document.getElementById(elementId);
+    const steps = 50;
+    const increment = targetValue / steps;
+    const stepDuration = duration / steps;
+    let currentValue = 0;
+
+    const timer = setInterval(() => {
+      currentValue += increment;
+      if (currentValue >= targetValue) {
+        currentValue = targetValue;
+        clearInterval(timer);
+      }
+
+      let displayValue;
+      if (targetValue >= 1000) {
+        displayValue = Math.floor(currentValue).toLocaleString('en-US');
+      } else {
+        displayValue = Math.floor(currentValue);
+      }
+
+      element.textContent = prefix + displayValue + suffix;
+    }, stepDuration);
+  }
+
+  // Start stat animations when elements are in viewport
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Animate all three stats
+        animateStat('stat-founders', 6000, '+', '', 2000);
+        animateStat('stat-raised', 5, 'M+', '$', 2000);
+        animateStat('stat-funded', 18, '+', '', 2000);
+
+        // Unobserve after animation starts
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const statsSection = document.querySelector('.stats-grid');
+  if (statsSection) {
+    statsObserver.observe(statsSection);
+  }
+</script>
+
+</body>
+</html>
