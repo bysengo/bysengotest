@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ila B Corcoran - Educator and Community Leader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      background: white;
+      border-radius: 30px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .heading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.95);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1.2s ease 0.3s backwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .profile-image-container {
+      width: 280px;
+      height: 280px;
+      margin: 0 auto 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 8px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
+      animation: scaleIn 0.8s ease 0.5s backwards;
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .profile-image-container:hover .profile-image {
+      transform: scale(1.1);
+    }
+
+    .name-section {
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1s ease 0.7s backwards;
+    }
+
+    .name-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 400;
+      font-style: italic;
+      color: white;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .name-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .content-section {
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: white;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      animation: slideInUp 0.6s ease backwards;
+    }
+
+    .social-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+
+    .social-btn:hover::before {
+      width: 300%;
+      height: 300%;
+    }
+
+    .social-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .social-btn.substack {
+      background: linear-gradient(135deg, #FF6719 0%, #FF8C42 100%);
+      animation-delay: 0.1s;
+    }
+
+    .social-btn.linkedin {
+      background: linear-gradient(135deg, #0077B5 0%, #00A0DC 100%);
+      animation-delay: 0.2s;
+    }
+
+    .social-btn.tiktok {
+      background: linear-gradient(135deg, #000000 0%, #333333 100%);
+      animation-delay: 0.3s;
+    }
+
+    .social-btn.instagram {
+      background: linear-gradient(135deg, #E1306C 0%, #C13584 50%, #833AB4 100%);
+      animation-delay: 0.4s;
+    }
+
+    .divider {
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      margin: 40px auto;
+      border-radius: 2px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px 40px;
+      background: #f8f9fa;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 40px 20px;
+      }
+
+      .heading {
+        font-size: 1rem;
+        letter-spacing: 1px;
+      }
+
+      .profile-image-container {
+        width: 220px;
+        height: 220px;
+      }
+
+      .name-logo {
+        font-size: 3rem;
+      }
+
+      .name-text {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+      }
+
+      .content-section {
+        padding: 40px 20px;
+      }
+
+      .social-links {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .social-btn {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .name-logo {
+        font-size: 2.5rem;
+      }
+
+      .heading {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <h1 class="heading">Educator and community leader<br>at the center of capital and culture</h1>
+
+      <div class="profile-image-container">
+        <!-- Replace this src with the actual path to your uploaded photo -->
+        <img src="https://via.placeholder.com/280" alt="Ila B Corcoran" class="profile-image" id="profileImage">
+      </div>
+
+      <div class="name-section">
+        <div class="name-logo">Ila B Corcoran</div>
+        <div class="name-text">Ila B Corcoran</div>
+      </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content-section">
+      <div class="social-links">
+        <a href="#" class="social-btn substack" target="_blank" rel="noopener noreferrer">
+          <span>Substack</span>
+        </a>
+        <a href="#" class="social-btn linkedin" target="_blank" rel="noopener noreferrer">
+          <span>LinkedIn</span>
+        </a>
+        <a href="#" class="social-btn tiktok" target="_blank" rel="noopener noreferrer">
+          <span>TikTok</span>
+        </a>
+        <a href="#" class="social-btn instagram" target="_blank" rel="noopener noreferrer">
+          <span>Instagram</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      &copy; 2026 Ila B Corcoran. All rights reserved.
+    </div>
+  </div>
+
+  <script>
+    // Placeholder for future image upload
+    // You can replace the placeholder image by updating the src attribute
+    // or upload your photo and update the path
+
+    // Example: If you upload your photo to the project
+    // document.getElementById('profileImage').src = 'path-to-your-photo.jpg';
+  </script>
+</body>
+</html>
