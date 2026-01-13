@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo Impact Report 2025</title>
+  <style>
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F3EDE7;
+      color: #1B3533;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(213, 112, 40, 0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .year-badge {
+      display: inline-block;
+      background: rgba(213, 112, 40, 0.2);
+      color: #F3EDE7;
+      padding: 10px 30px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      border: 2px solid rgba(213, 112, 40, 0.4);
+    }
+
+    .hero h1 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 7rem;
+      font-weight: 700;
+      color: #F3EDE7;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: #F3EDE7;
+      font-weight: 400;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 80px 20px;
+    }
+
+    .section-title {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #1B3533;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: #67441A;
+      margin-bottom: 50px;
+      max-width: 800px;
+    }
+
+    /* Executive Summary */
+    .executive-summary {
+      background: white;
+      padding: 60px;
+      border-radius: 20px;
+      margin: 60px auto;
+      max-width: 1100px;
+      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.1);
+    }
+
+    .executive-summary p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: #1B3533;
+      margin-bottom: 20px;
+    }
+
+    /* Highlights Grid */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+
+    .highlight-card {
+      background: #1B3533;
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      border: 3px solid transparent;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #D57028, #AF8145);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .highlight-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-10px);
+      border-color: #D57028;
+      box-shadow: 0 20px 50px rgba(213, 112, 40, 0.3);
+    }
+
+    .highlight-number {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #D57028;
+      margin-bottom: 15px;
+      font-family: 'Arimo', sans-serif;
+    }
+
+    .highlight-label {
+      font-size: 1rem;
+      color: #F3EDE7;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    /* Grant Distribution Chart */
+    .chart-section {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      padding: 80px 40px;
+      border-radius: 20px;
+      margin: 60px auto;
+      max-width: 1100px;
+      color: #F3EDE7;
+    }
+
+    .chart-title {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 50px;
+      color: #F3EDE7;
+      text-transform: uppercase;
+    }
+
+    .chart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .chart-bar {
+      position: relative;
+    }
+
+    .chart-bar-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .chart-bar-bg {
+      height: 50px;
+      background: rgba(243, 237, 231, 0.1);
+      border-radius: 25px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chart-bar-fill {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 20px;
+      font-weight: 700;
+      color: #F3EDE7;
+      transition: width 1.5s ease;
+      border-radius: 25px;
+    }
+
+    .chart-bar-fill.bar1 {
+      background: linear-gradient(90deg, #D57028, #AF8145);
+      width: 0;
+    }
+
+    .chart-bar-fill.bar2 {
+      background: linear-gradient(90deg, #67441A, #AF8145);
+      width: 0;
+    }
+
+    .chart-bar-fill.bar3 {
+      background: linear-gradient(90deg, #1B3533, #67441A);
+      width: 0;
+    }
+
+    .chart-bar-fill.animate {
+      width: var(--width);
+    }
+
+    /* Carousel Styles */
+    .carousel-section {
+      margin: 60px 0;
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.1);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 50px;
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .carousel-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid #1B3533;
+      background: white;
+      color: #1B3533;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-btn:hover {
+      background: #D57028;
+      border-color: #D57028;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #D3D3D3;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: #D57028;
+      transform: scale(1.3);
+    }
+
+    /* Events Grid in Carousel */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .event-item {
+      background: #F3EDE7;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 4px solid #D57028;
+      transition: all 0.3s ease;
+    }
+
+    .event-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(213, 112, 40, 0.2);
+    }
+
+    .event-type {
+      display: inline-block;
+      background: #D57028;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .event-type.virtual {
+      background: #67441A;
+    }
+
+    .event-name {
+      font-weight: 600;
+      color: #1B3533;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* Case Study Carousel */
+    .case-study {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .case-study-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .company-name {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.5rem;
+      color: #1B3533;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .founder-name {
+      font-size: 1.2rem;
+      color: #67441A;
+      font-style: italic;
+    }
+
+    .grant-info {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .grant-detail {
+      text-align: center;
+    }
+
+    .grant-detail-label {
+      font-size: 0.85rem;
+      color: #67441A;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .grant-detail-value {
+      font-size: 1.5rem;
+      color: #D57028;
+      font-weight: 700;
+      margin-top: 5px;
+    }
+
+    .case-study-content h4 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.5rem;
+      color: #1B3533;
+      margin: 30px 0 15px;
+      text-transform: uppercase;
+    }
+
+    .case-study-content p, .case-study-content ul {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #1B3533;
+      margin-bottom: 20px;
+    }
+
+    .case-study-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .case-study-content li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+    }
+
+    .case-study-content li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .testimonial {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      padding: 40px;
+      border-radius: 16px;
+      margin: 30px 0;
+      border-left: 5px solid #D57028;
+    }
+
+    .testimonial-text {
+      font-size: 1.2rem;
+      color: #F3EDE7;
+      font-style: italic;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-author {
+      color: #AF8145;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* Theory of Change */
+    .theory-section {
+      background: white;
+      padding: 60px;
+      border-radius: 20px;
+      margin: 60px auto;
+      max-width: 1100px;
+      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.1);
+    }
+
+    .theory-flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .theory-box {
+      background: #F3EDE7;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      border-top: 4px solid #D57028;
+      transition: all 0.3s ease;
+    }
+
+    .theory-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(213, 112, 40, 0.2);
+    }
+
+    .theory-box h4 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.3rem;
+      color: #1B3533;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .theory-box ul {
+      list-style: none;
+      padding: 0;
+      font-size: 0.95rem;
+      color: #67441A;
+      text-align: left;
+    }
+
+    .theory-box li {
+      padding: 8px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .theory-box li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    /* Impact Stats Row */
+    .impact-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+
+    .impact-stat {
+      background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .impact-stat:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(213, 112, 40, 0.4);
+    }
+
+    .impact-stat-number {
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: 'Arimo', sans-serif;
+      margin-bottom: 10px;
+    }
+
+    .impact-stat-label {
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0.95;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      padding: 80px 40px;
+      border-radius: 20px;
+      text-align: center;
+      margin: 60px auto;
+      max-width: 1100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(213, 112, 40, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 4rem;
+      color: #F3EDE7;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-section p {
+      font-size: 1.3rem;
+      color: #F3EDE7;
+      margin-bottom: 40px;
+      opacity: 0.95;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-btn {
+      padding: 18px 45px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: 3px solid #F3EDE7;
+      background: transparent;
+      color: #F3EDE7;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .cta-btn:hover {
+      background: #D57028;
+      border-color: #D57028;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.4);
+    }
+
+    .cta-btn.primary {
+      background: #D57028;
+      border-color: #D57028;
+    }
+
+    /* Animations */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+      }
+
+      .highlight-number {
+        font-size: 2.5rem;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .carousel-slide {
+        padding: 30px 20px;
+      }
+
+      .grant-info {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .theory-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-section h2 {
+        font-size: 2.5rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .executive-summary {
+        padding: 30px 20px;
+      }
+
+      .chart-section {
+        padding: 40px 20px;
+      }
+
+      .theory-section {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="year-badge">Impact Report</div>
+      <h1>2025</h1>
+      <p class="hero-subtitle">Turning Communities Into Capital Engines</p>
+    </div>
+  </div>
+
+  <!-- Executive Summary -->
+  <section class="container">
+    <div class="executive-summary fade-in-up">
+      <h2 class="section-title">Executive Summary</h2>
+      <p>
+        In 2025, Sengo officially launched a new model for how capital moves—one rooted in community, education, and access. Our proof of concept efforts through 2024 consisted of research to understand how funding gaps were exacerbated. We gathered hundreds in our primary markets of New York, Los Angeles, and Dallas.
+      </p>
+      <p>
+        In January of 2025 we officially received our first grant partner allowing us to roll out our $30,000 grant fund and introduce our membership platform. Through education, events, grants, and fundraising support, Sengo helped founders and funders better understand private markets and participate in them more equitably.
+      </p>
+      <p>
+        This year marked a transition from early experimentation to a repeatable, scalable ecosystem with measurable outcomes.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2025 Highlights -->
+  <section class="container">
+    <h2 class="section-title" style="text-align: center;">2025 Highlights</h2>
+    <div class="highlights-grid fade-in-up">
+      <div class="highlight-card">
+        <div class="highlight-number">600+</div>
+        <div class="highlight-label">Members across explorer, founder, funder, and all-access tiers</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-number">8,000+</div>
+        <div class="highlight-label">Email subscribers (from 157 in January)</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-number">$31,250</div>
+        <div class="highlight-label">In grants deployed to underrepresented founders</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-number">$5M+</div>
+        <div class="highlight-label">In follow-on capital committed to supported founders</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-number">27</div>
+        <div class="highlight-label">Events hosted (13 virtual, 14 in-person)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grant Distribution Chart -->
+  <section class="container">
+    <div class="chart-section fade-in-up" id="chartSection">
+      <h3 class="chart-title">Grant Distribution Breakdown</h3>
+      <div class="chart-container">
+        <div class="chart-bar">
+          <div class="chart-bar-label">
+            <span>Standard Grants</span>
+            <span>76.8%</span>
+          </div>
+          <div class="chart-bar-bg">
+            <div class="chart-bar-fill bar1" style="--width: 76.8%;">76.8%</div>
+          </div>
+        </div>
+        <div class="chart-bar">
+          <div class="chart-bar-label">
+            <span>Pitch Competition Awards</span>
+            <span>12.0%</span>
+          </div>
+          <div class="chart-bar-bg">
+            <div class="chart-bar-fill bar2" style="--width: 12%;">12.0%</div>
+          </div>
+        </div>
+        <div class="chart-bar">
+          <div class="chart-bar-label">
+            <span>Micro / Mini Grants</span>
+            <span>11.2%</span>
+          </div>
+          <div class="chart-bar-bg">
+            <div class="chart-bar-fill bar3" style="--width: 11.2%;">11.2%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Carousel -->
+  <section class="container carousel-section">
+    <h2 class="section-title" style="text-align: center;">2025 Events</h2>
+    <p class="section-subtitle" style="text-align: center; margin: 0 auto;">27 events with a near-even split: 48.15% virtual, 51.85% in-person</p>
+
+    <div class="carousel-container fade-in-up">
+      <div class="carousel-track" id="eventsTrack">
+        <!-- Slide 1: Virtual Events Part 1 -->
+        <div class="carousel-slide">
+          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">Virtual Events (Part 1)</h3>
+          <div class="events-grid">
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Virtual Pitch for $1,000 — September</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Virtual Pitch for $1,000 — October</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Sengo Virtual Pitch Competition (CPG Edition)</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Pitch Prep with Amiah</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Practice Your Pitch with Sarah Anto</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Build Your 2026 Pitch Strategy</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Virtual Events Part 2 -->
+        <div class="carousel-slide">
+          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">Virtual Events (Part 2)</h3>
+          <div class="events-grid">
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Private Markets 101 (Part 1)</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Demystifying CDFI Funding</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Ask an Angel</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Preparing to Raise Capital with Confidence</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Welcome to Sengo Webinar</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Sengo Founder Meetup: Angels & VCs</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type virtual">Virtual</span>
+              <div class="event-name">Sengo Founder Meetup: Social Enterprise & EdTech</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: In-Person Events Part 1 -->
+        <div class="carousel-slide">
+          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">In-Person Events (Part 1)</h3>
+          <div class="events-grid">
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">Fashion x Futures — Los Angeles (June)</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">Fashion x Futures — New York (July)</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">Fashion x Futures — LA Holiday Pop-Up</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">Galentine's Wine Club — Dallas</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">Brunch Wine Club — Dallas</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">Sip Into Spring — Dallas</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: In-Person Events Part 2 -->
+        <div class="carousel-slide">
+          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">In-Person Events (Part 2)</h3>
+          <div class="events-grid">
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">Wine Club — Dallas</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">GirlMath x Sengo: Wednesday Night Write-Off (NY Tech Week)</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">Spill the Tea: What's Really Happening in AI & Tech (LA Tech Week)</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">NY Tech Week Mixer (Sengo x Little More)</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">BBOP Center x Sengo Founder Workshop</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">Funded & Fearless Workshop</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">Barcelona Black Women Entrepreneurs Mixer</div>
+            </div>
+            <div class="event-item">
+              <span class="event-type">In-Person</span>
+              <div class="event-name">The Village Retreat — France</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-nav">
+      <button class="carousel-btn" onclick="moveCarousel('events', -1)">←</button>
+      <button class="carousel-btn" onclick="moveCarousel('events', 1)">→</button>
+    </div>
+    <div class="carousel-dots" id="eventsDots"></div>
+  </section>
+
+  <!-- Case Studies Carousel -->
+  <section class="container carousel-section">
+    <h2 class="section-title" style="text-align: center;">Impact Stories</h2>
+    <p class="section-subtitle" style="text-align: center; margin: 0 auto;">Real founders, real results</p>
+
+    <div class="carousel-container fade-in-up">
+      <div class="carousel-track" id="caseStudiesTrack">
+        <!-- Case Study 1: Versed Wellness -->
+        <div class="carousel-slide">
+          <div class="case-study">
+            <div class="case-study-header">
+              <h3 class="company-name">Versed Wellness</h3>
+              <p class="founder-name">Founder: Jasmine Bowie</p>
+            </div>
+
+            <div class="grant-info">
+              <div class="grant-detail">
+                <div class="grant-detail-label">Grant Type</div>
+                <div class="grant-detail-value">Micro Grant</div>
+              </div>
+              <div class="grant-detail">
+                <div class="grant-detail-label">Grant Amount</div>
+                <div class="grant-detail-value">$500</div>
+              </div>
+              <div class="grant-detail">
+                <div class="grant-detail-label">Stage</div>
+                <div class="grant-detail-value">Revenue</div>
+              </div>
+            </div>
+
+            <div class="case-study-content">
+              <h4>Use of Funds</h4>
+              <p>The Sengo micro-grant supported early design and prototyping for Healing Con(verse)sation Cards, including design work, preparation of print-ready files, and production of a first physical sample.</p>
+
+              <h4>Measured Impact</h4>
+              <ul>
+                <li>Product advanced from concept to physical prototype</li>
+                <li>25 new customers acquired following grant support</li>
+                <li>Revenue increased post-grant</li>
+                <li>Continued growth without raising external capital</li>
+              </ul>
+
+              <h4>Capital Outcomes</h4>
+              <p>Additional capital raised: $0 — Founder intentionally chose to validate product-market fit before fundraising</p>
+
+              <div class="testimonial">
+                <p class="testimonial-text">"I would recommend Sengo. The support was thoughtful, timely, and deeply encouraging—especially at a stage when belief and early resources matter most."</p>
+                <p class="testimonial-author">— Jasmine Bowie, Founder of Versed Wellness</p>
+              </div>
+
+              <h4>Why This Case Matters</h4>
+              <p>This case shows how small, flexible capital can unlock real customer traction and revenue growth for founders prioritizing sustainability over premature fundraising.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case Study 2: Satlyt -->
+        <div class="carousel-slide">
+          <div class="case-study">
+            <div class="case-study-header">
+              <h3 class="company-name">Satlyt</h3>
+              <p class="founder-name">Founder: Rama Afullo</p>
+            </div>
+
+            <div class="grant-info">
+              <div class="grant-detail">
+                <div class="grant-detail-label">Grant Type</div>
+                <div class="grant-detail-value">Standard Grant</div>
+              </div>
+              <div class="grant-detail">
+                <div class="grant-detail-label">Grant Amount</div>
+                <div class="grant-detail-value">$3,000</div>
+              </div>
+              <div class="grant-detail">
+                <div class="grant-detail-label">Stage</div>
+                <div class="grant-detail-value">Revenue</div>
+              </div>
+            </div>
+
+            <div class="case-study-content">
+              <h4>Use of Funds</h4>
+              <p>The grant supported early-stage marketing and operations, including funding a marketing intern during Satlyt's product launch phase and partnership development with satellite operators and space agencies.</p>
+
+              <h4>Measured Impact</h4>
+              <ul>
+                <li>10 new customers acquired following Sengo support</li>
+                <li>Revenue increased post-grant</li>
+                <li>Operational capacity expanded at a critical growth stage</li>
+              </ul>
+
+              <h4>Capital & Growth Outcomes</h4>
+              <ul>
+                <li>$3,000,000 raised post-Sengo (VC + angel investors)</li>
+                <li>12 new hires following the grant period</li>
+                <li>Transitioned from early execution to scaled growth</li>
+              </ul>
+
+              <div class="testimonial">
+                <p class="testimonial-text">"Absolutely. Sengo's grant provides critical early validation and flexible funds that help founders bridge the gap between idea and institutional traction."</p>
+                <p class="testimonial-author">— Rama Afullo, Founder of Satlyt</p>
+              </div>
+
+              <h4>Why This Case Matters</h4>
+              <p>This case demonstrates how non-dilutive capital paired with readiness and visibility can contribute to meaningful downstream outcomes, including customer growth, team expansion, and successful venture fundraising.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-nav">
+      <button class="carousel-btn" onclick="moveCarousel('caseStudies', -1)">←</button>
+      <button class="carousel-btn" onclick="moveCarousel('caseStudies', 1)">→</button>
+    </div>
+    <div class="carousel-dots" id="caseStudiesDots"></div>
+  </section>
+
+  <!-- Organizational Overview -->
+  <section class="container">
+    <div class="executive-summary fade-in-up">
+      <h2 class="section-title">Organizational Overview</h2>
+      <p>
+        Sengo exists to democratize access to funding and investing by turning communities into capital engines. Traditional capital systems often exclude founders and everyday individuals from participating meaningfully in private markets. Sengo addresses this gap by combining education, third spaces, and compliant fundraising pathways.
+      </p>
+      <p>
+        Founded by Ila B. Corcoran, Sengo operates at the intersection of fintech, community building, and capital strategy—helping people understand how money actually moves and how to participate in it responsibly.
+      </p>
+    </div>
+  </section>
+
+  <!-- Theory of Change -->
+  <section class="container">
+    <div class="theory-section fade-in-up">
+      <h2 class="section-title" style="text-align: center;">Theory of Change</h2>
+      <div class="theory-flow">
+        <div class="theory-box">
+          <h4>Inputs</h4>
+          <ul>
+            <li>Educational content</li>
+            <li>Community spaces</li>
+            <li>Grant capital</li>
+            <li>Infrastructure</li>
+          </ul>
+        </div>
+        <div class="theory-box">
+          <h4>Activities</h4>
+          <ul>
+            <li>Capital education</li>
+            <li>Grant programs</li>
+            <li>Events & workshops</li>
+            <li>Investor readiness</li>
+          </ul>
+        </div>
+        <div class="theory-box">
+          <h4>Outputs</h4>
+          <ul>
+            <li>Informed founders</li>
+            <li>Capital deployed</li>
+            <li>Active spaces</li>
+            <li>Connections made</li>
+          </ul>
+        </div>
+        <div class="theory-box">
+          <h4>Outcomes</h4>
+          <ul>
+            <li>Increased fundability</li>
+            <li>Diverse participation</li>
+            <li>Better relationships</li>
+            <li>Market access</li>
+          </ul>
+        </div>
+        <div class="theory-box">
+          <h4>Impact</h4>
+          <ul>
+            <li>Reduced access gaps</li>
+            <li>Self-capitalizing communities</li>
+            <li>Equitable markets</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs & Initiatives -->
+  <section class="container">
+    <h2 class="section-title" style="text-align: center;">Programs & Initiatives</h2>
+    <div class="impact-stats fade-in-up">
+      <div class="impact-stat">
+        <div class="impact-stat-number">💼</div>
+        <div class="impact-stat-label">Platform & Memberships<br>Resources, deal education, and curated opportunities</div>
+      </div>
+      <div class="impact-stat">
+        <div class="impact-stat-number">🎯</div>
+        <div class="impact-stat-label">Events & Third Spaces<br>27 events balancing virtual and in-person</div>
+      </div>
+      <div class="impact-stat">
+        <div class="impact-stat-number">💰</div>
+        <div class="impact-stat-label">Fundraising Support<br>Reg CF, 506(b), and advisory pathways</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learnings & Adjustments -->
+  <section class="container">
+    <div class="executive-summary fade-in-up">
+      <h2 class="section-title">Learnings & Adjustments</h2>
+      <p>
+        In 2025, Sengo learned that <strong>events alone are not sufficient</strong> to drive sustained engagement or outcomes. While events create energy and visibility, the strongest results occurred when events were paired with education and clear next steps.
+      </p>
+      <p>
+        We also learned that <strong>too much variety can create distraction</strong>. Many community members expressed a preference for reliable, repeatable support within the platform over a wide range of disconnected experiences.
+      </p>
+      <p>
+        Additionally, we observed that <strong>pay-to-play models can unintentionally exclude participants</strong>. To address this, Sengo began offering scholarships and giveaways, and 6.4% of grant capital was intentionally deployed to non-members.
+      </p>
+      <p>
+        In response, Sengo introduced the <strong>Fundraise Readiness Pathway</strong>, a free, self-guided assessment available to both members and non-members, helping founders understand their readiness and identify gaps without requiring immediate enrollment.
+      </p>
+    </div>
+  </section>
+
+  <!-- Looking Ahead -->
+  <section class="container">
+    <div class="executive-summary fade-in-up">
+      <h2 class="section-title">Looking Ahead: 2026</h2>
+      <p>
+        In 2026, Sengo will focus on deepening investor participation, expanding its impact measurement tools, and scaling repeatable programming across new cities and sectors. We're committed to building infrastructure that creates lasting change—not just visibility.
+      </p>
+    </div>
+  </section>
+
+  <!-- Ecosystem & Partnerships -->
+  <section class="container">
+    <div class="executive-summary fade-in-up">
+      <h2 class="section-title">Ecosystem & Partnerships</h2>
+      <p>
+        Sengo collaborated with ecosystem partners including <strong>Honeycomb, BBOP Center, GirlMath, Build in Tulsa</strong>, and multiple community hosts and brand sponsors. These partnerships extended reach, reduced costs for founders, and strengthened trust across the ecosystem.
+      </p>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="container">
+    <div class="cta-section fade-in-up">
+      <h2>Join the Movement</h2>
+      <p>
+        Be part of the next chapter. Whether you're a founder, funder, or partner—
+        together we're building a more equitable future for capital access.
+      </p>
+      <div class="cta-buttons">
+        <a href="https://app.bysengo.com/founder-enrollment" class="cta-btn primary">Become a Member</a>
+        <a href="#" class="cta-btn">Partner With Us</a>
+        <a href="#" class="cta-btn">Attend an Event</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Carousel functionality
+    const carousels = {
+      events: {
+        track: document.getElementById('eventsTrack'),
+        dots: document.getElementById('eventsDots'),
+        currentIndex: 0,
+        totalSlides: 4
+      },
+      caseStudies: {
+        track: document.getElementById('caseStudiesTrack'),
+        dots: document.getElementById('caseStudiesDots'),
+        currentIndex: 0,
+        totalSlides: 2
+      }
+    };
+
+    // Initialize carousels
+    function initCarousel(name) {
+      const carousel = carousels[name];
+
+      // Create dots
+      for (let i = 0; i < carousel.totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goToSlide(name, i);
+        carousel.dots.appendChild(dot);
+      }
+    }
+
+    function moveCarousel(name, direction) {
+      const carousel = carousels[name];
+      carousel.currentIndex += direction;
+
+      if (carousel.currentIndex < 0) {
+        carousel.currentIndex = carousel.totalSlides - 1;
+      } else if (carousel.currentIndex >= carousel.totalSlides) {
+        carousel.currentIndex = 0;
+      }
+
+      updateCarousel(name);
+    }
+
+    function goToSlide(name, index) {
+      carousels[name].currentIndex = index;
+      updateCarousel(name);
+    }
+
+    function updateCarousel(name) {
+      const carousel = carousels[name];
+      const offset = -carousel.currentIndex * 100;
+      carousel.track.style.transform = `translateX(${offset}%)`;
+
+      // Update dots
+      const dots = carousel.dots.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === carousel.currentIndex);
+      });
+    }
+
+    // Initialize both carousels
+    initCarousel('events');
+    initCarousel('caseStudies');
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('.fade-in-up').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Animate chart bars when visible
+    const chartObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bars = entry.target.querySelectorAll('.chart-bar-fill');
+          bars.forEach(bar => {
+            bar.classList.add('animate');
+          });
+          chartObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const chartSection = document.getElementById('chartSection');
+    if (chartSection) {
+      chartObserver.observe(chartSection);
+    }
+  </script>
+
+</body>
+</html>
