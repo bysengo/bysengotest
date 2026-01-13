@@ -357,22 +357,25 @@
 
     .contact-btn{
       display: inline-block;
-      padding: 18px 48px;
-      background: var(--accent);
+      padding: 20px 60px;
+      background: #f4e4a6;
       color: #000000;
       font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 1.1rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       text-decoration: none;
       border-radius: 50px;
-      transition: transform 0.2s ease, filter 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 4px 20px rgba(244, 228, 166, 0.4);
     }
 
     .contact-btn:hover{
       transform: translateY(-2px);
-      filter: brightness(0.95);
+      box-shadow: 0 6px 30px rgba(244, 228, 166, 0.6);
     }
 
     /* FOOTER */
@@ -493,6 +496,13 @@
         height: 300px;
         right: -20%;
         bottom: -5%;
+      }
+      .contact-section{
+        padding: 60px 20px;
+      }
+      .contact-btn{
+        padding: 16px 40px;
+        font-size: 1rem;
       }
     }
 
