@@ -173,6 +173,26 @@
             box-shadow: 0 0 0 3px rgba(213, 112, 40, 0.1);
         }
 
+        .feedback-btn {
+            margin-top: 0.5rem;
+            background: var(--brown-light);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .feedback-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
         .file-upload {
             position: relative;
             display: flex;
@@ -772,6 +792,63 @@
             padding: 3rem;
         }
 
+        /* Calculator Result */
+        .calculator-result {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 4px solid var(--success-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+
+        .calculator-result h4 {
+            font-family: 'Arimo', sans-serif;
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .calculator-result .amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--success-green);
+            margin: 1rem 0;
+        }
+
+        .calculator-result .breakdown {
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .calculator-result .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .use-amount-btn {
+            width: 100%;
+            margin-top: 1rem;
+            background: var(--success-green);
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .use-amount-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -1041,6 +1118,7 @@
                 <div class="form-group">
                     <label for="fundraiseGoal">Fundraising Goal *</label>
                     <input type="number" id="fundraiseGoal" required placeholder="e.g., 1000000" min="0" step="1000">
+                    <button type="button" class="feedback-btn" onclick="openCalculatorModal()">💡 Need Feedback?</button>
                 </div>
 
                 <div class="form-group">
@@ -1182,6 +1260,70 @@
                     <button type="button" class="modal-btn cancel" onclick="closeInvestorModal()">Cancel</button>
                     <button type="submit" class="modal-btn save">Save Investor</button>
                 </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Fundraising Calculator Modal -->
+    <div class="modal" id="calculatorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">💡 Fundraising Amount Calculator</h3>
+                <button class="close-btn" onclick="closeCalculatorModal()">&times;</button>
+            </div>
+            <form class="modal-form" id="calculatorForm">
+                <p style="margin-bottom: 1.5rem; color: var(--brown-dark); font-size: 0.95rem;">
+                    Answer these questions to get a recommended fundraising amount based on your business metrics.
+                </p>
+
+                <div class="form-group">
+                    <label for="monthlyRevenue">Current Monthly Revenue</label>
+                    <input type="number" id="monthlyRevenue" placeholder="e.g., 50000" min="0" step="1000">
+                    <small style="color: var(--brown-dark); font-size: 0.85rem;">Leave blank if pre-revenue</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyExpenses">Current Monthly Expenses *</label>
+                    <input type="number" id="monthlyExpenses" required placeholder="e.g., 100000" min="0" step="1000">
+                    <small style="color: var(--brown-dark); font-size: 0.85rem;">Total monthly burn (salaries, rent, software, etc.)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="desiredRunway">Desired Runway (months) *</label>
+                    <select id="desiredRunway" required>
+                        <option value="12">12 months</option>
+                        <option value="18" selected>18 months (Recommended)</option>
+                        <option value="24">24 months</option>
+                        <option value="30">30 months</option>
+                        <option value="36">36 months</option>
+                    </select>
+                    <small style="color: var(--brown-dark); font-size: 0.85rem;">Time until next fundraise or profitability</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="plannedHiring">Planned Team Growth</label>
+                    <input type="number" id="plannedHiring" placeholder="e.g., 5" min="0" step="1">
+                    <small style="color: var(--brown-dark); font-size: 0.85rem;">Number of people you plan to hire</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="avgSalary">Average Annual Salary per Hire</label>
+                    <input type="number" id="avgSalary" placeholder="e.g., 120000" min="0" step="5000">
+                    <small style="color: var(--brown-dark); font-size: 0.85rem;">Only if adding team members above</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="growthExpenses">One-Time Growth Expenses</label>
+                    <input type="number" id="growthExpenses" placeholder="e.g., 50000" min="0" step="5000">
+                    <small style="color: var(--brown-dark); font-size: 0.85rem;">Marketing, product development, infrastructure, etc.</small>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn cancel" onclick="closeCalculatorModal()">Cancel</button>
+                    <button type="submit" class="modal-btn save">Calculate Amount</button>
+                </div>
+
+                <div id="calculatorResult"></div>
             </form>
         </div>
     </div>
@@ -1861,6 +2003,103 @@
             closeInvestorModal();
         });
 
+        // Fundraising Calculator Functions
+        function openCalculatorModal() {
+            document.getElementById('calculatorModal').classList.add('active');
+            document.getElementById('calculatorResult').innerHTML = '';
+            document.getElementById('monthlyRevenue').focus();
+        }
+
+        function closeCalculatorModal() {
+            document.getElementById('calculatorModal').classList.remove('active');
+        }
+
+        document.getElementById('calculatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const monthlyRevenue = parseFloat(document.getElementById('monthlyRevenue').value) || 0;
+            const monthlyExpenses = parseFloat(document.getElementById('monthlyExpenses').value);
+            const desiredRunway = parseInt(document.getElementById('desiredRunway').value);
+            const plannedHiring = parseInt(document.getElementById('plannedHiring').value) || 0;
+            const avgSalary = parseFloat(document.getElementById('avgSalary').value) || 0;
+            const growthExpenses = parseFloat(document.getElementById('growthExpenses').value) || 0;
+
+            // Calculate monthly burn
+            const currentMonthlyBurn = monthlyExpenses - monthlyRevenue;
+
+            // Calculate additional monthly costs from new hires
+            const additionalMonthlyCost = plannedHiring > 0 && avgSalary > 0
+                ? (avgSalary * plannedHiring) / 12
+                : 0;
+
+            // Calculate average monthly burn (accounts for ramping up hires)
+            const avgMonthlyBurn = currentMonthlyBurn + (additionalMonthlyCost / 2);
+
+            // Calculate base runway needs
+            const runwayAmount = avgMonthlyBurn * desiredRunway;
+
+            // Add one-time expenses
+            const totalOneTime = growthExpenses + (plannedHiring * 5000); // $5k per hire for recruiting/onboarding
+
+            // Calculate total with 25% buffer
+            const subtotal = runwayAmount + totalOneTime;
+            const buffer = subtotal * 0.25;
+            const recommendedAmount = subtotal + buffer;
+
+            // Round to nearest 50k for cleaner numbers
+            const finalAmount = Math.ceil(recommendedAmount / 50000) * 50000;
+
+            // Display result
+            const resultDiv = document.getElementById('calculatorResult');
+            resultDiv.innerHTML = `
+                <div class="calculator-result">
+                    <h4>Recommended Fundraising Amount:</h4>
+                    <div class="amount">$${finalAmount.toLocaleString()}</div>
+
+                    <div class="breakdown">
+                        <strong>Breakdown:</strong>
+                        <div class="breakdown-item">
+                            <span>Current Monthly Burn:</span>
+                            <span>$${currentMonthlyBurn.toLocaleString()}</span>
+                        </div>
+                        ${additionalMonthlyCost > 0 ? `
+                        <div class="breakdown-item">
+                            <span>Additional Monthly Cost (${plannedHiring} hires):</span>
+                            <span>$${additionalMonthlyCost.toLocaleString()}</span>
+                        </div>
+                        ` : ''}
+                        <div class="breakdown-item">
+                            <span>${desiredRunway}-Month Runway:</span>
+                            <span>$${runwayAmount.toLocaleString()}</span>
+                        </div>
+                        ${totalOneTime > 0 ? `
+                        <div class="breakdown-item">
+                            <span>One-Time Expenses:</span>
+                            <span>$${totalOneTime.toLocaleString()}</span>
+                        </div>
+                        ` : ''}
+                        <div class="breakdown-item">
+                            <span>Safety Buffer (25%):</span>
+                            <span>$${buffer.toLocaleString()}</span>
+                        </div>
+                    </div>
+
+                    <button type="button" class="use-amount-btn" onclick="useCalculatedAmount(${finalAmount})">
+                        Use This Amount
+                    </button>
+                </div>
+            `;
+
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        function useCalculatedAmount(amount) {
+            document.getElementById('fundraiseGoal').value = amount;
+            closeCalculatorModal();
+            showToast(`Fundraising goal set to $${amount.toLocaleString()}`);
+        }
+
         // Email Summary Function
         function sendEmailSummary() {
             const subject = encodeURIComponent(`${roadmapData.companyName} - Fundraising Progress Update`);
@@ -1968,6 +2207,7 @@
         window.onclick = function(event) {
             const noteModal = document.getElementById('noteModal');
             const investorModal = document.getElementById('investorModal');
+            const calculatorModal = document.getElementById('calculatorModal');
 
             if (event.target === noteModal) {
                 closeNoteModal();
@@ -1975,6 +2215,10 @@
 
             if (event.target === investorModal) {
                 closeInvestorModal();
+            }
+
+            if (event.target === calculatorModal) {
+                closeCalculatorModal();
             }
         }
     </script>
