@@ -522,6 +522,64 @@
             font-size: 0.9rem;
         }
 
+        /* Task Checklist */
+        .milestone-tasks {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(27, 53, 51, 0.1);
+        }
+
+        .tasks-header {
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.65rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .task-item:hover {
+            background: rgba(27, 53, 51, 0.03);
+        }
+
+        .task-checkbox {
+            margin-top: 0.2rem;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--accent-orange);
+        }
+
+        .task-label {
+            flex: 1;
+            color: var(--primary-dark);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .task-item.completed .task-label {
+            text-decoration: line-through;
+            color: var(--brown-dark);
+            opacity: 0.7;
+        }
+
+        .tasks-progress {
+            font-size: 0.85rem;
+            color: var(--brown-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -945,47 +1003,110 @@
                 {
                     title: 'Preparation Phase',
                     description: 'Finalize pitch deck, financial models, and data room. Prepare all investor materials.',
-                    percentage: 0
+                    percentage: 0,
+                    tasks: [
+                        'Finalize pitch deck design and content',
+                        'Complete financial models and projections',
+                        'Prepare data room with key documents',
+                        'Create one-page executive summary',
+                        'Prepare FAQ document for investors'
+                    ]
                 },
                 {
                     title: 'Target List Creation',
                     description: 'Research and compile list of target investors. Prioritize by fit, stage, and portfolio.',
-                    percentage: 10
+                    percentage: 10,
+                    tasks: [
+                        'Research investors by stage and sector fit',
+                        'Identify warm introduction opportunities',
+                        'Create tiered investor target list',
+                        'Gather contact information and preferences',
+                        'Prioritize outreach sequence'
+                    ]
                 },
                 {
                     title: 'Initial Outreach',
                     description: 'Begin reaching out to warm introductions and tier-1 targets. Schedule initial calls.',
-                    percentage: 20
+                    percentage: 20,
+                    tasks: [
+                        'Send personalized intro emails',
+                        'Request warm introductions',
+                        'Follow up on initial contacts',
+                        'Schedule intro calls and meetings',
+                        'Prepare customized materials for each investor'
+                    ]
                 },
                 {
                     title: 'First Meetings',
                     description: 'Conduct partner meetings. Gather feedback and refine pitch based on responses.',
-                    percentage: 30
+                    percentage: 30,
+                    tasks: [
+                        'Deliver partner presentations',
+                        'Answer investor questions thoroughly',
+                        'Collect feedback and objections',
+                        'Refine pitch based on responses',
+                        'Send follow-up materials'
+                    ]
                 },
                 {
                     title: 'Follow-up Round',
                     description: 'Second meetings with interested investors. Share additional materials and answer deep-dive questions.',
-                    percentage: 45
+                    percentage: 45,
+                    tasks: [
+                        'Schedule second meetings with interested parties',
+                        'Provide detailed financial breakdowns',
+                        'Share customer testimonials and metrics',
+                        'Address technical or market questions',
+                        'Facilitate team introductions'
+                    ]
                 },
                 {
                     title: 'Due Diligence',
                     description: 'Facilitate due diligence process. Provide access to data room, references, and technical reviews.',
-                    percentage: 60
+                    percentage: 60,
+                    tasks: [
+                        'Grant data room access',
+                        'Provide customer references',
+                        'Facilitate technical due diligence',
+                        'Complete background checks',
+                        'Answer detailed DD questions'
+                    ]
                 },
                 {
                     title: 'Term Sheet Negotiation',
                     description: 'Review and negotiate term sheets. Consult with legal counsel on terms and conditions.',
-                    percentage: 75
+                    percentage: 75,
+                    tasks: [
+                        'Review initial term sheets',
+                        'Consult with legal counsel',
+                        'Negotiate valuation and terms',
+                        'Align on governance and board seats',
+                        'Finalize term sheet agreement'
+                    ]
                 },
                 {
                     title: 'Final Documentation',
                     description: 'Execute final investment documents. Complete legal review and regulatory requirements.',
-                    percentage: 90
+                    percentage: 90,
+                    tasks: [
+                        'Review investment agreements',
+                        'Complete legal documentation',
+                        'Address final investor questions',
+                        'Obtain board approvals',
+                        'Sign all closing documents'
+                    ]
                 },
                 {
                     title: 'Round Closing',
                     description: 'Close the round and receive funds. Announce funding and celebrate with the team!',
-                    percentage: 100
+                    percentage: 100,
+                    tasks: [
+                        'Wire transfer completed',
+                        'Update cap table',
+                        'Prepare funding announcement',
+                        'Notify stakeholders and team',
+                        'Plan celebration and next steps'
+                    ]
                 }
             ];
 
@@ -998,7 +1119,12 @@
                     description: template.description,
                     date: milestoneDate.toISOString().split('T')[0],
                     completed: false,
-                    notes: []
+                    notes: [],
+                    tasks: template.tasks.map((taskText, taskIndex) => ({
+                        id: Date.now() + index * 1000 + taskIndex,
+                        text: taskText,
+                        completed: false
+                    }))
                 };
             });
         }
@@ -1082,6 +1208,52 @@
             descEl.className = 'milestone-description';
             descEl.textContent = milestone.description;
 
+            // Tasks Section
+            const tasksDiv = document.createElement('div');
+            tasksDiv.className = 'milestone-tasks';
+
+            const tasksHeader = document.createElement('div');
+            tasksHeader.className = 'tasks-header';
+            tasksHeader.textContent = 'Tasks';
+
+            const completedTasks = milestone.tasks ? milestone.tasks.filter(t => t.completed).length : 0;
+            const totalTasks = milestone.tasks ? milestone.tasks.length : 0;
+
+            const tasksProgress = document.createElement('div');
+            tasksProgress.className = 'tasks-progress';
+            tasksProgress.textContent = `${completedTasks} of ${totalTasks} completed`;
+
+            tasksDiv.appendChild(tasksHeader);
+            tasksDiv.appendChild(tasksProgress);
+
+            if (milestone.tasks && milestone.tasks.length > 0) {
+                milestone.tasks.forEach(task => {
+                    const taskItem = document.createElement('div');
+                    taskItem.className = `task-item ${task.completed ? 'completed' : ''}`;
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.className = 'task-checkbox';
+                    checkbox.checked = task.completed;
+                    checkbox.onclick = (e) => {
+                        e.stopPropagation();
+                        toggleTask(milestone.id, task.id);
+                    };
+
+                    const label = document.createElement('label');
+                    label.className = 'task-label';
+                    label.textContent = task.text;
+                    label.onclick = (e) => {
+                        e.stopPropagation();
+                        toggleTask(milestone.id, task.id);
+                    };
+
+                    taskItem.appendChild(checkbox);
+                    taskItem.appendChild(label);
+                    tasksDiv.appendChild(taskItem);
+                });
+            }
+
             const notesDiv = document.createElement('div');
             notesDiv.className = 'milestone-notes';
 
@@ -1133,6 +1305,7 @@
 
             contentDiv.appendChild(headerDiv);
             contentDiv.appendChild(descEl);
+            contentDiv.appendChild(tasksDiv);
             contentDiv.appendChild(notesDiv);
 
             const marker = document.createElement('div');
@@ -1142,6 +1315,21 @@
             milestoneDiv.appendChild(marker);
 
             return milestoneDiv;
+        }
+
+        function toggleTask(milestoneId, taskId) {
+            const milestone = roadmapData.milestones.find(m => m.id === milestoneId);
+            if (milestone && milestone.tasks) {
+                const task = milestone.tasks.find(t => t.id === taskId);
+                if (task) {
+                    task.completed = !task.completed;
+                    saveData();
+                    displayRoadmap();
+
+                    const statusText = task.completed ? 'completed' : 'uncompleted';
+                    console.log(`Task "${task.text}" ${statusText}`);
+                }
+            }
         }
 
         function completeMilestone(milestoneId) {
