@@ -114,21 +114,20 @@
       max-width: 800px;
     }
 
-    /* Executive Summary */
+    /* Executive Summary - Centered Subtext Style */
     .executive-summary {
-      background: white;
-      padding: 60px;
-      border-radius: 20px;
-      margin: 60px auto;
-      max-width: 1100px;
-      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.1);
+      text-align: center;
+      padding: 40px 20px;
+      margin: 40px auto;
+      max-width: 900px;
     }
 
     .executive-summary p {
-      font-size: 1.15rem;
-      line-height: 1.9;
+      font-size: 1.1rem;
+      line-height: 1.8;
       color: #1B3533;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      font-weight: 400;
     }
 
     /* Organizational Overview - Different Style */
@@ -217,21 +216,25 @@
 
     /* Highlights Grid */
     .highlights-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 30px;
-      margin: 60px 0;
+      margin: 60px auto;
+      max-width: 1400px;
     }
 
     .highlight-card {
       background: #1B3533;
-      padding: 40px;
+      padding: 40px 30px;
       border-radius: 16px;
       text-align: center;
       border: 3px solid transparent;
       transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
+      min-width: 200px;
+      flex: 0 1 auto;
     }
 
     .highlight-card::before {
@@ -262,6 +265,7 @@
       color: #D57028;
       margin-bottom: 15px;
       font-family: 'Arimo', sans-serif;
+      min-height: 60px;
     }
 
     .highlight-label {
@@ -271,17 +275,17 @@
       line-height: 1.4;
     }
 
-    /* Grant Distribution Chart */
-    .chart-section {
+    /* Charts Section */
+    .charts-wrapper {
       background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
       padding: 80px 40px;
       border-radius: 20px;
       margin: 60px auto;
-      max-width: 1100px;
+      max-width: 1200px;
       color: #F3EDE7;
     }
 
-    .chart-title {
+    .charts-title {
       font-family: 'Arimo', sans-serif;
       font-size: 2.5rem;
       text-align: center;
@@ -290,12 +294,96 @@
       text-transform: uppercase;
     }
 
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .chart-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart-box-title {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #F3EDE7;
+      text-transform: uppercase;
+    }
+
     .chart-container {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      max-width: 700px;
-      margin: 0 auto;
+    }
+
+    /* Pie Chart */
+    .pie-chart-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .pie-chart {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #D57028 0deg 186deg,
+        #67441A 186deg 360deg
+      );
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .pie-chart-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1rem;
+    }
+
+    .legend-color {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .legend-color.in-person {
+      background: #D57028;
+    }
+
+    .legend-color.virtual {
+      background: #67441A;
+    }
+
+    .legend-text {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .legend-label {
+      font-weight: 600;
+    }
+
+    .legend-value {
+      font-weight: 700;
+      font-size: 1.1rem;
     }
 
     .chart-bar {
@@ -633,6 +721,7 @@
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
       margin-top: 40px;
+      margin-bottom: 30px;
     }
 
     .theory-box {
@@ -678,6 +767,29 @@
       color: #D57028;
       font-size: 1.5rem;
       line-height: 1;
+    }
+
+    .theory-impact-summary {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, rgba(213, 112, 40, 0.1) 0%, rgba(175, 129, 69, 0.1) 100%);
+      border-radius: 12px;
+      border: 2px solid #D57028;
+      margin-top: 30px;
+    }
+
+    .theory-impact-summary p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1B3533;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .theory-impact-summary .impact-arrow {
+      font-size: 2rem;
+      color: #D57028;
+      margin: 0 10px;
     }
 
     /* Impact Stats Row */
@@ -862,8 +974,13 @@
         padding: 30px 20px;
       }
 
-      .chart-section {
+      .charts-wrapper {
         padding: 40px 20px;
+      }
+
+      .charts-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
       }
 
       .theory-section {
@@ -877,6 +994,16 @@
       .event-image {
         width: 100%;
         height: 150px;
+      }
+
+      .highlights-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .highlight-card {
+        width: 100%;
+        max-width: 350px;
       }
     }
   </style>
@@ -895,15 +1022,11 @@
   <!-- Executive Summary -->
   <section class="container">
     <div class="executive-summary fade-in-up">
-      <h2 class="section-title">Executive Summary</h2>
       <p>
-        In 2025, Sengo officially launched a new model for how capital moves—one rooted in community, education, and access. Our proof of concept efforts through 2024 consisted of research to understand how funding gaps were exacerbated. We gathered hundreds in our primary markets of New York, Los Angeles, and Dallas.
+        In 2025, Sengo officially launched a new model for how capital moves—one rooted in community, education, and access. Our proof of concept efforts through 2024 consisted of research to understand how funding gaps were exacerbated. We gathered hundreds in our primary markets of New York, Los Angeles, and Dallas. In January of 2025 we officially received our first grant partner allowing us to roll out our $30,000 grant fund and introduce our membership platform.
       </p>
       <p>
-        In January of 2025 we officially received our first grant partner allowing us to roll out our $30,000 grant fund and introduce our membership platform. Through education, events, grants, and fundraising support, Sengo helped founders and funders better understand private markets and participate in them more equitably.
-      </p>
-      <p>
-        This year marked a transition from early experimentation to a repeatable, scalable ecosystem with measurable outcomes.
+        Through education, events, grants, and fundraising support, Sengo helped founders and funders better understand private markets and participate in them more equitably. This year marked a transition from early experimentation to a repeatable, scalable ecosystem with measurable outcomes.
       </p>
     </div>
   </section>
@@ -913,58 +1036,93 @@
     <h2 class="section-title" style="text-align: center;">2025 Highlights</h2>
     <div class="highlights-grid fade-in-up">
       <div class="highlight-card">
-        <div class="highlight-number">600+</div>
-        <div class="highlight-label">Members across explorer, founder, funder, and all-access tiers</div>
+        <div class="highlight-number" data-target="600" data-suffix="+">0</div>
+        <div class="highlight-label">Platform Members</div>
       </div>
       <div class="highlight-card">
-        <div class="highlight-number">8,000+</div>
-        <div class="highlight-label">Email subscribers (from 157 in January)</div>
+        <div class="highlight-number" data-target="8000" data-suffix="+">0</div>
+        <div class="highlight-label">Email Subscribers</div>
       </div>
       <div class="highlight-card">
-        <div class="highlight-number">$31,250</div>
-        <div class="highlight-label">In grants deployed to underrepresented founders</div>
+        <div class="highlight-number" data-target="0" data-suffix="%" data-placeholder="true">--</div>
+        <div class="highlight-label">Email Open Rate</div>
       </div>
       <div class="highlight-card">
-        <div class="highlight-number">$5M+</div>
-        <div class="highlight-label">In follow-on capital committed to supported founders</div>
+        <div class="highlight-number" data-target="31250" data-prefix="$" data-format="currency">$0</div>
+        <div class="highlight-label">Grants Deployed</div>
       </div>
       <div class="highlight-card">
-        <div class="highlight-number">27</div>
-        <div class="highlight-label">Events hosted (13 virtual, 14 in-person)</div>
+        <div class="highlight-number" data-target="5" data-suffix="M+" data-prefix="$">$0</div>
+        <div class="highlight-label">Follow-on Capital</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-number" data-target="27">0</div>
+        <div class="highlight-label">Events Hosted</div>
       </div>
     </div>
   </section>
 
-  <!-- Grant Distribution Chart -->
+  <!-- Charts Section: Grant Distribution & Event Split -->
   <section class="container">
-    <div class="chart-section fade-in-up" id="chartSection">
-      <h3 class="chart-title">Grant Distribution Breakdown</h3>
-      <div class="chart-container">
-        <div class="chart-bar">
-          <div class="chart-bar-label">
-            <span>Standard Grants</span>
-            <span>76.8%</span>
-          </div>
-          <div class="chart-bar-bg">
-            <div class="chart-bar-fill bar1" style="--width: 76.8%;">76.8%</div>
+    <div class="charts-wrapper fade-in-up">
+      <h3 class="charts-title">2025 Impact by the Numbers</h3>
+
+      <div class="charts-grid" id="chartsSection">
+        <!-- Grant Distribution Chart -->
+        <div class="chart-box">
+          <h4 class="chart-box-title">Grant Distribution</h4>
+          <div class="chart-container">
+            <div class="chart-bar">
+              <div class="chart-bar-label">
+                <span>Standard Grants</span>
+                <span>76.8%</span>
+              </div>
+              <div class="chart-bar-bg">
+                <div class="chart-bar-fill bar1" style="--width: 76.8%;">76.8%</div>
+              </div>
+            </div>
+            <div class="chart-bar">
+              <div class="chart-bar-label">
+                <span>Pitch Competition Awards</span>
+                <span>12.0%</span>
+              </div>
+              <div class="chart-bar-bg">
+                <div class="chart-bar-fill bar2" style="--width: 12%;">12.0%</div>
+              </div>
+            </div>
+            <div class="chart-bar">
+              <div class="chart-bar-label">
+                <span>Micro / Mini Grants</span>
+                <span>11.2%</span>
+              </div>
+              <div class="chart-bar-bg">
+                <div class="chart-bar-fill bar3" style="--width: 11.2%;">11.2%</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="chart-bar">
-          <div class="chart-bar-label">
-            <span>Pitch Competition Awards</span>
-            <span>12.0%</span>
-          </div>
-          <div class="chart-bar-bg">
-            <div class="chart-bar-fill bar2" style="--width: 12%;">12.0%</div>
-          </div>
-        </div>
-        <div class="chart-bar">
-          <div class="chart-bar-label">
-            <span>Micro / Mini Grants</span>
-            <span>11.2%</span>
-          </div>
-          <div class="chart-bar-bg">
-            <div class="chart-bar-fill bar3" style="--width: 11.2%;">11.2%</div>
+
+        <!-- Event Type Pie Chart -->
+        <div class="chart-box">
+          <h4 class="chart-box-title">Event Format Split</h4>
+          <div class="pie-chart-container">
+            <div class="pie-chart"></div>
+            <div class="pie-chart-legend">
+              <div class="legend-item">
+                <div class="legend-color in-person"></div>
+                <div class="legend-text">
+                  <span class="legend-label">In-Person</span>
+                  <span class="legend-value">14 (51.85%)</span>
+                </div>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color virtual"></div>
+                <div class="legend-text">
+                  <span class="legend-label">Virtual</span>
+                  <span class="legend-value">13 (48.15%)</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1477,14 +1635,13 @@
             <li>Market access</li>
           </ul>
         </div>
-        <div class="theory-box">
-          <h4>Impact</h4>
-          <ul>
-            <li>Reduced access gaps</li>
-            <li>Self-capitalizing communities</li>
-            <li>Equitable markets</li>
-          </ul>
-        </div>
+      </div>
+
+      <div class="theory-impact-summary">
+        <p>
+          <span class="impact-arrow">→</span>
+          <strong>Long-Term Impact:</strong> Reduced access gaps in funding and investing, self-capitalizing communities, and more equitable markets.
+        </p>
       </div>
     </div>
   </section>
@@ -1646,6 +1803,66 @@
       observer.observe(el);
     });
 
+    // Slot machine counter animation for highlights
+    function animateCounter(element, target, duration = 2000) {
+      const isPlaceholder = element.dataset.placeholder === 'true';
+      if (isPlaceholder) return; // Skip animation for placeholder
+
+      const prefix = element.dataset.prefix || '';
+      const suffix = element.dataset.suffix || '';
+      const format = element.dataset.format || '';
+      const startValue = 0;
+      const increment = target / (duration / 16);
+      let currentValue = startValue;
+
+      const updateCounter = () => {
+        currentValue += increment;
+        if (currentValue >= target) {
+          currentValue = target;
+
+          // Format the final value
+          let displayValue = Math.round(currentValue);
+          if (format === 'currency') {
+            displayValue = displayValue.toLocaleString();
+          }
+          element.textContent = prefix + displayValue + suffix;
+        } else {
+          // Format intermediate values
+          let displayValue = Math.round(currentValue);
+          if (format === 'currency') {
+            displayValue = displayValue.toLocaleString();
+          }
+          element.textContent = prefix + displayValue + suffix;
+          requestAnimationFrame(updateCounter);
+        }
+      };
+
+      requestAnimationFrame(updateCounter);
+    }
+
+    // Observe highlights for counter animation
+    const highlightsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const numbers = entry.target.querySelectorAll('.highlight-number');
+          numbers.forEach((num, index) => {
+            setTimeout(() => {
+              const target = parseInt(num.dataset.target);
+              if (!isNaN(target) && target > 0) {
+                animateCounter(num, target);
+              }
+            }, index * 150);
+          });
+          highlightsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const highlightsGrid = document.querySelector('.highlights-grid');
+    if (highlightsGrid) {
+      highlightsObserver.observe(highlightsGrid);
+    }
+
     // Animate chart bars when visible
     const chartObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1659,9 +1876,9 @@
       });
     }, { threshold: 0.5 });
 
-    const chartSection = document.getElementById('chartSection');
-    if (chartSection) {
-      chartObserver.observe(chartSection);
+    const chartsSection = document.getElementById('chartsSection');
+    if (chartsSection) {
+      chartObserver.observe(chartsSection);
     }
   </script>
 
