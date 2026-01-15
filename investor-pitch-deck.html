@@ -349,6 +349,68 @@
       text-underline-offset: 5px;
     }
 
+    /* Citations */
+    .citation {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-top: 40px;
+      font-style: italic;
+      max-width: 800px;
+    }
+
+    .citation a {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-color: rgba(213, 112, 40, 0.5);
+    }
+
+    .slide-dark .citation a,
+    .slide-accent .citation a {
+      text-decoration-color: rgba(243, 237, 231, 0.5);
+    }
+
+    /* Data Grid */
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+      max-width: 1000px;
+    }
+
+    .data-item {
+      text-align: left;
+      padding: 30px;
+      background: rgba(27, 53, 51, 0.05);
+      border-radius: 12px;
+      border: 2px solid rgba(213, 112, 40, 0.2);
+    }
+
+    .slide-dark .data-item,
+    .slide-accent .data-item {
+      background: rgba(243, 237, 231, 0.1);
+      border-color: rgba(243, 237, 231, 0.3);
+    }
+
+    .data-number {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #D57028;
+      line-height: 1;
+      margin-bottom: 15px;
+    }
+
+    .slide-dark .data-number,
+    .slide-accent .data-number {
+      color: #F3EDE7;
+    }
+
+    .data-description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .slide {
@@ -382,6 +444,15 @@
 
       .stat-number {
         font-size: 3rem;
+      }
+
+      .data-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .data-number {
+        font-size: 2.5rem;
       }
 
       .sengo-logo {
@@ -451,11 +522,11 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <span class="slide-number">1 / 10</span>
+      <span class="slide-number">1 / 15</span>
       <span class="impact-badge">First Angel Investor Meetup</span>
       <h1>Welcome to<br>Sengo</h1>
-      <p class="subtitle">Reimagining Fundraising and Investing</p>
-      <p class="small-text">Presented by Ila Corcoran, Founder</p>
+      <p class="subtitle">Addressing the Venture Capital Diversity Gap Through Evidence-Based Solutions</p>
+      <p class="small-text">Presented by Ila Corcoran, Founder & CEO</p>
     </div>
 
     <!-- Slide 2: Personal Introduction -->
@@ -467,7 +538,7 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <span class="slide-number">2 / 10</span>
+      <span class="slide-number">2 / 15</span>
       <span class="impact-badge">Introduction</span>
       <h2>Meet Ila Corcoran</h2>
       <div class="content-box">
@@ -486,7 +557,7 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <span class="slide-number">3 / 10</span>
+      <span class="slide-number">3 / 15</span>
       <span class="impact-badge">Our Vision</span>
       <h2>Community Goals</h2>
       <ul>
@@ -508,18 +579,18 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <span class="slide-number">4 / 10</span>
+      <span class="slide-number">4 / 15</span>
       <span class="impact-badge">The Landscape</span>
-      <h2>Angel Investing in Today's Market</h2>
+      <h2>Angel Investing in 2025</h2>
       <div class="content-box">
         <ul>
-          <li>Rising interest in alternative assets and private market access</li>
-          <li>Increased focus on diverse founders and impact investing</li>
-          <li>Need for education and community support for new angels</li>
-          <li>Challenges: dealflow quality, due diligence, and portfolio management</li>
+          <li>Alternative assets and private markets attracting unprecedented investor interest</li>
+          <li>Growing recognition of diverse founders as an underutilized investment opportunity</li>
+          <li>Structural barriers persist: limited dealflow access, information asymmetry, homogenous networks</li>
+          <li>Angel investors increasingly seeking education, community, and data-driven decision frameworks</li>
         </ul>
       </div>
-      <p style="margin-top: 30px;">Let's discuss: <span class="emphasis">What are your biggest questions or concerns about angel investing?</span></p>
+      <p style="margin-top: 30px;">Discussion: <span class="emphasis">What structural changes would improve angel investing outcomes?</span></p>
     </div>
 
     <!-- Slide 5: The Problem -->
@@ -531,17 +602,19 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <span class="slide-number">5 / 10</span>
-      <span class="impact-badge">The Challenge</span>
-      <h2>The Wealth Gap is Real</h2>
-      <p class="subtitle">Only 2% of VC funding goes to women founders.<br>Less than 1% goes to Black founders.</p>
+      <span class="slide-number">5 / 15</span>
+      <span class="impact-badge">Research Evidence</span>
+      <h2>The Venture Capital Diversity Gap</h2>
+      <p class="subtitle">A Systematic Market Failure</p>
       <div class="content-box">
-        <p>Traditional fundraising and investing pathways are <span class="emphasis">broken</span>. Access to capital and dealflow remains concentrated among a small, homogenous group.</p>
-        <p style="margin-top: 25px;">Sengo exists to change this.</p>
+        <p>Despite representing <span class="emphasis">32% of the U.S. population</span>, Black and Latino founders receive only <span class="emphasis">4% of venture capital</span>.</p>
+        <p style="margin-top: 25px;">Women-founded companies secured just <span class="emphasis">1-2.3% of VC funding in 2024</span>—the lowest share in five years.</p>
+        <p style="margin-top: 25px;">This represents an estimated <span class="emphasis">$400 billion annual funding gap</span>, creating a significant market inefficiency and unrealized economic potential.</p>
       </div>
+      <p class="citation">Sources: HBCU.VC (2025), Founders Forum Group (2025), Inc. Magazine (2024)</p>
     </div>
 
-    <!-- Slide 6: Sengo Platform Overview -->
+    <!-- Slide 6: Black Founders Data -->
     <div class="slide slide-cream" data-slide="6">
       <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
         <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
@@ -550,7 +623,132 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <span class="slide-number">6 / 10</span>
+      <span class="slide-number">6 / 15</span>
+      <span class="impact-badge">The Data</span>
+      <h2>Black Founders: Q2 2025</h2>
+      <div class="data-grid">
+        <div class="data-item">
+          <div class="data-number">0.42%</div>
+          <div class="data-description">of total U.S. venture funding went to Black founders in Q2 2025</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number">$290.7M</div>
+          <div class="data-description">raised by 19 Black-founded startups out of $69.9B total deployed</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number">42</div>
+          <div class="data-description">Black & Latino-founded unicorns valued at $125B collectively</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number">1,338</div>
+          <div class="data-description">Black and Latino companies have raised $1M+ in VC ($52.3B total)</div>
+        </div>
+      </div>
+      <p class="citation">Source: HBCU.VC Q2 2025 Black Venture Funding Report, Harlem Capital (2024)</p>
+    </div>
+
+    <!-- Slide 7: Women Founders Data -->
+    <div class="slide slide-dark" data-slide="7">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">7 / 15</span>
+      <span class="impact-badge">The Data</span>
+      <h2>Women Founders: 2024</h2>
+      <div class="data-grid">
+        <div class="data-item">
+          <div class="data-number">1%</div>
+          <div class="data-description">of U.S. VC funding went to all-female founding teams—the lowest in 5 years</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number">2.3%</div>
+          <div class="data-description">of global VC funding ($6.7B of $289B) went to female-only teams</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number">20.5%</div>
+          <div class="data-description">of first financings went to women-led startups (down from 26.5% in 2020)</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number">13</div>
+          <div class="data-description">female-founded unicorns achieved in 2024 (record high, $300B+ valuation)</div>
+        </div>
+      </div>
+      <p class="citation">Sources: Inc. Magazine (2024), Founders Forum Group (2025), PitchBook Data</p>
+    </div>
+
+    <!-- Slide 8: Latino Founders Data -->
+    <div class="slide slide-accent" data-slide="8">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">8 / 15</span>
+      <span class="impact-badge">The Data</span>
+      <h2>Latino Founders: 2021-2024</h2>
+      <div class="data-grid">
+        <div class="data-item">
+          <div class="data-number">2.1%</div>
+          <div class="data-description">of all venture funding went to Latino founders in 2021</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number"><1%</div>
+          <div class="data-description">of top 500 VC/PE deals in 2020 involved a Latino founder</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number">2%</div>
+          <div class="data-description">of venture capitalists are Latino/Latina (partner-level and general)</div>
+        </div>
+        <div class="data-item">
+          <div class="data-number">2x</div>
+          <div class="data-description">growth in investment crowdfunding for Hispanic/Latinx founders (2023→2024)</div>
+        </div>
+      </div>
+      <p class="citation">Sources: WebSummit (Dr. Paul Judge), Crunchbase (2024), KingsCrowd (2025)</p>
+    </div>
+
+    <!-- Slide 9: Systemic Barriers -->
+    <div class="slide slide-dark" data-slide="9">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">9 / 15</span>
+      <span class="impact-badge">Root Causes</span>
+      <h2>Systemic Barriers in Venture Capital</h2>
+      <div class="content-box">
+        <p class="subtitle">Who Makes the Decisions?</p>
+        <p><span class="emphasis">82.7%</span> of decision-makers at U.S. VC firms with $50M+ AUM are male, while <span class="emphasis">17.3%</span> are women.</p>
+        <p style="margin-top: 25px;">Only <span class="emphasis">2%</span> of VCs are Latino/Latina at the partner level.</p>
+        <p style="margin-top: 35px;">This homogeneity creates structural barriers through:</p>
+        <ul style="margin-top: 20px;">
+          <li>Pattern matching and affinity bias in investment decisions</li>
+          <li>Closed networks limiting diverse founder access to capital</li>
+          <li>Unconscious bias in due diligence and valuation processes</li>
+        </ul>
+      </div>
+      <p class="citation">Sources: Founders Forum Group (2025), Carta Equity Report (2024)</p>
+    </div>
+
+    <!-- Slide 10: Sengo Platform Overview -->
+    <div class="slide slide-cream" data-slide="10">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">10 / 15</span>
       <span class="impact-badge">The Solution</span>
       <h2>What is Sengo?</h2>
       <p class="subtitle">A platform connecting founders and funders through education, dealflow, and community.</p>
@@ -573,7 +771,7 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <span class="slide-number">7 / 10</span>
+      <span class="slide-number">11 / 15</span>
       <span class="impact-badge">Our Impact</span>
       <h2>Sengo By The Numbers</h2>
       <div class="stats-container">
@@ -602,7 +800,7 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <span class="slide-number">8 / 10</span>
+      <span class="slide-number">12 / 15</span>
       <span class="impact-badge">For Funders</span>
       <h2>Your Journey as an Angel</h2>
       <ul>
@@ -624,7 +822,7 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <span class="slide-number">9 / 10</span>
+      <span class="slide-number">13 / 15</span>
       <span class="impact-badge">Coming Soon</span>
       <h2>Live Pitch Event</h2>
       <div class="content-box">
@@ -649,7 +847,7 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <span class="slide-number">10 / 10</span>
+      <span class="slide-number">14 / 15</span>
       <span class="impact-badge">Join Us</span>
       <h1>Let's Build This Together</h1>
       <p class="subtitle">Join the movement to democratize access to capital</p>
@@ -659,6 +857,50 @@
         </p>
         <p style="margin-top: 30px;">Visit <strong>app.bysengo.com</strong> to enroll as an investor</p>
         <p class="small-text" style="margin-top: 30px;">Thank you for being here. Let's change the game together.</p>
+      </div>
+    </div>
+
+    <!-- Slide 15: References -->
+    <div class="slide slide-dark" data-slide="15">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">15 / 15</span>
+      <span class="impact-badge">Sources</span>
+      <h2>References & Data Sources</h2>
+      <div class="content-box" style="text-align: left; max-width: 1000px;">
+        <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 15px;">
+          <strong>HBCU.VC</strong> - Q2 2025 Black Venture Funding Report<br>
+          <span style="font-size: 0.9rem; opacity: 0.8;">www.hbcu.vc/news/q2-2025-black-venture-funding-report</span>
+        </p>
+        <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 15px;">
+          <strong>Founders Forum Group</strong> - Women in VC & Startup Funding: Statistics & Trends (2025)<br>
+          <span style="font-size: 0.9rem; opacity: 0.8;">ff.co/women-funding-statistics-2025</span>
+        </p>
+        <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 15px;">
+          <strong>Inc. Magazine</strong> - Women-Led Companies Attracted Just 1% of VC Funding in 2024<br>
+          <span style="font-size: 0.9rem; opacity: 0.8;">inc.com/wholly-women-led-companies-funding-2024</span>
+        </p>
+        <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 15px;">
+          <strong>Harlem Capital</strong> - 1,338 Black and Latino Startups That Have Raised $1M+ in VC<br>
+          <span style="font-size: 0.9rem; opacity: 0.8;">harlem.capital/black-latino-startups-vc-funding</span>
+        </p>
+        <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 15px;">
+          <strong>WebSummit</strong> - Dr. Paul Judge on VC Funding for Black and Latino Founders<br>
+          <span style="font-size: 0.9rem; opacity: 0.8;">websummit.com/vc-paul-judge-opportunity-fund</span>
+        </p>
+        <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 15px;">
+          <strong>Crunchbase</strong> - VC Funding to Latinx-Founded Startups (2024)<br>
+          <span style="font-size: 0.9rem; opacity: 0.8;">crunchbase.com/latinx-startup-founders-vc-funding</span>
+        </p>
+        <p style="font-size: 1rem; line-height: 1.8;">
+          <strong>Carta</strong> - Annual Equity Report 2024<br>
+          <span style="font-size: 0.9rem; opacity: 0.8;">carta.com/data/equity-report-2024</span>
+        </p>
       </div>
     </div>
 
