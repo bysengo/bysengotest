@@ -1118,7 +1118,7 @@
                 <div class="form-group">
                     <label for="fundraiseGoal">Fundraising Goal *</label>
                     <input type="number" id="fundraiseGoal" required placeholder="e.g., 1000000" min="0" step="1000">
-                    <button type="button" class="feedback-btn" onclick="openCalculatorModal()">💡 Need Feedback?</button>
+                    <button type="button" class="feedback-btn" id="calculatorBtn">💡 Need Feedback?</button>
                 </div>
 
                 <div class="form-group">
@@ -1346,6 +1346,20 @@
         window.addEventListener('DOMContentLoaded', () => {
             loadSavedData();
             setDefaultDate();
+
+            // Ensure calculator button works
+            const calcButton = document.getElementById('calculatorBtn');
+            if (calcButton) {
+                console.log('Calculator button found, attaching event listener');
+                calcButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Calculator button clicked via event listener');
+                    openCalculatorModal();
+                });
+            } else {
+                console.error('Calculator button not found!');
+            }
         });
 
         function setDefaultDate() {
@@ -2005,9 +2019,29 @@
 
         // Fundraising Calculator Functions
         function openCalculatorModal() {
-            document.getElementById('calculatorModal').classList.add('active');
-            document.getElementById('calculatorResult').innerHTML = '';
-            document.getElementById('monthlyRevenue').focus();
+            console.log('Opening calculator modal...');
+            const modal = document.getElementById('calculatorModal');
+            const resultDiv = document.getElementById('calculatorResult');
+            const revenueInput = document.getElementById('monthlyRevenue');
+
+            console.log('Modal element:', modal);
+
+            if (resultDiv) {
+                resultDiv.innerHTML = '';
+            }
+
+            if (modal) {
+                modal.classList.add('active');
+                console.log('Modal classList after adding active:', modal.classList);
+                // Focus after modal is visible
+                setTimeout(() => {
+                    if (revenueInput) {
+                        revenueInput.focus();
+                    }
+                }, 100);
+            } else {
+                console.error('Calculator modal not found!');
+            }
         }
 
         function closeCalculatorModal() {
