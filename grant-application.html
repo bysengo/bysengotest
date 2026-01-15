@@ -366,6 +366,32 @@
             color: #67441A;
         }
 
+        /* Kajabi Form Styling */
+        #kajabi-form-container {
+            background: #F3EDE7;
+            padding: 30px;
+            border-radius: 15px;
+            min-height: 400px;
+        }
+
+        /* Override Kajabi form styles to match our design */
+        #kajabi-form-container input[type="text"],
+        #kajabi-form-container input[type="email"],
+        #kajabi-form-container input[type="tel"],
+        #kajabi-form-container textarea,
+        #kajabi-form-container select {
+            border-radius: 12px !important;
+            border: 2px solid #D5D5D5 !important;
+            font-family: 'Montserrat', sans-serif !important;
+        }
+
+        #kajabi-form-container input:focus,
+        #kajabi-form-container textarea:focus,
+        #kajabi-form-container select:focus {
+            border-color: #D57028 !important;
+            box-shadow: 0 5px 20px rgba(213, 112, 40, 0.1) !important;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -626,17 +652,17 @@
             </div>
         </div>
 
-        <!-- Step 2: Airtable Application Form -->
+        <!-- Step 2: Grant Application Form -->
         <div class="section-card" id="step2">
-            <div class="placeholder-section">
-                <div class="placeholder-title">📝 Grant Application Form</div>
-                <div class="placeholder-text">
-                    Your Airtable form embed code will go here.<br>
-                    Replace this section with your Airtable iframe or form code.
-                </div>
+            <h2 style="font-family: 'Arimo', sans-serif; font-size: 2rem; font-weight: 600; color: #1B3533; margin-bottom: 30px; text-align: center;">Complete Your Application</h2>
+
+            <!-- Kajabi Form Container -->
+            <div id="kajabi-form-container" style="margin-bottom: 40px;">
+                <script src="https://app.bysengo.com/forms/2149412403/embed.js"></script>
             </div>
+
             <div class="button-group">
-                <button type="button" class="btn btn-secondary" onclick="goToStep(1)">Back</button>
+                <button type="button" class="btn btn-secondary" onclick="goToStep(1)">Back to Score</button>
                 <button type="button" class="btn btn-primary" onclick="goToStep(3)">Continue to Membership</button>
             </div>
         </div>
