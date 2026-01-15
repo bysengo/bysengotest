@@ -1118,7 +1118,63 @@
                 <div class="form-group">
                     <label for="fundraiseGoal">Fundraising Goal *</label>
                     <input type="number" id="fundraiseGoal" required placeholder="e.g., 1000000" min="0" step="1000">
-                    <button type="button" class="feedback-btn" onclick="openCalculatorModal()">💡 Need Feedback? - Calculator</button>
+                    <button type="button" class="feedback-btn" onclick="toggleCalculator()">💡 Need Feedback? - Calculator</button>
+
+                    <!-- Inline Calculator Section -->
+                    <div id="inlineCalculator" style="display: none; margin-top: 1.5rem; padding: 1.5rem; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 8px; border-left: 4px solid var(--success-green);">
+                        <h4 style="font-family: 'Arimo', sans-serif; color: var(--primary-dark); font-size: 1.2rem; margin-bottom: 1rem;">💡 Fundraising Amount Calculator</h4>
+                        <p style="margin-bottom: 1rem; color: var(--brown-dark); font-size: 0.9rem;">Answer these questions to get a recommended fundraising amount.</p>
+
+                        <div style="display: grid; gap: 1rem;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: var(--primary-dark); margin-bottom: 0.5rem; font-size: 0.9rem;">Current Monthly Revenue</label>
+                                <input type="number" id="calcMonthlyRevenue" placeholder="e.g., 50000" min="0" step="1000" style="width: 100%; padding: 0.75rem; border: 2px solid var(--light-cream); border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem;">
+                                <small style="color: var(--brown-dark); font-size: 0.8rem;">Leave blank if pre-revenue</small>
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; color: var(--primary-dark); margin-bottom: 0.5rem; font-size: 0.9rem;">Current Monthly Expenses *</label>
+                                <input type="number" id="calcMonthlyExpenses" required placeholder="e.g., 100000" min="0" step="1000" style="width: 100%; padding: 0.75rem; border: 2px solid var(--light-cream); border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem;">
+                                <small style="color: var(--brown-dark); font-size: 0.8rem;">Total monthly burn (salaries, rent, software, etc.)</small>
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; color: var(--primary-dark); margin-bottom: 0.5rem; font-size: 0.9rem;">Desired Runway (months) *</label>
+                                <select id="calcDesiredRunway" required style="width: 100%; padding: 0.75rem; border: 2px solid var(--light-cream); border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; background: var(--white);">
+                                    <option value="12">12 months</option>
+                                    <option value="18" selected>18 months (Recommended)</option>
+                                    <option value="24">24 months</option>
+                                    <option value="30">30 months</option>
+                                    <option value="36">36 months</option>
+                                </select>
+                                <small style="color: var(--brown-dark); font-size: 0.8rem;">Time until next fundraise or profitability</small>
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; color: var(--primary-dark); margin-bottom: 0.5rem; font-size: 0.9rem;">Planned Team Growth</label>
+                                <input type="number" id="calcPlannedHiring" placeholder="e.g., 5" min="0" step="1" style="width: 100%; padding: 0.75rem; border: 2px solid var(--light-cream); border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem;">
+                                <small style="color: var(--brown-dark); font-size: 0.8rem;">Number of people you plan to hire</small>
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; color: var(--primary-dark); margin-bottom: 0.5rem; font-size: 0.9rem;">Average Annual Salary per Hire</label>
+                                <input type="number" id="calcAvgSalary" placeholder="e.g., 120000" min="0" step="5000" style="width: 100%; padding: 0.75rem; border: 2px solid var(--light-cream); border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem;">
+                                <small style="color: var(--brown-dark); font-size: 0.8rem;">Only if adding team members above</small>
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; color: var(--primary-dark); margin-bottom: 0.5rem; font-size: 0.9rem;">One-Time Growth Expenses</label>
+                                <input type="number" id="calcGrowthExpenses" placeholder="e.g., 50000" min="0" step="5000" style="width: 100%; padding: 0.75rem; border: 2px solid var(--light-cream); border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem;">
+                                <small style="color: var(--brown-dark); font-size: 0.8rem;">Marketing, product development, infrastructure, etc.</small>
+                            </div>
+
+                            <button type="button" onclick="calculateInlineAmount()" style="background: var(--success-green); color: var(--white); border: none; padding: 0.875rem 1.5rem; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease;">
+                                Calculate Amount
+                            </button>
+
+                            <div id="inlineCalculatorResult"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -2118,6 +2174,111 @@
             document.getElementById('fundraiseGoal').value = amount;
             closeCalculatorModal();
             showToast(`Fundraising goal set to $${amount.toLocaleString()}`);
+        }
+
+        // Inline Calculator Functions
+        function toggleCalculator() {
+            const calculator = document.getElementById('inlineCalculator');
+            if (calculator.style.display === 'none') {
+                calculator.style.display = 'block';
+                // Smooth scroll to calculator
+                setTimeout(() => {
+                    calculator.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            } else {
+                calculator.style.display = 'none';
+            }
+        }
+
+        function calculateInlineAmount() {
+            // Get form values
+            const monthlyRevenue = parseFloat(document.getElementById('calcMonthlyRevenue').value) || 0;
+            const monthlyExpenses = parseFloat(document.getElementById('calcMonthlyExpenses').value);
+            const desiredRunway = parseInt(document.getElementById('calcDesiredRunway').value);
+            const plannedHiring = parseInt(document.getElementById('calcPlannedHiring').value) || 0;
+            const avgSalary = parseFloat(document.getElementById('calcAvgSalary').value) || 0;
+            const growthExpenses = parseFloat(document.getElementById('calcGrowthExpenses').value) || 0;
+
+            if (!monthlyExpenses) {
+                alert('Please enter your current monthly expenses.');
+                return;
+            }
+
+            // Calculate monthly burn
+            const currentMonthlyBurn = monthlyExpenses - monthlyRevenue;
+
+            // Calculate additional monthly costs from new hires
+            const additionalMonthlyCost = plannedHiring > 0 && avgSalary > 0
+                ? (avgSalary * plannedHiring) / 12
+                : 0;
+
+            // Calculate average monthly burn (accounts for ramping up hires)
+            const avgMonthlyBurn = currentMonthlyBurn + (additionalMonthlyCost / 2);
+
+            // Calculate base runway needs
+            const runwayAmount = avgMonthlyBurn * desiredRunway;
+
+            // Add one-time expenses
+            const totalOneTime = growthExpenses + (plannedHiring * 5000); // $5k per hire for recruiting/onboarding
+
+            // Calculate total with 25% buffer
+            const subtotal = runwayAmount + totalOneTime;
+            const buffer = subtotal * 0.25;
+            const recommendedAmount = subtotal + buffer;
+
+            // Round to nearest 50k for cleaner numbers
+            const finalAmount = Math.ceil(recommendedAmount / 50000) * 50000;
+
+            // Display result
+            const resultDiv = document.getElementById('inlineCalculatorResult');
+            resultDiv.innerHTML = `
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border: 2px solid var(--success-green);">
+                    <h4 style="font-family: 'Arimo', sans-serif; color: var(--primary-dark); font-size: 1.2rem; margin-bottom: 0.5rem;">Recommended Fundraising Amount:</h4>
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--success-green); margin: 1rem 0;">$${finalAmount.toLocaleString()}</div>
+
+                    <div style="font-size: 0.9rem; color: var(--primary-dark); margin-top: 1rem; padding-top: 1rem; border-top: 2px solid rgba(76, 175, 80, 0.2);">
+                        <strong>Breakdown:</strong>
+                        <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                            <span>Current Monthly Burn:</span>
+                            <span>$${currentMonthlyBurn.toLocaleString()}</span>
+                        </div>
+                        ${additionalMonthlyCost > 0 ? `
+                        <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                            <span>Additional Monthly Cost (${plannedHiring} hires):</span>
+                            <span>$${additionalMonthlyCost.toLocaleString()}</span>
+                        </div>
+                        ` : ''}
+                        <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                            <span>${desiredRunway}-Month Runway:</span>
+                            <span>$${runwayAmount.toLocaleString()}</span>
+                        </div>
+                        ${totalOneTime > 0 ? `
+                        <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                            <span>One-Time Expenses:</span>
+                            <span>$${totalOneTime.toLocaleString()}</span>
+                        </div>
+                        ` : ''}
+                        <div style="display: flex; justify-content: space-between; margin: 0.5rem 0;">
+                            <span>Safety Buffer (25%):</span>
+                            <span>$${buffer.toLocaleString()}</span>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="useInlineCalculatedAmount(${finalAmount})" style="width: 100%; margin-top: 1rem; background: var(--success-green); color: var(--white); border: none; padding: 1rem; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease;">
+                        Use This Amount
+                    </button>
+                </div>
+            `;
+
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function useInlineCalculatedAmount(amount) {
+            document.getElementById('fundraiseGoal').value = amount;
+            document.getElementById('inlineCalculator').style.display = 'none';
+            showToast(`Fundraising goal set to $${amount.toLocaleString()}`);
+            // Scroll back to the fundraising goal field
+            document.getElementById('fundraiseGoal').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         // Email Summary Function
