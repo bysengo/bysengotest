@@ -653,6 +653,28 @@
             background: var(--brown-dark);
         }
 
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--success-green);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            font-weight: 600;
+            z-index: 2000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
@@ -814,6 +836,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
 
     <!-- Note Modal -->
     <div class="modal" id="noteModal">
@@ -1039,10 +1064,12 @@
 
             if (!milestone.completed) {
                 const completeBtn = document.createElement('button');
+                completeBtn.type = 'button';
                 completeBtn.className = 'complete-btn';
                 completeBtn.textContent = 'Complete';
                 completeBtn.onclick = (e) => {
                     e.stopPropagation();
+                    e.preventDefault();
                     completeMilestone(milestone.id);
                 };
                 statusDiv.appendChild(completeBtn);
@@ -1066,10 +1093,13 @@
             notesTitle.textContent = 'Notes & Updates';
 
             const addNoteBtn = document.createElement('button');
+            addNoteBtn.type = 'button';
             addNoteBtn.className = 'add-note-btn';
             addNoteBtn.textContent = '+ Add Note';
             addNoteBtn.onclick = (e) => {
                 e.stopPropagation();
+                e.preventDefault();
+                console.log('Add Note clicked for milestone:', milestone.id);
                 openNoteModal(milestone.id);
             };
 
@@ -1120,6 +1150,7 @@
                 milestone.completed = true;
                 saveData();
                 displayRoadmap();
+                showToast(`Milestone "${milestone.title}" completed!`);
             }
         }
 
@@ -1134,10 +1165,14 @@
         }
 
         function openNoteModal(milestoneId) {
+            console.log('Opening note modal for milestone:', milestoneId);
             currentMilestoneId = milestoneId;
-            document.getElementById('noteModal').classList.add('active');
+            const modal = document.getElementById('noteModal');
+            modal.classList.add('active');
             document.getElementById('noteDate').value = new Date().toISOString().split('T')[0];
             document.getElementById('noteText').value = '';
+            document.getElementById('noteText').focus();
+            console.log('Modal opened, currentMilestoneId:', currentMilestoneId);
         }
 
         function closeNoteModal() {
@@ -1145,8 +1180,19 @@
             currentMilestoneId = null;
         }
 
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
         document.getElementById('noteForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            console.log('Note form submitted for milestone:', currentMilestoneId);
 
             const milestone = roadmapData.milestones.find(m => m.id === currentMilestoneId);
             if (milestone) {
@@ -1155,6 +1201,8 @@
                     text: document.getElementById('noteText').value
                 };
 
+                console.log('Adding note:', note);
+
                 if (!milestone.notes) {
                     milestone.notes = [];
                 }
@@ -1162,9 +1210,17 @@
                 milestone.notes.push(note);
                 milestone.notes.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+                console.log('Milestone now has', milestone.notes.length, 'notes');
+
                 saveData();
                 displayRoadmap();
                 closeNoteModal();
+                showToast('Note added successfully!');
+
+                console.log('Note added successfully and roadmap refreshed');
+            } else {
+                console.error('Milestone not found:', currentMilestoneId);
+                showToast('Error: Could not add note');
             }
         });
 
