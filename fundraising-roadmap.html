@@ -63,6 +63,12 @@
             font-weight: 700;
         }
 
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
         .header-actions button {
             background: var(--accent-orange);
             color: var(--white);
@@ -80,6 +86,14 @@
             background: var(--brown-light);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(213, 112, 40, 0.3);
+        }
+
+        .header-actions button.secondary {
+            background: var(--brown-light);
+        }
+
+        .header-actions button.secondary:hover {
+            background: var(--primary-dark);
         }
 
         /* Container */
@@ -580,6 +594,184 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Investor Prospects Section */
+        .investors-section {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .investors-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .investors-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .add-investor-btn {
+            background: var(--accent-orange);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-investor-btn:hover {
+            background: var(--brown-dark);
+            transform: translateY(-2px);
+        }
+
+        .investors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .investor-card {
+            background: var(--light-cream);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .investor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .investor-card.contacted {
+            border-left: 4px solid #2196F3;
+        }
+
+        .investor-card.nurturing {
+            border-left: 4px solid var(--accent-orange);
+        }
+
+        .investor-card.committed {
+            border-left: 4px solid var(--success-green);
+        }
+
+        .investor-card.declined {
+            border-left: 4px solid #F44336;
+        }
+
+        .investor-card.dead {
+            border-left: 4px solid #9E9E9E;
+            opacity: 0.7;
+        }
+
+        .investor-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .investor-company {
+            color: var(--brown-dark);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .investor-contact {
+            color: var(--primary-dark);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .investor-status {
+            margin-bottom: 1rem;
+        }
+
+        .investor-status label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .investor-status select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid var(--light-cream);
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .investor-status select:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+        }
+
+        .investor-notes {
+            font-size: 0.85rem;
+            color: var(--brown-dark);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .investor-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .investor-actions button {
+            flex: 1;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .edit-investor-btn {
+            background: var(--brown-light);
+            color: var(--white);
+        }
+
+        .edit-investor-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .delete-investor-btn {
+            background: #F44336;
+            color: var(--white);
+        }
+
+        .delete-investor-btn:hover {
+            background: #D32F2F;
+        }
+
+        .no-investors {
+            text-align: center;
+            color: var(--brown-dark);
+            font-style: italic;
+            padding: 3rem;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -740,6 +932,10 @@
                 text-align: center;
             }
 
+            .header-actions {
+                justify-content: center;
+            }
+
             .logo-section h1 {
                 font-size: 1.5rem;
             }
@@ -772,6 +968,19 @@
 
             .progress-bar-container {
                 width: 100%;
+            }
+
+            .investors-section {
+                padding: 1.5rem;
+            }
+
+            .investors-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .investors-grid {
+                grid-template-columns: 1fr;
             }
 
             .timeline::before {
@@ -810,6 +1019,7 @@
                 <h1>Sengo Fundraising Roadmap</h1>
             </div>
             <div class="header-actions">
+                <button class="secondary" onclick="sendEmailSummary()" id="emailBtn" style="display: none;">📧 Email Summary</button>
                 <button onclick="resetRoadmap()">New Roadmap</button>
             </div>
         </div>
@@ -885,6 +1095,17 @@
                 </div>
             </div>
 
+            <!-- Investor Prospects Section -->
+            <div class="investors-section">
+                <div class="investors-header">
+                    <h3 class="investors-title">Investor Prospects</h3>
+                    <button class="add-investor-btn" onclick="openInvestorModal()">+ Add Investor</button>
+                </div>
+                <div class="investors-grid" id="investorsGrid">
+                    <div class="no-investors">No investors added yet. Click "+ Add Investor" to start tracking your prospects.</div>
+                </div>
+            </div>
+
             <!-- Timeline -->
             <div class="timeline-container">
                 <h3 class="timeline-title">Your Fundraising Journey</h3>
@@ -922,6 +1143,49 @@
         </div>
     </div>
 
+    <!-- Investor Modal -->
+    <div class="modal" id="investorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="investorModalTitle">Add Investor</h3>
+                <button class="close-btn" onclick="closeInvestorModal()">&times;</button>
+            </div>
+            <form class="modal-form" id="investorForm">
+                <div class="form-group">
+                    <label for="investorName">Investor Name *</label>
+                    <input type="text" id="investorName" required placeholder="e.g., John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="investorCompany">Fund/Company *</label>
+                    <input type="text" id="investorCompany" required placeholder="e.g., Acme Ventures">
+                </div>
+                <div class="form-group">
+                    <label for="investorEmail">Email</label>
+                    <input type="email" id="investorEmail" placeholder="e.g., john@acmevc.com">
+                </div>
+                <div class="form-group">
+                    <label for="investorStatus">Status *</label>
+                    <select id="investorStatus" required>
+                        <option value="prospect">Prospect</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="nurturing">Nurturing</option>
+                        <option value="committed">Committed</option>
+                        <option value="declined">Declined</option>
+                        <option value="dead">Dead</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="investorNotes">Notes</label>
+                    <textarea id="investorNotes" placeholder="Add any notes about this investor..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn cancel" onclick="closeInvestorModal()">Cancel</button>
+                    <button type="submit" class="modal-btn save">Save Investor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         let roadmapData = {
             companyName: '',
@@ -929,10 +1193,12 @@
             targetDate: '',
             logoUrl: '',
             deckName: '',
-            milestones: []
+            milestones: [],
+            investors: []
         };
 
         let currentMilestoneId = null;
+        let currentInvestorId = null;
 
         // Load saved data on page load
         window.addEventListener('DOMContentLoaded', () => {
@@ -1132,6 +1398,7 @@
         function displayRoadmap() {
             document.getElementById('setupSection').classList.add('hidden');
             document.getElementById('roadmapSection').classList.add('visible');
+            document.getElementById('emailBtn').style.display = 'inline-block';
 
             // Display company info
             document.getElementById('companyNameDisplay').textContent = roadmapData.companyName;
@@ -1145,6 +1412,9 @@
 
             // Update progress
             updateProgress();
+
+            // Display investors
+            displayInvestors();
 
             // Generate timeline
             const timeline = document.getElementById('timeline');
@@ -1417,6 +1687,260 @@
             // Currently, all details are shown by default
         }
 
+        // Investor Management Functions
+        function displayInvestors() {
+            const grid = document.getElementById('investorsGrid');
+            grid.innerHTML = '';
+
+            if (!roadmapData.investors || roadmapData.investors.length === 0) {
+                grid.innerHTML = '<div class="no-investors">No investors added yet. Click "+ Add Investor" to start tracking your prospects.</div>';
+                return;
+            }
+
+            roadmapData.investors.forEach(investor => {
+                const card = createInvestorCard(investor);
+                grid.appendChild(card);
+            });
+        }
+
+        function createInvestorCard(investor) {
+            const card = document.createElement('div');
+            card.className = `investor-card ${investor.status}`;
+
+            const name = document.createElement('div');
+            name.className = 'investor-name';
+            name.textContent = investor.name;
+
+            const company = document.createElement('div');
+            company.className = 'investor-company';
+            company.textContent = investor.company;
+
+            card.appendChild(name);
+            card.appendChild(company);
+
+            if (investor.email) {
+                const contact = document.createElement('div');
+                contact.className = 'investor-contact';
+                contact.textContent = `📧 ${investor.email}`;
+                card.appendChild(contact);
+            }
+
+            const statusDiv = document.createElement('div');
+            statusDiv.className = 'investor-status';
+
+            const statusLabel = document.createElement('label');
+            statusLabel.textContent = 'Status';
+
+            const statusSelect = document.createElement('select');
+            statusSelect.value = investor.status;
+            statusSelect.innerHTML = `
+                <option value="prospect">Prospect</option>
+                <option value="contacted">Contacted</option>
+                <option value="nurturing">Nurturing</option>
+                <option value="committed">Committed</option>
+                <option value="declined">Declined</option>
+                <option value="dead">Dead</option>
+            `;
+            statusSelect.onchange = (e) => {
+                updateInvestorStatus(investor.id, e.target.value);
+            };
+
+            statusDiv.appendChild(statusLabel);
+            statusDiv.appendChild(statusSelect);
+            card.appendChild(statusDiv);
+
+            if (investor.notes) {
+                const notes = document.createElement('div');
+                notes.className = 'investor-notes';
+                notes.textContent = investor.notes;
+                card.appendChild(notes);
+            }
+
+            const actions = document.createElement('div');
+            actions.className = 'investor-actions';
+
+            const editBtn = document.createElement('button');
+            editBtn.className = 'edit-investor-btn';
+            editBtn.textContent = 'Edit';
+            editBtn.onclick = () => editInvestor(investor.id);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-investor-btn';
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.onclick = () => deleteInvestor(investor.id);
+
+            actions.appendChild(editBtn);
+            actions.appendChild(deleteBtn);
+            card.appendChild(actions);
+
+            return card;
+        }
+
+        function openInvestorModal(investorId = null) {
+            currentInvestorId = investorId;
+            const modal = document.getElementById('investorModal');
+            const title = document.getElementById('investorModalTitle');
+
+            if (investorId) {
+                const investor = roadmapData.investors.find(i => i.id === investorId);
+                if (investor) {
+                    title.textContent = 'Edit Investor';
+                    document.getElementById('investorName').value = investor.name;
+                    document.getElementById('investorCompany').value = investor.company;
+                    document.getElementById('investorEmail').value = investor.email || '';
+                    document.getElementById('investorStatus').value = investor.status;
+                    document.getElementById('investorNotes').value = investor.notes || '';
+                }
+            } else {
+                title.textContent = 'Add Investor';
+                document.getElementById('investorForm').reset();
+            }
+
+            modal.classList.add('active');
+            document.getElementById('investorName').focus();
+        }
+
+        function closeInvestorModal() {
+            document.getElementById('investorModal').classList.remove('active');
+            currentInvestorId = null;
+        }
+
+        function editInvestor(investorId) {
+            openInvestorModal(investorId);
+        }
+
+        function deleteInvestor(investorId) {
+            if (confirm('Are you sure you want to delete this investor?')) {
+                roadmapData.investors = roadmapData.investors.filter(i => i.id !== investorId);
+                saveData();
+                displayInvestors();
+                showToast('Investor deleted');
+            }
+        }
+
+        function updateInvestorStatus(investorId, newStatus) {
+            const investor = roadmapData.investors.find(i => i.id === investorId);
+            if (investor) {
+                investor.status = newStatus;
+                saveData();
+                displayInvestors();
+                showToast(`Status updated to "${newStatus}"`);
+            }
+        }
+
+        document.getElementById('investorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const investorData = {
+                name: document.getElementById('investorName').value,
+                company: document.getElementById('investorCompany').value,
+                email: document.getElementById('investorEmail').value,
+                status: document.getElementById('investorStatus').value,
+                notes: document.getElementById('investorNotes').value
+            };
+
+            if (currentInvestorId) {
+                // Update existing investor
+                const investor = roadmapData.investors.find(i => i.id === currentInvestorId);
+                if (investor) {
+                    Object.assign(investor, investorData);
+                    showToast('Investor updated successfully!');
+                }
+            } else {
+                // Add new investor
+                investorData.id = Date.now();
+                if (!roadmapData.investors) {
+                    roadmapData.investors = [];
+                }
+                roadmapData.investors.push(investorData);
+                showToast('Investor added successfully!');
+            }
+
+            saveData();
+            displayInvestors();
+            closeInvestorModal();
+        });
+
+        // Email Summary Function
+        function sendEmailSummary() {
+            const subject = encodeURIComponent(`${roadmapData.companyName} - Fundraising Progress Update`);
+
+            let body = `Hello,\n\n`;
+            body += `Here's an update on ${roadmapData.companyName}'s fundraising progress:\n\n`;
+            body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            body += `📊 FUNDRAISING OVERVIEW\n`;
+            body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+            body += `Company: ${roadmapData.companyName}\n`;
+            body += `Goal: $${roadmapData.fundraiseGoal.toLocaleString()}\n`;
+            body += `Target Close Date: ${new Date(roadmapData.targetDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}\n\n`;
+
+            const completedMilestones = roadmapData.milestones.filter(m => m.completed).length;
+            const totalMilestones = roadmapData.milestones.length;
+            const percentage = Math.round((completedMilestones / totalMilestones) * 100);
+            body += `Progress: ${completedMilestones} of ${totalMilestones} milestones completed (${percentage}%)\n\n`;
+
+            body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            body += `🎯 MILESTONE STATUS\n`;
+            body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+            roadmapData.milestones.forEach((milestone, index) => {
+                const status = milestone.completed ? '✅' : '⏳';
+                body += `${status} ${milestone.title}\n`;
+                body += `   Date: ${new Date(milestone.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}\n`;
+
+                if (milestone.tasks) {
+                    const completedTasks = milestone.tasks.filter(t => t.completed).length;
+                    body += `   Tasks: ${completedTasks}/${milestone.tasks.length} completed\n`;
+                }
+
+                if (milestone.notes && milestone.notes.length > 0) {
+                    body += `   Latest Note: ${milestone.notes[0].text.substring(0, 100)}...\n`;
+                }
+                body += `\n`;
+            });
+
+            if (roadmapData.investors && roadmapData.investors.length > 0) {
+                body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+                body += `👥 INVESTOR PROSPECTS\n`;
+                body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+                const statusGroups = {
+                    'committed': [],
+                    'nurturing': [],
+                    'contacted': [],
+                    'prospect': [],
+                    'declined': [],
+                    'dead': []
+                };
+
+                roadmapData.investors.forEach(inv => {
+                    statusGroups[inv.status].push(inv);
+                });
+
+                Object.keys(statusGroups).forEach(status => {
+                    if (statusGroups[status].length > 0) {
+                        const label = status.charAt(0).toUpperCase() + status.slice(1);
+                        body += `${label} (${statusGroups[status].length}):\n`;
+                        statusGroups[status].forEach(inv => {
+                            body += `  • ${inv.name} - ${inv.company}\n`;
+                        });
+                        body += `\n`;
+                    }
+                });
+            }
+
+            body += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+            body += `Best regards,\n`;
+            body += `${roadmapData.companyName} Team\n\n`;
+            body += `---\n`;
+            body += `This summary was generated by Sengo Fundraising Roadmap\n`;
+
+            const mailtoLink = `mailto:?subject=${subject}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+
+            showToast('Opening email client...');
+        }
+
         function resetRoadmap() {
             if (confirm('Are you sure you want to create a new roadmap? This will clear all current data.')) {
                 localStorage.removeItem('fundraisingRoadmap');
@@ -1426,10 +1950,12 @@
                     targetDate: '',
                     logoUrl: '',
                     deckName: '',
-                    milestones: []
+                    milestones: [],
+                    investors: []
                 };
                 document.getElementById('setupSection').classList.remove('hidden');
                 document.getElementById('roadmapSection').classList.remove('visible');
+                document.getElementById('emailBtn').style.display = 'none';
                 document.getElementById('roadmapForm').reset();
                 document.getElementById('logoPreview').classList.remove('visible');
                 document.getElementById('logoFileName').textContent = 'No file chosen';
@@ -1438,11 +1964,17 @@
             }
         }
 
-        // Close modal when clicking outside
+        // Close modals when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('noteModal');
-            if (event.target === modal) {
+            const noteModal = document.getElementById('noteModal');
+            const investorModal = document.getElementById('investorModal');
+
+            if (event.target === noteModal) {
                 closeNoteModal();
+            }
+
+            if (event.target === investorModal) {
+                closeInvestorModal();
             }
         }
     </script>
