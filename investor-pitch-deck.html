@@ -415,6 +415,60 @@
       opacity: 0.9;
     }
 
+    /* Large Stat Display */
+    .large-stat {
+      text-align: center;
+      margin: 60px auto;
+    }
+
+    .large-stat-number {
+      font-size: 8rem;
+      font-weight: 900;
+      color: #D57028;
+      line-height: 1;
+      margin-bottom: 30px;
+    }
+
+    .large-stat-description {
+      font-size: 1.8rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* QR Code */
+    .qr-code {
+      display: inline-block;
+      padding: 20px;
+      background: white;
+      border-radius: 16px;
+      margin-top: 40px;
+    }
+
+    .qr-code img {
+      display: block;
+      width: 180px;
+      height: 180px;
+    }
+
+    /* Company Logo */
+    .company-logo {
+      max-width: 300px;
+      height: auto;
+      margin: 30px auto;
+      display: block;
+    }
+
+    /* Social Media Preview */
+    .social-preview {
+      max-width: 400px;
+      height: auto;
+      margin: 30px auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .slide {
@@ -588,7 +642,7 @@
       <span class="impact-badge">Our Vision</span>
       <h2>Community Goals</h2>
       <ul>
-        <li>Create a supportive network of angel investors committed to diverse founders</li>
+        <li>Create a supportive network of angel investors committed to founders</li>
         <li>Share knowledge, resources, and investment opportunities</li>
         <li>Build authentic relationships between funders and founders</li>
         <li>Democratize access to quality dealflow</li>
@@ -616,7 +670,7 @@
           <li>Growing demand for accessible, ethical, community-driven investment pathways</li>
         </ul>
       </div>
-      <p style="margin-top: 30px;">Discussion: <span class="emphasis">How do we democratize access to the fastest-growing asset class?</span></p>
+      <p style="margin-top: 30px; font-size: 1.2rem;">Discussion: <span class="emphasis">How do we democratize access?</span></p>
     </div>
 
     <!-- Slide 5: The Problem -->
@@ -650,25 +704,14 @@
       <span class="slide-number">7 / 17</span>
       <span class="impact-badge">The Data</span>
       <h2>Black Founders: Q2 2025</h2>
-      <div class="data-grid">
-        <div class="data-item">
-          <div class="data-number">0.42%</div>
-          <div class="data-description">of total U.S. venture funding went to Black founders in Q2 2025</div>
-        </div>
-        <div class="data-item">
-          <div class="data-number">$290.7M</div>
-          <div class="data-description">raised by 19 Black-founded startups out of $69.9B total deployed</div>
-        </div>
-        <div class="data-item">
-          <div class="data-number">42</div>
-          <div class="data-description">Black & Latino-founded unicorns valued at $125B collectively</div>
-        </div>
-        <div class="data-item">
-          <div class="data-number">1,338</div>
-          <div class="data-description">Black and Latino companies have raised $1M+ in VC ($52.3B total)</div>
-        </div>
+      <div class="large-stat">
+        <div class="large-stat-number">0.42%</div>
+        <p class="large-stat-description">of total U.S. venture funding went to Black founders in Q2 2025</p>
       </div>
-      <p class="citation">Source: HBCU.VC Q2 2025 Black Venture Funding Report, Harlem Capital (2024)</p>
+      <div class="qr-code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.hbcu.vc/news/q2-2025-black-venture-funding-report" alt="QR Code to HBCU.VC Report">
+      </div>
+      <p class="citation" style="margin-top: 30px;">Source: HBCU.VC Q2 2025 Black Venture Funding Report</p>
     </div>
 
     <!-- Slide 7: Women Founders Data -->
@@ -792,7 +835,7 @@
       <span class="slide-number">12 / 17</span>
       <span class="impact-badge">The Solution</span>
       <h2>What is Sengo?</h2>
-      <p class="subtitle">Reimagining fundraising and investing by building the infrastructure for private market access.</p>
+      <p class="subtitle">Building infrastructure for private market access.</p>
       <div class="content-box">
         <ul>
           <li><span class="emphasis">Education:</span> Modular learning that prepares founders and funders to confidently navigate private markets</li>
@@ -814,23 +857,23 @@
       </svg>
       <span class="slide-number">13 / 17</span>
       <span class="impact-badge">Our Impact</span>
-      <h2>365 Days Since MVP Launch</h2>
+      <h2>We had our launch party in March 2025 and since then...</h2>
       <div class="stats-container">
         <div class="stat-card">
           <div class="stat-number">600+</div>
           <div class="stat-label">Platform Members</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">167X</div>
-          <div class="stat-label">Multiplier on Deployed Funds</div>
+          <div class="stat-number">18</div>
+          <div class="stat-label">Founders Funded</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">$5M+</div>
-          <div class="stat-label">Raised by Sengo Founders</div>
+          <div class="stat-number">$30K+</div>
+          <div class="stat-label">Grants Given Out</div>
         </div>
       </div>
-      <p style="margin-top: 50px;"><span class="emphasis">$50K+ ARR  •  $200K+ Lifetime Revenue  •  8,000+ Email Subscribers (4X Industry Open Rate)</span></p>
-      <p style="margin-top: 20px; font-size: 1rem; opacity: 0.9;">Featured in Forbes, NerdWallet, Nasdaq, Business Insider, and more.</p>
+      <p style="margin-top: 50px; font-size: 1.4rem;"><span class="emphasis">$5M+ raised by founders at a 167X multiplier</span></p>
+      <p style="margin-top: 25px; font-size: 1.2rem;">9,400+ email subscribers  •  Featured in Forbes, NerdWallet, Nasdaq, Business Insider</p>
     </div>
 
     <!-- Slide 8: How It Works for Investors -->
@@ -843,7 +886,7 @@
       </svg>
       <span class="slide-number">14 / 17</span>
       <span class="impact-badge">For Funders</span>
-      <h2>Your Journey Into Private Markets</h2>
+      <h2>Using the Platform</h2>
       <ul>
         <li>Access modular education that builds confidence navigating private market investments</li>
         <li>Join a digital community to discover, vote on, and discuss investment opportunities</li>
@@ -863,19 +906,14 @@
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
       <span class="slide-number">15 / 17</span>
-      <span class="impact-badge">Coming Soon</span>
-      <h2>Live Pitch Event</h2>
+      <span class="impact-badge">Live Pitch Event</span>
+      <h2>Meet Cee Cee's Closet</h2>
+      <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/07c5abfa-9197-433a-a4d1-4aa1f02c76e4/ceeeceelogo.png?format=1000w" alt="Cee Cee's Closet Logo" class="company-logo">
       <div class="content-box">
-        <p class="subtitle">End of the month!</p>
-        <p>You'll have the opportunity to hear a <span class="emphasis">live pitch from a vetted founder</span> seeking investment.</p>
-        <p style="margin-top: 25px;">This is your chance to:</p>
-        <ul style="margin-top: 20px;">
-          <li>See our dealflow process in action</li>
-          <li>Ask questions and engage with a founder</li>
-          <li>Practice your due diligence</li>
-          <li>Consider your first (or next) angel investment</li>
-        </ul>
+        <p class="subtitle">End of the month - Live founder pitch!</p>
+        <p>Join us to hear from a vetted founder building an impactful business. This is your chance to see our dealflow process in action, ask questions, and consider your first (or next) angel investment.</p>
       </div>
+      <img src="https://via.placeholder.com/400x400/F3EDE7/1B3533?text=Social+Media+Preview" alt="Cee Cee's Closet Social Media" class="social-preview">
     </div>
 
     <!-- Slide 10: Call to Action -->
