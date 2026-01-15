@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo Angel Investor Meetup - Ila Corcoran</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F3EDE7;
+      overflow: hidden;
+      color: #1B3533;
+    }
+
+    /* Slide Container */
+    .deck-container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slides-wrapper {
+      display: flex;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 80px;
+      position: relative;
+      text-align: center;
+    }
+
+    /* Slide Backgrounds */
+    .slide-cream {
+      background: #F3EDE7;
+    }
+
+    .slide-dark {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      color: #F3EDE7;
+    }
+
+    .slide-accent {
+      background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
+      color: #F3EDE7;
+    }
+
+    .slide-dark::before,
+    .slide-accent::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(213, 112, 40, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Typography */
+    h1 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 5.5rem;
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.077em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    p, li {
+      font-size: 1.4rem;
+      line-height: 1.8;
+      font-weight: 400;
+      max-width: 900px;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .subtitle {
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    .small-text {
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    /* Lists */
+    ul {
+      list-style: none;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    ul li {
+      padding: 15px 0 15px 50px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #D57028;
+    }
+
+    .slide-dark ul li::before,
+    .slide-accent ul li::before {
+      color: #F3EDE7;
+    }
+
+    /* Impact Badge */
+    .impact-badge {
+      display: inline-block;
+      background: #D57028;
+      color: white;
+      padding: 12px 35px;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 30px;
+    }
+
+    .slide-dark .impact-badge,
+    .slide-accent .impact-badge {
+      background: rgba(243, 237, 231, 0.2);
+      color: #F3EDE7;
+      border: 2px solid rgba(243, 237, 231, 0.4);
+    }
+
+    /* Stats */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 50px;
+      max-width: 1100px;
+    }
+
+    .stat-card {
+      padding: 40px 30px;
+      background: rgba(243, 237, 231, 0.15);
+      border-radius: 16px;
+      border: 2px solid rgba(243, 237, 231, 0.3);
+    }
+
+    .stat-number {
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 15px;
+      color: #F3EDE7;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: 0.9;
+    }
+
+    /* Logo */
+    .sengo-logo {
+      position: absolute;
+      top: 40px;
+      left: 60px;
+      width: 120px;
+      height: auto;
+      opacity: 0.8;
+    }
+
+    .slide-dark .sengo-logo,
+    .slide-accent .sengo-logo {
+      filter: brightness(0) invert(1);
+    }
+
+    /* Navigation */
+    .nav-controls {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 100;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(27, 53, 51, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-dot.active {
+      background: #D57028;
+      transform: scale(1.4);
+    }
+
+    .slide-dark .nav-dot,
+    .slide-accent .nav-dot {
+      background: rgba(243, 237, 231, 0.3);
+    }
+
+    .slide-dark .nav-dot.active,
+    .slide-accent .nav-dot.active {
+      background: #F3EDE7;
+    }
+
+    /* Arrow Navigation */
+    .arrow-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(213, 112, 40, 0.2);
+      color: #1B3533;
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .arrow-nav:hover {
+      background: #D57028;
+      color: white;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .arrow-prev {
+      left: 30px;
+    }
+
+    .arrow-next {
+      right: 30px;
+    }
+
+    .slide-dark .arrow-nav,
+    .slide-accent .arrow-nav {
+      background: rgba(243, 237, 231, 0.2);
+      color: #F3EDE7;
+    }
+
+    .slide-dark .arrow-nav:hover,
+    .slide-accent .arrow-nav:hover {
+      background: #F3EDE7;
+      color: #1B3533;
+    }
+
+    /* Slide Number */
+    .slide-number {
+      position: absolute;
+      top: 40px;
+      right: 60px;
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0.5;
+    }
+
+    /* Content Boxes */
+    .content-box {
+      background: rgba(27, 53, 51, 0.05);
+      padding: 40px 50px;
+      border-radius: 20px;
+      margin: 30px auto;
+      max-width: 900px;
+      border: 2px solid rgba(213, 112, 40, 0.2);
+    }
+
+    .slide-dark .content-box,
+    .slide-accent .content-box {
+      background: rgba(243, 237, 231, 0.1);
+      border-color: rgba(243, 237, 231, 0.3);
+    }
+
+    /* Emphasis Text */
+    .emphasis {
+      color: #D57028;
+      font-weight: 700;
+    }
+
+    .slide-dark .emphasis,
+    .slide-accent .emphasis {
+      color: #F3EDE7;
+      text-decoration: underline;
+      text-decoration-color: rgba(243, 237, 231, 0.5);
+      text-decoration-thickness: 3px;
+      text-underline-offset: 5px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .slide {
+        padding: 40px 30px;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+      }
+
+      h3 {
+        font-size: 1.8rem;
+      }
+
+      p, li {
+        font-size: 1.1rem;
+      }
+
+      .subtitle {
+        font-size: 1.3rem;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .stat-number {
+        font-size: 3rem;
+      }
+
+      .sengo-logo {
+        width: 80px;
+        top: 25px;
+        left: 30px;
+      }
+
+      .slide-number {
+        top: 25px;
+        right: 30px;
+        font-size: 0.85rem;
+      }
+
+      .arrow-nav {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+
+      .arrow-prev {
+        left: 15px;
+      }
+
+      .arrow-next {
+        right: 15px;
+      }
+
+      .content-box {
+        padding: 30px 25px;
+      }
+
+      ul li {
+        padding-left: 40px;
+      }
+    }
+
+    /* Keyboard Navigation Hint */
+    .keyboard-hint {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      opacity: 0.4;
+      font-weight: 500;
+      animation: fadeInOut 3s ease-in-out infinite;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.6; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck-container">
+  <div class="slides-wrapper" id="slidesWrapper">
+
+    <!-- Slide 1: Title Slide -->
+    <div class="slide slide-dark" data-slide="1">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">1 / 10</span>
+      <span class="impact-badge">First Angel Investor Meetup</span>
+      <h1>Welcome to<br>Sengo</h1>
+      <p class="subtitle">Reimagining Fundraising and Investing</p>
+      <p class="small-text">Presented by Ila Corcoran, Founder</p>
+    </div>
+
+    <!-- Slide 2: Personal Introduction -->
+    <div class="slide slide-cream" data-slide="2">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">2 / 10</span>
+      <span class="impact-badge">Introduction</span>
+      <h2>Meet Ila Corcoran</h2>
+      <div class="content-box">
+        <p>Founder and CEO of Sengo, passionate about closing the wealth gap in private assets and democratizing access to capital for underrepresented founders.</p>
+        <p style="margin-top: 30px;"><span class="emphasis">Your turn!</span> Let's hear from you. Share your background and what brings you to angel investing.</p>
+        <p class="small-text" style="margin-top: 20px; opacity: 0.7;">(We'll cap intros at ~10 minutes)</p>
+      </div>
+    </div>
+
+    <!-- Slide 3: Vision & Goals -->
+    <div class="slide slide-accent" data-slide="3">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">3 / 10</span>
+      <span class="impact-badge">Our Vision</span>
+      <h2>Community Goals</h2>
+      <ul>
+        <li>Create a supportive network of angel investors committed to diverse founders</li>
+        <li>Share knowledge, resources, and investment opportunities</li>
+        <li>Build authentic relationships between funders and founders</li>
+        <li>Democratize access to quality dealflow</li>
+        <li>Learn together and grow as investors</li>
+      </ul>
+      <p style="margin-top: 40px;"><span class="emphasis">Your feedback is welcome!</span></p>
+    </div>
+
+    <!-- Slide 4: Angel Investing Today -->
+    <div class="slide slide-cream" data-slide="4">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">4 / 10</span>
+      <span class="impact-badge">The Landscape</span>
+      <h2>Angel Investing in Today's Market</h2>
+      <div class="content-box">
+        <ul>
+          <li>Rising interest in alternative assets and private market access</li>
+          <li>Increased focus on diverse founders and impact investing</li>
+          <li>Need for education and community support for new angels</li>
+          <li>Challenges: dealflow quality, due diligence, and portfolio management</li>
+        </ul>
+      </div>
+      <p style="margin-top: 30px;">Let's discuss: <span class="emphasis">What are your biggest questions or concerns about angel investing?</span></p>
+    </div>
+
+    <!-- Slide 5: The Problem -->
+    <div class="slide slide-dark" data-slide="5">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">5 / 10</span>
+      <span class="impact-badge">The Challenge</span>
+      <h2>The Wealth Gap is Real</h2>
+      <p class="subtitle">Only 2% of VC funding goes to women founders.<br>Less than 1% goes to Black founders.</p>
+      <div class="content-box">
+        <p>Traditional fundraising and investing pathways are <span class="emphasis">broken</span>. Access to capital and dealflow remains concentrated among a small, homogenous group.</p>
+        <p style="margin-top: 25px;">Sengo exists to change this.</p>
+      </div>
+    </div>
+
+    <!-- Slide 6: Sengo Platform Overview -->
+    <div class="slide slide-cream" data-slide="6">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">6 / 10</span>
+      <span class="impact-badge">The Solution</span>
+      <h2>What is Sengo?</h2>
+      <p class="subtitle">A platform connecting founders and funders through education, dealflow, and community.</p>
+      <div class="content-box">
+        <ul>
+          <li><span class="emphasis">Education:</span> Angel investing courses, founder prep programs</li>
+          <li><span class="emphasis">Dealflow:</span> Curated investment opportunities from vetted founders</li>
+          <li><span class="emphasis">Resources:</span> Tools, templates, and best practices</li>
+          <li><span class="emphasis">Events:</span> 90+ annual touchpoints including pitch sessions and networking</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Slide 7: Impact & Traction -->
+    <div class="slide slide-accent" data-slide="7">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">7 / 10</span>
+      <span class="impact-badge">Our Impact</span>
+      <h2>Sengo By The Numbers</h2>
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-number">600</div>
+          <div class="stat-label">App Members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">90+</div>
+          <div class="stat-label">Annual Touchpoints</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">$5M+</div>
+          <div class="stat-label">Raised by Founders in 2025</div>
+        </div>
+      </div>
+      <p style="margin-top: 50px;">Featured in Forbes, NerdWallet, Nasdaq, Business Insider, and more.</p>
+    </div>
+
+    <!-- Slide 8: How It Works for Investors -->
+    <div class="slide slide-dark" data-slide="8">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">8 / 10</span>
+      <span class="impact-badge">For Funders</span>
+      <h2>Your Journey as an Angel</h2>
+      <ul>
+        <li>Join the Sengo investor community and get access to our platform</li>
+        <li>Complete angel investing education modules (optional but recommended)</li>
+        <li>Review curated dealflow and founder profiles</li>
+        <li>Attend live pitch events and meet founders in person</li>
+        <li>Connect with fellow angels for co-investment opportunities</li>
+        <li>Access ongoing support, resources, and community</li>
+      </ul>
+    </div>
+
+    <!-- Slide 9: What's Coming -->
+    <div class="slide slide-cream" data-slide="9">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">9 / 10</span>
+      <span class="impact-badge">Coming Soon</span>
+      <h2>Live Pitch Event</h2>
+      <div class="content-box">
+        <p class="subtitle">End of the month!</p>
+        <p>You'll have the opportunity to hear a <span class="emphasis">live pitch from a vetted founder</span> seeking investment.</p>
+        <p style="margin-top: 25px;">This is your chance to:</p>
+        <ul style="margin-top: 20px;">
+          <li>See our dealflow process in action</li>
+          <li>Ask questions and engage with a founder</li>
+          <li>Practice your due diligence</li>
+          <li>Consider your first (or next) angel investment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Slide 10: Call to Action -->
+    <div class="slide slide-accent" data-slide="10">
+      <svg class="sengo-logo" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="slide-number">10 / 10</span>
+      <span class="impact-badge">Join Us</span>
+      <h1>Let's Build This Together</h1>
+      <p class="subtitle">Join the movement to democratize access to capital</p>
+      <div class="content-box">
+        <p style="font-size: 1.6rem; line-height: 1.7;">
+          <span class="emphasis">Questions? Ideas? Ready to get started?</span>
+        </p>
+        <p style="margin-top: 30px;">Visit <strong>app.bysengo.com</strong> to enroll as an investor</p>
+        <p class="small-text" style="margin-top: 30px;">Thank you for being here. Let's change the game together.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Navigation Controls -->
+<button class="arrow-nav arrow-prev" id="prevBtn" onclick="navigate(-1)">‹</button>
+<button class="arrow-nav arrow-next" id="nextBtn" onclick="navigate(1)">›</button>
+
+<div class="nav-controls" id="navDots"></div>
+
+<div class="keyboard-hint">Use arrow keys, swipe, or click to navigate</div>
+
+<script>
+  // Slide Navigation
+  let currentSlide = 0;
+  const slidesWrapper = document.getElementById('slidesWrapper');
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  const navDots = document.getElementById('navDots');
+
+  // Create navigation dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('nav-dot');
+    if (i === 0) dot.classList.add('active');
+    dot.onclick = () => goToSlide(i);
+    navDots.appendChild(dot);
+  }
+
+  function updateSlide() {
+    slidesWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    // Update dots
+    document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
+
+    // Update arrow visibility
+    document.getElementById('prevBtn').style.opacity = currentSlide === 0 ? '0.3' : '1';
+    document.getElementById('nextBtn').style.opacity = currentSlide === totalSlides - 1 ? '0.3' : '1';
+  }
+
+  function navigate(direction) {
+    const newSlide = currentSlide + direction;
+    if (newSlide >= 0 && newSlide < totalSlides) {
+      currentSlide = newSlide;
+      updateSlide();
+    }
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    updateSlide();
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      navigate(1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      navigate(-1);
+    }
+  });
+
+  // Touch/Swipe navigation
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  slidesWrapper.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  slidesWrapper.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    if (touchStartX - touchEndX > swipeThreshold) {
+      navigate(1); // Swipe left - next slide
+    } else if (touchEndX - touchStartX > swipeThreshold) {
+      navigate(-1); // Swipe right - previous slide
+    }
+  }
+
+  // Mouse wheel navigation (optional - subtle)
+  let wheelTimeout;
+  document.addEventListener('wheel', (e) => {
+    clearTimeout(wheelTimeout);
+    wheelTimeout = setTimeout(() => {
+      if (Math.abs(e.deltaY) > 30) {
+        if (e.deltaY > 0) {
+          navigate(1);
+        } else {
+          navigate(-1);
+        }
+      }
+    }, 150);
+  });
+
+  // Initialize
+  updateSlide();
+</script>
+
+</body>
+</html>
