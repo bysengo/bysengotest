@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sengo - Fundraising Roadmap</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1B3533;
+            --brown-dark: #67441A;
+            --brown-light: #AF8145;
+            --accent-orange: #D57028;
+            --light-cream: #F3EDE7;
+            --white: #FFFFFF;
+            --success-green: #4CAF50;
+            --warning-yellow: #FFC107;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--light-cream) 0%, #ffffff 100%);
+            color: var(--primary-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .roadmap-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--brown-dark) 100%);
+            padding: 2rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-section h1 {
+            font-family: 'Arimo', sans-serif;
+            color: var(--white);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .header-actions button {
+            background: var(--accent-orange);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .header-actions button:hover {
+            background: var(--brown-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(213, 112, 40, 0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Setup Section */
+        .setup-section {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .setup-section.hidden {
+            display: none;
+        }
+
+        .section-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--brown-dark);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="date"] {
+            padding: 0.875rem;
+            border: 2px solid var(--light-cream);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 3px rgba(213, 112, 40, 0.1);
+        }
+
+        .file-upload {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-btn {
+            background: var(--light-cream);
+            color: var(--primary-dark);
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            border: 2px solid var(--brown-light);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .file-upload-btn:hover {
+            background: var(--brown-light);
+            color: var(--white);
+        }
+
+        .file-name {
+            color: var(--brown-dark);
+            font-size: 0.9rem;
+        }
+
+        .logo-preview {
+            margin-top: 1rem;
+            max-width: 200px;
+            max-height: 100px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .logo-preview.visible {
+            display: block;
+        }
+
+        .submit-btn {
+            grid-column: 1 / -1;
+            background: var(--accent-orange);
+            color: var(--white);
+            border: none;
+            padding: 1.25rem 2rem;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--brown-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(213, 112, 40, 0.3);
+        }
+
+        /* Roadmap Section */
+        .roadmap-section {
+            display: none;
+        }
+
+        .roadmap-section.visible {
+            display: block;
+        }
+
+        .roadmap-header-info {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .company-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .company-logo-display {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .company-details h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .company-details .goal-info {
+            color: var(--brown-dark);
+            font-weight: 600;
+        }
+
+        .progress-info {
+            text-align: right;
+        }
+
+        .progress-bar-container {
+            width: 300px;
+            height: 12px;
+            background: var(--light-cream);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-orange) 0%, var(--brown-light) 100%);
+            transition: width 0.5s ease;
+            border-radius: 6px;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: var(--brown-dark);
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .timeline-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--accent-orange) 0%, var(--brown-light) 100%);
+            transform: translateX(-50%);
+        }
+
+        .milestone {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: flex-start;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .milestone:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .milestone-content {
+            width: calc(50% - 40px);
+            background: var(--light-cream);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .milestone-content:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .milestone-content.completed {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 4px solid var(--success-green);
+        }
+
+        .milestone-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: var(--white);
+            border: 4px solid var(--accent-orange);
+            border-radius: 50%;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .milestone-content.completed + .milestone-marker {
+            background: var(--success-green);
+            border-color: var(--success-green);
+        }
+
+        .milestone-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .milestone-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-date {
+            color: var(--brown-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .milestone-status {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-badge.pending {
+            background: var(--warning-yellow);
+            color: var(--primary-dark);
+        }
+
+        .status-badge.completed {
+            background: var(--success-green);
+            color: var(--white);
+        }
+
+        .complete-btn {
+            background: var(--accent-orange);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .complete-btn:hover {
+            background: var(--brown-dark);
+        }
+
+        .milestone-description {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .milestone-notes {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(27, 53, 51, 0.1);
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .notes-title {
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 0.95rem;
+        }
+
+        .add-note-btn {
+            background: var(--brown-light);
+            color: var(--white);
+            border: none;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-note-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .note-item {
+            background: var(--white);
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        .note-date {
+            font-size: 0.8rem;
+            color: var(--brown-dark);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .note-text {
+            color: var(--primary-dark);
+            font-size: 0.9rem;
+        }
+
+        .no-notes {
+            color: var(--brown-dark);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(27, 53, 51, 0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--brown-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-orange);
+            transform: rotate(90deg);
+        }
+
+        .modal-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-form textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--light-cream);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 3px rgba(213, 112, 40, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 0.875rem 1.75rem;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .modal-btn.cancel {
+            background: var(--light-cream);
+            color: var(--primary-dark);
+        }
+
+        .modal-btn.cancel:hover {
+            background: var(--brown-light);
+            color: var(--white);
+        }
+
+        .modal-btn.save {
+            background: var(--accent-orange);
+            color: var(--white);
+        }
+
+        .modal-btn.save:hover {
+            background: var(--brown-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .setup-section {
+                padding: 2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .roadmap-header-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .company-info {
+                flex-direction: column;
+            }
+
+            .progress-info {
+                text-align: center;
+            }
+
+            .progress-bar-container {
+                width: 100%;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .milestone {
+                flex-direction: column !important;
+                padding-left: 50px;
+            }
+
+            .milestone-content {
+                width: 100%;
+            }
+
+            .milestone-marker {
+                left: 20px;
+            }
+
+            .timeline-container {
+                padding: 2rem 1rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="roadmap-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <h1>Sengo Fundraising Roadmap</h1>
+            </div>
+            <div class="header-actions">
+                <button onclick="resetRoadmap()">New Roadmap</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Setup Section -->
+        <div class="setup-section" id="setupSection">
+            <h2 class="section-title">Create Your Fundraising Roadmap</h2>
+            <p class="section-subtitle">Enter your company details and fundraising goals to generate an intelligent, customizable roadmap.</p>
+
+            <form class="form-grid" id="roadmapForm">
+                <div class="form-group">
+                    <label for="companyName">Company Name *</label>
+                    <input type="text" id="companyName" required placeholder="e.g., Acme Inc.">
+                </div>
+
+                <div class="form-group">
+                    <label for="fundraiseGoal">Fundraising Goal *</label>
+                    <input type="number" id="fundraiseGoal" required placeholder="e.g., 1000000" min="0" step="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="companyLogo">Company Logo</label>
+                    <div class="file-upload">
+                        <label for="logoFile" class="file-upload-btn">Choose Logo</label>
+                        <input type="file" id="logoFile" accept="image/*" onchange="handleLogoUpload(event)">
+                        <span class="file-name" id="logoFileName">No file chosen</span>
+                    </div>
+                    <img id="logoPreview" class="logo-preview" alt="Logo preview">
+                </div>
+
+                <div class="form-group">
+                    <label for="targetDate">Target Close Date *</label>
+                    <input type="date" id="targetDate" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="slideDeck">Pitch Deck (Optional)</label>
+                    <div class="file-upload">
+                        <label for="deckFile" class="file-upload-btn">Upload Deck</label>
+                        <input type="file" id="deckFile" accept=".pdf,.ppt,.pptx" onchange="handleDeckUpload(event)">
+                        <span class="file-name" id="deckFileName">No file chosen</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Generate Roadmap</button>
+            </form>
+        </div>
+
+        <!-- Roadmap Section -->
+        <div class="roadmap-section" id="roadmapSection">
+            <!-- Company Header Info -->
+            <div class="roadmap-header-info">
+                <div class="company-info">
+                    <img id="companyLogoDisplay" class="company-logo-display" alt="Company Logo" src="">
+                    <div class="company-details">
+                        <h2 id="companyNameDisplay"></h2>
+                        <div class="goal-info">
+                            <span>Goal: <strong id="goalAmount"></strong></span> |
+                            <span>Target: <strong id="targetDateDisplay"></strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-info">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="completedCount">0</span> of <span id="totalCount">0</span> milestones completed
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline-container">
+                <h3 class="timeline-title">Your Fundraising Journey</h3>
+                <div class="timeline" id="timeline">
+                    <!-- Milestones will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note Modal -->
+    <div class="modal" id="noteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Note / Update</h3>
+                <button class="close-btn" onclick="closeNoteModal()">&times;</button>
+            </div>
+            <form class="modal-form" id="noteForm">
+                <div class="form-group">
+                    <label for="noteDate">Date</label>
+                    <input type="date" id="noteDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="noteText">Note / Update</label>
+                    <textarea id="noteText" required placeholder="Enter your update or note here..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn cancel" onclick="closeNoteModal()">Cancel</button>
+                    <button type="submit" class="modal-btn save">Save Note</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let roadmapData = {
+            companyName: '',
+            fundraiseGoal: 0,
+            targetDate: '',
+            logoUrl: '',
+            deckName: '',
+            milestones: []
+        };
+
+        let currentMilestoneId = null;
+
+        // Load saved data on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSavedData();
+            setDefaultDate();
+        });
+
+        function setDefaultDate() {
+            const today = new Date();
+            const sixMonthsLater = new Date(today.setMonth(today.getMonth() + 6));
+            document.getElementById('targetDate').value = sixMonthsLater.toISOString().split('T')[0];
+            document.getElementById('noteDate').value = new Date().toISOString().split('T')[0];
+        }
+
+        function loadSavedData() {
+            const saved = localStorage.getItem('fundraisingRoadmap');
+            if (saved) {
+                roadmapData = JSON.parse(saved);
+                displayRoadmap();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('fundraisingRoadmap', JSON.stringify(roadmapData));
+        }
+
+        function handleLogoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('logoFileName').textContent = file.name;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('logoPreview');
+                    preview.src = e.target.result;
+                    preview.classList.add('visible');
+                    roadmapData.logoUrl = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleDeckUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('deckFileName').textContent = file.name;
+                roadmapData.deckName = file.name;
+            }
+        }
+
+        document.getElementById('roadmapForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            roadmapData.companyName = document.getElementById('companyName').value;
+            roadmapData.fundraiseGoal = parseFloat(document.getElementById('fundraiseGoal').value);
+            roadmapData.targetDate = document.getElementById('targetDate').value;
+
+            generateMilestones();
+            displayRoadmap();
+            saveData();
+        });
+
+        function generateMilestones() {
+            const startDate = new Date();
+            const endDate = new Date(roadmapData.targetDate);
+            const daysDiff = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+
+            const milestoneTemplates = [
+                {
+                    title: 'Preparation Phase',
+                    description: 'Finalize pitch deck, financial models, and data room. Prepare all investor materials.',
+                    percentage: 0
+                },
+                {
+                    title: 'Target List Creation',
+                    description: 'Research and compile list of target investors. Prioritize by fit, stage, and portfolio.',
+                    percentage: 10
+                },
+                {
+                    title: 'Initial Outreach',
+                    description: 'Begin reaching out to warm introductions and tier-1 targets. Schedule initial calls.',
+                    percentage: 20
+                },
+                {
+                    title: 'First Meetings',
+                    description: 'Conduct partner meetings. Gather feedback and refine pitch based on responses.',
+                    percentage: 30
+                },
+                {
+                    title: 'Follow-up Round',
+                    description: 'Second meetings with interested investors. Share additional materials and answer deep-dive questions.',
+                    percentage: 45
+                },
+                {
+                    title: 'Due Diligence',
+                    description: 'Facilitate due diligence process. Provide access to data room, references, and technical reviews.',
+                    percentage: 60
+                },
+                {
+                    title: 'Term Sheet Negotiation',
+                    description: 'Review and negotiate term sheets. Consult with legal counsel on terms and conditions.',
+                    percentage: 75
+                },
+                {
+                    title: 'Final Documentation',
+                    description: 'Execute final investment documents. Complete legal review and regulatory requirements.',
+                    percentage: 90
+                },
+                {
+                    title: 'Round Closing',
+                    description: 'Close the round and receive funds. Announce funding and celebrate with the team!',
+                    percentage: 100
+                }
+            ];
+
+            roadmapData.milestones = milestoneTemplates.map((template, index) => {
+                const milestoneDate = new Date(startDate.getTime() + (daysDiff * template.percentage / 100) * 24 * 60 * 60 * 1000);
+
+                return {
+                    id: Date.now() + index,
+                    title: template.title,
+                    description: template.description,
+                    date: milestoneDate.toISOString().split('T')[0],
+                    completed: false,
+                    notes: []
+                };
+            });
+        }
+
+        function displayRoadmap() {
+            document.getElementById('setupSection').classList.add('hidden');
+            document.getElementById('roadmapSection').classList.add('visible');
+
+            // Display company info
+            document.getElementById('companyNameDisplay').textContent = roadmapData.companyName;
+            document.getElementById('goalAmount').textContent = '$' + roadmapData.fundraiseGoal.toLocaleString();
+            document.getElementById('targetDateDisplay').textContent = new Date(roadmapData.targetDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            if (roadmapData.logoUrl) {
+                document.getElementById('companyLogoDisplay').src = roadmapData.logoUrl;
+                document.getElementById('companyLogoDisplay').style.display = 'block';
+            }
+
+            // Update progress
+            updateProgress();
+
+            // Generate timeline
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '';
+
+            roadmapData.milestones.forEach((milestone, index) => {
+                const milestoneEl = createMilestoneElement(milestone, index);
+                timeline.appendChild(milestoneEl);
+            });
+        }
+
+        function createMilestoneElement(milestone, index) {
+            const milestoneDiv = document.createElement('div');
+            milestoneDiv.className = 'milestone';
+            milestoneDiv.style.animationDelay = `${index * 0.1}s`;
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = `milestone-content ${milestone.completed ? 'completed' : ''}`;
+            contentDiv.onclick = () => toggleMilestoneDetails(milestone.id);
+
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'milestone-header';
+
+            const titleDiv = document.createElement('div');
+            const titleEl = document.createElement('div');
+            titleEl.className = 'milestone-title';
+            titleEl.textContent = milestone.title;
+
+            const dateEl = document.createElement('div');
+            dateEl.className = 'milestone-date';
+            dateEl.textContent = new Date(milestone.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+            titleDiv.appendChild(titleEl);
+            titleDiv.appendChild(dateEl);
+
+            const statusDiv = document.createElement('div');
+            statusDiv.className = 'milestone-status';
+
+            const badge = document.createElement('span');
+            badge.className = `status-badge ${milestone.completed ? 'completed' : 'pending'}`;
+            badge.textContent = milestone.completed ? 'Completed' : 'Pending';
+            statusDiv.appendChild(badge);
+
+            if (!milestone.completed) {
+                const completeBtn = document.createElement('button');
+                completeBtn.className = 'complete-btn';
+                completeBtn.textContent = 'Complete';
+                completeBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    completeMilestone(milestone.id);
+                };
+                statusDiv.appendChild(completeBtn);
+            }
+
+            headerDiv.appendChild(titleDiv);
+            headerDiv.appendChild(statusDiv);
+
+            const descEl = document.createElement('div');
+            descEl.className = 'milestone-description';
+            descEl.textContent = milestone.description;
+
+            const notesDiv = document.createElement('div');
+            notesDiv.className = 'milestone-notes';
+
+            const notesHeader = document.createElement('div');
+            notesHeader.className = 'notes-header';
+
+            const notesTitle = document.createElement('span');
+            notesTitle.className = 'notes-title';
+            notesTitle.textContent = 'Notes & Updates';
+
+            const addNoteBtn = document.createElement('button');
+            addNoteBtn.className = 'add-note-btn';
+            addNoteBtn.textContent = '+ Add Note';
+            addNoteBtn.onclick = (e) => {
+                e.stopPropagation();
+                openNoteModal(milestone.id);
+            };
+
+            notesHeader.appendChild(notesTitle);
+            notesHeader.appendChild(addNoteBtn);
+            notesDiv.appendChild(notesHeader);
+
+            if (milestone.notes && milestone.notes.length > 0) {
+                milestone.notes.forEach(note => {
+                    const noteItem = document.createElement('div');
+                    noteItem.className = 'note-item';
+
+                    const noteDate = document.createElement('div');
+                    noteDate.className = 'note-date';
+                    noteDate.textContent = new Date(note.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+                    const noteText = document.createElement('div');
+                    noteText.className = 'note-text';
+                    noteText.textContent = note.text;
+
+                    noteItem.appendChild(noteDate);
+                    noteItem.appendChild(noteText);
+                    notesDiv.appendChild(noteItem);
+                });
+            } else {
+                const noNotes = document.createElement('div');
+                noNotes.className = 'no-notes';
+                noNotes.textContent = 'No notes yet. Click "Add Note" to add updates.';
+                notesDiv.appendChild(noNotes);
+            }
+
+            contentDiv.appendChild(headerDiv);
+            contentDiv.appendChild(descEl);
+            contentDiv.appendChild(notesDiv);
+
+            const marker = document.createElement('div');
+            marker.className = 'milestone-marker';
+
+            milestoneDiv.appendChild(contentDiv);
+            milestoneDiv.appendChild(marker);
+
+            return milestoneDiv;
+        }
+
+        function completeMilestone(milestoneId) {
+            const milestone = roadmapData.milestones.find(m => m.id === milestoneId);
+            if (milestone) {
+                milestone.completed = true;
+                saveData();
+                displayRoadmap();
+            }
+        }
+
+        function updateProgress() {
+            const completedMilestones = roadmapData.milestones.filter(m => m.completed).length;
+            const totalMilestones = roadmapData.milestones.length;
+            const percentage = (completedMilestones / totalMilestones) * 100;
+
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('completedCount').textContent = completedMilestones;
+            document.getElementById('totalCount').textContent = totalMilestones;
+        }
+
+        function openNoteModal(milestoneId) {
+            currentMilestoneId = milestoneId;
+            document.getElementById('noteModal').classList.add('active');
+            document.getElementById('noteDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('noteText').value = '';
+        }
+
+        function closeNoteModal() {
+            document.getElementById('noteModal').classList.remove('active');
+            currentMilestoneId = null;
+        }
+
+        document.getElementById('noteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const milestone = roadmapData.milestones.find(m => m.id === currentMilestoneId);
+            if (milestone) {
+                const note = {
+                    date: document.getElementById('noteDate').value,
+                    text: document.getElementById('noteText').value
+                };
+
+                if (!milestone.notes) {
+                    milestone.notes = [];
+                }
+
+                milestone.notes.push(note);
+                milestone.notes.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                saveData();
+                displayRoadmap();
+                closeNoteModal();
+            }
+        });
+
+        function toggleMilestoneDetails(milestoneId) {
+            // This function can be used to expand/collapse milestone details if needed
+            // Currently, all details are shown by default
+        }
+
+        function resetRoadmap() {
+            if (confirm('Are you sure you want to create a new roadmap? This will clear all current data.')) {
+                localStorage.removeItem('fundraisingRoadmap');
+                roadmapData = {
+                    companyName: '',
+                    fundraiseGoal: 0,
+                    targetDate: '',
+                    logoUrl: '',
+                    deckName: '',
+                    milestones: []
+                };
+                document.getElementById('setupSection').classList.remove('hidden');
+                document.getElementById('roadmapSection').classList.remove('visible');
+                document.getElementById('roadmapForm').reset();
+                document.getElementById('logoPreview').classList.remove('visible');
+                document.getElementById('logoFileName').textContent = 'No file chosen';
+                document.getElementById('deckFileName').textContent = 'No file chosen';
+                setDefaultDate();
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('noteModal');
+            if (event.target === modal) {
+                closeNoteModal();
+            }
+        }
+    </script>
+</body>
+</html>
