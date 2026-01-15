@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grant Application | Bysengo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #F3EDE7;
+            color: #1B3533;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1B3533;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #1B3533;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #67441A;
+            margin-bottom: 40px;
+        }
+
+        /* Step Indicator */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: #D5D5D5;
+            z-index: 0;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #D5D5D5;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #999;
+            transition: all 0.4s ease;
+        }
+
+        .step.active .step-circle {
+            background: #D57028;
+            border-color: #D57028;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(213, 112, 40, 0.3);
+        }
+
+        .step.completed .step-circle {
+            background: #1B3533;
+            border-color: #1B3533;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+        .step.active .step-label {
+            color: #D57028;
+        }
+
+        .step.completed .step-label {
+            color: #1B3533;
+        }
+
+        /* Section Card */
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(27, 53, 51, 0.1);
+            margin-bottom: 40px;
+            display: none;
+        }
+
+        .section-card.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Calculator Styles */
+        .question-group {
+            margin-bottom: 35px;
+        }
+
+        .question-label {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1B3533;
+            margin-bottom: 15px;
+        }
+
+        .question-required {
+            color: #D57028;
+        }
+
+        /* Radio/Checkbox Options */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-card {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .option-card input[type="radio"],
+        .option-card input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .option-label {
+            display: block;
+            padding: 18px 25px;
+            border: 2px solid #D5D5D5;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: #F3EDE7;
+            color: #1B3533;
+        }
+
+        .option-card input:checked + .option-label {
+            border-color: #D57028;
+            background: #D57028;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(213, 112, 40, 0.3);
+        }
+
+        .option-label:hover {
+            border-color: #D57028;
+            transform: translateY(-2px);
+        }
+
+        /* Text Input */
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 18px 25px;
+            border: 2px solid #D5D5D5;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            background: #F3EDE7;
+            color: #1B3533;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #D57028;
+            background: white;
+            box-shadow: 0 5px 20px rgba(213, 112, 40, 0.1);
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 18px 50px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(213, 112, 40, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(213, 112, 40, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #1B3533;
+            color: #1B3533;
+        }
+
+        .btn-secondary:hover {
+            background: #1B3533;
+            color: white;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        /* Score Display */
+        .score-display {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .score-number {
+            font-size: 5rem;
+            font-weight: 700;
+            font-family: 'Arimo', sans-serif;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .score-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 30px 0 20px;
+            overflow: hidden;
+        }
+
+        .score-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #D57028 0%, #F9A826 100%);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        /* Placeholder Sections */
+        .placeholder-section {
+            background: linear-gradient(135deg, rgba(213, 112, 40, 0.1) 0%, rgba(175, 129, 69, 0.1) 100%);
+            border: 2px dashed #D57028;
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .placeholder-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1B3533;
+            margin-bottom: 15px;
+        }
+
+        .placeholder-text {
+            font-size: 1.1rem;
+            color: #67441A;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section-card {
+                padding: 35px 25px;
+            }
+
+            .steps-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .steps-container::before {
+                display: none;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .score-number {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Progress Indicator */
+        .progress-text {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #67441A;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">Bysengo</div>
+            <h1>Grant Application</h1>
+            <p class="subtitle">Let's assess your fundraise readiness and get you connected with the right capital</p>
+        </div>
+
+        <!-- Step Indicator -->
+        <div class="steps-container">
+            <div class="step active" data-step="1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Readiness Score</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Application</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Join the Community</div>
+            </div>
+        </div>
+
+        <!-- Step 1: Readiness Calculator -->
+        <div class="section-card active" id="step1">
+            <div class="progress-text">Answer a few quick questions to get your fundraise readiness score</div>
+
+            <form id="calculatorForm">
+                <!-- Question 1: Capital Type -->
+                <div class="question-group">
+                    <label class="question-label">
+                        What type of capital are you looking to raise? <span class="question-required">*</span>
+                    </label>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="capitalType" id="grant" value="grant" required>
+                            <label for="grant" class="option-label">Grant</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="capitalType" id="equity" value="equity">
+                            <label for="equity" class="option-label">Equity</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="capitalType" id="debt" value="debt">
+                            <label for="debt" class="option-label">Debt</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="capitalType" id="convertible" value="convertible">
+                            <label for="convertible" class="option-label">Convertible Note</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="capitalType" id="safe" value="safe">
+                            <label for="safe" class="option-label">SAFE</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="capitalType" id="not-sure" value="not-sure">
+                            <label for="not-sure" class="option-label">Not Sure Yet</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2: Funding Amount -->
+                <div class="question-group">
+                    <label class="question-label">
+                        How much capital do you need to raise? <span class="question-required">*</span>
+                    </label>
+                    <select name="fundingAmount" required>
+                        <option value="">Select amount range</option>
+                        <option value="0-50k">$0 - $50,000</option>
+                        <option value="50k-100k">$50,000 - $100,000</option>
+                        <option value="100k-250k">$100,000 - $250,000</option>
+                        <option value="250k-500k">$250,000 - $500,000</option>
+                        <option value="500k-1m">$500,000 - $1M</option>
+                        <option value="1m-5m">$1M - $5M</option>
+                        <option value="5m+">$5M+</option>
+                    </select>
+                </div>
+
+                <!-- Question 3: Use of Funds -->
+                <div class="question-group">
+                    <label class="question-label">
+                        Do you have a clear breakdown of how you'll use the funds? <span class="question-required">*</span>
+                    </label>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="useOfFunds" id="detailed-plan" value="detailed" required>
+                            <label for="detailed-plan" class="option-label">Yes, detailed plan</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="useOfFunds" id="rough-plan" value="rough">
+                            <label for="rough-plan" class="option-label">Rough outline</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="useOfFunds" id="no-plan" value="none">
+                            <label for="no-plan" class="option-label">Not yet</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4: Pitch Deck -->
+                <div class="question-group">
+                    <label class="question-label">
+                        Do you have a pitch deck? <span class="question-required">*</span>
+                    </label>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="pitchDeck" id="deck-yes" value="yes" required>
+                            <label for="deck-yes" class="option-label">Yes, complete</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="pitchDeck" id="deck-draft" value="draft">
+                            <label for="deck-draft" class="option-label">Draft version</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="pitchDeck" id="deck-no" value="no">
+                            <label for="deck-no" class="option-label">Not yet</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 5: Financial Projections -->
+                <div class="question-group">
+                    <label class="question-label">
+                        Do you have financial projections (3-5 years)? <span class="question-required">*</span>
+                    </label>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="financials" id="fin-yes" value="yes" required>
+                            <label for="fin-yes" class="option-label">Yes, detailed</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="financials" id="fin-basic" value="basic">
+                            <label for="fin-basic" class="option-label">Basic projections</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="financials" id="fin-no" value="no">
+                            <label for="fin-no" class="option-label">Not yet</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 6: Traction -->
+                <div class="question-group">
+                    <label class="question-label">
+                        What's your current traction? <span class="question-required">*</span>
+                    </label>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="traction" id="traction-revenue" value="revenue" required>
+                            <label for="traction-revenue" class="option-label">Generating Revenue</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="traction" id="traction-customers" value="customers">
+                            <label for="traction-customers" class="option-label">Active Customers</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="traction" id="traction-mvp" value="mvp">
+                            <label for="traction-mvp" class="option-label">MVP/Beta</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="traction" id="traction-idea" value="idea">
+                            <label for="traction-idea" class="option-label">Idea Stage</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 7: Team -->
+                <div class="question-group">
+                    <label class="question-label">
+                        Do you have a founding team? <span class="question-required">*</span>
+                    </label>
+                    <div class="options-grid">
+                        <div class="option-card">
+                            <input type="radio" name="team" id="team-full" value="full" required>
+                            <label for="team-full" class="option-label">Full Team (2+)</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="team" id="team-solo" value="solo">
+                            <label for="team-solo" class="option-label">Solo Founder</label>
+                        </div>
+                        <div class="option-card">
+                            <input type="radio" name="team" id="team-building" value="building">
+                            <label for="team-building" class="option-label">Building Team</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">Calculate My Score</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 1b: Score Display -->
+        <div class="section-card" id="scoreDisplay">
+            <div class="score-display">
+                <div class="score-number" id="scoreNumber">0</div>
+                <div class="score-label">Fundraise Readiness Score</div>
+                <div class="score-bar">
+                    <div class="score-bar-fill" id="scoreBarFill" style="width: 0%"></div>
+                </div>
+                <div class="score-message" id="scoreMessage"></div>
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary" onclick="goToStep(1)">Retake Assessment</button>
+                <button type="button" class="btn btn-primary" onclick="goToStep(2)">Continue to Application</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Airtable Application Form -->
+        <div class="section-card" id="step2">
+            <div class="placeholder-section">
+                <div class="placeholder-title">📝 Grant Application Form</div>
+                <div class="placeholder-text">
+                    Your Airtable form embed code will go here.<br>
+                    Replace this section with your Airtable iframe or form code.
+                </div>
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary" onclick="goToStep(1)">Back</button>
+                <button type="button" class="btn btn-primary" onclick="goToStep(3)">Continue to Membership</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Founder Membership Checkout -->
+        <div class="section-card" id="step3">
+            <div class="placeholder-section">
+                <div class="placeholder-title">🎉 Join the Bysengo Community</div>
+                <div class="placeholder-text">
+                    Founder membership checkout will go here.<br>
+                    You'll add the membership checkout integration in this section.
+                </div>
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary" onclick="goToStep(2)">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Current step tracking
+        let currentStep = 1;
+
+        // Calculator Form Submission
+        document.getElementById('calculatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateScore();
+        });
+
+        function calculateScore() {
+            const formData = new FormData(document.getElementById('calculatorForm'));
+            let score = 0;
+
+            // Scoring logic
+            // Capital Type (10 points)
+            const capitalType = formData.get('capitalType');
+            if (capitalType && capitalType !== 'not-sure') score += 10;
+            else if (capitalType === 'not-sure') score += 5;
+
+            // Funding Amount (10 points)
+            const fundingAmount = formData.get('fundingAmount');
+            if (fundingAmount) score += 10;
+
+            // Use of Funds (20 points)
+            const useOfFunds = formData.get('useOfFunds');
+            if (useOfFunds === 'detailed') score += 20;
+            else if (useOfFunds === 'rough') score += 10;
+
+            // Pitch Deck (15 points)
+            const pitchDeck = formData.get('pitchDeck');
+            if (pitchDeck === 'yes') score += 15;
+            else if (pitchDeck === 'draft') score += 8;
+
+            // Financial Projections (20 points)
+            const financials = formData.get('financials');
+            if (financials === 'yes') score += 20;
+            else if (financials === 'basic') score += 10;
+
+            // Traction (15 points)
+            const traction = formData.get('traction');
+            if (traction === 'revenue') score += 15;
+            else if (traction === 'customers') score += 12;
+            else if (traction === 'mvp') score += 8;
+            else if (traction === 'idea') score += 3;
+
+            // Team (10 points)
+            const team = formData.get('team');
+            if (team === 'full') score += 10;
+            else if (team === 'solo') score += 6;
+            else if (team === 'building') score += 8;
+
+            // Save to localStorage
+            localStorage.setItem('readinessScore', score);
+            localStorage.setItem('calculatorData', JSON.stringify(Object.fromEntries(formData)));
+
+            // Display score
+            displayScore(score);
+        }
+
+        function displayScore(score) {
+            // Hide calculator form
+            document.getElementById('step1').classList.remove('active');
+
+            // Show score display
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.classList.add('active');
+
+            // Animate score
+            animateScore(score);
+
+            // Update step indicator
+            updateStepIndicator(1, 'completed');
+        }
+
+        function animateScore(targetScore) {
+            const scoreElement = document.getElementById('scoreNumber');
+            const scoreBar = document.getElementById('scoreBarFill');
+            const messageElement = document.getElementById('scoreMessage');
+
+            let currentScore = 0;
+            const duration = 2000;
+            const steps = 60;
+            const increment = targetScore / steps;
+            const stepDuration = duration / steps;
+
+            const animation = setInterval(() => {
+                currentScore += increment;
+                if (currentScore >= targetScore) {
+                    currentScore = targetScore;
+                    clearInterval(animation);
+                }
+                scoreElement.textContent = Math.round(currentScore);
+                scoreBar.style.width = currentScore + '%';
+            }, stepDuration);
+
+            // Display message based on score
+            let message = '';
+            if (targetScore >= 80) {
+                message = '🎉 Excellent! You\'re well-prepared for fundraising. Your documentation and traction show strong readiness. Let\'s get you connected with the right capital partners.';
+            } else if (targetScore >= 60) {
+                message = '✅ Good progress! You have solid foundations, but there are a few areas to strengthen before you start fundraising. We can help you bridge those gaps.';
+            } else if (targetScore >= 40) {
+                message = '📈 You\'re on the right track! Focus on building out your pitch materials and financial projections. Our resources and community can help accelerate your readiness.';
+            } else {
+                message = '🌱 Early stage, but that\'s okay! Every successful founder started here. Let\'s work together to build the foundations you need for successful fundraising.';
+            }
+            messageElement.textContent = message;
+        }
+
+        function goToStep(stepNumber) {
+            // Hide all sections
+            document.querySelectorAll('.section-card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Show target section
+            if (stepNumber === 1) {
+                document.getElementById('step1').classList.add('active');
+                updateStepIndicator(1, 'active');
+            } else if (stepNumber === 2) {
+                document.getElementById('step2').classList.add('active');
+                updateStepIndicator(2, 'active');
+                // Mark step 1 as completed
+                updateStepIndicator(1, 'completed');
+            } else if (stepNumber === 3) {
+                document.getElementById('step3').classList.add('active');
+                updateStepIndicator(3, 'active');
+                // Mark steps 1 & 2 as completed
+                updateStepIndicator(1, 'completed');
+                updateStepIndicator(2, 'completed');
+            }
+
+            currentStep = stepNumber;
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateStepIndicator(stepNumber, status) {
+            const step = document.querySelector(`.step[data-step="${stepNumber}"]`);
+
+            // Remove all status classes
+            step.classList.remove('active', 'completed');
+
+            // Add new status
+            if (status === 'active') {
+                step.classList.add('active');
+            } else if (status === 'completed') {
+                step.classList.add('completed');
+            }
+        }
+
+        // Initialize: Check if there's a saved score
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedScore = localStorage.getItem('readinessScore');
+            if (savedScore) {
+                // Could optionally show the score if they return
+                console.log('Previous score:', savedScore);
+            }
+        });
+    </script>
+</body>
+</html>
