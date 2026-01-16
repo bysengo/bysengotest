@@ -674,6 +674,13 @@
 
   // Pathway button interaction - works reliably in Squarespace
   function selectPathway(button, pathway) {
+    // Validate pathway parameter to prevent invalid values
+    var validPathways = ['founder', 'funder', 'both'];
+    if (validPathways.indexOf(pathway) === -1) {
+      console.error('Invalid pathway:', pathway);
+      return;
+    }
+
     // Remove active class from all buttons
     var buttons = document.querySelectorAll('.pathway-btn');
     buttons.forEach(function(btn) {
@@ -683,8 +690,13 @@
     // Add active class to clicked button
     button.classList.add('active');
 
-    // Store in localStorage
-    localStorage.setItem('selectedPathway', pathway);
+    // Store in localStorage with error handling for private browsing mode
+    try {
+      localStorage.setItem('selectedPathway', pathway);
+    } catch (e) {
+      console.warn('localStorage not available:', e);
+      // Continue with redirect even if localStorage fails
+    }
 
     // Log to console
     console.log('Selected pathway:', pathway);
