@@ -116,6 +116,89 @@
     position: relative;
   }
 
+  /* Progress Banner */
+  .progress-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(27, 53, 51, 0.05) 0%, rgba(103, 68, 26, 0.05) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(213, 112, 40, 0.2);
+  }
+
+  .progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    max-width: 180px;
+  }
+
+  .progress-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #F3EDE7;
+    border: 3px solid #D57028;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #1B3533;
+    transition: all 0.3s ease;
+  }
+
+  .progress-step.active .progress-circle {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: white;
+    border-color: #1B3533;
+    box-shadow: 0 4px 15px rgba(27, 53, 51, 0.3);
+  }
+
+  .progress-step.completed .progress-circle {
+    background: #D57028;
+    color: white;
+    border-color: #D57028;
+  }
+
+  .progress-label {
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #67441A;
+    line-height: 1.3;
+  }
+
+  .progress-step.active .progress-label {
+    color: #1B3533;
+    font-weight: 700;
+  }
+
+  .progress-connector {
+    flex: 1;
+    height: 3px;
+    background: #D57028;
+    opacity: 0.3;
+    margin: 0 -10px;
+    align-self: flex-start;
+    margin-top: 25px;
+  }
+
+  .progress-step.active ~ .progress-connector,
+  .progress-step.active ~ .progress-step .progress-connector {
+    opacity: 0.3;
+  }
+
+  .progress-step.completed ~ .progress-connector {
+    opacity: 1;
+    background: #D57028;
+  }
+
   /* Eligibility Checker Section */
   .eligibility-section {
     text-align: center;
@@ -516,6 +599,31 @@
       padding: 14px 30px;
       font-size: 0.9rem;
     }
+
+    .progress-banner {
+      flex-direction: column;
+      gap: 15px;
+      padding: 15px;
+    }
+
+    .progress-step {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .progress-connector {
+      display: none;
+    }
+
+    .progress-circle {
+      width: 45px;
+      height: 45px;
+      font-size: 1.1rem;
+    }
+
+    .progress-label {
+      font-size: 0.8rem;
+    }
   }
 </style>
 
@@ -523,9 +631,9 @@
 
   <!-- Hero Section -->
   <div class="sengo-grant-hero fade-in">
-    <span class="impact-badge">Funding Opportunity</span>
+    <span class="impact-badge">Sprint Grants, 2026</span>
     <h1>The Sengo Grant</h1>
-    <p class="sengo-grant-hero-subtitle">Flexible and non-dilutive funding to give businesses a boost.</p>
+    <p class="sengo-grant-hero-subtitle">Sengo is offering a one-time $3,000 USD grant to eligible founders that apply by February 28, 2026 as part of our 2026 Sengo Sprint Grant program.</p>
   </div>
 
   <!-- Glowing Application Text -->
@@ -535,6 +643,24 @@
 
   <!-- Main Application Module (Single Box) -->
   <div class="application-module fade-in-up">
+
+    <!-- Progress Banner -->
+    <div class="progress-banner">
+      <div class="progress-step active" id="progress-eligibility">
+        <div class="progress-circle">1</div>
+        <div class="progress-label">Check Eligibility</div>
+      </div>
+      <div class="progress-connector"></div>
+      <div class="progress-step" id="progress-application">
+        <div class="progress-circle">2</div>
+        <div class="progress-label">Application</div>
+      </div>
+      <div class="progress-connector"></div>
+      <div class="progress-step" id="progress-checkout">
+        <div class="progress-circle">3</div>
+        <div class="progress-label">Checkout</div>
+      </div>
+    </div>
 
     <!-- View 0: Eligibility Checker -->
     <div class="view-container active" id="eligibility-view">
@@ -658,6 +784,31 @@
     var nextToStep2Btn = document.getElementById('next-to-step-2');
     var backToStep1Btn = document.getElementById('back-to-step-1');
 
+    // Progress elements
+    var progressEligibility = document.getElementById('progress-eligibility');
+    var progressApplication = document.getElementById('progress-application');
+    var progressCheckout = document.getElementById('progress-checkout');
+
+    // Update progress indicator
+    function updateProgress(currentStep) {
+      // Remove all active and completed classes
+      progressEligibility.classList.remove('active', 'completed');
+      progressApplication.classList.remove('active', 'completed');
+      progressCheckout.classList.remove('active', 'completed');
+
+      // Set active and completed based on current step
+      if (currentStep === 'eligibility') {
+        progressEligibility.classList.add('active');
+      } else if (currentStep === 'step-1') {
+        progressEligibility.classList.add('completed');
+        progressApplication.classList.add('active');
+      } else if (currentStep === 'step-2') {
+        progressEligibility.classList.add('completed');
+        progressApplication.classList.add('completed');
+        progressCheckout.classList.add('active');
+      }
+    }
+
     // View navigation function
     function showView(viewName) {
       // Hide all views
@@ -673,6 +824,9 @@
       } else if (viewName === 'step-2') {
         step2View.classList.add('active');
       }
+
+      // Update progress indicator
+      updateProgress(viewName);
 
       // Scroll to top of module
       var module = document.querySelector('.application-module');
