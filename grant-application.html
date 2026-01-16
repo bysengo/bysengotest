@@ -439,6 +439,143 @@
             color: #67441A;
             margin-bottom: 30px;
         }
+
+        /* Overview Section */
+        .overview-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(27, 53, 51, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .overview-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #1B3533;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .overview-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .eligibility-box {
+            background: linear-gradient(135deg, rgba(213, 112, 40, 0.1) 0%, rgba(175, 129, 69, 0.1) 100%);
+            border-left: 4px solid #D57028;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .eligibility-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #1B3533;
+            margin-bottom: 12px;
+        }
+
+        .eligibility-text {
+            font-size: 1rem;
+            color: #67441A;
+            line-height: 1.8;
+        }
+
+        .process-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .process-list li {
+            padding: 18px 20px;
+            margin-bottom: 15px;
+            background: #F3EDE7;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            color: #1B3533;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .process-list li::before {
+            content: "✓";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: #D57028;
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .auth-section {
+            background: #F3EDE7;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .auth-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1B3533;
+            margin-bottom: 20px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .btn-auth {
+            padding: 15px 35px;
+            border: 2px solid #1B3533;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            color: #1B3533;
+            text-decoration: none;
+        }
+
+        .btn-auth:hover {
+            background: #1B3533;
+            color: white;
+        }
+
+        .auth-note {
+            font-size: 0.9rem;
+            color: #67441A;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .overview-section {
+                padding: 35px 25px;
+            }
+
+            .auth-buttons {
+                flex-direction: column;
+            }
+
+            .btn-auth {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -451,7 +588,7 @@
         </div>
 
         <!-- Step Indicator -->
-        <div class="steps-container">
+        <div class="steps-container" id="stepsContainer" style="display: none;">
             <div class="step active" data-step="1">
                 <div class="step-circle">1</div>
                 <div class="step-label">Readiness Score</div>
@@ -466,8 +603,47 @@
             </div>
         </div>
 
+        <!-- Overview Section -->
+        <div class="overview-section" id="overviewSection">
+            <h2 class="overview-title">Bysengo Grant Application</h2>
+
+            <div class="overview-content">
+                <div class="eligibility-box">
+                    <div class="eligibility-title">📋 Eligibility</div>
+                    <div class="eligibility-text">
+                        This grant is open to <strong>for-profit businesses</strong> registered in the <strong>United States, United Kingdom, or European Union</strong>.
+                    </div>
+                </div>
+
+                <h3 style="font-family: 'Arimo', sans-serif; font-size: 1.4rem; font-weight: 600; color: #1B3533; margin-bottom: 20px; text-align: center;">What to Expect</h3>
+
+                <ul class="process-list">
+                    <li>Complete a fundraise readiness assessment to get your score</li>
+                    <li>Provide detailed business information for your application</li>
+                    <li>Join the Bysengo platform to track your progress and receive updates</li>
+                </ul>
+
+                <div class="auth-section">
+                    <div class="auth-title">Already have an account?</div>
+                    <div class="auth-buttons">
+                        <button type="button" class="btn-auth" onclick="handleLogin()">Log In</button>
+                        <button type="button" class="btn-auth" onclick="handleSignup()">Sign Up</button>
+                    </div>
+                    <div class="auth-note">Your responses will be saved to your account for tracking</div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-primary" onclick="startApplication()">Get Started</button>
+                </div>
+
+                <p style="text-align: center; margin-top: 25px; font-size: 0.95rem; color: #67441A;">
+                    <em>This application takes approximately 10-15 minutes to complete</em>
+                </p>
+            </div>
+        </div>
+
         <!-- Step 1: Readiness Calculator -->
-        <div class="section-card active" id="step1">
+        <div class="section-card" id="step1">
             <div class="progress-text">Answer a few quick questions to get your fundraise readiness score</div>
 
             <form id="calculatorForm">
@@ -684,7 +860,37 @@
 
     <script>
         // Current step tracking
-        let currentStep = 1;
+        let currentStep = 0; // Start at 0 for overview
+
+        // Overview Section Functions
+        function startApplication() {
+            // Hide overview
+            document.getElementById('overviewSection').style.display = 'none';
+
+            // Show step indicator
+            document.getElementById('stepsContainer').style.display = 'flex';
+
+            // Show step 1 (calculator)
+            document.getElementById('step1').classList.add('active');
+
+            // Update current step
+            currentStep = 1;
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleLogin() {
+            // TODO: Replace with your actual login URL or modal trigger
+            alert('Redirecting to login page...\n\nYou can replace this with your Kajabi login URL or modal.');
+            // window.location.href = 'https://app.bysengo.com/login';
+        }
+
+        function handleSignup() {
+            // TODO: Replace with your actual signup URL or modal trigger
+            alert('Redirecting to signup page...\n\nYou can replace this with your Kajabi signup URL or modal.');
+            // window.location.href = 'https://app.bysengo.com/signup';
+        }
 
         // Calculator Form Submission
         document.getElementById('calculatorForm').addEventListener('submit', function(e) {
