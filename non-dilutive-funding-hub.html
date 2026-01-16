@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Non-dilutive Funding Hub - Sengo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<style>
+  /* Reset and base styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .sengo-funding-hub {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1B3533;
+    background-color: #F3EDE7;
+    overflow-x: hidden;
+  }
+
+  /* Typography */
+  h1, h2, h3 {
+    font-family: 'Arimo', sans-serif;
+  }
+
+  /* Hero Section */
+  .funding-hero {
+    background: linear-gradient(135deg, #1B3533 0%, #2A4A47 100%);
+    color: #F3EDE7;
+    padding: 80px 20px;
+    text-align: center;
+  }
+
+  .funding-hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .funding-hero h1 {
+    font-size: 4.5rem;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .funding-hero .subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    opacity: 0.95;
+    font-weight: 400;
+  }
+
+  .funding-hero .description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    opacity: 0.85;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* CTA Buttons */
+  .cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  .cta-btn {
+    padding: 18px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-btn.primary {
+    background: #D57028;
+    color: white;
+  }
+
+  .cta-btn.secondary {
+    background: transparent;
+    color: #F3EDE7;
+    border: 2px solid #D57028;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(213, 112, 40, 0.3);
+  }
+
+  .cta-btn.primary:hover {
+    background: #C56020;
+  }
+
+  .cta-btn.secondary:hover {
+    background: rgba(213, 112, 40, 0.1);
+  }
+
+  /* Overview Section */
+  .funding-overview {
+    padding: 80px 20px;
+    background: #F3EDE7;
+  }
+
+  .funding-overview-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .funding-overview h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 48px;
+    color: #1B3533;
+  }
+
+  /* Opportunity Cards */
+  .opportunity-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  .opportunity-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(27, 53, 51, 0.08);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .opportunity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(27, 53, 51, 0.15);
+    border-color: #D57028;
+  }
+
+  .opportunity-card h3 {
+    font-size: 1.75rem;
+    color: #1B3533;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .opportunity-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #67441A;
+  }
+
+  .opportunity-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #D57028, #AF8145);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+
+  /* Form Section */
+  .form-section {
+    padding: 80px 20px;
+    scroll-margin-top: 20px;
+  }
+
+  .form-section:nth-of-type(even) {
+    background: white;
+  }
+
+  .form-section:nth-of-type(odd) {
+    background: #F3EDE7;
+  }
+
+  .form-content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .form-section h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1B3533;
+  }
+
+  .form-section .section-description {
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #67441A;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form-embed {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(27, 53, 51, 0.08);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-placeholder {
+    text-align: center;
+    color: #67441A;
+    font-style: italic;
+  }
+
+  /* Animation classes */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .funding-hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .funding-hero .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .funding-hero .description {
+      font-size: 1rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-btn {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .funding-overview h2 {
+      font-size: 2rem;
+    }
+
+    .opportunity-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .form-section h2 {
+      font-size: 2rem;
+    }
+
+    .form-embed {
+      padding: 20px;
+    }
+  }
+</style>
+
+<div class="sengo-funding-hub">
+  <!-- Hero Section -->
+  <section class="funding-hero">
+    <div class="funding-hero-content fade-in-up">
+      <h1>Non-dilutive Funding Hub</h1>
+      <p class="subtitle">Access grants, competitions, and pitch opportunities—without giving up equity</p>
+      <p class="description">
+        At Sengo, we believe founders deserve access to capital that doesn't dilute their ownership.
+        Our Non-dilutive Funding Hub connects you with grants, pitch competitions, and other funding
+        opportunities that help you grow your business while maintaining control.
+      </p>
+      <div class="cta-buttons">
+        <button class="cta-btn primary" onclick="scrollToSection('pitch-application')">
+          Apply to Pitch
+        </button>
+        <button class="cta-btn secondary" onclick="scrollToSection('grant-application')">
+          Apply for Grant Cycle
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview Section -->
+  <section class="funding-overview">
+    <div class="funding-overview-content">
+      <h2 class="fade-in-up">Available Opportunities</h2>
+
+      <div class="opportunity-cards">
+        <div class="opportunity-card fade-in-up">
+          <div class="opportunity-icon">🎤</div>
+          <h3>Pitch Competitions</h3>
+          <p>
+            Showcase your startup to investors, industry experts, and potential partners.
+            Win cash prizes, gain visibility, and receive valuable feedback on your business model.
+          </p>
+        </div>
+
+        <div class="opportunity-card fade-in-up">
+          <div class="opportunity-icon">💰</div>
+          <h3>Grant Programs</h3>
+          <p>
+            Access non-dilutive capital through our curated grant cycles. We connect you with
+            government, corporate, and foundation grants that align with your mission and stage.
+          </p>
+        </div>
+
+        <div class="opportunity-card fade-in-up">
+          <div class="opportunity-icon">🚀</div>
+          <h3>Accelerator Support</h3>
+          <p>
+            Get expert guidance on finding and applying for the best non-dilutive funding opportunities.
+            Our team helps you craft compelling applications and navigate the funding landscape.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pitch Application Section -->
+  <section id="pitch-application" class="form-section">
+    <div class="form-content">
+      <h2 class="fade-in-up">Apply to Pitch</h2>
+      <p class="section-description fade-in-up">
+        Ready to pitch your startup? Submit your application below to be considered for our upcoming
+        pitch events and competitions. We're looking for innovative founders with compelling stories
+        and scalable business models.
+      </p>
+      <div class="form-embed fade-in-up">
+        <!-- Replace this placeholder with your actual pitch application form embed code -->
+        <div class="form-placeholder">
+          <p>Pitch Application Form</p>
+          <p style="font-size: 0.9rem; margin-top: 10px;">
+            (Insert your pitch application form embed code here)
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grant Application Section -->
+  <section id="grant-application" class="form-section">
+    <div class="form-content">
+      <h2 class="fade-in-up">Apply for Current Grant Cycle</h2>
+      <p class="section-description fade-in-up">
+        Join our current grant cycle and access non-dilutive funding opportunities curated specifically
+        for startups like yours. Fill out the application below to get matched with relevant grants and
+        receive personalized support throughout the application process.
+      </p>
+      <div class="form-embed fade-in-up">
+        <!-- Replace this placeholder with your actual grant application form embed code -->
+        <div class="form-placeholder">
+          <p>Grant Cycle Application Form</p>
+          <p style="font-size: 0.9rem; margin-top: 10px;">
+            (Insert your grant application form embed code here)
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Smooth scroll to section
+  function scrollToSection(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }
+
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all elements with fade-in-up class
+  document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.fade-in-up');
+    animatedElements.forEach(el => observer.observe(el));
+  });
+</script>
+
+</body>
+</html>
