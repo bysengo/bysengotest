@@ -851,16 +851,23 @@
                 Complete your application by becoming a Bysengo member. Get access to our network of funders, exclusive resources, and personalized support on your fundraising journey.
             </p>
 
-            <!-- ============================================ -->
-            <!-- ADD YOUR CHECKOUT FLOW CODE BELOW THIS LINE -->
-            <!-- ============================================ -->
+            <!-- Checkout Container -->
+            <div id="checkout-container" style="margin-bottom: 40px;">
+                <!-- Embedded Checkout -->
+                <iframe
+                    src="https://app.bysengo.com/grantcheckout"
+                    style="width: 100%; min-height: 600px; border: none; border-radius: 15px; background: #F3EDE7;"
+                    title="Bysengo Membership Checkout"
+                    frameborder="0">
+                </iframe>
+            </div>
 
-
-
-
-            <!-- ============================================ -->
-            <!-- ADD YOUR CHECKOUT FLOW CODE ABOVE THIS LINE -->
-            <!-- ============================================ -->
+            <!-- Fallback Button (if iframe doesn't work) -->
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="https://app.bysengo.com/grantcheckout" target="_blank" class="btn btn-primary" style="display: inline-block; text-decoration: none;">
+                    Open Checkout in New Tab
+                </a>
+            </div>
 
             <div class="button-group" style="margin-top: 40px;">
                 <button type="button" class="btn btn-secondary" onclick="goToStep(2)">Back to Application</button>
