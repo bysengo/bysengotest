@@ -1,0 +1,677 @@
+<!-- Sengo Grant Applications Page -->
+<!-- Add this to an Embed Block on your Squarespace page -->
+
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .sengo-grant-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Glowing Application Text */
+  .application-glow {
+    text-align: center;
+    padding: 20px 0 10px;
+    margin-top: 20px;
+  }
+
+  .glow-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #D57028;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Arimo', sans-serif;
+    text-shadow:
+      0 0 10px rgba(213, 112, 40, 0.8),
+      0 0 20px rgba(213, 112, 40, 0.6),
+      0 0 30px rgba(213, 112, 40, 0.4),
+      0 0 40px rgba(213, 112, 40, 0.2);
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      text-shadow:
+        0 0 10px rgba(213, 112, 40, 0.8),
+        0 0 20px rgba(213, 112, 40, 0.6),
+        0 0 30px rgba(213, 112, 40, 0.4);
+    }
+    to {
+      text-shadow:
+        0 0 15px rgba(213, 112, 40, 1),
+        0 0 30px rgba(213, 112, 40, 0.8),
+        0 0 45px rgba(213, 112, 40, 0.6),
+        0 0 60px rgba(213, 112, 40, 0.4);
+    }
+  }
+
+  /* Hero Section */
+  .sengo-grant-hero {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .sengo-grant-hero h1 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: #1B3533;
+    letter-spacing: -0.05em;
+    text-transform: none;
+    max-width: 900px;
+    margin: 0 0 20px 0;
+  }
+
+  .sengo-grant-hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #67441A;
+    margin: 0 0 10px 0;
+    max-width: 700px;
+  }
+
+  /* Impact Badge */
+  .impact-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: white;
+    padding: 8px 25px;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(27, 53, 51, 0.2);
+  }
+
+  /* Eligibility Checker Section */
+  .eligibility-section {
+    text-align: center;
+    margin: 40px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 16px;
+    border: 2px solid #D57028;
+    max-width: 700px;
+  }
+
+  .eligibility-section h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #1B3533;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+
+  .eligibility-section p {
+    font-size: 1rem;
+    color: #67441A;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  .eligibility-question {
+    text-align: left;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(27, 53, 51, 0.1);
+  }
+
+  .eligibility-question:last-of-type {
+    border-bottom: none;
+  }
+
+  .eligibility-question label {
+    display: block;
+    font-size: 1.1rem;
+    color: #1B3533;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .eligibility-options {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+  }
+
+  .eligibility-option {
+    position: relative;
+  }
+
+  .eligibility-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .eligibility-option-label {
+    display: inline-block;
+    padding: 10px 25px;
+    background: #F3EDE7;
+    color: #1B3533;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .eligibility-option input[type="radio"]:checked + .eligibility-option-label {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: white;
+    border-color: #1B3533;
+  }
+
+  .eligibility-option-label:hover {
+    border-color: #D57028;
+  }
+
+  .eligibility-result {
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .eligibility-result.show {
+    display: block;
+  }
+
+  .eligibility-result.eligible {
+    background: linear-gradient(135deg, rgba(27, 53, 51, 0.1) 0%, rgba(103, 68, 26, 0.1) 100%);
+    border: 2px solid #1B3533;
+    color: #1B3533;
+  }
+
+  .eligibility-result.eligible-with-membership {
+    background: linear-gradient(135deg, rgba(213, 112, 40, 0.1) 0%, rgba(175, 129, 69, 0.1) 100%);
+    border: 2px solid #D57028;
+    color: #67441A;
+  }
+
+  .eligibility-result.not-eligible {
+    background: linear-gradient(135deg, rgba(213, 112, 40, 0.15) 0%, rgba(175, 129, 69, 0.15) 100%);
+    border: 2px solid #D57028;
+    color: #67441A;
+  }
+
+  .eligibility-result a {
+    color: #D57028;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
+  /* Step Section */
+  .step-section {
+    margin: 60px 0;
+  }
+
+  .step-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .step-number {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .step-header h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #1B3533;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+
+  .step-header p {
+    font-size: 1rem;
+    color: #67441A;
+    margin: 0;
+  }
+
+  /* Airtable Embed Section */
+  .airtable-section {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    padding: 60px 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(27, 53, 51, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .airtable-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .airtable-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+  }
+
+  .airtable-container iframe {
+    width: 100%;
+    min-height: 800px;
+    border: none;
+    border-radius: 8px;
+  }
+
+  /* Checkout Section */
+  .checkout-section {
+    background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
+    padding: 60px 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(213, 112, 40, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .checkout-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(243, 237, 231, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .checkout-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+  }
+
+  .checkout-container iframe {
+    width: 100%;
+    min-height: 800px;
+    border: none;
+    border-radius: 8px;
+  }
+
+  /* Info Section */
+  .grant-info-section {
+    text-align: center;
+    margin: 60px 0;
+    padding: 60px 50px;
+    background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(27, 53, 51, 0.25);
+  }
+
+  .grant-info-section .impact-badge {
+    background: rgba(243, 237, 231, 0.15);
+    color: #F3EDE7;
+    border: 1px solid rgba(243, 237, 231, 0.3);
+  }
+
+  .grant-info-section h3 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: #F3EDE7;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  .grant-info-section p {
+    font-size: 1.15rem;
+    color: #F3EDE7;
+    margin-bottom: 0;
+    font-weight: 400;
+    opacity: 0.95;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+
+  /* Scroll animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sengo-grant-content {
+      padding: 30px 15px;
+    }
+
+    .sengo-grant-hero {
+      min-height: 30vh;
+      padding: 30px 15px;
+    }
+
+    .sengo-grant-hero h1 {
+      font-size: 2.5rem;
+      line-height: 1.1;
+    }
+
+    .sengo-grant-hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .application-glow {
+      padding: 15px 0 5px;
+      margin-top: 15px;
+    }
+
+    .glow-text {
+      font-size: 1rem;
+    }
+
+    .eligibility-section {
+      padding: 30px 20px;
+      margin: 30px auto;
+    }
+
+    .eligibility-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .eligibility-question label {
+      font-size: 1rem;
+    }
+
+    .eligibility-options {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .eligibility-option-label {
+      display: block;
+      text-align: center;
+    }
+
+    .eligibility-result {
+      font-size: 1rem;
+      padding: 20px;
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 1.3rem;
+    }
+
+    .step-header h2 {
+      font-size: 1.5rem;
+    }
+
+    .step-header p {
+      font-size: 0.9rem;
+    }
+
+    .airtable-section,
+    .checkout-section {
+      padding: 40px 20px;
+    }
+
+    .airtable-container,
+    .checkout-container {
+      padding: 15px;
+    }
+
+    .airtable-container iframe,
+    .checkout-container iframe {
+      min-height: 700px;
+    }
+
+    .grant-info-section {
+      padding: 40px 30px;
+    }
+
+    .grant-info-section h3 {
+      font-size: 2.5rem;
+    }
+
+    .grant-info-section p {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<div class="sengo-grant-content">
+
+  <!-- Hero Section -->
+  <div class="sengo-grant-hero fade-in">
+    <span class="impact-badge">Funding Opportunity</span>
+    <h1>The Sengo Grant</h1>
+    <p class="sengo-grant-hero-subtitle">Flexible and non-dilutive funding to give businesses a boost.</p>
+  </div>
+
+  <!-- Glowing Application Text -->
+  <div class="application-glow fade-in-up">
+    <div class="glow-text">Application Below!</div>
+  </div>
+
+  <!-- Eligibility Checker Section -->
+  <div class="eligibility-section fade-in-up">
+    <h2>Check Your Eligibility</h2>
+    <p>Answer the following questions to see if you qualify for the Sengo Grant.</p>
+
+    <div class="eligibility-question">
+      <label>Are you based in the US, UK, or EU?</label>
+      <div class="eligibility-options">
+        <div class="eligibility-option">
+          <input type="radio" id="location-yes" name="location" value="yes">
+          <label for="location-yes" class="eligibility-option-label">Yes</label>
+        </div>
+        <div class="eligibility-option">
+          <input type="radio" id="location-no" name="location" value="no">
+          <label for="location-no" class="eligibility-option-label">No</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="eligibility-question">
+      <label>Do you have a for-profit business?</label>
+      <div class="eligibility-options">
+        <div class="eligibility-option">
+          <input type="radio" id="business-yes" name="business" value="yes">
+          <label for="business-yes" class="eligibility-option-label">Yes</label>
+        </div>
+        <div class="eligibility-option">
+          <input type="radio" id="business-no" name="business" value="no">
+          <label for="business-no" class="eligibility-option-label">No</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="eligibility-question">
+      <label>Are you a Sengo member?</label>
+      <div class="eligibility-options">
+        <div class="eligibility-option">
+          <input type="radio" id="member-yes" name="member" value="yes">
+          <label for="member-yes" class="eligibility-option-label">Yes</label>
+        </div>
+        <div class="eligibility-option">
+          <input type="radio" id="member-no" name="member" value="no">
+          <label for="member-no" class="eligibility-option-label">No</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="eligibility-result" class="eligibility-result"></div>
+  </div>
+
+  <!-- Step 1: Airtable Application -->
+  <div class="step-section fade-in-up">
+    <div class="step-header">
+      <div class="step-number">1</div>
+      <h2>Complete Your Application</h2>
+      <p>Fill out the form below to apply for the Sengo Grant.</p>
+    </div>
+
+    <div class="airtable-section">
+      <div class="airtable-container">
+        <iframe class="airtable-embed" src="https://airtable.com/embed/apprQaZi5Xs3tfnLq/shrSY6kWTDyzWoxcy" frameborder="0" onmousewheel="" width="100%" height="800" style="background: transparent; border: 1px solid #ccc;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: Checkout -->
+  <div class="step-section fade-in-up">
+    <div class="step-header">
+      <div class="step-number">2</div>
+      <h2>Complete Your Checkout</h2>
+      <p>Finalize your grant application by completing the checkout process.</p>
+    </div>
+
+    <div class="checkout-section">
+      <div class="checkout-container">
+        <iframe class="checkout-embed" src="https://app.bysengo.com/grantcheckout" frameborder="0" onmousewheel="" width="100%" height="800" style="background: transparent; border: 1px solid #ccc;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Section -->
+  <div class="grant-info-section fade-in-up">
+    <span class="impact-badge">Questions?</span>
+    <h3>Need Help?</h3>
+    <p>If you have questions about the grant application process or need assistance, please don't hesitate to reach out to our team at hello@bysengo.com. We're here to support you every step of the way.</p>
+  </div>
+
+</div>
+
+<script>
+  // Eligibility checker logic
+  document.addEventListener('DOMContentLoaded', function() {
+    var locationRadios = document.querySelectorAll('input[name="location"]');
+    var businessRadios = document.querySelectorAll('input[name="business"]');
+    var memberRadios = document.querySelectorAll('input[name="member"]');
+    var resultDiv = document.getElementById('eligibility-result');
+
+    function checkEligibility() {
+      var location = document.querySelector('input[name="location"]:checked');
+      var business = document.querySelector('input[name="business"]:checked');
+      var member = document.querySelector('input[name="member"]:checked');
+
+      // Only check if all questions are answered
+      if (location && business && member) {
+        var locationValue = location.value;
+        var businessValue = business.value;
+        var memberValue = member.value;
+
+        // Reset classes
+        resultDiv.className = 'eligibility-result show';
+
+        // Logic based on requirements
+        if (locationValue === 'yes' && businessValue === 'yes' && memberValue === 'yes') {
+          // Yes to all 3
+          resultDiv.classList.add('eligible');
+          resultDiv.innerHTML = '<strong>✓ Yes, you\'re eligible!</strong><br>You meet all requirements for the Sengo Grant. Please proceed with your application below.';
+        } else if (locationValue === 'yes' && businessValue === 'yes' && memberValue === 'no') {
+          // Yes to first 2, no to member
+          resultDiv.classList.add('eligible-with-membership');
+          resultDiv.innerHTML = '<strong>✓ Yes, but you\'ll need to confirm membership.</strong><br>You meet the location and business requirements, but you\'ll need to become a Sengo member. <a href="https://app.bysengo.com/founder-enrollment" target="_blank">Enroll here</a> and then return to complete your application.';
+        } else if (locationValue === 'no' || businessValue === 'no') {
+          // No to location or business
+          resultDiv.classList.add('not-eligible');
+          resultDiv.innerHTML = '<strong>Not eligible for the grant, but you can pitch live!</strong><br>While you don\'t meet the grant requirements, you can still join the platform and apply to pitch. <a href="https://app.bysengo.com/founder-enrollment" target="_blank">Join now</a> to get started!';
+        }
+      }
+    }
+
+    // Add event listeners to all radio buttons
+    locationRadios.forEach(function(radio) {
+      radio.addEventListener('change', checkEligibility);
+    });
+    businessRadios.forEach(function(radio) {
+      radio.addEventListener('change', checkEligibility);
+    });
+    memberRadios.forEach(function(radio) {
+      radio.addEventListener('change', checkEligibility);
+    });
+
+    // Scroll-triggered animations
+    var observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    var animatedElements = document.querySelectorAll('.fade-in-up, .fade-in');
+    animatedElements.forEach(function(el) {
+      observer.observe(el);
+    });
+  });
+</script>
