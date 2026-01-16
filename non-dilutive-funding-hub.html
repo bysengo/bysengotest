@@ -16,11 +16,23 @@
     box-sizing: border-box;
   }
 
-  .sengo-funding-hub {
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: #1B3533;
     background-color: #F3EDE7;
     overflow-x: hidden;
+  }
+
+  .sengo-funding-hub {
+    width: 100%;
+    min-height: 100vh;
   }
 
   /* Typography */
@@ -30,41 +42,46 @@
 
   /* Hero Section */
   .funding-hero {
-    background: linear-gradient(135deg, #1B3533 0%, #2A4A47 100%);
-    color: #F3EDE7;
-    padding: 80px 20px;
+    background: #1B3533;
+    color: #FFFFFF;
+    padding: 100px 20px;
     text-align: center;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .funding-hero-content {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
   .funding-hero h1 {
-    font-size: 4.5rem;
-    font-weight: 600;
+    font-size: 5rem;
+    font-weight: 700;
     line-height: 1.1;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     letter-spacing: -0.02em;
+    color: #FFFFFF;
   }
 
   .funding-hero .subtitle {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1.6;
-    margin-bottom: 16px;
-    opacity: 0.95;
-    font-weight: 400;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: #FFFFFF;
   }
 
   .funding-hero .description {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    opacity: 0.85;
+    font-size: 1.15rem;
+    line-height: 1.8;
     margin-bottom: 40px;
-    max-width: 800px;
+    max-width: 850px;
     margin-left: auto;
     margin-right: auto;
+    color: #F3EDE7;
   }
 
   /* CTA Buttons */
@@ -98,8 +115,8 @@
 
   .cta-btn.secondary {
     background: transparent;
-    color: #F3EDE7;
-    border: 2px solid #D57028;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
   }
 
   .cta-btn:hover {
@@ -137,9 +154,12 @@
   /* Opportunity Cards */
   .opportunity-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
     margin-bottom: 60px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .opportunity-card {
@@ -251,12 +271,17 @@
 
   /* Responsive Design */
   @media (max-width: 768px) {
+    .funding-hero {
+      min-height: auto;
+      padding: 60px 20px;
+    }
+
     .funding-hero h1 {
-      font-size: 2.5rem;
+      font-size: 2.75rem;
     }
 
     .funding-hero .subtitle {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
 
     .funding-hero .description {
@@ -273,12 +298,21 @@
       max-width: 300px;
     }
 
+    .funding-overview {
+      padding: 60px 20px;
+    }
+
     .funding-overview h2 {
-      font-size: 2rem;
+      font-size: 2.25rem;
     }
 
     .opportunity-cards {
       grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .form-section {
+      padding: 60px 20px;
     }
 
     .form-section h2 {
@@ -336,15 +370,6 @@
             government, corporate, and foundation grants that align with your mission and stage.
           </p>
         </div>
-
-        <div class="opportunity-card fade-in-up">
-          <div class="opportunity-icon">🚀</div>
-          <h3>Accelerator Support</h3>
-          <p>
-            Get expert guidance on finding and applying for the best non-dilutive funding opportunities.
-            Our team helps you craft compelling applications and navigate the funding landscape.
-          </p>
-        </div>
       </div>
     </div>
   </section>
@@ -359,13 +384,7 @@
         and scalable business models.
       </p>
       <div class="form-embed fade-in-up">
-        <!-- Replace this placeholder with your actual pitch application form embed code -->
-        <div class="form-placeholder">
-          <p>Pitch Application Form</p>
-          <p style="font-size: 0.9rem; margin-top: 10px;">
-            (Insert your pitch application form embed code here)
-          </p>
-        </div>
+        <iframe class="airtable-embed" src="https://airtable.com/embed/appNF0gmjUJ0o9NWT/shrJJV3FCNRYDcV5i" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
       </div>
     </div>
   </section>
@@ -380,13 +399,7 @@
         receive personalized support throughout the application process.
       </p>
       <div class="form-embed fade-in-up">
-        <!-- Replace this placeholder with your actual grant application form embed code -->
-        <div class="form-placeholder">
-          <p>Grant Cycle Application Form</p>
-          <p style="font-size: 0.9rem; margin-top: 10px;">
-            (Insert your grant application form embed code here)
-          </p>
-        </div>
+        <iframe class="airtable-embed" src="https://airtable.com/embed/apprQaZi5Xs3tfnLq/shrSEvXCe2CyMkSqN" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
       </div>
     </div>
   </section>
