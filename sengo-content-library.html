@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sengo Content Library</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1B3533;
+            --secondary-brown: #67441A;
+            --accent-orange: #D57028;
+            --light-cream: #F3EDE7;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--primary-dark);
+            background-color: var(--light-cream);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .sengo-hero {
+            padding: 120px 20px 80px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-brown) 100%);
+            color: var(--light-cream);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--light-cream);
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Content Library Section */
+        .content-library-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--accent-orange);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .content-card.fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-card-header {
+            margin-bottom: 15px;
+        }
+
+        .content-badge {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .content-date {
+            display: inline-block;
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .content-card h3 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .content-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--secondary-brown);
+            margin-bottom: 20px;
+        }
+
+        .description-preview {
+            display: block;
+        }
+
+        .description-full {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .description-full.expanded {
+            display: block;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: var(--accent-orange);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0;
+            margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            color: var(--secondary-brown);
+        }
+
+        .read-more-btn::after {
+            content: '↓';
+            transition: transform 0.3s ease;
+        }
+
+        .read-more-btn.expanded::after {
+            transform: rotate(180deg);
+        }
+
+        .content-card-footer {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(27, 53, 51, 0.1);
+        }
+
+        .view-content-btn {
+            display: inline-block;
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-content-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(213, 112, 40, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .view-content-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .view-content-btn:hover {
+            background: var(--accent-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(213, 112, 40, 0.3);
+        }
+
+        .view-content-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Email CTA Section */
+        .sengo-email-section {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--secondary-brown) 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .email-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .email-content h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .email-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .content-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .sengo-email-section {
+                padding: 60px 20px;
+            }
+
+            .email-content h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .content-badge,
+            .content-date {
+                font-size: 0.7rem;
+                padding: 5px 12px;
+            }
+
+            .view-content-btn {
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="sengo-hero">
+        <div class="hero-content">
+            <h1>Sengo Content Library</h1>
+            <p class="subtitle">Access our collection of virtual meetup recaps, courses, and resources designed to help founders navigate funding, scaling, and strategic growth.</p>
+        </div>
+    </section>
+
+    <!-- Content Library Section -->
+    <section class="content-library-section">
+        <div class="content-grid">
+            <!-- Content Item 1 -->
+            <div class="content-card fade-in-up">
+                <div class="content-card-header">
+                    <span class="content-badge">Virtual Meetup</span>
+                    <span class="content-date">9/18/2025</span>
+                    <h3>Sengo Virtual Meetup Recap: Finding Angels & VCs</h3>
+                </div>
+                <div class="content-description">
+                    <span class="description-preview">
+                        Our 9.18 session on sourcing and qualifying angels/VCs. We dug into practical tactics (warm intros > spray-and-pray), investor fit...
+                    </span>
+                    <span class="description-full">
+                        Our 9.18 session on sourcing and qualifying angels/VCs. We dug into practical tactics (warm intros > spray-and-pray), investor fit (thesis, stage, check size), and alternative capital paths like CDFIs. Special shoutouts to founders who shared their journeys.
+                    </span>
+                    <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <div class="content-card-footer">
+                    <a href="https://app.bysengo.com/products/sengo-virtual-meetup-recap-finding-angels-vcs" class="view-content-btn" target="_blank">
+                        <span>View Content</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Item 2 -->
+            <div class="content-card fade-in-up">
+                <div class="content-card-header">
+                    <span class="content-badge">Course</span>
+                    <h3>Debt vs. Bootstrapping</h3>
+                </div>
+                <div class="content-description">
+                    <span class="description-preview">
+                        Not every founder wants (or needs) venture capital. In this course, we break down two powerful (and often misunderstood) funding paths...
+                    </span>
+                    <span class="description-full">
+                        Not every founder wants (or needs) venture capital. In this course, we break down two powerful (and often misunderstood) funding paths: bootstrapping and debt financing. You'll learn how to think strategically about funding your business while preserving ownership, managing risk, and staying true to your vision. Whether you're early-stage or scaling, this course gives you perspective to consider as you navigate your approach to the question... "should I bootstrap or borrow?"
+                    </span>
+                    <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <div class="content-card-footer">
+                    <a href="https://app.bysengo.com/products/debt-vs-bootstrapping" class="view-content-btn" target="_blank">
+                        <span>View Content</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Item 3 -->
+            <div class="content-card fade-in-up">
+                <div class="content-card-header">
+                    <span class="content-badge">Virtual Meetup</span>
+                    <span class="content-date">10/14/2025</span>
+                    <h3>Sengo Virtual Meetup Recap: Demystifying CDFI Funding with Isaiah Coleman</h3>
+                </div>
+                <div class="content-description">
+                    <span class="description-preview">
+                        We hosted Isaiah Coleman, capital connector and ecosystem builder, for an insightful fireside chat on CDFIs...
+                    </span>
+                    <span class="description-full">
+                        We hosted Isaiah Coleman, capital connector and ecosystem builder, for an insightful fireside chat on CDFIs (Community Development Financial Institutions) - the mission-driven alternative to traditional banks that prioritize impact alongside returns. Isaiah broke down how CDFIs work, who they serve, and how founders can leverage them as part of a strategic funding approach.
+                    </span>
+                    <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <div class="content-card-footer">
+                    <a href="https://app.bysengo.com/products/sengo-virtual-meetup-recap-demystifying-cdfi-funding-with-isaiah-coleman" class="view-content-btn" target="_blank">
+                        <span>View Content</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Item 4 -->
+            <div class="content-card fade-in-up">
+                <div class="content-card-header">
+                    <span class="content-badge">Virtual Meetup</span>
+                    <span class="content-date">12/4/2025</span>
+                    <h3>Sengo Virtual Meetup Recap: Building to Scale/Sell</h3>
+                </div>
+                <div class="content-description">
+                    <span class="description-preview">
+                        Learn the secrets of Building to Scale/Sell with proven strategies from Brianna Arps, the CEO of MOODEAUX...
+                    </span>
+                    <span class="description-full">
+                        Learn the secrets of Building to Scale/Sell with proven strategies from Brianna Arps, the CEO of MOODEAUX. Brianna Arps is the founder and CEO of MOODEAUX, a multi-award-winning fragrance label empowering bold self-expression with every spritz. After a decade in journalism and a career in marketing, Brianna began studying the art of perfumery and its transformative effects, recognizing an opportunity to turn her passion into a purpose-driven, trailblazing business. A champion for diversity, Brianna also leads Black in Fragrance™, MOODEAUX®'s philanthropic arm, to support Black perfumers and entrepreneurs with peer mentorship, networking and access to capital.
+                    </span>
+                    <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <div class="content-card-footer">
+                    <a href="https://app.bysengo.com/products/sengo-virtual-meetup-recap-building-to-scale-sell" class="view-content-btn" target="_blank">
+                        <span>View Content</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Item 5 -->
+            <div class="content-card fade-in-up">
+                <div class="content-card-header">
+                    <span class="content-badge">Virtual Meetup</span>
+                    <span class="content-date">12/11/2025</span>
+                    <h3>Sengo Virtual Meetup Recap: Building Your 2026 Pitch Strategy With Dana Ammons</h3>
+                </div>
+                <div class="content-description">
+                    <span class="description-preview">
+                        We closed the year with a powerful conversation led by Dana Ammons, CEO of VGP Value Growth Partners...
+                    </span>
+                    <span class="description-full">
+                        We closed the year with a powerful conversation led by Dana Ammons, CEO of VGP Value Growth Partners, energizing our entire community for what's ahead. In a funding landscape shifting quickly, with AI absorbing more capital and underrepresented founders facing heightened competition. Dana grounded us in what founders can control: strategy, clean data, real traction, and a story rooted in purpose.
+                    </span>
+                    <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <div class="content-card-footer">
+                    <a href="https://app.bysengo.com/products/sengo-virtual-meetup-recap-building-your-2026-pitch-strategy-with-dana-ammons" class="view-content-btn" target="_blank">
+                        <span>View Content</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Item 6 -->
+            <div class="content-card fade-in-up">
+                <div class="content-card-header">
+                    <span class="content-badge">Virtual Meetup</span>
+                    <span class="content-date">1/8/2026</span>
+                    <h3>Sengo Virtual Meetup Recap: Q1 Momentum & Strategy Session with Amiah</h3>
+                </div>
+                <div class="content-description">
+                    <span class="description-preview">
+                        Amiah Sheppard is a pitch coach and venture strategist who works with founders on clarity, positioning, and decision-making...
+                    </span>
+                    <span class="description-full">
+                        Amiah Sheppard is a pitch coach and venture strategist who works with founders on clarity, positioning, and decision-making. She has supported early-stage companies through founder programs and venture platforms, including her work with Backstage Capital, and brings a grounded, founder-first approach to helping entrepreneurs move with focus and intention.
+                    </span>
+                    <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <div class="content-card-footer">
+                    <a href="https://app.bysengo.com/products/sengo-virtual-meetup-recap-q1-momentum-strategy-session-with-amiah" class="view-content-btn" target="_blank">
+                        <span>View Content</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Item 7 -->
+            <div class="content-card fade-in-up">
+                <div class="content-card-header">
+                    <span class="content-badge">Course</span>
+                    <h3>Intro to Private Markets</h3>
+                </div>
+                <div class="content-description">
+                    <span class="description-preview">
+                        Whether you're raising capital or simply curious about how money moves behind the scenes, this series is your step-by-step onboarding...
+                    </span>
+                    <span class="description-full">
+                        Whether you're raising capital or simply curious about how money moves behind the scenes, this series is your step-by-step onboarding into the world of private markets. You'll gain the language, frameworks, and tools to understand how private fundraising works—and how to take your first confident step as either a founder or a funder.
+                    </span>
+                    <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <div class="content-card-footer">
+                    <a href="https://app.bysengo.com/products/2149150057" class="view-content-btn" target="_blank">
+                        <span>View Content</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email CTA Section -->
+    <section class="sengo-email-section">
+        <div class="email-content">
+            <h2>Stay Connected</h2>
+            <p>Get notified when we add new content, upcoming meetups, and exclusive resources for founders and funders.</p>
+            <!-- Add your Squarespace email form block here -->
+        </div>
+    </section>
+
+    <script>
+        // Toggle description expansion
+        function toggleDescription(button) {
+            const card = button.closest('.content-card');
+            const preview = card.querySelector('.description-preview');
+            const full = card.querySelector('.description-full');
+
+            if (full.classList.contains('expanded')) {
+                full.classList.remove('expanded');
+                preview.style.display = 'inline';
+                button.textContent = 'Read more';
+                button.classList.remove('expanded');
+            } else {
+                full.classList.add('expanded');
+                preview.style.display = 'none';
+                button.textContent = 'Read less';
+                button.classList.add('expanded');
+            }
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all content cards
+        document.querySelectorAll('.content-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
