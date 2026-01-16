@@ -1,5 +1,5 @@
 <!-- Sengo Grant Applications Page -->
-<!-- Add this to an Embed Block on your Squarespace page -->
+<!-- Add this to your Kajabi page -->
 
 <style>
   /* Google Fonts */
@@ -227,6 +227,32 @@
     font-weight: 700;
   }
 
+  /* Flow Container */
+  .flow-container {
+    position: relative;
+    min-height: 600px;
+  }
+
+  .flow-step {
+    display: none;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .flow-step.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* Step Section */
   .step-section {
     margin: 60px 0;
@@ -264,6 +290,49 @@
     font-size: 1rem;
     color: #67441A;
     margin: 0;
+  }
+
+  /* Navigation Buttons */
+  .step-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+
+  .nav-button {
+    display: inline-block;
+    padding: 16px 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: white;
+    border: 2px solid #1B3533;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .nav-button:hover {
+    background: #D57028;
+    border-color: #D57028;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(213, 112, 40, 0.35);
+  }
+
+  .nav-button.secondary {
+    background: transparent;
+    color: #1B3533;
+    border-color: #1B3533;
+  }
+
+  .nav-button.secondary:hover {
+    background: #1B3533;
+    color: white;
   }
 
   /* Airtable Embed Section */
@@ -498,6 +567,17 @@
     .grant-info-section p {
       font-size: 1rem;
     }
+
+    .step-navigation {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .nav-button {
+      width: 100%;
+      padding: 14px 30px;
+      font-size: 0.9rem;
+    }
   }
 </style>
 
@@ -563,36 +643,58 @@
     </div>
 
     <div id="eligibility-result" class="eligibility-result"></div>
-  </div>
 
-  <!-- Step 1: Airtable Application -->
-  <div class="step-section fade-in-up">
-    <div class="step-header">
-      <div class="step-number">1</div>
-      <h2>Complete Your Application</h2>
-      <p>Fill out the form below to apply for the Sengo Grant.</p>
-    </div>
-
-    <div class="airtable-section">
-      <div class="airtable-container">
-        <iframe class="airtable-embed" src="https://airtable.com/embed/apprQaZi5Xs3tfnLq/shrSY6kWTDyzWoxcy" frameborder="0" onmousewheel="" width="100%" height="800" style="background: transparent; border: 1px solid #ccc;"></iframe>
-      </div>
+    <!-- Start Application Button -->
+    <div class="step-navigation">
+      <button class="nav-button" id="start-application-btn" style="display: none;">Start Application</button>
     </div>
   </div>
 
-  <!-- Step 2: Checkout -->
-  <div class="step-section fade-in-up">
-    <div class="step-header">
-      <div class="step-number">2</div>
-      <h2>Complete Your Checkout</h2>
-      <p>Finalize your grant application by completing the checkout process.</p>
-    </div>
+  <!-- Flow Container for Steps -->
+  <div class="flow-container">
 
-    <div class="checkout-section">
-      <div class="checkout-container">
-        <iframe class="checkout-embed" src="https://app.bysengo.com/grantcheckout" frameborder="0" onmousewheel="" width="100%" height="800" style="background: transparent; border: 1px solid #ccc;"></iframe>
+    <!-- Step 1: Airtable Application -->
+    <div class="flow-step" id="step-1">
+      <div class="step-section">
+        <div class="step-header">
+          <div class="step-number">1</div>
+          <h2>Complete Your Application</h2>
+          <p>Fill out the form below to apply for the Sengo Grant.</p>
+        </div>
+
+        <div class="airtable-section">
+          <div class="airtable-container">
+            <iframe class="airtable-embed" src="https://airtable.com/embed/apprQaZi5Xs3tfnLq/shrSY6kWTDyzWoxcy" frameborder="0" onmousewheel="" width="100%" height="800" style="background: transparent; border: 1px solid #ccc;"></iframe>
+          </div>
+        </div>
+
+        <div class="step-navigation">
+          <button class="nav-button" id="next-to-step-2">Next: Checkout →</button>
+        </div>
       </div>
     </div>
+
+    <!-- Step 2: Checkout -->
+    <div class="flow-step" id="step-2">
+      <div class="step-section">
+        <div class="step-header">
+          <div class="step-number">2</div>
+          <h2>Complete Your Checkout</h2>
+          <p>Finalize your grant application by completing the checkout process.</p>
+        </div>
+
+        <div class="checkout-section">
+          <div class="checkout-container">
+            <iframe class="checkout-embed" src="https://app.bysengo.com/grantcheckout" frameborder="0" onmousewheel="" width="100%" height="800" style="background: transparent; border: 1px solid #ccc;"></iframe>
+          </div>
+        </div>
+
+        <div class="step-navigation">
+          <button class="nav-button secondary" id="back-to-step-1">← Back to Application</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- Info Section -->
@@ -605,13 +707,52 @@
 </div>
 
 <script>
-  // Eligibility checker logic
+  // Flow navigation and eligibility checker logic
   document.addEventListener('DOMContentLoaded', function() {
     var locationRadios = document.querySelectorAll('input[name="location"]');
     var businessRadios = document.querySelectorAll('input[name="business"]');
     var memberRadios = document.querySelectorAll('input[name="member"]');
     var resultDiv = document.getElementById('eligibility-result');
+    var startApplicationBtn = document.getElementById('start-application-btn');
 
+    // Flow navigation elements
+    var step1 = document.getElementById('step-1');
+    var step2 = document.getElementById('step-2');
+    var nextToStep2Btn = document.getElementById('next-to-step-2');
+    var backToStep1Btn = document.getElementById('back-to-step-1');
+
+    // Flow navigation functions
+    function showStep(stepNumber) {
+      // Hide all steps
+      step1.classList.remove('active');
+      step2.classList.remove('active');
+
+      // Show the requested step
+      if (stepNumber === 1) {
+        step1.classList.add('active');
+        // Scroll to top of flow container
+        step1.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (stepNumber === 2) {
+        step2.classList.add('active');
+        // Scroll to top of flow container
+        step2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Navigation button event listeners
+    startApplicationBtn.addEventListener('click', function() {
+      showStep(1);
+    });
+
+    nextToStep2Btn.addEventListener('click', function() {
+      showStep(2);
+    });
+
+    backToStep1Btn.addEventListener('click', function() {
+      showStep(1);
+    });
+
+    // Eligibility checker
     function checkEligibility() {
       var location = document.querySelector('input[name="location"]:checked');
       var business = document.querySelector('input[name="business"]:checked');
@@ -631,14 +772,17 @@
           // Yes to all 3
           resultDiv.classList.add('eligible');
           resultDiv.innerHTML = '<strong>✓ Yes, you\'re eligible!</strong><br>You meet all requirements for the Sengo Grant. Please proceed with your application below.';
+          startApplicationBtn.style.display = 'inline-block';
         } else if (locationValue === 'yes' && businessValue === 'yes' && memberValue === 'no') {
           // Yes to first 2, no to member
           resultDiv.classList.add('eligible-with-membership');
           resultDiv.innerHTML = '<strong>✓ Yes, but you\'ll need to confirm membership.</strong><br>You meet the location and business requirements, but you\'ll need to become a Sengo member. <a href="https://app.bysengo.com/founder-enrollment" target="_blank">Enroll here</a> and then return to complete your application.';
+          startApplicationBtn.style.display = 'inline-block';
         } else if (locationValue === 'no' || businessValue === 'no') {
           // No to location or business
           resultDiv.classList.add('not-eligible');
           resultDiv.innerHTML = '<strong>Not eligible for the grant, but you can pitch live!</strong><br>While you don\'t meet the grant requirements, you can still join the platform and apply to pitch. <a href="https://app.bysengo.com/founder-enrollment" target="_blank">Join now</a> to get started!';
+          startApplicationBtn.style.display = 'none';
         }
       }
     }
