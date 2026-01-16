@@ -165,6 +165,64 @@
     margin-bottom: 30px;
   }
 
+  /* CTA Buttons */
+  .cta-buttons-section {
+    text-align: center;
+    padding: 80px 100px;
+    background-color: #F3EDE7;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+
+  .cta-btn {
+    padding: 25px 60px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: 3px solid #1B3533;
+    background: transparent;
+    color: #1B3533;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #D57028;
+    transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .cta-btn:hover::before {
+    width: 300%;
+    height: 300%;
+  }
+
+  .cta-btn:hover {
+    border-color: #D57028;
+    color: white;
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(213, 112, 40, 0.3);
+  }
+
   /* Impact Badge */
   .impact-badge {
     display: inline-block;
@@ -279,6 +337,10 @@
       padding: 60px 50px;
     }
 
+    .cta-buttons-section {
+      padding: 60px 50px;
+    }
+
     .funding-overview {
       padding: 80px 50px;
     }
@@ -314,6 +376,22 @@
     .funding-intro {
       padding: 50px 30px;
       font-size: 1.1rem;
+    }
+
+    .cta-buttons-section {
+      padding: 50px 30px;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-btn {
+      width: 100%;
+      max-width: 350px;
+      padding: 20px 40px;
+      font-size: 1rem;
     }
 
     .funding-overview {
@@ -364,6 +442,18 @@
   <!-- Intro Section -->
   <div class="funding-intro fade-in-up">
     <p>Sengo believes founders deserve access to capital that doesn't dilute their ownership. Our Non-dilutive Funding Hub connects you with grants, pitch competitions, and other funding opportunities that help you grow your business while maintaining control.</p>
+  </div>
+
+  <!-- CTA Buttons Section -->
+  <div class="cta-buttons-section fade-in-up">
+    <div class="cta-buttons">
+      <button class="cta-btn" onclick="scrollToSection('pitch-application')">
+        Apply to Pitch
+      </button>
+      <button class="cta-btn" onclick="scrollToSection('grant-application')">
+        Apply for Grant Cycle
+      </button>
+    </div>
   </div>
 
   <!-- Overview Section -->
@@ -422,6 +512,17 @@
 </div>
 
 <script>
+  // Smooth scroll to section
+  function scrollToSection(sectionId) {
+    var element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }
+
   // Scroll-triggered animations
   document.addEventListener('DOMContentLoaded', function() {
     // Intersection Observer for scroll animations
