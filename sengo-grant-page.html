@@ -103,15 +103,22 @@
     box-shadow: 0 4px 15px rgba(27, 53, 51, 0.2);
   }
 
-  /* Eligibility Checker Section */
-  .eligibility-section {
-    text-align: center;
+  /* Main Application Module */
+  .application-module {
     margin: 40px auto;
-    padding: 40px;
+    padding: 50px 40px;
     background: white;
     border-radius: 16px;
     border: 2px solid #D57028;
-    max-width: 700px;
+    max-width: 900px;
+    min-height: 500px;
+    box-shadow: 0 10px 40px rgba(27, 53, 51, 0.15);
+    position: relative;
+  }
+
+  /* Eligibility Checker Section */
+  .eligibility-section {
+    text-align: center;
   }
 
   .eligibility-section h2 {
@@ -227,19 +234,14 @@
     font-weight: 700;
   }
 
-  /* Flow Container */
-  .flow-container {
-    position: relative;
-    min-height: 600px;
-  }
-
-  .flow-step {
+  /* View Container */
+  .view-container {
     display: none;
-    animation: fadeIn 0.5s ease;
   }
 
-  .flow-step.active {
+  .view-container.active {
     display: block;
+    animation: fadeIn 0.5s ease;
   }
 
   @keyframes fadeIn {
@@ -255,7 +257,7 @@
 
   /* Step Section */
   .step-section {
-    margin: 60px 0;
+    text-align: center;
   }
 
   .step-header {
@@ -335,78 +337,21 @@
     color: white;
   }
 
-  /* Airtable Embed Section */
-  .airtable-section {
-    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
-    padding: 60px 40px;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(27, 53, 51, 0.25);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .airtable-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(213, 112, 40, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .airtable-container {
-    background: white;
+  /* Iframe Container */
+  .iframe-container {
+    margin-top: 30px;
+    background: #f8f8f8;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    position: relative;
-    z-index: 1;
+    box-shadow: inset 0 2px 8px rgba(27, 53, 51, 0.1);
   }
 
-  .airtable-container iframe {
+  .iframe-container iframe {
     width: 100%;
     min-height: 800px;
     border: none;
     border-radius: 8px;
-  }
-
-  /* Checkout Section */
-  .checkout-section {
-    background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
-    padding: 60px 40px;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(213, 112, 40, 0.25);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .checkout-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(243, 237, 231, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .checkout-container {
     background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    position: relative;
-    z-index: 1;
-  }
-
-  .checkout-container iframe {
-    width: 100%;
-    min-height: 800px;
-    border: none;
-    border-radius: 8px;
   }
 
   /* Info Section */
@@ -498,7 +443,7 @@
       font-size: 1rem;
     }
 
-    .eligibility-section {
+    .application-module {
       padding: 30px 20px;
       margin: 30px auto;
     }
@@ -541,18 +486,11 @@
       font-size: 0.9rem;
     }
 
-    .airtable-section,
-    .checkout-section {
-      padding: 40px 20px;
-    }
-
-    .airtable-container,
-    .checkout-container {
+    .iframe-container {
       padding: 15px;
     }
 
-    .airtable-container iframe,
-    .checkout-container iframe {
+    .iframe-container iframe {
       min-height: 700px;
     }
 
@@ -595,66 +533,68 @@
     <div class="glow-text">Application Below!</div>
   </div>
 
-  <!-- Eligibility Checker Section -->
-  <div class="eligibility-section fade-in-up">
-    <h2>Check Your Eligibility</h2>
-    <p>Answer the following questions to see if you qualify for the Sengo Grant.</p>
+  <!-- Main Application Module (Single Box) -->
+  <div class="application-module fade-in-up">
 
-    <div class="eligibility-question">
-      <label>Are you based in the US, UK, or EU?</label>
-      <div class="eligibility-options">
-        <div class="eligibility-option">
-          <input type="radio" id="location-yes" name="location" value="yes">
-          <label for="location-yes" class="eligibility-option-label">Yes</label>
+    <!-- View 0: Eligibility Checker -->
+    <div class="view-container active" id="eligibility-view">
+      <div class="eligibility-section">
+        <h2>Check Your Eligibility</h2>
+        <p>Answer the following questions to see if you qualify for the Sengo Grant.</p>
+
+        <div class="eligibility-question">
+          <label>Are you based in the US, UK, or EU?</label>
+          <div class="eligibility-options">
+            <div class="eligibility-option">
+              <input type="radio" id="location-yes" name="location" value="yes">
+              <label for="location-yes" class="eligibility-option-label">Yes</label>
+            </div>
+            <div class="eligibility-option">
+              <input type="radio" id="location-no" name="location" value="no">
+              <label for="location-no" class="eligibility-option-label">No</label>
+            </div>
+          </div>
         </div>
-        <div class="eligibility-option">
-          <input type="radio" id="location-no" name="location" value="no">
-          <label for="location-no" class="eligibility-option-label">No</label>
+
+        <div class="eligibility-question">
+          <label>Do you have a for-profit business?</label>
+          <div class="eligibility-options">
+            <div class="eligibility-option">
+              <input type="radio" id="business-yes" name="business" value="yes">
+              <label for="business-yes" class="eligibility-option-label">Yes</label>
+            </div>
+            <div class="eligibility-option">
+              <input type="radio" id="business-no" name="business" value="no">
+              <label for="business-no" class="eligibility-option-label">No</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="eligibility-question">
+          <label>Are you a Sengo member?</label>
+          <div class="eligibility-options">
+            <div class="eligibility-option">
+              <input type="radio" id="member-yes" name="member" value="yes">
+              <label for="member-yes" class="eligibility-option-label">Yes</label>
+            </div>
+            <div class="eligibility-option">
+              <input type="radio" id="member-no" name="member" value="no">
+              <label for="member-no" class="eligibility-option-label">No</label>
+            </div>
+          </div>
+        </div>
+
+        <div id="eligibility-result" class="eligibility-result"></div>
+
+        <!-- Start Application Button -->
+        <div class="step-navigation">
+          <button class="nav-button" id="start-application-btn" style="display: none;">Start Application</button>
         </div>
       </div>
     </div>
 
-    <div class="eligibility-question">
-      <label>Do you have a for-profit business?</label>
-      <div class="eligibility-options">
-        <div class="eligibility-option">
-          <input type="radio" id="business-yes" name="business" value="yes">
-          <label for="business-yes" class="eligibility-option-label">Yes</label>
-        </div>
-        <div class="eligibility-option">
-          <input type="radio" id="business-no" name="business" value="no">
-          <label for="business-no" class="eligibility-option-label">No</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="eligibility-question">
-      <label>Are you a Sengo member?</label>
-      <div class="eligibility-options">
-        <div class="eligibility-option">
-          <input type="radio" id="member-yes" name="member" value="yes">
-          <label for="member-yes" class="eligibility-option-label">Yes</label>
-        </div>
-        <div class="eligibility-option">
-          <input type="radio" id="member-no" name="member" value="no">
-          <label for="member-no" class="eligibility-option-label">No</label>
-        </div>
-      </div>
-    </div>
-
-    <div id="eligibility-result" class="eligibility-result"></div>
-
-    <!-- Start Application Button -->
-    <div class="step-navigation">
-      <button class="nav-button" id="start-application-btn" style="display: none;">Start Application</button>
-    </div>
-  </div>
-
-  <!-- Flow Container for Steps -->
-  <div class="flow-container">
-
-    <!-- Step 1: Airtable Application -->
-    <div class="flow-step" id="step-1">
+    <!-- View 1: Application Step -->
+    <div class="view-container" id="step-1-view">
       <div class="step-section">
         <div class="step-header">
           <div class="step-number">1</div>
@@ -662,10 +602,8 @@
           <p>Fill out the form below to apply for the Sengo Grant.</p>
         </div>
 
-        <div class="airtable-section">
-          <div class="airtable-container">
-            <iframe class="airtable-embed" src="https://airtable.com/embed/apprQaZi5Xs3tfnLq/shrSY6kWTDyzWoxcy" frameborder="0" onmousewheel="" width="100%" height="800" style="background: transparent; border: 1px solid #ccc;"></iframe>
-          </div>
+        <div class="iframe-container">
+          <iframe class="airtable-embed" src="https://airtable.com/embed/apprQaZi5Xs3tfnLq/shrSY6kWTDyzWoxcy" frameborder="0" onmousewheel="" width="100%" height="800"></iframe>
         </div>
 
         <div class="step-navigation">
@@ -674,8 +612,8 @@
       </div>
     </div>
 
-    <!-- Step 2: Checkout -->
-    <div class="flow-step" id="step-2">
+    <!-- View 2: Checkout Step -->
+    <div class="view-container" id="step-2-view">
       <div class="step-section">
         <div class="step-header">
           <div class="step-number">2</div>
@@ -683,10 +621,8 @@
           <p>Finalize your grant application by completing the checkout process.</p>
         </div>
 
-        <div class="checkout-section">
-          <div class="checkout-container">
-            <iframe class="checkout-embed" src="https://app.bysengo.com/grantcheckout" frameborder="0" onmousewheel="" width="100%" height="800" style="background: transparent; border: 1px solid #ccc;"></iframe>
-          </div>
+        <div class="iframe-container">
+          <iframe class="checkout-embed" src="https://app.bysengo.com/grantcheckout" frameborder="0" onmousewheel="" width="100%" height="800"></iframe>
         </div>
 
         <div class="step-navigation">
@@ -707,7 +643,7 @@
 </div>
 
 <script>
-  // Flow navigation and eligibility checker logic
+  // View navigation and eligibility checker logic
   document.addEventListener('DOMContentLoaded', function() {
     var locationRadios = document.querySelectorAll('input[name="location"]');
     var businessRadios = document.querySelectorAll('input[name="business"]');
@@ -715,41 +651,47 @@
     var resultDiv = document.getElementById('eligibility-result');
     var startApplicationBtn = document.getElementById('start-application-btn');
 
-    // Flow navigation elements
-    var step1 = document.getElementById('step-1');
-    var step2 = document.getElementById('step-2');
+    // View elements
+    var eligibilityView = document.getElementById('eligibility-view');
+    var step1View = document.getElementById('step-1-view');
+    var step2View = document.getElementById('step-2-view');
     var nextToStep2Btn = document.getElementById('next-to-step-2');
     var backToStep1Btn = document.getElementById('back-to-step-1');
 
-    // Flow navigation functions
-    function showStep(stepNumber) {
-      // Hide all steps
-      step1.classList.remove('active');
-      step2.classList.remove('active');
+    // View navigation function
+    function showView(viewName) {
+      // Hide all views
+      eligibilityView.classList.remove('active');
+      step1View.classList.remove('active');
+      step2View.classList.remove('active');
 
-      // Show the requested step
-      if (stepNumber === 1) {
-        step1.classList.add('active');
-        // Scroll to top of flow container
-        step1.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else if (stepNumber === 2) {
-        step2.classList.add('active');
-        // Scroll to top of flow container
-        step2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Show the requested view
+      if (viewName === 'eligibility') {
+        eligibilityView.classList.add('active');
+      } else if (viewName === 'step-1') {
+        step1View.classList.add('active');
+      } else if (viewName === 'step-2') {
+        step2View.classList.add('active');
+      }
+
+      // Scroll to top of module
+      var module = document.querySelector('.application-module');
+      if (module) {
+        module.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
     // Navigation button event listeners
     startApplicationBtn.addEventListener('click', function() {
-      showStep(1);
+      showView('step-1');
     });
 
     nextToStep2Btn.addEventListener('click', function() {
-      showStep(2);
+      showView('step-2');
     });
 
     backToStep1Btn.addEventListener('click', function() {
-      showStep(1);
+      showView('step-1');
     });
 
     // Eligibility checker
