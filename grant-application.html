@@ -582,9 +582,8 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="logo">Bysengo</div>
             <h1>Grant Application</h1>
-            <p class="subtitle">Let's assess your fundraise readiness and get you connected with the right capital</p>
+            <p class="subtitle">Complete a short readiness test and then complete your application</p>
         </div>
 
         <!-- Step Indicator -->
@@ -605,8 +604,6 @@
 
         <!-- Overview Section -->
         <div class="overview-section" id="overviewSection">
-            <h2 class="overview-title">Bysengo Grant Application</h2>
-
             <div class="overview-content">
                 <div class="eligibility-box">
                     <div class="eligibility-title">📋 Eligibility</div>
@@ -620,17 +617,12 @@
                 <ul class="process-list">
                     <li>Complete a fundraise readiness assessment to get your score</li>
                     <li>Provide detailed business information for your application</li>
-                    <li>Join the Bysengo platform to track your progress and receive updates</li>
+                    <li>Join the Sengo platform (or select log in)</li>
                 </ul>
 
-                <div class="auth-section">
-                    <div class="auth-title">Already have an account?</div>
-                    <div class="auth-buttons">
-                        <button type="button" class="btn-auth" onclick="handleLogin()">Log In</button>
-                        <button type="button" class="btn-auth" onclick="handleSignup()">Sign Up</button>
-                    </div>
-                    <div class="auth-note">Your responses will be saved to your account for tracking</div>
-                </div>
+                <p style="text-align: center; font-size: 1rem; color: #67441A; margin: 30px 0; line-height: 1.8;">
+                    <strong>Note:</strong> There is no minimum readiness score, but it helps us follow up with the right resources for you.
+                </p>
 
                 <div class="button-group">
                     <button type="button" class="btn btn-primary" onclick="startApplication()">Get Started</button>
@@ -847,9 +839,18 @@
         <div class="section-card" id="step3">
             <h2 style="font-family: 'Arimo', sans-serif; font-size: 2rem; font-weight: 600; color: #1B3533; margin-bottom: 20px; text-align: center;">Join the Bysengo Community</h2>
 
-            <p style="text-align: center; font-size: 1.05rem; color: #67441A; margin-bottom: 40px; line-height: 1.8;">
+            <p style="text-align: center; font-size: 1.05rem; color: #67441A; margin-bottom: 30px; line-height: 1.8;">
                 Complete your application by becoming a Bysengo member. Get access to our network of funders, exclusive resources, and personalized support on your fundraising journey.
             </p>
+
+            <!-- Already Have Account Section -->
+            <div class="auth-section" style="margin-bottom: 40px;">
+                <div class="auth-title">Already have an account?</div>
+                <div class="auth-buttons">
+                    <button type="button" class="btn-auth" onclick="handleLogin()">Log In</button>
+                    <button type="button" class="btn-auth" onclick="handleSignup()">Sign Up</button>
+                </div>
+            </div>
 
             <!-- Checkout Container -->
             <div id="checkout-container" style="margin-bottom: 40px;">
