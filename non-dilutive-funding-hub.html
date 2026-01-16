@@ -9,58 +9,66 @@
     box-sizing: border-box;
   }
 
-  .sengo-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
+  body {
+    margin: 0;
+    padding: 0;
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #F3EDE7;
+  }
+
+  .sengo-content {
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   /* Hero Section */
   .funding-hero {
-    min-height: 50vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     text-align: left;
-    padding: 40px 20px 20px;
-    margin-bottom: 40px;
+    padding: 80px 100px;
+    margin-bottom: 0;
     position: relative;
+    background-color: #F3EDE7;
   }
 
   .funding-hero h1 {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 6.5rem;
+    font-size: 7.5rem;
     font-weight: 400;
     line-height: 0.94;
     color: #1B3533;
     letter-spacing: -0.077em;
     text-transform: none;
-    max-width: 900px;
-    margin: 0 0 20px 0;
+    max-width: 1400px;
+    margin: 0 0 30px 0;
   }
 
   .funding-hero-subtitle {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 400;
     color: #67441A;
     margin: 0;
-    max-width: 600px;
+    max-width: 800px;
   }
 
   /* Intro Section */
   .funding-intro {
     text-align: center;
-    font-size: 1.2rem;
-    line-height: 1.7;
+    font-size: 1.3rem;
+    line-height: 1.8;
     color: #1B3533;
-    margin: 40px auto;
+    margin: 0;
     max-width: 100%;
     font-weight: 500;
-    padding: 30px 40px;
+    padding: 80px 100px;
     position: relative;
+    background-color: #F3EDE7;
   }
 
   /* Animated border lines */
@@ -89,16 +97,23 @@
     right: 0;
   }
 
+  .funding-intro p {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
   /* Overview Section */
   .funding-overview {
-    margin: 60px 0;
+    margin: 0;
+    padding: 100px 100px;
     text-align: center;
+    background-color: #F3EDE7;
   }
 
   .funding-overview h2 {
     font-family: 'Arimo', sans-serif;
-    font-size: 7rem;
-    margin-bottom: 30px;
+    font-size: 8rem;
+    margin-bottom: 60px;
     font-weight: 700;
     line-height: 0.8;
     letter-spacing: -0.077em;
@@ -109,44 +124,45 @@
   /* Opportunity Cards */
   .opportunity-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin: 40px 0;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
   .opportunity-card {
     background: #1B3533;
-    padding: 50px 30px;
-    border-radius: 12px;
+    padding: 70px 50px;
+    border-radius: 16px;
     text-align: center;
-    border: 2px solid rgba(213, 112, 40, 0.3);
+    border: 3px solid rgba(213, 112, 40, 0.3);
     transition: all 0.3s ease;
   }
 
   .opportunity-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(27, 53, 51, 0.3);
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(27, 53, 51, 0.4);
     border-color: #D57028;
   }
 
   .opportunity-card h3 {
-    font-size: 1.75rem;
+    font-size: 2.25rem;
     color: #F3EDE7;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     font-weight: 600;
     font-family: 'Arimo', sans-serif;
   }
 
   .opportunity-card p {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 1.1rem;
+    line-height: 1.8;
     color: #AF8145;
     font-weight: 400;
   }
 
   .opportunity-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
+    font-size: 4rem;
+    margin-bottom: 30px;
   }
 
   /* Impact Badge */
@@ -167,9 +183,8 @@
   .form-section {
     background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
     color: #F3EDE7;
-    padding: 60px 50px;
-    border-radius: 16px;
-    margin: 60px 0;
+    padding: 120px 100px;
+    margin: 0;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -189,8 +204,8 @@
 
   .form-section h2 {
     font-family: 'Arimo', sans-serif;
-    font-size: 7rem;
-    margin-bottom: 20px;
+    font-size: 8rem;
+    margin-bottom: 30px;
     font-weight: 700;
     line-height: 0.8;
     letter-spacing: -0.077em;
@@ -201,23 +216,27 @@
   }
 
   .form-section .section-description {
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     line-height: 1.9;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     opacity: 0.95;
     font-weight: 400;
     position: relative;
     z-index: 1;
-    max-width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .form-embed {
     background: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(27, 53, 51, 0.25);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .form-embed iframe {
@@ -247,14 +266,40 @@
   }
 
   /* Responsive Design */
-  @media (max-width: 768px) {
-    .sengo-content {
-      padding: 40px 20px 20px;
+  @media (max-width: 1024px) {
+    .funding-hero {
+      padding: 60px 50px;
     }
 
+    .funding-hero h1 {
+      font-size: 5rem;
+    }
+
+    .funding-intro {
+      padding: 60px 50px;
+    }
+
+    .funding-overview {
+      padding: 80px 50px;
+    }
+
+    .funding-overview h2 {
+      font-size: 5.5rem;
+    }
+
+    .form-section {
+      padding: 80px 50px;
+    }
+
+    .form-section h2 {
+      font-size: 5.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
     .funding-hero {
-      min-height: 40vh;
-      padding: 30px 20px 20px;
+      min-height: 50vh;
+      padding: 40px 30px;
     }
 
     .funding-hero h1 {
@@ -263,7 +308,16 @@
     }
 
     .funding-hero-subtitle {
-      font-size: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .funding-intro {
+      padding: 50px 30px;
+      font-size: 1.1rem;
+    }
+
+    .funding-overview {
+      padding: 60px 30px;
     }
 
     .funding-overview h2 {
@@ -273,10 +327,15 @@
 
     .opportunity-cards {
       grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    .opportunity-card {
+      padding: 50px 30px;
     }
 
     .form-section {
-      padding: 50px 30px;
+      padding: 60px 30px;
     }
 
     .form-section h2 {
@@ -284,8 +343,12 @@
       line-height: 0.8;
     }
 
+    .form-section .section-description {
+      font-size: 1.1rem;
+    }
+
     .form-embed {
-      padding: 20px;
+      padding: 25px;
     }
   }
 </style>
