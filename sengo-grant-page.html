@@ -733,7 +733,8 @@
         </div>
 
         <div class="step-navigation">
-          <button class="nav-button" id="next-to-step-2">Next: Checkout →</button>
+          <button class="nav-button secondary" id="back-from-application" style="display: none;">← Back</button>
+          <button class="nav-button" id="next-from-application">Next →</button>
         </div>
       </div>
     </div>
@@ -752,7 +753,29 @@
         </div>
 
         <div class="step-navigation">
-          <button class="nav-button secondary" id="back-to-step-1">← Back to Application</button>
+          <button class="nav-button secondary" id="back-from-checkout">← Back</button>
+          <button class="nav-button" id="next-from-checkout" style="display: none;">Next: Application →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View 3: Final Step (for non-members) -->
+    <div class="view-container" id="step-3-view">
+      <div class="step-section">
+        <div class="step-header">
+          <div class="step-number">3</div>
+          <h2 id="step-3-title">Application Complete!</h2>
+          <p id="step-3-description">Thank you for completing your Sengo Grant application. We'll review your submission and be in touch soon!</p>
+        </div>
+
+        <div style="text-align: center; padding: 60px 20px;">
+          <div style="font-size: 4rem; color: #D57028; margin-bottom: 20px;">✓</div>
+          <h3 style="font-size: 1.5rem; color: #1B3533; margin-bottom: 15px;">Your application has been submitted</h3>
+          <p style="font-size: 1rem; color: #67441A; line-height: 1.6; max-width: 600px; margin: 0 auto;">We're excited to review your application for the 2026 Sengo Sprint Grant. Our team will carefully evaluate your submission and reach out to you with next steps.</p>
+        </div>
+
+        <div class="step-navigation">
+          <button class="nav-button secondary" id="back-from-final">← Back to Application</button>
         </div>
       </div>
     </div>
@@ -781,8 +804,14 @@
     var eligibilityView = document.getElementById('eligibility-view');
     var step1View = document.getElementById('step-1-view');
     var step2View = document.getElementById('step-2-view');
-    var nextToStep2Btn = document.getElementById('next-to-step-2');
-    var backToStep1Btn = document.getElementById('back-to-step-1');
+    var step3View = document.getElementById('step-3-view');
+
+    // Button elements
+    var backFromApplication = document.getElementById('back-from-application');
+    var nextFromApplication = document.getElementById('next-from-application');
+    var backFromCheckout = document.getElementById('back-from-checkout');
+    var nextFromCheckout = document.getElementById('next-from-checkout');
+    var backFromFinal = document.getElementById('back-from-final');
 
     // Progress elements
     var progressEligibility = document.getElementById('progress-eligibility');
@@ -801,11 +830,11 @@
 
       // Update labels based on member status
       if (isMember === false) {
-        // Non-member: Checkout comes before Application
-        progressApplication.querySelector('.progress-label').textContent = 'Checkout/Log In';
+        // Non-member (3 steps): Checkout → Application → Complete
+        progressApplication.querySelector('.progress-label').textContent = 'Checkout/Member';
         progressCheckout.querySelector('.progress-label').textContent = 'Application';
       } else {
-        // Member: Application comes before Checkout
+        // Member (2 steps): Application → Checkout
         progressApplication.querySelector('.progress-label').textContent = 'Application';
         progressCheckout.querySelector('.progress-label').textContent = 'Checkout/Log In';
       }
@@ -820,6 +849,11 @@
         progressEligibility.classList.add('completed');
         progressApplication.classList.add('completed');
         progressCheckout.classList.add('active');
+      } else if (currentStep === 'step-3') {
+        // Non-member only: all steps completed
+        progressEligibility.classList.add('completed');
+        progressApplication.classList.add('completed');
+        progressCheckout.classList.add('completed');
       }
     }
 
@@ -829,6 +863,7 @@
       eligibilityView.classList.remove('active');
       step1View.classList.remove('active');
       step2View.classList.remove('active');
+      step3View.classList.remove('active');
 
       // Get header elements
       var step1Number = document.getElementById('step-1-number');
@@ -838,41 +873,49 @@
       var step2Title = document.getElementById('step-2-title');
       var step2Description = document.getElementById('step-2-description');
 
-      // Show the requested view (swap content for non-members)
+      // Show the requested view (different flow for members vs non-members)
       if (viewName === 'eligibility') {
         eligibilityView.classList.add('active');
       } else if (viewName === 'step-1') {
         if (isMember === false) {
-          // Non-member: Show checkout first
+          // Non-member Step 1: Checkout (become member)
           step2View.classList.add('active');
           step2Number.textContent = '1';
-          step2Title.textContent = 'Complete Your Checkout';
-          step2Description.innerHTML = 'Become a Sengo member to proceed with your grant application. Already a member? <a href="https://app.bysengo.com/login" target="_blank" style="color: #D57028; text-decoration: underline; font-weight: 600;">Log in here</a>.';
-          nextToStep2Btn.textContent = 'Next: Application →';
+          step2Title.textContent = 'Become a Member';
+          step2Description.innerHTML = 'Complete checkout to become a Sengo member and proceed with your grant application. Already a member? <a href="https://app.bysengo.com/login" target="_blank" style="color: #D57028; text-decoration: underline; font-weight: 600;">Log in here</a>.';
+          backFromCheckout.style.display = 'none';
+          nextFromCheckout.style.display = 'inline-block';
         } else {
-          // Member: Show application first
+          // Member Step 1: Application
           step1View.classList.add('active');
           step1Number.textContent = '1';
           step1Title.textContent = 'Complete Your Application';
           step1Description.textContent = 'Fill out the form below to apply for the Sengo Grant.';
-          nextToStep2Btn.textContent = 'Next: Checkout →';
+          backFromApplication.style.display = 'none';
+          nextFromApplication.textContent = 'Next: Checkout →';
         }
       } else if (viewName === 'step-2') {
         if (isMember === false) {
-          // Non-member: Show application second
+          // Non-member Step 2: Application
           step1View.classList.add('active');
           step1Number.textContent = '2';
           step1Title.textContent = 'Complete Your Application';
           step1Description.textContent = 'Fill out the form below to apply for the Sengo Grant.';
-          backToStep1Btn.textContent = '← Back to Checkout';
+          backFromApplication.style.display = 'inline-block';
+          backFromApplication.textContent = '← Back to Checkout';
+          nextFromApplication.textContent = 'Complete Application →';
         } else {
-          // Member: Show checkout second
+          // Member Step 2: Checkout
           step2View.classList.add('active');
           step2Number.textContent = '2';
           step2Title.textContent = 'Complete Your Checkout';
           step2Description.innerHTML = 'Finalize your grant application by completing the checkout process. Already a member? <a href="https://app.bysengo.com/login" target="_blank" style="color: #D57028; text-decoration: underline; font-weight: 600;">Log in here</a>.';
-          backToStep1Btn.textContent = '← Back to Application';
+          backFromCheckout.style.display = 'inline-block';
+          backFromCheckout.textContent = '← Back to Application';
         }
+      } else if (viewName === 'step-3') {
+        // Non-member Step 3: Confirmation (only for non-members)
+        step3View.classList.add('active');
       }
 
       // Update progress indicator
@@ -890,12 +933,37 @@
       showView('step-1');
     });
 
-    nextToStep2Btn.addEventListener('click', function() {
+    // From application view
+    nextFromApplication.addEventListener('click', function() {
+      if (isMember === false) {
+        // Non-member: Application is step 2, go to confirmation (step 3)
+        showView('step-3');
+      } else {
+        // Member: Application is step 1, go to checkout (step 2)
+        showView('step-2');
+      }
+    });
+
+    backFromApplication.addEventListener('click', function() {
+      // Go back to checkout (non-members only see this)
+      showView('step-1');
+    });
+
+    // From checkout view
+    nextFromCheckout.addEventListener('click', function() {
+      // Non-member: Checkout is step 1, go to application (step 2)
       showView('step-2');
     });
 
-    backToStep1Btn.addEventListener('click', function() {
+    backFromCheckout.addEventListener('click', function() {
+      // Member: Go back to application
       showView('step-1');
+    });
+
+    // From final confirmation view
+    backFromFinal.addEventListener('click', function() {
+      // Go back to application
+      showView('step-2');
     });
 
     // Eligibility checker
