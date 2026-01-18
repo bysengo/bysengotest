@@ -723,9 +723,9 @@
     <div class="view-container" id="step-1-view">
       <div class="step-section">
         <div class="step-header">
-          <div class="step-number">1</div>
-          <h2>Complete Your Application</h2>
-          <p>Fill out the form below to apply for the Sengo Grant.</p>
+          <div class="step-number" id="step-1-number">1</div>
+          <h2 id="step-1-title">Complete Your Application</h2>
+          <p id="step-1-description">Fill out the form below to apply for the Sengo Grant.</p>
         </div>
 
         <div class="iframe-container">
@@ -742,9 +742,9 @@
     <div class="view-container" id="step-2-view">
       <div class="step-section">
         <div class="step-header">
-          <div class="step-number">2</div>
-          <h2>Complete Your Checkout</h2>
-          <p>Finalize your grant application by completing the checkout process. Already a member? <a href="https://app.bysengo.com/login" target="_blank" style="color: #D57028; text-decoration: underline; font-weight: 600;">Log in here</a>.</p>
+          <div class="step-number" id="step-2-number">2</div>
+          <h2 id="step-2-title">Complete Your Checkout</h2>
+          <p id="step-2-description">Finalize your grant application by completing the checkout process. Already a member? <a href="https://app.bysengo.com/login" target="_blank" style="color: #D57028; text-decoration: underline; font-weight: 600;">Log in here</a>.</p>
         </div>
 
         <div class="iframe-container">
@@ -789,12 +789,26 @@
     var progressApplication = document.getElementById('progress-application');
     var progressCheckout = document.getElementById('progress-checkout');
 
+    // Track member status
+    var isMember = null;
+
     // Update progress indicator
     function updateProgress(currentStep) {
       // Remove all active and completed classes
       progressEligibility.classList.remove('active', 'completed');
       progressApplication.classList.remove('active', 'completed');
       progressCheckout.classList.remove('active', 'completed');
+
+      // Update labels based on member status
+      if (isMember === false) {
+        // Non-member: Checkout comes before Application
+        progressApplication.querySelector('.progress-label').textContent = 'Checkout/Log In';
+        progressCheckout.querySelector('.progress-label').textContent = 'Application';
+      } else {
+        // Member: Application comes before Checkout
+        progressApplication.querySelector('.progress-label').textContent = 'Application';
+        progressCheckout.querySelector('.progress-label').textContent = 'Checkout/Log In';
+      }
 
       // Set active and completed based on current step
       if (currentStep === 'eligibility') {
@@ -816,13 +830,49 @@
       step1View.classList.remove('active');
       step2View.classList.remove('active');
 
-      // Show the requested view
+      // Get header elements
+      var step1Number = document.getElementById('step-1-number');
+      var step1Title = document.getElementById('step-1-title');
+      var step1Description = document.getElementById('step-1-description');
+      var step2Number = document.getElementById('step-2-number');
+      var step2Title = document.getElementById('step-2-title');
+      var step2Description = document.getElementById('step-2-description');
+
+      // Show the requested view (swap content for non-members)
       if (viewName === 'eligibility') {
         eligibilityView.classList.add('active');
       } else if (viewName === 'step-1') {
-        step1View.classList.add('active');
+        if (isMember === false) {
+          // Non-member: Show checkout first
+          step2View.classList.add('active');
+          step2Number.textContent = '1';
+          step2Title.textContent = 'Complete Your Checkout';
+          step2Description.innerHTML = 'Become a Sengo member to proceed with your grant application. Already a member? <a href="https://app.bysengo.com/login" target="_blank" style="color: #D57028; text-decoration: underline; font-weight: 600;">Log in here</a>.';
+          nextToStep2Btn.textContent = 'Next: Application →';
+        } else {
+          // Member: Show application first
+          step1View.classList.add('active');
+          step1Number.textContent = '1';
+          step1Title.textContent = 'Complete Your Application';
+          step1Description.textContent = 'Fill out the form below to apply for the Sengo Grant.';
+          nextToStep2Btn.textContent = 'Next: Checkout →';
+        }
       } else if (viewName === 'step-2') {
-        step2View.classList.add('active');
+        if (isMember === false) {
+          // Non-member: Show application second
+          step1View.classList.add('active');
+          step1Number.textContent = '2';
+          step1Title.textContent = 'Complete Your Application';
+          step1Description.textContent = 'Fill out the form below to apply for the Sengo Grant.';
+          backToStep1Btn.textContent = '← Back to Checkout';
+        } else {
+          // Member: Show checkout second
+          step2View.classList.add('active');
+          step2Number.textContent = '2';
+          step2Title.textContent = 'Complete Your Checkout';
+          step2Description.innerHTML = 'Finalize your grant application by completing the checkout process. Already a member? <a href="https://app.bysengo.com/login" target="_blank" style="color: #D57028; text-decoration: underline; font-weight: 600;">Log in here</a>.';
+          backToStep1Btn.textContent = '← Back to Application';
+        }
       }
 
       // Update progress indicator
@@ -860,6 +910,9 @@
         var businessValue = business.value;
         var memberValue = member.value;
 
+        // Store member status
+        isMember = (memberValue === 'yes');
+
         // Reset classes
         resultDiv.className = 'eligibility-result show';
 
@@ -872,7 +925,7 @@
         } else if (locationValue === 'yes' && businessValue === 'yes' && memberValue === 'no') {
           // Yes to first 2, no to member
           resultDiv.classList.add('eligible-with-membership');
-          resultDiv.innerHTML = '<strong>✓ Yes, but you\'ll need to confirm membership.</strong><br>You meet the location and business requirements, but you\'ll need to become a Sengo member. <a href="https://app.bysengo.com/founder-enrollment" target="_blank">Enroll here</a> and then return to complete your application.';
+          resultDiv.innerHTML = '<strong>✓ Yes, but you\'ll need to confirm membership.</strong><br>You meet the location and business requirements, but you\'ll need to become a Sengo member through the checkout process. Click below to continue.';
           startApplicationBtn.style.display = 'inline-block';
         } else if (locationValue === 'no' || businessValue === 'no') {
           // No to location or business
