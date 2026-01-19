@@ -476,6 +476,92 @@
     line-height: 1.8;
   }
 
+  /* Membership Benefits Section */
+  .membership-benefits {
+    margin: 30px 0;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(27, 53, 51, 0.05) 0%, rgba(103, 68, 26, 0.05) 100%);
+    border-radius: 12px;
+    border: 2px solid #D57028;
+    text-align: left;
+  }
+
+  .membership-benefits h3 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.5rem;
+    color: #1B3533;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .membership-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .benefit-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: #D57028;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: 2px;
+  }
+
+  .benefit-text {
+    flex: 1;
+  }
+
+  .benefit-text strong {
+    display: block;
+    color: #1B3533;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .benefit-text p {
+    margin: 0;
+    color: #67441A;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .membership-pricing {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 2px solid rgba(213, 112, 40, 0.2);
+  }
+
+  .membership-pricing p {
+    font-size: 1rem;
+    color: #67441A;
+    margin-bottom: 10px;
+  }
+
+  .membership-pricing strong {
+    color: #D57028;
+    font-size: 1.1rem;
+  }
+
   /* Scroll animations */
   .fade-in-up {
     opacity: 0;
@@ -624,6 +710,32 @@
     .progress-label {
       font-size: 0.8rem;
     }
+
+    .membership-benefits {
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .membership-benefits h3 {
+      font-size: 1.2rem;
+    }
+
+    .membership-benefits-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .benefit-text strong {
+      font-size: 0.9rem;
+    }
+
+    .benefit-text p {
+      font-size: 0.85rem;
+    }
+
+    .membership-pricing p {
+      font-size: 0.9rem;
+    }
   }
 </style>
 
@@ -746,6 +858,66 @@
           <div class="step-number" id="step-2-number">2</div>
           <h2 id="step-2-title">Complete Your Checkout</h2>
           <p id="step-2-description">Finalize your grant application by completing the checkout process. Already a member? <a href="https://app.bysengo.com/login" target="_blank" style="color: #D57028; text-decoration: underline; font-weight: 600;">Log in here</a>.</p>
+        </div>
+
+        <!-- Membership Benefits (shown only for non-members) -->
+        <div class="membership-benefits" id="membership-benefits-box" style="display: none;">
+          <h3>What You'll Get With Membership</h3>
+
+          <div class="membership-benefits-grid">
+            <div class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <div class="benefit-text">
+                <strong>Quarterly Strategy Calls</strong>
+                <p>1:1 sessions to refine your business strategy and fundraising approach</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <div class="benefit-text">
+                <strong>Grant Opportunities</strong>
+                <p>Exclusive access to Sengo grants and funding opportunities</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <div class="benefit-text">
+                <strong>High-Touch Support</strong>
+                <p>For active fundraisers: deal publishing, pitch refinement, and investor introductions</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <div class="benefit-text">
+                <strong>Curated Events & Network</strong>
+                <p>Virtual events and access to mission-aligned funders and founders</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <div class="benefit-text">
+                <strong>Platform Access</strong>
+                <p>Mobile and web hub with push notifications, member content, and deal flow</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">✓</div>
+              <div class="benefit-text">
+                <strong>Educational Resources</strong>
+                <p>Evergreen materials and curated courses to navigate private markets confidently</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="membership-pricing">
+            <p><strong>Founder Membership: $15/month</strong></p>
+            <p style="font-size: 0.85rem; color: #67441A;">Cancel anytime and retain access to what you've already paid for</p>
+          </div>
         </div>
 
         <div class="iframe-container">
@@ -872,6 +1044,7 @@
       var step2Number = document.getElementById('step-2-number');
       var step2Title = document.getElementById('step-2-title');
       var step2Description = document.getElementById('step-2-description');
+      var membershipBenefitsBox = document.getElementById('membership-benefits-box');
 
       // Show the requested view (different flow for members vs non-members)
       if (viewName === 'eligibility') {
@@ -885,6 +1058,7 @@
           step2Description.innerHTML = 'Complete checkout to become a Sengo member and proceed with your grant application. Already a member? <a href="https://app.bysengo.com/login" target="_blank" style="color: #D57028; text-decoration: underline; font-weight: 600;">Log in here</a>.';
           backFromCheckout.style.display = 'none';
           nextFromCheckout.style.display = 'inline-block';
+          membershipBenefitsBox.style.display = 'block'; // Show benefits for non-members
         } else {
           // Member Step 1: Application
           step1View.classList.add('active');
@@ -893,6 +1067,7 @@
           step1Description.textContent = 'Fill out the form below to apply for the Sengo Grant.';
           backFromApplication.style.display = 'none';
           nextFromApplication.textContent = 'Next: Checkout →';
+          membershipBenefitsBox.style.display = 'none'; // Hide benefits for members
         }
       } else if (viewName === 'step-2') {
         if (isMember === false) {
@@ -904,6 +1079,7 @@
           backFromApplication.style.display = 'inline-block';
           backFromApplication.textContent = '← Back to Checkout';
           nextFromApplication.textContent = 'Complete Application →';
+          membershipBenefitsBox.style.display = 'none'; // Hide benefits when showing application
         } else {
           // Member Step 2: Checkout
           step2View.classList.add('active');
@@ -912,6 +1088,7 @@
           step2Description.innerHTML = 'Finalize your grant application by completing the checkout process. Already a member? <a href="https://app.bysengo.com/login" target="_blank" style="color: #D57028; text-decoration: underline; font-weight: 600;">Log in here</a>.';
           backFromCheckout.style.display = 'inline-block';
           backFromCheckout.textContent = '← Back to Application';
+          membershipBenefitsBox.style.display = 'none'; // Hide benefits for members at checkout
         }
       } else if (viewName === 'step-3') {
         // Non-member Step 3: Confirmation (only for non-members)
