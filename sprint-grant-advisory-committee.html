@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprint Grant Advisory Committee | Sengo x Venture Partners</title>
+    <title>Sprint Advisory Committee | Sengo x Venture Partners</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap');
@@ -29,13 +29,6 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ========== CONTAINER & LAYOUT ========== */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
         /* ========== HERO SECTION ========== */
         .hero {
             min-height: 100vh;
@@ -59,21 +52,6 @@
             background: linear-gradient(90deg, #D57028 0%, #AF8145 100%);
         }
 
-        .hero-badge {
-            font-family: 'Arimo', sans-serif;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #67441A;
-            margin-bottom: 30px;
-            padding: 10px 24px;
-            border: 2px solid #67441A;
-            border-radius: 50px;
-            display: inline-block;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
         .hero-content {
             text-align: center;
             max-width: 1100px;
@@ -90,7 +68,7 @@
         }
 
         .logo-image {
-            height: 80px;
+            height: 100px;
             width: auto;
             object-fit: contain;
             transition: transform 0.3s ease;
@@ -107,79 +85,7 @@
             line-height: 1.1;
             letter-spacing: -0.02em;
             color: #1B3533;
-            margin-bottom: 30px;
             text-transform: uppercase;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: #67441A;
-            margin-bottom: 50px;
-            line-height: 1.6;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .cta-btn {
-            padding: 18px 40px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.02em;
-        }
-
-        .cta-primary {
-            background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
-            color: #FFFFFF;
-            box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
-        }
-
-        .cta-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(213, 112, 40, 0.4);
-        }
-
-        .cta-secondary {
-            background: transparent;
-            color: #1B3533;
-            border: 2px solid #1B3533;
-        }
-
-        .cta-secondary:hover {
-            background: #1B3533;
-            color: #FFFFFF;
-            transform: translateY(-2px);
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.9rem;
-            color: #67441A;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            animation: bounce 2s infinite;
-        }
-
-        .scroll-indicator::after {
-            content: '↓';
-            font-size: 1.5rem;
         }
 
         /* ========== MISSION SECTION ========== */
@@ -215,18 +121,229 @@
             letter-spacing: -0.02em;
             margin-bottom: 40px;
             color: #FFFFFF;
+            text-transform: uppercase;
         }
 
         .mission-section p {
             font-size: 1.3rem;
             line-height: 1.8;
-            margin-bottom: 30px;
             font-weight: 400;
         }
 
-        .highlight-orange {
+        /* ========== GALLERY SECTION ========== */
+        .gallery-section {
+            padding: 120px 40px;
+            background: #FFFFFF;
+            position: relative;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .gallery-slides {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-slide {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .gallery-slide.active {
+            display: block;
+        }
+
+        .slide-content {
+            padding: 40px 0;
+        }
+
+        /* Slide 1 - Grant Features */
+        .grant-features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .grant-feature {
+            background: linear-gradient(135deg, #F3EDE7 0%, #FFFFFF 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .grant-feature:hover {
+            transform: translateY(-5px);
+            border-color: #D57028;
+            box-shadow: 0 10px 30px rgba(213, 112, 40, 0.15);
+        }
+
+        .grant-feature h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1B3533;
+            margin-bottom: 15px;
+        }
+
+        .grant-feature p {
+            font-size: 1.1rem;
+            color: #67441A;
+            line-height: 1.7;
+        }
+
+        /* Slide 2 - Metrics */
+        .metrics-slide {
+            text-align: center;
+        }
+
+        .metrics-slide h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1B3533;
+            margin-bottom: 50px;
+            line-height: 1.4;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .metric-item {
+            background: linear-gradient(135deg, #F3EDE7 0%, #FFFFFF 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .metric-item:hover {
+            transform: translateY(-5px);
+            border-color: #D57028;
+            box-shadow: 0 10px 30px rgba(213, 112, 40, 0.15);
+        }
+
+        .metric-item h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
             color: #D57028;
-            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Gallery Navigation */
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .gallery-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #D9D9D9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .gallery-dot.active {
+            background: #D57028;
+            width: 40px;
+            border-radius: 10px;
+        }
+
+        .gallery-dot:hover {
+            background: #AF8145;
+        }
+
+        /* ========== IMPACT SECTION ========== */
+        .impact-section {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #67441A 0%, #AF8145 100%);
+            color: #F3EDE7;
+        }
+
+        .impact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .impact-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .impact-section h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+        }
+
+        .impact-section .section-intro {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .impact-programs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .program-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .program-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .program-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+
+        .program-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .program-stats {
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .stat-number {
+            font-weight: 700;
+            color: #FFFFFF;
+            font-size: 1.3rem;
         }
 
         /* ========== QUOTE SECTION ========== */
@@ -284,218 +401,6 @@
             margin-top: 5px;
         }
 
-        /* ========== COMMITTEE SECTION ========== */
-        .committee-section {
-            padding: 120px 40px;
-            background: #FFFFFF;
-        }
-
-        .committee-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .committee-section h2 {
-            font-family: 'Arimo', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: #1B3533;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-        }
-
-        .committee-section .section-subtitle {
-            font-size: 1.2rem;
-            color: #67441A;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .benefit-card {
-            background: linear-gradient(135deg, #F3EDE7 0%, #FFFFFF 100%);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            border-color: #D57028;
-            box-shadow: 0 10px 30px rgba(213, 112, 40, 0.15);
-        }
-
-        .benefit-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .benefit-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #1B3533;
-            margin-bottom: 15px;
-        }
-
-        .benefit-card p {
-            font-size: 1rem;
-            color: #67441A;
-            line-height: 1.7;
-        }
-
-        .impact-stats {
-            max-width: 900px;
-            margin: 60px auto 0;
-            padding: 40px;
-            background: linear-gradient(135deg, #F3EDE7 0%, #FFFFFF 100%);
-            border-radius: 20px;
-            border: 2px solid #D57028;
-        }
-
-        .impact-intro {
-            font-size: 1.2rem;
-            line-height: 1.9;
-            color: #1B3533;
-            text-align: center;
-        }
-
-        .impact-intro strong {
-            color: #D57028;
-            font-weight: 700;
-        }
-
-        /* ========== GRANT PROGRAM SECTION ========== */
-        .grant-program-section {
-            padding: 120px 40px;
-            background: linear-gradient(135deg, #67441A 0%, #AF8145 100%);
-            color: #F3EDE7;
-        }
-
-        .grant-program-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .grant-program-section h2 {
-            font-family: 'Arimo', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: #FFFFFF;
-            text-transform: uppercase;
-        }
-
-        .grant-program-section p {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        .grant-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin-top: 50px;
-            text-align: left;
-        }
-
-        .grant-feature {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .grant-feature:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .grant-feature h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #FFFFFF;
-            margin-bottom: 15px;
-        }
-
-        .grant-feature p {
-            font-size: 1.1rem;
-            margin-bottom: 0;
-        }
-
-        /* ========== PARTNERSHIP SECTION ========== */
-        .partnership-section {
-            padding: 120px 40px;
-            background: linear-gradient(135deg, #67441A 0%, #AF8145 100%);
-            color: #F3EDE7;
-        }
-
-        .partnership-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .partnership-section h2 {
-            font-family: 'Arimo', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: #FFFFFF;
-            text-transform: uppercase;
-        }
-
-        .partnership-section p {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            margin-bottom: 50px;
-        }
-
-        .partner-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 60px;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
-
-        .partner-logo-box {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px 50px;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .partner-logo-box:hover {
-            background: rgba(255, 255, 255, 1);
-            transform: scale(1.05);
-        }
-
-        .partner-logo-image {
-            height: 60px;
-            width: auto;
-            object-fit: contain;
-        }
-
         /* ========== CTA SECTION ========== */
         .cta-section {
             padding: 120px 40px;
@@ -519,6 +424,49 @@
             margin-left: auto;
             margin-right: auto;
             line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 18px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
+            color: #FFFFFF;
+            box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(213, 112, 40, 0.4);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #FFFFFF;
+            border: 2px solid #FFFFFF;
+        }
+
+        .cta-secondary:hover {
+            background: #FFFFFF;
+            color: #1B3533;
+            transform: translateY(-2px);
         }
 
         /* ========== FOOTER ========== */
@@ -589,12 +537,12 @@
             }
         }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateX(-50%) translateY(0);
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
-            50% {
-                transform: translateX(-50%) translateY(-10px);
+            to {
+                opacity: 1;
             }
         }
 
@@ -611,61 +559,46 @@
 
         /* ========== RESPONSIVE DESIGN ========== */
         @media (max-width: 1024px) {
-            .benefits-grid {
+            .grant-features-grid,
+            .impact-programs {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-
             .hero {
                 padding: 60px 20px;
                 min-height: 90vh;
             }
 
             .logo-image {
-                height: 50px;
+                height: 60px;
             }
 
             .hero h1 {
                 font-size: 2.5rem;
             }
 
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .cta-btn {
-                width: 100%;
-                text-align: center;
-            }
-
             .mission-section,
+            .gallery-section,
+            .impact-section,
             .quote-section,
-            .committee-section,
-            .grant-program-section,
-            .partnership-section,
             .cta-section {
                 padding: 80px 20px;
             }
 
             .mission-section h2,
-            .grant-program-section h2,
-            .partnership-section h2,
+            .impact-section h2,
             .cta-section h2 {
                 font-size: 2.2rem;
             }
 
-            .committee-section h2 {
-                font-size: 2rem;
+            .metrics-slide h2 {
+                font-size: 1.8rem;
             }
 
             .quote-text {
@@ -678,27 +611,25 @@
                 left: -10px;
             }
 
-            .benefits-grid,
-            .grant-features {
+            .grant-features-grid,
+            .metrics-grid,
+            .impact-programs {
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
 
-            .impact-stats {
-                padding: 30px 20px;
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
             }
 
-            .impact-intro {
-                font-size: 1.1rem;
+            .cta-btn {
+                width: 100%;
             }
 
             .footer-links {
                 flex-direction: column;
                 gap: 20px;
-            }
-
-            .scroll-indicator {
-                display: none;
             }
         }
     </style>
@@ -707,116 +638,174 @@
 
     <!-- ========== HERO SECTION ========== -->
     <section class="hero">
-        <div class="hero-badge">Introducing</div>
-
         <div class="hero-content">
             <div class="logo-container">
                 <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/f28e57cc-eb1f-4898-a4fd-476adda1265a/4.png?format=750w" alt="Sengo Logo" class="logo-image">
                 <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/900b9c28-b797-4302-943f-651fa8694fc5/5.png?format=750w" alt="Venture Partners Logo" class="logo-image">
             </div>
 
-            <h1>Sprint Grant Advisory Committee</h1>
-
-            <p class="hero-subtitle">
-                Bringing diverse voices to the table when allocating capital
-            </p>
-
-            <div class="hero-cta">
-                <a href="#learn-more" class="cta-btn cta-primary">Learn More</a>
-                <a href="#apply" class="cta-btn cta-secondary">Get Involved</a>
-            </div>
+            <h1>Sprint Advisory Committee</h1>
         </div>
-
-        <div class="scroll-indicator">Scroll to explore</div>
     </section>
 
     <!-- ========== MISSION SECTION ========== -->
-    <section class="mission-section fade-in-up" id="learn-more">
+    <section class="mission-section fade-in-up">
         <div class="mission-content">
             <div class="mission-badge">United for Impact</div>
 
-            <h2>United for Impact</h2>
+            <h2>Mobilization Over Aggregation</h2>
 
             <p>
-                The <span class="highlight-orange">Sprint Grant Advisory Committee</span> represents a groundbreaking partnership between
+                The Sprint Grant Advisory Committee represents a groundbreaking partnership between
                 Sengo and Venture Partners to transform how funding decisions are made in the startup ecosystem.
-            </p>
-
-            <p>
-                By incorporating new decision-makers into the funding process, we're building a more
-                inclusive and diverse approach to capital allocation that better reflects the
-                communities we serve.
+                By bringing diverse voices into the decision-making process, we're creating a more inclusive
+                model that reflects the communities we serve while maintaining the speed and flexibility
+                founders need to succeed—without excessive bureaucracy or lengthy underwriting processes.
             </p>
         </div>
     </section>
 
-    <!-- ========== COMMITTEE SECTION ========== -->
-    <section class="committee-section fade-in-up">
-        <div class="committee-header">
-            <h2>Why This Matters</h2>
-            <p class="section-subtitle">
-                We measure what matters to ensure our grantees are building sustainable,
-                impactful businesses
-            </p>
+    <!-- ========== GALLERY SECTION ========== -->
+    <section class="gallery-section fade-in-up">
+        <div class="gallery-container">
+            <div class="gallery-slides">
+                <!-- Slide 1: Grant Features -->
+                <div class="gallery-slide active">
+                    <div class="slide-content">
+                        <div class="grant-features-grid">
+                            <div class="grant-feature">
+                                <h3>Rapid Deployment</h3>
+                                <p>
+                                    We move money quickly with streamlined processes that get capital into founders'
+                                    hands when they need it, not months later
+                                </p>
+                            </div>
+
+                            <div class="grant-feature">
+                                <h3>Limited Barriers</h3>
+                                <p>
+                                    Minimal bureaucratic underwriting means fewer hoops to jump through and more
+                                    focus on founder potential and vision
+                                </p>
+                            </div>
+
+                            <div class="grant-feature">
+                                <h3>Capital Circulation</h3>
+                                <p>
+                                    Fast deployment enables founders to test, iterate, and grow quickly, keeping
+                                    money in motion rather than sitting idle in aggregation
+                                </p>
+                            </div>
+
+                            <div class="grant-feature">
+                                <h3>Diverse Decision-Makers</h3>
+                                <p>
+                                    We bring more voices to the table in the underwriting process, ensuring funding
+                                    decisions reflect varied perspectives and experiences
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Metrics -->
+                <div class="gallery-slide">
+                    <div class="slide-content metrics-slide">
+                        <h2>
+                            We measure what matters to ensure our grantees are building sustainable,
+                            impactful businesses
+                        </h2>
+
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <h4>Jobs Created</h4>
+                            </div>
+
+                            <div class="metric-item">
+                                <h4>Revenue Generated</h4>
+                            </div>
+
+                            <div class="metric-item">
+                                <h4>Follow-On Funding</h4>
+                            </div>
+
+                            <div class="metric-item">
+                                <h4>Customer Acquisition</h4>
+                            </div>
+
+                            <div class="metric-item">
+                                <h4>Confidence Built</h4>
+                            </div>
+
+                            <div class="metric-item">
+                                <h4>Press Coverage</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Navigation -->
+            <div class="gallery-nav">
+                <button class="gallery-dot active" onclick="showSlide(0)" aria-label="Slide 1"></button>
+                <button class="gallery-dot" onclick="showSlide(1)" aria-label="Slide 2"></button>
+            </div>
         </div>
+    </section>
 
-        <div class="benefits-grid">
-            <div class="benefit-card fade-in-up">
-                <h3>Jobs Created</h3>
-                <p>
-                    We track employment growth because job creation demonstrates scalability
-                    and community impact, showing founders are building teams that last
+    <!-- ========== IMPACT SECTION ========== -->
+    <section class="impact-section fade-in-up">
+        <div class="impact-content">
+            <div class="impact-header">
+                <h2>Our Track Record</h2>
+                <p class="section-intro">
+                    Building on years of proven impact through Sengo Sprint and Venture Partners programs,
+                    we're combining our expertise to create even greater opportunities for underrepresented founders.
                 </p>
             </div>
 
-            <div class="benefit-card fade-in-up">
-                <h3>Press Coverage</h3>
-                <p>
-                    Media visibility validates market positioning and amplifies founder voices,
-                    opening doors to customers, partners, and future funding
-                </p>
-            </div>
+            <div class="impact-programs">
+                <div class="program-card">
+                    <h3>Sengo Sprint</h3>
+                    <p>
+                        Our community-driven approach has built a thriving ecosystem of founders, investors,
+                        and supporters creating pathways to funding and success.
+                    </p>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">600+</span> active members in our community
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">90+</span> annual touchpoints connecting founders with resources
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">$5M+</span> raised by Sengo founders in 2025
+                        </div>
+                        <div class="stat-item">
+                            Building <span class="stat-number">confidence</span> and <span class="stat-number">connections</span> through testimonials and ongoing support
+                        </div>
+                    </div>
+                </div>
 
-            <div class="benefit-card fade-in-up">
-                <h3>Revenue Generated</h3>
-                <p>
-                    Revenue proves product-market fit and sustainability, demonstrating that
-                    customers value what founders are building
-                </p>
+                <div class="program-card">
+                    <h3>Venture Partners</h3>
+                    <p>
+                        Through strategic initiatives and investment programs, we've demonstrated the power
+                        of bringing diverse perspectives to capital allocation decisions.
+                    </p>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">Supporting</span> underrepresented founders through strategic partnerships
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">Creating</span> pathways to capital and resources
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">Building</span> a more inclusive venture ecosystem
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="benefit-card fade-in-up">
-                <h3>Follow-On Funding</h3>
-                <p>
-                    Tracking additional capital raised shows investor confidence and validates
-                    our selection process, creating pathways to larger funding rounds
-                </p>
-            </div>
-
-            <div class="benefit-card fade-in-up">
-                <h3>Customer Acquisition</h3>
-                <p>
-                    Customer growth indicates market traction and validates business models,
-                    proving founders are solving real problems
-                </p>
-            </div>
-
-            <div class="benefit-card fade-in-up">
-                <h3>Confidence Built</h3>
-                <p>
-                    We measure founder confidence and preparedness because belief in their vision
-                    is as critical as capital for long-term success
-                </p>
-            </div>
-        </div>
-
-        <div class="impact-stats">
-            <p class="impact-intro">
-                Our community-driven approach is delivering real results: <strong>600+ active members</strong>
-                engaging through <strong>90+ annual touchpoints</strong>, with founders raising
-                <strong>$5M+ in 2025</strong>. Through testimonials and ongoing support, we're building
-                confidence and creating sustainable pathways to funding for underrepresented entrepreneurs.
-            </p>
         </div>
     </section>
 
@@ -838,82 +827,6 @@
         </div>
     </section>
 
-    <!-- ========== GRANT PROGRAM SECTION ========== -->
-    <section class="grant-program-section fade-in-up">
-        <div class="grant-program-content">
-            <h2>Mobilization Over Aggregation</h2>
-
-            <p>
-                We focus on <strong>mobilizing capital</strong>, not just aggregating it. Our independent sprint
-                grants are designed to get money moving quickly and break down traditional barriers to funding,
-                ensuring capital reaches founders who need it most.
-            </p>
-
-            <p>
-                By bringing diverse voices into the decision-making process, we're creating a more inclusive
-                model that reflects the communities we serve while maintaining the speed and flexibility
-                founders need to succeed—without excessive bureaucracy or lengthy underwriting processes.
-            </p>
-
-            <div class="grant-features">
-                <div class="grant-feature fade-in-up">
-                    <h3>Rapid Deployment</h3>
-                    <p>
-                        We move money quickly with streamlined processes that get capital into founders'
-                        hands when they need it, not months later
-                    </p>
-                </div>
-
-                <div class="grant-feature fade-in-up">
-                    <h3>Limited Barriers</h3>
-                    <p>
-                        Minimal bureaucratic underwriting means fewer hoops to jump through and more
-                        focus on founder potential and vision
-                    </p>
-                </div>
-
-                <div class="grant-feature fade-in-up">
-                    <h3>Capital Circulation</h3>
-                    <p>
-                        Fast deployment enables founders to test, iterate, and grow quickly, keeping
-                        money in motion rather than sitting idle in aggregation
-                    </p>
-                </div>
-
-                <div class="grant-feature fade-in-up">
-                    <h3>Diverse Decision-Makers</h3>
-                    <p>
-                        We bring more voices to the table in the underwriting process, ensuring funding
-                        decisions reflect varied perspectives and experiences
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== PARTNERSHIP SECTION ========== -->
-    <section class="partnership-section fade-in-up">
-        <div class="partnership-content">
-            <h2>A Powerful Partnership</h2>
-
-            <p>
-                Sengo and Venture Partners are joining forces to create a new model for how
-                capital is allocated. Together, we're building an advisory committee that reflects
-                the diversity of the entrepreneurial ecosystem and brings fresh perspectives to
-                funding decisions.
-            </p>
-
-            <div class="partner-logos">
-                <div class="partner-logo-box">
-                    <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/f28e57cc-eb1f-4898-a4fd-476adda1265a/4.png?format=750w" alt="Sengo" class="partner-logo-image">
-                </div>
-                <div class="partner-logo-box">
-                    <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/900b9c28-b797-4302-943f-651fa8694fc5/5.png?format=750w" alt="Venture Partners" class="partner-logo-image">
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ========== CTA SECTION ========== -->
     <section class="cta-section fade-in-up" id="apply">
         <h2>Join the Movement</h2>
@@ -924,7 +837,7 @@
             for you in the Sprint Grant Advisory Committee.
         </p>
 
-        <div class="hero-cta">
+        <div class="cta-buttons">
             <a href="https://app.bysengo.com/founder-enrollment" class="cta-btn cta-primary">
                 Apply as a Founder
             </a>
@@ -957,6 +870,32 @@
 
     <!-- ========== JAVASCRIPT ========== -->
     <script>
+        // Gallery Slide Navigation
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.gallery-slide');
+            const dots = document.querySelectorAll('.gallery-dot');
+
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+
+            // Remove active from all dots
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Show selected slide
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+
+            currentSlide = index;
+        }
+
+        // Auto-advance slides every 8 seconds
+        setInterval(() => {
+            const nextSlide = (currentSlide + 1) % 2;
+            showSlide(nextSlide);
+        }, 8000);
+
         // Intersection Observer for scroll animations
         const observerOptions = {
             threshold: 0.15,
@@ -975,39 +914,6 @@
         document.querySelectorAll('.fade-in-up').forEach(el => {
             observer.observe(el);
         });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Optional: Add analytics tracking
-        /*
-        function trackEvent(eventName, data) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', eventName, data);
-            }
-        }
-
-        // Track CTA clicks
-        document.querySelectorAll('.cta-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                trackEvent('cta_click', {
-                    button_text: btn.textContent.trim(),
-                    section: btn.closest('section').className
-                });
-            });
-        });
-        */
     </script>
 
 </body>
