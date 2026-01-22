@@ -360,6 +360,88 @@
             line-height: 1.7;
         }
 
+        .impact-stats {
+            max-width: 900px;
+            margin: 60px auto 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #F3EDE7 0%, #FFFFFF 100%);
+            border-radius: 20px;
+            border: 2px solid #D57028;
+        }
+
+        .impact-intro {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #1B3533;
+            text-align: center;
+        }
+
+        .impact-intro strong {
+            color: #D57028;
+            font-weight: 700;
+        }
+
+        /* ========== GRANT PROGRAM SECTION ========== */
+        .grant-program-section {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #67441A 0%, #AF8145 100%);
+            color: #F3EDE7;
+        }
+
+        .grant-program-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .grant-program-section h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+        }
+
+        .grant-program-section p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .grant-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .grant-feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .grant-feature:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .grant-feature h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        .grant-feature p {
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+
         /* ========== PARTNERSHIP SECTION ========== */
         .partnership-section {
             padding: 120px 40px;
@@ -571,12 +653,14 @@
             .mission-section,
             .quote-section,
             .committee-section,
+            .grant-program-section,
             .partnership-section,
             .cta-section {
                 padding: 80px 20px;
             }
 
             .mission-section h2,
+            .grant-program-section h2,
             .partnership-section h2,
             .cta-section h2 {
                 font-size: 2.2rem;
@@ -596,9 +680,18 @@
                 left: -10px;
             }
 
-            .benefits-grid {
+            .benefits-grid,
+            .grant-features {
                 grid-template-columns: 1fr;
                 gap: 30px;
+            }
+
+            .impact-stats {
+                padding: 30px 20px;
+            }
+
+            .impact-intro {
+                font-size: 1.1rem;
             }
 
             .footer-links {
@@ -664,8 +757,8 @@
         <div class="committee-header">
             <h2>Why This Matters</h2>
             <p class="section-subtitle">
-                The Sprint Grant Advisory Committee is reimagining how capital gets distributed
-                to underrepresented founders
+                We measure what matters to ensure our grantees are building sustainable,
+                impactful businesses
             </p>
         </div>
 
@@ -673,50 +766,59 @@
             <div class="benefit-card fade-in-up">
                 <h3>Jobs Created</h3>
                 <p>
-                    Grantees have created over 150 new jobs, providing employment opportunities
-                    in their communities and building sustainable teams
+                    We track employment growth because job creation demonstrates scalability
+                    and community impact, showing founders are building teams that last
                 </p>
             </div>
 
             <div class="benefit-card fade-in-up">
                 <h3>Press Coverage</h3>
                 <p>
-                    Featured in Forbes, NerdWallet, Nasdaq, Black Girl Ventures, and Business Insider,
-                    amplifying the voices of diverse founders
+                    Media visibility validates market positioning and amplifies founder voices,
+                    opening doors to customers, partners, and future funding
                 </p>
             </div>
 
             <div class="benefit-card fade-in-up">
-                <h3>Revenue Growth</h3>
+                <h3>Revenue Generated</h3>
                 <p>
-                    Sprint grant recipients have generated over $10M in revenue, demonstrating
-                    the viability of their business models
+                    Revenue proves product-market fit and sustainability, demonstrating that
+                    customers value what founders are building
                 </p>
             </div>
 
             <div class="benefit-card fade-in-up">
-                <h3>Funds Raised</h3>
+                <h3>Follow-On Funding</h3>
                 <p>
-                    $5M+ raised by Sengo founders in 2025, with grantees going on to secure
-                    additional funding from investors
+                    Tracking additional capital raised shows investor confidence and validates
+                    our selection process, creating pathways to larger funding rounds
                 </p>
             </div>
 
             <div class="benefit-card fade-in-up">
-                <h3>Customers Acquired</h3>
+                <h3>Customer Acquisition</h3>
                 <p>
-                    Grantees have served over 50,000 customers, validating product-market fit
-                    and building loyal user bases
+                    Customer growth indicates market traction and validates business models,
+                    proving founders are solving real problems
                 </p>
             </div>
 
             <div class="benefit-card fade-in-up">
-                <h3>Community Impact</h3>
+                <h3>Confidence Built</h3>
                 <p>
-                    600+ active app members and 90+ annual touchpoints creating a vibrant
-                    ecosystem of founders, investors, and supporters
+                    We measure founder confidence and preparedness because belief in their vision
+                    is as critical as capital for long-term success
                 </p>
             </div>
+        </div>
+
+        <div class="impact-stats">
+            <p class="impact-intro">
+                Our community-driven approach is delivering real results: <strong>600+ active members</strong>
+                engaging through <strong>90+ annual touchpoints</strong>, with founders raising
+                <strong>$5M+ in 2025</strong>. Through testimonials and ongoing support, we're building
+                confidence and creating sustainable pathways to funding for underrepresented entrepreneurs.
+            </p>
         </div>
     </section>
 
@@ -733,6 +835,59 @@
                 <div class="quote-author">
                     Ila B Corcoran
                     <div class="quote-author-title">Founder, Sengo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== GRANT PROGRAM SECTION ========== -->
+    <section class="grant-program-section fade-in-up">
+        <div class="grant-program-content">
+            <h2>Independent Grant Programs</h2>
+
+            <p>
+                Our sprint grants are designed to move quickly and break down traditional barriers to funding.
+                We believe capital should circulate efficiently to founders who need it most, without excessive
+                bureaucracy or lengthy underwriting processes.
+            </p>
+
+            <p>
+                By bringing diverse voices into the decision-making process, we're creating a more inclusive
+                model that reflects the communities we serve while maintaining the speed and flexibility
+                founders need to succeed.
+            </p>
+
+            <div class="grant-features">
+                <div class="grant-feature fade-in-up">
+                    <h3>Rapid Deployment</h3>
+                    <p>
+                        We move money quickly with streamlined processes that get capital into founders'
+                        hands when they need it, not months later
+                    </p>
+                </div>
+
+                <div class="grant-feature fade-in-up">
+                    <h3>Limited Barriers</h3>
+                    <p>
+                        Minimal bureaucratic underwriting means fewer hoops to jump through and more
+                        focus on founder potential and vision
+                    </p>
+                </div>
+
+                <div class="grant-feature fade-in-up">
+                    <h3>Money Circulation</h3>
+                    <p>
+                        Fast capital deployment enables founders to test, iterate, and grow quickly,
+                        creating momentum and proving viability
+                    </p>
+                </div>
+
+                <div class="grant-feature fade-in-up">
+                    <h3>Diverse Decision-Makers</h3>
+                    <p>
+                        We bring more voices to the table in the underwriting process, ensuring funding
+                        decisions reflect varied perspectives and experiences
+                    </p>
                 </div>
             </div>
         </div>
