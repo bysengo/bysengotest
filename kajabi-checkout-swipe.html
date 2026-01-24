@@ -317,8 +317,8 @@
     .tool-image {
       width: 100%;
       height: 350px;
-      object-fit: contain;
-      object-position: center;
+      object-fit: cover;
+      object-position: center 20%;
       border-radius: 12px;
       margin-bottom: 20px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
@@ -420,6 +420,7 @@
 
       .tool-image {
         height: 280px;
+        object-position: center 15%;
       }
 
       .carousel-arrow {
@@ -438,6 +439,7 @@
 
       .tool-image {
         height: 300px;
+        object-position: center 18%;
       }
     }
 
@@ -1434,7 +1436,7 @@
 
   let currentIndex = 0;
   let cardsPerView = 3;
-  let totalCards = toolCards.length;
+  let totalCards = 6; // Total number of tool cards
 
   // Calculate cards per view based on screen size
   function updateCardsPerView() {
@@ -1452,6 +1454,8 @@
   function createDots() {
     dotsContainer.innerHTML = '';
     const totalPages = updateCardsPerView();
+
+    console.log('Total cards:', totalCards, 'Cards per view:', cardsPerView, 'Total pages:', totalPages);
 
     for (let i = 0; i < totalPages; i++) {
       const dot = document.createElement('span');
