@@ -287,6 +287,7 @@
       gap: 30px;
       transition: transform 0.4s ease;
       align-items: stretch;
+      width: fit-content;
     }
 
     .tool-card {
@@ -1469,10 +1470,16 @@
 
   // Update carousel position
   function updateCarousel() {
-    const cardWidth = toolCards[0].offsetWidth;
-    const gap = 30;
-    const offset = -(currentIndex * cardsPerView * (cardWidth + gap));
-    toolsCarousel.style.transform = `translateX(${offset}px)`;
+    if (toolCards.length === 0) return;
+
+    // Calculate which card should be first visible
+    const firstVisibleCard = currentIndex * cardsPerView;
+
+    // Get the position of that card
+    if (toolCards[firstVisibleCard]) {
+      const firstCardPosition = toolCards[firstVisibleCard].offsetLeft;
+      toolsCarousel.style.transform = `translateX(-${firstCardPosition}px)`;
+    }
 
     // Update dots
     const dots = document.querySelectorAll('.tools-carousel-dot');
@@ -1487,6 +1494,8 @@
     const maxIndex = Math.ceil(totalCards / cardsPerView) - 1;
     nextButton.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
     nextButton.style.cursor = currentIndex >= maxIndex ? 'default' : 'pointer';
+
+    console.log('Current page:', currentIndex, 'First visible card:', firstVisibleCard, 'Max page:', maxIndex);
   }
 
   // Navigate to specific slide
