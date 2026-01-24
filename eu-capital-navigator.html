@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EU Capital Pathways Navigator | Sengo</title>
+  <style>
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #F3EDE7 0%, #ffffff 100%);
+      color: #1B3533;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 60px 20px 40px;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: #D57028;
+      color: white;
+      padding: 10px 30px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      color: #1B3533;
+      margin-bottom: 20px;
+    }
+
+    .header-subtitle {
+      font-size: 1.25rem;
+      color: #67441A;
+      font-weight: 500;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(27, 53, 51, 0.08);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #F3EDE7;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #D57028 0%, #717E36 100%);
+      transition: width 0.3s ease;
+      border-radius: 10px;
+    }
+
+    .progress-text {
+      font-size: 0.9rem;
+      color: #67441A;
+      font-weight: 600;
+    }
+
+    /* Question Card */
+    .question-card {
+      background: white;
+      border-radius: 16px;
+      padding: 50px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.08);
+      display: none;
+    }
+
+    .question-card.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .question-number {
+      font-size: 0.9rem;
+      color: #D57028;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .question-title {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1B3533;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .question-description {
+      font-size: 1rem;
+      color: #67441A;
+      margin-bottom: 30px;
+      line-height: 1.7;
+    }
+
+    /* Form Inputs */
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      color: #1B3533;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    select, input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #F3EDE7;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      color: #1B3533;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    select:focus, input:focus {
+      outline: none;
+      border-color: #D57028;
+      box-shadow: 0 0 0 3px rgba(213, 112, 40, 0.1);
+    }
+
+    /* Checkbox Grid */
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-item {
+      position: relative;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .checkbox-item label {
+      display: block;
+      padding: 15px 20px;
+      border: 2px solid #F3EDE7;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+
+    .checkbox-item input[type="checkbox"]:checked + label {
+      background: #D57028;
+      border-color: #D57028;
+      color: white;
+    }
+
+    .checkbox-item label:hover {
+      border-color: #D57028;
+      transform: translateY(-2px);
+    }
+
+    /* Radio Buttons as Cards */
+    .radio-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .radio-card {
+      position: relative;
+    }
+
+    .radio-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .radio-card label {
+      display: block;
+      padding: 25px;
+      border: 3px solid #F3EDE7;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 0;
+      background: white;
+    }
+
+    .radio-card input[type="radio"]:checked + label {
+      border-color: #D57028;
+      background: linear-gradient(135deg, rgba(213, 112, 40, 0.05) 0%, rgba(113, 126, 54, 0.05) 100%);
+      box-shadow: 0 5px 20px rgba(213, 112, 40, 0.2);
+    }
+
+    .radio-card label:hover {
+      border-color: #D57028;
+      transform: translateY(-3px);
+    }
+
+    .radio-card-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #1B3533;
+      margin-bottom: 8px;
+    }
+
+    .radio-card-desc {
+      font-size: 0.9rem;
+      color: #67441A;
+      font-weight: 400;
+    }
+
+    /* Buttons */
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+
+    .btn {
+      padding: 16px 40px;
+      font-size: 1rem;
+      font-weight: 700;
+      border: 3px solid #1B3533;
+      background: transparent;
+      color: #1B3533;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(27, 53, 51, 0.2);
+    }
+
+    .btn-primary {
+      background: #D57028;
+      border-color: #D57028;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #bf5e22;
+      border-color: #bf5e22;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Results Section */
+    .results-section {
+      display: none;
+    }
+
+    .results-section.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .results-header {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      color: #F3EDE7;
+      padding: 60px 50px;
+      border-radius: 16px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .results-header h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .results-header p {
+      font-size: 1.15rem;
+      opacity: 0.95;
+    }
+
+    /* Compatibility Map */
+    .compatibility-section {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.08);
+    }
+
+    .section-title {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1B3533;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .section-subtitle {
+      color: #67441A;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .compatibility-grid {
+      display: grid;
+      gap: 15px;
+    }
+
+    .compatibility-item {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid #F3EDE7;
+      transition: all 0.3s ease;
+    }
+
+    .compatibility-item:hover {
+      box-shadow: 0 5px 20px rgba(27, 53, 51, 0.1);
+    }
+
+    .status-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+
+    .status-viable {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .status-caution {
+      background: #FF9800;
+      color: white;
+    }
+
+    .status-blocked {
+      background: #F44336;
+      color: white;
+    }
+
+    .compatibility-content {
+      flex-grow: 1;
+    }
+
+    .compatibility-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #1B3533;
+      margin-bottom: 5px;
+    }
+
+    .compatibility-desc {
+      font-size: 0.9rem;
+      color: #67441A;
+    }
+
+    /* Recommended Paths */
+    .path-cards {
+      display: grid;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .path-card {
+      background: white;
+      border-radius: 16px;
+      padding: 35px;
+      border-left: 6px solid #D57028;
+      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .path-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(27, 53, 51, 0.15);
+    }
+
+    .path-rank {
+      display: inline-block;
+      background: #D57028;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .path-title {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1B3533;
+      margin-bottom: 15px;
+    }
+
+    .path-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+      padding: 20px;
+      background: #F3EDE7;
+      border-radius: 12px;
+    }
+
+    .path-detail-item {
+      text-align: center;
+    }
+
+    .path-detail-label {
+      font-size: 0.8rem;
+      color: #67441A;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .path-detail-value {
+      font-size: 1.1rem;
+      color: #1B3533;
+      font-weight: 700;
+    }
+
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .pros-cons h4 {
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #1B3533;
+    }
+
+    .pros-cons ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .pros-cons li {
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+      font-size: 0.95rem;
+      color: #67441A;
+    }
+
+    .pros-cons li:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+    }
+
+    .pros li:before {
+      background: #4CAF50;
+      content: '✓';
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cons li:before {
+      background: #F44336;
+      content: '✗';
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Structure Stress Test */
+    .stress-test-items {
+      display: grid;
+      gap: 20px;
+    }
+
+    .stress-item {
+      padding: 25px;
+      border-radius: 12px;
+      border-left: 4px solid;
+    }
+
+    .stress-item.critical {
+      background: rgba(244, 67, 54, 0.05);
+      border-color: #F44336;
+    }
+
+    .stress-item.warning {
+      background: rgba(255, 152, 0, 0.05);
+      border-color: #FF9800;
+    }
+
+    .stress-item.info {
+      background: rgba(33, 150, 243, 0.05);
+      border-color: #2196F3;
+    }
+
+    .stress-item h4 {
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #1B3533;
+      font-size: 1.1rem;
+    }
+
+    .stress-item p {
+      color: #67441A;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .stress-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stress-tag.critical {
+      background: #F44336;
+      color: white;
+    }
+
+    .stress-tag.warning {
+      background: #FF9800;
+      color: white;
+    }
+
+    .stress-tag.info {
+      background: #2196F3;
+      color: white;
+    }
+
+    /* SEIS Section */
+    .seis-verdict {
+      padding: 40px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      text-align: center;
+      border: 3px solid;
+    }
+
+    .seis-verdict.eligible {
+      background: rgba(76, 175, 80, 0.1);
+      border-color: #4CAF50;
+    }
+
+    .seis-verdict.not-eligible {
+      background: rgba(244, 67, 54, 0.1);
+      border-color: #F44336;
+    }
+
+    .seis-verdict.maybe {
+      background: rgba(255, 152, 0, 0.1);
+      border-color: #FF9800;
+    }
+
+    .seis-verdict h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .seis-verdict p {
+      font-size: 1.1rem;
+      color: #67441A;
+    }
+
+    .seis-details {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .seis-details h4 {
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #1B3533;
+    }
+
+    .seis-details ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .seis-details li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+      color: #67441A;
+      border-bottom: 1px solid #F3EDE7;
+    }
+
+    .seis-details li:last-child {
+      border-bottom: none;
+    }
+
+    .seis-details li:before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+    }
+
+    /* Restructure Signal */
+    .restructure-signal {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      color: #F3EDE7;
+      padding: 50px;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .signal-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .restructure-signal h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .restructure-signal p {
+      font-size: 1.15rem;
+      margin-bottom: 15px;
+      opacity: 0.95;
+    }
+
+    .restructure-details {
+      background: rgba(243, 237, 231, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .restructure-details h4 {
+      color: #F3EDE7;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .restructure-details ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .restructure-details li {
+      padding: 10px 0;
+      padding-left: 25px;
+      position: relative;
+      opacity: 0.9;
+    }
+
+    .restructure-details li:before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: white;
+      padding: 60px 40px;
+      border-radius: 16px;
+      text-align: center;
+      margin-top: 40px;
+      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.08);
+    }
+
+    .cta-section h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1B3533;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      color: #67441A;
+      margin-bottom: 30px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2.5rem;
+      }
+
+      .question-card {
+        padding: 30px 25px;
+      }
+
+      .question-title {
+        font-size: 1.6rem;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .radio-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .pros-cons {
+        grid-template-columns: 1fr;
+      }
+
+      .results-header h2 {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .path-details {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <span class="header-badge">🇪🇺 EU Founders</span>
+      <h1>Capital Pathways<br>Navigator</h1>
+      <p class="header-subtitle">
+        Given where you are, where you're incorporated, and who your investors are—what capital paths are actually viable for you?
+      </p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container" id="progressContainer" style="display: none;">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text">
+        <span id="progressText">Question 1 of 7</span>
+      </div>
+    </div>
+
+    <!-- Questionnaire -->
+    <form id="navigatorForm">
+      <!-- Question 1: Country of Incorporation -->
+      <div class="question-card active" data-step="1">
+        <div class="question-number">Question 1 of 7</div>
+        <h2 class="question-title">Where is your company incorporated?</h2>
+        <p class="question-description">This is the legal jurisdiction where your company is registered.</p>
+
+        <div class="form-group">
+          <label for="incorporation">Select your country of incorporation</label>
+          <select id="incorporation" required>
+            <option value="">Choose a country...</option>
+            <optgroup label="United Kingdom">
+              <option value="UK">United Kingdom</option>
+            </optgroup>
+            <optgroup label="EU Countries">
+              <option value="FR">France</option>
+              <option value="DE">Germany</option>
+              <option value="NL">Netherlands</option>
+              <option value="IE">Ireland</option>
+              <option value="ES">Spain</option>
+              <option value="IT">Italy</option>
+              <option value="SE">Sweden</option>
+              <option value="DK">Denmark</option>
+              <option value="FI">Finland</option>
+              <option value="BE">Belgium</option>
+              <option value="AT">Austria</option>
+              <option value="PT">Portugal</option>
+              <option value="PL">Poland</option>
+              <option value="CZ">Czech Republic</option>
+              <option value="EE">Estonia</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="US">United States</option>
+              <option value="OTHER">Other</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn" disabled>Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(1)">Next</button>
+        </div>
+      </div>
+
+      <!-- Question 2: Founder Residency -->
+      <div class="question-card" data-step="2">
+        <div class="question-number">Question 2 of 7</div>
+        <h2 class="question-title">Where are you (the founder) resident for tax purposes?</h2>
+        <p class="question-description">This affects your eligibility for certain tax incentives and investment schemes.</p>
+
+        <div class="form-group">
+          <label for="residency">Select your primary tax residency</label>
+          <select id="residency" required>
+            <option value="">Choose a country...</option>
+            <optgroup label="United Kingdom">
+              <option value="UK">United Kingdom</option>
+            </optgroup>
+            <optgroup label="EU Countries">
+              <option value="FR">France</option>
+              <option value="DE">Germany</option>
+              <option value="NL">Netherlands</option>
+              <option value="IE">Ireland</option>
+              <option value="ES">Spain</option>
+              <option value="IT">Italy</option>
+              <option value="SE">Sweden</option>
+              <option value="DK">Denmark</option>
+              <option value="FI">Finland</option>
+              <option value="BE">Belgium</option>
+              <option value="AT">Austria</option>
+              <option value="PT">Portugal</option>
+              <option value="PL">Poland</option>
+              <option value="CZ">Czech Republic</option>
+              <option value="EE">Estonia</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="US">United States</option>
+              <option value="OTHER">Other</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn" onclick="prevQuestion(2)">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(2)">Next</button>
+        </div>
+      </div>
+
+      <!-- Question 3: Revenue Stage -->
+      <div class="question-card" data-step="3">
+        <div class="question-number">Question 3 of 7</div>
+        <h2 class="question-title">What's your current revenue stage?</h2>
+        <p class="question-description">This helps us identify which funding sources are realistic for your stage.</p>
+
+        <div class="radio-cards">
+          <div class="radio-card">
+            <input type="radio" id="pre-revenue" name="revenue-stage" value="pre-revenue" required>
+            <label for="pre-revenue">
+              <div class="radio-card-title">Pre-Revenue</div>
+              <div class="radio-card-desc">No revenue yet, idea or prototype stage</div>
+            </label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="early-revenue" name="revenue-stage" value="early-revenue">
+            <label for="early-revenue">
+              <div class="radio-card-title">Early Revenue</div>
+              <div class="radio-card-desc">€0-€100k ARR</div>
+            </label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="growing-revenue" name="revenue-stage" value="growing-revenue">
+            <label for="growing-revenue">
+              <div class="radio-card-title">Growing Revenue</div>
+              <div class="radio-card-desc">€100k-€1M ARR</div>
+            </label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="scaling" name="revenue-stage" value="scaling">
+            <label for="scaling">
+              <div class="radio-card-title">Scaling</div>
+              <div class="radio-card-desc">€1M+ ARR</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn" onclick="prevQuestion(3)">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(3)">Next</button>
+        </div>
+      </div>
+
+      <!-- Question 4: Target Investor Geography -->
+      <div class="question-card" data-step="4">
+        <div class="question-number">Question 4 of 7</div>
+        <h2 class="question-title">Which investor geographies are you targeting?</h2>
+        <p class="question-description">Select all that apply. Each geography has different requirements and expectations.</p>
+
+        <div class="checkbox-grid">
+          <div class="checkbox-item">
+            <input type="checkbox" id="geo-eu" name="target-geo" value="EU">
+            <label for="geo-eu">EU Investors</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="geo-uk" name="target-geo" value="UK">
+            <label for="geo-uk">UK Investors</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="geo-us" name="target-geo" value="US">
+            <label for="geo-us">US Investors</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="geo-other" name="target-geo" value="OTHER">
+            <label for="geo-other">Other/Global</label>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn" onclick="prevQuestion(4)">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(4)">Next</button>
+        </div>
+      </div>
+
+      <!-- Question 5: Desired Check Size -->
+      <div class="question-card" data-step="5">
+        <div class="question-number">Question 5 of 7</div>
+        <h2 class="question-title">What check size are you looking to raise?</h2>
+        <p class="question-description">This helps determine which capital sources are most appropriate.</p>
+
+        <div class="radio-cards">
+          <div class="radio-card">
+            <input type="radio" id="check-micro" name="check-size" value="micro" required>
+            <label for="check-micro">
+              <div class="radio-card-title">€0 - €50k</div>
+              <div class="radio-card-desc">Pre-seed / Friends & Family</div>
+            </label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="check-small" name="check-size" value="small">
+            <label for="check-small">
+              <div class="radio-card-title">€50k - €250k</div>
+              <div class="radio-card-desc">Seed / Angel</div>
+            </label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="check-medium" name="check-size" value="medium">
+            <label for="check-medium">
+              <div class="radio-card-title">€250k - €1M</div>
+              <div class="radio-card-desc">Seed / Early VC</div>
+            </label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="check-large" name="check-size" value="large">
+            <label for="check-large">
+              <div class="radio-card-title">€1M+</div>
+              <div class="radio-card-desc">Series A+</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn" onclick="prevQuestion(5)">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(5)">Next</button>
+        </div>
+      </div>
+
+      <!-- Question 6: Current Funding Sources -->
+      <div class="question-card" data-step="6">
+        <div class="question-number">Question 6 of 7</div>
+        <h2 class="question-title">Have you received funding from any of these sources?</h2>
+        <p class="question-description">This helps identify potential conflicts or compatibility issues. Select all that apply.</p>
+
+        <div class="checkbox-grid">
+          <div class="checkbox-item">
+            <input type="checkbox" id="fund-none" name="current-funding" value="none">
+            <label for="fund-none">None Yet</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="fund-grants" name="current-funding" value="grants">
+            <label for="fund-grants">EU/Public Grants</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="fund-angels" name="current-funding" value="angels">
+            <label for="fund-angels">Angel Investors</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="fund-vc" name="current-funding" value="vc">
+            <label for="fund-vc">VC Funding</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="fund-crowd" name="current-funding" value="crowdfunding">
+            <label for="fund-crowd">Crowdfunding</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="fund-us" name="current-funding" value="us-investors">
+            <label for="fund-us">US Investors</label>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn" onclick="prevQuestion(6)">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(6)">Next</button>
+        </div>
+      </div>
+
+      <!-- Question 7: Primary Goal -->
+      <div class="question-card" data-step="7">
+        <div class="question-number">Question 7 of 7</div>
+        <h2 class="question-title">What's your primary goal right now?</h2>
+        <p class="question-description">This helps us prioritize the most relevant recommendations for you.</p>
+
+        <div class="radio-cards">
+          <div class="radio-card">
+            <input type="radio" id="goal-understand" name="primary-goal" value="understand" required>
+            <label for="goal-understand">
+              <div class="radio-card-title">Understand My Options</div>
+              <div class="radio-card-desc">I want to know what's possible</div>
+            </label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="goal-raise" name="primary-goal" value="raise">
+            <label for="goal-raise">
+              <div class="radio-card-title">Actively Raising</div>
+              <div class="radio-card-desc">I need to raise capital soon</div>
+            </label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="goal-structure" name="primary-goal" value="structure">
+            <label for="goal-structure">
+              <div class="radio-card-title">Structure Decision</div>
+              <div class="radio-card-desc">Considering US entity or restructure</div>
+            </label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="goal-optimize" name="primary-goal" value="optimize">
+            <label for="goal-optimize">
+              <div class="radio-card-title">Optimize Current Setup</div>
+              <div class="radio-card-desc">Already funded, planning next round</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="button" class="btn" onclick="prevQuestion(7)">Previous</button>
+          <button type="submit" class="btn btn-primary">Get My Capital Pathways</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Results Section -->
+    <div class="results-section" id="resultsSection">
+      <!-- Results Header -->
+      <div class="results-header">
+        <h2>Your Capital Pathways Report</h2>
+        <p>Based on your inputs, here's what you can realistically pursue—and what to watch out for.</p>
+      </div>
+
+      <!-- 1. Capital Compatibility Map -->
+      <div class="compatibility-section">
+        <h3 class="section-title">💰 Capital Compatibility Map</h3>
+        <p class="section-subtitle">What funding sources are viable for you right now?</p>
+        <div class="compatibility-grid" id="compatibilityGrid">
+          <!-- Generated dynamically -->
+        </div>
+      </div>
+
+      <!-- 2. Recommended Capital Paths -->
+      <div class="compatibility-section">
+        <h3 class="section-title">🎯 Your Top 3 Recommended Paths</h3>
+        <p class="section-subtitle">Ranked by viability, timing, and fit for your situation</p>
+        <div class="path-cards" id="pathCards">
+          <!-- Generated dynamically -->
+        </div>
+      </div>
+
+      <!-- 3. Structure Stress Test -->
+      <div class="compatibility-section">
+        <h3 class="section-title">⚠️ Structure Stress Test</h3>
+        <p class="section-subtitle">If you accept money from certain sources, here's what could break</p>
+        <div class="stress-test-items" id="stressTestItems">
+          <!-- Generated dynamically -->
+        </div>
+      </div>
+
+      <!-- 4. SEIS/EIS Reality Check -->
+      <div class="compatibility-section" id="seisSection">
+        <h3 class="section-title">🇬🇧 SEIS/EIS Reality Check</h3>
+        <p class="section-subtitle">Your eligibility for UK tax incentive schemes</p>
+        <div id="seisContent">
+          <!-- Generated dynamically -->
+        </div>
+      </div>
+
+      <!-- 5. Restructure Readiness Signal -->
+      <div class="restructure-signal" id="restructureSignal">
+        <!-- Generated dynamically -->
+      </div>
+
+      <!-- CTA Section -->
+      <div class="cta-section">
+        <h3>Ready to Take Action?</h3>
+        <p>Connect with Sengo to access curated investors, strategic advice, and capital support tailored to your pathway.</p>
+        <div class="cta-buttons">
+          <button class="btn btn-primary" onclick="window.location.href='https://sengo.com/founders'">Join Sengo</button>
+          <button class="btn" onclick="window.print()">Save This Report</button>
+          <button class="btn" onclick="resetAssessment()">Start Over</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 7;
+
+    // Show progress container when form starts
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        document.getElementById('progressContainer').style.display = 'block';
+        updateProgress();
+      }, 500);
+    });
+
+    function updateProgress() {
+      const progress = (currentStep / totalSteps) * 100;
+      document.getElementById('progressFill').style.width = progress + '%';
+      document.getElementById('progressText').textContent = `Question ${currentStep} of ${totalSteps}`;
+    }
+
+    function nextQuestion(step) {
+      const currentCard = document.querySelector(`.question-card[data-step="${step}"]`);
+
+      // Validate current step
+      if (!validateStep(step)) {
+        alert('Please answer this question before continuing.');
+        return;
+      }
+
+      // Hide current card
+      currentCard.classList.remove('active');
+
+      // Show next card
+      currentStep = step + 1;
+      const nextCard = document.querySelector(`.question-card[data-step="${currentStep}"]`);
+      if (nextCard) {
+        nextCard.classList.add('active');
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function prevQuestion(step) {
+      const currentCard = document.querySelector(`.question-card[data-step="${step}"]`);
+      currentCard.classList.remove('active');
+
+      currentStep = step - 1;
+      const prevCard = document.querySelector(`.question-card[data-step="${currentStep}"]`);
+      prevCard.classList.add('active');
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function validateStep(step) {
+      const card = document.querySelector(`.question-card[data-step="${step}"]`);
+
+      // Check for required select inputs
+      const selects = card.querySelectorAll('select[required]');
+      for (let select of selects) {
+        if (!select.value) return false;
+      }
+
+      // Check for required radio buttons
+      const radioGroups = card.querySelectorAll('input[type="radio"][required]');
+      if (radioGroups.length > 0) {
+        const radioName = radioGroups[0].name;
+        const checked = card.querySelector(`input[name="${radioName}"]:checked`);
+        if (!checked) return false;
+      }
+
+      // For checkbox questions (step 4 & 6), at least one must be checked
+      if (step === 4) {
+        const checkboxes = card.querySelectorAll('input[name="target-geo"]:checked');
+        if (checkboxes.length === 0) return false;
+      }
+
+      if (step === 6) {
+        const checkboxes = card.querySelectorAll('input[name="current-funding"]:checked');
+        if (checkboxes.length === 0) return false;
+      }
+
+      return true;
+    }
+
+    // Form submission
+    document.getElementById('navigatorForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (!validateStep(7)) {
+        alert('Please answer this question before continuing.');
+        return;
+      }
+
+      // Collect form data
+      const formData = {
+        incorporation: document.getElementById('incorporation').value,
+        residency: document.getElementById('residency').value,
+        revenueStage: document.querySelector('input[name="revenue-stage"]:checked').value,
+        targetGeo: Array.from(document.querySelectorAll('input[name="target-geo"]:checked')).map(cb => cb.value),
+        checkSize: document.querySelector('input[name="check-size"]:checked').value,
+        currentFunding: Array.from(document.querySelectorAll('input[name="current-funding"]:checked')).map(cb => cb.value),
+        primaryGoal: document.querySelector('input[name="primary-goal"]:checked').value
+      };
+
+      // Generate results
+      generateResults(formData);
+
+      // Hide form, show results
+      document.getElementById('navigatorForm').style.display = 'none';
+      document.getElementById('progressContainer').style.display = 'none';
+      document.getElementById('resultsSection').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    function generateResults(data) {
+      generateCompatibilityMap(data);
+      generateRecommendedPaths(data);
+      generateStressTest(data);
+      generateSEISCheck(data);
+      generateRestructureSignal(data);
+    }
+
+    function generateCompatibilityMap(data) {
+      const grid = document.getElementById('compatibilityGrid');
+      const sources = [
+        {
+          name: 'EU Angel Investors',
+          evaluate: () => {
+            if (['FR', 'DE', 'NL', 'ES', 'IT', 'BE', 'AT', 'SE', 'DK', 'FI', 'PT', 'PL', 'CZ', 'EE'].includes(data.incorporation)) {
+              return { status: 'viable', message: 'Directly viable. EU structure works seamlessly for EU angels.' };
+            }
+            if (data.incorporation === 'UK') {
+              return { status: 'viable', message: 'Viable. UK structure accepted by most EU angels, especially post-Brexit clarity.' };
+            }
+            if (data.incorporation === 'US') {
+              return { status: 'caution', message: 'Possible via SPV. Many EU angels prefer local structures for tax efficiency.' };
+            }
+            return { status: 'caution', message: 'May require structuring. Consider local entity or SPV.' };
+          }
+        },
+        {
+          name: 'UK Angels (SEIS/EIS)',
+          evaluate: () => {
+            if (data.incorporation === 'UK' && data.residency === 'UK' && ['micro', 'small'].includes(data.checkSize)) {
+              return { status: 'viable', message: 'Fully eligible if under SEIS/EIS limits and other criteria met.' };
+            }
+            if (data.incorporation === 'UK' && data.residency !== 'UK') {
+              return { status: 'caution', message: 'UK company eligible, but founder residency may complicate permanence tests.' };
+            }
+            if (data.incorporation !== 'UK') {
+              return { status: 'blocked', message: 'Not viable. SEIS/EIS requires UK incorporation and substantial UK presence.' };
+            }
+            return { status: 'caution', message: 'Partially viable. Check SEIS/EIS criteria carefully.' };
+          }
+        },
+        {
+          name: 'US Angel Investors',
+          evaluate: () => {
+            if (data.incorporation === 'US') {
+              return { status: 'viable', message: 'Directly viable. US structure is standard for US angels.' };
+            }
+            if (data.targetGeo.includes('US') && ['small', 'medium', 'large'].includes(data.checkSize)) {
+              return { status: 'caution', message: 'Viable via US parent/C-Corp flip or SPV. Many US angels prefer US entities.' };
+            }
+            if (['micro'].includes(data.checkSize)) {
+              return { status: 'caution', message: 'Possible but uncommon. Most US angels avoid foreign structures for small checks.' };
+            }
+            return { status: 'viable', message: 'Possible via SPV or direct investment, depending on investor preferences.' };
+          }
+        },
+        {
+          name: 'US Venture Capital',
+          evaluate: () => {
+            if (data.incorporation === 'US') {
+              return { status: 'viable', message: 'Fully viable. US VCs strongly prefer Delaware C-Corps.' };
+            }
+            if (['medium', 'large'].includes(data.checkSize)) {
+              return { status: 'caution', message: 'Viable with US flip. Most US VCs require Delaware C-Corp for institutional investments.' };
+            }
+            return { status: 'blocked', message: 'Not realistic. US VCs rarely invest in non-US entities without restructure.' };
+          }
+        },
+        {
+          name: 'EU Crowdfunding',
+          evaluate: () => {
+            if (['FR', 'DE', 'NL', 'ES', 'IT', 'BE', 'AT', 'SE', 'DK', 'FI', 'PT', 'PL', 'CZ', 'EE', 'UK'].includes(data.incorporation)) {
+              return { status: 'viable', message: 'Viable. EU crowdfunding platforms accept EU/UK entities.' };
+            }
+            return { status: 'caution', message: 'Limited options. Most EU platforms require EU incorporation.' };
+          }
+        },
+        {
+          name: 'Regulation Crowdfunding (US)',
+          evaluate: () => {
+            if (data.incorporation === 'US') {
+              return { status: 'viable', message: 'Fully viable for US entities raising up to $5M/year.' };
+            }
+            return { status: 'blocked', message: 'Not viable. Reg CF requires US incorporation.' };
+          }
+        },
+        {
+          name: 'EU Grants & Public Funding',
+          evaluate: () => {
+            if (['FR', 'DE', 'NL', 'ES', 'IT', 'BE', 'AT', 'SE', 'DK', 'FI', 'PT', 'PL', 'CZ', 'EE'].includes(data.incorporation)) {
+              return { status: 'viable', message: 'Viable. EU entities eligible for Horizon Europe, national grants, and regional programs.' };
+            }
+            if (data.incorporation === 'UK') {
+              return { status: 'caution', message: 'Limited post-Brexit. Some Horizon Europe programs still accessible with conditions.' };
+            }
+            return { status: 'blocked', message: 'Not eligible. EU grants typically require EU incorporation and operations.' };
+          }
+        },
+        {
+          name: 'Revenue-Based Financing',
+          evaluate: () => {
+            if (['growing-revenue', 'scaling'].includes(data.revenueStage)) {
+              return { status: 'viable', message: 'Viable with revenue traction. Geography-agnostic if revenue is proven.' };
+            }
+            return { status: 'blocked', message: 'Not viable yet. RBF requires consistent revenue (typically €50k+ MRR).' };
+          }
+        }
+      ];
+
+      grid.innerHTML = sources.map(source => {
+        const result = source.evaluate();
+        const statusClass = result.status;
+        const icon = result.status === 'viable' ? '✓' : result.status === 'caution' ? '⚠' : '✗';
+
+        return `
+          <div class="compatibility-item">
+            <div class="status-icon status-${statusClass}">${icon}</div>
+            <div class="compatibility-content">
+              <div class="compatibility-title">${source.name}</div>
+              <div class="compatibility-desc">${result.message}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function generateRecommendedPaths(data) {
+      const container = document.getElementById('pathCards');
+      const paths = [];
+
+      // Path 1: EU Angels + National Incentives
+      if (['FR', 'DE', 'NL', 'ES', 'IT', 'BE', 'AT', 'SE', 'DK', 'FI', 'PT', 'PL', 'CZ', 'EE'].includes(data.incorporation)) {
+        paths.push({
+          rank: 1,
+          title: 'EU Angel Network + National Tax Incentives',
+          timeline: '2-4 months',
+          complexity: 'Low',
+          cost: '€2k-€5k legal',
+          expectations: '€50k-€250k typical range',
+          pros: [
+            'No restructuring needed',
+            'Access to local tax incentives (e.g., IR-PME in France, EIS-equivalent schemes)',
+            'Investors familiar with EU structures',
+            'Can layer with EU grants without conflict'
+          ],
+          cons: [
+            'Smaller check sizes vs. US market',
+            'Fragmented investor landscape',
+            'May need to educate investors on your specific country rules'
+          ]
+        });
+      }
+
+      // Path 2: UK SEIS/EIS
+      if (data.incorporation === 'UK' && ['micro', 'small'].includes(data.checkSize)) {
+        paths.push({
+          rank: paths.length + 1,
+          title: 'UK SEIS/EIS Angel Round',
+          timeline: '1-3 months',
+          complexity: 'Low-Medium',
+          cost: '£3k-£8k legal + SEIS/EIS advance assurance',
+          expectations: '£50k-£150k (SEIS), £150k-£5M (EIS)',
+          pros: [
+            'Powerful tax incentives attract UK angels (30-50% tax relief)',
+            'Well-understood investment structure',
+            'Large pool of SEIS/EIS-focused investors',
+            'Can combine with crowdfunding'
+          ],
+          cons: [
+            'Strict eligibility rules (employee count, asset test, qualifying trade)',
+            'Caps on raise amount',
+            'HMRC approval process can take 4-6 weeks',
+            'Limits future flexibility (e.g., US flip becomes taxable event)'
+          ]
+        });
+      }
+
+      // Path 3: EU Crowdfunding → Angel/VC Bridge
+      if (['FR', 'DE', 'NL', 'ES', 'IT', 'BE', 'AT', 'SE', 'DK', 'FI', 'PT', 'PL', 'CZ', 'EE', 'UK'].includes(data.incorporation) &&
+          ['pre-revenue', 'early-revenue'].includes(data.revenueStage)) {
+        paths.push({
+          rank: paths.length + 1,
+          title: 'EU Crowdfunding → Professional Investor Bridge',
+          timeline: '3-6 months (crowdfunding) + 6 months (follow-on)',
+          complexity: 'Medium',
+          cost: '€5k-€15k platform fees + legal',
+          expectations: '€100k-€500k (crowdfunding) + €250k-€1M (angels)',
+          pros: [
+            'Validate market demand publicly',
+            'Build community of brand advocates',
+            'Proof point for later professional investors',
+            'Regulatory clarity under EU Crowdfunding Regulation'
+          ],
+          cons: [
+            'Time-intensive campaign (60-90 days)',
+            'Cap table can get messy with many small investors',
+            'Platform fees (typically 5-8%)',
+            'Success not guaranteed—needs strong marketing'
+          ]
+        });
+      }
+
+      // Path 4: US Flip → US VC
+      if (data.targetGeo.includes('US') && ['medium', 'large'].includes(data.checkSize)) {
+        paths.push({
+          rank: paths.length + 1,
+          title: 'Delaware C-Corp Flip → US VC',
+          timeline: '3-6 months (flip) + 6-12 months (fundraise)',
+          complexity: 'High',
+          cost: '€15k-€50k legal + tax + ongoing compliance',
+          expectations: '$500k-$5M+ (US seed/Series A)',
+          pros: [
+            'Access to largest venture capital market',
+            'US VCs prefer Delaware C-Corps (standard structure)',
+            'Better for ambitious US market expansion',
+            'Cleaner cap table for future US IPO/acquisition'
+          ],
+          cons: [
+            'Expensive and time-consuming to execute',
+            'Potential tax liabilities on flip',
+            'Lose EU grant eligibility',
+            'May lose SEIS/EIS benefits if already used',
+            'Ongoing US tax compliance burden'
+          ]
+        });
+      }
+
+      // Path 5: Grants + Bootstrapping → Profitable Growth
+      if (['FR', 'DE', 'NL', 'ES', 'IT', 'BE', 'AT', 'SE', 'DK', 'FI', 'PT', 'PL', 'CZ', 'EE'].includes(data.incorporation)) {
+        paths.push({
+          rank: paths.length + 1,
+          title: 'EU Grants + Bootstrapped Revenue Growth',
+          timeline: '6-12 months (grant approval) + ongoing',
+          complexity: 'Medium',
+          cost: '€3k-€10k grant writing + compliance',
+          expectations: '€50k-€2M (non-dilutive grants)',
+          pros: [
+            'Non-dilutive capital',
+            'Validates technology/innovation',
+            'Can layer with other funding later',
+            'Attractive to deep-tech and impact-focused startups'
+          ],
+          cons: [
+            'Bureaucratic application process',
+            'Often requires matched funding or milestones',
+            'Reporting requirements can be heavy',
+            'May conflict with some state aid rules if mixing VC later'
+          ]
+        });
+      }
+
+      // Select top 3
+      const topPaths = paths.slice(0, 3);
+
+      container.innerHTML = topPaths.map(path => `
+        <div class="path-card">
+          <span class="path-rank">Recommended Path #${path.rank}</span>
+          <h3 class="path-title">${path.title}</h3>
+
+          <div class="path-details">
+            <div class="path-detail-item">
+              <div class="path-detail-label">Timeline</div>
+              <div class="path-detail-value">${path.timeline}</div>
+            </div>
+            <div class="path-detail-item">
+              <div class="path-detail-label">Complexity</div>
+              <div class="path-detail-value">${path.complexity}</div>
+            </div>
+            <div class="path-detail-item">
+              <div class="path-detail-label">Cost</div>
+              <div class="path-detail-value">${path.cost}</div>
+            </div>
+            <div class="path-detail-item">
+              <div class="path-detail-label">Typical Range</div>
+              <div class="path-detail-value">${path.expectations}</div>
+            </div>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">
+              <h4>✓ Pros</h4>
+              <ul>
+                ${path.pros.map(pro => `<li>${pro}</li>`).join('')}
+              </ul>
+            </div>
+            <div class="cons">
+              <h4>✗ Cons</h4>
+              <ul>
+                ${path.cons.map(con => `<li>${con}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function generateStressTest(data) {
+      const container = document.getElementById('stressTestItems');
+      const issues = [];
+
+      // US VC + EU Grants conflict
+      if (data.currentFunding.includes('grants') && data.targetGeo.includes('US')) {
+        issues.push({
+          severity: 'critical',
+          title: 'State Aid Conflict Risk',
+          description: 'If you\'ve received EU state aid (grants), a US flip could trigger recapture obligations or violate grant terms requiring EU presence.',
+          tag: 'EU Grants + US Entity'
+        });
+      }
+
+      // SEIS/EIS + US Flip
+      if (data.incorporation === 'UK' && data.targetGeo.includes('US') && ['micro', 'small'].includes(data.checkSize)) {
+        issues.push({
+          severity: 'critical',
+          title: 'SEIS/EIS Clawback Risk',
+          description: 'Flipping to a US entity within 3 years of SEIS/EIS investment triggers tax relief clawback for your investors—making you toxic to UK angels.',
+          tag: 'SEIS/EIS + US Flip'
+        });
+      }
+
+      // Non-EU company seeking EU grants
+      if (!['FR', 'DE', 'NL', 'ES', 'IT', 'BE', 'AT', 'SE', 'DK', 'FI', 'PT', 'PL', 'CZ', 'EE'].includes(data.incorporation) &&
+          data.currentFunding.includes('grants')) {
+        issues.push({
+          severity: 'warning',
+          title: 'Grant Eligibility Limited',
+          description: 'Your current structure may exclude you from major EU grant programs (Horizon Europe, EIC Accelerator) which require EU incorporation and significant EU operations.',
+          tag: 'Non-EU Entity'
+        });
+      }
+
+      // US investors + no US entity
+      if (data.currentFunding.includes('us-investors') && data.incorporation !== 'US') {
+        issues.push({
+          severity: 'warning',
+          title: 'US Investor Tax Friction',
+          description: 'US investors in non-US entities face PFIC (Passive Foreign Investment Company) tax penalties—making your equity less attractive and potentially unsellable.',
+          tag: 'US Investors + Foreign Entity'
+        });
+      }
+
+      // Crowdfunding + VC
+      if (data.currentFunding.includes('crowdfunding') && ['medium', 'large'].includes(data.checkSize)) {
+        issues.push({
+          severity: 'info',
+          title: 'Cap Table Cleanup May Be Needed',
+          description: 'Many VCs dislike crowdfunded cap tables (100+ small investors). You may need to consolidate via nominee structure or SPV before institutional rounds.',
+          tag: 'Crowdfunding + VC'
+        });
+      }
+
+      // Pre-revenue + large check
+      if (data.revenueStage === 'pre-revenue' && ['large'].includes(data.checkSize)) {
+        issues.push({
+          severity: 'warning',
+          title: 'Market Mismatch',
+          description: 'Raising €1M+ pre-revenue is very difficult in EU markets without exceptional traction (team, tech, partnerships). US market may be more realistic but requires US structure.',
+          tag: 'Pre-revenue + Large Round'
+        });
+      }
+
+      // Add defaults if no issues
+      if (issues.length === 0) {
+        issues.push({
+          severity: 'info',
+          title: 'No Major Red Flags Detected',
+          description: 'Based on your inputs, we don\'t see structural conflicts that would immediately block your fundraising. However, always verify specific investor requirements before proceeding.',
+          tag: 'All Clear'
+        });
+      }
+
+      container.innerHTML = issues.map(issue => `
+        <div class="stress-item ${issue.severity}">
+          <span class="stress-tag ${issue.severity}">${issue.tag}</span>
+          <h4>${issue.title}</h4>
+          <p>${issue.description}</p>
+        </div>
+      `).join('');
+    }
+
+    function generateSEISCheck(data) {
+      const section = document.getElementById('seisSection');
+      const content = document.getElementById('seisContent');
+
+      // Only show SEIS section for UK companies
+      if (data.incorporation !== 'UK') {
+        section.style.display = 'none';
+        return;
+      }
+
+      section.style.display = 'block';
+
+      let verdict = 'maybe';
+      let verdictTitle = 'Potentially Eligible';
+      let verdictText = 'You may qualify for SEIS/EIS, but need to verify specific criteria';
+      let reasons = [];
+      let changes = [];
+      let consequences = [];
+
+      // Determine eligibility
+      if (data.incorporation === 'UK' && data.residency === 'UK' && ['micro', 'small'].includes(data.checkSize)) {
+        // Check disqualifiers
+        if (data.currentFunding.includes('vc') || data.currentFunding.includes('us-investors')) {
+          verdict = 'not-eligible';
+          verdictTitle = 'Likely Not Eligible';
+          verdictText = 'Based on your funding history, you may have exceeded SEIS/EIS limits or compatibility';
+          reasons = [
+            'Prior VC funding may have exceeded £150k SEIS limit',
+            'US investor structure may conflict with SEIS permanence requirements',
+            'Total investment limits: SEIS max £250k lifetime, EIS max £5M (or £10M for knowledge-intensive)'
+          ];
+        } else {
+          verdict = 'eligible';
+          verdictTitle = 'Likely Eligible ✓';
+          verdictText = 'You appear to meet the basic criteria for SEIS/EIS schemes';
+          reasons = [
+            'UK incorporated company ✓',
+            'UK tax resident founder ✓',
+            'Appropriate raise size for SEIS (up to £250k) or EIS (up to £5M) ✓',
+            'No obvious disqualifying factors detected ✓'
+          ];
+          changes = [
+            'Obtain SEIS/EIS advance assurance from HMRC (recommended before fundraising)',
+            'Ensure <25 FTEs and <£200k gross assets (SEIS) or <250 FTEs and <£15M gross (EIS)',
+            'Verify qualifying trade (most tech/innovation businesses qualify)',
+            'Ensure no substantial interest (>30%) by investors at time of investment'
+          ];
+          consequences = [
+            'Investors get 50% income tax relief (SEIS) or 30% (EIS) immediately',
+            'You become more attractive to UK angel investors',
+            'BUT: Restructuring within 3 years triggers clawback',
+            'BUT: Limits future US flip options without tax consequences'
+          ];
+        }
+      } else {
+        // Not UK or not right residency/size
+        if (data.incorporation !== 'UK') {
+          reasons = ['SEIS/EIS requires UK incorporation (you are incorporated elsewhere)'];
+        } else if (data.residency !== 'UK') {
+          verdict = 'maybe';
+          reasons = [
+            'UK incorporation ✓',
+            'Founder tax residency outside UK may complicate permanence requirements',
+            'HMRC may scrutinize whether business has "permanent establishment" in UK'
+          ];
+        } else {
+          reasons = ['Check size may be too large for SEIS (max £250k), but EIS may be viable (up to £5M)'];
+        }
+      }
+
+      content.innerHTML = `
+        <div class="seis-verdict ${verdict}">
+          <h3>${verdictTitle}</h3>
+          <p>${verdictText}</p>
+        </div>
+
+        ${reasons.length > 0 ? `
+          <div class="seis-details">
+            <h4>Why:</h4>
+            <ul>
+              ${reasons.map(r => `<li>${r}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+
+        ${changes.length > 0 ? `
+          <div class="seis-details">
+            <h4>What You'd Need to Do:</h4>
+            <ul>
+              ${changes.map(c => `<li>${c}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+
+        ${consequences.length > 0 ? `
+          <div class="seis-details">
+            <h4>What You Gain & Lose:</h4>
+            <ul>
+              ${consequences.map(c => `<li>${c}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+      `;
+    }
+
+    function generateRestructureSignal(data) {
+      const container = document.getElementById('restructureSignal');
+
+      let signal = 'not-yet';
+      let icon = '🛑';
+      let title = 'Don\'t Flip Yet';
+      let message = 'Based on your current situation, forming a US entity is premature and potentially harmful.';
+      let reasons = [];
+
+      // Should flip: Targeting US VCs with significant check size
+      if (data.targetGeo.includes('US') && ['medium', 'large'].includes(data.checkSize) &&
+          ['growing-revenue', 'scaling'].includes(data.revenueStage)) {
+        signal = 'yes';
+        icon = '✅';
+        title = 'Yes — Consider US Entity';
+        message = 'Your profile suggests a US flip makes strategic sense, but do it carefully.';
+        reasons = [
+          'You\'re targeting US VCs who strongly prefer Delaware C-Corps',
+          'Your check size (€250k+) justifies the €15k-€50k flip cost',
+          'You have revenue traction, making you credible to US investors',
+          'Cleanest approach: Form US parent, make EU entity a subsidiary (retains EU grant eligibility for subsidiary)',
+          'Alternative: Issue US holding company shares to US investors via "UP-C" or similar structure'
+        ];
+      }
+      // Maybe flip: Targeting US but early stage or conflicts
+      else if (data.targetGeo.includes('US') && ['small', 'medium'].includes(data.checkSize)) {
+        signal = 'maybe';
+        icon = '⚠️';
+        title = 'Only If Targeting Top-Tier US VCs';
+        message = 'A US flip could work, but evaluate carefully—it\'s expensive and irreversible.';
+        reasons = [
+          'If you\'re only raising from US angels (not VCs), an SPV may be cheaper than full flip',
+          'Cost/benefit improves if check size >€500k and investors require it',
+          'Weigh against: loss of EU grants, SEIS/EIS benefits, and ongoing US compliance costs ($5k-$15k/year)',
+          'Consider hybrid: Keep EU entity, create US entity only when Series A demand justifies it'
+        ];
+      }
+      // Don't flip: EU/UK focused or conflicts
+      else {
+        if (data.currentFunding.includes('grants')) {
+          reasons.push('You have EU grant funding—US flip risks recapture or violates grant terms requiring EU operations');
+        }
+        if (data.incorporation === 'UK' && ['micro', 'small'].includes(data.checkSize)) {
+          reasons.push('SEIS/EIS structure is more valuable than US entity for your stage—don\'t kill it');
+        }
+        if (!data.targetGeo.includes('US')) {
+          reasons.push('You\'re not targeting US investors—no reason to incur US entity costs and complexity');
+        }
+        if (['pre-revenue', 'early-revenue'].includes(data.revenueStage) && !['large'].includes(data.checkSize)) {
+          reasons.push('At your stage, €15k-€50k flip cost is better spent on product and traction');
+        }
+        if (reasons.length === 0) {
+          reasons.push('Your current structure serves you well—optimize what you have before adding complexity');
+        }
+      }
+
+      container.innerHTML = `
+        <div class="signal-icon">${icon}</div>
+        <h3>${title}</h3>
+        <p>${message}</p>
+
+        <div class="restructure-details">
+          <h4>Reasoning:</h4>
+          <ul>
+            ${reasons.map(r => `<li>${r}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
+
+    function resetAssessment() {
+      // Reset form
+      document.getElementById('navigatorForm').reset();
+
+      // Show form, hide results
+      document.getElementById('navigatorForm').style.display = 'block';
+      document.getElementById('progressContainer').style.display = 'block';
+      document.getElementById('resultsSection').classList.remove('active');
+
+      // Reset to first question
+      document.querySelectorAll('.question-card').forEach(card => card.classList.remove('active'));
+      document.querySelector('.question-card[data-step="1"]').classList.add('active');
+
+      currentStep = 1;
+      updateProgress();
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Handle "none" checkbox for funding sources
+    document.getElementById('fund-none').addEventListener('change', function() {
+      if (this.checked) {
+        document.querySelectorAll('input[name="current-funding"]').forEach(cb => {
+          if (cb.id !== 'fund-none') cb.checked = false;
+        });
+      }
+    });
+
+    document.querySelectorAll('input[name="current-funding"]').forEach(cb => {
+      if (cb.id !== 'fund-none') {
+        cb.addEventListener('change', function() {
+          if (this.checked) {
+            document.getElementById('fund-none').checked = false;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
