@@ -52,6 +52,7 @@
             transform: translateX(100%);
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             color: #F3EDE7;
+            overflow-y: auto;
         }
 
         .slide.active {
@@ -73,58 +74,59 @@
             align-items: center;
         }
 
-        .slide-1 .logo {
-            font-size: 48px;
-            font-weight: 800;
-            color: #D57028;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .slide-1 h1 {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            line-height: 1.2;
-        }
-
-        .slide-1 .subtitle {
-            font-size: 24px;
-            font-weight: 400;
-            color: #F3EDE7;
-            opacity: 0.9;
+        .slide-1 .logo-img {
+            max-width: 200px;
+            height: auto;
             margin-bottom: 40px;
         }
 
+        .slide-1 h1 {
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.3;
+            color: #F3EDE7;
+        }
+
         .slide-1 .tagline {
-            font-size: 18px;
+            font-size: 20px;
             color: #D57028;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            max-width: 900px;
         }
 
         /* Content Slides */
         .slide h2 {
-            font-size: 48px;
+            font-size: 40px;
             font-weight: 700;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             color: #D57028;
             line-height: 1.2;
         }
 
         .slide h3 {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 600;
             margin-bottom: 20px;
+            margin-top: 20px;
             color: #F3EDE7;
         }
 
         .slide p {
-            font-size: 20px;
-            line-height: 1.6;
+            font-size: 18px;
+            line-height: 1.7;
             margin-bottom: 20px;
-            color: rgba(243, 237, 231, 0.9);
+            color: rgba(243, 237, 231, 0.95);
+        }
+
+        .slide .intro-text {
+            font-size: 22px;
+            font-weight: 500;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #D57028;
         }
 
         .slide ul {
@@ -133,34 +135,57 @@
         }
 
         .slide li {
-            font-size: 20px;
-            line-height: 1.8;
-            margin-bottom: 16px;
-            padding-left: 30px;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 14px;
+            padding-left: 35px;
             position: relative;
-            color: rgba(243, 237, 231, 0.9);
+            color: rgba(243, 237, 231, 0.95);
         }
 
         .slide li:before {
-            content: "→";
+            content: "•";
             position: absolute;
-            left: 0;
+            left: 12px;
+            top: 0;
             color: #D57028;
             font-weight: 700;
-            font-size: 24px;
+            font-size: 28px;
+            line-height: 1.4;
+        }
+
+        .slide li strong {
+            color: #F3EDE7;
+            font-weight: 600;
         }
 
         .highlight-box {
-            background: rgba(213, 112, 40, 0.1);
+            background: rgba(213, 112, 40, 0.15);
             border-left: 4px solid #D57028;
             padding: 20px 30px;
-            margin: 30px 0;
+            margin: 25px 0;
             border-radius: 8px;
         }
 
         .highlight-box p {
             color: #F3EDE7;
             font-weight: 500;
+            font-size: 18px;
+        }
+
+        .quote-box {
+            background: rgba(27, 53, 51, 0.4);
+            border-left: 4px solid #F3EDE7;
+            padding: 25px 30px;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .quote-box p {
+            color: #F3EDE7;
+            font-size: 19px;
+            line-height: 1.6;
         }
 
         /* Navigation */
@@ -248,39 +273,50 @@
             }
 
             .slide {
-                padding: 40px 30px;
+                padding: 40px 25px;
             }
 
-            .slide-1 .logo {
-                font-size: 32px;
+            .slide-1 .logo-img {
+                max-width: 150px;
+                margin-bottom: 30px;
             }
 
             .slide-1 h1 {
-                font-size: 28px;
-            }
-
-            .slide-1 .subtitle {
-                font-size: 18px;
+                font-size: 26px;
             }
 
             .slide-1 .tagline {
-                font-size: 14px;
+                font-size: 16px;
             }
 
             .slide h2 {
-                font-size: 32px;
-                margin-bottom: 24px;
+                font-size: 28px;
+                margin-bottom: 20px;
             }
 
             .slide h3 {
-                font-size: 22px;
-                margin-bottom: 16px;
+                font-size: 20px;
+                margin-bottom: 15px;
             }
 
             .slide p,
+            .slide .intro-text {
+                font-size: 15px;
+            }
+
             .slide li {
-                font-size: 16px;
-                line-height: 1.6;
+                font-size: 14px;
+                padding-left: 28px;
+            }
+
+            .slide li:before {
+                left: 8px;
+                font-size: 22px;
+            }
+
+            .highlight-box p,
+            .quote-box p {
+                font-size: 15px;
             }
 
             .nav-btn {
@@ -300,19 +336,23 @@
         .slide.active h3,
         .slide.active p,
         .slide.active li,
-        .slide.active .highlight-box {
+        .slide.active .intro-text,
+        .slide.active .highlight-box,
+        .slide.active .quote-box {
             animation: fadeInUp 0.6s ease forwards;
             opacity: 0;
         }
 
         .slide.active h2 { animation-delay: 0.1s; }
+        .slide.active .intro-text { animation-delay: 0.2s; }
         .slide.active h3 { animation-delay: 0.2s; }
         .slide.active p:nth-of-type(1) { animation-delay: 0.3s; }
         .slide.active li:nth-child(1) { animation-delay: 0.3s; }
         .slide.active li:nth-child(2) { animation-delay: 0.4s; }
         .slide.active li:nth-child(3) { animation-delay: 0.5s; }
         .slide.active li:nth-child(4) { animation-delay: 0.6s; }
-        .slide.active .highlight-box { animation-delay: 0.4s; }
+        .slide.active .highlight-box,
+        .slide.active .quote-box { animation-delay: 0.5s; }
 
         @keyframes fadeInUp {
             from {
@@ -330,70 +370,137 @@
     <div class="presentation-container">
         <div class="progress-bar" id="progressBar"></div>
         <div class="slides-wrapper">
-            <!-- Slide 1: Intro -->
+            <!-- Slide 1: Opening -->
             <div class="slide slide-1 active">
-                <div class="logo">SENGO</div>
-                <h1>Fundraising Guide for<br>European Startups</h1>
-                <div class="subtitle">Navigate the transatlantic funding landscape</div>
-                <div class="tagline">Reimagining Fundraising & Investing</div>
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/f28e57cc-eb1f-4898-a4fd-476adda1265a/4.png?format=750w"
+                     alt="Sengo Logo"
+                     class="logo-img">
+                <h1>Not every company should be<br>raising money right now.</h1>
+                <div class="tagline">And even fewer should be raising it the way they think they should.</div>
             </div>
 
-            <!-- Slide 2: When is the best time to have investors? -->
+            <!-- Slide 2: Who I Am / What Sengo Is -->
+            <div class="slide">
+                <h2>Who We Are</h2>
+                <p class="intro-text">I'm Ila Corcoran, founder of Sengo. We work with founders, funders, and communities around capital access—specifically helping people understand how money actually moves, not just how to pitch for it.</p>
+
+                <h3>What Sengo Is</h3>
+                <p>Sengo is a platform and community that helps founders answer three questions:</p>
+                <ul>
+                    <li>Should I raise?</li>
+                    <li>What kind of capital actually fits my business?</li>
+                    <li>Who should I be talking to right now—not someday?</li>
+                </ul>
+                <p>We do that through tools—like a fundraise readiness calculator—education, office hours, events, and curated investor conversations.</p>
+
+                <div class="highlight-box">
+                    <p><strong>What Sengo Isn't:</strong> We're not a pitch mill. We're not here to push everyone toward venture capital. We're here to help founders understand the tradeoffs of capital, because capital is not neutral.</p>
+                </div>
+            </div>
+
+            <!-- Slide 3: When is the Best Time to Have Investors? -->
             <div class="slide">
                 <h2>When is the Best Time to Have Investors?</h2>
+                <p class="intro-text">Most people ask: "When should I raise money?" A better question is: "What problem am I trying to solve with capital?"</p>
+
+                <h3>The Three Valid Reasons to Raise</h3>
                 <ul>
-                    <li><strong>Traction First:</strong> Wait until you have validated product-market fit with real customer data</li>
-                    <li><strong>Clear Milestones:</strong> Secure funding when you can demonstrate how capital will accelerate growth</li>
-                    <li><strong>Runway Planning:</strong> Aim to raise 18-24 months before you actually need the capital</li>
-                    <li><strong>Market Timing:</strong> Consider economic conditions and sector-specific funding cycles</li>
+                    <li><strong>Speed</strong> — You know what to do, you just need to move faster</li>
+                    <li><strong>Scale</strong> — Demand exists and supply is the bottleneck</li>
+                    <li><strong>Risk Reduction</strong> — Capital helps you cross a credibility or infrastructure gap</li>
                 </ul>
-                <div class="highlight-box">
-                    <p><strong>Key Insight:</strong> The best time is when you can negotiate from strength, not desperation. Build leverage through customer validation and revenue growth.</p>
+
+                <div class="quote-box">
+                    <p>"If capital is funding uncertainty, it usually creates pressure instead of progress."</p>
                 </div>
+
+                <p><strong>Healthy timing feels like:</strong> Clear priorities, a short list of use cases for the money, and confidence in what happens after the raise.</p>
+
+                <p><strong>Unhealthy timing feels like:</strong> "Everyone else is raising," "I'm running out of time," or "Investors told me to come back with traction—but I don't know which traction."</p>
             </div>
 
-            <!-- Slide 3: How to Pitch to an Investor? -->
+            <!-- Slide 4: How to Pitch to an Investor -->
             <div class="slide">
                 <h2>How to Pitch to an Investor?</h2>
-                <h3>Essential Elements of a Winning Pitch:</h3>
+                <p class="intro-text">Pitching is translation, not persuasion. Founders speak in vision and possibility. Investors listen for risk, return, timing, and decision-making quality.</p>
+
+                <h3>The Four Questions Every Pitch Must Answer</h3>
                 <ul>
-                    <li><strong>The Problem:</strong> Articulate a clear, urgent pain point in a large market</li>
-                    <li><strong>Your Solution:</strong> Demonstrate unique value and competitive advantages</li>
-                    <li><strong>Traction & Metrics:</strong> Show growth, retention, and unit economics</li>
-                    <li><strong>The Team:</strong> Highlight expertise and why you're uniquely positioned to win</li>
+                    <li><strong>What problem are you solving—and for whom?</strong></li>
+                    <li><strong>Why are you the right person to solve it?</strong></li>
+                    <li><strong>Why does this matter now?</strong></li>
+                    <li><strong>How does this become a return?</strong></li>
                 </ul>
+
+                <p>Notice that only one of those is about the idea. The rest are about execution and judgment.</p>
+
                 <div class="highlight-box">
-                    <p><strong>Remember:</strong> Investors back people first. Show passion, coachability, and deep market understanding. Know your numbers cold.</p>
+                    <p><strong>What Investors Actually Screen For:</strong> Early-stage investors are not betting on certainty. They're betting on how founders think, how founders learn, and how founders respond to information. A pitch that says "I don't know yet, but here's how I'm testing it" is often stronger than one that pretends everything is solved.</p>
                 </div>
             </div>
 
-            <!-- Slide 4: The Danger of Having One Too Early -->
+            <!-- Slide 5: The Danger of Having Investors Too Early -->
             <div class="slide">
                 <h2>The Danger of Having Investors Too Early</h2>
+                <p class="intro-text">Capital always comes with expectations—even when it's friendly.</p>
+
+                <h3>The Hidden Costs of Early Capital</h3>
                 <ul>
-                    <li><strong>Dilution Without Value:</strong> Raising too early means giving up equity at the lowest valuation</li>
-                    <li><strong>Wrong Direction:</strong> Premature funding can push you to scale before finding product-market fit</li>
-                    <li><strong>Misaligned Expectations:</strong> Early investors may pressure for growth trajectories you can't sustain</li>
-                    <li><strong>Loss of Control:</strong> Board composition and decision-making power shift away from founders</li>
+                    <li><strong>Dilution Without Value</strong> — Giving up equity before you understand your value</li>
+                    <li><strong>Wrong Direction</strong> — Locking into a growth narrative you can't yet support</li>
+                    <li><strong>Time Drain</strong> — Spending time reporting instead of building</li>
+                    <li><strong>Mental Shift</strong> — Once you take money, you stop asking "What's true?" and start asking "What will investors think?"</li>
                 </ul>
+
+                <div class="quote-box">
+                    <p>"That shift can happen before your foundation is strong—and it's hard to undo."</p>
+                </div>
+
                 <div class="highlight-box">
-                    <p><strong>Warning:</strong> Bootstrap as long as possible. Early-stage capital is the most expensive money you'll ever raise. Focus on customer funding first.</p>
+                    <p><strong>Simple Gut Check:</strong> If capital disappeared tomorrow—would you still know what to build next? Would you still know who your customer is? Would you still believe in the business? If the answer is no, capital may be masking a clarity problem.</p>
                 </div>
             </div>
 
-            <!-- Slide 5: Can European Startups Receive Funds from the U.S.? -->
+            <!-- Slide 6: Can European Startups Receive U.S. Funding? -->
             <div class="slide">
                 <h2>Can European Startups Receive U.S. Funding?</h2>
-                <h3>Absolutely! Here's How:</h3>
+                <p><strong>The short answer:</strong> Yes—European startups can absolutely receive U.S. investment.</p>
+
+                <p><strong>The real nuance:</strong> But it depends on who the investor is, how the investment is structured, and what stage you're at.</p>
+
+                <h3>Angels vs Institutions</h3>
                 <ul>
-                    <li><strong>Delaware C-Corp:</strong> Most U.S. investors prefer investing in Delaware entities for legal clarity</li>
-                    <li><strong>Flip Structure:</strong> Create a U.S. parent company that owns your European subsidiary</li>
-                    <li><strong>Network Access:</strong> Leverage accelerators, warm introductions, and platforms like Sengo for connections</li>
-                    <li><strong>Market Expansion:</strong> Show clear plans for U.S. market entry to attract American capital</li>
+                    <li><strong>U.S. Angels</strong> are often comfortable investing directly into European companies—especially early on</li>
+                    <li><strong>U.S. Institutions</strong> usually require a U.S. entity, often a Delaware company, because of legal and tax constraints</li>
                 </ul>
+
                 <div class="highlight-box">
-                    <p><strong>Sengo's Role:</strong> We bridge the gap between European founders and U.S. investors, providing deal flow, education, and funding resources to close the transatlantic divide.</p>
+                    <p><strong>The Biggest Mistake:</strong> The mistake I see most often is founders restructuring before capital actually requires it. A U.S. entity is a long-term commitment—with tax, legal, and operational implications.</p>
                 </div>
+
+                <p><strong>The Sengo Principle:</strong> Structure should follow capital rather than anticipation.</p>
+            </div>
+
+            <!-- Slide 7: How Sengo Helps + Closing -->
+            <div class="slide">
+                <h2>How Sengo Helps</h2>
+                <p>This is why Sengo focuses so much on readiness and pathways.</p>
+
+                <p>We help founders understand:</p>
+                <ul>
+                    <li>What capital paths are actually viable for them</li>
+                    <li>What breaks if they accept certain money</li>
+                    <li>What not to rush into</li>
+                </ul>
+
+                <p>Because clarity is a form of leverage.</p>
+
+                <div class="highlight-box">
+                    <p><strong>Bottom Line:</strong> You don't need to raise money to be legitimate. You need to raise money on purpose—with the right structure, at the right time, from the right people.</p>
+                </div>
+
+                <h3 style="margin-top: 40px; text-align: center; color: #D57028;">That's what we're building at Sengo.</h3>
+                <p style="text-align: center; font-size: 20px; margin-top: 20px;">If you're capital-curious, capital-confused, or capital-ready—we're here to help you make sense of it.</p>
             </div>
         </div>
 
