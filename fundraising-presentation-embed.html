@@ -327,6 +327,37 @@
         border-color: rgba(243, 237, 231, 0.3);
     }
 
+    .sengo-fullscreen-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(243, 237, 231, 0.1);
+        border: 2px solid rgba(243, 237, 231, 0.3);
+        color: #F3EDE7;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+
+    .sengo-fullscreen-btn:hover {
+        background: #D57028;
+        border-color: #D57028;
+        transform: scale(1.05);
+    }
+
+    .sengo-fullscreen-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+    }
+
     .sengo-slide-dots {
         display: flex;
         gap: 12px;
@@ -430,6 +461,19 @@
             gap: 12px;
         }
 
+        .sengo-fullscreen-btn {
+            top: 10px;
+            right: 10px;
+            width: 35px;
+            height: 35px;
+            font-size: 16px;
+        }
+
+        .sengo-fullscreen-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
         .sengo-profile-container {
             flex-direction: column;
             text-align: center;
@@ -512,8 +556,13 @@
 </style>
 
 <div class="sengo-presentation">
-    <div class="sengo-presentation-container">
+    <div class="sengo-presentation-container" id="sengoPresentationContainer">
         <div class="sengo-progress-bar" id="sengoProgressBar"></div>
+        <button class="sengo-fullscreen-btn" id="sengoFullscreenBtn" title="Toggle Fullscreen">
+            <svg viewBox="0 0 24 24">
+                <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+            </svg>
+        </button>
         <div class="sengo-slides-wrapper">
             <!-- Slide 1: Opening -->
             <div class="sengo-slide sengo-slide-1 active">
@@ -785,5 +834,31 @@
 
     // Initialize
     updateSlide();
+
+    // Fullscreen functionality
+    const fullscreenBtn = document.getElementById('sengoFullscreenBtn');
+    const presentationContainer = document.getElementById('sengoPresentationContainer');
+
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            presentationContainer.requestFullscreen().catch(err => {
+                console.log(`Error attempting to enable fullscreen: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    // Update button icon when fullscreen state changes
+    document.addEventListener('fullscreenchange', () => {
+        const svg = fullscreenBtn.querySelector('svg');
+        if (document.fullscreenElement) {
+            svg.innerHTML = '<path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>';
+        } else {
+            svg.innerHTML = '<path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>';
+        }
+    });
 })();
 </script>
