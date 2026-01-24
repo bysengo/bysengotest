@@ -276,10 +276,10 @@
 
     .tools-carousel-wrapper {
       position: relative;
-      max-width: 1200px;
+      max-width: 1080px;
       margin: 0 auto;
       overflow: hidden;
-      padding: 0 60px;
+      padding: 0;
     }
 
     .tools-carousel {
@@ -287,11 +287,12 @@
       gap: 30px;
       transition: transform 0.4s ease;
       align-items: stretch;
-      width: fit-content;
+      padding: 0 60px;
     }
 
     .tool-card {
-      min-width: 100%;
+      min-width: calc(100% - 120px);
+      width: calc(100% - 120px);
       background: rgba(255, 255, 255, 0.95);
       border-radius: 16px;
       padding: 30px 25px;
@@ -410,11 +411,13 @@
         margin-bottom: 30px;
       }
 
-      .tools-carousel-wrapper {
+      .tools-carousel {
         padding: 0 20px;
       }
 
       .tool-card {
+        min-width: calc(100% - 40px);
+        width: calc(100% - 40px);
         padding: 25px 20px;
       }
 
@@ -433,6 +436,15 @@
     }
 
     @media (min-width: 969px) and (max-width: 1200px) {
+      .tools-carousel {
+        padding: 0 40px;
+      }
+
+      .tool-card {
+        min-width: calc(100% - 80px);
+        width: calc(100% - 80px);
+      }
+
       .tool-image {
         height: 300px;
         object-position: center 18%;
