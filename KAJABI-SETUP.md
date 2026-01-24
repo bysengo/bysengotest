@@ -44,6 +44,7 @@ The EU Capital Pathways Navigator is a comprehensive assessment tool that helps 
 - Pure vanilla JavaScript (no jQuery or frameworks)
 - Mobile responsive design
 - Works in iframes
+- **Multi-language support** (EN/FR/ES) with automatic persistence 🇬🇧 🇫🇷 🇪🇸
 
 ### ⚠️ Kajabi Limitations to Consider
 
@@ -75,6 +76,31 @@ Update these CSS variables in the `<style>` section:
 #F3EDE7  /* Cream - backgrounds */
 #717E36  /* Olive - badges */
 ```
+
+### Language Support
+
+The tool includes built-in multi-language support:
+- 🇬🇧 English (default)
+- 🇫🇷 French
+- 🇪🇸 Spanish
+
+**Features:**
+- Fixed language switcher (top-right corner)
+- Automatic language persistence using localStorage
+- Real-time switching without page reload
+- All UI text, questions, buttons, and results are translated
+
+**User Experience:**
+- Users can switch languages at any time
+- Selected language is remembered for future visits
+- Language preference survives page refresh
+
+**To add more languages:**
+1. Find the `translations` object in the JavaScript section
+2. Add a new language key (e.g., `de` for German)
+3. Copy the structure from `en`, `fr`, or `es`
+4. Translate all strings
+5. Add a new button to the language switcher HTML
 
 ### Call-to-Action URLs
 The main CTA is already configured to link to the fundraising strategy call booking:
