@@ -96,6 +96,99 @@
         max-width: 900px;
     }
 
+    /* Slide 2 - Profile */
+    .sengo-profile-container {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        margin-bottom: 30px;
+    }
+
+    .sengo-headshot {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #D57028;
+        flex-shrink: 0;
+    }
+
+    .sengo-profile-text h2 {
+        margin-bottom: 10px;
+    }
+
+    .sengo-profile-text p {
+        margin: 0;
+    }
+
+    /* Metrics Grid */
+    .sengo-metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        margin: 30px 0;
+    }
+
+    .sengo-metric-card {
+        background: rgba(213, 112, 40, 0.1);
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        border: 2px solid rgba(213, 112, 40, 0.3);
+    }
+
+    .sengo-metric-number {
+        font-size: 32px;
+        font-weight: 800;
+        color: #D57028;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .sengo-metric-label {
+        font-size: 14px;
+        color: rgba(243, 237, 231, 0.9);
+        line-height: 1.4;
+    }
+
+    /* Event Photo */
+    .sengo-event-photo {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border-radius: 12px;
+        margin: 25px auto;
+        display: block;
+        border: 3px solid #D57028;
+    }
+
+    /* Three Column Layout */
+    .sengo-three-col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        margin: 25px 0;
+    }
+
+    .sengo-col-item {
+        background: rgba(27, 53, 51, 0.4);
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 4px solid #D57028;
+    }
+
+    .sengo-col-item h4 {
+        font-size: 20px;
+        color: #D57028;
+        margin-bottom: 12px;
+        font-weight: 700;
+    }
+
+    .sengo-col-item p {
+        font-size: 15px;
+        margin: 0;
+    }
+
     /* Content Slides */
     .sengo-slide h2 {
         font-size: 40px;
@@ -333,6 +426,43 @@
             bottom: 20px;
             gap: 12px;
         }
+
+        .sengo-profile-container {
+            flex-direction: column;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .sengo-headshot {
+            width: 120px;
+            height: 120px;
+        }
+
+        .sengo-metrics-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .sengo-metric-number {
+            font-size: 24px;
+        }
+
+        .sengo-metric-label {
+            font-size: 12px;
+        }
+
+        .sengo-three-col {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .sengo-col-item h4 {
+            font-size: 18px;
+        }
+
+        .sengo-col-item p {
+            font-size: 14px;
+        }
     }
 
     /* Animation on slide enter */
@@ -342,19 +472,27 @@
     .sengo-slide.active li,
     .sengo-slide.active .intro-text,
     .sengo-slide.active .sengo-highlight-box,
-    .sengo-slide.active .sengo-quote-box {
+    .sengo-slide.active .sengo-quote-box,
+    .sengo-slide.active .sengo-profile-container,
+    .sengo-slide.active .sengo-metrics-grid,
+    .sengo-slide.active .sengo-three-col,
+    .sengo-slide.active .sengo-event-photo {
         animation: sengoFadeInUp 0.6s ease forwards;
         opacity: 0;
     }
 
     .sengo-slide.active h2 { animation-delay: 0.1s; }
+    .sengo-slide.active .sengo-profile-container { animation-delay: 0.2s; }
     .sengo-slide.active .intro-text { animation-delay: 0.2s; }
     .sengo-slide.active h3 { animation-delay: 0.2s; }
+    .sengo-slide.active .sengo-three-col { animation-delay: 0.3s; }
+    .sengo-slide.active .sengo-metrics-grid { animation-delay: 0.4s; }
     .sengo-slide.active p:nth-of-type(1) { animation-delay: 0.3s; }
     .sengo-slide.active li:nth-child(1) { animation-delay: 0.3s; }
     .sengo-slide.active li:nth-child(2) { animation-delay: 0.4s; }
     .sengo-slide.active li:nth-child(3) { animation-delay: 0.5s; }
     .sengo-slide.active li:nth-child(4) { animation-delay: 0.6s; }
+    .sengo-slide.active .sengo-event-photo { animation-delay: 0.4s; }
     .sengo-slide.active .sengo-highlight-box,
     .sengo-slide.active .sengo-quote-box { animation-delay: 0.5s; }
 
@@ -385,20 +523,56 @@
 
             <!-- Slide 2: Who I Am / What Sengo Is -->
             <div class="sengo-slide">
-                <h2>Who We Are</h2>
-                <p class="intro-text">I'm Ila Corcoran, founder of Sengo. We work with founders, funders, and communities around capital access—specifically helping people understand how money actually moves, not just how to pitch for it.</p>
+                <div class="sengo-profile-container">
+                    <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/edd89a8b-342f-49d5-9c44-625e9b481f32/IMG_4246.JPG?format=750w"
+                         alt="Ila Corcoran"
+                         class="sengo-headshot">
+                    <div class="sengo-profile-text">
+                        <h2>Ila Corcoran, Founder of Sengo</h2>
+                        <p class="intro-text">We work with founders, funders, and communities around capital access—specifically helping people understand how money actually moves, not just how to pitch for it.</p>
+                    </div>
+                </div>
 
-                <h3>What Sengo Is</h3>
-                <p>Sengo is a platform and community that helps founders answer three questions:</p>
-                <ul>
-                    <li>Should I raise?</li>
-                    <li>What kind of capital actually fits my business?</li>
-                    <li>Who should I be talking to right now—not someday?</li>
-                </ul>
-                <p>We do that through tools—like a fundraise readiness calculator—education, office hours, events, and curated investor conversations.</p>
+                <div class="sengo-three-col">
+                    <div class="sengo-col-item">
+                        <h4>Founders</h4>
+                        <p>Support and resources for high impact founders at key inflection points</p>
+                    </div>
+                    <div class="sengo-col-item">
+                        <h4>Funders</h4>
+                        <p>Education and pathways to invest responsibly in private markets</p>
+                    </div>
+                    <div class="sengo-col-item">
+                        <h4>Partners</h4>
+                        <p>Access to the next generation of wealth creators before traditional networks discover them</p>
+                    </div>
+                </div>
 
-                <div class="sengo-highlight-box">
-                    <p><strong>What Sengo Isn't:</strong> We're not a pitch mill. We're not here to push everyone toward venture capital. We're here to help founders understand the tradeoffs of capital, because capital is not neutral.</p>
+                <div class="sengo-metrics-grid">
+                    <div class="sengo-metric-card">
+                        <span class="sengo-metric-number">90+</span>
+                        <span class="sengo-metric-label">Annual touchpoints through in-person and virtual programming</span>
+                    </div>
+                    <div class="sengo-metric-card">
+                        <span class="sengo-metric-number">9,200+</span>
+                        <span class="sengo-metric-label">Organically-built email list</span>
+                    </div>
+                    <div class="sengo-metric-card">
+                        <span class="sengo-metric-number">600+</span>
+                        <span class="sengo-metric-label">Active app users</span>
+                    </div>
+                    <div class="sengo-metric-card">
+                        <span class="sengo-metric-number">$5M+</span>
+                        <span class="sengo-metric-label">Raised in '25 by grantees</span>
+                    </div>
+                    <div class="sengo-metric-card">
+                        <span class="sengo-metric-number">46.8%</span>
+                        <span class="sengo-metric-label">Email open rate (4x industry average)</span>
+                    </div>
+                    <div class="sengo-metric-card">
+                        <span class="sengo-metric-number">167X</span>
+                        <span class="sengo-metric-label">Multiplyer on grants given to funds raised</span>
+                    </div>
                 </div>
             </div>
 
@@ -499,12 +673,16 @@
 
                 <p>Because clarity is a form of leverage.</p>
 
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/50bd3f7e-5112-46f2-93d9-74338190df59/BGIMRetreat-DP+Jolly_83.jpg?format=750w"
+                     alt="Sengo Community Event"
+                     class="sengo-event-photo">
+
                 <div class="sengo-highlight-box">
                     <p><strong>Bottom Line:</strong> You don't need to raise money to be legitimate. You need to raise money on purpose—with the right structure, at the right time, from the right people.</p>
                 </div>
 
-                <h3 style="margin-top: 40px; text-align: center; color: #D57028;">That's what we're building at Sengo.</h3>
-                <p style="text-align: center; font-size: 20px; margin-top: 20px;">If you're capital-curious, capital-confused, or capital-ready—we're here to help you make sense of it.</p>
+                <h3 style="margin-top: 30px; text-align: center; color: #D57028;">That's what we're building at Sengo.</h3>
+                <p style="text-align: center; font-size: 20px; margin-top: 15px;">If you're capital-curious, capital-confused, or capital-ready—we're here to help you make sense of it.</p>
             </div>
         </div>
 
