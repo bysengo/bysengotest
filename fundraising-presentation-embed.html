@@ -109,6 +109,7 @@
         height: 140px;
         border-radius: 50%;
         object-fit: cover;
+        object-position: center 40%;
         border: 3px solid #D57028;
         flex-shrink: 0;
     }
@@ -157,7 +158,9 @@
     .sengo-event-photo {
         width: 100%;
         max-width: 400px;
-        height: auto;
+        height: 250px;
+        object-fit: cover;
+        object-position: center 40%;
         border-radius: 10px;
         margin: 15px auto;
         display: block;
@@ -509,6 +512,10 @@
 
         .sengo-col-item p {
             font-size: 14px;
+        }
+
+        .sengo-event-photo {
+            height: 200px;
         }
     }
 
