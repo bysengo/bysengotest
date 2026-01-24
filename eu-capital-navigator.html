@@ -835,15 +835,72 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* Language Switcher */
+    .language-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 8px;
+      background: white;
+      padding: 8px;
+      border-radius: 30px;
+      box-shadow: 0 4px 15px rgba(27, 53, 51, 0.15);
+    }
+
+    .lang-btn {
+      padding: 8px 16px;
+      border: 2px solid transparent;
+      background: transparent;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #67441A;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .lang-btn:hover {
+      background: rgba(213, 112, 40, 0.1);
+    }
+
+    .lang-btn.active {
+      background: #D57028;
+      border-color: #D57028;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .language-switcher {
+        top: 10px;
+        right: 10px;
+        padding: 6px;
+      }
+
+      .lang-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+      <button class="lang-btn active" data-lang="en" onclick="switchLanguage('en')">EN</button>
+      <button class="lang-btn" data-lang="fr" onclick="switchLanguage('fr')">FR</button>
+      <button class="lang-btn" data-lang="es" onclick="switchLanguage('es')">ES</button>
+    </div>
+
     <!-- Header -->
     <div class="header">
-      <span class="header-badge">🇪🇺 EU Founders</span>
-      <h1>Capital Pathways<br>Navigator</h1>
-      <p class="header-subtitle">
+      <span class="header-badge" data-i18n="header.badge">🇪🇺 EU Founders</span>
+      <h1 data-i18n-html="header.title">Capital Pathways<br>Navigator</h1>
+      <p class="header-subtitle" data-i18n="header.subtitle">
         Given where you are, where you're incorporated, and who your investors are—what capital paths are actually viable for you?
       </p>
     </div>
@@ -898,8 +955,8 @@
         </div>
 
         <div class="button-group">
-          <button type="button" class="btn" disabled>Previous</button>
-          <button type="button" class="btn btn-primary" onclick="nextQuestion(1)">Next</button>
+          <button type="button" class="btn" disabled data-i18n="btn.previous">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(1)" data-i18n="btn.next">Next</button>
         </div>
       </div>
 
@@ -941,8 +998,8 @@
         </div>
 
         <div class="button-group">
-          <button type="button" class="btn" onclick="prevQuestion(2)">Previous</button>
-          <button type="button" class="btn btn-primary" onclick="nextQuestion(2)">Next</button>
+          <button type="button" class="btn" onclick="prevQuestion(2)" data-i18n="btn.previous">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(2)" data-i18n="btn.next">Next</button>
         </div>
       </div>
 
@@ -984,8 +1041,8 @@
         </div>
 
         <div class="button-group">
-          <button type="button" class="btn" onclick="prevQuestion(3)">Previous</button>
-          <button type="button" class="btn btn-primary" onclick="nextQuestion(3)">Next</button>
+          <button type="button" class="btn" onclick="prevQuestion(3)" data-i18n="btn.previous">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(3)" data-i18n="btn.next">Next</button>
         </div>
       </div>
 
@@ -1015,8 +1072,8 @@
         </div>
 
         <div class="button-group">
-          <button type="button" class="btn" onclick="prevQuestion(4)">Previous</button>
-          <button type="button" class="btn btn-primary" onclick="nextQuestion(4)">Next</button>
+          <button type="button" class="btn" onclick="prevQuestion(4)" data-i18n="btn.previous">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(4)" data-i18n="btn.next">Next</button>
         </div>
       </div>
 
@@ -1058,8 +1115,8 @@
         </div>
 
         <div class="button-group">
-          <button type="button" class="btn" onclick="prevQuestion(5)">Previous</button>
-          <button type="button" class="btn btn-primary" onclick="nextQuestion(5)">Next</button>
+          <button type="button" class="btn" onclick="prevQuestion(5)" data-i18n="btn.previous">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(5)" data-i18n="btn.next">Next</button>
         </div>
       </div>
 
@@ -1097,8 +1154,8 @@
         </div>
 
         <div class="button-group">
-          <button type="button" class="btn" onclick="prevQuestion(6)">Previous</button>
-          <button type="button" class="btn btn-primary" onclick="nextQuestion(6)">Next</button>
+          <button type="button" class="btn" onclick="prevQuestion(6)" data-i18n="btn.previous">Previous</button>
+          <button type="button" class="btn btn-primary" onclick="nextQuestion(6)" data-i18n="btn.next">Next</button>
         </div>
       </div>
 
@@ -1140,8 +1197,8 @@
         </div>
 
         <div class="button-group">
-          <button type="button" class="btn" onclick="prevQuestion(7)">Previous</button>
-          <button type="submit" class="btn btn-primary">Get My Capital Pathways</button>
+          <button type="button" class="btn" onclick="prevQuestion(7)" data-i18n="btn.previous">Previous</button>
+          <button type="submit" class="btn btn-primary" data-i18n="btn.submit">Get My Capital Pathways</button>
         </div>
       </div>
     </form>
@@ -1218,6 +1275,381 @@
   </div>
 
   <script>
+    // Language Management
+    let currentLang = localStorage.getItem('capitalNavLang') || 'en';
+
+    const translations = {
+      en: {
+        header: {
+          badge: '🇪🇺 EU Founders',
+          title: 'Capital Pathways<br>Navigator',
+          subtitle: 'Given where you are, where you\'re incorporated, and who your investors are—what capital paths are actually viable for you?'
+        },
+        progress: {
+          question: 'Question',
+          of: 'of'
+        },
+        buttons: {
+          previous: 'Previous',
+          next: 'Next',
+          getResults: 'Get My Capital Pathways',
+          bookCall: 'Book Your Strategy Call',
+          saveReport: 'Save This Report',
+          startOver: 'Start Over'
+        },
+        questions: {
+          q1: {
+            number: 'Question 1 of 7',
+            title: 'Where is your company incorporated?',
+            description: 'This is the legal jurisdiction where your company is registered.',
+            label: 'Select your country of incorporation'
+          },
+          q2: {
+            number: 'Question 2 of 7',
+            title: 'Where are you (the founder) resident for tax purposes?',
+            description: 'This affects your eligibility for certain tax incentives and investment schemes.',
+            label: 'Select your primary tax residency'
+          },
+          q3: {
+            number: 'Question 3 of 7',
+            title: 'What\'s your current revenue stage?',
+            description: 'This helps us identify which funding sources are realistic for your stage.'
+          },
+          q4: {
+            number: 'Question 4 of 7',
+            title: 'Which investor geographies are you targeting?',
+            description: 'Select all that apply. Each geography has different requirements and expectations.'
+          },
+          q5: {
+            number: 'Question 5 of 7',
+            title: 'What check size are you looking to raise?',
+            description: 'This helps determine which capital sources are most appropriate.'
+          },
+          q6: {
+            number: 'Question 6 of 7',
+            title: 'Have you received funding from any of these sources?',
+            description: 'This helps identify potential conflicts or compatibility issues. Select all that apply.'
+          },
+          q7: {
+            number: 'Question 7 of 7',
+            title: 'What\'s your primary goal right now?',
+            description: 'This helps us prioritize the most relevant recommendations for you.'
+          }
+        },
+        results: {
+          header: {
+            title: 'Your Capital Pathways Report',
+            subtitle: 'Based on your inputs, here\'s what you can realistically pursue—and what to watch out for.'
+          },
+          compatibility: {
+            title: '💰 Capital Compatibility Map',
+            subtitle: 'What funding sources are viable for you right now?'
+          },
+          paths: {
+            title: '🎯 Your Top 3 Recommended Paths',
+            subtitle: 'Ranked by viability, timing, and fit for your situation'
+          },
+          stress: {
+            title: '⚠️ Structure Stress Test',
+            subtitle: 'If you accept money from certain sources, here\'s what could break'
+          },
+          seis: {
+            title: '🇬🇧 SEIS/EIS Reality Check',
+            subtitle: 'Your eligibility for UK tax incentive schemes'
+          }
+        },
+        cta: {
+          title: 'Get Expert Help With Your Fundraise',
+          description: 'Your pathways are clear—but navigating them alone is risky. Work 1:1 with a Sengo fundraising expert to interpret your results, build your roadmap, and avoid costly mistakes.',
+          sessionLabel: '1:1 Fundraising Strategy Sessions',
+          services: 'Personalized guidance • Capital roadmap • Investor intro strategy • Structure optimization',
+          savingsNote: '💡 Most founders who book a call save €5k-€20k by avoiding structural mistakes their results flag.'
+        }
+      },
+      fr: {
+        header: {
+          badge: '🇪🇺 Fondateurs Européens',
+          title: 'Navigateur des<br>Voies de Financement',
+          subtitle: 'Selon votre situation, votre pays de constitution et vos investisseurs—quelles sont les voies de financement réellement viables pour vous?'
+        },
+        progress: {
+          question: 'Question',
+          of: 'sur'
+        },
+        buttons: {
+          previous: 'Précédent',
+          next: 'Suivant',
+          getResults: 'Obtenir Mes Voies de Financement',
+          bookCall: 'Réserver Votre Appel Stratégique',
+          saveReport: 'Sauvegarder Ce Rapport',
+          startOver: 'Recommencer'
+        },
+        questions: {
+          q1: {
+            number: 'Question 1 sur 7',
+            title: 'Où votre entreprise est-elle constituée?',
+            description: 'Il s\'agit de la juridiction légale où votre entreprise est enregistrée.',
+            label: 'Sélectionnez votre pays de constitution'
+          },
+          q2: {
+            number: 'Question 2 sur 7',
+            title: 'Où êtes-vous (le fondateur) résident fiscal?',
+            description: 'Cela affecte votre éligibilité à certains incitatifs fiscaux et programmes d\'investissement.',
+            label: 'Sélectionnez votre résidence fiscale principale'
+          },
+          q3: {
+            number: 'Question 3 sur 7',
+            title: 'Quel est votre stade de revenu actuel?',
+            description: 'Cela nous aide à identifier quelles sources de financement sont réalistes pour votre stade.'
+          },
+          q4: {
+            number: 'Question 4 sur 7',
+            title: 'Quelles géographies d\'investisseurs ciblez-vous?',
+            description: 'Sélectionnez toutes les options applicables. Chaque géographie a des exigences et attentes différentes.'
+          },
+          q5: {
+            number: 'Question 5 sur 7',
+            title: 'Quel montant cherchez-vous à lever?',
+            description: 'Cela aide à déterminer quelles sources de capital sont les plus appropriées.'
+          },
+          q6: {
+            number: 'Question 6 sur 7',
+            title: 'Avez-vous reçu des fonds de l\'une de ces sources?',
+            description: 'Cela aide à identifier les conflits ou problèmes de compatibilité potentiels. Sélectionnez toutes les options applicables.'
+          },
+          q7: {
+            number: 'Question 7 sur 7',
+            title: 'Quel est votre objectif principal en ce moment?',
+            description: 'Cela nous aide à prioriser les recommandations les plus pertinentes pour vous.'
+          }
+        },
+        results: {
+          header: {
+            title: 'Votre Rapport de Voies de Financement',
+            subtitle: 'Selon vos réponses, voici ce que vous pouvez réalistement poursuivre—et ce à quoi faire attention.'
+          },
+          compatibility: {
+            title: '💰 Carte de Compatibilité du Capital',
+            subtitle: 'Quelles sources de financement sont viables pour vous maintenant?'
+          },
+          paths: {
+            title: '🎯 Vos 3 Voies Recommandées',
+            subtitle: 'Classées par viabilité, timing et adéquation à votre situation'
+          },
+          stress: {
+            title: '⚠️ Test de Stress Structurel',
+            subtitle: 'Si vous acceptez de l\'argent de certaines sources, voici ce qui pourrait se briser'
+          },
+          seis: {
+            title: '🇬🇧 Vérification SEIS/EIS',
+            subtitle: 'Votre éligibilité aux programmes d\'incitation fiscale britanniques'
+          }
+        },
+        cta: {
+          title: 'Obtenez l\'Aide d\'un Expert pour Votre Levée de Fonds',
+          description: 'Vos voies sont claires—mais naviguer seul est risqué. Travaillez en tête-à-tête avec un expert en levée de fonds Sengo pour interpréter vos résultats, construire votre feuille de route et éviter des erreurs coûteuses.',
+          sessionLabel: 'Sessions de Stratégie de Levée de Fonds 1:1',
+          services: 'Conseil personnalisé • Feuille de route du capital • Stratégie d\'introduction aux investisseurs • Optimisation structurelle',
+          savingsNote: '💡 La plupart des fondateurs qui réservent un appel économisent 5 000 € à 20 000 € en évitant les erreurs structurelles signalées dans leurs résultats.'
+        }
+      },
+      es: {
+        header: {
+          badge: '🇪🇺 Fundadores Europeos',
+          title: 'Navegador de<br>Rutas de Capital',
+          subtitle: '¿Dada tu situación, dónde estás constituido y quiénes son tus inversores—qué rutas de capital son realmente viables para ti?'
+        },
+        progress: {
+          question: 'Pregunta',
+          of: 'de'
+        },
+        buttons: {
+          previous: 'Anterior',
+          next: 'Siguiente',
+          getResults: 'Obtener Mis Rutas de Capital',
+          bookCall: 'Reservar Tu Llamada Estratégica',
+          saveReport: 'Guardar Este Informe',
+          startOver: 'Empezar de Nuevo'
+        },
+        questions: {
+          q1: {
+            number: 'Pregunta 1 de 7',
+            title: '¿Dónde está constituida tu empresa?',
+            description: 'Esta es la jurisdicción legal donde tu empresa está registrada.',
+            label: 'Selecciona tu país de constitución'
+          },
+          q2: {
+            number: 'Pregunta 2 de 7',
+            title: '¿Dónde eres (el fundador) residente fiscal?',
+            description: 'Esto afecta tu elegibilidad para ciertos incentivos fiscales y esquemas de inversión.',
+            label: 'Selecciona tu residencia fiscal principal'
+          },
+          q3: {
+            number: 'Pregunta 3 de 7',
+            title: '¿Cuál es tu etapa de ingresos actual?',
+            description: 'Esto nos ayuda a identificar qué fuentes de financiación son realistas para tu etapa.'
+          },
+          q4: {
+            number: 'Pregunta 4 de 7',
+            title: '¿Qué geografías de inversores estás apuntando?',
+            description: 'Selecciona todas las aplicables. Cada geografía tiene diferentes requisitos y expectativas.'
+          },
+          q5: {
+            number: 'Pregunta 5 de 7',
+            title: '¿Qué tamaño de inversión buscas levantar?',
+            description: 'Esto ayuda a determinar qué fuentes de capital son más apropiadas.'
+          },
+          q6: {
+            number: 'Pregunta 6 de 7',
+            title: '¿Has recibido financiación de alguna de estas fuentes?',
+            description: 'Esto ayuda a identificar conflictos potenciales o problemas de compatibilidad. Selecciona todas las aplicables.'
+          },
+          q7: {
+            number: 'Pregunta 7 de 7',
+            title: '¿Cuál es tu objetivo principal ahora mismo?',
+            description: 'Esto nos ayuda a priorizar las recomendaciones más relevantes para ti.'
+          }
+        },
+        results: {
+          header: {
+            title: 'Tu Informe de Rutas de Capital',
+            subtitle: 'Basado en tus respuestas, aquí está lo que puedes perseguir realistamente—y qué tener en cuenta.'
+          },
+          compatibility: {
+            title: '💰 Mapa de Compatibilidad de Capital',
+            subtitle: '¿Qué fuentes de financiación son viables para ti ahora?'
+          },
+          paths: {
+            title: '🎯 Tus 3 Rutas Recomendadas',
+            subtitle: 'Clasificadas por viabilidad, tiempo y ajuste a tu situación'
+          },
+          stress: {
+            title: '⚠️ Prueba de Estrés Estructural',
+            subtitle: 'Si aceptas dinero de ciertas fuentes, esto es lo que podría romperse'
+          },
+          seis: {
+            title: '🇬🇧 Verificación SEIS/EIS',
+            subtitle: 'Tu elegibilidad para programas de incentivos fiscales del Reino Unido'
+          }
+        },
+        cta: {
+          title: 'Obtén Ayuda Experta Con Tu Recaudación de Fondos',
+          description: 'Tus rutas están claras—pero navegar solo es arriesgado. Trabaja 1:1 con un experto en recaudación de fondos de Sengo para interpretar tus resultados, construir tu hoja de ruta y evitar errores costosos.',
+          sessionLabel: 'Sesiones de Estrategia de Recaudación 1:1',
+          services: 'Guía personalizada • Hoja de ruta de capital • Estrategia de presentación a inversores • Optimización estructural',
+          savingsNote: '💡 La mayoría de los fundadores que reservan una llamada ahorran €5k-€20k al evitar errores estructurales señalados en sus resultados.'
+        }
+      }
+    };
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('capitalNavLang', lang);
+
+      // Update button states
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.lang === lang) {
+          btn.classList.add('active');
+        }
+      });
+
+      applyTranslations();
+    }
+
+    function applyTranslations() {
+      const t = translations[currentLang];
+
+      // Header
+      document.querySelector('[data-i18n="header.badge"]').textContent = t.header.badge;
+      document.querySelector('[data-i18n-html="header.title"]').innerHTML = t.header.title;
+      document.querySelector('[data-i18n="header.subtitle"]').textContent = t.header.subtitle;
+
+      // Progress text
+      const progressText = document.getElementById('progressText');
+      if (progressText) {
+        progressText.textContent = `${t.progress.question} ${currentStep} ${t.progress.of} ${totalSteps}`;
+      }
+
+      // Buttons
+      document.querySelectorAll('[data-i18n="btn.previous"]').forEach(el => el.textContent = t.buttons.previous);
+      document.querySelectorAll('[data-i18n="btn.next"]').forEach(el => el.textContent = t.buttons.next);
+      const submitBtn = document.querySelector('[data-i18n="btn.submit"]');
+      if (submitBtn) submitBtn.textContent = t.buttons.getResults;
+
+      // Questions
+      for (let i = 1; i <= 7; i++) {
+        const card = document.querySelector(`.question-card[data-step="${i}"]`);
+        if (card) {
+          const q = t.questions[`q${i}`];
+          card.querySelector('.question-number').textContent = q.number;
+          card.querySelector('.question-title').textContent = q.title;
+          card.querySelector('.question-description').textContent = q.description;
+          if (q.label) {
+            const label = card.querySelector('label');
+            if (label && label.getAttribute('for')) {
+              label.textContent = q.label;
+            }
+          }
+        }
+      }
+
+      // Results section
+      const resultsHeader = document.querySelector('.results-header h2');
+      if (resultsHeader) resultsHeader.textContent = t.results.header.title;
+      const resultsSubtitle = document.querySelector('.results-header p');
+      if (resultsSubtitle) resultsSubtitle.textContent = t.results.header.subtitle;
+
+      // Result sections
+      const sections = [
+        { selector: '.compatibility-section:nth-of-type(1) .section-title', key: 'compatibility.title' },
+        { selector: '.compatibility-section:nth-of-type(1) .section-subtitle', key: 'compatibility.subtitle' },
+        { selector: '.compatibility-section:nth-of-type(2) .section-title', key: 'paths.title' },
+        { selector: '.compatibility-section:nth-of-type(2) .section-subtitle', key: 'paths.subtitle' },
+        { selector: '.compatibility-section:nth-of-type(3) .section-title', key: 'stress.title' },
+        { selector: '.compatibility-section:nth-of-type(3) .section-subtitle', key: 'stress.subtitle' },
+        { selector: '#seisSection .section-title', key: 'seis.title' },
+        { selector: '#seisSection .section-subtitle', key: 'seis.subtitle' }
+      ];
+
+      sections.forEach(({ selector, key }) => {
+        const el = document.querySelector(selector);
+        if (el) {
+          const keys = key.split('.');
+          let value = t.results;
+          keys.forEach(k => value = value[k]);
+          el.textContent = value;
+        }
+      });
+
+      // CTA section
+      const ctaTitle = document.querySelector('.cta-section h3');
+      if (ctaTitle) ctaTitle.textContent = t.cta.title;
+      const ctaDesc = document.querySelector('.cta-section > p');
+      if (ctaDesc) ctaDesc.textContent = t.cta.description;
+      const ctaSessionLabel = document.querySelector('.cta-section [style*="text-transform: uppercase"]');
+      if (ctaSessionLabel) ctaSessionLabel.textContent = t.cta.sessionLabel;
+      const ctaServices = document.querySelector('.cta-section [style*="font-size: 0.95rem"]');
+      if (ctaServices) ctaServices.textContent = t.cta.services;
+      const ctaSavings = document.querySelector('.cta-section [style*="font-style: italic"]');
+      if (ctaSavings) ctaSavings.textContent = t.cta.savingsNote;
+
+      // CTA buttons
+      const bookBtn = document.querySelector('[onclick*="calendly"]');
+      if (bookBtn) bookBtn.textContent = t.buttons.bookCall;
+      const saveBtn = document.querySelector('[onclick="window.print()"]');
+      if (saveBtn) saveBtn.textContent = t.buttons.saveReport;
+      const resetBtn = document.querySelector('[onclick="resetAssessment()"]');
+      if (resetBtn) resetBtn.textContent = t.buttons.startOver;
+    }
+
+    // Initialize language on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      if (currentLang !== 'en') {
+        switchLanguage(currentLang);
+      }
+    });
+
     let currentStep = 1;
     const totalSteps = 7;
 
@@ -1232,7 +1664,8 @@
     function updateProgress() {
       const progress = (currentStep / totalSteps) * 100;
       document.getElementById('progressFill').style.width = progress + '%';
-      document.getElementById('progressText').textContent = `Question ${currentStep} of ${totalSteps}`;
+      const t = translations[currentLang];
+      document.getElementById('progressText').textContent = `${t.progress.question} ${currentStep} ${t.progress.of} ${totalSteps}`;
     }
 
     function nextQuestion(step) {
