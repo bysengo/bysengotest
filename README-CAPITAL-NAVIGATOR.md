@@ -126,7 +126,12 @@ Not "all options" — **actionable priorities**:
 
 ### What This Tool Naturally Gates:
 
-1. 💼 **1:1 strategy sessions** ($200-$500)
+1. 💼 **1:1 fundraising strategy sessions** (€425-€1,700) — PRIMARY CTA
+   - Personalized results interpretation
+   - Capital roadmap development
+   - Investor intro strategy
+   - Structure optimization guidance
+
 2. ⚖️ **Legal partner referrals** (commission)
 3. 💎 **Premium membership tiers** ($49-$99/mo)
 4. 🎯 **"Backed by Sengo" pathway eligibility**
@@ -230,25 +235,33 @@ See `KAJABI-SETUP.md` for code to gate results behind email capture.
 
 ## Monetization Models
 
-### 1. **Freemium Lead Magnet**
-- ✓ Free: Basic compatibility assessment
-- 💰 Paid ($97): Full report PDF + 30-min strategy call
+### 1. **1:1 Strategy Sessions** (PRIMARY MODEL - Currently Active)
+- ✓ Free: Complete assessment + results report
+- 💰 Paid (€425-€1,700): 1:1 fundraising strategy sessions
+  - Personalized results interpretation
+  - Capital roadmap development
+  - Investor matching strategy
+  - Structure optimization guidance
+  - Avoid €5k-€20k in structural mistakes
 
-### 2. **Membership Value-Add**
+**Booking:** https://calendly.com/ila-bysengo/fundraising
+
+**Value proposition:** "Your pathways are clear—but navigating them alone is risky."
+
+### 2. **Membership Value-Add** (Future)
 - ✓ Free tier: One-time tool access
 - 💎 Premium ($49/mo): Quarterly reassessments + investor intros
 
-### 3. **Course Upsell Funnel**
+### 3. **Course Upsell Funnel** (Future)
 - Step 1: Free tool (capture lead)
 - Step 2: Show complexity in results
 - Step 3: Upsell "EU Fundraising Masterclass" ($297-$497)
 
-### 4. **Consultation Qualifier**
-- Step 1: Free tool (self-service assessment)
-- Step 2: CTA at end: "Want expert guidance? Book a call"
-- Step 3: Paid strategy session ($200-$500)
+### 4. **Report Enhancement** (Future)
+- ✓ Free: Interactive results
+- 💰 Paid ($97): Downloadable PDF report + email course
 
-### 5. **Investor Network Access**
+### 5. **Investor Network Access** (Future)
 - Free tool reveals compatible pathways
 - Premium: Direct intros to investors in those categories
 - Pricing: Application fee ($500) + success fee (2-5% of raise)

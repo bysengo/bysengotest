@@ -77,13 +77,17 @@ Update these CSS variables in the `<style>` section:
 ```
 
 ### Call-to-Action URLs
-Find the CTA section (around line 1945) and update:
+The main CTA is already configured to link to the fundraising strategy call booking:
 
 ```javascript
-<button class="btn btn-primary" onclick="window.location.href='https://YOUR-KAJABI-SITE.com/join-sengo'">
-  Join Sengo
+<button class="btn btn-primary" onclick="window.location.href='https://calendly.com/ila-bysengo/fundraising'">
+  Book Your Strategy Call
 </button>
 ```
+
+**Current pricing displayed:** €425 - €1,700 for 1:1 fundraising strategy sessions
+
+To update the Calendly link or pricing, find the CTA section (around line 1199) and modify as needed.
 
 ### Footer Email Capture
 Replace the CTA buttons with Kajabi form:
