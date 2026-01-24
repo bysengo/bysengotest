@@ -1,0 +1,1542 @@
+<!-- Sengo Founder Membership Checkout Page - Kajabi Preview -->
+<!-- This is a PREVIEW matching your landing page style -->
+<!-- Replace [KAJABI CHECKOUT EMBED] placeholders with actual Kajabi embed codes -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Sengo as a Founder</title>
+
+  <style>
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F3EDE7;
+      color: #1B3533;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Section Backgrounds for Color Segmentation */
+    .section-cream {
+      background: #F3EDE7;
+    }
+
+    .section-white {
+      background: #FFFFFF;
+    }
+
+    .section-light-tan {
+      background: #FAF7F4;
+    }
+
+    .checkout-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    /* Full-width section wrapper */
+    .full-width-section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      padding: 60px 20px;
+    }
+
+    .full-width-section .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Hero Section */
+    .checkout-hero {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .checkout-hero h1 {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 5rem;
+      font-weight: 500;
+      line-height: 0.94;
+      color: #1B3533;
+      letter-spacing: -0.077em;
+      margin-bottom: 20px;
+    }
+
+    .checkout-hero p {
+      font-size: 1.5rem;
+      color: #67441A;
+      font-weight: 400;
+      margin: 0 0 25px 0;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 18px 50px;
+      background: #D57028;
+      color: white;
+      text-decoration: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hero-cta:hover {
+      background: #C56020;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.5);
+    }
+
+    /* Freebie Section - Side by Side */
+    .freebie-section {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 25px;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .freebie-content {
+      background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
+      border-radius: 12px;
+      padding: 30px 35px;
+      box-shadow: 0 8px 30px rgba(27, 53, 51, 0.15);
+    }
+
+    .freebie-content h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      color: #F3EDE7;
+      margin-bottom: 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .freebie-content p {
+      color: #F3EDE7;
+      font-size: 0.95rem;
+      margin-bottom: 0;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+
+    .freebie-arrow {
+      font-size: 3rem;
+      color: #D57028;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: translateX(0); }
+      50% { opacity: 0.6; transform: translateX(5px); }
+    }
+
+    .freebie-form-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .freebie-form-wrapper h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      color: #1B3533;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .freebie-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (max-width: 968px) {
+      .freebie-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .freebie-arrow {
+        display: none;
+      }
+    }
+
+    .freebie-form input[type="email"] {
+      flex: 1;
+      min-width: 220px;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      background: white;
+    }
+
+    .freebie-form button {
+      padding: 12px 28px;
+      background: #1B3533;
+      color: #F3EDE7;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .freebie-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(27, 53, 51, 0.4);
+    }
+
+    /* Style Kajabi embedded form buttons */
+    .freebie-form button[type="submit"],
+    .freebie-form input[type="submit"],
+    .freebie-form .kjb-btn,
+    .freebie-form [class*="submit"],
+    .freebie-form [class*="button"] {
+      padding: 12px 28px !important;
+      background: #1B3533 !important;
+      color: #F3EDE7 !important;
+      border: none !important;
+      border-radius: 8px !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-weight: 600 !important;
+      font-size: 0.9rem !important;
+      cursor: pointer !important;
+      transition: all 0.3s ease !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+    }
+
+    .freebie-form button[type="submit"]:hover,
+    .freebie-form input[type="submit"]:hover,
+    .freebie-form .kjb-btn:hover,
+    .freebie-form [class*="submit"]:hover,
+    .freebie-form [class*="button"]:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 20px rgba(27, 53, 51, 0.4) !important;
+      background: #2a4a47 !important;
+    }
+
+    .freebie-microcopy {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #F3EDE7;
+      opacity: 0.85;
+    }
+
+    /* Tool Carousel Section */
+    .benefits-section {
+      text-align: center;
+      padding: 20px 20px 40px;
+    }
+
+    .benefits-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      color: #F3EDE7;
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .tools-carousel-wrapper {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+      padding: 0 60px;
+    }
+
+    .tools-carousel {
+      display: flex;
+      gap: 30px;
+      transition: transform 0.4s ease;
+      align-items: stretch;
+    }
+
+    .tool-card {
+      min-width: calc(33.333% - 20px);
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(213, 112, 40, 0.4);
+    }
+
+    .tool-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 4px 10px rgba(213, 112, 40, 0.3));
+    }
+
+    .tool-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      color: #1B3533;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .tool-card p {
+      font-size: 1rem;
+      color: #67441A;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Carousel Navigation Arrows */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #D57028;
+      transition: all 0.3s ease;
+      z-index: 10;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .carousel-arrow:hover {
+      background: #D57028;
+      color: white;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-arrow.prev {
+      left: 0;
+    }
+
+    .carousel-arrow.next {
+      right: 0;
+    }
+
+    /* Carousel Dots */
+    .tools-carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .tools-carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .tools-carousel-dot.active {
+      background: #D57028;
+      border-color: #F3EDE7;
+      transform: scale(1.3);
+    }
+
+    .tools-carousel-dot:hover {
+      background: rgba(213, 112, 40, 0.6);
+    }
+
+    @media (max-width: 968px) {
+      .benefits-section h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+      }
+
+      .tools-carousel-wrapper {
+        padding: 0 20px;
+      }
+
+      .tool-card {
+        min-width: 100%;
+        padding: 30px 20px;
+      }
+
+      .carousel-arrow {
+        display: none;
+      }
+
+      .tool-card:hover {
+        transform: translateY(-5px);
+      }
+    }
+
+    @media (min-width: 969px) and (max-width: 1200px) {
+      .tool-card {
+        min-width: calc(50% - 15px);
+      }
+    }
+
+    /* For/Not For Section */
+    .target-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .target-box {
+      padding: 40px 35px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(27, 53, 51, 0.1);
+    }
+
+    .target-box.for {
+      background: linear-gradient(135deg, #F3EDE7 0%, #FAF7F4 100%);
+      border: 3px solid #D57028;
+    }
+
+    .target-box.not-for {
+      background: linear-gradient(135deg, #1B3533 0%, #2a4a47 100%);
+      border: 3px solid #67441A;
+    }
+
+    .target-box.not-for h3,
+    .target-box.not-for li {
+      color: #F3EDE7;
+    }
+
+    .target-box h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .target-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .target-box li {
+      padding: 12px 0;
+      padding-left: 35px;
+      position: relative;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .target-box.for li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .target-box.not-for li::before {
+      content: '✗';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    /* Pricing Section */
+    .pricing-section {
+      text-align: center;
+    }
+
+    .pricing-section h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      color: #1B3533;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .pricing-section p.intro {
+      font-size: 1.1rem;
+      color: #67441A;
+      margin-bottom: 50px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pricing-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: white;
+      border: 3px solid #D57028;
+      border-radius: 16px;
+      padding: 30px 20px 20px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: visible;
+    }
+
+    .pricing-card.featured::before {
+      content: 'BEST VALUE';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #D57028;
+      color: white;
+      padding: 8px 25px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      border-radius: 20px;
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(213, 112, 40, 0.2);
+    }
+
+    .pricing-price {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #D57028;
+      margin-bottom: 5px;
+    }
+
+    .pricing-term {
+      font-size: 1.1rem;
+      color: #67441A;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .pricing-note {
+      font-size: 0.9rem;
+      color: #67441A;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    /* Checkout Button */
+    .checkout-button {
+      display: block;
+      width: 100%;
+      padding: 18px 30px;
+      margin-top: 20px;
+      background: #D57028;
+      color: white;
+      text-decoration: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .checkout-button:hover {
+      background: #C56020;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.5);
+    }
+
+    .pricing-card.featured .checkout-button {
+      background: #1B3533;
+    }
+
+    .pricing-card.featured .checkout-button:hover {
+      background: #D57028;
+    }
+
+    /* Stats & Testimonial */
+    .social-proof {
+      text-align: center;
+      color: #F3EDE7;
+    }
+
+    .stat-highlight {
+      font-size: 8rem;
+      font-weight: 900;
+      color: #717e36;
+      margin-bottom: 20px;
+      line-height: 1;
+      text-shadow: 0 0 30px rgba(113, 126, 54, 0.5);
+    }
+
+    .stat-label {
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      opacity: 0.9;
+    }
+
+    .testimonial {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    /* Side-by-Side Testimonials */
+    .rotating-testimonials {
+      text-align: center;
+      padding: 10px 20px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px 25px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .testimonial-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      opacity: 1;
+    }
+
+    .testimonial-headshot {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #D57028;
+      box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
+    }
+
+    .testimonial-quote {
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.5;
+      color: #1B3533;
+      margin: 0;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: #D57028;
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+
+    .testimonial-title {
+      font-size: 0.85rem;
+      color: #67441A;
+      opacity: 0.9;
+    }
+
+    /* Testimonial carousel navigation */
+    .testimonial-nav {
+      display: none;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .testimonial-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #D57028;
+      opacity: 0.3;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-dot.active {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+
+    @media (max-width: 768px) {
+      .rotating-testimonials {
+        position: relative;
+        overflow: hidden;
+        max-width: 100%;
+        width: 100%;
+        padding: 10px 0 20px;
+      }
+
+      .testimonial-container {
+        display: flex;
+        flex-wrap: nowrap;
+        transition: transform 0.3s ease;
+        gap: 0;
+        width: 400%;
+        max-width: none;
+      }
+
+      .testimonial-slide {
+        min-width: 25%;
+        width: 25%;
+        flex-shrink: 0;
+        padding: 0 20px;
+        box-sizing: border-box;
+      }
+
+      .testimonial-nav {
+        display: flex;
+      }
+    }
+
+    /* Founder Bio Section */
+    .founder-bio {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding: 30px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .founder-headshot {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #D57028;
+      box-shadow: 0 8px 30px rgba(213, 112, 40, 0.3);
+      flex-shrink: 0;
+    }
+
+    .founder-content {
+      flex: 1;
+    }
+
+    .founder-content h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.6rem;
+      color: #1B3533;
+      margin-bottom: 5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .founder-content h3 a {
+      display: inline-flex;
+      align-items: center;
+      color: #0077B5;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .founder-content h3 a:hover {
+      color: #005885;
+      transform: scale(1.1);
+    }
+
+    .founder-content h3 svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .founder-content .founder-title {
+      font-size: 1rem;
+      color: #D57028;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .founder-content p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #1B3533;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .founder-bio {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .founder-headshot {
+        width: 150px;
+        height: 150px;
+      }
+
+      .founder-content h3 {
+        font-size: 1.6rem;
+        justify-content: center;
+      }
+    }
+
+    /* Upsell Section */
+    .upsell-section {
+      background: white;
+      border: 3px solid #AF8145;
+      border-radius: 16px;
+      padding: 50px 40px;
+    }
+
+    .upsell-section h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.5rem;
+      color: #717e36;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 30px rgba(113, 126, 54, 1),
+                   0 0 50px rgba(113, 126, 54, 0.8),
+                   0 0 70px rgba(113, 126, 54, 0.6);
+    }
+
+    .upsell-section p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
+
+    .upsell-includes {
+      background: #F3EDE7;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .upsell-includes h4 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #1B3533;
+      font-weight: 600;
+    }
+
+    .upsell-includes ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .upsell-includes li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+      font-size: 1.05rem;
+    }
+
+    .upsell-includes li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #D57028;
+      font-weight: 700;
+    }
+
+    .upsell-cta {
+      display: inline-block;
+      padding: 20px 50px;
+      background: #D57028;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .upsell-cta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(213, 112, 40, 0.4);
+    }
+
+    /* Reassurance */
+    .reassurance {
+      text-align: center;
+      padding: 20px 20px;
+    }
+
+    .reassurance-items {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .reassurance-item {
+      font-size: 1.1rem;
+      color: #67441A;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .reassurance-item:hover {
+      color: #D57028;
+      text-shadow: 0 0 15px rgba(213, 112, 40, 0.6),
+                   0 0 25px rgba(213, 112, 40, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .reassurance-item::before {
+      content: '✓';
+      display: inline-block;
+      margin-right: 10px;
+      color: #D57028;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .checkout-container {
+        padding: 40px 20px;
+      }
+
+      .checkout-hero h1 {
+        font-size: 3rem;
+      }
+
+      .checkout-hero p {
+        font-size: 1.2rem;
+      }
+
+
+      .benefits-section h2,
+      .pricing-section h2 {
+        font-size: 2rem;
+      }
+
+      .target-section {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-options {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .pricing-card {
+        padding: 25px 15px 15px;
+      }
+
+      .pricing-price {
+        font-size: 2.5rem;
+      }
+
+      .stat-highlight {
+        font-size: 4.5rem;
+      }
+
+      .upsell-section {
+        padding: 35px 25px;
+      }
+
+      .upsell-section h3 {
+        font-size: 1.8rem;
+      }
+
+      .reassurance-items {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero Section - Cream Background -->
+<div class="full-width-section section-cream">
+  <div class="content-wrapper">
+    <div class="checkout-hero">
+      <h1>Join Sengo as a Founder</h1>
+      <p>Fundraising infrastructure for founders building real impact</p>
+      <a href="#pricing" class="hero-cta">Enroll Now</a>
+    </div>
+
+    <!-- Freebie Section - Side by Side -->
+    <div class="freebie-section">
+      <!-- Orange Content Box -->
+      <div class="freebie-content">
+        <h2>Not sure if you're ready to join yet?</h2>
+        <p>Get the Sengo Fundability Rubric to assess your readiness and next steps before committing.</p>
+      </div>
+
+      <!-- Arrow -->
+      <div class="freebie-arrow">→</div>
+
+      <!-- Form -->
+      <div class="freebie-form-wrapper">
+        <h3>Get Your Free Rubric</h3>
+        <div class="freebie-form">
+          <script src="https://app.bysengo.com/forms/2149405173/embed.js"></script>
+        </div>
+        <p class="freebie-microcopy" style="font-size: 0.85rem; color: #67441A; margin-top: 5px; opacity: 0.8;">Included with membership · No pressure to raise</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Side-by-Side Testimonials - White Background -->
+<div class="full-width-section section-white" style="padding: 5px 20px 15px;">
+  <div class="content-wrapper">
+    <div class="rotating-testimonials">
+      <div class="testimonial-container">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-slide">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23bbb'/%3E%3Ccircle cx='50' cy='35' r='18' fill='%23999'/%3E%3Cellipse cx='50' cy='75' rx='28' ry='20' fill='%23999'/%3E%3C/svg%3E" alt="Erika Baker" class="testimonial-headshot">
+          <div class="testimonial-quote">
+            "Thank you overall for seeing the human side of entrepreneurship. Out of every grant that I've applied for, I've felt seen by you and I'm sure other people can say the same."
+          </div>
+          <div class="testimonial-author">Erika Baker</div>
+          <div class="testimonial-title">Black & Bilingual LLC</div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-slide">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23bbb'/%3E%3Ccircle cx='50' cy='35' r='18' fill='%23999'/%3E%3Cellipse cx='50' cy='75' rx='28' ry='20' fill='%23999'/%3E%3C/svg%3E" alt="Robin Robinson" class="testimonial-headshot">
+          <div class="testimonial-quote">
+            "What I love about Sengo is how great it is to meet like-minded entrepreneurs. I recently connected with someone through the platform and we're already exploring innovative ways our businesses can support and grow together"
+          </div>
+          <div class="testimonial-author">Robin Robinson</div>
+          <div class="testimonial-title"></div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-slide">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23bbb'/%3E%3Ccircle cx='50' cy='35' r='18' fill='%23999'/%3E%3Cellipse cx='50' cy='75' rx='28' ry='20' fill='%23999'/%3E%3C/svg%3E" alt="Anonymous" class="testimonial-headshot">
+          <div class="testimonial-quote">
+            "I'm a founder who was very nervous about funding as I've failed recently and lost a ton of capital. Love the comprehensiveness of this workshop and the ways it can help me get up fast and continue."
+          </div>
+          <div class="testimonial-author">Anonymous</div>
+          <div class="testimonial-title">Founder</div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-slide">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/cbd7debe-37ee-4002-958b-4f0be6fc11de/1708410857908.jpg?format=750w" alt="Rama Afullo" class="testimonial-headshot">
+          <div class="testimonial-quote">
+            "Sengo's grant provides critical early validation and flexible funds that help founders bridge the gap between idea and institutional traction. Also, Ila is awesome!"
+          </div>
+          <div class="testimonial-author">Rama Afullo</div>
+          <div class="testimonial-title">Satlyt</div>
+        </div>
+      </div>
+
+      <!-- Navigation dots for mobile carousel -->
+      <div class="testimonial-nav">
+        <span class="testimonial-dot active" data-index="0"></span>
+        <span class="testimonial-dot" data-index="1"></span>
+        <span class="testimonial-dot" data-index="2"></span>
+        <span class="testimonial-dot" data-index="3"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Membership Tools Carousel - Dark Gradient Background -->
+<div class="full-width-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%); padding: 50px 20px;">
+  <div class="content-wrapper">
+    <div class="benefits-section">
+      <h2>What Your Membership Comes With</h2>
+
+      <!-- Tools Carousel -->
+      <div class="tools-carousel-wrapper">
+        <button class="carousel-arrow prev" aria-label="Previous tools">‹</button>
+
+        <div class="tools-carousel" id="toolsCarousel">
+          <!-- Tool 1: Fundability Education & Tools -->
+          <div class="tool-card">
+            <div class="tool-icon">📊</div>
+            <h3>Fundability Education & Tools</h3>
+            <p>Access our Fundraise Readiness Calculator, Roadmap Builder, and EU Capital Navigator to assess your fundability and plan your path forward.</p>
+          </div>
+
+          <!-- Tool 2: Community Support -->
+          <div class="tool-card">
+            <div class="tool-icon">🤝</div>
+            <h3>Community Support</h3>
+            <p>Join monthly virtual meetups, engage through chat and posting, and connect with like-minded founders building real businesses.</p>
+          </div>
+
+          <!-- Tool 3: Dealflow Submission -->
+          <div class="tool-card">
+            <div class="tool-icon">📱</div>
+            <h3>Dealflow Submission</h3>
+            <p>Submit your company for consideration to investors on our platform. Get visibility with aligned funders actively seeking opportunities like yours.</p>
+          </div>
+
+          <!-- Tool 4: Grants & Pitch Competitions -->
+          <div class="tool-card">
+            <div class="tool-icon">💰</div>
+            <h3>Grants & Pitch Competitions</h3>
+            <p>Access Sengo grants and pitch competitions for early validation and flexible capital that bridges the gap between idea and traction.</p>
+          </div>
+
+          <!-- Tool 5: Education Archive -->
+          <div class="tool-card">
+            <div class="tool-icon">📚</div>
+            <h3>Education Archive</h3>
+            <p>Tap into our full archive of classes, recorded virtual sessions, and educational content covering every stage of the fundraising journey.</p>
+          </div>
+
+          <!-- Tool 6: And More... -->
+          <div class="tool-card">
+            <div class="tool-icon">✨</div>
+            <h3>And More...</h3>
+            <p>We're constantly developing new tools, expanding visibility within the Sengo ecosystem, and providing ongoing support as your business evolves.</p>
+          </div>
+        </div>
+
+        <button class="carousel-arrow next" aria-label="Next tools">›</button>
+      </div>
+
+      <!-- Carousel Dots -->
+      <div class="tools-carousel-dots" id="toolsCarouselDots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Target Audience - Light Tan Background -->
+<div class="full-width-section section-light-tan">
+  <div class="content-wrapper">
+    <div class="target-section">
+      <div class="target-box for">
+        <h3>This is for founders who:</h3>
+        <ul>
+          <li>Are building real businesses</li>
+          <li>Care about ownership and alignment</li>
+          <li>Want to understand types of capital they can pursue</li>
+        </ul>
+      </div>
+
+      <div class="target-box not-for">
+        <h3>This is not for founders looking for:</h3>
+        <ul>
+          <li>Guaranteed funding</li>
+          <li>Investor lists or shortcuts</li>
+          <li>Hype/promo without foundations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pricing Options - Cream Background -->
+<div id="pricing" class="full-width-section section-cream">
+  <div class="content-wrapper">
+    <div class="pricing-section">
+      <h2>Choose Your Membership</h2>
+      <p class="intro">Many founders choose annual for long-term focus.</p>
+
+      <div class="pricing-options">
+        <!-- Annual Membership -->
+        <div class="pricing-card featured">
+          <div class="pricing-header">
+            <div class="pricing-price">$160</div>
+            <div class="pricing-term">per year</div>
+            <p class="pricing-note">Best value · Full year access</p>
+          </div>
+
+          <a href="https://app.bysengo.com/offers/BqnKBSaa" class="checkout-button">Join Annual Membership</a>
+        </div>
+
+        <!-- Monthly Membership -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <div class="pricing-price">$15</div>
+            <div class="pricing-term">per month</div>
+            <p class="pricing-note">Flexible · Cancel anytime</p>
+          </div>
+
+          <a href="https://app.bysengo.com/offers/BqnKBSaa" class="checkout-button">Join Monthly Membership</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Social Proof - Dark Gradient Background -->
+<div class="full-width-section" style="background: linear-gradient(135deg, #1B3533 0%, #67441A 100%); padding: 50px 20px;">
+  <div class="content-wrapper">
+    <div class="social-proof">
+      <div class="stat-highlight" id="grant-counter">$0</div>
+      <div class="stat-label">in grants deployed in 2025</div>
+    </div>
+  </div>
+</div>
+
+<!-- Founder Bio - Cream Background -->
+<div class="full-width-section section-cream" style="padding: 20px 20px;">
+  <div class="content-wrapper">
+    <div class="founder-bio">
+      <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/94d0e6e9-dedc-4ac9-b199-4c951de04f42/IMG_3144.JPG?format=750w" alt="Ila Corcoran" class="founder-headshot">
+
+      <div class="founder-content">
+        <h3>
+          Ila Corcoran
+          <a href="https://www.linkedin.com/in/ila-b-corcoran/" target="_blank" rel="noopener noreferrer" aria-label="Ila Corcoran's LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+            </svg>
+          </a>
+        </h3>
+        <div class="founder-title">Founder & CEO, Sengo</div>
+        <p>Ila B Corcoran is the founder of Sengo, a platform reimagining how founders and communities access capital. Her work sits at the intersection of fundraising strategy, community-led investing, and financial education. Through Sengo, she has supported hundreds of founders, deployed grants, and helped unlock millions in follow-on capital.</p>
+        <p>Ila is focused on helping more people building durable pathways to ownership and long-term wealth.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Upsell: 1:1 Support - White Background -->
+<div class="full-width-section section-white">
+  <div class="content-wrapper">
+    <div class="upsell-section">
+      <h3>I'm fundraising and I want 1:1 partnership.</h3>
+      <p>Some founders want strategic, personalized guidance as they prepare to raise—or decide whether they should. Our 1:1 support is designed to meet you where you are.</p>
+
+      <div class="upsell-includes">
+        <h4>What's Included:</h4>
+        <ul>
+          <li>A fundraising roadmap tied to your company's growth milestones</li>
+          <li>Strategic support on valuation, tranche sizing, and use of funds</li>
+          <li>Pitch deck and investor messaging refinement</li>
+          <li>Monthly strategy sessions to maintain momentum and adapt</li>
+          <li>Curated introductions to aligned investors within Sengo's network</li>
+          <li>Light support during investor calls and due diligence preparation</li>
+          <li>Ongoing advisory access between sessions (email / async support)</li>
+        </ul>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="https://calendly.com/ila-bysengo/fundraising" class="upsell-cta" target="_blank" rel="noopener noreferrer">Learn about 1:1 fundraising support</a>
+        <p style="margin-top: 15px; color: #67441A; font-size: 0.95rem;">(Ranging from $500–$2,000+/mo)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout Reassurance - Light Tan Background -->
+<div class="full-width-section section-light-tan">
+  <div class="content-wrapper">
+    <div class="reassurance">
+      <div class="reassurance-items">
+        <div class="reassurance-item">Cancel anytime</div>
+        <div class="reassurance-item">Community membership, not a fundraising obligation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Animated Counter for Grant Amount
+  function animateCounter() {
+    const counter = document.getElementById('grant-counter');
+    const targetAmount = 31250;
+    const duration = 2000; // 2 seconds
+    const steps = 50;
+    const increment = targetAmount / steps;
+    const stepDuration = duration / steps;
+    let currentAmount = 0;
+
+    const timer = setInterval(() => {
+      currentAmount += increment;
+      if (currentAmount >= targetAmount) {
+        currentAmount = targetAmount;
+        clearInterval(timer);
+      }
+
+      // Format with commas
+      const formattedAmount = Math.floor(currentAmount).toLocaleString('en-US');
+      counter.textContent = '$' + formattedAmount;
+    }, stepDuration);
+  }
+
+  // Start counter animation when element is in viewport
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const grantCounter = document.getElementById('grant-counter');
+  if (grantCounter) {
+    observer.observe(grantCounter);
+  }
+
+  // Testimonial Carousel for Mobile
+  let currentTestimonial = 0;
+  const testimonialContainer = document.querySelector('.testimonial-container');
+  const testimonialDots = document.querySelectorAll('.testimonial-dot');
+  const totalTestimonials = document.querySelectorAll('.testimonial-slide').length;
+
+  function showTestimonial(index) {
+    if (window.innerWidth <= 768) {
+      currentTestimonial = index;
+      const offset = -index * 25; // 25% for each testimonial (100% / 4 testimonials)
+      testimonialContainer.style.transform = `translateX(${offset}%)`;
+
+      // Update dots
+      testimonialDots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+  }
+
+  // Dot click handlers
+  testimonialDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const index = parseInt(dot.getAttribute('data-index'));
+      showTestimonial(index);
+    });
+  });
+
+  // Touch swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  if (testimonialContainer) {
+    testimonialContainer.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    testimonialContainer.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+  }
+
+  function handleSwipe() {
+    if (window.innerWidth <= 768) {
+      const swipeThreshold = 50;
+      if (touchStartX - touchEndX > swipeThreshold) {
+        // Swipe left - next
+        if (currentTestimonial < totalTestimonials - 1) {
+          showTestimonial(currentTestimonial + 1);
+        }
+      } else if (touchEndX - touchStartX > swipeThreshold) {
+        // Swipe right - previous
+        if (currentTestimonial > 0) {
+          showTestimonial(currentTestimonial - 1);
+        }
+      }
+    }
+  }
+
+  // Reset on window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      testimonialContainer.style.transform = 'translateX(0)';
+    } else {
+      showTestimonial(currentTestimonial);
+    }
+  });
+
+  // Initialize on mobile
+  if (window.innerWidth <= 768) {
+    showTestimonial(0);
+  }
+
+  // ===== TOOLS CAROUSEL FUNCTIONALITY =====
+  const toolsCarousel = document.getElementById('toolsCarousel');
+  const toolCards = document.querySelectorAll('.tool-card');
+  const prevButton = document.querySelector('.carousel-arrow.prev');
+  const nextButton = document.querySelector('.carousel-arrow.next');
+  const dotsContainer = document.getElementById('toolsCarouselDots');
+
+  let currentIndex = 0;
+  let cardsPerView = 3;
+  let totalCards = toolCards.length;
+
+  // Calculate cards per view based on screen size
+  function updateCardsPerView() {
+    if (window.innerWidth <= 968) {
+      cardsPerView = 1;
+    } else if (window.innerWidth <= 1200) {
+      cardsPerView = 2;
+    } else {
+      cardsPerView = 3;
+    }
+    return Math.ceil(totalCards / cardsPerView);
+  }
+
+  // Create navigation dots
+  function createDots() {
+    dotsContainer.innerHTML = '';
+    const totalPages = updateCardsPerView();
+
+    for (let i = 0; i < totalPages; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('tools-carousel-dot');
+      if (i === 0) dot.classList.add('active');
+      dot.setAttribute('data-index', i);
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  // Update carousel position
+  function updateCarousel() {
+    const cardWidth = toolCards[0].offsetWidth;
+    const gap = 30;
+    const offset = -(currentIndex * cardsPerView * (cardWidth + gap));
+    toolsCarousel.style.transform = `translateX(${offset}px)`;
+
+    // Update dots
+    const dots = document.querySelectorAll('.tools-carousel-dot');
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+    });
+
+    // Update button states
+    prevButton.style.opacity = currentIndex === 0 ? '0.5' : '1';
+    prevButton.style.cursor = currentIndex === 0 ? 'default' : 'pointer';
+
+    const maxIndex = Math.ceil(totalCards / cardsPerView) - 1;
+    nextButton.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+    nextButton.style.cursor = currentIndex >= maxIndex ? 'default' : 'pointer';
+  }
+
+  // Navigate to specific slide
+  function goToSlide(index) {
+    const maxIndex = Math.ceil(totalCards / cardsPerView) - 1;
+    currentIndex = Math.max(0, Math.min(index, maxIndex));
+    updateCarousel();
+  }
+
+  // Previous button
+  prevButton.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+
+  // Next button
+  nextButton.addEventListener('click', () => {
+    const maxIndex = Math.ceil(totalCards / cardsPerView) - 1;
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+
+  // Touch/swipe support for mobile
+  let toolsTouchStartX = 0;
+  let toolsTouchEndX = 0;
+
+  toolsCarousel.addEventListener('touchstart', (e) => {
+    toolsTouchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  toolsCarousel.addEventListener('touchend', (e) => {
+    toolsTouchEndX = e.changedTouches[0].screenX;
+    handleToolsSwipe();
+  }, { passive: true });
+
+  function handleToolsSwipe() {
+    const swipeThreshold = 50;
+    const maxIndex = Math.ceil(totalCards / cardsPerView) - 1;
+
+    if (toolsTouchStartX - toolsTouchEndX > swipeThreshold) {
+      // Swipe left - next
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateCarousel();
+      }
+    } else if (toolsTouchEndX - toolsTouchStartX > swipeThreshold) {
+      // Swipe right - previous
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    }
+  }
+
+  // Handle window resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      createDots();
+      currentIndex = 0;
+      updateCarousel();
+    }, 250);
+  });
+
+  // Initialize carousel
+  createDots();
+  updateCarousel();
+</script>
+
+</body>
+</html>
