@@ -820,9 +820,9 @@
                         </div>
                         <span class="selector-value" id="months-value">4 months</span>
                     </div>
-                    <input type="range" class="range-slider" id="months-slider" min="4" max="12" value="4" step="1">
+                    <input type="range" class="range-slider" id="months-slider" min="2" max="12" value="4" step="1">
                     <div class="range-labels">
-                        <span>4 months (min)</span>
+                        <span>2 months (min)</span>
                         <span>12 months</span>
                     </div>
                 </div>
@@ -968,6 +968,8 @@
 
         // Plan thresholds
         const FOUNDATION_MAX_RAISE = 1500; // $1.5M max for Foundation plan
+        const FOUNDATION_MIN_MONTHS = 4;   // 4 months minimum for Foundation plan
+        const ACCELERATOR_MIN_MONTHS = 2;  // 2 months minimum for Accelerator plan
         const FOUNDATION_PRICE = 1000;
         const ACCELERATOR_PRICE = 2000;
 
@@ -981,12 +983,15 @@
         const priceDescription = document.getElementById('price-description');
         const totalCommitment = document.getElementById('total-commitment');
         const upgradeNotice = document.getElementById('upgrade-notice');
+        const upgradeNoticeTitle = upgradeNotice.querySelector('h4');
+        const upgradeNoticeText = upgradeNotice.querySelector('p');
         const tierFoundation = document.getElementById('tier-foundation');
         const tierAccelerator = document.getElementById('tier-accelerator');
 
         // State
         let currentPlan = 'foundation';
         let currentMonthlyPrice = FOUNDATION_PRICE;
+        let lockedInAccelerator = false; // Once triggered, can't go back
 
         // Format currency
         function formatCurrency(amount) {
@@ -1005,19 +1010,45 @@
             monthsValue.textContent = months + ' month' + (months > 1 ? 's' : '');
             raiseValue.textContent = formatCurrency(raiseAmount);
 
-            // Determine plan based on raise amount
-            if (raiseAmount > FOUNDATION_MAX_RAISE) {
+            // Check if Accelerator should be triggered (and locked)
+            const triggeredByMonths = months < FOUNDATION_MIN_MONTHS;
+            const triggeredByRaise = raiseAmount > FOUNDATION_MAX_RAISE;
+
+            // Once locked into Accelerator, can't go back
+            if (triggeredByMonths || triggeredByRaise) {
+                lockedInAccelerator = true;
+            }
+
+            // Determine plan based on lock state
+            if (lockedInAccelerator) {
                 currentPlan = 'accelerator';
                 currentMonthlyPrice = ACCELERATOR_PRICE;
                 tierFoundation.className = 'tier-badge inactive';
                 tierAccelerator.className = 'tier-badge active';
+                tierFoundation.style.cursor = 'not-allowed';
+                tierFoundation.style.opacity = '0.6';
                 upgradeNotice.classList.add('visible');
-                priceDescription.textContent = 'Accelerator plan for larger raises with comprehensive support';
+
+                // Update notice message based on trigger reason
+                if (triggeredByMonths && triggeredByRaise) {
+                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
+                    upgradeNoticeText.textContent = 'You\'ve selected a shorter commitment and a larger raise target. The Accelerator plan provides the intensive support you need.';
+                } else if (triggeredByMonths) {
+                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
+                    upgradeNoticeText.textContent = 'For commitments under 4 months, the Accelerator plan ensures you get intensive support in a shorter timeframe.';
+                } else {
+                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
+                    upgradeNoticeText.textContent = 'For raises above $1.5M, the Accelerator plan provides the comprehensive support you need.';
+                }
+
+                priceDescription.textContent = 'Accelerator plan with intensive fundraising support';
             } else {
                 currentPlan = 'foundation';
                 currentMonthlyPrice = FOUNDATION_PRICE;
                 tierFoundation.className = 'tier-badge active';
                 tierAccelerator.className = 'tier-badge inactive';
+                tierFoundation.style.cursor = 'pointer';
+                tierFoundation.style.opacity = '1';
                 upgradeNotice.classList.remove('visible');
                 priceDescription.textContent = 'Foundation plan with core fundraising support';
             }
@@ -1051,15 +1082,23 @@
 
         // Tier badge click handlers
         tierFoundation.addEventListener('click', function() {
+            // Can't click Foundation if locked into Accelerator
+            if (lockedInAccelerator) return;
+
+            // Reset to Foundation-compatible values
             if (parseInt(raiseSlider.value) > FOUNDATION_MAX_RAISE) {
                 raiseSlider.value = FOUNDATION_MAX_RAISE;
+            }
+            if (parseInt(monthsSlider.value) < FOUNDATION_MIN_MONTHS) {
+                monthsSlider.value = FOUNDATION_MIN_MONTHS;
             }
             updateDisplay();
         });
 
         tierAccelerator.addEventListener('click', function() {
-            if (parseInt(raiseSlider.value) <= FOUNDATION_MAX_RAISE) {
-                raiseSlider.value = FOUNDATION_MAX_RAISE + 100;
+            // Trigger lock by going under 4 months
+            if (parseInt(monthsSlider.value) >= FOUNDATION_MIN_MONTHS) {
+                monthsSlider.value = FOUNDATION_MIN_MONTHS - 1; // Set to 3 months
             }
             updateDisplay();
         });
