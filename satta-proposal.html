@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satta x Sengo - Fundraising Support Proposal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #F8F5F1 0%, #FDF9F5 50%, #F3EDE7 100%);
+            min-height: 100vh;
+            color: #1B3533;
+        }
+
+        /* Main Container */
+        .proposal-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        /* Header Section */
+        .proposal-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #1B3533;
+            color: #F3EDE7;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+        }
+
+        .logo-badge span {
+            color: #D57028;
+        }
+
+        .proposal-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1B3533;
+            margin-bottom: 16px;
+            line-height: 1.15;
+        }
+
+        .proposal-subtitle {
+            font-size: 1.15rem;
+            color: #67441A;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Vision Section */
+        .vision-section {
+            background: linear-gradient(135deg, #1B3533 0%, #2A4A47 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            color: #F3EDE7;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(213, 112, 40, 0.2);
+            color: #D57028;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+
+        .vision-quote {
+            font-size: 1.35rem;
+            font-style: italic;
+            line-height: 1.7;
+            color: #F3EDE7;
+            border-left: 4px solid #D57028;
+            padding-left: 24px;
+            margin-bottom: 24px;
+        }
+
+        .vision-highlight {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .highlight-tag {
+            background: rgba(243, 237, 231, 0.1);
+            border: 1px solid rgba(243, 237, 231, 0.3);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* What You Need Section */
+        .needs-section {
+            margin-bottom: 40px;
+        }
+
+        .needs-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .needs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .need-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(27, 53, 51, 0.06);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .need-card:hover {
+            border-color: #D57028;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(213, 112, 40, 0.12);
+        }
+
+        .need-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .need-card h3 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1B3533;
+        }
+
+        .need-card p {
+            font-size: 0.9rem;
+            color: #67441A;
+            line-height: 1.6;
+        }
+
+        /* Plan Selection Section */
+        .plan-section {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 30px rgba(27, 53, 51, 0.08);
+        }
+
+        .plan-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .plan-header h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .plan-header p {
+            color: #67441A;
+            font-size: 1rem;
+        }
+
+        /* Toggle Switches Container */
+        .toggle-container {
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(27, 53, 51, 0.1);
+        }
+
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-info {
+            flex: 1;
+        }
+
+        .toggle-info h4 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1B3533;
+            margin-bottom: 4px;
+        }
+
+        .toggle-info p {
+            font-size: 0.85rem;
+            color: #67441A;
+        }
+
+        .toggle-price {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #D57028;
+            margin-right: 20px;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        /* Custom Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 56px;
+            height: 30px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #E0DAD4;
+            transition: 0.3s;
+            border-radius: 30px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
+        }
+
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Pricing Display */
+        .pricing-display {
+            text-align: center;
+            padding: 36px;
+            background: linear-gradient(135deg, #F8F5F1 0%, #FDF9F5 100%);
+            border-radius: 20px;
+            margin-bottom: 32px;
+        }
+
+        .price-label {
+            font-size: 0.9rem;
+            color: #67441A;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .price-amount {
+            font-family: 'Arimo', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #1B3533;
+            line-height: 1;
+        }
+
+        .price-amount span {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #67441A;
+        }
+
+        .price-description {
+            font-size: 0.95rem;
+            color: #67441A;
+            margin-top: 12px;
+        }
+
+        /* Plan Tier Indicator */
+        .plan-tier {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .tier-badge {
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tier-badge.active {
+            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
+            color: white;
+        }
+
+        .tier-badge.inactive {
+            background: #E0DAD4;
+            color: #67441A;
+        }
+
+        /* CTA Button */
+        .cta-container {
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
+            color: white;
+            padding: 18px 48px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(213, 112, 40, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(213, 112, 40, 0.4);
+        }
+
+        .cta-subtext {
+            font-size: 0.85rem;
+            color: #67441A;
+            margin-top: 16px;
+        }
+
+        /* Checkout Modal */
+        .checkout-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(27, 53, 51, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .checkout-modal.active {
+            display: flex;
+        }
+
+        .checkout-content {
+            background: white;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 28px;
+            border-bottom: 1px solid rgba(27, 53, 51, 0.1);
+        }
+
+        .checkout-header h3 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .close-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: #F3EDE7;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #1B3533;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .close-button:hover {
+            background: #E0DAD4;
+        }
+
+        .checkout-iframe-container {
+            height: calc(90vh - 80px);
+            overflow: auto;
+        }
+
+        .checkout-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 600px;
+        }
+
+        /* Included Features List */
+        .features-included {
+            background: #F8F5F1;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .features-included h4 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1B3533;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #1B3533;
+        }
+
+        .feature-item.disabled {
+            color: #A9A29A;
+            text-decoration: line-through;
+        }
+
+        .feature-check {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #D57028;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .feature-check.disabled {
+            background: #D0CBC5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .proposal-title {
+                font-size: 2rem;
+            }
+
+            .vision-section {
+                padding: 28px;
+            }
+
+            .vision-quote {
+                font-size: 1.1rem;
+            }
+
+            .plan-section {
+                padding: 28px 20px;
+            }
+
+            .toggle-row {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .toggle-info {
+                width: 100%;
+                margin-bottom: 8px;
+            }
+
+            .toggle-price {
+                margin-right: auto;
+            }
+
+            .price-amount {
+                font-size: 3rem;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-tier {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="proposal-container">
+        <!-- Header -->
+        <header class="proposal-header fade-in-up">
+            <div class="logo-badge">
+                SATTA <span>×</span> SENGO
+            </div>
+            <h1 class="proposal-title">Fundraising Support Tailored for Satta</h1>
+            <p class="proposal-subtitle">Based on your vision, pace, and what you need most right now, here's your personalized support plan.</p>
+        </header>
+
+        <!-- Vision Section -->
+        <section class="vision-section fade-in-up">
+            <span class="section-badge">Your Vision</span>
+            <blockquote class="vision-quote">
+                "Money shapes nearly every life decision, yet it is rarely talked about or taught in a healthy way. Satta exists to change how money is experienced at the very beginning of life."
+            </blockquote>
+            <div class="vision-highlight">
+                <span class="highlight-tag">Depth over Scale</span>
+                <span class="highlight-tag">Mission-Aligned Growth</span>
+                <span class="highlight-tag">Kids & Families First</span>
+                <span class="highlight-tag">Building a World, Not Just a Product</span>
+            </div>
+        </section>
+
+        <!-- What You Need Section -->
+        <section class="needs-section fade-in-up">
+            <h2 class="needs-title">What You're Looking For</h2>
+            <div class="needs-grid">
+                <div class="need-card">
+                    <div class="need-icon">🎯</div>
+                    <h3>Fundraising Strategy</h3>
+                    <p>You're brand new to fundraising and want a clear strategy with investor targeting that aligns with your mission.</p>
+                </div>
+                <div class="need-card">
+                    <div class="need-icon">📋</div>
+                    <h3>Data Room & Narrative</h3>
+                    <p>Sharpening your story so investors understand the depth and impact of what you're building.</p>
+                </div>
+                <div class="need-card">
+                    <div class="need-icon">🤝</div>
+                    <h3>A Trusted Sounding Board</h3>
+                    <p>Support and expertise without someone making decisions for you. You're capable of execution.</p>
+                </div>
+                <div class="need-card">
+                    <div class="need-icon">⚡</div>
+                    <h3>Momentum & Clarity</h3>
+                    <p>Moving with confidence and clear options so you can close your round and make your team proud.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plan Selection -->
+        <section class="plan-section fade-in-up">
+            <div class="plan-header">
+                <h2>Customize Your Support</h2>
+                <p>Toggle the options below to build your ideal plan</p>
+            </div>
+
+            <!-- Plan Tier Indicator -->
+            <div class="plan-tier">
+                <span class="tier-badge" id="tier-foundation">Foundation</span>
+                <span class="tier-badge" id="tier-accelerator">Accelerator</span>
+            </div>
+
+            <!-- Toggle Options -->
+            <div class="toggle-container">
+                <div class="toggle-row">
+                    <div class="toggle-info">
+                        <h4>Bi-Weekly Strategy Calls</h4>
+                        <p>Deep-dive sessions on fundraising progress & investor pipeline</p>
+                    </div>
+                    <span class="toggle-price">Included</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked disabled data-feature="strategy-calls" data-price="0">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-info">
+                        <h4>Investor Targeting List</h4>
+                        <p>Curated list of mission-aligned angels, pre-seed & grant opportunities</p>
+                    </div>
+                    <span class="toggle-price">Included</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked disabled data-feature="investor-list" data-price="0">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-info">
+                        <h4>Data Room Review & Setup</h4>
+                        <p>Professional data room structure with all essential fundraising documents</p>
+                    </div>
+                    <span class="toggle-price">Included</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked disabled data-feature="data-room" data-price="0">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-info">
+                        <h4>Pitch Deck Narrative Coaching</h4>
+                        <p>Refine your story to resonate with mission-aligned investors</p>
+                    </div>
+                    <span class="toggle-price" id="narrative-price">+$500/mo</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-narrative" data-feature="narrative" data-price="500">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-info">
+                        <h4>Weekly Accountability Check-ins</h4>
+                        <p>Stay on track with quick weekly progress calls</p>
+                    </div>
+                    <span class="toggle-price" id="accountability-price">+$250/mo</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-accountability" data-feature="accountability" data-price="250">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-info">
+                        <h4>Warm Investor Introductions</h4>
+                        <p>Direct intros to aligned investors in our network</p>
+                    </div>
+                    <span class="toggle-price" id="intros-price">+$250/mo</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-intros" data-feature="intros" data-price="250">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pricing Display -->
+            <div class="pricing-display">
+                <p class="price-label">Your Monthly Investment</p>
+                <p class="price-amount">$<span id="total-price">1,000</span><span>/mo</span></p>
+                <p class="price-description" id="price-description">Foundation plan with core fundraising support</p>
+            </div>
+
+            <!-- Features Included -->
+            <div class="features-included">
+                <h4>What's Included in Your Plan:</h4>
+                <div class="feature-list">
+                    <div class="feature-item" id="feature-calls">
+                        <span class="feature-check">✓</span>
+                        Bi-weekly strategy calls
+                    </div>
+                    <div class="feature-item" id="feature-targeting">
+                        <span class="feature-check">✓</span>
+                        Investor targeting list
+                    </div>
+                    <div class="feature-item" id="feature-dataroom">
+                        <span class="feature-check">✓</span>
+                        Data room setup
+                    </div>
+                    <div class="feature-item" id="feature-narrative">
+                        <span class="feature-check disabled">✓</span>
+                        Pitch narrative coaching
+                    </div>
+                    <div class="feature-item" id="feature-weekly">
+                        <span class="feature-check disabled">✓</span>
+                        Weekly check-ins
+                    </div>
+                    <div class="feature-item" id="feature-intros">
+                        <span class="feature-check disabled">✓</span>
+                        Warm introductions
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="cta-container" style="margin-top: 32px;">
+                <button class="cta-button" onclick="openCheckout()">
+                    Proceed to Enroll
+                </button>
+                <p class="cta-subtext">Secure checkout. Cancel anytime.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <h3 id="checkout-title">Complete Your Enrollment</h3>
+                <button class="close-button" onclick="closeCheckout()">×</button>
+            </div>
+            <div class="checkout-iframe-container">
+                <!-- Kajabi checkout will be embedded here -->
+                <iframe id="checkout-iframe" src="" title="Checkout"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration - Replace these URLs with your actual Kajabi checkout URLs
+        const CHECKOUT_URLS = {
+            foundation: 'https://checkout.kajabi.com/checkout/YOUR_1K_OFFER_ID', // $1,000/mo plan
+            accelerator: 'https://checkout.kajabi.com/checkout/YOUR_2K_OFFER_ID'  // $2,000/mo plan
+        };
+
+        // Pricing configuration
+        const BASE_PRICE = 1000;
+        let currentPrice = BASE_PRICE;
+
+        // Toggle elements
+        const toggleNarrative = document.getElementById('toggle-narrative');
+        const toggleAccountability = document.getElementById('toggle-accountability');
+        const toggleIntros = document.getElementById('toggle-intros');
+
+        // Update functions
+        function updatePrice() {
+            let addons = 0;
+
+            if (toggleNarrative.checked) addons += 500;
+            if (toggleAccountability.checked) addons += 250;
+            if (toggleIntros.checked) addons += 250;
+
+            currentPrice = BASE_PRICE + addons;
+
+            // Update display
+            document.getElementById('total-price').textContent = currentPrice.toLocaleString();
+
+            // Update tier badges
+            const tierFoundation = document.getElementById('tier-foundation');
+            const tierAccelerator = document.getElementById('tier-accelerator');
+
+            if (currentPrice >= 2000) {
+                tierFoundation.className = 'tier-badge inactive';
+                tierAccelerator.className = 'tier-badge active';
+                document.getElementById('price-description').textContent = 'Accelerator plan with comprehensive fundraising support';
+            } else {
+                tierFoundation.className = 'tier-badge active';
+                tierAccelerator.className = 'tier-badge inactive';
+                document.getElementById('price-description').textContent = 'Foundation plan with core fundraising support';
+            }
+
+            // Update feature list styling
+            updateFeatureList();
+        }
+
+        function updateFeatureList() {
+            // Narrative coaching
+            const featureNarrative = document.getElementById('feature-narrative');
+            if (toggleNarrative.checked) {
+                featureNarrative.classList.remove('disabled');
+                featureNarrative.querySelector('.feature-check').classList.remove('disabled');
+            } else {
+                featureNarrative.classList.add('disabled');
+                featureNarrative.querySelector('.feature-check').classList.add('disabled');
+            }
+
+            // Weekly check-ins
+            const featureWeekly = document.getElementById('feature-weekly');
+            if (toggleAccountability.checked) {
+                featureWeekly.classList.remove('disabled');
+                featureWeekly.querySelector('.feature-check').classList.remove('disabled');
+            } else {
+                featureWeekly.classList.add('disabled');
+                featureWeekly.querySelector('.feature-check').classList.add('disabled');
+            }
+
+            // Warm intros
+            const featureIntros = document.getElementById('feature-intros');
+            if (toggleIntros.checked) {
+                featureIntros.classList.remove('disabled');
+                featureIntros.querySelector('.feature-check').classList.remove('disabled');
+            } else {
+                featureIntros.classList.add('disabled');
+                featureIntros.querySelector('.feature-check').classList.add('disabled');
+            }
+        }
+
+        // Add event listeners to toggles
+        toggleNarrative.addEventListener('change', updatePrice);
+        toggleAccountability.addEventListener('change', updatePrice);
+        toggleIntros.addEventListener('change', updatePrice);
+
+        // Initialize tier badges
+        document.getElementById('tier-foundation').className = 'tier-badge active';
+        document.getElementById('tier-accelerator').className = 'tier-badge inactive';
+
+        // Checkout modal functions
+        function openCheckout() {
+            const modal = document.getElementById('checkout-modal');
+            const iframe = document.getElementById('checkout-iframe');
+            const checkoutTitle = document.getElementById('checkout-title');
+
+            // Determine which checkout URL to use
+            let checkoutUrl;
+            if (currentPrice >= 2000) {
+                checkoutUrl = CHECKOUT_URLS.accelerator;
+                checkoutTitle.textContent = 'Accelerator Plan - $' + currentPrice.toLocaleString() + '/mo';
+            } else {
+                checkoutUrl = CHECKOUT_URLS.foundation;
+                checkoutTitle.textContent = 'Foundation Plan - $' + currentPrice.toLocaleString() + '/mo';
+            }
+
+            // Set iframe source and show modal
+            iframe.src = checkoutUrl;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCheckout() {
+            const modal = document.getElementById('checkout-modal');
+            const iframe = document.getElementById('checkout-iframe');
+
+            modal.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        document.getElementById('checkout-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCheckout();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCheckout();
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Tier badge click handlers (for quick plan selection)
+        document.getElementById('tier-foundation').addEventListener('click', function() {
+            // Reset all add-ons for foundation
+            toggleNarrative.checked = false;
+            toggleAccountability.checked = false;
+            toggleIntros.checked = false;
+            updatePrice();
+        });
+
+        document.getElementById('tier-accelerator').addEventListener('click', function() {
+            // Enable all add-ons for accelerator
+            toggleNarrative.checked = true;
+            toggleAccountability.checked = true;
+            toggleIntros.checked = true;
+            updatePrice();
+        });
+    </script>
+</body>
+</html>
