@@ -1277,11 +1277,55 @@
         updateDisplay();
 
         // Checkout modal functions
+        // Email notification configuration
+        // Get your free access key at: https://web3forms.com/
+        const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'; // Replace with your key
+
+        async function sendEmailNotification() {
+            const months = parseInt(monthsSlider.value);
+            const raiseAmount = parseInt(raiseSlider.value);
+            const discountedPrice = currentMonthlyPrice / 2;
+            const total = isDeferralActive
+                ? currentMonthlyPrice + (discountedPrice * (months - 1))
+                : currentMonthlyPrice * months;
+            const deferredAmount = isDeferralActive ? discountedPrice * (months - 1) : 0;
+
+            const formData = {
+                access_key: WEB3FORMS_KEY,
+                subject: '🎉 New Satta Enrollment Started - ' + (currentPlan === 'accelerator' ? 'Accelerator' : 'Foundation') + ' Plan',
+                from_name: 'Satta Proposal Page',
+                // Enrollment details
+                plan: currentPlan === 'accelerator' ? 'Accelerator ($2,000/mo)' : 'Foundation ($1,000/mo)',
+                commitment_months: months + ' months',
+                fundraising_target: formatCurrency(raiseAmount),
+                cost_deferral: isDeferralActive ? 'Yes (50% off after Month 1)' : 'No',
+                weekly_checkins: toggleAccountability.checked ? 'Yes' : 'No',
+                monthly_price: '$' + currentMonthlyPrice.toLocaleString(),
+                total_commitment: '$' + total.toLocaleString(),
+                deferred_balance: isDeferralActive ? '$' + deferredAmount.toLocaleString() + ' (due at close)' : 'N/A',
+                timestamp: new Date().toLocaleString()
+            };
+
+            try {
+                await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+            } catch (error) {
+                console.log('Email notification failed:', error);
+                // Continue to checkout even if email fails
+            }
+        }
+
         function openCheckout() {
             const modal = document.getElementById('checkout-modal');
             const iframe = document.getElementById('checkout-iframe');
             const checkoutTitle = document.getElementById('checkout-title');
             const months = parseInt(monthsSlider.value);
+
+            // Send email notification (non-blocking)
+            sendEmailNotification();
 
             // Determine which checkout URL to use
             let checkoutUrl;
