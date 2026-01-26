@@ -1,0 +1,835 @@
+<!-- Tudy's Kitchen Investment Proposal - Embedded Landing Page -->
+<!-- Add this to an Embed Block on your Squarespace page -->
+<!-- Focused on growth capital, angel investor targeting, pitch support, and investor access -->
+
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .tudy-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Hero Section */
+  .tudy-hero {
+    min-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    padding: 60px 20px 40px;
+    margin-bottom: 40px;
+    position: relative;
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+    border-radius: 20px;
+  }
+
+  .tudy-hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 5.5rem;
+    font-weight: 700;
+    line-height: 1.0;
+    color: #2D1810;
+    letter-spacing: -0.03em;
+    max-width: 850px;
+    margin: 0 0 25px 0;
+  }
+
+  .tudy-hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: #8B4513;
+    margin: 0;
+    max-width: 650px;
+    line-height: 1.6;
+  }
+
+  .tudy-hero-tagline {
+    display: inline-block;
+    background: #C84C1C;
+    color: #FFF8F0;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+  }
+
+  /* Scroll animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+  }
+
+  .slide-in-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .slide-in-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* The Ask Section */
+  .tudy-ask-section {
+    background: #2D1810;
+    padding: 50px 40px;
+    border-radius: 16px;
+    margin: 40px 0;
+  }
+
+  .tudy-ask-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #FFE8D6;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .ask-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .ask-item {
+    background: rgba(255, 248, 240, 0.08);
+    padding: 30px;
+    border-radius: 12px;
+    border-left: 4px solid #C84C1C;
+  }
+
+  .ask-item h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #C84C1C;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .ask-item p {
+    font-size: 1rem;
+    color: #FFE8D6;
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  /* Mission Statement */
+  .tudy-mission {
+    text-align: center;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #2D1810;
+    margin: 50px auto;
+    max-width: 100%;
+    font-weight: 500;
+    padding: 40px 50px;
+    position: relative;
+  }
+
+  /* Animated border lines */
+  .tudy-mission::before,
+  .tudy-mission::after {
+    content: '';
+    position: absolute;
+    height: 4px;
+    background: linear-gradient(90deg, #C84C1C, #E07028, #C84C1C);
+    left: 50%;
+    right: 50%;
+    transition: left 0.8s ease 0.2s, right 0.8s ease 0.2s;
+  }
+
+  .tudy-mission::before {
+    top: 0;
+  }
+
+  .tudy-mission::after {
+    bottom: 0;
+  }
+
+  .tudy-mission.visible::before,
+  .tudy-mission.visible::after {
+    left: 0;
+    right: 0;
+  }
+
+  .tudy-mission p {
+    margin: 0;
+    color: #2D1810;
+  }
+
+  .tudy-mission strong {
+    color: #C84C1C;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin: 50px 0;
+  }
+
+  .stat-card {
+    background: linear-gradient(145deg, #2D1810 0%, #4A2C20 100%);
+    padding: 45px 25px;
+    border-radius: 16px;
+    text-align: center;
+    border: 2px solid rgba(200, 76, 28, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(45, 24, 16, 0.4);
+    border-color: #C84C1C;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #FFE8D6;
+    margin-bottom: 12px;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: #E07028;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  /* Investment Thesis Section */
+  .tudy-thesis {
+    background: linear-gradient(135deg, #C84C1C 0%, #8B4513 100%);
+    color: #FFF8F0;
+    padding: 70px 60px;
+    border-radius: 20px;
+    margin: 60px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tudy-thesis::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 80%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(255, 248, 240, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .tudy-thesis .impact-badge {
+    display: inline-block;
+    background: rgba(255, 248, 240, 0.15);
+    color: #FFF8F0;
+    padding: 10px 28px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 248, 240, 0.3);
+  }
+
+  .tudy-thesis h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #FFF8F0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tudy-thesis p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    margin-bottom: 50px;
+    opacity: 0.95;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Investor Type Buttons */
+  .investor-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .investor-btn {
+    padding: 18px 45px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border: 3px solid #FFF8F0;
+    background: transparent;
+    color: #FFF8F0;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .investor-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #2D1810;
+    transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .investor-btn:hover::before {
+    width: 300%;
+    height: 300%;
+  }
+
+  .investor-btn:hover {
+    border-color: #2D1810;
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(45, 24, 16, 0.4);
+  }
+
+  .investor-btn.active {
+    background: #2D1810;
+    border-color: #2D1810;
+    color: #FFF8F0;
+  }
+
+  /* Services/What We Need Section */
+  .services-section {
+    margin: 70px 0;
+  }
+
+  .services-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #2D1810;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+
+  .service-card {
+    position: relative;
+    background: linear-gradient(145deg, #FFF8F0 0%, #FFE8D6 100%);
+    border-radius: 16px;
+    padding: 40px 25px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #C84C1C, #E07028);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(45, 24, 16, 0.15);
+    border-color: #C84C1C;
+  }
+
+  .service-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #2D1810;
+    margin: 0 0 15px 0;
+    font-weight: 700;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+    color: #5D3A2A;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Use of Funds Section */
+  .funds-section {
+    background: #2D1810;
+    padding: 60px 50px;
+    border-radius: 20px;
+    margin: 60px 0;
+  }
+
+  .funds-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: #FFE8D6;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .funds-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .fund-item {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(255, 248, 240, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(200, 76, 28, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .fund-item:hover {
+    background: rgba(255, 248, 240, 0.1);
+    border-color: #C84C1C;
+  }
+
+  .fund-percentage {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #C84C1C;
+    margin-bottom: 15px;
+  }
+
+  .fund-label {
+    font-size: 1rem;
+    color: #FFE8D6;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .fund-description {
+    font-size: 0.9rem;
+    color: #E07028;
+    opacity: 0.8;
+    line-height: 1.5;
+  }
+
+  /* CTA Section */
+  .tudy-cta-section {
+    text-align: center;
+    margin: 60px 0;
+    padding: 70px 50px;
+    background: linear-gradient(135deg, #E07028 0%, #C84C1C 50%, #8B4513 100%);
+    border-radius: 20px;
+    box-shadow: 0 25px 70px rgba(45, 24, 16, 0.3);
+  }
+
+  .tudy-cta-section .impact-badge {
+    background: rgba(255, 248, 240, 0.15);
+    color: #FFF8F0;
+    border: 1px solid rgba(255, 248, 240, 0.3);
+    display: inline-block;
+    padding: 10px 28px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+  }
+
+  .tudy-cta-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: #FFF8F0;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .tudy-cta-section p {
+    font-size: 1.2rem;
+    color: #FFF8F0;
+    margin-bottom: 40px;
+    font-weight: 400;
+    opacity: 0.95;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 20px 60px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: #FFF8F0;
+    color: #C84C1C;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(45, 24, 16, 0.4);
+    background: #2D1810;
+    color: #FFF8F0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .funds-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tudy-content {
+      padding: 30px 15px;
+    }
+
+    .tudy-hero {
+      min-height: auto;
+      padding: 40px 25px;
+    }
+
+    .tudy-hero h1 {
+      font-size: 2.8rem;
+      line-height: 1.1;
+    }
+
+    .tudy-hero-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .ask-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tudy-thesis {
+      padding: 50px 30px;
+    }
+
+    .tudy-thesis h2 {
+      font-size: 2.5rem;
+    }
+
+    .tudy-cta-section h3 {
+      font-size: 2.5rem;
+    }
+
+    .investor-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .investor-btn {
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .funds-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .funds-section {
+      padding: 40px 25px;
+    }
+
+    .tudy-mission {
+      padding: 30px 20px;
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<div class="tudy-content">
+
+  <!-- Hero Section -->
+  <div class="tudy-hero fade-in">
+    <span class="tudy-hero-tagline">Investment Opportunity</span>
+    <h1>Tudy's Kitchen is Ready to Scale</h1>
+    <p class="tudy-hero-subtitle">From beloved local brand to regional powerhouse. We're seeking strategic partners who believe in authentic flavors, sustainable growth, and the power of food to bring communities together.</p>
+  </div>
+
+  <!-- The Ask Section -->
+  <div class="tudy-ask-section fade-in-up">
+    <h2>What We're Looking For</h2>
+    <div class="ask-grid">
+      <div class="ask-item">
+        <h3>Growth Capital</h3>
+        <p>Beyond production funding, we need capital to build infrastructure, expand our team, and enter new markets strategically.</p>
+      </div>
+      <div class="ask-item">
+        <h3>Angel Investor Network</h3>
+        <p>Seeking connections to angel investors who understand CPG, food & beverage, and want to be part of an authentic brand story.</p>
+      </div>
+      <div class="ask-item">
+        <h3>Pitch Support</h3>
+        <p>Guidance on refining our investor deck, financial projections, and storytelling to resonate with the right investors.</p>
+      </div>
+      <div class="ask-item">
+        <h3>Investor Introductions</h3>
+        <p>Warm introductions to investor groups, pitch competitions, and funding networks focused on food entrepreneurs.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mission Statement -->
+  <div class="tudy-mission fade-in-up">
+    <p>Tudy's Kitchen started with a simple belief: <strong>everyone deserves access to delicious, authentic food made with love</strong>. Now we're ready to bring that mission to more tables, more communities, and more families across the region.</p>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="stats-section fade-in-up">
+    <div class="stat-card">
+      <div class="stat-number">$250K</div>
+      <div class="stat-label">Revenue (2025)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">45%</div>
+      <div class="stat-label">YoY Growth</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">12</div>
+      <div class="stat-label">Retail Partners</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">5K+</div>
+      <div class="stat-label">Loyal Customers</div>
+    </div>
+  </div>
+
+  <!-- Investment Thesis Section -->
+  <div class="tudy-thesis fade-in-up">
+    <span class="impact-badge">Investment Thesis</span>
+    <h2>Flavor Meets Opportunity</h2>
+    <p>
+      The specialty food market is booming, with consumers craving authentic, small-batch products with real stories behind them.
+      Tudy's Kitchen sits at the intersection of cultural authenticity, quality ingredients, and scalable production.
+      We've proven product-market fit. Now we need the right partners to accelerate our growth.
+    </p>
+
+    <div class="investor-buttons">
+      <button class="investor-btn" onclick="selectInvestorType(this, 'angel')">Angel Investor</button>
+      <button class="investor-btn" onclick="selectInvestorType(this, 'vc')">VC / Fund</button>
+      <button class="investor-btn" onclick="selectInvestorType(this, 'strategic')">Strategic Partner</button>
+    </div>
+  </div>
+
+  <!-- Services/Support Needed Section -->
+  <div class="services-section fade-in-up">
+    <h2>How Partners Can Help</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">&#128176;</div>
+        <h3>Capital Access</h3>
+        <p>Connect us to funding sources beyond traditional bank loans - angel networks, food-focused funds, and impact investors.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#127908;</div>
+        <h3>Pitch Coaching</h3>
+        <p>Help us sharpen our story, refine our deck, and practice delivery for investor meetings and pitch competitions.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#129309;</div>
+        <h3>Warm Intros</h3>
+        <p>Facilitate introductions to your network - investors, advisors, and industry leaders who can open doors.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#128218;</div>
+        <h3>Strategic Guidance</h3>
+        <p>Advise on growth strategy, market expansion, and operational scaling from experience in the food industry.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Use of Funds Section -->
+  <div class="funds-section fade-in-up">
+    <h2>Use of Funds</h2>
+    <div class="funds-grid">
+      <div class="fund-item">
+        <div class="fund-percentage">40%</div>
+        <div class="fund-label">Market Expansion</div>
+        <div class="fund-description">New retail partnerships, regional distribution, and market entry costs</div>
+      </div>
+      <div class="fund-item">
+        <div class="fund-percentage">30%</div>
+        <div class="fund-label">Team & Operations</div>
+        <div class="fund-description">Key hires in sales, marketing, and operations to support growth</div>
+      </div>
+      <div class="fund-item">
+        <div class="fund-percentage">30%</div>
+        <div class="fund-label">Marketing & Brand</div>
+        <div class="fund-description">Brand awareness, digital marketing, and customer acquisition</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="tudy-cta-section fade-in-up">
+    <span class="impact-badge">Let's Connect</span>
+    <h3>Join the Tudy's Kitchen Journey</h3>
+    <p>We're looking for investors and partners who share our vision for bringing authentic flavors to every table. Ready to learn more?</p>
+    <a href="#contact" class="cta-button">Request Pitch Deck</a>
+  </div>
+
+</div>
+
+<script>
+  // Scroll-triggered animations
+  document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for scroll animations
+    var observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    var animatedElements = document.querySelectorAll('.fade-in-up, .fade-in, .slide-in-left, .slide-in-right');
+    animatedElements.forEach(function(el) {
+      observer.observe(el);
+    });
+  });
+
+  // Investor type button interaction
+  function selectInvestorType(button, investorType) {
+    // Remove active class from all buttons
+    var buttons = document.querySelectorAll('.investor-btn');
+    buttons.forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+
+    // Add active class to clicked button
+    button.classList.add('active');
+
+    // Store in localStorage
+    localStorage.setItem('investorType', investorType);
+
+    // Log to console
+    console.log('Investor type selected:', investorType);
+
+    // Optional: Add your analytics tracking here
+    // Example: gtag('event', 'investor_type_selected', { type: investorType });
+
+    // Optional: Redirect or show relevant content based on investor type
+    // Customize these URLs based on your needs
+    /*
+    if (investorType === 'angel') {
+      window.location.href = '/angel-investor-info';
+    } else if (investorType === 'vc') {
+      window.location.href = '/vc-info';
+    } else if (investorType === 'strategic') {
+      window.location.href = '/strategic-partner-info';
+    }
+    */
+  }
+</script>
