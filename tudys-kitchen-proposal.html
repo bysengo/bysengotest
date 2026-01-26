@@ -906,7 +906,7 @@
 
         <!-- Vision Section -->
         <section class="vision-section fade-in-up">
-            <span class="section-badge">Our Mission</span>
+            <span class="section-badge">Your Mission</span>
             <blockquote class="vision-quote">
                 "Using fresh, locally-sourced ingredients, while creating business opportunities for underrepresented groups, particularly womxn and people of color, are the core values of our brand."
             </blockquote>
@@ -1192,7 +1192,7 @@
         // State
         let currentPlan = 'foundation';
         let currentMonthlyPrice = FOUNDATION_PRICE;
-        let lockedInAccelerator = false;
+        let userSelectedPlan = 'foundation'; // Track user's manual selection
         let isDeferralActive = false;
 
         // Format currency
@@ -1207,22 +1207,17 @@
         function updateDisplay() {
             const months = parseInt(monthsSlider.value);
             const raiseAmount = parseInt(raiseSlider.value);
+            const minMonths = toggleDeferral.checked ? 6 : FOUNDATION_MIN_MONTHS;
 
             // Update displayed values
             monthsValue.textContent = months + ' month' + (months > 1 ? 's' : '');
             raiseValue.textContent = formatCurrency(raiseAmount);
 
-            // Check if Accelerator should be triggered (and locked)
-            const triggeredByMonths = months < FOUNDATION_MIN_MONTHS;
-            const triggeredByRaise = raiseAmount > FOUNDATION_MAX_RAISE;
+            // Check if months is below minimum for Foundation
+            const belowMinMonths = months < minMonths;
 
-            // Once locked into Accelerator, can't go back
-            if (triggeredByMonths || triggeredByRaise) {
-                lockedInAccelerator = true;
-            }
-
-            // Determine plan based on lock state
-            if (lockedInAccelerator) {
+            // Determine plan: force Accelerator only if below minimum months, otherwise use user selection
+            if (belowMinMonths) {
                 currentPlan = 'accelerator';
                 currentMonthlyPrice = ACCELERATOR_PRICE;
                 tierFoundation.className = 'tier-badge inactive';
@@ -1230,29 +1225,25 @@
                 tierFoundation.style.cursor = 'not-allowed';
                 tierFoundation.style.opacity = '0.6';
                 upgradeNotice.classList.add('visible');
-
-                // Update notice message based on trigger reason
-                if (triggeredByMonths && triggeredByRaise) {
-                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
-                    upgradeNoticeText.textContent = 'You\'ve selected a shorter commitment and a larger raise target. The Accelerator plan provides the intensive support you need.';
-                } else if (triggeredByMonths) {
-                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
-                    upgradeNoticeText.textContent = 'For commitments under 4 months, the Accelerator plan ensures you get intensive support in a shorter timeframe.';
-                } else {
-                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
-                    upgradeNoticeText.textContent = 'For raises above $1M, the Accelerator plan provides the comprehensive support you need.';
-                }
-
+                upgradeNoticeTitle.textContent = 'Accelerator Plan Required';
+                upgradeNoticeText.textContent = 'For commitments under ' + minMonths + ' months, the Accelerator plan provides the intensive support needed in a shorter timeframe.';
                 priceDescription.textContent = 'Accelerator plan with intensive fundraising support';
             } else {
-                currentPlan = 'foundation';
-                currentMonthlyPrice = FOUNDATION_PRICE;
-                tierFoundation.className = 'tier-badge active';
-                tierAccelerator.className = 'tier-badge inactive';
+                // At or above minimum months - allow free choice
+                currentPlan = userSelectedPlan;
+                currentMonthlyPrice = (currentPlan === 'accelerator') ? ACCELERATOR_PRICE : FOUNDATION_PRICE;
+
+                tierFoundation.className = (currentPlan === 'foundation') ? 'tier-badge active' : 'tier-badge inactive';
+                tierAccelerator.className = (currentPlan === 'accelerator') ? 'tier-badge active' : 'tier-badge inactive';
                 tierFoundation.style.cursor = 'pointer';
                 tierFoundation.style.opacity = '1';
                 upgradeNotice.classList.remove('visible');
-                priceDescription.textContent = 'Foundation plan with core fundraising support';
+
+                if (currentPlan === 'accelerator') {
+                    priceDescription.textContent = 'Accelerator plan with intensive fundraising support';
+                } else {
+                    priceDescription.textContent = 'Foundation plan with core fundraising support';
+                }
             }
 
             // Handle deferral pricing
@@ -1347,23 +1338,18 @@
 
         // Tier badge click handlers
         tierFoundation.addEventListener('click', function() {
-            if (lockedInAccelerator) return;
-
-            if (parseInt(raiseSlider.value) > FOUNDATION_MAX_RAISE) {
-                raiseSlider.value = FOUNDATION_MAX_RAISE;
-            }
+            const months = parseInt(monthsSlider.value);
             const minMonths = toggleDeferral.checked ? 6 : FOUNDATION_MIN_MONTHS;
-            if (parseInt(monthsSlider.value) < minMonths) {
-                monthsSlider.value = minMonths;
+
+            // Only allow switching to Foundation if at or above minimum months
+            if (months >= minMonths) {
+                userSelectedPlan = 'foundation';
+                updateDisplay();
             }
-            updateDisplay();
         });
 
         tierAccelerator.addEventListener('click', function() {
-            const minMonths = toggleDeferral.checked ? 6 : FOUNDATION_MIN_MONTHS;
-            if (parseInt(monthsSlider.value) >= minMonths) {
-                monthsSlider.value = minMonths - 1;
-            }
+            userSelectedPlan = 'accelerator';
             updateDisplay();
         });
 
