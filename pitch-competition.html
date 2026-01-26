@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch Competition - Sengo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #1B3533;
+            background-color: #F3EDE7;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(213, 112, 40, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(175, 129, 69, 0.1) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 5rem;
+            font-weight: 400;
+            letter-spacing: -0.077em;
+            line-height: 0.94;
+            margin-bottom: 24px;
+            color: #F3EDE7;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.35rem;
+            font-weight: 400;
+            color: #D57028;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            text-shadow: 0 0 20px rgba(213, 112, 40, 0.6),
+                         0 0 40px rgba(213, 112, 40, 0.4),
+                         0 0 60px rgba(213, 112, 40, 0.2);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #F3EDE7;
+            opacity: 0.85;
+            max-width: 700px;
+            margin: 0 auto 32px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1B3533;
+            background: #D57028;
+            border: none;
+            border-radius: 60px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(213, 112, 40, 0.4);
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(213, 112, 40, 0.5);
+            background: #e07a32;
+        }
+
+        /* Info Section */
+        .info-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 28px 24px;
+            border-radius: 12px;
+            border-top: 3px solid #D57028;
+            box-shadow: 0 2px 12px rgba(27, 53, 51, 0.06);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(27, 53, 51, 0.12);
+        }
+
+        .info-card h3 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1B3533;
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            color: #67441A;
+            line-height: 1.6;
+        }
+
+        /* Application Section */
+        .application-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .section-title {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 20px;
+            color: #1B3533;
+            line-height: 1.1;
+        }
+
+        .section-description {
+            font-size: 1.15rem;
+            color: #67441A;
+            line-height: 1.8;
+        }
+
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #F3EDE7;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(27, 53, 51, 0.1);
+        }
+
+        .airtable-embed {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Partners Section */
+        .partners-section {
+            padding: 80px 20px;
+            background: #1B3533;
+            text-align: center;
+        }
+
+        .partners-section h2 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #F3EDE7;
+            margin-bottom: 48px;
+            letter-spacing: -0.02em;
+        }
+
+        .partners-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 48px;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .partner-logo-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 100%;
+            padding: 12px;
+        }
+
+        .partner-logo-link:hover {
+            transform: scale(1.1);
+        }
+
+        .partner-logo {
+            max-width: 100%;
+            max-height: 70px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            transition: all 0.3s ease;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+
+        .partner-logo-link:hover .partner-logo {
+            opacity: 1;
+        }
+
+        /* Watch Section */
+        .watch-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .watch-section::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        .watch-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .watch-section h2 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .watch-section p {
+            font-size: 1.2rem;
+            color: white;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .watch-btn {
+            display: inline-block;
+            padding: 20px 50px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #D57028;
+            background: white;
+            border: none;
+            border-radius: 60px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .watch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            background: #F3EDE7;
+        }
+
+        /* Schedule Info */
+        .schedule-info {
+            background: #1B3533;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .schedule-info h3 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 2rem;
+            color: #F3EDE7;
+            margin-bottom: 16px;
+        }
+
+        .schedule-info p {
+            font-size: 1.1rem;
+            color: #F3EDE7;
+            opacity: 0.9;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-btn {
+                padding: 14px 32px;
+                font-size: 0.95rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .section-description {
+                font-size: 1rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .info-card {
+                padding: 32px 24px;
+            }
+
+            .form-container {
+                padding: 24px;
+            }
+
+            .partners-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+
+            .partner-logo {
+                max-height: 50px;
+            }
+
+            .watch-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .watch-section p {
+                font-size: 1.05rem;
+            }
+
+            .watch-btn {
+                padding: 16px 40px;
+                font-size: 1rem;
+            }
+
+            .schedule-info h3 {
+                font-size: 1.6rem;
+            }
+
+            .schedule-info p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Pitch Competition</h1>
+            <p class="hero-subtitle">Apply below to compete for cash prizes in front of expert judges</p>
+            <p class="hero-description">
+                Showcase your startup to industry leaders, receive valuable feedback, and compete for funding to grow your business.
+            </p>
+            <a href="#watch-section" class="hero-btn">Register to Watch</a>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section">
+        <div class="info-grid">
+            <div class="info-card fade-in-on-scroll">
+                <h3>Cash Prize</h3>
+                <p>Winners receive cash prizes to help accelerate their startup's growth and bring their vision to life.</p>
+            </div>
+            <div class="info-card fade-in-on-scroll">
+                <h3>Expert Panel</h3>
+                <p>Pitch to a panel of experienced investors, founders, and industry experts who provide actionable feedback.</p>
+            </div>
+            <div class="info-card fade-in-on-scroll">
+                <h3>Monthly Events</h3>
+                <p>Competitions held monthly, giving you regular opportunities to refine your pitch and compete.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners-section">
+        <h2 class="fade-in-on-scroll">Past Partners & Sponsors</h2>
+        <div class="partners-grid fade-in-on-scroll">
+            <a href="https://serenaventures.com/" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/093694d8-c507-4ac5-968f-79c028b259e7/12.png?format=750w" alt="Serena Ventures" class="partner-logo">
+            </a>
+            <a href="https://www.moodeaux.com/" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/0cf7666b-245c-4459-97db-2b72f5331fd4/13.png?format=750w" alt="Moodeaux" class="partner-logo">
+            </a>
+            <a href="https://www.bipoccpg.com/" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/92c4bc40-d4b0-44ca-880e-5aa901ee3a83/14.png?format=750w" alt="BIPOC CPG" class="partner-logo">
+            </a>
+            <a href="https://www.helloalice.com/" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/48a7a793-928a-4a6b-b2e5-010f4b474fc4/Hello+Alice++Sengo.png?format=750w" alt="Hello Alice" class="partner-logo">
+            </a>
+            <a href="https://www.buildintulsa.com/" target="_blank" rel="noopener noreferrer" class="partner-logo-link">
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/63ecc668-1ab8-4ec4-b03f-edfc6e9d39de/15.png?format=750w" alt="Build in Tulsa" class="partner-logo">
+            </a>
+        </div>
+    </section>
+
+    <!-- Application Section -->
+    <section class="application-section">
+        <div class="section-header fade-in-on-scroll">
+            <h2 class="section-title">Apply to Compete</h2>
+            <p class="section-description">
+                Ready to showcase your startup? Fill out the application below to be considered for our next pitch competition.
+            </p>
+        </div>
+        <div class="form-container fade-in-on-scroll">
+            <iframe class="airtable-embed" src="https://airtable.com/embed/appNF0gmjUJ0o9NWT/shrJJV3FCNRYDcV5i" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+        </div>
+    </section>
+
+    <!-- Watch Section -->
+    <section id="watch-section" class="watch-section">
+        <div class="watch-content fade-in-on-scroll">
+            <h2>Stream Our Competition Live</h2>
+            <p>
+                See founders pitch their startups for a cash prize.
+                Register to watch our next monthly pitch competition live.
+            </p>
+            <a href="https://streamyard.com/watch/KbxSPxtXguVB" target="_blank" rel="noopener noreferrer" class="watch-btn">
+                Register to Watch
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in-on-scroll class
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in-on-scroll');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Track application submissions (optional analytics integration point)
+        const airtableIframe = document.querySelector('.airtable-embed');
+        if (airtableIframe) {
+            console.log('Pitch competition application form loaded');
+        }
+    </script>
+</body>
+</html>
