@@ -37,19 +37,28 @@
         .logo-badge {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             background: #2D1810;
             color: #FFF8F0;
-            padding: 12px 28px;
+            padding: 16px 32px;
             border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
             margin-bottom: 30px;
         }
 
-        .logo-badge span {
+        .logo-badge img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-badge img.tudy-logo {
+            filter: brightness(0) invert(1);
+        }
+
+        .logo-badge .logo-divider {
             color: #E07028;
+            font-size: 1.5rem;
+            font-weight: 300;
         }
 
         .proposal-title {
@@ -887,7 +896,9 @@
         <!-- Header -->
         <header class="proposal-header fade-in-up">
             <div class="logo-badge">
-                TUDY'S KITCHEN <span>×</span> SENGO
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/69a7465b-a7e5-45eb-bf1a-46e821bea870/Untitled%2Bdesign%2B%2812%29.webp?format=750w" alt="Tudy's Kitchen" class="tudy-logo">
+                <span class="logo-divider">×</span>
+                <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/f28e57cc-eb1f-4898-a4fd-476adda1265a/4.png?format=750w" alt="Sengo">
             </div>
             <h1 class="proposal-title">Fundraising Support Tailored for Tudy's Kitchen</h1>
             <p class="proposal-subtitle">Strategic support to help you grow beyond production funding, connect with angel investors, and get in front of the right investor groups.</p>
@@ -895,15 +906,15 @@
 
         <!-- Vision Section -->
         <section class="vision-section fade-in-up">
-            <span class="section-badge">Your Vision</span>
+            <span class="section-badge">Our Mission</span>
             <blockquote class="vision-quote">
-                "Great food brings people together. Tudy's Kitchen isn't just about recipes—it's about creating moments, building community, and sharing culture one dish at a time. Now we're ready to bring that magic to more tables."
+                "Using fresh, locally-sourced ingredients, while creating business opportunities for underrepresented groups, particularly womxn and people of color, are the core values of our brand."
             </blockquote>
             <div class="vision-highlight">
-                <span class="highlight-tag">Growth Beyond Production</span>
-                <span class="highlight-tag">Angel Investor Ready</span>
-                <span class="highlight-tag">Scalable & Authentic</span>
-                <span class="highlight-tag">Community-Centered Brand</span>
+                <span class="highlight-tag">Locally-Sourced Ingredients</span>
+                <span class="highlight-tag">Womxn & POC Empowerment</span>
+                <span class="highlight-tag">Community-Centered Growth</span>
+                <span class="highlight-tag">Scalable Impact</span>
             </div>
         </section>
 
