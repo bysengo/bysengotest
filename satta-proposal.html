@@ -1083,9 +1083,12 @@
         });
 
         tierAccelerator.addEventListener('click', function() {
-            // Switch to Accelerator by going under 4 months
-            if (parseInt(monthsSlider.value) >= FOUNDATION_MIN_MONTHS) {
-                monthsSlider.value = FOUNDATION_MIN_MONTHS - 1; // Set to 3 months
+            // Switch to Accelerator by going over $1.5M raise, keep at 4 months
+            if (parseInt(raiseSlider.value) <= FOUNDATION_MAX_RAISE) {
+                raiseSlider.value = FOUNDATION_MAX_RAISE + 100; // Set to $1.6M
+            }
+            if (parseInt(monthsSlider.value) < FOUNDATION_MIN_MONTHS) {
+                monthsSlider.value = FOUNDATION_MIN_MONTHS; // Set to 4 months
             }
             updateDisplay();
         });
