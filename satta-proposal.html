@@ -991,7 +991,6 @@
         // State
         let currentPlan = 'foundation';
         let currentMonthlyPrice = FOUNDATION_PRICE;
-        let lockedInAccelerator = false; // Once triggered, can't go back
 
         // Format currency
         function formatCurrency(amount) {
@@ -1010,35 +1009,28 @@
             monthsValue.textContent = months + ' month' + (months > 1 ? 's' : '');
             raiseValue.textContent = formatCurrency(raiseAmount);
 
-            // Check if Accelerator should be triggered (and locked)
-            const triggeredByMonths = months < FOUNDATION_MIN_MONTHS;
-            const triggeredByRaise = raiseAmount > FOUNDATION_MAX_RAISE;
+            // Check if Accelerator conditions are met
+            const needsAcceleratorForMonths = months < FOUNDATION_MIN_MONTHS;
+            const needsAcceleratorForRaise = raiseAmount > FOUNDATION_MAX_RAISE;
 
-            // Once locked into Accelerator, can't go back
-            if (triggeredByMonths || triggeredByRaise) {
-                lockedInAccelerator = true;
-            }
-
-            // Determine plan based on lock state
-            if (lockedInAccelerator) {
+            // Determine plan based on current values
+            if (needsAcceleratorForMonths || needsAcceleratorForRaise) {
                 currentPlan = 'accelerator';
                 currentMonthlyPrice = ACCELERATOR_PRICE;
                 tierFoundation.className = 'tier-badge inactive';
                 tierAccelerator.className = 'tier-badge active';
-                tierFoundation.style.cursor = 'not-allowed';
-                tierFoundation.style.opacity = '0.6';
                 upgradeNotice.classList.add('visible');
 
-                // Update notice message based on trigger reason
-                if (triggeredByMonths && triggeredByRaise) {
-                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
-                    upgradeNoticeText.textContent = 'You\'ve selected a shorter commitment and a larger raise target. The Accelerator plan provides the intensive support you need.';
-                } else if (triggeredByMonths) {
-                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
-                    upgradeNoticeText.textContent = 'For commitments under 4 months, the Accelerator plan ensures you get intensive support in a shorter timeframe.';
+                // Update notice message based on reason
+                if (needsAcceleratorForMonths && needsAcceleratorForRaise) {
+                    upgradeNoticeTitle.textContent = 'Accelerator Plan';
+                    upgradeNoticeText.textContent = 'Shorter commitments and larger raises require the Accelerator plan for intensive support.';
+                } else if (needsAcceleratorForMonths) {
+                    upgradeNoticeTitle.textContent = 'Accelerator Plan';
+                    upgradeNoticeText.textContent = 'Commitments under 4 months require the Accelerator plan. Add more months to switch to Foundation ($1k/mo).';
                 } else {
-                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
-                    upgradeNoticeText.textContent = 'For raises above $1.5M, the Accelerator plan provides the comprehensive support you need.';
+                    upgradeNoticeTitle.textContent = 'Accelerator Plan';
+                    upgradeNoticeText.textContent = 'Raises above $1.5M require the Accelerator plan. Lower your target to switch to Foundation ($1k/mo).';
                 }
 
                 priceDescription.textContent = 'Accelerator plan with intensive fundraising support';
@@ -1047,8 +1039,6 @@
                 currentMonthlyPrice = FOUNDATION_PRICE;
                 tierFoundation.className = 'tier-badge active';
                 tierAccelerator.className = 'tier-badge inactive';
-                tierFoundation.style.cursor = 'pointer';
-                tierFoundation.style.opacity = '1';
                 upgradeNotice.classList.remove('visible');
                 priceDescription.textContent = 'Foundation plan with core fundraising support';
             }
@@ -1082,10 +1072,7 @@
 
         // Tier badge click handlers
         tierFoundation.addEventListener('click', function() {
-            // Can't click Foundation if locked into Accelerator
-            if (lockedInAccelerator) return;
-
-            // Reset to Foundation-compatible values
+            // Set to Foundation-compatible values
             if (parseInt(raiseSlider.value) > FOUNDATION_MAX_RAISE) {
                 raiseSlider.value = FOUNDATION_MAX_RAISE;
             }
@@ -1096,7 +1083,7 @@
         });
 
         tierAccelerator.addEventListener('click', function() {
-            // Trigger lock by going under 4 months
+            // Switch to Accelerator by going under 4 months
             if (parseInt(monthsSlider.value) >= FOUNDATION_MIN_MONTHS) {
                 monthsSlider.value = FOUNDATION_MIN_MONTHS - 1; // Set to 3 months
             }
