@@ -391,6 +391,150 @@
             letter-spacing: 0.5px;
         }
 
+        .free-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2E7D32;
+            background: rgba(46, 125, 50, 0.12);
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 12px;
+        }
+
+        /* Deferral Section */
+        .deferral-section {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            padding: 28px;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.08) 0%, rgba(46, 125, 50, 0.03) 100%);
+            border: 2px solid rgba(46, 125, 50, 0.3);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .deferral-section.active {
+            border-color: #2E7D32;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.12) 0%, rgba(46, 125, 50, 0.06) 100%);
+        }
+
+        .deferral-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .deferral-checkbox {
+            position: relative;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .deferral-checkbox input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .deferral-checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 28px;
+            height: 28px;
+            background: white;
+            border: 2px solid #D8D0C8;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .deferral-checkbox input:checked + .deferral-checkmark {
+            background: #2E7D32;
+            border-color: #2E7D32;
+        }
+
+        .deferral-checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 9px;
+            top: 4px;
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .deferral-checkbox input:checked + .deferral-checkmark:after {
+            display: block;
+        }
+
+        .deferral-info h4 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2D1810;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .deferral-info h4 .savings-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #2E7D32;
+            background: rgba(46, 125, 50, 0.15);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .deferral-info > p {
+            font-size: 0.95rem;
+            color: #5D3A2A;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .deferral-details {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+
+        .deferral-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .deferral-details li {
+            font-size: 0.85rem;
+            color: #5D3A2A;
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .deferral-details li:before {
+            content: "•";
+            color: #2E7D32;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .deferral-details .detail-highlight {
+            font-weight: 600;
+            color: #2E7D32;
+        }
+
         /* Custom Toggle Switch */
         .toggle-switch {
             position: relative;
@@ -886,11 +1030,11 @@
                     <span class="included-badge">Included</span>
                 </div>
 
-                <p class="toggle-section-title" style="margin-top: 28px;">Optional Add-ons</p>
+                <p class="toggle-section-title" style="margin-top: 28px;">Optional Add-ons (Free)</p>
 
                 <div class="toggle-row">
                     <div class="toggle-info">
-                        <h4>Weekly Accountability Check-ins</h4>
+                        <h4>Weekly Accountability Check-ins<span class="free-badge">Free</span></h4>
                         <p>Stay on track with quick weekly progress calls & action items</p>
                     </div>
                     <label class="toggle-switch">
@@ -901,13 +1045,35 @@
 
                 <div class="toggle-row">
                     <div class="toggle-info">
-                        <h4>Data Room Setup & Review</h4>
+                        <h4>Data Room Setup & Review<span class="free-badge">Free</span></h4>
                         <p>Professional data room with financials, projections & due diligence docs</p>
                     </div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="toggle-dataroom">
                         <span class="toggle-slider"></span>
                     </label>
+                </div>
+            </div>
+
+            <!-- Cost Deferral Section -->
+            <div class="deferral-section" id="deferral-section">
+                <div class="deferral-header">
+                    <label class="deferral-checkbox">
+                        <input type="checkbox" id="toggle-deferral">
+                        <span class="deferral-checkmark"></span>
+                    </label>
+                    <div class="deferral-info">
+                        <h4>I need to defer some costs <span class="savings-badge">50% OFF</span></h4>
+                        <p>We understand cash flow is tight when you're raising. Defer half your costs until you close your first check.</p>
+                        <div class="deferral-details">
+                            <ul>
+                                <li><span class="detail-highlight">Month 1:</span> Full price (to get started immediately)</li>
+                                <li><span class="detail-highlight">Months 2-6:</span> 50% off monthly rate</li>
+                                <li><span class="detail-highlight">Deferred balance due</span> when first investor check closes</li>
+                                <li><span class="detail-highlight">Minimum commitment:</span> 6 months (increased from 4)</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -978,21 +1144,29 @@
         // Configuration - Replace these URLs with your actual Kajabi checkout URLs
         const CHECKOUT_URLS = {
             foundation: 'https://checkout.kajabi.com/checkout/YOUR_1K_OFFER_ID', // $1,000/mo plan
-            accelerator: 'https://checkout.kajabi.com/checkout/YOUR_2K_OFFER_ID'  // $2,000/mo plan
+            accelerator: 'https://checkout.kajabi.com/checkout/YOUR_2K_OFFER_ID', // $2,000/mo plan
+            foundation_deferred: 'https://checkout.kajabi.com/checkout/YOUR_1K_DEFERRED_OFFER_ID', // $1,000/mo deferred plan
+            accelerator_deferred: 'https://checkout.kajabi.com/checkout/YOUR_2K_DEFERRED_OFFER_ID'  // $2,000/mo deferred plan
         };
 
         // Plan thresholds
         const FOUNDATION_MAX_RAISE = 1000; // $1M max for Foundation plan
         const FOUNDATION_MIN_MONTHS = 4;   // 4 months minimum for Foundation plan
+        const FOUNDATION_MIN_MONTHS_DEFERRED = 6; // 6 months minimum when deferring
         const ACCELERATOR_MIN_MONTHS = 2;  // 2 months minimum for Accelerator plan
+        const ACCELERATOR_MIN_MONTHS_DEFERRED = 6; // 6 months minimum when deferring
         const FOUNDATION_PRICE = 1000;
         const ACCELERATOR_PRICE = 2000;
+        const DEFERRAL_DISCOUNT = 0.5; // 50% off
+        const DEFERRAL_MONTHS = 5; // Months 2-6 (5 months at 50% off)
 
         // DOM Elements
         const monthsSlider = document.getElementById('months-slider');
         const raiseSlider = document.getElementById('raise-slider');
         const toggleAccountability = document.getElementById('toggle-accountability');
         const toggleDataroom = document.getElementById('toggle-dataroom');
+        const toggleDeferral = document.getElementById('toggle-deferral');
+        const deferralSection = document.getElementById('deferral-section');
         const monthsValue = document.getElementById('months-value');
         const raiseValue = document.getElementById('raise-value');
         const totalPrice = document.getElementById('total-price');
@@ -1008,6 +1182,7 @@
         let currentPlan = 'foundation';
         let currentMonthlyPrice = FOUNDATION_PRICE;
         let lockedInAccelerator = false;
+        let isDeferralActive = false;
 
         // Format currency
         function formatCurrency(amount) {
@@ -1069,12 +1244,46 @@
                 priceDescription.textContent = 'Foundation plan with core fundraising support';
             }
 
-            // Update price display
-            totalPrice.textContent = currentMonthlyPrice.toLocaleString();
+            // Handle deferral pricing
+            isDeferralActive = toggleDeferral.checked;
 
-            // Update total commitment
-            const total = currentMonthlyPrice * months;
-            totalCommitment.textContent = 'Total: $' + total.toLocaleString() + ' over ' + months + ' month' + (months > 1 ? 's' : '');
+            if (isDeferralActive) {
+                deferralSection.classList.add('active');
+
+                // Calculate deferred pricing
+                // Month 1: Full price, Months 2-6: 50% off
+                const fullPriceMonth = currentMonthlyPrice; // Month 1
+                const discountedMonths = Math.min(DEFERRAL_MONTHS, months - 1); // Up to 5 months at 50% off
+                const remainingMonths = Math.max(0, months - 6); // Any months after 6 at full price
+
+                const discountedRate = currentMonthlyPrice * DEFERRAL_DISCOUNT;
+                const upfrontTotal = fullPriceMonth + (discountedRate * discountedMonths) + (currentMonthlyPrice * remainingMonths);
+                const deferredAmount = (currentMonthlyPrice - discountedRate) * discountedMonths;
+
+                // Update price display to show discounted rate (months 2-6)
+                totalPrice.textContent = discountedRate.toLocaleString();
+
+                // Update description
+                if (currentPlan === 'accelerator') {
+                    priceDescription.textContent = 'Accelerator plan with deferred payment option';
+                } else {
+                    priceDescription.textContent = 'Foundation plan with deferred payment option';
+                }
+
+                // Update total commitment with breakdown
+                totalCommitment.innerHTML = 'Month 1: $' + fullPriceMonth.toLocaleString() +
+                    ' &bull; Months 2-6: $' + discountedRate.toLocaleString() + '/mo' +
+                    '<br><span style="font-size: 0.75rem; opacity: 0.8;">Deferred balance: $' + deferredAmount.toLocaleString() + ' (due at first check close)</span>';
+            } else {
+                deferralSection.classList.remove('active');
+
+                // Update price display
+                totalPrice.textContent = currentMonthlyPrice.toLocaleString();
+
+                // Update total commitment
+                const total = currentMonthlyPrice * months;
+                totalCommitment.textContent = 'Total: $' + total.toLocaleString() + ' over ' + months + ' month' + (months > 1 ? 's' : '');
+            }
 
             // Update features list
             updateFeatureList();
@@ -1107,6 +1316,24 @@
         toggleAccountability.addEventListener('change', updateFeatureList);
         toggleDataroom.addEventListener('change', updateFeatureList);
 
+        // Deferral toggle handler
+        toggleDeferral.addEventListener('change', function() {
+            if (this.checked) {
+                // Enforce minimum 6 months when deferral is active
+                if (parseInt(monthsSlider.value) < 6) {
+                    monthsSlider.value = 6;
+                }
+                // Update slider minimum
+                monthsSlider.min = 6;
+                document.querySelector('.range-labels span:first-child').textContent = '6 months (min with deferral)';
+            } else {
+                // Reset slider minimum
+                monthsSlider.min = 2;
+                document.querySelector('.range-labels span:first-child').textContent = '2 months (min)';
+            }
+            updateDisplay();
+        });
+
         // Tier badge click handlers
         tierFoundation.addEventListener('click', function() {
             if (lockedInAccelerator) return;
@@ -1114,15 +1341,17 @@
             if (parseInt(raiseSlider.value) > FOUNDATION_MAX_RAISE) {
                 raiseSlider.value = FOUNDATION_MAX_RAISE;
             }
-            if (parseInt(monthsSlider.value) < FOUNDATION_MIN_MONTHS) {
-                monthsSlider.value = FOUNDATION_MIN_MONTHS;
+            const minMonths = toggleDeferral.checked ? 6 : FOUNDATION_MIN_MONTHS;
+            if (parseInt(monthsSlider.value) < minMonths) {
+                monthsSlider.value = minMonths;
             }
             updateDisplay();
         });
 
         tierAccelerator.addEventListener('click', function() {
-            if (parseInt(monthsSlider.value) >= FOUNDATION_MIN_MONTHS) {
-                monthsSlider.value = FOUNDATION_MIN_MONTHS - 1;
+            const minMonths = toggleDeferral.checked ? 6 : FOUNDATION_MIN_MONTHS;
+            if (parseInt(monthsSlider.value) >= minMonths) {
+                monthsSlider.value = minMonths - 1;
             }
             updateDisplay();
         });
@@ -1138,12 +1367,29 @@
             const months = parseInt(monthsSlider.value);
 
             let checkoutUrl;
+            let planName;
+            const discountedRate = currentMonthlyPrice * DEFERRAL_DISCOUNT;
+
             if (currentPlan === 'accelerator') {
-                checkoutUrl = CHECKOUT_URLS.accelerator;
-                checkoutTitle.textContent = 'Accelerator Plan - $' + currentMonthlyPrice.toLocaleString() + '/mo × ' + months + ' months';
+                if (isDeferralActive) {
+                    checkoutUrl = CHECKOUT_URLS.accelerator_deferred;
+                    planName = 'Accelerator Plan (Deferred)';
+                    checkoutTitle.textContent = planName + ' - $' + currentMonthlyPrice.toLocaleString() + ' Month 1, then $' + discountedRate.toLocaleString() + '/mo';
+                } else {
+                    checkoutUrl = CHECKOUT_URLS.accelerator;
+                    planName = 'Accelerator Plan';
+                    checkoutTitle.textContent = planName + ' - $' + currentMonthlyPrice.toLocaleString() + '/mo × ' + months + ' months';
+                }
             } else {
-                checkoutUrl = CHECKOUT_URLS.foundation;
-                checkoutTitle.textContent = 'Foundation Plan - $' + currentMonthlyPrice.toLocaleString() + '/mo × ' + months + ' months';
+                if (isDeferralActive) {
+                    checkoutUrl = CHECKOUT_URLS.foundation_deferred;
+                    planName = 'Foundation Plan (Deferred)';
+                    checkoutTitle.textContent = planName + ' - $' + currentMonthlyPrice.toLocaleString() + ' Month 1, then $' + discountedRate.toLocaleString() + '/mo';
+                } else {
+                    checkoutUrl = CHECKOUT_URLS.foundation;
+                    planName = 'Foundation Plan';
+                    checkoutTitle.textContent = planName + ' - $' + currentMonthlyPrice.toLocaleString() + '/mo × ' + months + ' months';
+                }
             }
 
             iframe.src = checkoutUrl;
