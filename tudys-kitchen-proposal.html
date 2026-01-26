@@ -1,835 +1,1196 @@
-<!-- Tudy's Kitchen Investment Proposal - Embedded Landing Page -->
-<!-- Add this to an Embed Block on your Squarespace page -->
-<!-- Focused on growth capital, angel investor targeting, pitch support, and investor access -->
-
-<style>
-  /* Google Fonts */
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
-
-  * {
-    box-sizing: border-box;
-  }
-
-  .tudy-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  }
-
-  /* Hero Section */
-  .tudy-hero {
-    min-height: 55vh;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: left;
-    padding: 60px 20px 40px;
-    margin-bottom: 40px;
-    position: relative;
-    background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
-    border-radius: 20px;
-  }
-
-  .tudy-hero h1 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 5.5rem;
-    font-weight: 700;
-    line-height: 1.0;
-    color: #2D1810;
-    letter-spacing: -0.03em;
-    max-width: 850px;
-    margin: 0 0 25px 0;
-  }
-
-  .tudy-hero-subtitle {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.35rem;
-    font-weight: 500;
-    color: #8B4513;
-    margin: 0;
-    max-width: 650px;
-    line-height: 1.6;
-  }
-
-  .tudy-hero-tagline {
-    display: inline-block;
-    background: #C84C1C;
-    color: #FFF8F0;
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 25px;
-  }
-
-  /* Scroll animations */
-  .fade-in-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .fade-in-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .fade-in {
-    opacity: 0;
-    transition: opacity 1s ease;
-  }
-
-  .fade-in.visible {
-    opacity: 1;
-  }
-
-  .slide-in-left {
-    opacity: 0;
-    transform: translateX(-60px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .slide-in-left.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .slide-in-right {
-    opacity: 0;
-    transform: translateX(60px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .slide-in-right.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  /* The Ask Section */
-  .tudy-ask-section {
-    background: #2D1810;
-    padding: 50px 40px;
-    border-radius: 16px;
-    margin: 40px 0;
-  }
-
-  .tudy-ask-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    color: #FFE8D6;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-
-  .ask-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
-
-  .ask-item {
-    background: rgba(255, 248, 240, 0.08);
-    padding: 30px;
-    border-radius: 12px;
-    border-left: 4px solid #C84C1C;
-  }
-
-  .ask-item h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #C84C1C;
-    margin: 0 0 12px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .ask-item p {
-    font-size: 1rem;
-    color: #FFE8D6;
-    margin: 0;
-    line-height: 1.6;
-    opacity: 0.9;
-  }
-
-  /* Mission Statement */
-  .tudy-mission {
-    text-align: center;
-    font-size: 1.25rem;
-    line-height: 1.8;
-    color: #2D1810;
-    margin: 50px auto;
-    max-width: 100%;
-    font-weight: 500;
-    padding: 40px 50px;
-    position: relative;
-  }
-
-  /* Animated border lines */
-  .tudy-mission::before,
-  .tudy-mission::after {
-    content: '';
-    position: absolute;
-    height: 4px;
-    background: linear-gradient(90deg, #C84C1C, #E07028, #C84C1C);
-    left: 50%;
-    right: 50%;
-    transition: left 0.8s ease 0.2s, right 0.8s ease 0.2s;
-  }
-
-  .tudy-mission::before {
-    top: 0;
-  }
-
-  .tudy-mission::after {
-    bottom: 0;
-  }
-
-  .tudy-mission.visible::before,
-  .tudy-mission.visible::after {
-    left: 0;
-    right: 0;
-  }
-
-  .tudy-mission p {
-    margin: 0;
-    color: #2D1810;
-  }
-
-  .tudy-mission strong {
-    color: #C84C1C;
-  }
-
-  /* Stats Section */
-  .stats-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
-    margin: 50px 0;
-  }
-
-  .stat-card {
-    background: linear-gradient(145deg, #2D1810 0%, #4A2C20 100%);
-    padding: 45px 25px;
-    border-radius: 16px;
-    text-align: center;
-    border: 2px solid rgba(200, 76, 28, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .stat-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(45, 24, 16, 0.4);
-    border-color: #C84C1C;
-  }
-
-  .stat-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.2rem;
-    font-weight: 800;
-    color: #FFE8D6;
-    margin-bottom: 12px;
-  }
-
-  .stat-label {
-    font-size: 0.9rem;
-    color: #E07028;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-  }
-
-  /* Investment Thesis Section */
-  .tudy-thesis {
-    background: linear-gradient(135deg, #C84C1C 0%, #8B4513 100%);
-    color: #FFF8F0;
-    padding: 70px 60px;
-    border-radius: 20px;
-    margin: 60px 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .tudy-thesis::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -30%;
-    width: 80%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(255, 248, 240, 0.1) 0%, transparent 60%);
-    pointer-events: none;
-  }
-
-  .tudy-thesis .impact-badge {
-    display: inline-block;
-    background: rgba(255, 248, 240, 0.15);
-    color: #FFF8F0;
-    padding: 10px 28px;
-    border-radius: 40px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(255, 248, 240, 0.3);
-  }
-
-  .tudy-thesis h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    margin-bottom: 30px;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: #FFF8F0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .tudy-thesis p {
-    font-size: 1.15rem;
-    line-height: 1.9;
-    margin-bottom: 50px;
-    opacity: 0.95;
-    font-weight: 400;
-    position: relative;
-    z-index: 1;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Investor Type Buttons */
-  .investor-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 40px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .investor-btn {
-    padding: 18px 45px;
-    font-size: 1.05rem;
-    font-weight: 700;
-    border: 3px solid #FFF8F0;
-    background: transparent;
-    color: #FFF8F0;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-family: 'Montserrat', sans-serif;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .investor-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: #2D1810;
-    transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-  }
-
-  .investor-btn:hover::before {
-    width: 300%;
-    height: 300%;
-  }
-
-  .investor-btn:hover {
-    border-color: #2D1810;
-    transform: translateY(-4px);
-    box-shadow: 0 15px 40px rgba(45, 24, 16, 0.4);
-  }
-
-  .investor-btn.active {
-    background: #2D1810;
-    border-color: #2D1810;
-    color: #FFF8F0;
-  }
-
-  /* Services/What We Need Section */
-  .services-section {
-    margin: 70px 0;
-  }
-
-  .services-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    color: #2D1810;
-    text-align: center;
-    margin-bottom: 50px;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-  }
-
-  .service-card {
-    position: relative;
-    background: linear-gradient(145deg, #FFF8F0 0%, #FFE8D6 100%);
-    border-radius: 16px;
-    padding: 40px 25px;
-    text-align: center;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    overflow: hidden;
-  }
-
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #C84C1C, #E07028);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-  }
-
-  .service-card:hover::before {
-    transform: scaleX(1);
-  }
-
-  .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(45, 24, 16, 0.15);
-    border-color: #C84C1C;
-  }
-
-  .service-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-  }
-
-  .service-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    color: #2D1810;
-    margin: 0 0 15px 0;
-    font-weight: 700;
-  }
-
-  .service-card p {
-    font-size: 0.95rem;
-    color: #5D3A2A;
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  /* Use of Funds Section */
-  .funds-section {
-    background: #2D1810;
-    padding: 60px 50px;
-    border-radius: 20px;
-    margin: 60px 0;
-  }
-
-  .funds-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    color: #FFE8D6;
-    text-align: center;
-    margin-bottom: 50px;
-  }
-
-  .funds-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-  }
-
-  .fund-item {
-    text-align: center;
-    padding: 30px 20px;
-    background: rgba(255, 248, 240, 0.05);
-    border-radius: 12px;
-    border: 1px solid rgba(200, 76, 28, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .fund-item:hover {
-    background: rgba(255, 248, 240, 0.1);
-    border-color: #C84C1C;
-  }
-
-  .fund-percentage {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    font-weight: 800;
-    color: #C84C1C;
-    margin-bottom: 15px;
-  }
-
-  .fund-label {
-    font-size: 1rem;
-    color: #FFE8D6;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-  }
-
-  .fund-description {
-    font-size: 0.9rem;
-    color: #E07028;
-    opacity: 0.8;
-    line-height: 1.5;
-  }
-
-  /* CTA Section */
-  .tudy-cta-section {
-    text-align: center;
-    margin: 60px 0;
-    padding: 70px 50px;
-    background: linear-gradient(135deg, #E07028 0%, #C84C1C 50%, #8B4513 100%);
-    border-radius: 20px;
-    box-shadow: 0 25px 70px rgba(45, 24, 16, 0.3);
-  }
-
-  .tudy-cta-section .impact-badge {
-    background: rgba(255, 248, 240, 0.15);
-    color: #FFF8F0;
-    border: 1px solid rgba(255, 248, 240, 0.3);
-    display: inline-block;
-    padding: 10px 28px;
-    border-radius: 40px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 25px;
-  }
-
-  .tudy-cta-section h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    margin-bottom: 20px;
-    color: #FFF8F0;
-    font-weight: 700;
-    line-height: 1.1;
-  }
-
-  .tudy-cta-section p {
-    font-size: 1.2rem;
-    color: #FFF8F0;
-    margin-bottom: 40px;
-    font-weight: 400;
-    opacity: 0.95;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .cta-button {
-    display: inline-block;
-    padding: 20px 60px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    background: #FFF8F0;
-    color: #C84C1C;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Montserrat', sans-serif;
-    text-decoration: none;
-  }
-
-  .cta-button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 40px rgba(45, 24, 16, 0.4);
-    background: #2D1810;
-    color: #FFF8F0;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .services-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .funds-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .tudy-content {
-      padding: 30px 15px;
-    }
-
-    .tudy-hero {
-      min-height: auto;
-      padding: 40px 25px;
-    }
-
-    .tudy-hero h1 {
-      font-size: 2.8rem;
-      line-height: 1.1;
-    }
-
-    .tudy-hero-subtitle {
-      font-size: 1.1rem;
-    }
-
-    .ask-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .tudy-thesis {
-      padding: 50px 30px;
-    }
-
-    .tudy-thesis h2 {
-      font-size: 2.5rem;
-    }
-
-    .tudy-cta-section h3 {
-      font-size: 2.5rem;
-    }
-
-    .investor-buttons {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .investor-btn {
-      width: 100%;
-      max-width: 320px;
-    }
-
-    .stat-number {
-      font-size: 2.5rem;
-    }
-
-    .services-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .funds-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .funds-section {
-      padding: 40px 25px;
-    }
-
-    .tudy-mission {
-      padding: 30px 20px;
-      font-size: 1.1rem;
-    }
-  }
-</style>
-
-<div class="tudy-content">
-
-  <!-- Hero Section -->
-  <div class="tudy-hero fade-in">
-    <span class="tudy-hero-tagline">Investment Opportunity</span>
-    <h1>Tudy's Kitchen is Ready to Scale</h1>
-    <p class="tudy-hero-subtitle">From beloved local brand to regional powerhouse. We're seeking strategic partners who believe in authentic flavors, sustainable growth, and the power of food to bring communities together.</p>
-  </div>
-
-  <!-- The Ask Section -->
-  <div class="tudy-ask-section fade-in-up">
-    <h2>What We're Looking For</h2>
-    <div class="ask-grid">
-      <div class="ask-item">
-        <h3>Growth Capital</h3>
-        <p>Beyond production funding, we need capital to build infrastructure, expand our team, and enter new markets strategically.</p>
-      </div>
-      <div class="ask-item">
-        <h3>Angel Investor Network</h3>
-        <p>Seeking connections to angel investors who understand CPG, food & beverage, and want to be part of an authentic brand story.</p>
-      </div>
-      <div class="ask-item">
-        <h3>Pitch Support</h3>
-        <p>Guidance on refining our investor deck, financial projections, and storytelling to resonate with the right investors.</p>
-      </div>
-      <div class="ask-item">
-        <h3>Investor Introductions</h3>
-        <p>Warm introductions to investor groups, pitch competitions, and funding networks focused on food entrepreneurs.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mission Statement -->
-  <div class="tudy-mission fade-in-up">
-    <p>Tudy's Kitchen started with a simple belief: <strong>everyone deserves access to delicious, authentic food made with love</strong>. Now we're ready to bring that mission to more tables, more communities, and more families across the region.</p>
-  </div>
-
-  <!-- Stats Section -->
-  <div class="stats-section fade-in-up">
-    <div class="stat-card">
-      <div class="stat-number">$250K</div>
-      <div class="stat-label">Revenue (2025)</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">45%</div>
-      <div class="stat-label">YoY Growth</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">12</div>
-      <div class="stat-label">Retail Partners</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">5K+</div>
-      <div class="stat-label">Loyal Customers</div>
-    </div>
-  </div>
-
-  <!-- Investment Thesis Section -->
-  <div class="tudy-thesis fade-in-up">
-    <span class="impact-badge">Investment Thesis</span>
-    <h2>Flavor Meets Opportunity</h2>
-    <p>
-      The specialty food market is booming, with consumers craving authentic, small-batch products with real stories behind them.
-      Tudy's Kitchen sits at the intersection of cultural authenticity, quality ingredients, and scalable production.
-      We've proven product-market fit. Now we need the right partners to accelerate our growth.
-    </p>
-
-    <div class="investor-buttons">
-      <button class="investor-btn" onclick="selectInvestorType(this, 'angel')">Angel Investor</button>
-      <button class="investor-btn" onclick="selectInvestorType(this, 'vc')">VC / Fund</button>
-      <button class="investor-btn" onclick="selectInvestorType(this, 'strategic')">Strategic Partner</button>
-    </div>
-  </div>
-
-  <!-- Services/Support Needed Section -->
-  <div class="services-section fade-in-up">
-    <h2>How Partners Can Help</h2>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">&#128176;</div>
-        <h3>Capital Access</h3>
-        <p>Connect us to funding sources beyond traditional bank loans - angel networks, food-focused funds, and impact investors.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">&#127908;</div>
-        <h3>Pitch Coaching</h3>
-        <p>Help us sharpen our story, refine our deck, and practice delivery for investor meetings and pitch competitions.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">&#129309;</div>
-        <h3>Warm Intros</h3>
-        <p>Facilitate introductions to your network - investors, advisors, and industry leaders who can open doors.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">&#128218;</div>
-        <h3>Strategic Guidance</h3>
-        <p>Advise on growth strategy, market expansion, and operational scaling from experience in the food industry.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Use of Funds Section -->
-  <div class="funds-section fade-in-up">
-    <h2>Use of Funds</h2>
-    <div class="funds-grid">
-      <div class="fund-item">
-        <div class="fund-percentage">40%</div>
-        <div class="fund-label">Market Expansion</div>
-        <div class="fund-description">New retail partnerships, regional distribution, and market entry costs</div>
-      </div>
-      <div class="fund-item">
-        <div class="fund-percentage">30%</div>
-        <div class="fund-label">Team & Operations</div>
-        <div class="fund-description">Key hires in sales, marketing, and operations to support growth</div>
-      </div>
-      <div class="fund-item">
-        <div class="fund-percentage">30%</div>
-        <div class="fund-label">Marketing & Brand</div>
-        <div class="fund-description">Brand awareness, digital marketing, and customer acquisition</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CTA Section -->
-  <div class="tudy-cta-section fade-in-up">
-    <span class="impact-badge">Let's Connect</span>
-    <h3>Join the Tudy's Kitchen Journey</h3>
-    <p>We're looking for investors and partners who share our vision for bringing authentic flavors to every table. Ready to learn more?</p>
-    <a href="#contact" class="cta-button">Request Pitch Deck</a>
-  </div>
-
-</div>
-
-<script>
-  // Scroll-triggered animations
-  document.addEventListener('DOMContentLoaded', function() {
-    // Intersection Observer for scroll animations
-    var observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tudy's Kitchen x Sengo - Fundraising Support Proposal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      });
-    }, observerOptions);
 
-    // Observe all animated elements
-    var animatedElements = document.querySelectorAll('.fade-in-up, .fade-in, .slide-in-left, .slide-in-right');
-    animatedElements.forEach(function(el) {
-      observer.observe(el);
-    });
-  });
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FDF5ED 50%, #F8EDE3 100%);
+            min-height: 100vh;
+            color: #2D1810;
+        }
 
-  // Investor type button interaction
-  function selectInvestorType(button, investorType) {
-    // Remove active class from all buttons
-    var buttons = document.querySelectorAll('.investor-btn');
-    buttons.forEach(function(btn) {
-      btn.classList.remove('active');
-    });
+        /* Main Container */
+        .proposal-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
 
-    // Add active class to clicked button
-    button.classList.add('active');
+        /* Header Section */
+        .proposal-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
-    // Store in localStorage
-    localStorage.setItem('investorType', investorType);
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #2D1810;
+            color: #FFF8F0;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+        }
 
-    // Log to console
-    console.log('Investor type selected:', investorType);
+        .logo-badge span {
+            color: #E07028;
+        }
 
-    // Optional: Add your analytics tracking here
-    // Example: gtag('event', 'investor_type_selected', { type: investorType });
+        .proposal-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #2D1810;
+            margin-bottom: 16px;
+            line-height: 1.15;
+        }
 
-    // Optional: Redirect or show relevant content based on investor type
-    // Customize these URLs based on your needs
-    /*
-    if (investorType === 'angel') {
-      window.location.href = '/angel-investor-info';
-    } else if (investorType === 'vc') {
-      window.location.href = '/vc-info';
-    } else if (investorType === 'strategic') {
-      window.location.href = '/strategic-partner-info';
-    }
-    */
-  }
-</script>
+        .proposal-subtitle {
+            font-size: 1.15rem;
+            color: #8B4513;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Vision Section */
+        .vision-section {
+            background: linear-gradient(135deg, #2D1810 0%, #4A2C20 100%);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            color: #FFF8F0;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(224, 112, 40, 0.2);
+            color: #E07028;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+
+        .vision-quote {
+            font-size: 1.35rem;
+            font-style: italic;
+            line-height: 1.7;
+            color: #FFF8F0;
+            border-left: 4px solid #E07028;
+            padding-left: 24px;
+            margin-bottom: 24px;
+        }
+
+        .vision-highlight {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .highlight-tag {
+            background: rgba(255, 248, 240, 0.1);
+            border: 1px solid rgba(255, 248, 240, 0.3);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* What You Need Section */
+        .needs-section {
+            margin-bottom: 40px;
+        }
+
+        .needs-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .needs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .need-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(45, 24, 16, 0.06);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .need-card:hover {
+            border-color: #E07028;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(224, 112, 40, 0.12);
+        }
+
+        .need-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #E07028 0%, #F0934D 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .need-card h3 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2D1810;
+        }
+
+        .need-card p {
+            font-size: 0.9rem;
+            color: #8B4513;
+            line-height: 1.6;
+        }
+
+        /* Plan Selection Section */
+        .plan-section {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 30px rgba(45, 24, 16, 0.08);
+        }
+
+        .plan-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .plan-header h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .plan-header p {
+            color: #8B4513;
+            font-size: 1rem;
+        }
+
+        /* Plan Tier Indicator */
+        .plan-tier {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .tier-badge {
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tier-badge.active {
+            background: linear-gradient(135deg, #E07028 0%, #F0934D 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(224, 112, 40, 0.3);
+        }
+
+        .tier-badge.inactive {
+            background: #E8E0D8;
+            color: #8B4513;
+        }
+
+        .tier-badge .tier-price {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-top: 4px;
+            opacity: 0.9;
+        }
+
+        /* Selector Controls */
+        .selector-container {
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .selector-group {
+            margin-bottom: 32px;
+        }
+
+        .selector-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .selector-label h4 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2D1810;
+        }
+
+        .selector-label p {
+            font-size: 0.85rem;
+            color: #8B4513;
+        }
+
+        .selector-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #E07028;
+            background: rgba(224, 112, 40, 0.1);
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        /* Custom Range Slider */
+        .range-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #E8E0D8;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #E07028 0%, #F0934D 100%);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(224, 112, 40, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .range-slider::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #E07028 0%, #F0934D 100%);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 10px rgba(224, 112, 40, 0.4);
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #8B4513;
+        }
+
+        /* Toggle Switches Container */
+        .toggle-container {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(45, 24, 16, 0.1);
+        }
+
+        .toggle-section-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #8B4513;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(45, 24, 16, 0.08);
+        }
+
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-row.included {
+            background: rgba(224, 112, 40, 0.05);
+            margin: 0 -20px;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-bottom: none;
+            margin-bottom: 8px;
+        }
+
+        .toggle-info {
+            flex: 1;
+        }
+
+        .toggle-info h4 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2D1810;
+            margin-bottom: 4px;
+        }
+
+        .toggle-info p {
+            font-size: 0.85rem;
+            color: #8B4513;
+        }
+
+        .included-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #E07028;
+            background: rgba(224, 112, 40, 0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Custom Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 56px;
+            height: 30px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #E8E0D8;
+            transition: 0.3s;
+            border-radius: 30px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: linear-gradient(135deg, #E07028 0%, #F0934D 100%);
+        }
+
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .toggle-switch input:disabled + .toggle-slider {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* Pricing Display */
+        .pricing-display {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #2D1810 0%, #4A2C20 100%);
+            border-radius: 20px;
+            margin-bottom: 32px;
+            color: #FFF8F0;
+        }
+
+        .price-label {
+            font-size: 0.9rem;
+            color: rgba(255, 248, 240, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .price-amount {
+            font-family: 'Arimo', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #FFF8F0;
+            line-height: 1;
+        }
+
+        .price-amount span {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: rgba(255, 248, 240, 0.7);
+        }
+
+        .price-description {
+            font-size: 1rem;
+            color: rgba(255, 248, 240, 0.8);
+            margin-top: 16px;
+        }
+
+        .price-commitment {
+            display: inline-block;
+            background: rgba(224, 112, 40, 0.3);
+            color: #FFF8F0;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 16px;
+        }
+
+        /* Upgrade Notice */
+        .upgrade-notice {
+            background: linear-gradient(135deg, rgba(224, 112, 40, 0.1) 0%, rgba(224, 112, 40, 0.05) 100%);
+            border: 2px solid #E07028;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            text-align: center;
+            display: none;
+        }
+
+        .upgrade-notice.visible {
+            display: block;
+        }
+
+        .upgrade-notice h4 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #E07028;
+            margin-bottom: 8px;
+        }
+
+        .upgrade-notice p {
+            font-size: 0.9rem;
+            color: #8B4513;
+        }
+
+        /* Included Features List */
+        .features-included {
+            background: #FFF8F0;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .features-included h4 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #2D1810;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #2D1810;
+        }
+
+        .feature-item.disabled {
+            color: #B8AFA6;
+            text-decoration: line-through;
+        }
+
+        .feature-check {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #E07028;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .feature-check.disabled {
+            background: #D8D0C8;
+        }
+
+        /* CTA Button */
+        .cta-container {
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #E07028 0%, #F0934D 100%);
+            color: white;
+            padding: 20px 56px;
+            border-radius: 50px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(224, 112, 40, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(224, 112, 40, 0.4);
+        }
+
+        .cta-subtext {
+            font-size: 0.85rem;
+            color: #8B4513;
+            margin-top: 16px;
+        }
+
+        /* Checkout Modal */
+        .checkout-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(45, 24, 16, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .checkout-modal.active {
+            display: flex;
+        }
+
+        .checkout-content {
+            background: white;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 28px;
+            border-bottom: 1px solid rgba(45, 24, 16, 0.1);
+        }
+
+        .checkout-header h3 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .close-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: #F8EDE3;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #2D1810;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .close-button:hover {
+            background: #E8E0D8;
+        }
+
+        .checkout-iframe-container {
+            height: calc(90vh - 80px);
+            overflow: auto;
+        }
+
+        .checkout-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 600px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .proposal-title {
+                font-size: 2rem;
+            }
+
+            .vision-section {
+                padding: 28px;
+            }
+
+            .vision-quote {
+                font-size: 1.1rem;
+            }
+
+            .plan-section {
+                padding: 28px 20px;
+            }
+
+            .toggle-row {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .toggle-info {
+                width: 100%;
+                margin-bottom: 8px;
+            }
+
+            .price-amount {
+                font-size: 3.5rem;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-tier {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .selector-label {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="proposal-container">
+        <!-- Header -->
+        <header class="proposal-header fade-in-up">
+            <div class="logo-badge">
+                TUDY'S KITCHEN <span>×</span> SENGO
+            </div>
+            <h1 class="proposal-title">Fundraising Support Tailored for Tudy's Kitchen</h1>
+            <p class="proposal-subtitle">Strategic support to help you grow beyond production funding, connect with angel investors, and get in front of the right investor groups.</p>
+        </header>
+
+        <!-- Vision Section -->
+        <section class="vision-section fade-in-up">
+            <span class="section-badge">Your Vision</span>
+            <blockquote class="vision-quote">
+                "Great food brings people together. Tudy's Kitchen isn't just about recipes—it's about creating moments, building community, and sharing culture one dish at a time. Now we're ready to bring that magic to more tables."
+            </blockquote>
+            <div class="vision-highlight">
+                <span class="highlight-tag">Growth Beyond Production</span>
+                <span class="highlight-tag">Angel Investor Ready</span>
+                <span class="highlight-tag">Scalable & Authentic</span>
+                <span class="highlight-tag">Community-Centered Brand</span>
+            </div>
+        </section>
+
+        <!-- What You Need Section -->
+        <section class="needs-section fade-in-up">
+            <h2 class="needs-title">What You're Looking For</h2>
+            <div class="needs-grid">
+                <div class="need-card">
+                    <div class="need-icon">💰</div>
+                    <h3>Growth Capital Strategy</h3>
+                    <p>Capital for more than just production—funding for market expansion, team building, and infrastructure to scale sustainably.</p>
+                </div>
+                <div class="need-card">
+                    <div class="need-icon">👼</div>
+                    <h3>Angel Investor Targeting</h3>
+                    <p>Access to curated angel investors who understand CPG, food & beverage, and want to back authentic founder stories.</p>
+                </div>
+                <div class="need-card">
+                    <div class="need-icon">🎤</div>
+                    <h3>Pitch Support & Coaching</h3>
+                    <p>Refine your deck, sharpen your narrative, and practice your delivery until you own the room.</p>
+                </div>
+                <div class="need-card">
+                    <div class="need-icon">🚀</div>
+                    <h3>Investor Group Access</h3>
+                    <p>Warm introductions and strategic positioning to get in front of investor networks and pitch competitions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plan Selection -->
+        <section class="plan-section fade-in-up">
+            <div class="plan-header">
+                <h2>Customize Your Support</h2>
+                <p>Adjust your commitment and raise target to see your plan</p>
+            </div>
+
+            <!-- Plan Tier Indicator -->
+            <div class="plan-tier">
+                <span class="tier-badge" id="tier-foundation">
+                    Foundation
+                    <span class="tier-price">$1,000/mo</span>
+                </span>
+                <span class="tier-badge" id="tier-accelerator">
+                    Accelerator
+                    <span class="tier-price">$2,000/mo</span>
+                </span>
+            </div>
+
+            <!-- Selectors -->
+            <div class="selector-container">
+                <!-- Months Commitment Slider -->
+                <div class="selector-group">
+                    <div class="selector-label">
+                        <div>
+                            <h4>Commitment Duration</h4>
+                            <p>How many months of support do you need?</p>
+                        </div>
+                        <span class="selector-value" id="months-value">4 months</span>
+                    </div>
+                    <input type="range" class="range-slider" id="months-slider" min="2" max="12" value="4" step="1">
+                    <div class="range-labels">
+                        <span>2 months (min)</span>
+                        <span>12 months</span>
+                    </div>
+                </div>
+
+                <!-- Raise Amount Slider -->
+                <div class="selector-group">
+                    <div class="selector-label">
+                        <div>
+                            <h4>Fundraising Target</h4>
+                            <p>How much are you looking to raise?</p>
+                        </div>
+                        <span class="selector-value" id="raise-value">$500K</span>
+                    </div>
+                    <input type="range" class="range-slider" id="raise-slider" min="100" max="2000" value="500" step="50">
+                    <div class="range-labels">
+                        <span>$100K</span>
+                        <span>$2M+</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upgrade Notice -->
+            <div class="upgrade-notice" id="upgrade-notice">
+                <h4>Accelerator Plan Recommended</h4>
+                <p>For raises above $1M, we recommend the Accelerator plan for comprehensive support.</p>
+            </div>
+
+            <!-- What's Included -->
+            <div class="toggle-container">
+                <p class="toggle-section-title">What's Included</p>
+
+                <div class="toggle-row included">
+                    <div class="toggle-info">
+                        <h4>Bi-Weekly Strategy Calls</h4>
+                        <p>Deep-dive sessions on fundraising progress, investor pipeline & pitch refinement</p>
+                    </div>
+                    <span class="included-badge">Included</span>
+                </div>
+
+                <div class="toggle-row included">
+                    <div class="toggle-info">
+                        <h4>Angel Investor Targeting List</h4>
+                        <p>Curated list of food/CPG-focused angels, pre-seed funds & grant opportunities</p>
+                    </div>
+                    <span class="included-badge">Included</span>
+                </div>
+
+                <div class="toggle-row included">
+                    <div class="toggle-info">
+                        <h4>Pitch Deck & Narrative Coaching</h4>
+                        <p>Refine your story to resonate with investors who back authentic food brands</p>
+                    </div>
+                    <span class="included-badge">Included</span>
+                </div>
+
+                <div class="toggle-row included">
+                    <div class="toggle-info">
+                        <h4>Investor Group Introductions</h4>
+                        <p>Warm intros to investor networks, pitch events & food-focused funding groups</p>
+                    </div>
+                    <span class="included-badge">Included</span>
+                </div>
+
+                <p class="toggle-section-title" style="margin-top: 28px;">Optional Add-ons</p>
+
+                <div class="toggle-row">
+                    <div class="toggle-info">
+                        <h4>Weekly Accountability Check-ins</h4>
+                        <p>Stay on track with quick weekly progress calls & action items</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-accountability">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-row">
+                    <div class="toggle-info">
+                        <h4>Data Room Setup & Review</h4>
+                        <p>Professional data room with financials, projections & due diligence docs</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-dataroom">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pricing Display -->
+            <div class="pricing-display">
+                <p class="price-label">Your Monthly Investment</p>
+                <p class="price-amount">$<span id="total-price">1,000</span><span>/mo</span></p>
+                <p class="price-description" id="price-description">Foundation plan with core fundraising support</p>
+                <p class="price-commitment" id="total-commitment">Total: $4,000 over 4 months</p>
+            </div>
+
+            <!-- Features Summary -->
+            <div class="features-included">
+                <h4>Your Plan Includes:</h4>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        Bi-weekly strategy calls
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        Angel investor targeting
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        Pitch deck coaching
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-check">✓</span>
+                        Investor group intros
+                    </div>
+                    <div class="feature-item" id="feature-weekly">
+                        <span class="feature-check disabled">✓</span>
+                        Weekly check-ins
+                    </div>
+                    <div class="feature-item" id="feature-dataroom">
+                        <span class="feature-check disabled">✓</span>
+                        Data room setup
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="cta-container" style="margin-top: 32px;">
+                <button class="cta-button" onclick="openCheckout()">
+                    Proceed to Enroll
+                </button>
+                <p class="cta-subtext">Secure checkout. Cancel anytime.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <h3 id="checkout-title">Complete Your Enrollment</h3>
+                <button class="close-button" onclick="closeCheckout()">×</button>
+            </div>
+            <div class="checkout-iframe-container">
+                <!-- Kajabi checkout will be embedded here -->
+                <iframe id="checkout-iframe" src="" title="Checkout"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration - Replace these URLs with your actual Kajabi checkout URLs
+        const CHECKOUT_URLS = {
+            foundation: 'https://checkout.kajabi.com/checkout/YOUR_1K_OFFER_ID', // $1,000/mo plan
+            accelerator: 'https://checkout.kajabi.com/checkout/YOUR_2K_OFFER_ID'  // $2,000/mo plan
+        };
+
+        // Plan thresholds
+        const FOUNDATION_MAX_RAISE = 1000; // $1M max for Foundation plan
+        const FOUNDATION_MIN_MONTHS = 4;   // 4 months minimum for Foundation plan
+        const ACCELERATOR_MIN_MONTHS = 2;  // 2 months minimum for Accelerator plan
+        const FOUNDATION_PRICE = 1000;
+        const ACCELERATOR_PRICE = 2000;
+
+        // DOM Elements
+        const monthsSlider = document.getElementById('months-slider');
+        const raiseSlider = document.getElementById('raise-slider');
+        const toggleAccountability = document.getElementById('toggle-accountability');
+        const toggleDataroom = document.getElementById('toggle-dataroom');
+        const monthsValue = document.getElementById('months-value');
+        const raiseValue = document.getElementById('raise-value');
+        const totalPrice = document.getElementById('total-price');
+        const priceDescription = document.getElementById('price-description');
+        const totalCommitment = document.getElementById('total-commitment');
+        const upgradeNotice = document.getElementById('upgrade-notice');
+        const upgradeNoticeTitle = upgradeNotice.querySelector('h4');
+        const upgradeNoticeText = upgradeNotice.querySelector('p');
+        const tierFoundation = document.getElementById('tier-foundation');
+        const tierAccelerator = document.getElementById('tier-accelerator');
+
+        // State
+        let currentPlan = 'foundation';
+        let currentMonthlyPrice = FOUNDATION_PRICE;
+        let lockedInAccelerator = false;
+
+        // Format currency
+        function formatCurrency(amount) {
+            if (amount >= 1000) {
+                return '$' + (amount / 1000).toFixed(amount % 1000 === 0 ? 0 : 1) + 'M';
+            }
+            return '$' + amount + 'K';
+        }
+
+        // Update display
+        function updateDisplay() {
+            const months = parseInt(monthsSlider.value);
+            const raiseAmount = parseInt(raiseSlider.value);
+
+            // Update displayed values
+            monthsValue.textContent = months + ' month' + (months > 1 ? 's' : '');
+            raiseValue.textContent = formatCurrency(raiseAmount);
+
+            // Check if Accelerator should be triggered (and locked)
+            const triggeredByMonths = months < FOUNDATION_MIN_MONTHS;
+            const triggeredByRaise = raiseAmount > FOUNDATION_MAX_RAISE;
+
+            // Once locked into Accelerator, can't go back
+            if (triggeredByMonths || triggeredByRaise) {
+                lockedInAccelerator = true;
+            }
+
+            // Determine plan based on lock state
+            if (lockedInAccelerator) {
+                currentPlan = 'accelerator';
+                currentMonthlyPrice = ACCELERATOR_PRICE;
+                tierFoundation.className = 'tier-badge inactive';
+                tierAccelerator.className = 'tier-badge active';
+                tierFoundation.style.cursor = 'not-allowed';
+                tierFoundation.style.opacity = '0.6';
+                upgradeNotice.classList.add('visible');
+
+                // Update notice message based on trigger reason
+                if (triggeredByMonths && triggeredByRaise) {
+                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
+                    upgradeNoticeText.textContent = 'You\'ve selected a shorter commitment and a larger raise target. The Accelerator plan provides the intensive support you need.';
+                } else if (triggeredByMonths) {
+                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
+                    upgradeNoticeText.textContent = 'For commitments under 4 months, the Accelerator plan ensures you get intensive support in a shorter timeframe.';
+                } else {
+                    upgradeNoticeTitle.textContent = 'Accelerator Plan Active';
+                    upgradeNoticeText.textContent = 'For raises above $1M, the Accelerator plan provides the comprehensive support you need.';
+                }
+
+                priceDescription.textContent = 'Accelerator plan with intensive fundraising support';
+            } else {
+                currentPlan = 'foundation';
+                currentMonthlyPrice = FOUNDATION_PRICE;
+                tierFoundation.className = 'tier-badge active';
+                tierAccelerator.className = 'tier-badge inactive';
+                tierFoundation.style.cursor = 'pointer';
+                tierFoundation.style.opacity = '1';
+                upgradeNotice.classList.remove('visible');
+                priceDescription.textContent = 'Foundation plan with core fundraising support';
+            }
+
+            // Update price display
+            totalPrice.textContent = currentMonthlyPrice.toLocaleString();
+
+            // Update total commitment
+            const total = currentMonthlyPrice * months;
+            totalCommitment.textContent = 'Total: $' + total.toLocaleString() + ' over ' + months + ' month' + (months > 1 ? 's' : '');
+
+            // Update features list
+            updateFeatureList();
+        }
+
+        function updateFeatureList() {
+            const featureWeekly = document.getElementById('feature-weekly');
+            const featureDataroom = document.getElementById('feature-dataroom');
+
+            if (toggleAccountability.checked) {
+                featureWeekly.classList.remove('disabled');
+                featureWeekly.querySelector('.feature-check').classList.remove('disabled');
+            } else {
+                featureWeekly.classList.add('disabled');
+                featureWeekly.querySelector('.feature-check').classList.add('disabled');
+            }
+
+            if (toggleDataroom.checked) {
+                featureDataroom.classList.remove('disabled');
+                featureDataroom.querySelector('.feature-check').classList.remove('disabled');
+            } else {
+                featureDataroom.classList.add('disabled');
+                featureDataroom.querySelector('.feature-check').classList.add('disabled');
+            }
+        }
+
+        // Event listeners
+        monthsSlider.addEventListener('input', updateDisplay);
+        raiseSlider.addEventListener('input', updateDisplay);
+        toggleAccountability.addEventListener('change', updateFeatureList);
+        toggleDataroom.addEventListener('change', updateFeatureList);
+
+        // Tier badge click handlers
+        tierFoundation.addEventListener('click', function() {
+            if (lockedInAccelerator) return;
+
+            if (parseInt(raiseSlider.value) > FOUNDATION_MAX_RAISE) {
+                raiseSlider.value = FOUNDATION_MAX_RAISE;
+            }
+            if (parseInt(monthsSlider.value) < FOUNDATION_MIN_MONTHS) {
+                monthsSlider.value = FOUNDATION_MIN_MONTHS;
+            }
+            updateDisplay();
+        });
+
+        tierAccelerator.addEventListener('click', function() {
+            if (parseInt(monthsSlider.value) >= FOUNDATION_MIN_MONTHS) {
+                monthsSlider.value = FOUNDATION_MIN_MONTHS - 1;
+            }
+            updateDisplay();
+        });
+
+        // Initialize
+        updateDisplay();
+
+        // Checkout modal functions
+        function openCheckout() {
+            const modal = document.getElementById('checkout-modal');
+            const iframe = document.getElementById('checkout-iframe');
+            const checkoutTitle = document.getElementById('checkout-title');
+            const months = parseInt(monthsSlider.value);
+
+            let checkoutUrl;
+            if (currentPlan === 'accelerator') {
+                checkoutUrl = CHECKOUT_URLS.accelerator;
+                checkoutTitle.textContent = 'Accelerator Plan - $' + currentMonthlyPrice.toLocaleString() + '/mo × ' + months + ' months';
+            } else {
+                checkoutUrl = CHECKOUT_URLS.foundation;
+                checkoutTitle.textContent = 'Foundation Plan - $' + currentMonthlyPrice.toLocaleString() + '/mo × ' + months + ' months';
+            }
+
+            iframe.src = checkoutUrl;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCheckout() {
+            const modal = document.getElementById('checkout-modal');
+            const iframe = document.getElementById('checkout-iframe');
+
+            modal.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        document.getElementById('checkout-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCheckout();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCheckout();
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
