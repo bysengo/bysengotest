@@ -391,6 +391,98 @@
             letter-spacing: 0.5px;
         }
 
+        .free-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #2E7D32;
+            background: rgba(46, 125, 50, 0.12);
+            padding: 3px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 8px;
+        }
+
+        /* Deferral Checkbox */
+        .deferral-section {
+            max-width: 700px;
+            margin: 0 auto 32px;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(46, 125, 50, 0.08) 0%, rgba(46, 125, 50, 0.03) 100%);
+            border: 2px solid rgba(46, 125, 50, 0.3);
+            border-radius: 16px;
+        }
+
+        .deferral-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .deferral-checkbox {
+            width: 24px;
+            height: 24px;
+            accent-color: #2E7D32;
+            cursor: pointer;
+        }
+
+        .deferral-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1B3533;
+        }
+
+        .deferral-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%);
+            padding: 4px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .deferral-details {
+            display: none;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(46, 125, 50, 0.2);
+        }
+
+        .deferral-details.visible {
+            display: block;
+        }
+
+        .deferral-details p {
+            font-size: 0.9rem;
+            color: #67441A;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .deferral-breakdown {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        .deferral-breakdown .line {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(27, 53, 51, 0.08);
+        }
+
+        .deferral-breakdown .line:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: #D57028;
+        }
+
         /* Custom Toggle Switch */
         .toggle-switch {
             position: relative;
@@ -886,17 +978,46 @@
                     <span class="included-badge">Included</span>
                 </div>
 
-                <p class="toggle-section-title" style="margin-top: 28px;">Optional Add-ons</p>
+                <p class="toggle-section-title" style="margin-top: 28px;">Optional Add-ons <span class="free-badge">Free</span></p>
 
                 <div class="toggle-row">
                     <div class="toggle-info">
-                        <h4>Weekly Accountability Check-ins</h4>
+                        <h4>Weekly Accountability Check-ins <span class="free-badge">Free</span></h4>
                         <p>Stay on track with quick weekly progress calls</p>
                     </div>
                     <label class="toggle-switch">
                         <input type="checkbox" id="toggle-accountability">
                         <span class="toggle-slider"></span>
                     </label>
+                </div>
+            </div>
+
+            <!-- Deferral Option -->
+            <div class="deferral-section">
+                <label class="deferral-header">
+                    <input type="checkbox" class="deferral-checkbox" id="defer-checkbox">
+                    <span class="deferral-title">I need to defer some costs</span>
+                    <span class="deferral-badge">50% OFF</span>
+                </label>
+                <div class="deferral-details" id="deferral-details">
+                    <p>We understand fundraising can be financially challenging. With cost deferral:</p>
+                    <div class="deferral-breakdown">
+                        <div class="line">
+                            <span>Month 1</span>
+                            <span id="defer-month1">$1,000 (full price)</span>
+                        </div>
+                        <div class="line">
+                            <span id="defer-months-label">Months 2-6</span>
+                            <span id="defer-discounted">$500/mo (50% off)</span>
+                        </div>
+                        <div class="line">
+                            <span>Deferred balance (due at close)</span>
+                            <span id="defer-balance">$2,500</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 12px; font-size: 0.8rem; color: #67441A;">
+                        * Minimum 6-month commitment required. Deferred balance due when your first investor check closes.
+                    </p>
                 </div>
             </div>
 
@@ -988,9 +1109,18 @@
         const tierFoundation = document.getElementById('tier-foundation');
         const tierAccelerator = document.getElementById('tier-accelerator');
 
+        // Deferral elements
+        const deferCheckbox = document.getElementById('defer-checkbox');
+        const deferralDetails = document.getElementById('deferral-details');
+        const deferMonth1 = document.getElementById('defer-month1');
+        const deferMonthsLabel = document.getElementById('defer-months-label');
+        const deferDiscounted = document.getElementById('defer-discounted');
+        const deferBalance = document.getElementById('defer-balance');
+
         // State
         let currentPlan = 'foundation';
         let currentMonthlyPrice = FOUNDATION_PRICE;
+        let isDeferralActive = false;
 
         // Format currency
         function formatCurrency(amount) {
@@ -1043,12 +1173,32 @@
                 priceDescription.textContent = 'Foundation plan with core fundraising support';
             }
 
-            // Update price display
-            totalPrice.textContent = currentMonthlyPrice.toLocaleString();
+            // Update price display based on deferral status
+            if (isDeferralActive) {
+                const discountedPrice = currentMonthlyPrice / 2;
+                totalPrice.textContent = discountedPrice.toLocaleString();
 
-            // Update total commitment
-            const total = currentMonthlyPrice * months;
-            totalCommitment.textContent = 'Total: $' + total.toLocaleString() + ' over ' + months + ' month' + (months > 1 ? 's' : '');
+                // Calculate totals for deferral
+                const remainingMonths = months - 1;
+                const upfrontTotal = currentMonthlyPrice + (discountedPrice * remainingMonths);
+                const deferredAmount = discountedPrice * remainingMonths;
+
+                totalCommitment.innerHTML = 'Month 1: $' + currentMonthlyPrice.toLocaleString() +
+                    ' &bull; Months 2-' + months + ': $' + discountedPrice.toLocaleString() + '/mo' +
+                    '<br><span style="color: #D57028;">Deferred: $' + deferredAmount.toLocaleString() + ' due at close</span>';
+
+                // Update deferral breakdown
+                deferMonth1.textContent = '$' + currentMonthlyPrice.toLocaleString() + ' (full price)';
+                deferMonthsLabel.textContent = 'Months 2-' + months;
+                deferDiscounted.textContent = '$' + discountedPrice.toLocaleString() + '/mo (50% off)';
+                deferBalance.textContent = '$' + deferredAmount.toLocaleString();
+            } else {
+                totalPrice.textContent = currentMonthlyPrice.toLocaleString();
+
+                // Update total commitment
+                const total = currentMonthlyPrice * months;
+                totalCommitment.textContent = 'Total: $' + total.toLocaleString() + ' over ' + months + ' month' + (months > 1 ? 's' : '');
+            }
 
             // Update weekly check-ins feature
             updateFeatureList();
@@ -1069,6 +1219,27 @@
         monthsSlider.addEventListener('input', updateDisplay);
         raiseSlider.addEventListener('input', updateDisplay);
         toggleAccountability.addEventListener('change', updateFeatureList);
+
+        // Deferral checkbox handler
+        deferCheckbox.addEventListener('change', function() {
+            isDeferralActive = this.checked;
+            deferralDetails.classList.toggle('visible', this.checked);
+
+            if (this.checked) {
+                // Enforce 6-month minimum for deferral
+                if (parseInt(monthsSlider.value) < 6) {
+                    monthsSlider.value = 6;
+                }
+                monthsSlider.min = 6;
+                document.querySelector('.range-labels span:first-child').textContent = '6 months (min)';
+            } else {
+                // Reset to normal minimum
+                monthsSlider.min = 2;
+                document.querySelector('.range-labels span:first-child').textContent = '2 months (min)';
+            }
+
+            updateDisplay();
+        });
 
         // Tier badge click handlers
         tierFoundation.addEventListener('click', function() {
