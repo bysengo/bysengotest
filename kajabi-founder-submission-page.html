@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Business | Bysengo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-teal: #1B3533;
+            --burnt-orange: #D57028;
+            --warm-brown: #67441A;
+            --light-tan: #AF8145;
+            --cream: #F3EDE7;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--cream);
+            color: var(--dark-teal);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--burnt-orange);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-family: 'Arimo', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--dark-teal);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            color: var(--burnt-orange);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--warm-brown);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        /* Process Section */
+        .process-section {
+            background: linear-gradient(135deg, var(--dark-teal) 0%, #2a4a47 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .process-header h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 16px;
+        }
+
+        .process-header p {
+            color: rgba(243, 237, 231, 0.8);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .process-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--burnt-orange), var(--burnt-orange), var(--burnt-orange), transparent);
+            z-index: 0;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 180px;
+            max-width: 220px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .process-step.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--dark-teal);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .process-step:hover .step-number {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(213, 112, 40, 0.3);
+        }
+
+        .step-icon {
+            font-size: 1.5rem;
+        }
+
+        .step-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: rgba(243, 237, 231, 0.7);
+            line-height: 1.5;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 80px 0;
+            background: var(--cream);
+        }
+
+        .form-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .form-header h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--dark-teal);
+            margin-bottom: 16px;
+        }
+
+        .form-header p {
+            color: var(--warm-brown);
+            font-size: 1.1rem;
+        }
+
+        /* Kajabi Form Placeholder */
+        .kajabi-form-container {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(27, 53, 51, 0.1);
+            border: 1px solid rgba(27, 53, 51, 0.08);
+        }
+
+        .kajabi-form-placeholder {
+            text-align: center;
+            padding: 40px;
+            border: 2px dashed var(--burnt-orange);
+            border-radius: 12px;
+            background: rgba(213, 112, 40, 0.05);
+        }
+
+        .kajabi-form-placeholder p {
+            color: var(--warm-brown);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .kajabi-form-placeholder code {
+            background: var(--dark-teal);
+            color: var(--cream);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* Sample Form Fields (for preview) */
+        .sample-form {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group label span {
+            color: var(--burnt-orange);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 16px 20px;
+            border: 2px solid rgba(27, 53, 51, 0.15);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: var(--dark-teal);
+            background: var(--white);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--burnt-orange);
+            box-shadow: 0 0 0 4px rgba(213, 112, 40, 0.15);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(27, 53, 51, 0.4);
+        }
+
+        .submit-btn {
+            background: var(--burnt-orange);
+            color: var(--white);
+            border: none;
+            padding: 18px 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .submit-btn:hover {
+            background: var(--dark-teal);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(27, 53, 51, 0.3);
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--light-tan) 100%);
+            padding: 80px 0;
+        }
+
+        .benefits-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .benefits-header h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--dark-teal), #2a4a47);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 1.75rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark-teal);
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            color: var(--warm-brown);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 0;
+            background: var(--cream);
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .faq-header h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--dark-teal);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(27, 53, 51, 0.06);
+            border: 1px solid rgba(27, 53, 51, 0.08);
+        }
+
+        .faq-question {
+            padding: 24px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(27, 53, 51, 0.02);
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-teal);
+            margin: 0;
+        }
+
+        .faq-toggle {
+            width: 30px;
+            height: 30px;
+            background: var(--burnt-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.25rem;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer p {
+            padding: 0 30px 24px;
+            color: var(--warm-brown);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--dark-teal);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 24px;
+        }
+
+        .cta-section p {
+            color: rgba(243, 237, 231, 0.8);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--burnt-orange);
+            color: var(--white);
+            text-decoration: none;
+            padding: 18px 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: var(--cream);
+            color: var(--dark-teal);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0 40px;
+            }
+
+            .process-timeline {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .process-timeline::before {
+                display: none;
+            }
+
+            .process-step {
+                max-width: 100%;
+                margin-bottom: 30px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .kajabi-form-container {
+                padding: 30px 20px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <span class="hero-badge">For Founders</span>
+            <h1>Get Your Business <span>In Front of Investors</span></h1>
+            <p class="hero-subtitle">Submit your venture to our curated investor network. No cold outreach. No endless pitching. Just real connections with investors who are actively looking.</p>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="process-header">
+                <h2>How It Works</h2>
+                <p>A streamlined process designed to connect you with the right investors</p>
+            </div>
+            <div class="process-timeline">
+                <div class="process-step" data-step="1">
+                    <div class="step-number"><span class="step-icon">📝</span></div>
+                    <h3 class="step-title">Submit</h3>
+                    <p class="step-description">Fill out our comprehensive form with your business details, traction, and funding needs</p>
+                </div>
+                <div class="process-step" data-step="2">
+                    <div class="step-number"><span class="step-icon">🔍</span></div>
+                    <h3 class="step-title">Team Review</h3>
+                    <p class="step-description">Our team reviews your submission to ensure quality and fit for our investor network</p>
+                </div>
+                <div class="process-step" data-step="3">
+                    <div class="step-number"><span class="step-icon">👥</span></div>
+                    <h3 class="step-title">Shared</h3>
+                    <p class="step-description">Your profile is shared with our curated network of active investors</p>
+                </div>
+                <div class="process-step" data-step="4">
+                    <div class="step-number"><span class="step-icon">💬</span></div>
+                    <h3 class="step-title">Gauge Interest</h3>
+                    <p class="step-description">Investors review and may reach out directly for 1:1 conversations</p>
+                </div>
+                <div class="process-step" data-step="5">
+                    <div class="step-number"><span class="step-icon">🎤</span></div>
+                    <h3 class="step-title">Pitch Invite</h3>
+                    <p class="step-description">With enough interest, you'll be invited to pitch to our investor community</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="submit-form">
+        <div class="container">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2>Submit Your Business</h2>
+                    <p>Tell us about your venture and what you're looking for</p>
+                </div>
+                <div class="kajabi-form-container">
+                    <!-- Airtable Form Embed -->
+                    <iframe class="airtable-embed" src="https://airtable.com/embed/appwqkwXRvE1lN2Rs/pagsrtgVciNnuW6i0/form" frameborder="0" onmousewheel="" width="100%" height="1200" style="background: transparent; border: none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="benefits-header">
+                <h2>Why Submit Through Bysengo?</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Curated Network</h3>
+                    <p>Access to vetted investors who are actively looking for opportunities in your space</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Streamlined Process</h3>
+                    <p>No more cold outreach. One submission gets you in front of multiple investors</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤝</div>
+                    <h3>Warm Introductions</h3>
+                    <p>When investors reach out, they've already seen your profile and shown interest</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How long does the review process take?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our team typically reviews submissions within 5-7 business days. You'll receive an email update on the status of your submission.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What happens after I'm approved?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once approved, your business profile will be shared with our investor network. Interested investors may reach out to you directly for initial conversations. If there's significant interest, you'll be invited to pitch to our community.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is there a cost to submit?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Submitting your business for review is completely free. We believe in removing barriers between founders and investors.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What types of businesses do you accept?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We welcome startups across various industries and stages. Our investors have diverse interests, so we encourage all founders to apply. Our review process helps match you with the right investors.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I update my submission after submitting?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! You can reach out to our team to update your submission with new milestones, metrics, or information at any time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <p>Join hundreds of founders who have connected with investors through Bysengo.</p>
+            <a href="#submit-form" class="cta-btn">Submit Your Business</a>
+        </div>
+    </section>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Animate process steps on scroll
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const steps = entry.target.querySelectorAll('.process-step');
+                    steps.forEach((step, index) => {
+                        setTimeout(() => {
+                            step.classList.add('animate');
+                        }, index * 150);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const timeline = document.querySelector('.process-timeline');
+        if (timeline) {
+            observer.observe(timeline);
+        }
+
+        // Smooth scroll for CTA button
+        document.querySelector('.cta-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector('#submit-form');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+    </script>
+</body>
+</html>
