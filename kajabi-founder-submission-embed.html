@@ -645,62 +645,6 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="bfs-faq">
-        <div class="bfs-container">
-            <div class="bfs-faq-header">
-                <h2>Frequently Asked Questions</h2>
-            </div>
-            <div class="bfs-faq-list">
-                <div class="bfs-faq-item">
-                    <div class="bfs-faq-question">
-                        <h3>How long does the review process take?</h3>
-                        <span class="bfs-faq-toggle">+</span>
-                    </div>
-                    <div class="bfs-faq-answer">
-                        <p>Our team typically reviews submissions within 5-7 business days. You'll receive an email update on the status of your submission.</p>
-                    </div>
-                </div>
-                <div class="bfs-faq-item">
-                    <div class="bfs-faq-question">
-                        <h3>What happens after I'm approved?</h3>
-                        <span class="bfs-faq-toggle">+</span>
-                    </div>
-                    <div class="bfs-faq-answer">
-                        <p>Once approved, your business profile will be shared with our investor network. Interested investors may reach out to you directly for initial conversations. If there's significant interest, you'll be invited to pitch to our community.</p>
-                    </div>
-                </div>
-                <div class="bfs-faq-item">
-                    <div class="bfs-faq-question">
-                        <h3>Is there a cost to submit?</h3>
-                        <span class="bfs-faq-toggle">+</span>
-                    </div>
-                    <div class="bfs-faq-answer">
-                        <p>Submitting your business for review is completely free. We believe in removing barriers between founders and investors.</p>
-                    </div>
-                </div>
-                <div class="bfs-faq-item">
-                    <div class="bfs-faq-question">
-                        <h3>What types of businesses do you accept?</h3>
-                        <span class="bfs-faq-toggle">+</span>
-                    </div>
-                    <div class="bfs-faq-answer">
-                        <p>We welcome startups across various industries and stages. Our investors have diverse interests, so we encourage all founders to apply. Our review process helps match you with the right investors.</p>
-                    </div>
-                </div>
-                <div class="bfs-faq-item">
-                    <div class="bfs-faq-question">
-                        <h3>Can I update my submission after submitting?</h3>
-                        <span class="bfs-faq-toggle">+</span>
-                    </div>
-                    <div class="bfs-faq-answer">
-                        <p>Yes! You can reach out to our team to update your submission with new milestones, metrics, or information at any time.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- CTA Section -->
     <section class="bfs-cta">
         <div class="bfs-container">
@@ -714,7 +658,7 @@
                 </svg>
             </div>
             <h2>Ready to Get Started?</h2>
-            <p>Join hundreds of founders who have connected with investors through Sengo.</p>
+            <p>Join hundreds of founders who have connected with investors.</p>
             <a href="#bfs-submit-form" class="bfs-cta-btn">Submit Your Business</a>
         </div>
     </section>
@@ -722,22 +666,6 @@
 
 <script>
 (function() {
-    // FAQ Accordion
-    document.querySelectorAll('.bfs-faq-question').forEach(question => {
-        question.addEventListener('click', () => {
-            const item = question.parentElement;
-            const isActive = item.classList.contains('active');
-
-            document.querySelectorAll('.bfs-faq-item').forEach(faq => {
-                faq.classList.remove('active');
-            });
-
-            if (!isActive) {
-                item.classList.add('active');
-            }
-        });
-    });
-
     // Animate process steps on scroll
     const observerOptions = {
         threshold: 0.2,
