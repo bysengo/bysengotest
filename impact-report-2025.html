@@ -1133,6 +1133,27 @@
 
     /* Responsive */
     @media (max-width: 768px) {
+      .slide {
+        padding: 40px 20px;
+      }
+
+      .presentation-nav {
+        bottom: 20px;
+        padding: 10px 20px;
+        gap: 15px;
+      }
+
+      .slide-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+      }
+
+      .slide-counter {
+        font-size: 0.85rem;
+        min-width: 60px;
+      }
+
       .hero h1 {
         font-size: 3.5rem;
       }
@@ -1254,7 +1275,12 @@
       <p class="hero-subtitle">Turning Communities Into Capital Engines</p>
     </div>
   </div>
+    </div>
+  </div>
 
+  <!-- Slide 2: Executive Summary & Highlights -->
+  <div class="slide">
+    <div class="slide-content">
   <!-- Executive Summary -->
   <section class="container">
     <div class="executive-summary fade-in-up">
@@ -1297,7 +1323,12 @@
       </div>
     </div>
   </section>
+    </div>
+  </div>
 
+  <!-- Slide 3: Charts -->
+  <div class="slide">
+    <div class="slide-content">
   <!-- Charts Section: Grant Distribution & Event Split -->
   <section class="container">
     <div class="charts-wrapper fade-in-up">
@@ -1364,7 +1395,12 @@
       </div>
     </div>
   </section>
+    </div>
+  </div>
 
+  <!-- Slide 4: Events -->
+  <div class="slide">
+    <div class="slide-content">
   <!-- Events Carousel -->
   <section class="container">
     <h2 class="section-title" style="text-align: center;">2025 Events Gallery</h2>
@@ -1970,7 +2006,12 @@
       <div class="events-carousel-counter" id="eventsCounter">Event 1 of 28</div>
     </div>
   </section>
+    </div>
+  </div>
 
+  <!-- Slide 5: Case Studies -->
+  <div class="slide">
+    <div class="slide-content">
   <!-- Case Studies Carousel -->
   <section class="container carousel-section">
     <h2 class="section-title" style="text-align: center;">Impact Stories</h2>
@@ -2087,7 +2128,12 @@
     </div>
     <div class="carousel-dots" id="caseStudiesDots"></div>
   </section>
+    </div>
+  </div>
 
+  <!-- Slide 6: Our Model & Theory of Change -->
+  <div class="slide">
+    <div class="slide-content">
   <!-- Organizational Overview -->
   <section class="container">
     <div class="org-overview fade-in-up">
@@ -2152,7 +2198,12 @@
       </div>
     </div>
   </section>
+    </div>
+  </div>
 
+  <!-- Slide 7: Core Programs -->
+  <div class="slide">
+    <div class="slide-content">
   <!-- Programs & Initiatives -->
   <section class="container">
     <h2 class="section-title" style="text-align: center;">Core Programs</h2>
@@ -2171,7 +2222,12 @@
       </div>
     </div>
   </section>
+    </div>
+  </div>
 
+  <!-- Slide 8: Learnings & Future -->
+  <div class="slide">
+    <div class="slide-content">
   <!-- Learnings & Adjustments -->
   <section class="container">
     <div class="learnings-section fade-in-up">
@@ -2203,7 +2259,12 @@
       </p>
     </div>
   </section>
+    </div>
+  </div>
 
+  <!-- Slide 9: Partnerships & CTA -->
+  <div class="slide">
+    <div class="slide-content">
   <!-- Ecosystem & Partnerships -->
   <section class="container">
     <div class="ecosystem-section fade-in-up">
@@ -2231,8 +2292,96 @@
       </div>
     </div>
   </section>
+    </div>
+  </div>
+
+  </div> <!-- End slides-container -->
+
+  <!-- Presentation Navigation -->
+  <div class="presentation-nav">
+    <button class="slide-nav-btn" id="prevSlide" onclick="navigateSlide(-1)">←</button>
+    <div class="slide-counter" id="slideCounter">1 / 9</div>
+    <button class="slide-nav-btn" id="nextSlide" onclick="navigateSlide(1)">→</button>
+  </div>
+
+  </div> <!-- End presentation-wrapper -->
 
   <script>
+    // Presentation Navigation
+    let currentSlide = 0;
+    const totalSlides = 9;
+
+    function navigateSlide(direction) {
+      const container = document.getElementById('slidesContainer');
+      const slides = container.querySelectorAll('.slide');
+
+      currentSlide += direction;
+
+      // Boundary checks
+      if (currentSlide < 0) currentSlide = 0;
+      if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+
+      // Scroll to slide
+      slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Update counter
+      updateSlideCounter();
+
+      // Update button states
+      document.getElementById('prevSlide').disabled = currentSlide === 0;
+      document.getElementById('nextSlide').disabled = currentSlide === totalSlides - 1;
+    }
+
+    function updateSlideCounter() {
+      document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+    }
+
+    // Track scroll position to update current slide
+    let scrollTimeout;
+    document.getElementById('slidesContainer').addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const container = document.getElementById('slidesContainer');
+        const slides = container.querySelectorAll('.slide');
+        const scrollPosition = container.scrollTop;
+
+        slides.forEach((slide, index) => {
+          const slideTop = slide.offsetTop;
+          const slideBottom = slideTop + slide.offsetHeight;
+
+          if (scrollPosition >= slideTop - 100 && scrollPosition < slideBottom - 100) {
+            currentSlide = index;
+            updateSlideCounter();
+            document.getElementById('prevSlide').disabled = currentSlide === 0;
+            document.getElementById('nextSlide').disabled = currentSlide === totalSlides - 1;
+          }
+        });
+      }, 100);
+    });
+
+    // Initialize
+    updateSlideCounter();
+    document.getElementById('prevSlide').disabled = true;
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown') {
+        e.preventDefault();
+        navigateSlide(1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        navigateSlide(-1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        currentSlide = -1;
+        navigateSlide(1);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        currentSlide = totalSlides;
+        navigateSlide(-1);
+      }
+    });
+
     // Carousel functionality (Case Studies only)
     const carousels = {
       caseStudies: {
