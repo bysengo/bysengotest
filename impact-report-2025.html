@@ -510,91 +510,145 @@
       transform: scale(1.3);
     }
 
-    /* Events Grid in Carousel */
-    .events-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
+    /* Events Gallery */
+    .events-gallery {
+      max-width: 1200px;
+      margin: 60px auto;
     }
 
-    .event-item {
-      background: #F3EDE7;
-      padding: 20px;
-      border-radius: 12px;
-      border-left: 4px solid #D57028;
-      transition: all 0.3s ease;
-      display: flex;
-      gap: 20px;
+    .event-gallery-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
       align-items: center;
     }
 
-    .event-item:hover {
-      transform: translateX(5px);
-      box-shadow: 0 5px 15px rgba(213, 112, 40, 0.2);
+    .event-gallery-item.reverse {
+      direction: rtl;
     }
 
-    .event-image {
-      width: 120px;
-      height: 120px;
-      border-radius: 8px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: #D3D3D3;
+    .event-gallery-item.reverse > * {
+      direction: ltr;
+    }
+
+    .event-gallery-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
+      box-shadow: 0 10px 30px rgba(27, 53, 51, 0.2);
     }
 
-    .event-details {
-      flex: 1;
+    .event-gallery-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
     }
 
-    .event-meta {
+    .event-gallery-item:hover .event-gallery-image {
+      transform: scale(1.05);
+    }
+
+    .event-gallery-placeholder {
+      font-size: 4rem;
+      color: rgba(243, 237, 231, 0.3);
+    }
+
+    .event-gallery-banner {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(27, 53, 51, 0.95) 0%, rgba(27, 53, 51, 0.7) 100%);
+      padding: 25px;
+      color: #F3EDE7;
+    }
+
+    .event-gallery-content h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2rem;
+      color: #1B3533;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .event-gallery-meta {
       display: flex;
       gap: 10px;
-      align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 15px;
       flex-wrap: wrap;
     }
 
-    .event-type {
+    .event-gallery-badge {
       display: inline-block;
-      background: #D57028;
-      color: white;
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
       text-transform: uppercase;
     }
 
-    .event-type.virtual {
+    .event-gallery-badge.date {
+      background: rgba(213, 112, 40, 0.1);
+      color: #D57028;
+      border: 1px solid rgba(213, 112, 40, 0.3);
+    }
+
+    .event-gallery-badge.type {
+      background: #1B3533;
+      color: #F3EDE7;
+    }
+
+    .event-gallery-badge.type.virtual {
       background: #67441A;
     }
 
-    .event-city {
-      display: inline-block;
-      color: #67441A;
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 600;
+    .event-gallery-badge.location {
       background: rgba(103, 68, 26, 0.1);
-    }
-
-    .event-name {
-      font-weight: 600;
-      color: #1B3533;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .event-date {
-      font-size: 0.85rem;
       color: #67441A;
-      font-style: italic;
-      margin-top: 4px;
+      border: 1px solid rgba(103, 68, 26, 0.3);
+    }
+
+    .event-gallery-description {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #67441A;
+    }
+
+    .event-month-divider {
+      text-align: center;
+      margin: 80px 0 40px;
+      position: relative;
+    }
+
+    .event-month-divider h4 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.8rem;
+      color: #D57028;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: inline-block;
+      background: #F3EDE7;
+      padding: 0 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .event-month-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #D57028, transparent);
+      z-index: 1;
     }
 
     /* Case Study Carousel */
@@ -987,13 +1041,24 @@
         padding: 30px 20px;
       }
 
-      .event-item {
-        flex-direction: column;
+      .event-gallery-item,
+      .event-gallery-item.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 20px;
+        margin-bottom: 40px;
       }
 
-      .event-image {
-        width: 100%;
-        height: 150px;
+      .event-gallery-content h3 {
+        font-size: 1.5rem;
+      }
+
+      .event-month-divider {
+        margin: 50px 0 30px;
+      }
+
+      .event-month-divider h4 {
+        font-size: 1.3rem;
       }
 
       .highlights-grid {
@@ -1129,339 +1194,448 @@
     </div>
   </section>
 
-  <!-- Events Carousel -->
-  <section class="container carousel-section">
-    <h2 class="section-title" style="text-align: center;">2025 Events</h2>
+  <!-- Events Gallery -->
+  <section class="container">
+    <h2 class="section-title" style="text-align: center;">2025 Events Gallery</h2>
     <p class="section-subtitle" style="text-align: center; margin: 0 auto;">27 events in chronological order — spanning virtual and in-person experiences</p>
 
-    <div class="carousel-container fade-in-up">
-      <div class="carousel-track" id="eventsTrack">
-        <!-- Slide 1: Jan-March -->
-        <div class="carousel-slide">
-          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">January - March 2025</h3>
-          <div class="events-grid">
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Welcome to Sengo Webinar</div>
-                <div class="event-date">January 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">Dallas</span>
-                </div>
-                <div class="event-name">Galentine's Wine Club</div>
-                <div class="event-date">February 21, 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">Dallas</span>
-                </div>
-                <div class="event-name">Brunch Wine Club</div>
-                <div class="event-date">March 15, 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">Dallas</span>
-                </div>
-                <div class="event-name">Sip Into Spring</div>
-                <div class="event-date">March 30, 2025</div>
-              </div>
-            </div>
+    <div class="events-gallery fade-in-up">
+      <!-- Q1: January - March -->
+      <div class="event-month-divider">
+        <h4>Q1 2025 • January - March</h4>
+      </div>
+
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Welcome to Sengo Webinar</h5>
           </div>
         </div>
+        <div class="event-gallery-content">
+          <h3>Welcome to Sengo Webinar</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">January 2025</span>
+            <span class="event-gallery-badge type virtual">Virtual</span>
+          </div>
+          <p class="event-gallery-description">
+            Kicking off 2025 with an introduction to Sengo's platform, community, and vision for democratizing capital access.
+          </p>
+        </div>
+      </div>
 
-        <!-- Slide 2: April-June -->
-        <div class="carousel-slide">
-          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">April - June 2025</h3>
-          <div class="events-grid">
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">Dallas</span>
-                </div>
-                <div class="event-name">Wine Club</div>
-                <div class="event-date">April 9, 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Private Markets 101 (Part 1)</div>
-                <div class="event-date">Spring 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Demystifying CDFI Funding</div>
-                <div class="event-date">Spring 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">Los Angeles</span>
-                </div>
-                <div class="event-name">Fashion x Futures</div>
-                <div class="event-date">June 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">New York</span>
-                </div>
-                <div class="event-name">GirlMath x Sengo: Wednesday Night Write-Off</div>
-                <div class="event-date">NY Tech Week, June 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">New York</span>
-                </div>
-                <div class="event-name">NY Tech Week Mixer (Sengo x Little More)</div>
-                <div class="event-date">NY Tech Week, June 2025</div>
-              </div>
-            </div>
+      <div class="event-gallery-item reverse">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Galentine's Wine Club</h5>
           </div>
         </div>
+        <div class="event-gallery-content">
+          <h3>Galentine's Wine Club</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">February 21, 2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">Dallas</span>
+          </div>
+          <p class="event-gallery-description">
+            Community-building event bringing together founders and funders in an intimate Dallas setting.
+          </p>
+        </div>
+      </div>
 
-        <!-- Slide 3: July-September -->
-        <div class="carousel-slide">
-          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">July - September 2025</h3>
-          <div class="events-grid">
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">New York</span>
-                </div>
-                <div class="event-name">Fashion x Futures</div>
-                <div class="event-date">July 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">Los Angeles</span>
-                </div>
-                <div class="event-name">Spill the Tea: What's Really Happening in AI & Tech</div>
-                <div class="event-date">LA Tech Week, Summer 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Ask an Angel</div>
-                <div class="event-date">Summer 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Preparing to Raise Capital with Confidence</div>
-                <div class="event-date">Summer 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Virtual Pitch for $1,000</div>
-                <div class="event-date">September 2025</div>
-              </div>
-            </div>
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Brunch Wine Club</h5>
           </div>
         </div>
+        <div class="event-gallery-content">
+          <h3>Brunch Wine Club</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">March 15, 2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">Dallas</span>
+          </div>
+          <p class="event-gallery-description">
+            Morning networking and capital conversations over brunch in the Dallas entrepreneurial community.
+          </p>
+        </div>
+      </div>
 
-        <!-- Slide 4: October-November -->
-        <div class="carousel-slide">
-          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">October - November 2025</h3>
-          <div class="events-grid">
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Virtual Pitch for $1,000</div>
-                <div class="event-date">October 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Sengo Virtual Pitch Competition (CPG Edition)</div>
-                <div class="event-date">November 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Pitch Prep with Amiah</div>
-                <div class="event-date">Fall 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Practice Your Pitch with Sarah Anto</div>
-                <div class="event-date">Fall 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">Los Angeles</span>
-                </div>
-                <div class="event-name">Fashion x Futures Holiday Pop-Up</div>
-                <div class="event-date">November 2025 (2-day event)</div>
-              </div>
-            </div>
+      <div class="event-gallery-item reverse">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Sip Into Spring</h5>
           </div>
         </div>
-
-        <!-- Slide 5: November-December & International -->
-        <div class="carousel-slide">
-          <h3 style="text-align: center; margin-bottom: 30px; color: #1B3533; font-family: 'Arimo', sans-serif;">Late 2025 & International Events</h3>
-          <div class="events-grid">
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Build Your 2026 Pitch Strategy with Dana Ammons</div>
-                <div class="event-date">November/December 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Sengo Founder Meetup: Angels & VCs</div>
-                <div class="event-date">Fall 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type virtual">Virtual</span>
-                </div>
-                <div class="event-name">Sengo Founder Meetup: Social Enterprise & EdTech</div>
-                <div class="event-date">Fall 2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">Location TBD</span>
-                </div>
-                <div class="event-name">BBOP Center x Sengo Founder Workshop</div>
-                <div class="event-date">2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">Location TBD</span>
-                </div>
-                <div class="event-name">Funded & Fearless Workshop</div>
-                <div class="event-date">2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">Barcelona</span>
-                </div>
-                <div class="event-name">Barcelona Black Women Entrepreneurs Mixer</div>
-                <div class="event-date">2025</div>
-              </div>
-            </div>
-            <div class="event-item">
-              <div class="event-image">📸</div>
-              <div class="event-details">
-                <div class="event-meta">
-                  <span class="event-type">In-Person</span>
-                  <span class="event-city">France</span>
-                </div>
-                <div class="event-name">The Village Retreat</div>
-                <div class="event-date">2025</div>
-              </div>
-            </div>
+        <div class="event-gallery-content">
+          <h3>Sip Into Spring</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">March 30, 2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">Dallas</span>
           </div>
+          <p class="event-gallery-description">
+            Seasonal celebration connecting Dallas founders with resources and community support.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q2: April - June -->
+      <div class="event-month-divider">
+        <h4>Q2 2025 • April - June</h4>
+      </div>
+
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Wine Club</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Wine Club</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">April 9, 2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">Dallas</span>
+          </div>
+          <p class="event-gallery-description">
+            Monthly touchpoint for ongoing community engagement and relationship building.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item reverse">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Private Markets 101</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Private Markets 101 (Part 1)</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">Spring 2025</span>
+            <span class="event-gallery-badge type virtual">Virtual</span>
+          </div>
+          <p class="event-gallery-description">
+            Educational workshop demystifying private market structures, investment vehicles, and participation pathways.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Demystifying CDFI Funding</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Demystifying CDFI Funding</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">Spring 2025</span>
+            <span class="event-gallery-badge type virtual">Virtual</span>
+          </div>
+          <p class="event-gallery-description">
+            Deep dive into Community Development Financial Institution funding opportunities for underrepresented founders.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item reverse">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Fashion x Futures (LA)</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Fashion x Futures — Los Angeles</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">June 2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">Los Angeles</span>
+          </div>
+          <p class="event-gallery-description">
+            Flagship event merging fashion entrepreneurship with capital access in LA's creative economy.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">NY Tech Week: GirlMath x Sengo</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>GirlMath x Sengo: Wednesday Night Write-Off</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">NY Tech Week, June 2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">New York</span>
+          </div>
+          <p class="event-gallery-description">
+            Partnership event during NY Tech Week connecting women founders with tech ecosystem resources.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item reverse">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">NY Tech Week Mixer</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>NY Tech Week Mixer (Sengo x Little More)</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">NY Tech Week, June 2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">New York</span>
+          </div>
+          <p class="event-gallery-description">
+            Strategic mixer bringing together founders, investors, and ecosystem partners during NYC's premier tech event.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q3: July - September -->
+      <div class="event-month-divider">
+        <h4>Q3 2025 • July - September</h4>
+      </div>
+
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Fashion x Futures (NYC)</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Fashion x Futures — New York</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">July 2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">New York</span>
+          </div>
+          <p class="event-gallery-description">
+            Bringing the Fashion x Futures experience to NYC's vibrant fashion and finance ecosystem.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item reverse">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">LA Tech Week: Spill the Tea</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Spill the Tea: What's Really Happening in AI & Tech</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">LA Tech Week, Summer 2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">Los Angeles</span>
+          </div>
+          <p class="event-gallery-description">
+            Candid conversations about AI, emerging tech, and capital access during LA Tech Week.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Ask an Angel</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Ask an Angel</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">Summer 2025</span>
+            <span class="event-gallery-badge type virtual">Virtual</span>
+          </div>
+          <p class="event-gallery-description">
+            Live Q&A with angel investors covering deal evaluation, investment criteria, and founder readiness.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item reverse">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Capital Prep Workshop</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Preparing to Raise Capital with Confidence</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">Summer 2025</span>
+            <span class="event-gallery-badge type virtual">Virtual</span>
+          </div>
+          <p class="event-gallery-description">
+            Comprehensive workshop on fundraising readiness, pitch preparation, and investor relations.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Virtual Pitch Competition</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Virtual Pitch for $1,000</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">September 2025</span>
+            <span class="event-gallery-badge type virtual">Virtual</span>
+          </div>
+          <p class="event-gallery-description">
+            Monthly pitch competition providing founders with capital, feedback, and visibility.
+          </p>
+        </div>
+      </div>
+
+      <!-- Q4: October - December -->
+      <div class="event-month-divider">
+        <h4>Q4 2025 • October - December</h4>
+      </div>
+
+      <div class="event-gallery-item reverse">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Virtual Pitch Competition</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Virtual Pitch for $1,000</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">October 2025</span>
+            <span class="event-gallery-badge type virtual">Virtual</span>
+          </div>
+          <p class="event-gallery-description">
+            Continued monthly pitch competition series supporting founders with non-dilutive capital.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">CPG Pitch Competition</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Sengo Virtual Pitch Competition (CPG Edition)</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">November 2025</span>
+            <span class="event-gallery-badge type virtual">Virtual</span>
+          </div>
+          <p class="event-gallery-description">
+            Sector-specific pitch competition focused on consumer packaged goods founders.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item reverse">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Fashion x Futures Holiday Pop-Up</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Fashion x Futures Holiday Pop-Up</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">November 2025 (2-day event)</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">Los Angeles</span>
+          </div>
+          <p class="event-gallery-description">
+            Multi-day holiday marketplace and networking event showcasing fashion founders and connecting them with capital.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">2026 Pitch Strategy</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Build Your 2026 Pitch Strategy with Dana Ammons</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">November/December 2025</span>
+            <span class="event-gallery-badge type virtual">Virtual</span>
+          </div>
+          <p class="event-gallery-description">
+            Year-end strategic workshop with expert guidance on planning 2026 fundraising campaigns.
+          </p>
+        </div>
+      </div>
+
+      <!-- International & Additional Events -->
+      <div class="event-month-divider">
+        <h4>International & Special Programs</h4>
+      </div>
+
+      <div class="event-gallery-item reverse">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Barcelona Entrepreneurs Mixer</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>Barcelona Black Women Entrepreneurs Mixer</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">Barcelona</span>
+          </div>
+          <p class="event-gallery-description">
+            International expansion event connecting Black women entrepreneurs in Barcelona's startup ecosystem.
+          </p>
+        </div>
+      </div>
+
+      <div class="event-gallery-item">
+        <div class="event-gallery-image-wrapper">
+          <div class="event-gallery-placeholder">📸</div>
+          <div class="event-gallery-banner">
+            <h5 style="margin: 0; font-size: 1.3rem; font-weight: 700;">The Village Retreat</h5>
+          </div>
+        </div>
+        <div class="event-gallery-content">
+          <h3>The Village Retreat — France</h3>
+          <div class="event-gallery-meta">
+            <span class="event-gallery-badge date">2025</span>
+            <span class="event-gallery-badge type">In-Person</span>
+            <span class="event-gallery-badge location">France</span>
+          </div>
+          <p class="event-gallery-description">
+            Immersive multi-day retreat for founders focusing on strategic planning, community, and well-being.
+          </p>
         </div>
       </div>
     </div>
-
-    <div class="carousel-nav">
-      <button class="carousel-btn" onclick="moveCarousel('events', -1)">←</button>
-      <button class="carousel-btn" onclick="moveCarousel('events', 1)">→</button>
-    </div>
-    <div class="carousel-dots" id="eventsDots"></div>
   </section>
 
   <!-- Case Studies Carousel -->
@@ -1726,14 +1900,8 @@
   </section>
 
   <script>
-    // Carousel functionality
+    // Carousel functionality (Case Studies only)
     const carousels = {
-      events: {
-        track: document.getElementById('eventsTrack'),
-        dots: document.getElementById('eventsDots'),
-        currentIndex: 0,
-        totalSlides: 5
-      },
       caseStudies: {
         track: document.getElementById('caseStudiesTrack'),
         dots: document.getElementById('caseStudiesDots'),
@@ -1785,8 +1953,7 @@
       });
     }
 
-    // Initialize both carousels
-    initCarousel('events');
+    // Initialize case studies carousel
     initCarousel('caseStudies');
 
     // Scroll animations
