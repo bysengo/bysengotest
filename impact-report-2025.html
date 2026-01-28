@@ -19,7 +19,121 @@
       background: #F3EDE7;
       color: #1B3533;
       line-height: 1.6;
-      overflow-x: hidden;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Presentation Mode */
+    .presentation-wrapper {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slides-container {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    .slide {
+      width: 100%;
+      min-height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .slide-content {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Presentation Navigation */
+    .presentation-nav {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px 30px;
+      border-radius: 50px;
+      box-shadow: 0 10px 40px rgba(27, 53, 51, 0.2);
+    }
+
+    .slide-nav-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #1B3533;
+      background: white;
+      color: #1B3533;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .slide-nav-btn:hover {
+      background: #D57028;
+      border-color: #D57028;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .slide-nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .slide-nav-btn:disabled:hover {
+      background: white;
+      border-color: #1B3533;
+      color: #1B3533;
+      transform: scale(1);
+    }
+
+    .slide-counter {
+      font-size: 0.95rem;
+      color: #1B3533;
+      font-weight: 600;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .slide-indicators {
+      display: flex;
+      gap: 8px;
+    }
+
+    .slide-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D3D3D3;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .slide-dot.active {
+      background: #D57028;
+      transform: scale(1.4);
     }
 
     .container {
@@ -1127,7 +1241,12 @@
 </head>
 <body>
 
-  <!-- Hero Section -->
+  <div class="presentation-wrapper">
+    <div class="slides-container" id="slidesContainer">
+
+  <!-- Slide 1: Hero Section -->
+  <div class="slide">
+    <div class="slide-content">
   <div class="hero">
     <div class="hero-content">
       <div class="year-badge">Impact Report</div>
