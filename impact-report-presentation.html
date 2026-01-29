@@ -41,11 +41,9 @@
     pointer-events: auto;
   }
 
-  /* Backgrounds */
   .sengo-deck .bg-teal { background: var(--teal); }
   .sengo-deck .bg-cream { background: var(--cream); }
 
-  /* Top accent bar */
   .sengo-deck .slide::before {
     content: '';
     position: absolute;
@@ -54,7 +52,6 @@
     background: var(--orange);
   }
 
-  /* Section label */
   .sengo-deck .section-label {
     font-size: clamp(9px, 1.2vw, 13px);
     color: var(--orange);
@@ -66,7 +63,6 @@
     width: 100%;
   }
 
-  /* Slide title */
   .sengo-deck .slide-title {
     font-family: 'Arimo', sans-serif;
     font-size: clamp(18px, 3.2vw, 38px);
@@ -78,7 +74,6 @@
   .sengo-deck .bg-teal .slide-title { color: #fff; }
   .sengo-deck .bg-cream .slide-title { color: var(--teal); }
 
-  /* Accent line */
   .sengo-deck .accent-line {
     width: 80px;
     height: 3px;
@@ -87,7 +82,6 @@
     border-radius: 2px;
   }
 
-  /* Body text */
   .sengo-deck .body-text {
     font-size: clamp(10px, 1.4vw, 16px);
     line-height: 1.6;
@@ -97,7 +91,6 @@
   .sengo-deck .bg-teal .body-text { color: var(--cream); }
   .sengo-deck .bg-cream .body-text { color: var(--brown); }
 
-  /* Card grids */
   .sengo-deck .card-grid {
     display: flex;
     gap: clamp(6px, 1vw, 14px);
@@ -112,27 +105,23 @@
     padding: clamp(10px, 1.8vw, 22px);
     text-align: center;
     flex: 1 1 0;
-    min-width: 140px;
-    max-width: 220px;
-  }
-  .sengo-deck .card.white-card {
-    background: #fff;
+    min-width: 120px;
+    max-width: 200px;
   }
 
   .sengo-deck .card .stat-num {
     font-family: 'Arimo', sans-serif;
-    font-size: clamp(22px, 3.5vw, 42px);
+    font-size: clamp(18px, 3vw, 36px);
     font-weight: 700;
     color: var(--orange);
     line-height: 1.1;
   }
   .sengo-deck .card .stat-label {
-    font-size: clamp(9px, 1.1vw, 13px);
+    font-size: clamp(8px, 1vw, 12px);
     color: var(--cream);
     margin-top: 4px;
     line-height: 1.35;
   }
-  .sengo-deck .card.white-card .stat-label { color: var(--teal); }
 
   .sengo-deck .card .card-title {
     font-size: clamp(11px, 1.3vw, 16px);
@@ -146,7 +135,6 @@
     line-height: 1.45;
   }
 
-  /* Badge */
   .sengo-deck .badge {
     display: inline-block;
     background: var(--orange);
@@ -158,7 +146,6 @@
     margin-top: 8px;
   }
 
-  /* Milestone list */
   .sengo-deck .milestone-list {
     list-style: none;
     width: 100%;
@@ -175,7 +162,19 @@
     border-left: 3px solid var(--orange);
   }
 
-  /* Numbered list for learnings */
+  .sengo-deck .callout-bar {
+    background: var(--orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: clamp(11px, 1.3vw, 16px);
+    padding: clamp(8px, 1.2vw, 14px) clamp(14px, 2vw, 24px);
+    border-radius: 8px;
+    text-align: center;
+    width: 85%;
+    max-width: 700px;
+    margin-top: 12px;
+  }
+
   .sengo-deck .learning-list {
     list-style: none;
     width: 100%;
@@ -200,7 +199,6 @@
     min-width: 28px;
   }
 
-  /* Two-column layout */
   .sengo-deck .two-col {
     display: flex;
     gap: clamp(12px, 2vw, 24px);
@@ -214,7 +212,6 @@
   }
   .sengo-deck .bg-cream .two-col .col-text { color: var(--brown); }
 
-  /* Theory of change flow */
   .sengo-deck .toc-flow {
     display: flex;
     gap: 4px;
@@ -265,7 +262,6 @@
     padding: 0 2px;
   }
 
-  /* Program cards */
   .sengo-deck .program-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -280,6 +276,11 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
+  }
+  .sengo-deck .program-card.full-width {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    justify-self: center;
   }
   .sengo-deck .program-card .prog-num {
     font-family: 'Arimo', sans-serif;
@@ -300,147 +301,116 @@
     line-height: 1.4;
   }
 
-  /* Priority cards */
-  .sengo-deck .priority-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(6px, 1vw, 12px);
+  .sengo-deck .priority-list {
+    list-style: none;
     width: 100%;
+    max-width: 85%;
     margin-top: 10px;
   }
-  .sengo-deck .priority-card {
+  .sengo-deck .priority-list li {
     background: var(--teal);
-    border-radius: 10px;
-    padding: clamp(10px, 1.5vw, 18px);
+    border-radius: 8px;
+    padding: clamp(8px, 1vw, 14px) clamp(10px, 1.5vw, 18px);
+    margin-bottom: 6px;
     display: flex;
     align-items: center;
     gap: 12px;
+    color: var(--cream);
+    font-size: clamp(10px, 1.2vw, 14px);
   }
-  .sengo-deck .priority-card .pri-num {
-    width: clamp(28px, 3vw, 40px);
-    height: clamp(28px, 3vw, 40px);
+  .sengo-deck .priority-list li .pri-num {
+    width: clamp(24px, 2.5vw, 34px);
+    height: clamp(24px, 2.5vw, 34px);
     border-radius: 50%;
     background: var(--orange);
     color: #fff;
     font-weight: 700;
-    font-size: clamp(12px, 1.4vw, 18px);
+    font-size: clamp(11px, 1.2vw, 16px);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
-  .sengo-deck .priority-card .pri-title {
-    font-size: clamp(11px, 1.2vw, 15px);
+
+  .sengo-deck .events-col-wrap {
+    display: flex;
+    gap: clamp(10px, 1.5vw, 20px);
+    width: 100%;
+    margin-top: 8px;
+  }
+  .sengo-deck .events-col {
+    flex: 1;
+  }
+  .sengo-deck .events-col h4 {
+    font-size: clamp(10px, 1.1vw, 14px);
     font-weight: 700;
     color: var(--orange);
-    margin-bottom: 3px;
+    margin-bottom: 6px;
   }
-  .sengo-deck .priority-card .pri-desc {
+  .sengo-deck .event-item {
+    background: var(--teal);
+    color: var(--cream);
+    font-size: clamp(8px, 0.85vw, 10px);
+    padding: clamp(3px, 0.5vw, 6px) clamp(6px, 0.8vw, 10px);
+    border-radius: 5px;
+    margin-bottom: 3px;
+    border-left: 2px solid var(--orange);
+  }
+  .sengo-deck .bg-cream .event-item {
+    background: var(--teal);
+    color: var(--cream);
+  }
+
+  /* Case study cards */
+  .sengo-deck .case-grid {
+    display: flex;
+    gap: clamp(10px, 1.5vw, 20px);
+    width: 100%;
+    margin-top: 10px;
+  }
+  .sengo-deck .case-card {
+    flex: 1;
+    background: var(--light-teal);
+    border-radius: 10px;
+    padding: clamp(12px, 1.8vw, 22px);
+  }
+  .sengo-deck .case-card h3 {
+    font-size: clamp(13px, 1.5vw, 18px);
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 2px;
+  }
+  .sengo-deck .case-card .case-meta {
+    font-size: clamp(9px, 0.9vw, 11px);
+    color: var(--cream);
+    opacity: 0.8;
+    margin-bottom: 8px;
+  }
+  .sengo-deck .case-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 8px 0;
+  }
+  .sengo-deck .case-card ul li {
     font-size: clamp(9px, 1vw, 12px);
     color: var(--cream);
-    line-height: 1.4;
+    padding: 2px 0;
   }
-
-  /* Partner logos row */
-  .sengo-deck .partner-row {
-    display: flex;
-    gap: clamp(6px, 1vw, 12px);
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 12px;
+  .sengo-deck .case-card ul li::before {
+    content: '• ';
+    color: var(--orange);
   }
-  .sengo-deck .partner-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: clamp(12px, 1.8vw, 22px) clamp(14px, 2vw, 28px);
-    text-align: center;
-    font-size: clamp(11px, 1.2vw, 15px);
-    font-weight: 700;
-    color: var(--teal);
-    min-width: 100px;
-  }
-
-  /* CTA buttons */
-  .sengo-deck .cta-row {
-    display: flex;
-    gap: clamp(8px, 1.2vw, 16px);
-    margin-top: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .sengo-deck .cta-btn {
+  .sengo-deck .case-card .case-why {
     background: var(--orange);
     color: #fff;
-    font-size: clamp(12px, 1.5vw, 18px);
-    font-weight: 700;
-    padding: clamp(8px, 1.2vw, 14px) clamp(18px, 3vw, 36px);
-    border-radius: 8px;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .sengo-deck .cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(213,112,40,0.4);
-  }
-  .sengo-deck .cta-url {
-    font-size: clamp(8px, 0.8vw, 10px);
-    color: var(--tan);
-    margin-top: 4px;
-    text-align: center;
+    font-size: clamp(9px, 0.95vw, 11px);
+    font-weight: 600;
+    padding: clamp(5px, 0.7vw, 8px) clamp(8px, 1vw, 12px);
+    border-radius: 6px;
+    margin-top: 6px;
   }
 
-  /* Subtitle / subtitle text */
-  .sengo-deck .subtitle {
-    font-size: clamp(10px, 1.3vw, 15px);
-    color: var(--tan);
-    text-align: center;
-    margin-top: 4px;
-  }
-
-  /* Sengo hero title */
-  .sengo-deck .hero-brand {
-    font-family: 'Arimo', sans-serif;
-    font-size: clamp(18px, 2.5vw, 28px);
-    font-weight: 700;
-    color: var(--orange);
-    letter-spacing: 4px;
-    text-align: center;
-  }
-  .sengo-deck .hero-title {
-    font-family: 'Arimo', sans-serif;
-    font-size: clamp(28px, 4.5vw, 52px);
-    font-weight: 700;
-    color: #fff;
-    text-align: center;
-    line-height: 1.15;
-    margin: 6px 0;
-  }
-  .sengo-deck .hero-subtitle {
-    font-size: clamp(12px, 1.8vw, 20px);
-    color: var(--cream);
-    text-align: center;
-    max-width: 80%;
-    line-height: 1.4;
-  }
-
-  .sengo-deck .hero-audience {
-    font-size: clamp(8px, 0.9vw, 11px);
-    color: var(--tan);
-    text-align: center;
-    margin-top: 16px;
-    letter-spacing: 1px;
-  }
-
-  .sengo-deck .footer-line {
-    font-size: clamp(8px, 0.85vw, 11px);
-    color: var(--tan);
-    text-align: center;
-    margin-top: 14px;
-  }
-
-  /* Model diagram */
+  /* Model slide */
   .sengo-deck .model-hub {
     position: relative;
     width: clamp(160px, 22vw, 260px);
@@ -479,40 +449,28 @@
   .sengo-deck .model-node.n-bottom { bottom: 0; left: 50%; transform: translateX(-50%); }
   .sengo-deck .model-node.n-left { top: 50%; left: 0; transform: translateY(-50%); }
 
-  /* Bar chart visual */
-  .sengo-deck .bar-chart {
+  /* Charts */
+  .sengo-deck .charts-row {
     display: flex;
-    align-items: flex-end;
-    gap: clamp(8px, 1.5vw, 18px);
-    height: clamp(80px, 14vw, 160px);
-    padding: 0 10px;
+    gap: clamp(16px, 3vw, 40px);
+    justify-content: center;
+    width: 100%;
+    margin-top: 12px;
   }
-  .sengo-deck .bar-col {
+  .sengo-deck .chart-box {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1;
   }
-  .sengo-deck .bar {
-    width: clamp(30px, 5vw, 60px);
-    background: var(--orange);
-    border-radius: 4px 4px 0 0;
-    transition: height 0.6s ease;
-  }
-  .sengo-deck .bar-label {
-    font-size: clamp(9px, 1vw, 12px);
-    color: var(--cream);
-    margin-top: 4px;
-    font-weight: 600;
-  }
-  .sengo-deck .bar-val {
-    font-size: clamp(10px, 1.1vw, 13px);
-    color: var(--orange);
+  .sengo-deck .chart-title {
+    font-size: clamp(11px, 1.2vw, 15px);
     font-weight: 700;
-    margin-bottom: 3px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 10px;
   }
 
-  /* Donut chart */
   .sengo-deck .donut-wrap {
     display: flex;
     flex-direction: column;
@@ -523,10 +481,9 @@
     height: clamp(100px, 14vw, 160px);
     border-radius: 50%;
     background: conic-gradient(
-      var(--orange) 0deg 90deg,
-      var(--olive) 90deg 216deg,
-      var(--tan) 216deg 288deg,
-      var(--light-teal) 288deg 360deg
+      var(--orange) 0deg 276.5deg,
+      var(--olive) 276.5deg 319.7deg,
+      var(--tan) 319.7deg 360deg
     );
     position: relative;
   }
@@ -561,14 +518,133 @@
   .sengo-deck .donut-legend .leg-1::before { background: var(--orange); }
   .sengo-deck .donut-legend .leg-2::before { background: var(--olive); }
   .sengo-deck .donut-legend .leg-3::before { background: var(--tan); }
-  .sengo-deck .donut-legend .leg-4::before { background: var(--light-teal); }
 
-  .sengo-deck .chart-title {
-    font-size: clamp(11px, 1.2vw, 15px);
+  .sengo-deck .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(16px, 3vw, 36px);
+    height: clamp(80px, 14vw, 160px);
+    padding: 0 10px;
+  }
+  .sengo-deck .bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+  .sengo-deck .bar {
+    width: clamp(50px, 8vw, 100px);
+    background: var(--orange);
+    border-radius: 4px 4px 0 0;
+  }
+  .sengo-deck .bar-label {
+    font-size: clamp(9px, 1vw, 12px);
+    color: var(--cream);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+  .sengo-deck .bar-val {
+    font-size: clamp(10px, 1.1vw, 13px);
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  .sengo-deck .engagement-note {
+    font-size: clamp(9px, 1vw, 12px);
+    color: var(--cream);
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+    opacity: 0.85;
+  }
+
+  /* CTA */
+  .sengo-deck .cta-list {
+    list-style: none;
+    margin-top: 14px;
+    width: 100%;
+    max-width: 420px;
+  }
+  .sengo-deck .cta-list li {
+    background: var(--light-teal);
+    color: var(--cream);
+    font-size: clamp(11px, 1.3vw, 15px);
+    padding: clamp(7px, 1vw, 12px) clamp(14px, 2vw, 24px);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+
+  .sengo-deck .hero-brand {
+    font-family: 'Arimo', sans-serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 4px;
+    text-align: center;
+  }
+  .sengo-deck .hero-title {
+    font-family: 'Arimo', sans-serif;
+    font-size: clamp(28px, 4.5vw, 52px);
     font-weight: 700;
     color: #fff;
     text-align: center;
-    margin-bottom: 10px;
+    line-height: 1.15;
+    margin: 6px 0;
+  }
+  .sengo-deck .hero-subtitle {
+    font-size: clamp(12px, 1.8vw, 20px);
+    color: var(--cream);
+    text-align: center;
+    max-width: 80%;
+    line-height: 1.4;
+  }
+  .sengo-deck .subtitle {
+    font-size: clamp(10px, 1.3vw, 15px);
+    color: var(--tan);
+    text-align: center;
+    margin-top: 4px;
+  }
+  .sengo-deck .footer-line {
+    font-size: clamp(8px, 0.85vw, 11px);
+    color: var(--tan);
+    text-align: center;
+    margin-top: 14px;
+  }
+
+  /* Learnings two-col */
+  .sengo-deck .learn-response-wrap {
+    display: flex;
+    gap: clamp(12px, 2vw, 24px);
+    width: 100%;
+    margin-top: 10px;
+  }
+  .sengo-deck .learn-col {
+    flex: 1;
+  }
+  .sengo-deck .learn-col h4 {
+    font-size: clamp(11px, 1.2vw, 15px);
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .sengo-deck .learn-col .learn-item {
+    background: var(--light-teal);
+    color: var(--cream);
+    font-size: clamp(9px, 1vw, 12px);
+    padding: clamp(5px, 0.7vw, 8px) clamp(8px, 1vw, 14px);
+    border-radius: 6px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sengo-deck .learn-col .learn-item .num {
+    font-size: clamp(12px, 1.3vw, 16px);
+    font-weight: 700;
+    color: var(--orange);
+    min-width: 24px;
   }
 
   /* Navigation */
@@ -613,7 +689,6 @@
     background: var(--orange);
     transform: scale(1.3);
   }
-
   .sengo-deck .slide-counter {
     position: absolute;
     top: 12px;
@@ -622,24 +697,6 @@
     color: rgba(255,255,255,0.5);
     z-index: 10;
   }
-  .sengo-deck .bg-cream .slide-counter-light {
-    color: rgba(27,53,51,0.4);
-  }
-
-  /* Charts side by side */
-  .sengo-deck .charts-row {
-    display: flex;
-    gap: clamp(16px, 3vw, 40px);
-    justify-content: center;
-    width: 100%;
-    margin-top: 12px;
-  }
-  .sengo-deck .chart-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 </style>
 
 <div class="sengo-deck" id="sengoDeck">
@@ -647,98 +704,111 @@
   <!-- SLIDE 1 — Hero -->
   <div class="slide bg-teal active" data-slide="0">
     <div class="hero-brand">SENGO</div>
-    <div class="hero-title">2025 Impact Report</div>
+    <div class="hero-title">Impact Report 2025</div>
     <div class="accent-line"></div>
-    <div class="hero-subtitle">A Year of Building Equitable Access to Funding, Education, and Private Markets</div>
-    <div class="subtitle">From Proof of Concept to Scalable Ecosystem</div>
-    <div class="hero-audience">For Community Members · Partners · Funders · Press · Ecosystem Allies</div>
+    <div class="hero-subtitle">Turning Community Into Capital — Through Readiness</div>
+    <div class="subtitle">Building informed founders, prepared funders, and durable ecosystems</div>
+    <div class="footer-line" style="margin-top:24px;">Founded by Ila B. Corcoran | 2025 Year in Review</div>
   </div>
 
   <!-- SLIDE 2 — 2025 Overview -->
   <div class="slide bg-cream" data-slide="1">
     <div class="section-label">Year in Review</div>
-    <div class="slide-title">2025 Overview</div>
+    <div class="slide-title">From Experimentation to Infrastructure</div>
     <div class="accent-line"></div>
-    <div class="body-text" style="font-weight:600;color:var(--teal);">Reimagining fundraising and investing through education, community, and access.</div>
     <ul class="milestone-list">
-      <li>Official platform launch and first grant-funded year</li>
-      <li>Transitioned from experimentation (2024) to repeatable programs with measurable outcomes</li>
-      <li>Combined education, technology, and non-dilutive capital into one ecosystem</li>
+      <li>2025 marked Sengo's official platform launch and first grant-funded year</li>
+      <li>Transitioned from research and pilots (2024) to repeatable, technology-enabled programs</li>
+      <li>Introduced readiness tools that help founders assess, prepare, and decide if and when to raise</li>
       <li>Served founders, funders, and partners across the U.S. and internationally</li>
     </ul>
+    <div class="callout-bar">Core shift: From "access to capital" → readiness for capital</div>
   </div>
 
-  <!-- SLIDE 3 — Highlight Metrics -->
+  <!-- SLIDE 3 — Headline Impact -->
   <div class="slide bg-teal" data-slide="2">
     <div class="section-label">Key Metrics</div>
-    <div class="slide-title">Highlights & Impact Numbers</div>
+    <div class="slide-title">Headline Impact</div>
     <div class="accent-line"></div>
     <div class="card-grid">
-      <div class="card"><div class="stat-num">$5M+</div><div class="stat-label">Raised by Founders</div></div>
-      <div class="card"><div class="stat-num">600</div><div class="stat-label">Active App Members</div></div>
-      <div class="card"><div class="stat-num">90+</div><div class="stat-label">Annual Touchpoints</div></div>
-      <div class="card"><div class="stat-num">167X</div><div class="stat-label">Return on Grants</div></div>
+      <div class="card"><div class="stat-num">600+</div><div class="stat-label">Members across Explorer, Founder, Funder & All-Access tiers</div></div>
+      <div class="card"><div class="stat-num">8,000+</div><div class="stat-label">Email subscribers (from 157 in Jan 2025)</div></div>
+      <div class="card"><div class="stat-num">$31,250</div><div class="stat-label">Grants deployed to underrepresented founders</div></div>
+      <div class="card"><div class="stat-num">$5M+</div><div class="stat-label">Follow-on capital influenced by supported founders</div></div>
+      <div class="card"><div class="stat-num">27</div><div class="stat-label">Events hosted globally</div></div>
     </div>
-    <div class="body-text" style="margin-top:14px;font-size:clamp(9px,1.1vw,13px);">These numbers represent real founders funded, real investors educated, and real wealth created in underserved communities.</div>
   </div>
 
   <!-- SLIDE 4 — Charts -->
   <div class="slide bg-teal" data-slide="3">
-    <div class="section-label">Growth Trajectory</div>
-    <div class="slide-title">Charts & Trends</div>
+    <div class="section-label">Data & Trends</div>
+    <div class="slide-title">Charts & Breakdown</div>
     <div class="accent-line"></div>
     <div class="charts-row">
       <div class="chart-box">
-        <div class="chart-title">Membership Growth (2025)</div>
-        <div class="bar-chart">
-          <div class="bar-col"><div class="bar-val">150</div><div class="bar" style="height:25%"></div><div class="bar-label">Q1</div></div>
-          <div class="bar-col"><div class="bar-val">300</div><div class="bar" style="height:50%"></div><div class="bar-label">Q2</div></div>
-          <div class="bar-col"><div class="bar-val">450</div><div class="bar" style="height:75%"></div><div class="bar-label">Q3</div></div>
-          <div class="bar-col"><div class="bar-val">600</div><div class="bar" style="height:100%"></div><div class="bar-label">Q4</div></div>
-        </div>
-      </div>
-      <div class="chart-box">
-        <div class="chart-title">Capital Raised by Stage</div>
+        <div class="chart-title">Grant Deployment Breakdown</div>
         <div class="donut-wrap">
           <div class="donut-chart"></div>
           <div class="donut-legend">
-            <span class="leg-1">Pre-Seed 25%</span>
-            <span class="leg-2">Seed 35%</span>
-            <span class="leg-3">Series A 20%</span>
-            <span class="leg-4">Grants 20%</span>
+            <span class="leg-1">Standard Grants 76.8%</span>
+            <span class="leg-2">Pitch Competition Awards 12.0%</span>
+            <span class="leg-3">Micro / Mini Grants 11.2%</span>
           </div>
         </div>
       </div>
+      <div class="chart-box">
+        <div class="chart-title">Programming Mix</div>
+        <div class="bar-chart">
+          <div class="bar-col"><div class="bar-val">51.85%</div><div class="bar" style="height:100%"></div><div class="bar-label">In-Person</div></div>
+          <div class="bar-col"><div class="bar-val">48.15%</div><div class="bar" style="height:93%"></div><div class="bar-label">Virtual</div></div>
+        </div>
+      </div>
     </div>
+    <div class="engagement-note">Above-industry-average email open rates · Strong repeat attendance across programs</div>
   </div>
 
   <!-- SLIDE 5 — Events -->
-  <div class="slide bg-cream" data-slide="4">
-    <div class="section-label">Community</div>
-    <div class="slide-title">Events & Gatherings</div>
+  <div class="slide bg-cream" data-slide="4" style="justify-content:flex-start;padding-top:3%;">
+    <div class="section-label">27 Touchpoints</div>
+    <div class="slide-title" style="font-size:clamp(16px,2.6vw,30px);">Events for Learning, Alignment & Trust</div>
     <div class="accent-line"></div>
-    <div class="card-grid">
-      <div class="card" style="background:var(--teal);">
-        <div class="badge">Q1 2025</div>
-        <div class="card-title" style="margin-top:8px;">Founder Pitch Night</div>
-        <div class="card-body">Live pitch event connecting founders with angel investors and VCs.</div>
+    <div class="events-col-wrap">
+      <div class="events-col">
+        <h4>Virtual Events (13 + 1 partner)</h4>
+        <div class="event-item">Virtual Pitch for $1,000 — Sep 25</div>
+        <div class="event-item">Virtual Pitch for $1,000 — Oct 30</div>
+        <div class="event-item">Virtual Pitch Competition (CPG Edition) — Nov 20</div>
+        <div class="event-item">Pitch Prep with Amiah — Oct 23</div>
+        <div class="event-item">Practice Your Pitch with Sarah Anto — Aug 12</div>
+        <div class="event-item">Build Your 2026 Pitch Strategy (Dana Ammons) — Dec 11</div>
+        <div class="event-item">Private Markets 101 (Part 1) — Sep 9</div>
+        <div class="event-item">Demystifying CDFI Funding with Coleman — Oct 14</div>
+        <div class="event-item">Ask an Angel — Jul 31</div>
+        <div class="event-item">Preparing to Raise Capital with Confidence — Sep 4</div>
+        <div class="event-item">Welcome to Sengo Webinar — May 21</div>
+        <div class="event-item">Founder Meetup: Angels & VCs — Sep 18</div>
+        <div class="event-item">Founder Meetup: Social Enterprise & EdTech — Jul 22</div>
+        <div class="event-item">IFundWomen Webinar — Jun 3</div>
       </div>
-      <div class="card" style="background:var(--teal);">
-        <div class="badge">Q2 2025</div>
-        <div class="card-title" style="margin-top:8px;">Funder Education Series</div>
-        <div class="card-body">Workshop series teaching new investors how to evaluate early-stage deals.</div>
-      </div>
-      <div class="card" style="background:var(--teal);">
-        <div class="badge">Q3 2025</div>
-        <div class="card-title" style="margin-top:8px;">Annual Impact Summit</div>
-        <div class="card-body">Flagship event bringing members together for networking and learning.</div>
-      </div>
-      <div class="card" style="background:var(--teal);">
-        <div class="badge">Q4 2025</div>
-        <div class="card-title" style="margin-top:8px;">Demo Day</div>
-        <div class="card-body">Showcasing top portfolio companies to a curated investor audience.</div>
+      <div class="events-col">
+        <h4>In-Person Events (14)</h4>
+        <div class="event-item">Fashion x Futures — Los Angeles (Jun 28)</div>
+        <div class="event-item">Fashion x Futures — New York (Jul 26)</div>
+        <div class="event-item">Fashion x Futures — LA Holiday Pop-Up (Nov 8–9)</div>
+        <div class="event-item">Galentine's Wine Club — Dallas (Feb 21)</div>
+        <div class="event-item">Brunch Wine Club — Dallas (Mar 15)</div>
+        <div class="event-item">Sip Into Spring — Dallas (Mar 30)</div>
+        <div class="event-item">Wine Club — Dallas (Apr 9)</div>
+        <div class="event-item">GirlMath x Sengo: Wed Night Write-Off — NY Tech Week (Jun 4)</div>
+        <div class="event-item">Spill the Tea: AI & Tech — LA Tech Week (Oct 14)</div>
+        <div class="event-item">NY Tech Week Mixer (Sengo x Little More, Jun 4)</div>
+        <div class="event-item">BBOP Center x Sengo Founder Workshop (Mar 28)</div>
+        <div class="event-item">Funded & Fearless Workshop (Apr 26)</div>
+        <div class="event-item">Barcelona Black Women Entrepreneurs Mixer (Mar 13)</div>
+        <div class="event-item">The Village Retreat — France (Jun 10–15)</div>
       </div>
     </div>
+    <div class="callout-bar" style="margin-top:8px;font-size:clamp(9px,1vw,12px);">Key Insight: Events are most effective when they lead into readiness tools and structured next steps.</div>
   </div>
 
   <!-- SLIDE 6 — Case Studies -->
@@ -746,21 +816,28 @@
     <div class="section-label">Success Stories</div>
     <div class="slide-title">Case Studies</div>
     <div class="accent-line"></div>
-    <div class="card-grid">
-      <div class="card" style="max-width:280px;text-align:left;">
-        <div class="card-title">Founder Spotlight</div>
-        <div class="card-body">A first-time founder joined Sengo's education program, refined their pitch through our workshops, and connected with an investor at Pitch Night. Within 6 months, they closed a pre-seed round through our ecosystem.</div>
-        <div class="badge">Capital Secured</div>
+    <div class="case-grid">
+      <div class="case-card">
+        <h3>Versed Wellness</h3>
+        <div class="case-meta">Founder: Jasmine Bowie | Grant: $500 Micro-Grant</div>
+        <ul>
+          <li>Concept → physical prototype</li>
+          <li>25 new customers acquired</li>
+          <li>Revenue increased post-grant</li>
+          <li>Founder chose not to raise capital prematurely</li>
+        </ul>
+        <div class="case-why">Why it matters: Readiness includes knowing when <em>not</em> to fundraise.</div>
       </div>
-      <div class="card" style="max-width:280px;text-align:left;">
-        <div class="card-title">Funder Journey</div>
-        <div class="card-body">A new investor enrolled in our Funder Education Series with zero investing experience. After completing the program, they made their first angel investments through Sengo's curated deal flow pipeline.</div>
-        <div class="badge">Investor Activated</div>
-      </div>
-      <div class="card" style="max-width:280px;text-align:left;">
-        <div class="card-title">Community Impact</div>
-        <div class="card-body">Through our grant programs and mentorship network, a cohort of underrepresented founders received non-dilutive capital and guidance, resulting in a combined 167X return on grant capital deployed.</div>
-        <div class="badge">167X Return</div>
+      <div class="case-card">
+        <h3>Satlyt</h3>
+        <div class="case-meta">Founder: Rama Afullo | Grant: $3,000 Standard Grant</div>
+        <ul>
+          <li>10 new customers acquired</li>
+          <li>Operational capacity expanded</li>
+          <li>$3M raised post-Sengo</li>
+          <li>12 new hires</li>
+        </ul>
+        <div class="case-why">Why it matters: Prepared founders convert early support into scalable outcomes.</div>
       </div>
     </div>
   </div>
@@ -768,99 +845,110 @@
   <!-- SLIDE 7 — Our Model -->
   <div class="slide bg-cream" data-slide="6">
     <div class="section-label">How We Work</div>
-    <div class="slide-title">Our Model</div>
+    <div class="slide-title">Readiness-First Capital Infrastructure</div>
     <div class="accent-line"></div>
     <div class="two-col">
       <div class="col">
         <div class="col-text">
-          Sengo combines education, technology, and non-dilutive capital into one integrated ecosystem.<br><br>
-          <strong>Founders</strong> — Access education, resources, and funding opportunities to prepare to scale.<br><br>
-          <strong>Funders</strong> — Learn how to invest in early-stage companies and discover high-potential deal flow.<br><br>
-          <strong>Both</strong> — Full access to founder and funder resources for those who build and invest simultaneously.
+          <strong>Sengo is built around preparation before participation.</strong><br><br>
+          <strong>Technology:</strong><br>
+          Fundraise Readiness Score · Personalized Fundraise Roadmap<br><br>
+          <strong>Human Support:</strong><br>
+          1:1 advisory for founders at key inflection points<br><br>
+          <strong>Community Layer:</strong><br>
+          Education, events, and peer learning
         </div>
       </div>
       <div class="col" style="display:flex;align-items:center;justify-content:center;">
         <div class="model-hub">
           <div class="model-center">SENGO</div>
-          <div class="model-node n-top">Education</div>
-          <div class="model-node n-right">Technology</div>
-          <div class="model-node n-bottom">Capital</div>
+          <div class="model-node n-top">Technology</div>
+          <div class="model-node n-right">Readiness</div>
+          <div class="model-node n-bottom">Advisory</div>
           <div class="model-node n-left">Community</div>
         </div>
       </div>
     </div>
+    <div class="callout-bar">Result: Better decisions, stronger outcomes, and healthier capital relationships.</div>
   </div>
 
   <!-- SLIDE 8 — Theory of Change -->
   <div class="slide bg-teal" data-slide="7">
     <div class="section-label">Why It Matters</div>
-    <div class="slide-title">Theory of Change</div>
+    <div class="slide-title">How Readiness Drives Impact</div>
     <div class="accent-line"></div>
     <div class="toc-flow">
       <div class="toc-step">
         <div class="step-num">1</div>
-        <div class="step-title">Problem</div>
-        <div class="step-body">Wealth gap in private assets excludes underrepresented founders & investors</div>
+        <div class="step-title">Inputs</div>
+        <div class="step-body">Education · Readiness technology · Community spaces · Grant capital</div>
       </div>
       <div class="toc-arrow">→</div>
       <div class="toc-step">
         <div class="step-num">2</div>
-        <div class="step-title">Approach</div>
-        <div class="step-body">Education + community + technology + non-dilutive capital in one ecosystem</div>
+        <div class="step-title">Activities</div>
+        <div class="step-body">Assessments · Roadmaps · Workshops · Advisory support</div>
       </div>
       <div class="toc-arrow">→</div>
       <div class="toc-step">
         <div class="step-num">3</div>
         <div class="step-title">Outputs</div>
-        <div class="step-body">600 members, 90+ touchpoints, workshops, pitch events, funding connections</div>
+        <div class="step-body">Prepared founders · Informed funders · Clear next steps</div>
       </div>
       <div class="toc-arrow">→</div>
       <div class="toc-step">
         <div class="step-num">4</div>
         <div class="step-title">Outcomes</div>
-        <div class="step-body">$5M+ raised, 167X return on grants, new investors activated, founder readiness</div>
+        <div class="step-body">Increased fundability when appropriate · Reduced premature fundraising · Stronger alignment</div>
       </div>
       <div class="toc-arrow">→</div>
       <div class="toc-step">
         <div class="step-num">5</div>
-        <div class="step-title">Impact</div>
-        <div class="step-body">A more equitable ecosystem where access to capital is democratized</div>
+        <div class="step-title">Long-Term Impact</div>
+        <div class="step-body">Communities that understand capital before seeking it</div>
       </div>
     </div>
   </div>
 
   <!-- SLIDE 9 — Core Programs -->
   <div class="slide bg-cream" data-slide="8">
-    <div class="section-label">What We Deliver</div>
+    <div class="section-label">What We Run Today</div>
     <div class="slide-title">Core Programs</div>
     <div class="accent-line"></div>
     <div class="program-grid">
       <div class="program-card">
         <div class="prog-num">01</div>
         <div>
-          <div class="prog-title">Founder Enrollment</div>
-          <div class="prog-desc">Comprehensive program preparing founders to scale — pitch prep, financial modeling, and investor readiness.</div>
+          <div class="prog-title">Fundraise Readiness Score</div>
+          <div class="prog-desc">A self-guided assessment to evaluate preparedness</div>
         </div>
       </div>
       <div class="program-card">
         <div class="prog-num">02</div>
         <div>
-          <div class="prog-title">Funder Education</div>
-          <div class="prog-desc">Teaching new investors how to evaluate deals, understand term sheets, and build diversified portfolios.</div>
+          <div class="prog-title">Fundraise Roadmap (1:1 Clients)</div>
+          <div class="prog-desc">Customized plans based on stage, goals, and gaps</div>
         </div>
       </div>
       <div class="program-card">
         <div class="prog-num">03</div>
         <div>
-          <div class="prog-title">All-Access Program</div>
-          <div class="prog-desc">For those who build and invest — full access to both founder and funder resources and events.</div>
+          <div class="prog-title">Membership Platform</div>
+          <div class="prog-desc">Education, tools, and community access</div>
         </div>
       </div>
       <div class="program-card">
         <div class="prog-num">04</div>
         <div>
-          <div class="prog-title">Curated Deal Flow</div>
-          <div class="prog-desc">Vetted investment opportunities connecting funders with high-potential startups in our network.</div>
+          <div class="prog-title">Events & Third Spaces</div>
+          <div class="prog-desc">Structured learning + relationship-building</div>
+        </div>
+      </div>
+      <div class="program-card full-width">
+        <div class="prog-num">05</div>
+        <div>
+          <div class="prog-title">Grant Programs</div>
+          <div class="prog-desc">Flexible, non-dilutive capital to support readiness</div>
         </div>
       </div>
     </div>
@@ -869,99 +957,60 @@
   <!-- SLIDE 10 — Key Learnings -->
   <div class="slide bg-teal" data-slide="9">
     <div class="section-label">Reflections</div>
-    <div class="slide-title">Key Learnings</div>
+    <div class="slide-title">What 2025 Taught Us</div>
     <div class="accent-line"></div>
-    <ul class="learning-list">
-      <li><span class="num">01</span> Community is currency — authentic relationships drive better outcomes than transactional networking.</li>
-      <li><span class="num">02</span> Education-first approach works — founders who complete our programs raise capital faster and more effectively.</li>
-      <li><span class="num">03</span> Non-dilutive capital matters — combining grants with education creates outsized impact (167X return).</li>
-      <li><span class="num">04</span> Access is the biggest barrier — when we remove structural barriers, underrepresented founders thrive.</li>
-      <li><span class="num">05</span> Both sides need support — funders need education just as much as founders need capital.</li>
-    </ul>
+    <div class="learn-response-wrap">
+      <div class="learn-col">
+        <h4>What We Learned</h4>
+        <div class="learn-item"><span class="num">01</span> Readiness beats access</div>
+        <div class="learn-item"><span class="num">02</span> Events without follow-through create noise</div>
+        <div class="learn-item"><span class="num">03</span> Founders value clarity over volume</div>
+        <div class="learn-item"><span class="num">04</span> Pay-to-play limits discovery of strong builders</div>
+        <div class="learn-item"><span class="num">05</span> Small capital, deployed intentionally, creates outsized outcomes</div>
+      </div>
+      <div class="learn-col">
+        <h4>Our Response</h4>
+        <div class="learn-item">→ Fewer, clearer programs</div>
+        <div class="learn-item">→ Free readiness tools for members & non-members</div>
+        <div class="learn-item">→ Deeper 1:1 support at critical moments</div>
+      </div>
+    </div>
   </div>
 
   <!-- SLIDE 11 — 2026 Priorities -->
   <div class="slide bg-cream" data-slide="10">
     <div class="section-label">Looking Ahead</div>
-    <div class="slide-title">2026 Priorities</div>
+    <div class="slide-title">Deepening the Infrastructure</div>
     <div class="accent-line"></div>
-    <div class="priority-grid">
-      <div class="priority-card">
-        <div class="pri-num">1</div>
-        <div>
-          <div class="pri-title">Scale the Ecosystem</div>
-          <div class="pri-desc">Grow membership and deepen engagement across all founder, funder, and dual pathways.</div>
-        </div>
-      </div>
-      <div class="priority-card">
-        <div class="pri-num">2</div>
-        <div>
-          <div class="pri-title">Launch Sengo Fund</div>
-          <div class="pri-desc">Establish a dedicated fund to directly invest in portfolio companies from our ecosystem.</div>
-        </div>
-      </div>
-      <div class="priority-card">
-        <div class="pri-num">3</div>
-        <div>
-          <div class="pri-title">Expand Programming</div>
-          <div class="pri-desc">Scale repeatable programs with measurable outcomes across regions and internationally.</div>
-        </div>
-      </div>
-      <div class="priority-card">
-        <div class="pri-num">4</div>
-        <div>
-          <div class="pri-title">Deepen Partnerships</div>
-          <div class="pri-desc">Build strategic alliances with accelerators, corporations, and institutional investors.</div>
-        </div>
-      </div>
-    </div>
+    <ul class="priority-list">
+      <li><span class="pri-num">1</span> Expand readiness technology & impact tracking</li>
+      <li><span class="pri-num">2</span> Increase investor participation through education</li>
+      <li><span class="pri-num">3</span> Scale repeatable programs into new cities</li>
+      <li><span class="pri-num">4</span> Strengthen longitudinal data on founder outcomes</li>
+      <li><span class="pri-num">5</span> Continue prioritizing clarity, timing, and alignment</li>
+    </ul>
   </div>
 
-  <!-- SLIDE 12 — Strategic Partnerships -->
+  <!-- SLIDE 12 — Call to Action -->
   <div class="slide bg-teal" data-slide="11">
-    <div class="section-label">Recognition & Partners</div>
-    <div class="slide-title">Strategic Partnerships</div>
-    <div class="accent-line"></div>
-    <div class="body-text" style="margin-bottom:10px;">Sengo's mission and impact have been recognized across major media and entrepreneurial platforms nationwide.</div>
-    <div class="partner-row">
-      <div class="partner-card">Forbes</div>
-      <div class="partner-card">NerdWallet</div>
-      <div class="partner-card">Nasdaq</div>
-      <div class="partner-card">Black Girl Ventures</div>
-      <div class="partner-card">Business Insider</div>
-      <div class="partner-card">Build in Tulsa</div>
-    </div>
-    <div class="body-text" style="margin-top:14px;font-size:clamp(9px,1.1vw,13px);">We're actively building partnerships with accelerators, angel networks, venture funds, and corporate innovation teams to expand our impact in 2026.</div>
-  </div>
-
-  <!-- SLIDE 13 — Call to Action -->
-  <div class="slide bg-teal" data-slide="12">
     <div class="section-label">Get Involved</div>
-    <div class="hero-title" style="font-size:clamp(24px,4vw,48px);">Join the Movement</div>
+    <div class="hero-title" style="font-size:clamp(24px,4vw,48px);">Build With Us</div>
     <div class="accent-line"></div>
-    <div class="hero-subtitle" style="max-width:70%;">Together, we're closing the wealth gap in private assets and creating a more equitable future for founders and funders alike. The best is yet to come.</div>
-    <div class="cta-row">
-      <div>
-        <a class="cta-btn" href="https://app.bysengo.com/founder-enrollment" target="_blank">I'm a Founder</a>
-        <div class="cta-url">app.bysengo.com/founder-enrollment</div>
-      </div>
-      <div>
-        <a class="cta-btn" href="https://app.bysengo.com/investor-enrollment" target="_blank">I'm a Funder</a>
-        <div class="cta-url">app.bysengo.com/investor-enrollment</div>
-      </div>
-      <div>
-        <a class="cta-btn" href="https://app.bysengo.com/allaccess-enrollment" target="_blank">I'm Both</a>
-        <div class="cta-url">app.bysengo.com/allaccess-enrollment</div>
-      </div>
-    </div>
-    <div class="footer-line">SENGO · Reimagining Fundraising & Investing · 2025</div>
+    <ul class="cta-list">
+      <li>Join the Sengo community</li>
+      <li>Partner on readiness, education, or grants</li>
+      <li>Attend an event or workshop</li>
+      <li>Support founders building with intention</li>
+    </ul>
+    <div class="body-text" style="margin-top:18px;font-weight:700;color:var(--orange);font-size:clamp(11px,1.4vw,17px);">Sengo believes capital should meet preparedness — not pressure.</div>
+    <div class="footer-line">SENGO · Founded by Ila B. Corcoran · 2025</div>
   </div>
 
   <!-- Navigation -->
   <div class="deck-nav">
-    <button id="deckPrev" aria-label="Previous slide">‹</button>
+    <button id="deckPrev" aria-label="Previous slide">&#8249;</button>
     <div class="deck-dots" id="deckDots"></div>
-    <button id="deckNext" aria-label="Next slide">›</button>
+    <button id="deckNext" aria-label="Next slide">&#8250;</button>
   </div>
   <div class="slide-counter" id="slideCounter"></div>
 </div>
@@ -975,7 +1024,6 @@
   var current = 0;
   var total = slides.length;
 
-  // Build dots
   for (var i = 0; i < total; i++) {
     var d = document.createElement('span');
     d.dataset.idx = i;
@@ -998,13 +1046,11 @@
   document.getElementById('deckPrev').addEventListener('click', function() { goTo(current - 1); });
   document.getElementById('deckNext').addEventListener('click', function() { goTo(current + 1); });
 
-  // Keyboard nav
   document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
   });
 
-  // Touch/swipe support
   var startX = 0;
   deck.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, {passive: true});
   deck.addEventListener('touchend', function(e) {
