@@ -35,21 +35,30 @@
     .slides-container {
       width: 100%;
       height: 100%;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
+      position: relative;
+      overflow: hidden;
     }
 
     .slide {
       width: 100%;
-      min-height: 100vh;
-      scroll-snap-align: start;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 60px 40px;
       box-sizing: border-box;
-      position: relative;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 1;
     }
 
     .slide-content {
@@ -2312,17 +2321,20 @@
     const totalSlides = 9;
 
     function navigateSlide(direction) {
-      const container = document.getElementById('slidesContainer');
-      const slides = container.querySelectorAll('.slide');
+      const slides = document.querySelectorAll('.slide');
 
+      // Remove active from current slide
+      slides[currentSlide].classList.remove('active');
+
+      // Update slide index
       currentSlide += direction;
 
       // Boundary checks
       if (currentSlide < 0) currentSlide = 0;
       if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
 
-      // Scroll to slide
-      slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Add active to new slide
+      slides[currentSlide].classList.add('active');
 
       // Update counter
       updateSlideCounter();
@@ -2336,32 +2348,13 @@
       document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
     }
 
-    // Track scroll position to update current slide
-    let scrollTimeout;
-    document.getElementById('slidesContainer').addEventListener('scroll', () => {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        const container = document.getElementById('slidesContainer');
-        const slides = container.querySelectorAll('.slide');
-        const scrollPosition = container.scrollTop;
-
-        slides.forEach((slide, index) => {
-          const slideTop = slide.offsetTop;
-          const slideBottom = slideTop + slide.offsetHeight;
-
-          if (scrollPosition >= slideTop - 100 && scrollPosition < slideBottom - 100) {
-            currentSlide = index;
-            updateSlideCounter();
-            document.getElementById('prevSlide').disabled = currentSlide === 0;
-            document.getElementById('nextSlide').disabled = currentSlide === totalSlides - 1;
-          }
-        });
-      }, 100);
+    // Initialize - activate first slide
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.slide');
+      slides[0].classList.add('active');
+      updateSlideCounter();
+      document.getElementById('prevSlide').disabled = true;
     });
-
-    // Initialize
-    updateSlideCounter();
-    document.getElementById('prevSlide').disabled = true;
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
