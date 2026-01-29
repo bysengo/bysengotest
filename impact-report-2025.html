@@ -48,11 +48,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 60px 40px;
+      padding: 80px 60px;
       box-sizing: border-box;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease, visibility 0.3s ease;
+      background: #F3EDE7;
     }
 
     .slide.active {
@@ -61,9 +62,9 @@
       z-index: 1;
     }
 
-    .slide-content {
-      max-width: 1400px;
+    .slide > .slide-content {
       width: 100%;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
@@ -1287,63 +1288,57 @@
     </div>
   </div>
 
-  <!-- Slide 2: Executive Summary & Highlights -->
+  <!-- Slide 2: Executive Summary -->
   <div class="slide">
-    <div class="slide-content">
-  <!-- Executive Summary -->
-  <section class="container">
-    <div class="executive-summary fade-in-up">
-      <p>
-        In 2025, Sengo officially launched a new model for how capital moves—one rooted in community, education, and access. Building on proof-of-concept research through 2024 across New York, Los Angeles, and Dallas, we transitioned from early experimentation to a repeatable, scalable ecosystem with measurable outcomes.
+    <div class="slide-content" style="max-width: 1200px; text-align: center;">
+      <h2 class="section-title" style="font-size: 3rem; margin-bottom: 50px;">2025 Overview</h2>
+      <p style="font-size: 1.5rem; line-height: 1.8; color: #1B3533; margin-bottom: 40px;">
+        Sengo launched a new model for how capital moves—one rooted in community, education, and access.
       </p>
-      <p>
-        With our first grant partner onboarded in January 2025, we deployed $31,250 in non-dilutive capital to 18 underrepresented founders, facilitated $5M+ in follow-on capital, and built an engaged community. Through 28 events, high-impact programming, and strategic partnerships, Sengo demonstrated that communities can become self-sustaining capital engines—creating pathways to funding and investing that are both accessible and compliant.
+      <p style="font-size: 1.3rem; line-height: 1.8; color: #67441A;">
+        We deployed <strong>$31,250</strong> in non-dilutive capital to <strong>18 underrepresented founders</strong>, facilitated <strong>$5M+</strong> in follow-on capital, and built an engaged community through <strong>28 events</strong> and strategic partnerships.
       </p>
-    </div>
-  </section>
-
-  <!-- 2025 Highlights -->
-  <section class="container">
-    <h2 class="section-title" style="text-align: center;">2025 Highlights</h2>
-    <div class="highlights-grid fade-in-up">
-      <div class="highlight-card">
-        <div class="highlight-number" data-target="18">0</div>
-        <div class="highlight-label">Founders Funded</div>
-      </div>
-      <div class="highlight-card">
-        <div class="highlight-number" data-target="90678" data-format="currency">0</div>
-        <div class="highlight-label">Emails Delivered</div>
-      </div>
-      <div class="highlight-card">
-        <div class="highlight-number" data-target="47" data-suffix="%">0</div>
-        <div class="highlight-label">Email Open Rate</div>
-      </div>
-      <div class="highlight-card">
-        <div class="highlight-number" data-target="31250" data-prefix="$" data-format="currency">$0</div>
-        <div class="highlight-label">Grants Deployed</div>
-      </div>
-      <div class="highlight-card">
-        <div class="highlight-number" data-target="5" data-suffix="M+" data-prefix="$">$0</div>
-        <div class="highlight-label">Follow-on Capital</div>
-      </div>
-      <div class="highlight-card">
-        <div class="highlight-number" data-target="28">0</div>
-        <div class="highlight-label">Events Hosted</div>
-      </div>
-    </div>
-  </section>
     </div>
   </div>
 
-  <!-- Slide 3: Charts -->
+  <!-- Slide 3: 2025 Highlights -->
   <div class="slide">
     <div class="slide-content">
-  <!-- Charts Section: Grant Distribution & Event Split -->
-  <section class="container">
-    <div class="charts-wrapper fade-in-up">
-      <h3 class="charts-title">2025 Impact by the Numbers</h3>
+      <h2 class="section-title" style="text-align: center; margin-bottom: 80px;">2025 Highlights</h2>
+      <div class="highlights-grid fade-in-up">
+        <div class="highlight-card">
+          <div class="highlight-number" data-target="18">0</div>
+          <div class="highlight-label">Founders Funded</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-number" data-target="90678" data-format="currency">0</div>
+          <div class="highlight-label">Emails Delivered</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-number" data-target="47" data-suffix="%">0</div>
+          <div class="highlight-label">Email Open Rate</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-number" data-target="31250" data-prefix="$" data-format="currency">$0</div>
+          <div class="highlight-label">Grants Deployed</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-number" data-target="5" data-suffix="M+" data-prefix="$">$0</div>
+          <div class="highlight-label">Follow-on Capital</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-number" data-target="28">0</div>
+          <div class="highlight-label">Events Hosted</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <div class="charts-grid" id="chartsSection">
+  <!-- Slide 4: Charts -->
+  <div class="slide">
+    <div class="slide-content">
+      <h2 class="section-title" style="text-align: center; margin-bottom: 60px;">2025 Impact by the Numbers</h2>
+      <div class="charts-grid" id="chartsSection" style="max-width: 1200px; margin: 0 auto;">
         <!-- Grant Distribution Chart -->
         <div class="chart-box">
           <h4 class="chart-box-title">Grant Distribution</h4>
@@ -1403,17 +1398,13 @@
         </div>
       </div>
     </div>
-  </section>
-    </div>
   </div>
 
-  <!-- Slide 4: Events -->
+  <!-- Slide 5: Events -->
   <div class="slide">
     <div class="slide-content">
-  <!-- Events Carousel -->
-  <section class="container">
-    <h2 class="section-title" style="text-align: center;">2025 Events Gallery</h2>
-    <p class="section-subtitle" style="text-align: center; margin: 0 auto;">28 events in chronological order — swipe or scroll to explore</p>
+      <h2 class="section-title" style="text-align: center; margin-bottom: 20px;">2025 Events Gallery</h2>
+      <p style="text-align: center; font-size: 1.1rem; color: #67441A; margin-bottom: 40px;">28 events in chronological order — swipe or scroll to explore</p>
 
     <div class="events-carousel-wrapper fade-in-up">
       <button class="events-carousel-nav prev" onclick="scrollEvents(-1)">←</button>
@@ -2014,17 +2005,14 @@
       </div>
       <div class="events-carousel-counter" id="eventsCounter">Event 1 of 28</div>
     </div>
-  </section>
     </div>
   </div>
 
-  <!-- Slide 5: Case Studies -->
+  <!-- Slide 6: Case Studies -->
   <div class="slide">
-    <div class="slide-content">
-  <!-- Case Studies Carousel -->
-  <section class="container carousel-section">
-    <h2 class="section-title" style="text-align: center;">Impact Stories</h2>
-    <p class="section-subtitle" style="text-align: center; margin: 0 auto;">Real founders, real results</p>
+    <div class="slide-content" style="max-width: 1100px;">
+      <h2 class="section-title" style="text-align: center; margin-bottom: 20px;">Impact Stories</h2>
+      <p style="text-align: center; font-size: 1.1rem; color: #67441A; margin-bottom: 40px;">Real founders, real results</p>
 
     <div class="carousel-container fade-in-up">
       <div class="carousel-track" id="caseStudiesTrack">
@@ -2136,30 +2124,26 @@
       <button class="carousel-btn" onclick="moveCarousel('caseStudies', 1)">→</button>
     </div>
     <div class="carousel-dots" id="caseStudiesDots"></div>
-  </section>
     </div>
   </div>
 
-  <!-- Slide 6: Our Model & Theory of Change -->
+  <!-- Slide 7: Our Model -->
   <div class="slide">
-    <div class="slide-content">
-  <!-- Organizational Overview -->
-  <section class="container">
-    <div class="org-overview fade-in-up">
-      <h2 class="section-title">Our Model</h2>
-      <p>
-        Sengo democratizes access to funding and investing by turning communities into capital engines. We address systemic exclusion in private markets through a three-pillar approach: education that demystifies capital access, third spaces that foster authentic connections, and compliant fundraising infrastructure that enables participation at scale.
+    <div class="slide-content" style="max-width: 1000px; text-align: center;">
+      <h2 class="section-title" style="margin-bottom: 60px;">Our Model</h2>
+      <p style="font-size: 1.4rem; line-height: 1.9; color: #1B3533; margin-bottom: 40px;">
+        Sengo democratizes access to funding and investing by turning communities into capital engines.
       </p>
-      <p>
-        Founded by Ila B. Corcoran, Sengo operates at the intersection of fintech, community building, and capital strategy. Our model creates measurable value for founders seeking capital, investors seeking deal flow, and ecosystem partners seeking impact—all while maintaining regulatory compliance and sustainable unit economics.
+      <p style="font-size: 1.2rem; line-height: 1.8; color: #67441A;">
+        We address systemic exclusion through a three-pillar approach: <strong>education</strong> that demystifies capital access, <strong>third spaces</strong> that foster authentic connections, and compliant <strong>fundraising infrastructure</strong> that enables participation at scale.
       </p>
     </div>
-  </section>
+  </div>
 
-  <!-- Theory of Change -->
-  <section class="container">
-    <div class="theory-section fade-in-up">
-      <h2 class="section-title" style="text-align: center;">Theory of Change</h2>
+  <!-- Slide 8: Theory of Change -->
+  <div class="slide">
+    <div class="slide-content">
+      <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">Theory of Change</h2>
       <div class="theory-flow">
         <div class="theory-box">
           <h4>Inputs</h4>
@@ -2199,24 +2183,20 @@
         </div>
       </div>
 
-      <div class="theory-impact-summary">
+      <div class="theory-impact-summary" style="margin-top: 50px;">
         <p>
           <span class="impact-arrow">→</span>
           <strong>Long-Term Impact:</strong> Reduced access gaps in funding and investing, self-capitalizing communities, and more equitable markets.
         </p>
       </div>
     </div>
-  </section>
-    </div>
   </div>
 
-  <!-- Slide 7: Core Programs -->
+  <!-- Slide 9: Core Programs -->
   <div class="slide">
     <div class="slide-content">
-  <!-- Programs & Initiatives -->
-  <section class="container">
-    <h2 class="section-title" style="text-align: center;">Core Programs</h2>
-    <div class="impact-stats fade-in-up">
+      <h2 class="section-title" style="text-align: center; margin-bottom: 80px;">Core Programs</h2>
+      <div class="impact-stats fade-in-up">
       <div class="impact-stat">
         <div class="impact-stat-number">💼</div>
         <div class="impact-stat-label">Platform & Community<br>18 founders funded with direct capital and ecosystem support</div>
@@ -2230,77 +2210,72 @@
         <div class="impact-stat-label">Capital Facilitation<br>Compliant fundraising pathways (Reg CF, 506(b)) and grant deployment</div>
       </div>
     </div>
-  </section>
     </div>
   </div>
 
-  <!-- Slide 8: Learnings & Future -->
+  <!-- Slide 10: Learnings -->
   <div class="slide">
-    <div class="slide-content">
-  <!-- Learnings & Adjustments -->
-  <section class="container">
-    <div class="learnings-section fade-in-up">
-      <h2 class="section-title">Learnings & Adjustments</h2>
-      <p>
-        In 2025, Sengo learned that <strong>events alone are not sufficient</strong> to drive sustained engagement or outcomes. While events create energy and visibility, the strongest results occurred when events were paired with education and clear next steps.
-      </p>
-      <p>
-        We also learned that <strong>too much variety can create distraction</strong>. Many community members expressed a preference for reliable, repeatable support within the platform over a wide range of disconnected experiences.
-      </p>
-      <p>
-        Additionally, we observed that <strong>pay-to-play models can unintentionally exclude participants</strong>. To address this, Sengo began offering scholarships and giveaways, and 6.4% of grant capital was intentionally deployed to non-members.
-      </p>
-      <p>
-        In response, Sengo introduced the <strong>Fundraise Readiness Pathway</strong>, a free, self-guided assessment available to both members and non-members, helping founders understand their readiness and identify gaps without requiring immediate enrollment.
-      </p>
-    </div>
-  </section>
-
-  <!-- Looking Ahead -->
-  <section class="container">
-    <div class="looking-ahead fade-in-up">
-      <h2 class="section-title">2026 Strategic Priorities</h2>
-      <p>
-        Building on 2025's foundation, Sengo is positioned to scale impact through three key initiatives: <strong>(1)</strong> deepening investor participation through structured deal flow and co-investment opportunities, <strong>(2)</strong> expanding our impact measurement framework to provide partners with transparent ROI data, and <strong>(3)</strong> replicating our proven programming model across new cities and sectors.
-      </p>
-      <p>
-        We're seeking strategic partners who share our vision of democratizing capital access and can help us scale infrastructure that creates lasting systemic change. Partnership opportunities include grant funding, corporate sponsorship, ecosystem collaboration, and programmatic support.
-      </p>
-    </div>
-  </section>
-    </div>
-  </div>
-
-  <!-- Slide 9: Partnerships & CTA -->
-  <div class="slide">
-    <div class="slide-content">
-  <!-- Ecosystem & Partnerships -->
-  <section class="container">
-    <div class="ecosystem-section fade-in-up">
-      <h2 class="section-title">Strategic Partnerships & Ecosystem Impact</h2>
-      <p>
-        In 2025, Sengo established strategic partnerships with leading organizations including <strong>Honeycomb, BBOP Center, GirlMath, and Build in Tulsa</strong>, alongside multiple community hosts and corporate sponsors. These collaborations amplified our reach, provided founders with complementary resources, and created shared value across the entrepreneurial ecosystem.
-      </p>
-      <p>
-        <strong>Partnership Impact:</strong> Through co-hosted events, cross-promotional initiatives, and resource sharing, our partners helped extend Sengo's reach to underserved communities, reduce barriers to entry for founders, and build trust through institutional validation. These partnerships demonstrate our ability to align diverse stakeholders around a shared mission of democratizing capital access.
-      </p>
-    </div>
-  </section>
-
-  <!-- Call to Action -->
-  <section class="container">
-    <div class="cta-section fade-in-up">
-      <h2>Partner With Us</h2>
-      <p>
-        Join leading organizations investing in equitable capital access. Whether through grant funding, strategic collaboration, or ecosystem partnerships—together we're building scalable infrastructure for underrepresented founders and investors.
-      </p>
-      <div class="cta-buttons">
-        <a href="#" class="cta-btn primary">Explore Partnership Opportunities</a>
-        <a href="#" class="cta-btn">Request Full Impact Report</a>
-        <a href="#" class="cta-btn">Schedule a Conversation</a>
+    <div class="slide-content" style="max-width: 1000px; text-align: center;">
+      <h2 class="section-title" style="margin-bottom: 60px;">Key Learnings</h2>
+      <div style="text-align: left; font-size: 1.2rem; line-height: 1.9; color: #1B3533;">
+        <p style="margin-bottom: 30px;">
+          ✓ <strong>Events alone are not sufficient</strong> — strongest results occurred when paired with education and clear next steps
+        </p>
+        <p style="margin-bottom: 30px;">
+          ✓ <strong>Too much variety creates distraction</strong> — members prefer reliable, repeatable support
+        </p>
+        <p style="margin-bottom: 30px;">
+          ✓ <strong>Pay-to-play models can exclude</strong> — introduced scholarships and deployed 6.4% of grants to non-members
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- Slide 11: 2026 Priorities -->
+  <div class="slide">
+    <div class="slide-content" style="max-width: 1000px; text-align: center;">
+      <h2 class="section-title" style="margin-bottom: 60px;">2026 Strategic Priorities</h2>
+      <div style="text-align: left; font-size: 1.2rem; line-height: 1.9; color: #1B3533;">
+        <p style="margin-bottom: 30px;">
+          <strong>1.</strong> Deepen investor participation through structured deal flow and co-investment opportunities
+        </p>
+        <p style="margin-bottom: 30px;">
+          <strong>2.</strong> Expand impact measurement framework to provide partners with transparent ROI data
+        </p>
+        <p style="margin-bottom: 30px;">
+          <strong>3.</strong> Replicate proven programming model across new cities and sectors
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 12: Partnerships -->
+  <div class="slide">
+    <div class="slide-content" style="max-width: 1000px; text-align: center;">
+      <h2 class="section-title" style="margin-bottom: 50px;">Strategic Partnerships</h2>
+      <p style="font-size: 1.3rem; line-height: 1.8; color: #1B3533; margin-bottom: 40px;">
+        In 2025, Sengo established strategic partnerships with leading organizations including <strong>Honeycomb, BBOP Center, GirlMath, and Build in Tulsa</strong>.
+      </p>
+      <p style="font-size: 1.2rem; line-height: 1.8; color: #67441A;">
+        These collaborations amplified our reach, provided founders with complementary resources, and created shared value across the entrepreneurial ecosystem.
+      </p>
+    </div>
+  </div>
+
+  <!-- Slide 13: Call to Action -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="cta-section fade-in-up">
+        <h2>Partner With Us</h2>
+        <p>
+          Join leading organizations investing in equitable capital access. Whether through grant funding, strategic collaboration, or ecosystem partnerships—together we're building scalable infrastructure for underrepresented founders and investors.
+        </p>
+        <div class="cta-buttons">
+          <a href="#" class="cta-btn primary">Explore Partnership Opportunities</a>
+          <a href="#" class="cta-btn">Request Full Impact Report</a>
+          <a href="#" class="cta-btn">Schedule a Conversation</a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2309,7 +2284,7 @@
   <!-- Presentation Navigation -->
   <div class="presentation-nav">
     <button class="slide-nav-btn" id="prevSlide" onclick="navigateSlide(-1)">←</button>
-    <div class="slide-counter" id="slideCounter">1 / 9</div>
+    <div class="slide-counter" id="slideCounter">1 / 13</div>
     <button class="slide-nav-btn" id="nextSlide" onclick="navigateSlide(1)">→</button>
   </div>
 
@@ -2318,7 +2293,7 @@
   <script>
     // Presentation Navigation
     let currentSlide = 0;
-    const totalSlides = 9;
+    const totalSlides = 13;
 
     function navigateSlide(direction) {
       const slides = document.querySelectorAll('.slide');
