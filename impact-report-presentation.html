@@ -730,6 +730,58 @@
     aspect-ratio: auto;
     border-radius: 0;
   }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes growBar {
+    from { height: 0; }
+  }
+  @keyframes spinDonut {
+    from { transform: rotate(-90deg); opacity: 0.3; }
+    to { transform: rotate(0deg); opacity: 1; }
+  }
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.7); }
+    70% { transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .sengo-deck .slide.active .card {
+    animation: fadeInUp 0.6s ease both;
+  }
+  .sengo-deck .slide.active .card:nth-child(1) { animation-delay: 0.1s; }
+  .sengo-deck .slide.active .card:nth-child(2) { animation-delay: 0.2s; }
+  .sengo-deck .slide.active .card:nth-child(3) { animation-delay: 0.3s; }
+  .sengo-deck .slide.active .card:nth-child(4) { animation-delay: 0.4s; }
+  .sengo-deck .slide.active .card:nth-child(5) { animation-delay: 0.5s; }
+
+  .sengo-deck .slide.active .donut-chart {
+    animation: spinDonut 1s ease both;
+    animation-delay: 0.3s;
+  }
+  .sengo-deck .slide.active .bar {
+    animation: growBar 0.8s ease both;
+  }
+  .sengo-deck .slide.active .bar-col:nth-child(1) .bar { animation-delay: 0.3s; }
+  .sengo-deck .slide.active .bar-col:nth-child(2) .bar { animation-delay: 0.5s; }
+
+  .sengo-deck .slide.active .donut-legend,
+  .sengo-deck .slide.active .bar-val {
+    animation: fadeInUp 0.5s ease both;
+    animation-delay: 0.8s;
+  }
+
+  .sengo-deck .slide.active .stat-num {
+    animation: popIn 0.5s ease both;
+  }
+  .sengo-deck .slide.active .card:nth-child(1) .stat-num { animation-delay: 0.15s; }
+  .sengo-deck .slide.active .card:nth-child(2) .stat-num { animation-delay: 0.25s; }
+  .sengo-deck .slide.active .card:nth-child(3) .stat-num { animation-delay: 0.35s; }
+  .sengo-deck .slide.active .card:nth-child(4) .stat-num { animation-delay: 0.45s; }
+  .sengo-deck .slide.active .card:nth-child(5) .stat-num { animation-delay: 0.55s; }
 </style>
 
 <div class="sengo-deck" id="sengoDeck">
@@ -1077,6 +1129,7 @@
     slides[current].classList.add('active');
     dots.children[current].classList.add('active');
     counter.textContent = (current + 1) + ' / ' + total;
+    animateSlide(n);
   }
 
   document.getElementById('deckPrev').addEventListener('click', function() { goTo(current - 1); });
@@ -1097,6 +1150,38 @@
   }, {passive: true});
 
   counter.textContent = '1 / ' + total;
+
+  // Count-up animation for stat numbers
+  function countUp(el) {
+    var raw = el.getAttribute('data-val') || el.textContent;
+    if (!el.getAttribute('data-val')) el.setAttribute('data-val', raw);
+    var prefix = raw.match(/^[^0-9]*/)[0];
+    var suffix = raw.match(/[^0-9]*$/)[0];
+    var numStr = raw.replace(prefix, '').replace(suffix, '').replace(/,/g, '');
+    var target = parseInt(numStr, 10);
+    if (isNaN(target)) return;
+    var duration = 1200;
+    var start = performance.now();
+    function step(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      var val = Math.floor(ease * target);
+      el.textContent = prefix + val.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    el.textContent = prefix + '0' + suffix;
+    requestAnimationFrame(step);
+  }
+
+  var animatedSlides = {};
+  function animateSlide(n) {
+    if (animatedSlides[n]) return;
+    animatedSlides[n] = true;
+    var slide = slides[n];
+    var nums = slide.querySelectorAll('.stat-num');
+    nums.forEach(function(el) { setTimeout(function() { countUp(el); }, 300); });
+  }
 
   // Fullscreen toggle
   document.getElementById('deckFs').addEventListener('click', function() {
