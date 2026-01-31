@@ -82,15 +82,15 @@ class SlideDeck:
         self._new_page()
         self._bg(TEAL)
         self._orange_bar()
-        # Sengo logo
+        # Sengo logo (SVG converted to PNG)
         logo_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sengo-logo.svg')
         with open(logo_path, 'r') as f:
             svg_data = f.read().replace('currentColor', '#D57028')
         logo_png = cairosvg.svg2png(bytestring=svg_data.encode(), output_width=400)
         logo_buf = io.BytesIO(logo_png)
-        logo_w, logo_h = 180, 116
+        logo_w, logo_h = 200, 129
         self.c.drawImage(ImageReader(logo_buf),
-                         PAGE_W / 2 - logo_w / 2, PAGE_H - 210,
+                         PAGE_W / 2 - logo_w / 2, PAGE_H - 200,
                          width=logo_w, height=logo_h, mask='auto')
         self.c.setFont("Helvetica-Bold", 44)
         self.c.setFillColor(WHITE)
