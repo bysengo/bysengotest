@@ -90,7 +90,7 @@ class SlideDeck:
         self._accent_line(PAGE_H - 260)
         self.c.setFont("Helvetica", 16)
         self.c.setFillColor(CREAM)
-        self.c.drawCentredString(PAGE_W / 2, PAGE_H - 295, "Turning Community Into Capital \u2014 Through Readiness")
+        self.c.drawCentredString(PAGE_W / 2, PAGE_H - 295, "Reimagining fundraising and investing through education, community, and access.")
         self.c.setFont("Helvetica", 12)
         self.c.setFillColor(TAN)
         self.c.drawCentredString(PAGE_W / 2, PAGE_H - 320, "Building informed founders, prepared funders, and durable ecosystems")
@@ -107,7 +107,7 @@ class SlideDeck:
         self._accent_line(PAGE_H - 135)
 
         items = [
-            "2025 marked Sengo\u2019s official platform launch and first grant-funded year",
+            "2025 marked Sengo\u2019s official platform launch and first grant cycle",
             "Transitioned from research and pilots (2024) to repeatable, technology-enabled programs",
             "Introduced readiness tools that help founders assess, prepare, and decide if and when to raise",
             "Served founders, funders, and partners across the U.S. and internationally",
@@ -232,7 +232,7 @@ class SlideDeck:
         self.c.setFont("Helvetica-Oblique", 9)
         self.c.setFillColor(CREAM)
         self.c.drawCentredString(PAGE_W / 2, PAGE_H - 430,
-                                 "Above-industry-average email open rates \u00b7 Strong repeat attendance across programs")
+                                 "Strong engagement across programs")
 
     def slide_email_data(self):
         self._new_page()
@@ -246,21 +246,21 @@ class SlideDeck:
         self.c.setFillColor(CREAM)
         self.c.drawCentredString(PAGE_W / 2, PAGE_H - 165, "Email engagement across 2025 campaigns")
 
-        # Top row: 3 stats
-        stats = [("90,678", "Emails Delivered"), ("42,150", "Emails Opened"), ("1,331", "Emails Clicked")]
-        card_w = 170
-        gap = 20
-        total_w = 3 * card_w + 2 * gap
+        # Top row: 2 stats (delivered + opened)
+        stats = [("90,678", "Emails Delivered"), ("42,150", "Emails Opened")]
+        card_w = 200
+        gap = 30
+        total_w = 2 * card_w + gap
         sx = (PAGE_W - total_w) / 2
         y = PAGE_H - 280
 
         for i, (num, label) in enumerate(stats):
             x = sx + i * (card_w + gap)
             self._rounded_rect(x, y, card_w, 85, 8, LIGHT_TEAL)
-            self.c.setFont("Helvetica-Bold", 26)
+            self.c.setFont("Helvetica-Bold", 28)
             self.c.setFillColor(ORANGE)
             self.c.drawCentredString(x + card_w / 2, y + 48, num)
-            self.c.setFont("Helvetica", 10)
+            self.c.setFont("Helvetica", 11)
             self.c.setFillColor(CREAM)
             self.c.drawCentredString(x + card_w / 2, y + 22, label)
 
@@ -278,7 +278,14 @@ class SlideDeck:
 
         self.c.setFont("Helvetica-Oblique", 9)
         self.c.setFillColor(CREAM)
-        self.c.drawCentredString(PAGE_W / 2, oy - 22, "Open rate significantly above the industry average of ~21%")
+        self.c.drawCentredString(PAGE_W / 2, oy - 22,
+                                 "Open rate significantly above the industry average of ~21.33%*")
+
+        # Citation
+        self.c.setFont("Helvetica", 7)
+        self.c.setFillColor(TAN)
+        self.c.drawCentredString(PAGE_W / 2, oy - 40,
+                                 "*Source: Mailchimp Email Marketing Benchmarks, 2024 \u2014 average open rate across all industries: 21.33%")
 
     def slide_events(self):
         self._new_page()
@@ -289,36 +296,36 @@ class SlideDeck:
         self._accent_line(PAGE_H - 102)
 
         virtual = [
+            "Welcome to Sengo Webinar \u2014 May 21",
+            "IFundWomen Webinar \u2014 Jun 3",
+            "Founder Meetup: Social Enterprise \u2014 Jul 22",
+            "Ask an Angel \u2014 Jul 31",
+            "Practice Your Pitch (Sarah Anto) \u2014 Aug 12",
+            "Preparing to Raise Capital \u2014 Sep 4",
+            "Private Markets 101 (Part 1) \u2014 Sep 9",
+            "Founder Meetup: Angels & VCs \u2014 Sep 18",
             "Virtual Pitch for $1,000 \u2014 Sep 25",
+            "Demystifying CDFI Funding \u2014 Oct 14",
+            "Pitch Prep with Amiah \u2014 Oct 23",
             "Virtual Pitch for $1,000 \u2014 Oct 30",
             "Virtual Pitch Competition (CPG) \u2014 Nov 20",
-            "Pitch Prep with Amiah \u2014 Oct 23",
-            "Practice Your Pitch (Sarah Anto) \u2014 Aug 12",
             "Build Your 2026 Pitch Strategy \u2014 Dec 11",
-            "Private Markets 101 (Part 1) \u2014 Sep 9",
-            "Demystifying CDFI Funding \u2014 Oct 14",
-            "Ask an Angel \u2014 Jul 31",
-            "Preparing to Raise Capital \u2014 Sep 4",
-            "Welcome to Sengo Webinar \u2014 May 21",
-            "Founder Meetup: Angels & VCs \u2014 Sep 18",
-            "Founder Meetup: Social Enterprise \u2014 Jul 22",
-            "IFundWomen Webinar \u2014 Jun 3",
         ]
         inperson = [
-            "Fashion x Futures \u2014 LA (Jun 28)",
-            "Fashion x Futures \u2014 NY (Jul 26)",
-            "Fashion x Futures \u2014 LA Pop-Up (Nov 8\u20139)",
             "Galentine's Wine Club \u2014 Dallas (Feb 21)",
+            "Barcelona Entrepreneurs Mixer (Mar 13)",
             "Brunch Wine Club \u2014 Dallas (Mar 15)",
+            "BBOP Center Workshop (Mar 28)",
             "Sip Into Spring \u2014 Dallas (Mar 30)",
             "Wine Club \u2014 Dallas (Apr 9)",
-            "GirlMath x Sengo \u2014 NY Tech Week (Jun 4)",
-            "Spill the Tea: AI & Tech \u2014 LA (Oct 14)",
-            "NY Tech Week Mixer (Jun 4)",
-            "BBOP Center Workshop (Mar 28)",
             "Funded & Fearless Workshop (Apr 26)",
-            "Barcelona Entrepreneurs Mixer (Mar 13)",
+            "GirlMath x Sengo \u2014 NY Tech Week (Jun 4)",
+            "NY Tech Week Mixer (Jun 4)",
             "The Village Retreat \u2014 France (Jun 10\u201315)",
+            "Fashion x Futures \u2014 LA (Jun 28)",
+            "Fashion x Futures \u2014 NY (Jul 26)",
+            "Spill the Tea: AI & Tech \u2014 LA (Oct 14)",
+            "Fashion x Futures \u2014 LA Pop-Up (Nov 8\u20139)",
         ]
 
         col_x_left = MARGIN + 20
@@ -412,18 +419,20 @@ class SlideDeck:
             self.c.drawCentredString(x + card_w / 2, by - 1, case["why"])
 
         # --- TEASER OVERLAY (remove this block after live) ---
+        # Solid overlay so case study content is not readable
         self.c.saveState()
         self.c.setFillColor(HexColor('#1B3533'))
-        self.c.setFillAlpha(0.78)
+        self.c.setFillAlpha(0.92)
         self.c.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
         self.c.restoreState()
 
-        # Overlay text
-        self.c.setFont("Helvetica-Bold", 30)
+        # CTA text — positioned above QR code with spacing
+        self.c.setFont("Helvetica-Bold", 28)
         self.c.setFillColor(WHITE)
-        self.c.drawCentredString(PAGE_W / 2, PAGE_H / 2 + 80, "Join our email list for full access")
+        self.c.drawCentredString(PAGE_W / 2, PAGE_H / 2 + 120, "Join our email list")
+        self.c.drawCentredString(PAGE_W / 2, PAGE_H / 2 + 85, "for full access")
 
-        # QR code
+        # QR code — centered in remaining space
         qr = qrcode.QRCode(version=1, box_size=10, border=2)
         qr.add_data("https://bysengo.com")
         qr.make(fit=True)
@@ -431,21 +440,22 @@ class SlideDeck:
         buf = io.BytesIO()
         qr_img.save(buf, format="PNG")
         buf.seek(0)
-        qr_size = 150
+        qr_size = 160
+        qr_y = PAGE_H / 2 - 50
         self.c.drawImage(ImageReader(buf),
-                         PAGE_W / 2 - qr_size / 2, PAGE_H / 2 - 70,
+                         PAGE_W / 2 - qr_size / 2, qr_y,
                          width=qr_size, height=qr_size)
 
         # Border around QR
         self.c.setStrokeColor(ORANGE)
         self.c.setLineWidth(2.5)
-        self.c.roundRect(PAGE_W / 2 - qr_size / 2 - 3, PAGE_H / 2 - 73,
+        self.c.roundRect(PAGE_W / 2 - qr_size / 2 - 3, qr_y - 3,
                          qr_size + 6, qr_size + 6, 6, fill=0, stroke=1)
 
-        # URL label
+        # URL label — below QR code
         self.c.setFont("Helvetica-Bold", 16)
         self.c.setFillColor(ORANGE)
-        self.c.drawCentredString(PAGE_W / 2, PAGE_H / 2 - 100, "bysengo.com")
+        self.c.drawCentredString(PAGE_W / 2, qr_y - 28, "bysengo.com")
         # --- END TEASER OVERLAY ---
 
     def slide_model(self):
