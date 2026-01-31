@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
@@ -782,6 +783,87 @@
   .sengo-deck .slide.active .card:nth-child(3) .stat-num { animation-delay: 0.35s; }
   .sengo-deck .slide.active .card:nth-child(4) .stat-num { animation-delay: 0.45s; }
   .sengo-deck .slide.active .card:nth-child(5) .stat-num { animation-delay: 0.55s; }
+
+  /* Mobile responsive */
+  @media (max-width: 680px) {
+    .sengo-deck {
+      aspect-ratio: auto;
+      min-height: 100vw;
+      border-radius: 0;
+      max-width: 100%;
+    }
+    .sengo-deck .slide {
+      padding: 12% 5% 14%;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .sengo-deck .card-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+    .sengo-deck .card {
+      max-width: 100%;
+      min-width: 0;
+      width: 100%;
+    }
+    .sengo-deck .case-grid {
+      flex-direction: column;
+    }
+    .sengo-deck .charts-row {
+      flex-direction: column;
+      align-items: center;
+    }
+    .sengo-deck .two-col,
+    .sengo-deck .learn-response-wrap {
+      flex-direction: column;
+    }
+    .sengo-deck .events-col-wrap {
+      flex-direction: column;
+    }
+    .sengo-deck .toc-flow {
+      flex-direction: column;
+      align-items: center;
+    }
+    .sengo-deck .toc-arrow {
+      transform: rotate(90deg);
+      padding: 2px 0;
+    }
+    .sengo-deck .program-grid {
+      grid-template-columns: 1fr;
+    }
+    .sengo-deck .program-card.full-width {
+      max-width: 100%;
+    }
+    .sengo-deck .deck-nav button {
+      width: 40px; height: 40px;
+      font-size: 20px;
+    }
+    .sengo-deck .fs-btn {
+      width: 38px; height: 38px;
+      font-size: 18px;
+    }
+    .sengo-deck .deck-dots span {
+      width: 10px; height: 10px;
+    }
+    .sengo-deck .slide-counter {
+      font-size: 13px;
+    }
+    .sengo-deck .bar-chart {
+      gap: clamp(24px, 6vw, 50px);
+    }
+  }
+
+  /* Fullscreen on all devices including mobile */
+  .sengo-deck.is-fullscreen {
+    position: fixed !important;
+    top: 0; left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    aspect-ratio: auto !important;
+    border-radius: 0 !important;
+    z-index: 999999;
+  }
 </style>
 
 <div class="sengo-deck" id="sengoDeck">
@@ -916,7 +998,7 @@
     <div class="callout-bar" style="margin-top:8px;font-size:clamp(9px,1vw,12px);">Key Insight: Events are most effective when they lead into readiness tools and structured next steps.</div>
   </div>
 
-  <!-- SLIDE 7 — Case Studies (TEASER OVERLAY — remove after live) -->
+  <!-- SLIDE 7 — Case Studies -->
   <div class="slide bg-teal" data-slide="6">
     <div class="section-label">Success Stories</div>
     <div class="slide-title">Case Studies</div>
@@ -944,14 +1026,6 @@
         </ul>
         <div class="case-why">Why it matters: Prepared founders convert early support into scalable outcomes.</div>
       </div>
-    </div>
-    <!-- TEASER OVERLAY — remove this div after live -->
-    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:5;background:rgba(27,53,51,0.78);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);">
-      <div style="font-family:'Arimo',sans-serif;font-size:clamp(18px,3vw,34px);font-weight:700;color:#fff;text-align:center;line-height:1.3;max-width:80%;">Join our email list for full access</div>
-      <div style="margin:18px 0 10px;">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://bysengo.com&bgcolor=1B3533&color=D57028&format=svg" alt="QR code to bysengo.com" style="width:clamp(110px,16vw,170px);height:clamp(110px,16vw,170px);border-radius:8px;border:3px solid var(--orange);">
-      </div>
-      <div style="font-size:clamp(12px,1.5vw,17px);color:var(--orange);font-weight:700;letter-spacing:1px;">bysengo.com</div>
     </div>
   </div>
 
@@ -1211,23 +1285,47 @@
     nums.forEach(function(el) { setTimeout(function() { countUp(el); }, 300); });
   }
 
-  // Fullscreen toggle
-  document.getElementById('deckFs').addEventListener('click', function() {
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-      if (deck.requestFullscreen) deck.requestFullscreen();
-      else if (deck.webkitRequestFullscreen) deck.webkitRequestFullscreen();
-    } else {
-      if (document.exitFullscreen) document.exitFullscreen();
-      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    }
+  // Fullscreen toggle — native API with CSS class fallback for iOS/mobile
+  var fsBtn = document.getElementById('deckFs');
+  var isFs = false;
+
+  function enterFs() {
+    if (deck.requestFullscreen) { deck.requestFullscreen(); return; }
+    if (deck.webkitRequestFullscreen) { deck.webkitRequestFullscreen(); return; }
+    // Fallback: CSS class for iOS and browsers without Fullscreen API
+    deck.classList.add('is-fullscreen');
+    document.body.style.overflow = 'hidden';
+    isFs = true;
+    updateFsBtn();
+  }
+
+  function exitFs() {
+    if (document.fullscreenElement) { document.exitFullscreen(); return; }
+    if (document.webkitFullscreenElement) { document.webkitExitFullscreen(); return; }
+    deck.classList.remove('is-fullscreen');
+    document.body.style.overflow = '';
+    isFs = false;
+    updateFsBtn();
+  }
+
+  function updateFsBtn() {
+    var active = document.fullscreenElement || document.webkitFullscreenElement || deck.classList.contains('is-fullscreen');
+    fsBtn.innerHTML = active ? '&#x2716;' : '&#x26F6;';
+  }
+
+  fsBtn.addEventListener('click', function() {
+    var active = document.fullscreenElement || document.webkitFullscreenElement || deck.classList.contains('is-fullscreen');
+    active ? exitFs() : enterFs();
   });
 
-  // Update button text on fullscreen change
-  function onFsChange() {
-    var btn = document.getElementById('deckFs');
-    btn.innerHTML = (document.fullscreenElement || document.webkitFullscreenElement) ? '&#x2716;' : '&#x26F6;';
-  }
-  document.addEventListener('fullscreenchange', onFsChange);
-  document.addEventListener('webkitfullscreenchange', onFsChange);
+  document.addEventListener('fullscreenchange', updateFsBtn);
+  document.addEventListener('webkitfullscreenchange', updateFsBtn);
+
+  // Allow Escape key to exit CSS-class fullscreen
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && deck.classList.contains('is-fullscreen')) {
+      exitFs();
+    }
+  });
 })();
 </script>
