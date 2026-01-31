@@ -11,6 +11,10 @@ from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 import math
 import os
+import io
+import qrcode
+from PIL import Image as PILImage
+from reportlab.lib.utils import ImageReader
 
 # Brand colors
 TEAL = HexColor('#1B3533')
@@ -406,6 +410,43 @@ class SlideDeck:
             self.c.setFont("Helvetica-Bold", 8)
             self.c.setFillColor(WHITE)
             self.c.drawCentredString(x + card_w / 2, by - 1, case["why"])
+
+        # --- TEASER OVERLAY (remove this block after live) ---
+        self.c.saveState()
+        self.c.setFillColor(HexColor('#1B3533'))
+        self.c.setFillAlpha(0.78)
+        self.c.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
+        self.c.restoreState()
+
+        # Overlay text
+        self.c.setFont("Helvetica-Bold", 30)
+        self.c.setFillColor(WHITE)
+        self.c.drawCentredString(PAGE_W / 2, PAGE_H / 2 + 80, "Join our email list for full access")
+
+        # QR code
+        qr = qrcode.QRCode(version=1, box_size=10, border=2)
+        qr.add_data("https://bysengo.com")
+        qr.make(fit=True)
+        qr_img = qr.make_image(fill_color="#D57028", back_color="#1B3533").convert("RGB")
+        buf = io.BytesIO()
+        qr_img.save(buf, format="PNG")
+        buf.seek(0)
+        qr_size = 150
+        self.c.drawImage(ImageReader(buf),
+                         PAGE_W / 2 - qr_size / 2, PAGE_H / 2 - 70,
+                         width=qr_size, height=qr_size)
+
+        # Border around QR
+        self.c.setStrokeColor(ORANGE)
+        self.c.setLineWidth(2.5)
+        self.c.roundRect(PAGE_W / 2 - qr_size / 2 - 3, PAGE_H / 2 - 73,
+                         qr_size + 6, qr_size + 6, 6, fill=0, stroke=1)
+
+        # URL label
+        self.c.setFont("Helvetica-Bold", 16)
+        self.c.setFillColor(ORANGE)
+        self.c.drawCentredString(PAGE_W / 2, PAGE_H / 2 - 100, "bysengo.com")
+        # --- END TEASER OVERLAY ---
 
     def slide_model(self):
         self._new_page()
