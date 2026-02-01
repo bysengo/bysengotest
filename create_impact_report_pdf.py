@@ -326,7 +326,7 @@ class SlideDeck:
             "Dallas Sip Into Spring \u2014 Mar 30",
             "Dallas Wine Club \u2014 Apr 9",
             "San Bernardino Funded & Fearless Workshop \u2014 Apr 26",
-            "NYC GirlMath x Sengo at NY Tech Week \u2014 Jun 4",
+            "New York GirlMath x Sengo at NY Tech Week \u2014 Jun 4",
             "Massaguel, France \u201cThe Village Retreat\u201d \u2014 Jun 10\u201315",
             "Los Angeles Fashion x Futures \u2014 Jun 28\u201329",
             "New York Fashion x Futures \u2014 Jul 26\u201327",
@@ -496,12 +496,12 @@ class SlideDeck:
         self.c.setFont("Helvetica", 12)
         self.c.setFillColor(CREAM)
         self.c.drawCentredString(PAGE_W / 2, PAGE_H - 170,
-                                 "Sengo\u2019s work has been featured across media outlets and industry publications.")
+                                 "Our work has received national recognition and press")
 
         cards = [
-            ("Press & Features", "Coverage and mentions to be listed here."),
-            ("Speaking & Panels", "Conference appearances and panel discussions."),
-            ("Publications", "Articles, thought leadership, and contributed pieces."),
+            ("Press & Features", "National coverage and\nmedia mentions"),
+            ("Speaking & Panels", "Conference appearances\nand panel discussions"),
+            ("Thought Leadership", "Articles and contributed\npieces"),
         ]
         card_w = (PAGE_W - 2 * MARGIN - 40) / 3
         sx = MARGIN + 10
@@ -515,7 +515,11 @@ class SlideDeck:
             self.c.drawCentredString(x + card_w / 2, y + 72, title)
             self.c.setFont("Helvetica", 9)
             self.c.setFillColor(CREAM)
-            self.c.drawCentredString(x + card_w / 2, y + 45, desc)
+            lines = desc.split('\n')
+            ly = y + 50
+            for line in lines:
+                self.c.drawCentredString(x + card_w / 2, ly, line)
+                ly -= 13
 
     def slide_model(self):
         self._new_page()

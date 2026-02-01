@@ -403,6 +403,20 @@
     border-radius: 10px;
     padding: clamp(12px, 1.8vw, 22px);
   }
+  .sengo-deck .case-card .case-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .sengo-deck .case-card .founder-photo {
+    width: clamp(40px, 5vw, 56px);
+    height: clamp(40px, 5vw, 56px);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--orange);
+    flex-shrink: 0;
+  }
   .sengo-deck .case-card h3 {
     font-size: clamp(13px, 1.5vw, 18px);
     font-weight: 700;
@@ -1019,7 +1033,7 @@
         <div class="event-item">Dallas Sip Into Spring — Mar 30</div>
         <div class="event-item">Dallas Wine Club — Apr 9</div>
         <div class="event-item">San Bernardino Funded & Fearless Workshop — Apr 26</div>
-        <div class="event-item">NYC GirlMath x Sengo at NY Tech Week — Jun 4</div>
+        <div class="event-item">New York GirlMath x Sengo at NY Tech Week — Jun 4</div>
         <div class="event-item">Massaguel, France "The Village Retreat" — Jun 10–15</div>
         <div class="event-item">Los Angeles Fashion x Futures — Jun 28–29</div>
         <div class="event-item">New York Fashion x Futures — Jul 26–27</div>
@@ -1030,7 +1044,7 @@
     <div class="callout-bar" style="margin-top:8px;font-size:clamp(9px,1vw,12px);">Key Insight: Events are most effective when they lead into readiness tools and structured next steps.</div>
     <div class="partners-section">
       <h4>Thank You to Our 2025 Partners and Sponsors</h4>
-      <div style="margin:8px auto;max-width:80%;color:var(--brown);font-size:clamp(9px,1vw,12px);">[Partner logos]</div>
+      <div style="margin:8px auto;max-width:80%;"><img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1f93b40e-e7eb-47b7-819c-5502419cddda/17.png?format=750w" alt="2025 Partners and Sponsors" style="width:100%;max-width:600px;height:auto;display:block;margin:0 auto;border-radius:8px;"></div>
       <div class="plus-more">+ more</div>
     </div>
   </div>
@@ -1042,8 +1056,11 @@
     <div class="accent-line"></div>
     <div class="case-grid">
       <div class="case-card">
-        <h3>Versed Wellness</h3>
-        <div class="case-meta">Founder: Jasmine Bowie | Grant: $500 Micro-Grant</div>
+        <div class="case-header">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/23bfe6c1-0c94-409d-a074-ae16d1c94063/Headshot+1.jpg?format=750w" alt="Jasmine Bowie" class="founder-photo">
+          <div><h3>Versed Wellness</h3>
+          <div class="case-meta">Founder: Jasmine Bowie | Grant: $500 Micro-Grant</div></div>
+        </div>
         <ul>
           <li>Concept → physical prototype</li>
           <li>25 new customers acquired</li>
@@ -1053,8 +1070,11 @@
         <div class="case-why">Why it matters: Readiness includes knowing when <em>not</em> to fundraise.</div>
       </div>
       <div class="case-card">
-        <h3>Satlyt</h3>
-        <div class="case-meta">Founder: Rama Afullo | Grant: $3,000 Standard Grant</div>
+        <div class="case-header">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/cbd7debe-37ee-4002-958b-4f0be6fc11de/1708410857908.jpg?format=750w" alt="Rama Afullo" class="founder-photo">
+          <div><h3>Satlyt</h3>
+          <div class="case-meta">Founder: Rama Afullo | Grant: $3,000 Standard Grant</div></div>
+        </div>
         <ul>
           <li>10 new customers acquired</li>
           <li>Operational capacity expanded</li>
@@ -1067,23 +1087,29 @@
   </div>
 
   <!-- SLIDE 8 — Published Media & Press -->
-  <div class="slide bg-teal" data-slide="7">
+  <div class="slide bg-teal" data-slide="7" style="justify-content:flex-start;padding-top:3%;overflow-y:auto;">
     <div class="section-label">In the News</div>
     <div class="slide-title">Published Media & Press</div>
     <div class="accent-line"></div>
-    <div class="body-text" style="margin-bottom:14px;">Sengo's work has been featured across media outlets and industry publications.</div>
-    <div class="card-grid">
-      <div class="card" style="text-align:left;">
+    <div class="body-text" style="margin-bottom:10px;">Our work has received national recognition and press</div>
+    <div style="display:flex;gap:clamp(8px,1.5vw,16px);width:100%;margin-top:6px;">
+      <!-- Press & Features -->
+      <div class="card" style="text-align:center;flex:1;">
         <div class="card-title">Press & Features</div>
-        <div class="card-body">Coverage and mentions to be listed here.</div>
+        <div style="margin-top:8px;"><img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/46999cc9-b352-4981-8f49-c0c3cb77594d/16.png?format=750w" alt="Press logos" style="width:100%;max-width:280px;height:auto;display:block;margin:0 auto;border-radius:6px;"></div>
       </div>
-      <div class="card" style="text-align:left;">
+      <!-- Speaking & Panels -->
+      <div class="card" style="text-align:center;flex:1;">
         <div class="card-title">Speaking & Panels</div>
-        <div class="card-body">Conference appearances and panel discussions.</div>
+        <div style="display:flex;gap:6px;margin-top:8px;">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/edd89a8b-342f-49d5-9c44-625e9b481f32/IMG_4246.JPG?format=750w" alt="Speaking at event" style="width:50%;height:auto;border-radius:6px;object-fit:cover;">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/b645e109-fd57-4596-b749-5b5a4b5ef55d/94c1874a-ec33-410b-b80e-91f33f063369.JPG?format=1000w" alt="Speaking at event" style="width:50%;height:auto;border-radius:6px;object-fit:cover;">
+        </div>
       </div>
-      <div class="card" style="text-align:left;">
-        <div class="card-title">Publications</div>
-        <div class="card-body">Articles, thought leadership, and contributed pieces.</div>
+      <!-- Thought Leadership -->
+      <div class="card" style="text-align:center;flex:1;">
+        <div class="card-title">Thought Leadership</div>
+        <div style="margin-top:8px;"><img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1f9107e9-ffb0-46a3-9921-cbe6daf451d5/Untitled+design.gif?format=750w" alt="Thought leadership" style="width:100%;max-width:280px;height:auto;display:block;margin:0 auto;border-radius:6px;"></div>
       </div>
     </div>
   </div>
