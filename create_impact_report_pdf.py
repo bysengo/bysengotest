@@ -148,7 +148,7 @@ class SlideDeck:
             ("8,000+", "Email subscribers\n(from 157 in Jan 2025)"),
             ("$31,250", "Grants deployed to\nunderrepresented founders"),
             ("$5M+", "Follow-on capital\ninfluenced by\nsupported founders"),
-            ("27", "Events hosted\nglobally"),
+            ("29", "Events hosted\nglobally"),
         ]
         card_w = 140
         gap = 14
@@ -216,7 +216,7 @@ class SlideDeck:
         self.c.setFillColor(WHITE)
         self.c.drawCentredString(bx_center, PAGE_H - 185, "Programming Mix")
 
-        bars = [("In-Person", 51.85, 120), ("Virtual", 48.15, 111)]
+        bars = [("Virtual", 55.2, 120), ("In-Person", 44.8, 97)]
         bar_w = 70
         bar_gap = 40
         bx_start = bx_center - (2 * bar_w + bar_gap) / 2
@@ -296,70 +296,93 @@ class SlideDeck:
         self._new_page()
         self._bg(CREAM)
         self._orange_bar()
-        self._section_label("27 Touchpoints", PAGE_H - 60)
+        self._section_label("29 Touchpoints", PAGE_H - 60)
         self._title("Events for Learning, Alignment & Trust", PAGE_H - 90, size=22, color=TEAL)
         self._accent_line(PAGE_H - 102)
 
+        # (text, is_partner)
         virtual = [
-            "Welcome to Sengo Webinar \u2014 May 21",
-            "IFundWomen Webinar \u2014 Jun 3",
-            "Founder Meetup: Social Enterprise \u2014 Jul 22",
-            "Ask an Angel \u2014 Jul 31",
-            "Practice Your Pitch (Sarah Anto) \u2014 Aug 12",
-            "Preparing to Raise Capital \u2014 Sep 4",
-            "Private Markets 101 (Part 1) \u2014 Sep 9",
-            "Founder Meetup: Angels & VCs \u2014 Sep 18",
-            "Virtual Pitch for $1,000 \u2014 Sep 25",
-            "Demystifying CDFI Funding \u2014 Oct 14",
-            "Pitch Prep with Amiah \u2014 Oct 23",
-            "Virtual Pitch for $1,000 \u2014 Oct 30",
-            "Virtual Pitch Competition (CPG) \u2014 Nov 20",
-            "Build Your 2026 Pitch Strategy \u2014 Dec 11",
+            ("Welcome to Sengo Webinar \u2014 May 21", False),
+            ("Debt vs. Bootstrapping with IFundWomen \u2014 Jun 3", True),
+            ("Debt vs. Bootstrapping with IFundWomen \u2014 Jul 15", True),
+            ("Founder Meetup: Social Enterprise \u2014 Jul 22", False),
+            ("Ask an Angel with Mandy Bynum \u2014 Jul 31", False),
+            ("Practice Your Pitch with Sarah Anto \u2014 Aug 12", False),
+            ("Preparing to Raise Capital with Forecastr \u2014 Sep 4", False),
+            ("Private Markets 101 (Part 1) \u2014 Sep 9", False),
+            ("Founder Meetup: Angels & VCs \u2014 Sep 18", False),
+            ("Virtual Pitch for $1,000 \u2014 Sep 25", False),
+            ("Demystifying CDFI Funding with Isaiah Coleman \u2014 Oct 14", False),
+            ("Pitch Prep with Amiah Shepherd \u2014 Oct 23", False),
+            ("Virtual Pitch for $1,000 \u2014 Oct 30", False),
+            ("Virtual Pitch for $1,000 (CPG Edition) \u2014 Nov 20", False),
+            ("Building to Scale/Sell with Brianna Arps \u2014 Dec 4", False),
+            ("Build 2026 Pitch Strategy with Dana Ammons \u2014 Dec 11", False),
         ]
         inperson = [
-            "Galentine's Wine Club \u2014 Dallas (Feb 21)",
-            "Barcelona Entrepreneurs Mixer (Mar 13)",
-            "Brunch Wine Club \u2014 Dallas (Mar 15)",
-            "BBOP Center Workshop (Mar 28)",
-            "Sip Into Spring \u2014 Dallas (Mar 30)",
-            "Wine Club \u2014 Dallas (Apr 9)",
-            "Funded & Fearless Workshop (Apr 26)",
-            "GirlMath x Sengo \u2014 NY Tech Week (Jun 4)",
-            "NY Tech Week Mixer (Jun 4)",
-            "The Village Retreat \u2014 France (Jun 10\u201315)",
-            "Fashion x Futures \u2014 LA (Jun 28)",
-            "Fashion x Futures \u2014 NY (Jul 26)",
-            "Spill the Tea: AI & Tech \u2014 LA (Oct 14)",
-            "Fashion x Futures \u2014 LA Pop-Up (Nov 8\u20139)",
+            "Dallas Galentine's Wine Club \u2014 Feb 21",
+            "Barcelona, Spain Entrepreneurs Mixer \u2014 Mar 13",
+            "Dallas Brunch Wine Club \u2014 Mar 15",
+            "San Bernardino Founder/Funder Fireside \u2014 Mar 28",
+            "Dallas Sip Into Spring \u2014 Mar 30",
+            "Dallas Wine Club \u2014 Apr 9",
+            "San Bernardino Funded & Fearless Workshop \u2014 Apr 26",
+            "NYC GirlMath x Sengo at NY Tech Week \u2014 Jun 4",
+            "Massaguel, France \u201cThe Village Retreat\u201d \u2014 Jun 10\u201315",
+            "Los Angeles Fashion x Futures \u2014 Jun 28\u201329",
+            "New York Fashion x Futures \u2014 Jul 26\u201327",
+            "Los Angeles Spill the Tea: AI & Tech Week \u2014 Oct 14",
+            "Los Angeles Fashion x Futures \u2014 Nov 8\u20139",
         ]
 
         col_x_left = MARGIN + 20
         col_x_right = PAGE_W / 2 + 10
-        y_start = PAGE_H - 130
+        y_start = PAGE_H - 125
 
         self.c.setFont("Helvetica-Bold", 10)
         self.c.setFillColor(ORANGE)
-        self.c.drawString(col_x_left, y_start, "Virtual Events (13 + 1 partner)")
-        self.c.drawString(col_x_right, y_start, "In-Person Events (14)")
+        self.c.drawString(col_x_left, y_start, "Virtual Events (14 + 2 partner)")
+        self.c.drawString(col_x_right, y_start, "In-Person Events (13)")
 
-        for col_x, events in [(col_x_left, virtual), (col_x_right, inperson)]:
-            y = y_start - 22
-            for ev in events:
-                self._rounded_rect(col_x, y - 3, PAGE_W / 2 - MARGIN - 40, 17, 4, TEAL)
-                self.c.setFillColor(ORANGE)
-                self.c.rect(col_x, y - 3, 2, 17, fill=1, stroke=0)
-                self.c.setFont("Helvetica", 7.5)
-                self.c.setFillColor(CREAM)
-                self.c.drawString(col_x + 8, y + 1, ev)
-                y -= 21
+        # Virtual events (left column)
+        y = y_start - 20
+        for ev_text, is_partner in virtual:
+            bg_color = OLIVE if is_partner else TEAL
+            border_color = OLIVE if is_partner else ORANGE
+            self._rounded_rect(col_x_left, y - 3, PAGE_W / 2 - MARGIN - 40, 15, 4, bg_color)
+            self.c.setFillColor(border_color)
+            self.c.rect(col_x_left, y - 3, 2, 15, fill=1, stroke=0)
+            self.c.setFont("Helvetica", 6.5)
+            self.c.setFillColor(WHITE if is_partner else CREAM)
+            self.c.drawString(col_x_left + 8, y, ev_text)
+            y -= 18
+
+        # In-person events (right column)
+        y = y_start - 20
+        for ev in inperson:
+            self._rounded_rect(col_x_right, y - 3, PAGE_W / 2 - MARGIN - 40, 15, 4, TEAL)
+            self.c.setFillColor(ORANGE)
+            self.c.rect(col_x_right, y - 3, 2, 15, fill=1, stroke=0)
+            self.c.setFont("Helvetica", 6.5)
+            self.c.setFillColor(CREAM)
+            self.c.drawString(col_x_right + 8, y, ev)
+            y -= 18
+
+        # Partners section
+        self.c.setFont("Helvetica-Bold", 10)
+        self.c.setFillColor(ORANGE)
+        self.c.drawCentredString(PAGE_W / 2, 62, "Thank You to Our 2025 Partners and Sponsors")
+        self.c.setFont("Helvetica-Oblique", 8)
+        self.c.setFillColor(BROWN)
+        self.c.drawCentredString(PAGE_W / 2, 46, "+ more")
 
         # Callout
         bw = PAGE_W - 2 * MARGIN - 60
         bx = (PAGE_W - bw) / 2
-        self._rounded_rect(bx, 30, bw, 24, 6, ORANGE)
-        self.c.setFont("Helvetica-Bold", 8)
+        self._rounded_rect(bx, 20, bw, 20, 6, ORANGE)
+        self.c.setFont("Helvetica-Bold", 7)
         self.c.setFillColor(WHITE)
-        self.c.drawCentredString(PAGE_W / 2, 38,
+        self.c.drawCentredString(PAGE_W / 2, 26,
                                  "Key Insight: Events are most effective when they lead into readiness tools and structured next steps.")
 
     def slide_case_studies(self):
@@ -462,6 +485,38 @@ class SlideDeck:
         self.c.setFillColor(ORANGE)
         self.c.drawCentredString(PAGE_W / 2, qr_y - 28, "bysengo.com")
         # --- END TEASER OVERLAY ---
+
+    def slide_media_press(self):
+        self._new_page()
+        self._bg(TEAL)
+        self._orange_bar()
+        self._section_label("In the News", PAGE_H - 80)
+        self._title("Published Media & Press", PAGE_H - 120, size=28)
+        self._accent_line(PAGE_H - 135)
+
+        self.c.setFont("Helvetica", 12)
+        self.c.setFillColor(CREAM)
+        self.c.drawCentredString(PAGE_W / 2, PAGE_H - 170,
+                                 "Sengo\u2019s work has been featured across media outlets and industry publications.")
+
+        cards = [
+            ("Press & Features", "Coverage and mentions to be listed here."),
+            ("Speaking & Panels", "Conference appearances and panel discussions."),
+            ("Publications", "Articles, thought leadership, and contributed pieces."),
+        ]
+        card_w = (PAGE_W - 2 * MARGIN - 40) / 3
+        sx = MARGIN + 10
+        y = PAGE_H - 300
+
+        for i, (title, desc) in enumerate(cards):
+            x = sx + i * (card_w + 20)
+            self._rounded_rect(x, y, card_w, 100, 8, LIGHT_TEAL)
+            self.c.setFont("Helvetica-Bold", 12)
+            self.c.setFillColor(ORANGE)
+            self.c.drawCentredString(x + card_w / 2, y + 72, title)
+            self.c.setFont("Helvetica", 9)
+            self.c.setFillColor(CREAM)
+            self.c.drawCentredString(x + card_w / 2, y + 45, desc)
 
     def slide_model(self):
         self._new_page()
@@ -751,6 +806,7 @@ class SlideDeck:
         self.slide_email_data()
         self.slide_events()
         self.slide_case_studies()
+        self.slide_media_press()
         self.slide_model()
         self.slide_theory_of_change()
         self.slide_core_programs()

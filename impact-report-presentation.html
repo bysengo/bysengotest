@@ -17,7 +17,7 @@
     width: 100%;
     max-width: 960px;
     margin: 0 auto;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 2;
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 8px 40px rgba(0,0,0,0.18);
@@ -362,6 +362,33 @@
     background: var(--teal);
     color: var(--cream);
   }
+  .sengo-deck .event-item.partner {
+    border-left: 2px solid var(--olive);
+    background: var(--olive);
+    color: #fff;
+  }
+  .sengo-deck .partners-section {
+    text-align: center;
+    margin-top: 14px;
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 0.5s;
+  }
+  .sengo-deck .slide.active .partners-section {
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 0.5s;
+  }
+  .sengo-deck .partners-section h4 {
+    font-size: clamp(11px, 1.3vw, 16px);
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
+  .sengo-deck .partners-section .plus-more {
+    font-size: clamp(9px, 1vw, 12px);
+    color: var(--brown);
+    font-style: italic;
+    margin-top: 6px;
+  }
 
   /* Case study cards */
   .sengo-deck .case-grid {
@@ -430,11 +457,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Arimo', sans-serif;
-    font-size: clamp(14px, 1.6vw, 20px);
-    font-weight: 700;
-    color: var(--orange);
     border: 2px solid var(--orange);
+    overflow: hidden;
+  }
+  .sengo-deck .model-center img {
+    width: 70%;
+    height: auto;
+    display: block;
   }
   .sengo-deck .model-node {
     position: absolute;
@@ -446,10 +475,10 @@
     border-radius: 20px;
     white-space: nowrap;
   }
-  .sengo-deck .model-node.n-top { top: 0; left: 50%; transform: translateX(-50%); }
-  .sengo-deck .model-node.n-right { top: 50%; right: 0; transform: translateY(-50%); }
-  .sengo-deck .model-node.n-bottom { bottom: 0; left: 50%; transform: translateX(-50%); }
-  .sengo-deck .model-node.n-left { top: 50%; left: 0; transform: translateY(-50%); }
+  .sengo-deck .model-node.n-top { top: -5%; left: 50%; transform: translateX(-50%); }
+  .sengo-deck .model-node.n-right { top: 50%; right: -10%; transform: translateY(-50%); }
+  .sengo-deck .model-node.n-bottom { bottom: -5%; left: 50%; transform: translateX(-50%); }
+  .sengo-deck .model-node.n-left { top: 50%; left: -10%; transform: translateY(-50%); }
 
   /* Charts */
   .sengo-deck .charts-row {
@@ -532,7 +561,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
     flex: 1;
+    height: 100%;
   }
   .sengo-deck .bar {
     width: clamp(50px, 8vw, 100px);
@@ -902,7 +933,7 @@
       <div class="card"><div class="stat-num">8,000+</div><div class="stat-label">Email subscribers (from 157 in Jan 2025)</div></div>
       <div class="card"><div class="stat-num">$31,250</div><div class="stat-label">Grants deployed to underrepresented founders</div></div>
       <div class="card"><div class="stat-num">$5M+</div><div class="stat-label">Follow-on capital influenced by supported founders</div></div>
-      <div class="card"><div class="stat-num">27</div><div class="stat-label">Events hosted globally</div></div>
+      <div class="card"><div class="stat-num">29</div><div class="stat-label">Events hosted globally</div></div>
     </div>
   </div>
 
@@ -926,8 +957,8 @@
       <div class="chart-box">
         <div class="chart-title">Programming Mix</div>
         <div class="bar-chart">
-          <div class="bar-col"><div class="bar-val">51.85%</div><div class="bar" style="height:100%"></div><div class="bar-label">In-Person</div></div>
-          <div class="bar-col"><div class="bar-val">48.15%</div><div class="bar" style="height:93%"></div><div class="bar-label">Virtual</div></div>
+          <div class="bar-col"><div class="bar-val">55.2%</div><div class="bar" style="height:100%"></div><div class="bar-label">Virtual</div></div>
+          <div class="bar-col"><div class="bar-val">44.8%</div><div class="bar" style="height:81%"></div><div class="bar-label">In-Person</div></div>
         </div>
       </div>
     </div>
@@ -955,47 +986,53 @@
   </div>
 
   <!-- SLIDE 6 — Events -->
-  <div class="slide bg-cream" data-slide="5" style="justify-content:flex-start;padding-top:3%;">
-    <div class="section-label">27 Touchpoints</div>
+  <div class="slide bg-cream" data-slide="5" style="justify-content:flex-start;padding-top:3%;overflow-y:auto;">
+    <div class="section-label">29 Touchpoints</div>
     <div class="slide-title" style="font-size:clamp(16px,2.6vw,30px);">Events for Learning, Alignment & Trust</div>
     <div class="accent-line"></div>
     <div class="events-col-wrap">
       <div class="events-col">
-        <h4>Virtual Events (13 + 1 partner)</h4>
+        <h4>Virtual Events (14 + 2 partner)</h4>
         <div class="event-item">Welcome to Sengo Webinar — May 21</div>
-        <div class="event-item">IFundWomen Webinar — Jun 3</div>
+        <div class="event-item partner">Debt vs. Bootstrapping Series with IFundWomen — Jun 3</div>
+        <div class="event-item partner">Debt vs. Bootstrapping Series with IFundWomen — Jul 15</div>
         <div class="event-item">Founder Meetup: Social Enterprise & EdTech — Jul 22</div>
-        <div class="event-item">Ask an Angel — Jul 31</div>
+        <div class="event-item">Ask an Angel with Mandy Bynum — Jul 31</div>
         <div class="event-item">Practice Your Pitch with Sarah Anto — Aug 12</div>
-        <div class="event-item">Preparing to Raise Capital with Confidence — Sep 4</div>
+        <div class="event-item">Preparing to Raise Capital with Forecastr — Sep 4</div>
         <div class="event-item">Private Markets 101 (Part 1) — Sep 9</div>
         <div class="event-item">Founder Meetup: Angels & VCs — Sep 18</div>
         <div class="event-item">Virtual Pitch for $1,000 — Sep 25</div>
-        <div class="event-item">Demystifying CDFI Funding with Coleman — Oct 14</div>
-        <div class="event-item">Pitch Prep with Amiah — Oct 23</div>
+        <div class="event-item">Demystifying CDFI Funding with Isaiah Coleman — Oct 14</div>
+        <div class="event-item">Pitch Prep with Amiah Shepherd — Oct 23</div>
         <div class="event-item">Virtual Pitch for $1,000 — Oct 30</div>
-        <div class="event-item">Virtual Pitch Competition (CPG Edition) — Nov 20</div>
-        <div class="event-item">Build Your 2026 Pitch Strategy (Dana Ammons) — Dec 11</div>
+        <div class="event-item">Virtual Pitch for $1,000 (CPG Edition) — Nov 20</div>
+        <div class="event-item">Building to Scale/Sell with Brianna Arps — Dec 4</div>
+        <div class="event-item">Build Your 2026 Pitch Strategy with Dana Ammons — Dec 11</div>
       </div>
       <div class="events-col">
-        <h4>In-Person Events (14)</h4>
-        <div class="event-item">Galentine's Wine Club — Dallas (Feb 21)</div>
-        <div class="event-item">Barcelona Black Women Entrepreneurs Mixer (Mar 13)</div>
-        <div class="event-item">Brunch Wine Club — Dallas (Mar 15)</div>
-        <div class="event-item">BBOP Center x Sengo Founder Workshop (Mar 28)</div>
-        <div class="event-item">Sip Into Spring — Dallas (Mar 30)</div>
-        <div class="event-item">Wine Club — Dallas (Apr 9)</div>
-        <div class="event-item">Funded & Fearless Workshop (Apr 26)</div>
-        <div class="event-item">GirlMath x Sengo: Wed Night Write-Off — NY Tech Week (Jun 4)</div>
-        <div class="event-item">NY Tech Week Mixer (Sengo x Little More, Jun 4)</div>
-        <div class="event-item">The Village Retreat — France (Jun 10–15)</div>
-        <div class="event-item">Fashion x Futures — Los Angeles (Jun 28)</div>
-        <div class="event-item">Fashion x Futures — New York (Jul 26)</div>
-        <div class="event-item">Spill the Tea: AI & Tech — LA Tech Week (Oct 14)</div>
-        <div class="event-item">Fashion x Futures — LA Holiday Pop-Up (Nov 8–9)</div>
+        <h4>In-Person Events (13)</h4>
+        <div class="event-item">Dallas Galentine's Wine Club — Feb 21</div>
+        <div class="event-item">Barcelona, Spain Entrepreneurs Mixer — Mar 13</div>
+        <div class="event-item">Dallas Brunch Wine Club — Mar 15</div>
+        <div class="event-item">San Bernardino Founder/Funder Fireside — Mar 28</div>
+        <div class="event-item">Dallas Sip Into Spring — Mar 30</div>
+        <div class="event-item">Dallas Wine Club — Apr 9</div>
+        <div class="event-item">San Bernardino Funded & Fearless Workshop — Apr 26</div>
+        <div class="event-item">NYC GirlMath x Sengo at NY Tech Week — Jun 4</div>
+        <div class="event-item">Massaguel, France "The Village Retreat" — Jun 10–15</div>
+        <div class="event-item">Los Angeles Fashion x Futures — Jun 28–29</div>
+        <div class="event-item">New York Fashion x Futures — Jul 26–27</div>
+        <div class="event-item">Los Angeles Spill the Tea: AI & Tech Week — Oct 14</div>
+        <div class="event-item">Los Angeles Fashion x Futures — Nov 8–9</div>
       </div>
     </div>
     <div class="callout-bar" style="margin-top:8px;font-size:clamp(9px,1vw,12px);">Key Insight: Events are most effective when they lead into readiness tools and structured next steps.</div>
+    <div class="partners-section">
+      <h4>Thank You to Our 2025 Partners and Sponsors</h4>
+      <div style="margin:8px auto;max-width:80%;color:var(--brown);font-size:clamp(9px,1vw,12px);">[Partner logos]</div>
+      <div class="plus-more">+ more</div>
+    </div>
   </div>
 
   <!-- SLIDE 7 — Case Studies -->
@@ -1029,8 +1066,30 @@
     </div>
   </div>
 
-  <!-- SLIDE 8 — Our Model -->
-  <div class="slide bg-cream" data-slide="7">
+  <!-- SLIDE 8 — Published Media & Press -->
+  <div class="slide bg-teal" data-slide="7">
+    <div class="section-label">In the News</div>
+    <div class="slide-title">Published Media & Press</div>
+    <div class="accent-line"></div>
+    <div class="body-text" style="margin-bottom:14px;">Sengo's work has been featured across media outlets and industry publications.</div>
+    <div class="card-grid">
+      <div class="card" style="text-align:left;">
+        <div class="card-title">Press & Features</div>
+        <div class="card-body">Coverage and mentions to be listed here.</div>
+      </div>
+      <div class="card" style="text-align:left;">
+        <div class="card-title">Speaking & Panels</div>
+        <div class="card-body">Conference appearances and panel discussions.</div>
+      </div>
+      <div class="card" style="text-align:left;">
+        <div class="card-title">Publications</div>
+        <div class="card-body">Articles, thought leadership, and contributed pieces.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9 — Our Model -->
+  <div class="slide bg-cream" data-slide="8">
     <div class="section-label">How We Work</div>
     <div class="slide-title">Readiness-First Capital Infrastructure</div>
     <div class="accent-line"></div>
@@ -1048,7 +1107,7 @@
       </div>
       <div class="col" style="display:flex;align-items:center;justify-content:center;">
         <div class="model-hub">
-          <div class="model-center">SENGO</div>
+          <div class="model-center"><img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/f28e57cc-eb1f-4898-a4fd-476adda1265a/4.png?format=750w" alt="Sengo"></div>
           <div class="model-node n-top">Technology</div>
           <div class="model-node n-right">Readiness</div>
           <div class="model-node n-bottom">Advisory</div>
@@ -1059,8 +1118,8 @@
     <div class="callout-bar">Result: Better decisions, stronger outcomes, and healthier capital relationships.</div>
   </div>
 
-  <!-- SLIDE 9 — Theory of Change -->
-  <div class="slide bg-teal" data-slide="8">
+  <!-- SLIDE 10 — Theory of Change -->
+  <div class="slide bg-teal" data-slide="9">
     <div class="section-label">Why It Matters</div>
     <div class="slide-title">How Readiness Drives Impact</div>
     <div class="accent-line"></div>
@@ -1097,8 +1156,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 10 — Core Programs -->
-  <div class="slide bg-cream" data-slide="9">
+  <!-- SLIDE 11 — Core Programs -->
+  <div class="slide bg-cream" data-slide="10">
     <div class="section-label">What We Run Today</div>
     <div class="slide-title">Core Programs</div>
     <div class="accent-line"></div>
@@ -1141,8 +1200,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 11 — Key Learnings -->
-  <div class="slide bg-teal" data-slide="10">
+  <!-- SLIDE 12 — Key Learnings -->
+  <div class="slide bg-teal" data-slide="11">
     <div class="section-label">Reflections</div>
     <div class="slide-title">What 2025 Taught Us</div>
     <div class="accent-line"></div>
@@ -1164,8 +1223,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 12 — 2026 Priorities -->
-  <div class="slide bg-cream" data-slide="11">
+  <!-- SLIDE 13 — 2026 Priorities -->
+  <div class="slide bg-cream" data-slide="12">
     <div class="section-label">Looking Ahead</div>
     <div class="slide-title">Deepening the Infrastructure</div>
     <div class="accent-line"></div>
@@ -1178,8 +1237,8 @@
     </ul>
   </div>
 
-  <!-- SLIDE 13 — Call to Action -->
-  <div class="slide bg-teal" data-slide="12">
+  <!-- SLIDE 14 — Call to Action -->
+  <div class="slide bg-teal" data-slide="13">
     <div class="section-label">Get Involved</div>
     <div class="hero-title" style="font-size:clamp(24px,4vw,48px);">Build With Us</div>
     <div class="accent-line"></div>
