@@ -82,13 +82,12 @@ class SlideDeck:
         self._new_page()
         self._bg(TEAL)
         self._orange_bar()
-        # Sengo brand wordmark
-        self.c.setFont("Helvetica-Bold", 72)
-        self.c.setFillColor(ORANGE)
-        self.c.drawCentredString(PAGE_W / 2, PAGE_H - 170, "SENGO")
-        # Small accent underline beneath wordmark
-        self.c.setFillColor(CREAM)
-        self.c.rect(PAGE_W / 2 - 60, PAGE_H - 180, 120, 2, fill=1, stroke=0)
+        # Sengo logo from uploaded PNG
+        logo_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'SENGO.PNG')
+        logo_w, logo_h = 200, 134  # maintain aspect ratio (1685:1124 ≈ 1.5:1)
+        self.c.drawImage(ImageReader(logo_path),
+                         PAGE_W / 2 - logo_w / 2, PAGE_H - 210,
+                         width=logo_w, height=logo_h, mask='auto')
         self.c.setFont("Helvetica-Bold", 44)
         self.c.setFillColor(WHITE)
         self.c.drawCentredString(PAGE_W / 2, PAGE_H - 240, "Impact Report 2025")
