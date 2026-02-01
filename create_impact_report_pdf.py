@@ -496,7 +496,7 @@ class SlideDeck:
         self.c.setFont("Helvetica", 12)
         self.c.setFillColor(CREAM)
         self.c.drawCentredString(PAGE_W / 2, PAGE_H - 170,
-                                 "Our work has received international recognition and press")
+                                 "Our work has received international recognition and press.")
 
         cards = [
             ("Press & Features", "National coverage and\nmedia mentions"),
