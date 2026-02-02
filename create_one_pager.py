@@ -80,9 +80,10 @@ def build():
 
     # ── HEADER ──
     logo_path = os.path.join(BASE_DIR, 'Sengo 2.PNG')
-    logo_w, logo_h = 90, 60
+    logo_h = 55
+    logo_w = logo_h * (3533 / 3089)  # preserve actual aspect ratio
     c.drawImage(ImageReader(logo_path),
-                MARGIN, PAGE_H - 62,
+                MARGIN, PAGE_H - 60,
                 width=logo_w, height=logo_h, mask='auto')
 
     tx = MARGIN + logo_w + 8
@@ -334,9 +335,14 @@ def build():
     p2.close()
     c.clipPath(p2, stroke=0)
     if os.path.exists(jasmine_path):
+        # Portrait photo (0.69:1) — fill circle width, let height overflow and clip
+        img_draw_w = photo_r * 2
+        img_draw_h = img_draw_w * (1542 / 1064)  # preserve aspect ratio
+        # Center vertically, shift up slightly to show face
+        img_y_offset = (img_draw_h - photo_r * 2) * 0.35
         c.drawImage(ImageReader(jasmine_path),
-                     photo_cx2 - photo_r, photo_cy2 - photo_r,
-                     width=photo_r * 2, height=photo_r * 2)
+                     photo_cx2 - photo_r, photo_cy2 - photo_r - img_y_offset,
+                     width=img_draw_w, height=img_draw_h)
     c.restoreState()
     c.setStrokeColor(ORANGE)
     c.setLineWidth(1.5)
