@@ -339,7 +339,7 @@ def build():
         img_draw_w = photo_r * 2
         img_draw_h = img_draw_w * (1542 / 1064)  # preserve aspect ratio
         # Center vertically, shift up slightly to show face
-        img_y_offset = (img_draw_h - photo_r * 2) * 0.55
+        img_y_offset = (img_draw_h - photo_r * 2) * 0.65
         c.drawImage(ImageReader(jasmine_path),
                      photo_cx2 - photo_r, photo_cy2 - photo_r - img_y_offset,
                      width=img_draw_w, height=img_draw_h)
