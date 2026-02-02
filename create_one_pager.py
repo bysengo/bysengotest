@@ -151,7 +151,7 @@ def build():
         ("$32,150", "Grants\nDeployed"),
         ("$5M+", "Follow-on\nCapital"),
         ("19", "Founders\nFunded"),
-        ("30", "Events\nHosted"),
+        ("30+", "Events\nHosted"),
     ]
     stat_w = uw / len(stats)
     stat_h = 42
