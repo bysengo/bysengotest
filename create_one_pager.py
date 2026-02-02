@@ -226,7 +226,7 @@ def build():
     c.setFillColor(TAN)
     c.drawString(left_x, ly, "AS SEEN IN")
     ly -= 4
-    press_logo_path = os.path.join(BASE_DIR, 'press_logos.png')
+    press_logo_path = os.path.join(BASE_DIR, 'Partnership Master Deck 2026 v1.png')
     if os.path.exists(press_logo_path):
         logo_img_w = col_w
         logo_img_h = 35
@@ -236,12 +236,7 @@ def build():
                      preserveAspectRatio=True, mask='auto')
         ly -= logo_img_h + 2
     else:
-        rrect(c, left_x, ly - 30, col_w, 30, 4, LIGHT_TEAL)
-        c.setFont("Helvetica-Oblique", 6)
-        c.setFillColor(TAN)
-        c.drawCentredString(left_x + col_w / 2, ly - 18,
-                            "Upload press_logos.png to display logos")
-        ly -= 32
+        ly -= 2
 
     # RIGHT: How It Works + Revenue
     ry = col_top - 13
@@ -340,33 +335,19 @@ def build():
     img_y = cs_y - 10
     img_h = 55
     img_w = (uw - 10) / 2
-    photo1_path = os.path.join(BASE_DIR, 'speaking_1.jpg')
-    photo2_path = os.path.join(BASE_DIR, 'speaking_2.jpg')
+    photo1_path = os.path.join(BASE_DIR, 'Conf-19.jpg')
+    photo2_path = os.path.join(BASE_DIR, 'IMG_4246.JPG')
 
     if os.path.exists(photo1_path):
         c.drawImage(ImageReader(photo1_path),
                      MARGIN, img_y - img_h,
                      width=img_w, height=img_h,
                      preserveAspectRatio=True, mask='auto')
-    else:
-        rrect(c, MARGIN, img_y - img_h, img_w, img_h, 5, LIGHT_TEAL)
-        c.setFont("Helvetica-Oblique", 6)
-        c.setFillColor(TAN)
-        c.drawCentredString(MARGIN + img_w / 2, img_y - img_h / 2 - 3,
-                            "Upload speaking_1.jpg")
-
     if os.path.exists(photo2_path):
         c.drawImage(ImageReader(photo2_path),
                      MARGIN + img_w + 10, img_y - img_h,
                      width=img_w, height=img_h,
                      preserveAspectRatio=True, mask='auto')
-    else:
-        rrect(c, MARGIN + img_w + 10, img_y - img_h, img_w, img_h, 5, LIGHT_TEAL)
-        c.setFont("Helvetica-Oblique", 6)
-        c.setFillColor(TAN)
-        c.drawCentredString(MARGIN + img_w + 10 + img_w / 2, img_y - img_h / 2 - 3,
-                            "Upload speaking_2.jpg")
-
     # ── FOOTER ──
     fy = img_y - img_h - 10
     c.setFont("Helvetica-Bold", 7.5)
