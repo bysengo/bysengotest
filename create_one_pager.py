@@ -96,14 +96,14 @@ def build():
     c.setFillColor(TAN)
     c.drawString(tx, PAGE_H - 43, "Founded by Ila B Corcoran  |  bysengo.com")
 
-    # Right: year badge
-    bw, bh = 60, 20
+    # Right: date badge
+    bw, bh = 80, 20
     bx = PAGE_W - MARGIN - bw
     by = PAGE_H - 34
     rrect(c, bx, by, bw, bh, 5, ORANGE)
-    c.setFont("Helvetica-Bold", 8.5)
+    c.setFont("Helvetica-Bold", 7.5)
     c.setFillColor(WHITE)
-    c.drawCentredString(bx + bw / 2, by + 6, "2025")
+    c.drawCentredString(bx + bw / 2, by + 6, "February 2026")
 
     # ── DIVIDER ──
     y = PAGE_H - 68
@@ -143,7 +143,7 @@ def build():
     y -= 13
     section_head(c, "HEADLINE IMPACT", y)
 
-    y -= 14
+    y -= 4
     stats = [
         ("600+", "Members"),
         ("9,500+", "Email\nSubscribers"),
@@ -154,22 +154,26 @@ def build():
     ]
     stat_w = uw / len(stats)
     stat_h = 42
+    # Draw boxes downward from current y
+    box_top = y
+    box_bot = box_top - stat_h
     for i, (num, label) in enumerate(stats):
         sx = MARGIN + i * stat_w
-        rrect(c, sx + 2, y - 2, stat_w - 4, stat_h, 5, LIGHT_TEAL)
+        rrect(c, sx + 2, box_bot, stat_w - 4, stat_h, 5, LIGHT_TEAL)
         c.setFont("Helvetica-Bold", 13)
         c.setFillColor(ORANGE)
-        c.drawCentredString(sx + stat_w / 2, y + 22, num)
+        c.drawCentredString(sx + stat_w / 2, box_top - 16, num)
         c.setFont("Helvetica", 6)
         c.setFillColor(CREAM)
         lines = label.split('\n')
-        sly = y + 10
+        sly = box_top - 28
         for line in lines:
             c.drawCentredString(sx + stat_w / 2, sly, line)
             sly -= 7.5
+    y = box_bot
 
     # ── TWO-COLUMN SECTION ──
-    y -= stat_h + 10
+    y -= 8
     divider(c, y, uw)
 
     col_w = (uw - 14) / 2
@@ -221,7 +225,7 @@ def build():
     c.setFont("Helvetica-Bold", 8.5)
     c.setFillColor(ORANGE)
     c.drawString(right_x, ry, "HOW IT WORKS")
-    ry -= 13
+    ry -= 4
 
     pillars = [
         ("Readiness Technology", "Fundraise Readiness Score + Personalized Roadmap"),
@@ -231,22 +235,24 @@ def build():
     ]
     pill_h = 20
     for title, desc in pillars:
-        rrect(c, right_x, ry - 2, col_w, pill_h, 4, LIGHT_TEAL)
+        pill_top = ry
+        pill_bot = ry - pill_h
+        rrect(c, right_x, pill_bot, col_w, pill_h, 4, LIGHT_TEAL)
         c.setFillColor(ORANGE)
-        c.rect(right_x, ry - 2, 2, pill_h, fill=1, stroke=0)
+        c.rect(right_x, pill_bot, 2, pill_h, fill=1, stroke=0)
         c.setFont("Helvetica-Bold", 6.5)
         c.setFillColor(WHITE)
-        c.drawString(right_x + 7, ry + 7, title)
+        c.drawString(right_x + 7, pill_top - 9, title)
         c.setFont("Helvetica", 6)
         c.setFillColor(CREAM)
-        c.drawString(right_x + 7, ry - 1, desc)
-        ry -= pill_h + 5
+        c.drawString(right_x + 7, pill_top - 18, desc)
+        ry -= pill_h + 4
 
-    ry -= 3
+    ry -= 5
     c.setFont("Helvetica-Bold", 8.5)
     c.setFillColor(ORANGE)
     c.drawString(right_x, ry, "REVENUE MODEL")
-    ry -= 13
+    ry -= 4
 
     revenue = [
         ("Subscriptions", "Monthly app access for founders & investors"),
@@ -254,16 +260,18 @@ def build():
         ("B2B Partners", "Institutions pay for deal flow & programming"),
     ]
     for title, desc in revenue:
-        rrect(c, right_x, ry - 2, col_w, pill_h, 4, LIGHT_TEAL)
+        pill_top = ry
+        pill_bot = ry - pill_h
+        rrect(c, right_x, pill_bot, col_w, pill_h, 4, LIGHT_TEAL)
         c.setFillColor(ORANGE)
-        c.rect(right_x, ry - 2, 2, pill_h, fill=1, stroke=0)
+        c.rect(right_x, pill_bot, 2, pill_h, fill=1, stroke=0)
         c.setFont("Helvetica-Bold", 6.5)
         c.setFillColor(WHITE)
-        c.drawString(right_x + 7, ry + 7, title)
+        c.drawString(right_x + 7, pill_top - 9, title)
         c.setFont("Helvetica", 6)
         c.setFillColor(CREAM)
-        c.drawString(right_x + 7, ry - 1, desc)
-        ry -= pill_h + 5
+        c.drawString(right_x + 7, pill_top - 18, desc)
+        ry -= pill_h + 4
 
     # ── CASE STUDY SPOTLIGHT ──
     cs_y = min(ly, ry) - 6
@@ -271,39 +279,42 @@ def build():
     cs_y -= 13
     section_head(c, "CASE STUDY SPOTLIGHT", cs_y)
 
-    cs_y -= 8
+    cs_y -= 4
     case_w = (uw - 10) / 2
     case_h = 56
+    case_top = cs_y
+    case_bot = cs_y - case_h
 
     # Satlyt
-    rrect(c, MARGIN, cs_y - case_h, case_w, case_h, 5, LIGHT_TEAL)
+    rrect(c, MARGIN, case_bot, case_w, case_h, 5, LIGHT_TEAL)
     c.setFont("Helvetica-Bold", 7.5)
     c.setFillColor(ORANGE)
-    c.drawString(MARGIN + 7, cs_y - 11, "Satlyt \u2014 Rama Afullo")
+    c.drawString(MARGIN + 7, case_top - 12, "Satlyt \u2014 Rama Afullo")
     c.setFont("Helvetica", 6)
     c.setFillColor(CREAM)
-    c.drawString(MARGIN + 7, cs_y - 21, "Former SpaceX, Tesla & Google \u2014 building software")
-    c.drawString(MARGIN + 7, cs_y - 30, "that turns satellites into virtual data centers. $3K grant.")
+    c.drawString(MARGIN + 7, case_top - 23, "Former SpaceX, Tesla & Google \u2014 building software")
+    c.drawString(MARGIN + 7, case_top - 32, "that turns satellites into virtual data centers. $3K grant.")
     c.setFont("Helvetica-Bold", 6.5)
     c.setFillColor(ORANGE)
-    c.drawString(MARGIN + 7, cs_y - 43, "$3M raised post-Sengo  \u00b7  12 new hires  \u00b7  10 customers")
+    c.drawString(MARGIN + 7, case_top - 46, "$3M raised post-Sengo  \u00b7  12 new hires  \u00b7  10 customers")
 
     # Versed Wellness
     rx2 = MARGIN + case_w + 10
-    rrect(c, rx2, cs_y - case_h, case_w, case_h, 5, LIGHT_TEAL)
+    rrect(c, rx2, case_bot, case_w, case_h, 5, LIGHT_TEAL)
     c.setFont("Helvetica-Bold", 7.5)
     c.setFillColor(ORANGE)
-    c.drawString(rx2 + 7, cs_y - 11, "Versed Wellness \u2014 Jasmine Bowie")
+    c.drawString(rx2 + 7, case_top - 12, "Versed Wellness \u2014 Jasmine Bowie")
     c.setFont("Helvetica", 6)
     c.setFillColor(CREAM)
-    c.drawString(rx2 + 7, cs_y - 21, "Concept to physical prototype. $500 Micro-Grant.")
-    c.drawString(rx2 + 7, cs_y - 30, "Chose not to raise prematurely\u2014readiness first.")
+    c.drawString(rx2 + 7, case_top - 23, "Concept to physical prototype. $500 Micro-Grant.")
+    c.drawString(rx2 + 7, case_top - 32, "Chose not to raise prematurely\u2014readiness first.")
     c.setFont("Helvetica-Bold", 6.5)
     c.setFillColor(ORANGE)
-    c.drawString(rx2 + 7, cs_y - 43, "25 new customers  \u00b7  Revenue increased post-grant")
+    c.drawString(rx2 + 7, case_top - 46, "25 new customers  \u00b7  Revenue increased post-grant")
+    cs_y = case_bot
 
     # ── QUOTE BAR ──
-    qy = cs_y - case_h - 10
+    qy = cs_y - 10
     rrect(c, MARGIN, qy, uw, 22, 5, ORANGE)
     c.setFont("Helvetica-Bold", 7.5)
     c.setFillColor(WHITE)
