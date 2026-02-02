@@ -902,6 +902,33 @@
     }
   }
 
+  /* Print styles — all slides shown for PDF save */
+  @media print {
+    .sengo-deck {
+      aspect-ratio: auto !important;
+      max-width: 100% !important;
+      overflow: visible !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      height: auto !important;
+    }
+    .sengo-deck .slide {
+      position: relative !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      page-break-after: always;
+      page-break-inside: avoid;
+      min-height: 100vh;
+      inset: auto !important;
+    }
+    .sengo-deck .deck-nav,
+    .sengo-deck .slide-counter,
+    .sengo-deck .fs-btn,
+    .sengo-deck .dl-btn {
+      display: none !important;
+    }
+  }
+
   /* Fullscreen on all devices including mobile */
   .sengo-deck.is-fullscreen {
     position: fixed !important;
@@ -1380,17 +1407,9 @@
     nums.forEach(function(el) { setTimeout(function() { countUp(el); }, 300); });
   }
 
-  // Download button
+  // Download as PDF — shows all slides and opens print dialog
   document.getElementById('deckDl').addEventListener('click', function() {
-    var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">' +
-      '<title>Sengo 2025 Impact Report</title></head><body>' +
-      document.querySelector('.sengo-deck').parentElement.innerHTML + '</body></html>';
-    var blob = new Blob([html], {type: 'text/html'});
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'Sengo_2025_Impact_Report.html';
-    a.click();
-    URL.revokeObjectURL(a.href);
+    window.print();
   });
 
   // Fullscreen toggle — native API with CSS class fallback for iOS/mobile
