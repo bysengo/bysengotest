@@ -285,29 +285,71 @@ def build():
     case_top = cs_y
     case_bot = cs_y - case_h
 
-    # Satlyt
+    photo_r = 18  # headshot circle radius
+    text_indent = photo_r * 2 + 12  # text starts after photo circle
+
+    # Satlyt — Rama Afullo
     rrect(c, MARGIN, case_bot, case_w, case_h, 5, LIGHT_TEAL)
+    # Headshot circle
+    rama_path = os.path.join(BASE_DIR, '1708410857908.jpg')
+    photo_cx = MARGIN + 7 + photo_r
+    photo_cy = case_top - photo_r - 4
+    c.saveState()
+    p = c.beginPath()
+    p.circle(photo_cx, photo_cy, photo_r)
+    p.close()
+    c.clipPath(p, stroke=0)
+    if os.path.exists(rama_path):
+        c.drawImage(ImageReader(rama_path),
+                     photo_cx - photo_r, photo_cy - photo_r,
+                     width=photo_r * 2, height=photo_r * 2)
+    c.restoreState()
+    # Orange circle border
+    c.setStrokeColor(ORANGE)
+    c.setLineWidth(1.5)
+    c.circle(photo_cx, photo_cy, photo_r, fill=0, stroke=1)
+
+    tx1 = MARGIN + text_indent
     c.setFont("Helvetica-Bold", 7.5)
     c.setFillColor(ORANGE)
-    c.drawString(MARGIN + 7, case_top - 12, "Satlyt \u2014 Rama Afullo")
+    c.drawString(tx1, case_top - 10, "Satlyt \u2014 Rama Afullo")
     c.setFont("Helvetica", 6)
     c.setFillColor(CREAM)
-    c.drawString(MARGIN + 7, case_top - 23, "Former SpaceX, Tesla & Google \u2014 building software")
-    c.drawString(MARGIN + 7, case_top - 32, "that turns satellites into virtual data centers. $3K grant.")
+    c.drawString(tx1, case_top - 20, "Former SpaceX, Tesla & Google")
+    c.drawString(tx1, case_top - 29, "Satellites \u2192 virtual data centers. $3K grant.")
     c.setFont("Helvetica-Bold", 6.5)
     c.setFillColor(ORANGE)
     c.drawString(MARGIN + 7, case_top - 46, "$3M raised post-Sengo  \u00b7  12 new hires  \u00b7  10 customers")
 
-    # Versed Wellness
+    # Versed Wellness — Jasmine Bowie
     rx2 = MARGIN + case_w + 10
     rrect(c, rx2, case_bot, case_w, case_h, 5, LIGHT_TEAL)
+    # Headshot circle
+    jasmine_path = os.path.join(BASE_DIR, 'Headshot 1.jpg')
+    photo_cx2 = rx2 + 7 + photo_r
+    photo_cy2 = case_top - photo_r - 4
+    c.saveState()
+    p2 = c.beginPath()
+    p2.circle(photo_cx2, photo_cy2, photo_r)
+    p2.close()
+    c.clipPath(p2, stroke=0)
+    if os.path.exists(jasmine_path):
+        c.drawImage(ImageReader(jasmine_path),
+                     photo_cx2 - photo_r, photo_cy2 - photo_r,
+                     width=photo_r * 2, height=photo_r * 2)
+    c.restoreState()
+    c.setStrokeColor(ORANGE)
+    c.setLineWidth(1.5)
+    c.circle(photo_cx2, photo_cy2, photo_r, fill=0, stroke=1)
+
+    tx2 = rx2 + text_indent
     c.setFont("Helvetica-Bold", 7.5)
     c.setFillColor(ORANGE)
-    c.drawString(rx2 + 7, case_top - 12, "Versed Wellness \u2014 Jasmine Bowie")
+    c.drawString(tx2, case_top - 10, "Versed Wellness \u2014 Jasmine Bowie")
     c.setFont("Helvetica", 6)
     c.setFillColor(CREAM)
-    c.drawString(rx2 + 7, case_top - 23, "Concept to physical prototype. $500 Micro-Grant.")
-    c.drawString(rx2 + 7, case_top - 32, "Chose not to raise prematurely\u2014readiness first.")
+    c.drawString(tx2, case_top - 20, "Concept to physical prototype. $500 Micro-Grant.")
+    c.drawString(tx2, case_top - 29, "Chose not to raise prematurely\u2014readiness first.")
     c.setFont("Helvetica-Bold", 6.5)
     c.setFillColor(ORANGE)
     c.drawString(rx2 + 7, case_top - 46, "25 new customers  \u00b7  Revenue increased post-grant")
