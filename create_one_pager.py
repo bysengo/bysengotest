@@ -229,7 +229,7 @@ def build():
     press_logo_path = os.path.join(BASE_DIR, 'Partnership Master Deck 2026 v1.png')
     if os.path.exists(press_logo_path):
         logo_img_w = col_w
-        logo_img_h = 35
+        logo_img_h = 55
         c.drawImage(ImageReader(press_logo_path),
                      left_x, ly - logo_img_h,
                      width=logo_img_w, height=logo_img_h,
@@ -333,7 +333,7 @@ def build():
 
     # ── PHOTOS ──
     img_y = cs_y - 10
-    img_h = 55
+    img_h = 90
     img_w = (uw - 10) / 2
     photo1_path = os.path.join(BASE_DIR, 'Conf-19.jpg')
     photo2_path = os.path.join(BASE_DIR, 'IMG_4246.JPG')
