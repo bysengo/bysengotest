@@ -220,6 +220,29 @@ def build():
         ly = wrap_text(c, item, left_x + 12, ly, col_w - 12, "Helvetica", 6.5, CREAM, 8.5)
         ly -= 2
 
+    # As Seen In — press logos
+    ly -= 6
+    c.setFont("Helvetica-Bold", 7)
+    c.setFillColor(TAN)
+    c.drawString(left_x, ly, "AS SEEN IN")
+    ly -= 4
+    press_logo_path = os.path.join(BASE_DIR, 'press_logos.png')
+    if os.path.exists(press_logo_path):
+        logo_img_w = col_w
+        logo_img_h = 35
+        c.drawImage(ImageReader(press_logo_path),
+                     left_x, ly - logo_img_h,
+                     width=logo_img_w, height=logo_img_h,
+                     preserveAspectRatio=True, mask='auto')
+        ly -= logo_img_h + 2
+    else:
+        rrect(c, left_x, ly - 30, col_w, 30, 4, LIGHT_TEAL)
+        c.setFont("Helvetica-Oblique", 6)
+        c.setFillColor(TAN)
+        c.drawCentredString(left_x + col_w / 2, ly - 18,
+                            "Upload press_logos.png to display logos")
+        ly -= 32
+
     # RIGHT: How It Works + Revenue
     ry = col_top - 13
     c.setFont("Helvetica-Bold", 8.5)
@@ -313,16 +336,39 @@ def build():
     c.drawString(rx2 + 7, case_top - 46, "25 new customers  \u00b7  Revenue increased post-grant")
     cs_y = case_bot
 
-    # ── QUOTE BAR ──
-    qy = cs_y - 10
-    rrect(c, MARGIN, qy, uw, 22, 5, ORANGE)
-    c.setFont("Helvetica-Bold", 7.5)
-    c.setFillColor(WHITE)
-    c.drawCentredString(PAGE_W / 2, qy + 7,
-                        "\u201cYou can\u2019t expect to hit the jackpot if you don\u2019t put a few nickels in the machine.\u201d \u2014 Flip Wilson")
+    # ── PHOTOS ──
+    img_y = cs_y - 10
+    img_h = 55
+    img_w = (uw - 10) / 2
+    photo1_path = os.path.join(BASE_DIR, 'speaking_1.jpg')
+    photo2_path = os.path.join(BASE_DIR, 'speaking_2.jpg')
+
+    if os.path.exists(photo1_path):
+        c.drawImage(ImageReader(photo1_path),
+                     MARGIN, img_y - img_h,
+                     width=img_w, height=img_h,
+                     preserveAspectRatio=True, mask='auto')
+    else:
+        rrect(c, MARGIN, img_y - img_h, img_w, img_h, 5, LIGHT_TEAL)
+        c.setFont("Helvetica-Oblique", 6)
+        c.setFillColor(TAN)
+        c.drawCentredString(MARGIN + img_w / 2, img_y - img_h / 2 - 3,
+                            "Upload speaking_1.jpg")
+
+    if os.path.exists(photo2_path):
+        c.drawImage(ImageReader(photo2_path),
+                     MARGIN + img_w + 10, img_y - img_h,
+                     width=img_w, height=img_h,
+                     preserveAspectRatio=True, mask='auto')
+    else:
+        rrect(c, MARGIN + img_w + 10, img_y - img_h, img_w, img_h, 5, LIGHT_TEAL)
+        c.setFont("Helvetica-Oblique", 6)
+        c.setFillColor(TAN)
+        c.drawCentredString(MARGIN + img_w + 10 + img_w / 2, img_y - img_h / 2 - 3,
+                            "Upload speaking_2.jpg")
 
     # ── FOOTER ──
-    fy = qy - 14
+    fy = img_y - img_h - 10
     c.setFont("Helvetica-Bold", 7.5)
     c.setFillColor(ORANGE)
     c.drawString(MARGIN, fy, "Get Involved:")
