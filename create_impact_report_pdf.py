@@ -395,6 +395,7 @@ class SlideDeck:
         cases = [
             {
                 "name": "Versed Wellness",
+                "founder": "Jasmine Bowie",
                 "meta": "Founder: Jasmine Bowie | Grant: $500 Micro-Grant",
                 "bullets": [
                     "Concept \u2192 physical prototype",
@@ -406,6 +407,7 @@ class SlideDeck:
             },
             {
                 "name": "Satlyt",
+                "founder": "Rama Afullo",
                 "meta": "Founder: Rama Afullo | Grant: $3,000 Standard Grant",
                 "bullets": [
                     "10 new customers acquired",
@@ -420,18 +422,33 @@ class SlideDeck:
         card_w = (PAGE_W - 2 * MARGIN - 30) / 2
         for i, case in enumerate(cases):
             x = MARGIN + i * (card_w + 30)
-            y_top = PAGE_H - 160
-            self._rounded_rect(x, y_top - 180, card_w, 180, 8, LIGHT_TEAL)
+            y_top = PAGE_H - 155
+            card_h = 210
+            self._rounded_rect(x, y_top - card_h, card_w, card_h, 8, LIGHT_TEAL)
+
+            # Founder photo circle placeholder + name header
+            photo_cx = x + 30
+            photo_cy = y_top - 22
+            photo_r = 18
+            self.c.setStrokeColor(ORANGE)
+            self.c.setLineWidth(2)
+            self.c.setFillColor(TEAL)
+            self.c.circle(photo_cx, photo_cy, photo_r, fill=1, stroke=1)
+            # Initials inside circle
+            self.c.setFont("Helvetica-Bold", 12)
+            self.c.setFillColor(ORANGE)
+            initials = "".join(w[0] for w in case["founder"].split())
+            self.c.drawCentredString(photo_cx, photo_cy - 4, initials)
 
             self.c.setFont("Helvetica-Bold", 15)
             self.c.setFillColor(ORANGE)
-            self.c.drawString(x + 14, y_top - 20, case["name"])
+            self.c.drawString(x + 56, y_top - 16, case["name"])
 
             self.c.setFont("Helvetica", 8)
             self.c.setFillColor(CREAM)
-            self.c.drawString(x + 14, y_top - 36, case["meta"])
+            self.c.drawString(x + 56, y_top - 32, case["meta"])
 
-            by = y_top - 60
+            by = y_top - 58
             for bullet in case["bullets"]:
                 self.c.setFillColor(ORANGE)
                 self.c.drawString(x + 14, by, "\u2022")
@@ -499,27 +516,54 @@ class SlideDeck:
                                  "Our work has received international recognition and press.")
 
         cards = [
-            ("Press & Features", "National coverage and\nmedia mentions"),
-            ("Speaking & Panels", "Conference appearances\nand panel discussions"),
-            ("Thought Leadership", "Articles and contributed\npieces"),
+            ("Press & Features", [
+                "Forbes",
+                "Black Enterprise",
+                "Entrepreneur",
+                "TechCrunch",
+                "+ more",
+            ]),
+            ("Speaking & Panels", [
+                "NY Tech Week",
+                "Fashion x Futures",
+                "Startup conferences",
+                "Industry panels",
+                "Fireside chats",
+            ]),
+            ("Thought Leadership", [
+                "Published articles",
+                "Contributed pieces",
+                "Podcast appearances",
+                "Community education",
+                "Research insights",
+            ]),
         ]
         card_w = (PAGE_W - 2 * MARGIN - 40) / 3
         sx = MARGIN + 10
-        y = PAGE_H - 300
+        y = PAGE_H - 200
+        card_h = 220
 
-        for i, (title, desc) in enumerate(cards):
+        for i, (title, items) in enumerate(cards):
             x = sx + i * (card_w + 20)
-            self._rounded_rect(x, y, card_w, 100, 8, LIGHT_TEAL)
-            self.c.setFont("Helvetica-Bold", 12)
+            self._rounded_rect(x, y - card_h + 30, card_w, card_h, 8, LIGHT_TEAL)
+            self.c.setFont("Helvetica-Bold", 13)
             self.c.setFillColor(ORANGE)
-            self.c.drawCentredString(x + card_w / 2, y + 72, title)
-            self.c.setFont("Helvetica", 9)
-            self.c.setFillColor(CREAM)
-            lines = desc.split('\n')
-            ly = y + 50
-            for line in lines:
-                self.c.drawCentredString(x + card_w / 2, ly, line)
-                ly -= 13
+            self.c.drawCentredString(x + card_w / 2, y + 10, title)
+
+            # Accent line under title
+            self.c.setFillColor(ORANGE)
+            self.c.rect(x + card_w / 2 - 25, y + 2, 50, 2, fill=1, stroke=0)
+
+            ly = y - 18
+            for item in items:
+                if item == "+ more":
+                    self.c.setFont("Helvetica-Oblique", 9)
+                    self.c.setFillColor(TAN)
+                else:
+                    self.c.setFont("Helvetica", 10)
+                    self.c.setFillColor(CREAM)
+                self.c.drawCentredString(x + card_w / 2, ly, item)
+                ly -= 20
 
     def slide_model(self):
         self._new_page()
@@ -559,9 +603,12 @@ class SlideDeck:
         self.c.setLineWidth(2)
         self.c.setFillColor(TEAL)
         self.c.circle(cx, cy, r, fill=1, stroke=1)
-        self.c.setFont("Helvetica-Bold", 16)
-        self.c.setFillColor(ORANGE)
-        self.c.drawCentredString(cx, cy - 5, "SENGO")
+        # Draw Sengo logo inside the hub circle
+        logo_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'SENGO.PNG')
+        logo_w, logo_h = 60, 40
+        self.c.drawImage(ImageReader(logo_path),
+                         cx - logo_w / 2, cy - logo_h / 2,
+                         width=logo_w, height=logo_h, mask='auto')
 
         nodes = [("Technology", 0, -85), ("Readiness", 85, 0), ("Advisory", 0, 85), ("Community", -85, 0)]
         for label, dx, dy in nodes:

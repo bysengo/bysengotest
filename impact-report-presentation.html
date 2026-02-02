@@ -747,10 +747,10 @@
   }
 
   /* Fullscreen button */
-  .sengo-deck .fs-btn,
-  .sengo-deck .dl-btn {
+  .sengo-deck .fs-btn {
     position: absolute;
     top: 10px;
+    left: 14px;
     background: rgba(255,255,255,0.15);
     border: none;
     color: #fff;
@@ -764,10 +764,7 @@
     z-index: 10;
     transition: background 0.2s;
   }
-  .sengo-deck .fs-btn { left: 14px; }
-  .sengo-deck .dl-btn { left: 50px; font-size: 14px; }
-  .sengo-deck .fs-btn:hover,
-  .sengo-deck .dl-btn:hover {
+  .sengo-deck .fs-btn:hover {
     background: var(--orange);
   }
 
@@ -899,33 +896,6 @@
     }
     .sengo-deck .bar-chart {
       gap: clamp(24px, 6vw, 50px);
-    }
-  }
-
-  /* Print styles — all slides shown for PDF save */
-  @media print {
-    .sengo-deck {
-      aspect-ratio: auto !important;
-      max-width: 100% !important;
-      overflow: visible !important;
-      box-shadow: none !important;
-      border-radius: 0 !important;
-      height: auto !important;
-    }
-    .sengo-deck .slide {
-      position: relative !important;
-      opacity: 1 !important;
-      pointer-events: auto !important;
-      page-break-after: always;
-      page-break-inside: avoid;
-      min-height: 100vh;
-      inset: auto !important;
-    }
-    .sengo-deck .deck-nav,
-    .sengo-deck .slide-counter,
-    .sengo-deck .fs-btn,
-    .sengo-deck .dl-btn {
-      display: none !important;
     }
   }
 
@@ -1315,9 +1285,6 @@
 
   <!-- Fullscreen button -->
   <button class="fs-btn" id="deckFs" aria-label="Toggle fullscreen" title="Fullscreen">&#x26F6;</button>
-  <!-- Download button -->
-  <button class="dl-btn" id="deckDl" aria-label="Download presentation" title="Download">&#x2B07;</button>
-
   <!-- Navigation -->
   <div class="deck-nav">
     <button id="deckPrev" aria-label="Previous slide">&#8249;</button>
@@ -1406,11 +1373,6 @@
     var nums = slide.querySelectorAll('.stat-num');
     nums.forEach(function(el) { setTimeout(function() { countUp(el); }, 300); });
   }
-
-  // Download as PDF — shows all slides and opens print dialog
-  document.getElementById('deckDl').addEventListener('click', function() {
-    window.print();
-  });
 
   // Fullscreen toggle — native API with CSS class fallback for iOS/mobile
   var fsBtn = document.getElementById('deckFs');
