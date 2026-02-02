@@ -220,24 +220,6 @@ def build():
         ly = wrap_text(c, item, left_x + 12, ly, col_w - 12, "Helvetica", 6.5, CREAM, 8.5)
         ly -= 2
 
-    # As Seen In — press logos
-    ly -= 6
-    c.setFont("Helvetica-Bold", 7)
-    c.setFillColor(TAN)
-    c.drawString(left_x, ly, "AS SEEN IN")
-    ly -= 4
-    press_logo_path = os.path.join(BASE_DIR, 'Partnership Master Deck 2026 v1.png')
-    if os.path.exists(press_logo_path):
-        logo_img_w = col_w
-        logo_img_h = 55
-        c.drawImage(ImageReader(press_logo_path),
-                     left_x, ly - logo_img_h,
-                     width=logo_img_w, height=logo_img_h,
-                     preserveAspectRatio=True, mask='auto')
-        ly -= logo_img_h + 2
-    else:
-        ly -= 2
-
     # RIGHT: How It Works + Revenue
     ry = col_top - 13
     c.setFont("Helvetica-Bold", 8.5)
