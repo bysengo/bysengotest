@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sengo Meeting Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1B3533;
+            --accent: #D57028;
+            --secondary: #67441A;
+            --light: #F3EDE7;
+            --white: #ffffff;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--light);
+            color: var(--primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Portal Container */
+        .portal-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .portal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a4a47 100%);
+            color: var(--white);
+            padding: 30px 40px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .portal-header h1 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .portal-header .subtitle {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .nav-tab {
+            padding: 14px 28px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab:hover {
+            background: var(--gray-100);
+            color: var(--primary);
+        }
+
+        .nav-tab.active {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #c4611f;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--gray-300);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .card-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Grid Layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ============================================
+           MEETINGS TAB
+           ============================================ */
+
+        .meetings-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+        }
+
+        /* Meeting List */
+        .meeting-list {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .meeting-item {
+            padding: 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .meeting-item:hover {
+            border-color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .meeting-item.active {
+            border-color: var(--accent);
+            background: rgba(213, 112, 40, 0.05);
+        }
+
+        .meeting-date {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .meeting-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .meeting-attendees {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* Meeting Detail */
+        .meeting-detail {
+            min-height: 500px;
+        }
+
+        .meeting-detail-header {
+            margin-bottom: 30px;
+        }
+
+        .meeting-detail-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .meeting-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        /* Discussion Points */
+        .discussion-section {
+            margin-bottom: 30px;
+        }
+
+        .discussion-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px;
+            background: var(--gray-100);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .discussion-item .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-400);
+            border-radius: 4px;
+            margin-right: 12px;
+            cursor: pointer;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .discussion-item .checkbox.checked {
+            background: var(--success);
+            border-color: var(--success);
+            color: var(--white);
+        }
+
+        .discussion-item .checkbox.checked::after {
+            content: '✓';
+            font-size: 12px;
+        }
+
+        .discussion-item.completed .discussion-text {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .discussion-text {
+            flex: 1;
+        }
+
+        .discussion-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            font-size: 1rem;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .icon-btn:hover {
+            opacity: 1;
+        }
+
+        /* Notes Section */
+        .notes-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        .notes-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* ============================================
+           KPI DASHBOARD TAB
+           ============================================ */
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .kpi-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .kpi-card.revenue::before { background: var(--success); }
+        .kpi-card.users::before { background: var(--info); }
+        .kpi-card.deals::before { background: var(--accent); }
+        .kpi-card.events::before { background: var(--warning); }
+        .kpi-card.founders::before { background: #9b59b6; }
+        .kpi-card.funders::before { background: #3498db; }
+
+        .kpi-label {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-family: 'Arimo', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .kpi-change {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .kpi-change.positive { color: var(--success); }
+        .kpi-change.negative { color: var(--danger); }
+
+        /* Charts Container */
+        .chart-container {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 250px;
+            padding: 20px 0;
+        }
+
+        .bar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            max-width: 80px;
+        }
+
+        .bar {
+            width: 40px;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--secondary) 100%);
+            border-radius: 6px 6px 0 0;
+            transition: height 0.5s ease;
+        }
+
+        .bar-label {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--gray-600);
+        }
+
+        .bar-value {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        /* ============================================
+           DATA TRACKING TAB
+           ============================================ */
+
+        .data-form {
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .data-table th {
+            background: var(--gray-100);
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table tr:hover td {
+            background: rgba(213, 112, 40, 0.05);
+        }
+
+        .data-table .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* ============================================
+           MODAL
+           ============================================ */
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-500);
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--primary);
+        }
+
+        /* ============================================
+           EMPTY STATE
+           ============================================ */
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray-500);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        /* ============================================
+           ACTION ITEMS
+           ============================================ */
+
+        .action-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--white);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .action-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+
+        .action-status.pending { background: var(--warning); }
+        .action-status.in-progress { background: var(--info); }
+        .action-status.completed { background: var(--success); }
+
+        .action-content {
+            flex: 1;
+        }
+
+        .action-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .action-meta {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+
+        @media (max-width: 1024px) {
+            .meetings-container {
+                grid-template-columns: 1fr;
+            }
+
+            .meeting-list {
+                max-height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portal-header {
+                padding: 20px;
+            }
+
+            .portal-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .nav-tab {
+                text-align: center;
+            }
+
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-value {
+                font-size: 2rem;
+            }
+
+            .data-table {
+                font-size: 0.85rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 10px 12px;
+            }
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        /* Status Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-success { background: rgba(40, 167, 69, 0.15); color: var(--success); }
+        .badge-warning { background: rgba(255, 193, 7, 0.15); color: #d39e00; }
+        .badge-danger { background: rgba(220, 53, 69, 0.15); color: var(--danger); }
+        .badge-info { background: rgba(23, 162, 184, 0.15); color: var(--info); }
+
+        /* Inline Edit */
+        .inline-edit {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .inline-edit input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid var(--accent);
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Save indicator */
+        .save-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .save-indicator.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-container">
+        <!-- Header -->
+        <header class="portal-header">
+            <div>
+                <h1>Sengo Meeting Portal</h1>
+                <p class="subtitle">Weekly meetings, discussion points, and KPI tracking</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="openNewMeetingModal()">+ New Meeting</button>
+                <button class="btn btn-secondary" onclick="exportData()">Export Data</button>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="meetings">Meetings</button>
+            <button class="nav-tab" data-tab="kpis">KPI Dashboard</button>
+            <button class="nav-tab" data-tab="data">Data Tracking</button>
+            <button class="nav-tab" data-tab="actions">Action Items</button>
+        </nav>
+
+        <!-- Meetings Tab -->
+        <div id="meetings" class="tab-content active">
+            <div class="meetings-container">
+                <!-- Meeting List -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">All Meetings</h3>
+                    </div>
+                    <div class="meeting-list" id="meetingList">
+                        <!-- Meetings will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Meeting Detail -->
+                <div class="card meeting-detail" id="meetingDetail">
+                    <div class="empty-state" id="noMeetingSelected">
+                        <div class="empty-state-icon">📅</div>
+                        <p class="empty-state-text">Select a meeting to view details or create a new one</p>
+                        <button class="btn btn-primary" onclick="openNewMeetingModal()">+ Create Meeting</button>
+                    </div>
+                    <div id="meetingContent" style="display: none;">
+                        <div class="meeting-detail-header">
+                            <h2 class="meeting-detail-title" id="detailTitle"></h2>
+                            <div class="meeting-meta">
+                                <span id="detailDate"></span>
+                                <span id="detailAttendees"></span>
+                            </div>
+                        </div>
+
+                        <!-- Discussion Points -->
+                        <div class="discussion-section">
+                            <div class="card-header">
+                                <h3 class="card-title">Discussion Points</h3>
+                                <button class="btn btn-sm btn-primary" onclick="addDiscussionPoint()">+ Add Point</button>
+                            </div>
+                            <div id="discussionPoints">
+                                <!-- Discussion points will be populated here -->
+                            </div>
+                        </div>
+
+                        <!-- Notes -->
+                        <div class="notes-section">
+                            <div class="card-header">
+                                <h3 class="card-title">Meeting Notes</h3>
+                            </div>
+                            <textarea class="notes-textarea" id="meetingNotes" placeholder="Add meeting notes here..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Dashboard Tab -->
+        <div id="kpis" class="tab-content">
+            <div class="kpi-grid">
+                <div class="kpi-card revenue">
+                    <div class="kpi-label">Total Raised</div>
+                    <div class="kpi-value" id="kpiRevenue">$0</div>
+                    <div class="kpi-change positive" id="kpiRevenueChange">
+                        <span>↑</span> <span>0%</span> vs last month
+                    </div>
+                </div>
+                <div class="kpi-card users">
+                    <div class="kpi-label">App Members</div>
+                    <div class="kpi-value" id="kpiUsers">0</div>
+                    <div class="kpi-change positive" id="kpiUsersChange">
+                        <span>↑</span> <span>0</span> new this month
+                    </div>
+                </div>
+                <div class="kpi-card founders">
+                    <div class="kpi-label">Active Founders</div>
+                    <div class="kpi-value" id="kpiFounders">0</div>
+                    <div class="kpi-change positive" id="kpiFoundersChange">
+                        <span>↑</span> <span>0</span> new this month
+                    </div>
+                </div>
+                <div class="kpi-card funders">
+                    <div class="kpi-label">Active Funders</div>
+                    <div class="kpi-value" id="kpiFunders">0</div>
+                    <div class="kpi-change positive" id="kpiFundersChange">
+                        <span>↑</span> <span>0</span> new this month
+                    </div>
+                </div>
+                <div class="kpi-card deals">
+                    <div class="kpi-label">Deals Facilitated</div>
+                    <div class="kpi-value" id="kpiDeals">0</div>
+                    <div class="kpi-change positive" id="kpiDealsChange">
+                        <span>↑</span> <span>0</span> this quarter
+                    </div>
+                </div>
+                <div class="kpi-card events">
+                    <div class="kpi-label">Events Hosted</div>
+                    <div class="kpi-value" id="kpiEvents">0</div>
+                    <div class="kpi-change positive" id="kpiEventsChange">
+                        <span>↑</span> <span>0</span> this month
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="grid-2">
+                <div class="chart-container">
+                    <div class="card-header">
+                        <h3 class="card-title">Monthly Growth</h3>
+                    </div>
+                    <div class="bar-chart" id="growthChart">
+                        <!-- Chart will be populated here -->
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="card-header">
+                        <h3 class="card-title">Funding by Quarter</h3>
+                    </div>
+                    <div class="bar-chart" id="fundingChart">
+                        <!-- Chart will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI History Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">KPI History</h3>
+                    <button class="btn btn-sm btn-primary" onclick="openKPIModal()">+ Add Entry</button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Total Raised</th>
+                                <th>Members</th>
+                                <th>Founders</th>
+                                <th>Funders</th>
+                                <th>Deals</th>
+                                <th>Events</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="kpiHistory">
+                            <!-- KPI history will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Tracking Tab -->
+        <div id="data" class="tab-content">
+            <div class="grid-2">
+                <!-- Add Data Entry Form -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Data Entry</h3>
+                    </div>
+                    <form class="data-form" id="dataEntryForm">
+                        <div class="form-group">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" id="dataCategory" required>
+                                <option value="">Select category...</option>
+                                <option value="founder">New Founder</option>
+                                <option value="funder">New Funder</option>
+                                <option value="deal">Deal Closed</option>
+                                <option value="event">Event Hosted</option>
+                                <option value="funding">Funding Raised</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Title/Name</label>
+                            <input type="text" class="form-input" id="dataTitle" required placeholder="Enter title or name">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Date</label>
+                                <input type="date" class="form-input" id="dataDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Amount (if applicable)</label>
+                                <input type="number" class="form-input" id="dataAmount" placeholder="$0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Notes</label>
+                            <textarea class="notes-textarea" id="dataNotes" style="min-height: 100px;" placeholder="Additional details..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Entry</button>
+                    </form>
+                </div>
+
+                <!-- Recent Entries -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Entries</h3>
+                    </div>
+                    <div id="recentEntries">
+                        <!-- Recent entries will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Data Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">All Data Entries</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <select class="form-select" id="dataFilter" style="width: auto;">
+                            <option value="all">All Categories</option>
+                            <option value="founder">Founders</option>
+                            <option value="funder">Funders</option>
+                            <option value="deal">Deals</option>
+                            <option value="event">Events</option>
+                            <option value="funding">Funding</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Title</th>
+                                <th>Amount</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTable">
+                            <!-- Data entries will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Items Tab -->
+        <div id="actions" class="tab-content">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Pending Actions</h3>
+                        <button class="btn btn-sm btn-primary" onclick="openActionModal()">+ Add Action</button>
+                    </div>
+                    <div id="pendingActions">
+                        <!-- Pending actions will be populated here -->
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Completed Actions</h3>
+                    </div>
+                    <div id="completedActions">
+                        <!-- Completed actions will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Meeting Modal -->
+    <div class="modal-overlay" id="meetingModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">New Meeting</h3>
+                <button class="modal-close" onclick="closeMeetingModal()">&times;</button>
+            </div>
+            <form id="newMeetingForm">
+                <div class="form-group">
+                    <label class="form-label">Meeting Title</label>
+                    <input type="text" class="form-input" id="meetingTitle" required placeholder="e.g., Weekly Team Sync">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-input" id="meetingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Time</label>
+                        <input type="time" class="form-input" id="meetingTime">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Attendees</label>
+                    <input type="text" class="form-input" id="meetingAttendees" placeholder="e.g., John, Sarah, Mike">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Agenda (one item per line)</label>
+                    <textarea class="notes-textarea" id="meetingAgenda" style="min-height: 100px;" placeholder="Item 1&#10;Item 2&#10;Item 3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Meeting</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- KPI Entry Modal -->
+    <div class="modal-overlay" id="kpiModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add KPI Entry</h3>
+                <button class="modal-close" onclick="closeKPIModal()">&times;</button>
+            </div>
+            <form id="kpiForm">
+                <div class="form-group">
+                    <label class="form-label">Date</label>
+                    <input type="date" class="form-input" id="kpiDate" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Total Raised ($)</label>
+                        <input type="number" class="form-input" id="kpiTotalRaised" placeholder="5000000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">App Members</label>
+                        <input type="number" class="form-input" id="kpiMembers" placeholder="600">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Active Founders</label>
+                        <input type="number" class="form-input" id="kpiActiveFounders" placeholder="150">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Active Funders</label>
+                        <input type="number" class="form-input" id="kpiActiveFunders" placeholder="75">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Deals Facilitated</label>
+                        <input type="number" class="form-input" id="kpiDealsFacilitated" placeholder="25">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Events Hosted</label>
+                        <input type="number" class="form-input" id="kpiEventsHosted" placeholder="12">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save KPI Entry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Action Item Modal -->
+    <div class="modal-overlay" id="actionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Action Item</h3>
+                <button class="modal-close" onclick="closeActionModal()">&times;</button>
+            </div>
+            <form id="actionForm">
+                <div class="form-group">
+                    <label class="form-label">Action Title</label>
+                    <input type="text" class="form-input" id="actionTitle" required placeholder="What needs to be done?">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Assigned To</label>
+                        <input type="text" class="form-input" id="actionAssignee" placeholder="Person responsible">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Due Date</label>
+                        <input type="date" class="form-input" id="actionDueDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="actionPriority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea class="notes-textarea" id="actionNotes" style="min-height: 80px;" placeholder="Additional context..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Action Item</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Save Indicator -->
+    <div class="save-indicator" id="saveIndicator">Changes saved</div>
+
+    <script>
+        // ============================================
+        // DATA STORE (localStorage)
+        // ============================================
+
+        const STORAGE_KEYS = {
+            meetings: 'sengo_meetings',
+            kpiHistory: 'sengo_kpi_history',
+            dataEntries: 'sengo_data_entries',
+            actionItems: 'sengo_action_items'
+        };
+
+        function getData(key) {
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : [];
+        }
+
+        function setData(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+            showSaveIndicator();
+        }
+
+        function showSaveIndicator() {
+            const indicator = document.getElementById('saveIndicator');
+            indicator.classList.add('show');
+            setTimeout(() => indicator.classList.remove('show'), 2000);
+        }
+
+        // ============================================
+        // TAB NAVIGATION
+        // ============================================
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // ============================================
+        // MEETINGS
+        // ============================================
+
+        let currentMeetingId = null;
+
+        function renderMeetings() {
+            const meetings = getData(STORAGE_KEYS.meetings);
+            const container = document.getElementById('meetingList');
+
+            if (meetings.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <p>No meetings yet</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort by date descending
+            meetings.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            container.innerHTML = meetings.map(meeting => `
+                <div class="meeting-item ${currentMeetingId === meeting.id ? 'active' : ''}"
+                     onclick="selectMeeting('${meeting.id}')">
+                    <div class="meeting-date">${formatDate(meeting.date)} ${meeting.time ? '@ ' + meeting.time : ''}</div>
+                    <div class="meeting-title">${meeting.title}</div>
+                    <div class="meeting-attendees">${meeting.attendees || 'No attendees specified'}</div>
+                </div>
+            `).join('');
+        }
+
+        function selectMeeting(id) {
+            currentMeetingId = id;
+            const meetings = getData(STORAGE_KEYS.meetings);
+            const meeting = meetings.find(m => m.id === id);
+
+            if (!meeting) return;
+
+            document.getElementById('noMeetingSelected').style.display = 'none';
+            document.getElementById('meetingContent').style.display = 'block';
+
+            document.getElementById('detailTitle').textContent = meeting.title;
+            document.getElementById('detailDate').textContent = formatDate(meeting.date) + (meeting.time ? ' @ ' + meeting.time : '');
+            document.getElementById('detailAttendees').textContent = meeting.attendees ? '👥 ' + meeting.attendees : '';
+            document.getElementById('meetingNotes').value = meeting.notes || '';
+
+            renderDiscussionPoints(meeting);
+            renderMeetings(); // Re-render to show active state
+        }
+
+        function renderDiscussionPoints(meeting) {
+            const container = document.getElementById('discussionPoints');
+            const points = meeting.discussionPoints || [];
+
+            if (points.length === 0) {
+                container.innerHTML = '<p style="color: var(--gray-500); text-align: center; padding: 20px;">No discussion points yet. Click "Add Point" to get started.</p>';
+                return;
+            }
+
+            container.innerHTML = points.map((point, index) => `
+                <div class="discussion-item ${point.completed ? 'completed' : ''}">
+                    <div class="checkbox ${point.completed ? 'checked' : ''}"
+                         onclick="toggleDiscussionPoint(${index})"></div>
+                    <div class="discussion-text">${point.text}</div>
+                    <div class="discussion-actions">
+                        <button class="icon-btn" onclick="deleteDiscussionPoint(${index})">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addDiscussionPoint() {
+            const text = prompt('Enter discussion point:');
+            if (!text) return;
+
+            const meetings = getData(STORAGE_KEYS.meetings);
+            const meeting = meetings.find(m => m.id === currentMeetingId);
+
+            if (!meeting.discussionPoints) meeting.discussionPoints = [];
+            meeting.discussionPoints.push({ text, completed: false });
+
+            setData(STORAGE_KEYS.meetings, meetings);
+            renderDiscussionPoints(meeting);
+        }
+
+        function toggleDiscussionPoint(index) {
+            const meetings = getData(STORAGE_KEYS.meetings);
+            const meeting = meetings.find(m => m.id === currentMeetingId);
+
+            meeting.discussionPoints[index].completed = !meeting.discussionPoints[index].completed;
+            setData(STORAGE_KEYS.meetings, meetings);
+            renderDiscussionPoints(meeting);
+        }
+
+        function deleteDiscussionPoint(index) {
+            if (!confirm('Delete this discussion point?')) return;
+
+            const meetings = getData(STORAGE_KEYS.meetings);
+            const meeting = meetings.find(m => m.id === currentMeetingId);
+
+            meeting.discussionPoints.splice(index, 1);
+            setData(STORAGE_KEYS.meetings, meetings);
+            renderDiscussionPoints(meeting);
+        }
+
+        // Auto-save notes
+        document.getElementById('meetingNotes').addEventListener('input', debounce(function() {
+            if (!currentMeetingId) return;
+
+            const meetings = getData(STORAGE_KEYS.meetings);
+            const meeting = meetings.find(m => m.id === currentMeetingId);
+            meeting.notes = this.value;
+            setData(STORAGE_KEYS.meetings, meetings);
+        }, 500));
+
+        function openNewMeetingModal() {
+            document.getElementById('meetingModal').classList.add('active');
+            document.getElementById('meetingDate').valueAsDate = new Date();
+        }
+
+        function closeMeetingModal() {
+            document.getElementById('meetingModal').classList.remove('active');
+            document.getElementById('newMeetingForm').reset();
+        }
+
+        document.getElementById('newMeetingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const meeting = {
+                id: generateId(),
+                title: document.getElementById('meetingTitle').value,
+                date: document.getElementById('meetingDate').value,
+                time: document.getElementById('meetingTime').value,
+                attendees: document.getElementById('meetingAttendees').value,
+                discussionPoints: document.getElementById('meetingAgenda').value
+                    .split('\n')
+                    .filter(line => line.trim())
+                    .map(text => ({ text: text.trim(), completed: false })),
+                notes: '',
+                createdAt: new Date().toISOString()
+            };
+
+            const meetings = getData(STORAGE_KEYS.meetings);
+            meetings.push(meeting);
+            setData(STORAGE_KEYS.meetings, meetings);
+
+            closeMeetingModal();
+            renderMeetings();
+            selectMeeting(meeting.id);
+        });
+
+        // ============================================
+        // KPI DASHBOARD
+        // ============================================
+
+        function renderKPIs() {
+            const kpiData = getData(STORAGE_KEYS.kpiHistory);
+            const dataEntries = getData(STORAGE_KEYS.dataEntries);
+
+            // Get latest KPI entry or calculate from data
+            const latestKPI = kpiData.length > 0
+                ? kpiData.sort((a, b) => new Date(b.date) - new Date(a.date))[0]
+                : calculateKPIsFromData(dataEntries);
+
+            // Update KPI cards
+            document.getElementById('kpiRevenue').textContent = formatCurrency(latestKPI.totalRaised || 0);
+            document.getElementById('kpiUsers').textContent = latestKPI.members || 0;
+            document.getElementById('kpiFounders').textContent = latestKPI.activeFounders || 0;
+            document.getElementById('kpiFunders').textContent = latestKPI.activeFunders || 0;
+            document.getElementById('kpiDeals').textContent = latestKPI.dealsFacilitated || 0;
+            document.getElementById('kpiEvents').textContent = latestKPI.eventsHosted || 0;
+
+            // Render KPI history table
+            renderKPIHistory();
+
+            // Render charts
+            renderGrowthChart();
+            renderFundingChart();
+        }
+
+        function calculateKPIsFromData(entries) {
+            return {
+                totalRaised: entries
+                    .filter(e => e.category === 'funding')
+                    .reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0),
+                members: entries.filter(e => ['founder', 'funder'].includes(e.category)).length,
+                activeFounders: entries.filter(e => e.category === 'founder').length,
+                activeFunders: entries.filter(e => e.category === 'funder').length,
+                dealsFacilitated: entries.filter(e => e.category === 'deal').length,
+                eventsHosted: entries.filter(e => e.category === 'event').length
+            };
+        }
+
+        function renderKPIHistory() {
+            const kpiData = getData(STORAGE_KEYS.kpiHistory);
+            const container = document.getElementById('kpiHistory');
+
+            if (kpiData.length === 0) {
+                container.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--gray-500);">No KPI history yet. Add your first entry.</td></tr>';
+                return;
+            }
+
+            kpiData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            container.innerHTML = kpiData.map(kpi => `
+                <tr>
+                    <td>${formatDate(kpi.date)}</td>
+                    <td>${formatCurrency(kpi.totalRaised || 0)}</td>
+                    <td>${kpi.members || 0}</td>
+                    <td>${kpi.activeFounders || 0}</td>
+                    <td>${kpi.activeFunders || 0}</td>
+                    <td>${kpi.dealsFacilitated || 0}</td>
+                    <td>${kpi.eventsHosted || 0}</td>
+                    <td class="actions">
+                        <button class="btn btn-sm btn-danger" onclick="deleteKPI('${kpi.id}')">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderGrowthChart() {
+            const container = document.getElementById('growthChart');
+            const kpiData = getData(STORAGE_KEYS.kpiHistory);
+
+            if (kpiData.length < 2) {
+                container.innerHTML = '<div class="chart-placeholder"><p>Add at least 2 KPI entries to see growth chart</p></div>';
+                return;
+            }
+
+            // Get last 6 months of data
+            const sortedData = kpiData.sort((a, b) => new Date(a.date) - new Date(b.date)).slice(-6);
+            const maxMembers = Math.max(...sortedData.map(d => d.members || 0));
+
+            container.innerHTML = sortedData.map(d => {
+                const height = maxMembers > 0 ? ((d.members || 0) / maxMembers * 200) : 0;
+                return `
+                    <div class="bar-item">
+                        <div class="bar-value">${d.members || 0}</div>
+                        <div class="bar" style="height: ${height}px;"></div>
+                        <div class="bar-label">${formatMonthShort(d.date)}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderFundingChart() {
+            const container = document.getElementById('fundingChart');
+            const dataEntries = getData(STORAGE_KEYS.dataEntries);
+
+            const fundingEntries = dataEntries.filter(e => e.category === 'funding');
+
+            if (fundingEntries.length === 0) {
+                container.innerHTML = '<div class="chart-placeholder"><p>Add funding data to see chart</p></div>';
+                return;
+            }
+
+            // Group by quarter
+            const quarters = {};
+            fundingEntries.forEach(entry => {
+                const date = new Date(entry.date);
+                const quarter = `Q${Math.floor(date.getMonth() / 3) + 1} ${date.getFullYear()}`;
+                quarters[quarter] = (quarters[quarter] || 0) + (parseFloat(entry.amount) || 0);
+            });
+
+            const quarterData = Object.entries(quarters).slice(-4);
+            const maxFunding = Math.max(...quarterData.map(([_, v]) => v));
+
+            container.innerHTML = quarterData.map(([quarter, amount]) => {
+                const height = maxFunding > 0 ? (amount / maxFunding * 200) : 0;
+                return `
+                    <div class="bar-item">
+                        <div class="bar-value">${formatCurrencyShort(amount)}</div>
+                        <div class="bar" style="height: ${height}px;"></div>
+                        <div class="bar-label">${quarter}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openKPIModal() {
+            document.getElementById('kpiModal').classList.add('active');
+            document.getElementById('kpiDate').valueAsDate = new Date();
+        }
+
+        function closeKPIModal() {
+            document.getElementById('kpiModal').classList.remove('active');
+            document.getElementById('kpiForm').reset();
+        }
+
+        document.getElementById('kpiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const kpiEntry = {
+                id: generateId(),
+                date: document.getElementById('kpiDate').value,
+                totalRaised: parseFloat(document.getElementById('kpiTotalRaised').value) || 0,
+                members: parseInt(document.getElementById('kpiMembers').value) || 0,
+                activeFounders: parseInt(document.getElementById('kpiActiveFounders').value) || 0,
+                activeFunders: parseInt(document.getElementById('kpiActiveFunders').value) || 0,
+                dealsFacilitated: parseInt(document.getElementById('kpiDealsFacilitated').value) || 0,
+                eventsHosted: parseInt(document.getElementById('kpiEventsHosted').value) || 0,
+                createdAt: new Date().toISOString()
+            };
+
+            const kpiData = getData(STORAGE_KEYS.kpiHistory);
+            kpiData.push(kpiEntry);
+            setData(STORAGE_KEYS.kpiHistory, kpiData);
+
+            closeKPIModal();
+            renderKPIs();
+        });
+
+        function deleteKPI(id) {
+            if (!confirm('Delete this KPI entry?')) return;
+
+            const kpiData = getData(STORAGE_KEYS.kpiHistory);
+            const filtered = kpiData.filter(k => k.id !== id);
+            setData(STORAGE_KEYS.kpiHistory, filtered);
+            renderKPIs();
+        }
+
+        // ============================================
+        // DATA TRACKING
+        // ============================================
+
+        function renderDataEntries() {
+            const entries = getData(STORAGE_KEYS.dataEntries);
+            const filter = document.getElementById('dataFilter').value;
+
+            const filtered = filter === 'all'
+                ? entries
+                : entries.filter(e => e.category === filter);
+
+            // Render table
+            const tableBody = document.getElementById('dataTable');
+
+            if (filtered.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--gray-500);">No data entries yet.</td></tr>';
+            } else {
+                filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+                tableBody.innerHTML = filtered.map(entry => `
+                    <tr>
+                        <td>${formatDate(entry.date)}</td>
+                        <td><span class="badge badge-${getCategoryColor(entry.category)}">${entry.category}</span></td>
+                        <td>${entry.title}</td>
+                        <td>${entry.amount ? formatCurrency(entry.amount) : '-'}</td>
+                        <td>${entry.notes || '-'}</td>
+                        <td class="actions">
+                            <button class="btn btn-sm btn-danger" onclick="deleteDataEntry('${entry.id}')">Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            // Render recent entries
+            const recentContainer = document.getElementById('recentEntries');
+            const recent = entries.slice(-5).reverse();
+
+            if (recent.length === 0) {
+                recentContainer.innerHTML = '<p style="color: var(--gray-500); text-align: center; padding: 20px;">No recent entries</p>';
+            } else {
+                recentContainer.innerHTML = recent.map(entry => `
+                    <div class="action-item">
+                        <div class="action-status ${getCategoryColor(entry.category)}"></div>
+                        <div class="action-content">
+                            <div class="action-title">${entry.title}</div>
+                            <div class="action-meta">${entry.category} • ${formatDate(entry.date)} ${entry.amount ? '• ' + formatCurrency(entry.amount) : ''}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function getCategoryColor(category) {
+            const colors = {
+                founder: 'info',
+                funder: 'success',
+                deal: 'warning',
+                event: 'danger',
+                funding: 'success',
+                other: 'info'
+            };
+            return colors[category] || 'info';
+        }
+
+        document.getElementById('dataEntryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const entry = {
+                id: generateId(),
+                category: document.getElementById('dataCategory').value,
+                title: document.getElementById('dataTitle').value,
+                date: document.getElementById('dataDate').value,
+                amount: document.getElementById('dataAmount').value,
+                notes: document.getElementById('dataNotes').value,
+                createdAt: new Date().toISOString()
+            };
+
+            const entries = getData(STORAGE_KEYS.dataEntries);
+            entries.push(entry);
+            setData(STORAGE_KEYS.dataEntries, entries);
+
+            this.reset();
+            document.getElementById('dataDate').valueAsDate = new Date();
+            renderDataEntries();
+            renderKPIs(); // Update KPIs based on new data
+        });
+
+        function deleteDataEntry(id) {
+            if (!confirm('Delete this entry?')) return;
+
+            const entries = getData(STORAGE_KEYS.dataEntries);
+            const filtered = entries.filter(e => e.id !== id);
+            setData(STORAGE_KEYS.dataEntries, filtered);
+            renderDataEntries();
+            renderKPIs();
+        }
+
+        document.getElementById('dataFilter').addEventListener('change', renderDataEntries);
+
+        // ============================================
+        // ACTION ITEMS
+        // ============================================
+
+        function renderActionItems() {
+            const actions = getData(STORAGE_KEYS.actionItems);
+
+            const pending = actions.filter(a => a.status !== 'completed');
+            const completed = actions.filter(a => a.status === 'completed');
+
+            // Render pending
+            const pendingContainer = document.getElementById('pendingActions');
+            if (pending.length === 0) {
+                pendingContainer.innerHTML = '<p style="color: var(--gray-500); text-align: center; padding: 20px;">No pending actions</p>';
+            } else {
+                pending.sort((a, b) => {
+                    const priorityOrder = { high: 0, medium: 1, low: 2 };
+                    return priorityOrder[a.priority] - priorityOrder[b.priority];
+                });
+                pendingContainer.innerHTML = pending.map(action => renderActionItem(action)).join('');
+            }
+
+            // Render completed
+            const completedContainer = document.getElementById('completedActions');
+            if (completed.length === 0) {
+                completedContainer.innerHTML = '<p style="color: var(--gray-500); text-align: center; padding: 20px;">No completed actions</p>';
+            } else {
+                completedContainer.innerHTML = completed.slice(-10).reverse().map(action => renderActionItem(action)).join('');
+            }
+        }
+
+        function renderActionItem(action) {
+            const priorityColors = { high: 'danger', medium: 'warning', low: 'info' };
+            return `
+                <div class="action-item" style="border-left-color: var(--${priorityColors[action.priority] || 'info'});">
+                    <div class="action-status ${action.status === 'completed' ? 'completed' : 'pending'}"></div>
+                    <div class="action-content">
+                        <div class="action-title" style="${action.status === 'completed' ? 'text-decoration: line-through; opacity: 0.6;' : ''}">${action.title}</div>
+                        <div class="action-meta">
+                            ${action.assignee ? action.assignee + ' • ' : ''}
+                            ${action.dueDate ? 'Due: ' + formatDate(action.dueDate) : ''}
+                            <span class="badge badge-${priorityColors[action.priority]}">${action.priority}</span>
+                        </div>
+                    </div>
+                    <div class="discussion-actions">
+                        ${action.status !== 'completed'
+                            ? `<button class="icon-btn" onclick="completeAction('${action.id}')" title="Mark complete">✓</button>`
+                            : `<button class="icon-btn" onclick="reopenAction('${action.id}')" title="Reopen">↩</button>`
+                        }
+                        <button class="icon-btn" onclick="deleteAction('${action.id}')" title="Delete">🗑️</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openActionModal() {
+            document.getElementById('actionModal').classList.add('active');
+            document.getElementById('actionDueDate').valueAsDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+        }
+
+        function closeActionModal() {
+            document.getElementById('actionModal').classList.remove('active');
+            document.getElementById('actionForm').reset();
+        }
+
+        document.getElementById('actionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const action = {
+                id: generateId(),
+                title: document.getElementById('actionTitle').value,
+                assignee: document.getElementById('actionAssignee').value,
+                dueDate: document.getElementById('actionDueDate').value,
+                priority: document.getElementById('actionPriority').value,
+                notes: document.getElementById('actionNotes').value,
+                status: 'pending',
+                createdAt: new Date().toISOString()
+            };
+
+            const actions = getData(STORAGE_KEYS.actionItems);
+            actions.push(action);
+            setData(STORAGE_KEYS.actionItems, actions);
+
+            closeActionModal();
+            renderActionItems();
+        });
+
+        function completeAction(id) {
+            const actions = getData(STORAGE_KEYS.actionItems);
+            const action = actions.find(a => a.id === id);
+            if (action) {
+                action.status = 'completed';
+                action.completedAt = new Date().toISOString();
+                setData(STORAGE_KEYS.actionItems, actions);
+                renderActionItems();
+            }
+        }
+
+        function reopenAction(id) {
+            const actions = getData(STORAGE_KEYS.actionItems);
+            const action = actions.find(a => a.id === id);
+            if (action) {
+                action.status = 'pending';
+                delete action.completedAt;
+                setData(STORAGE_KEYS.actionItems, actions);
+                renderActionItems();
+            }
+        }
+
+        function deleteAction(id) {
+            if (!confirm('Delete this action item?')) return;
+
+            const actions = getData(STORAGE_KEYS.actionItems);
+            const filtered = actions.filter(a => a.id !== id);
+            setData(STORAGE_KEYS.actionItems, filtered);
+            renderActionItems();
+        }
+
+        // ============================================
+        // EXPORT DATA
+        // ============================================
+
+        function exportData() {
+            const data = {
+                meetings: getData(STORAGE_KEYS.meetings),
+                kpiHistory: getData(STORAGE_KEYS.kpiHistory),
+                dataEntries: getData(STORAGE_KEYS.dataEntries),
+                actionItems: getData(STORAGE_KEYS.actionItems),
+                exportedAt: new Date().toISOString()
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `sengo-portal-export-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ============================================
+        // UTILITY FUNCTIONS
+        // ============================================
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+
+        function formatMonthShort(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-US', { month: 'short' });
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function formatCurrencyShort(amount) {
+            if (amount >= 1000000) {
+                return '$' + (amount / 1000000).toFixed(1) + 'M';
+            } else if (amount >= 1000) {
+                return '$' + (amount / 1000).toFixed(0) + 'K';
+            }
+            return '$' + amount;
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func.apply(this, args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // ============================================
+        // INITIALIZE
+        // ============================================
+
+        function init() {
+            // Set default date for forms
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('dataDate').value = today;
+
+            // Render all sections
+            renderMeetings();
+            renderKPIs();
+            renderDataEntries();
+            renderActionItems();
+        }
+
+        // Run on load
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1609 @@
+<!--
+    SENGO MEETING PORTAL - KAJABI EMBED VERSION
+
+    HOW TO USE IN KAJABI:
+    1. Go to your Kajabi site builder
+    2. Add a new "Custom Code" block or section
+    3. Copy and paste this ENTIRE code into the custom code area
+    4. Save and publish
+
+    NOTES:
+    - All data is stored in the browser's localStorage
+    - Data persists between sessions on the same device
+    - Export feature allows downloading all data as JSON
+    - For team-wide data sharing, consider upgrading to a backend solution
+-->
+
+<style>
+    /* ============================================
+       SENGO MEETING PORTAL STYLES
+       ============================================ */
+
+    .smp-portal * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .smp-portal {
+        --smp-primary: #1B3533;
+        --smp-accent: #D57028;
+        --smp-secondary: #67441A;
+        --smp-light: #F3EDE7;
+        --smp-white: #ffffff;
+        --smp-gray-100: #f8f9fa;
+        --smp-gray-200: #e9ecef;
+        --smp-gray-300: #dee2e6;
+        --smp-gray-400: #ced4da;
+        --smp-gray-500: #adb5bd;
+        --smp-gray-600: #6c757d;
+        --smp-gray-700: #495057;
+        --smp-success: #28a745;
+        --smp-warning: #ffc107;
+        --smp-danger: #dc3545;
+        --smp-info: #17a2b8;
+
+        font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: var(--smp-light);
+        color: var(--smp-primary);
+        line-height: 1.6;
+        padding: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* Header */
+    .smp-header {
+        background: linear-gradient(135deg, var(--smp-primary) 0%, #2a4a47 100%);
+        color: var(--smp-white);
+        padding: 30px 40px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .smp-header h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+    }
+
+    .smp-header .smp-subtitle {
+        opacity: 0.9;
+        font-size: 0.95rem;
+        margin-top: 5px;
+    }
+
+    .smp-header-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    /* Navigation Tabs */
+    .smp-nav-tabs {
+        display: flex;
+        background: var(--smp-white);
+        border-radius: 12px;
+        padding: 8px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .smp-nav-tab {
+        padding: 14px 28px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--smp-gray-600);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .smp-nav-tab:hover {
+        background: var(--smp-gray-100);
+        color: var(--smp-primary);
+    }
+
+    .smp-nav-tab.active {
+        background: var(--smp-accent);
+        color: var(--smp-white);
+    }
+
+    /* Buttons */
+    .smp-btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .smp-btn-primary {
+        background: var(--smp-accent);
+        color: var(--smp-white);
+    }
+
+    .smp-btn-primary:hover {
+        background: #c4611f;
+        transform: translateY(-2px);
+    }
+
+    .smp-btn-secondary {
+        background: var(--smp-white);
+        color: var(--smp-primary);
+        border: 2px solid var(--smp-gray-300);
+    }
+
+    .smp-btn-danger {
+        background: var(--smp-danger);
+        color: var(--smp-white);
+    }
+
+    .smp-btn-sm {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    /* Cards */
+    .smp-card {
+        background: var(--smp-white);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+    }
+
+    .smp-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--smp-gray-200);
+    }
+
+    .smp-card-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--smp-primary);
+    }
+
+    /* Tab Content */
+    .smp-tab-content {
+        display: none;
+    }
+
+    .smp-tab-content.active {
+        display: block;
+    }
+
+    /* Meetings Container */
+    .smp-meetings-container {
+        display: grid;
+        grid-template-columns: 350px 1fr;
+        gap: 30px;
+    }
+
+    /* Meeting List */
+    .smp-meeting-list {
+        max-height: 600px;
+        overflow-y: auto;
+    }
+
+    .smp-meeting-item {
+        padding: 16px;
+        border: 2px solid var(--smp-gray-200);
+        border-radius: 10px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .smp-meeting-item:hover {
+        border-color: var(--smp-accent);
+        transform: translateX(5px);
+    }
+
+    .smp-meeting-item.active {
+        border-color: var(--smp-accent);
+        background: rgba(213, 112, 40, 0.05);
+    }
+
+    .smp-meeting-date {
+        font-size: 0.85rem;
+        color: var(--smp-accent);
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .smp-meeting-title {
+        font-weight: 600;
+        color: var(--smp-primary);
+        margin-bottom: 8px;
+    }
+
+    .smp-meeting-attendees {
+        font-size: 0.85rem;
+        color: var(--smp-gray-600);
+    }
+
+    /* Discussion Points */
+    .smp-discussion-item {
+        display: flex;
+        align-items: flex-start;
+        padding: 12px;
+        background: var(--smp-gray-100);
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+
+    .smp-checkbox {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--smp-gray-400);
+        border-radius: 4px;
+        margin-right: 12px;
+        cursor: pointer;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .smp-checkbox.checked {
+        background: var(--smp-success);
+        border-color: var(--smp-success);
+        color: var(--smp-white);
+    }
+
+    .smp-checkbox.checked::after {
+        content: '✓';
+        font-size: 12px;
+    }
+
+    .smp-discussion-item.completed .smp-discussion-text {
+        text-decoration: line-through;
+        opacity: 0.6;
+    }
+
+    .smp-discussion-text {
+        flex: 1;
+    }
+
+    .smp-icon-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        font-size: 1rem;
+        opacity: 0.5;
+        transition: opacity 0.2s;
+    }
+
+    .smp-icon-btn:hover {
+        opacity: 1;
+    }
+
+    /* Notes Section */
+    .smp-notes-textarea {
+        width: 100%;
+        min-height: 200px;
+        padding: 16px;
+        border: 2px solid var(--smp-gray-200);
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        resize: vertical;
+        transition: border-color 0.3s;
+    }
+
+    .smp-notes-textarea:focus {
+        outline: none;
+        border-color: var(--smp-accent);
+    }
+
+    /* KPI Grid */
+    .smp-kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .smp-kpi-card {
+        background: var(--smp-white);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .smp-kpi-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+    }
+
+    .smp-kpi-card.revenue::before { background: var(--smp-success); }
+    .smp-kpi-card.users::before { background: var(--smp-info); }
+    .smp-kpi-card.deals::before { background: var(--smp-accent); }
+    .smp-kpi-card.events::before { background: var(--smp-warning); }
+    .smp-kpi-card.founders::before { background: #9b59b6; }
+    .smp-kpi-card.funders::before { background: #3498db; }
+
+    .smp-kpi-label {
+        font-size: 0.8rem;
+        color: var(--smp-gray-600);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+    }
+
+    .smp-kpi-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--smp-primary);
+        margin-bottom: 8px;
+    }
+
+    .smp-kpi-change {
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .smp-kpi-change.positive { color: var(--smp-success); }
+    .smp-kpi-change.negative { color: var(--smp-danger); }
+
+    /* Charts */
+    .smp-chart-container {
+        background: var(--smp-white);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+    }
+
+    .smp-bar-chart {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        height: 200px;
+        padding: 20px 0;
+    }
+
+    .smp-bar-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        max-width: 60px;
+    }
+
+    .smp-bar {
+        width: 30px;
+        background: linear-gradient(180deg, var(--smp-accent) 0%, var(--smp-secondary) 100%);
+        border-radius: 4px 4px 0 0;
+        transition: height 0.5s ease;
+    }
+
+    .smp-bar-label {
+        margin-top: 10px;
+        font-size: 0.75rem;
+        color: var(--smp-gray-600);
+    }
+
+    .smp-bar-value {
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    /* Forms */
+    .smp-form-group {
+        margin-bottom: 20px;
+    }
+
+    .smp-form-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--smp-primary);
+    }
+
+    .smp-form-input,
+    .smp-form-select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid var(--smp-gray-200);
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        transition: border-color 0.3s;
+    }
+
+    .smp-form-input:focus,
+    .smp-form-select:focus {
+        outline: none;
+        border-color: var(--smp-accent);
+    }
+
+    .smp-form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    /* Data Table */
+    .smp-data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .smp-data-table th,
+    .smp-data-table td {
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--smp-gray-200);
+    }
+
+    .smp-data-table th {
+        background: var(--smp-gray-100);
+        font-weight: 600;
+        color: var(--smp-primary);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .smp-data-table tr:hover td {
+        background: rgba(213, 112, 40, 0.05);
+    }
+
+    /* Modal */
+    .smp-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .smp-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .smp-modal {
+        background: var(--smp-white);
+        border-radius: 16px;
+        padding: 30px;
+        width: 90%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        transform: translateY(-20px);
+        transition: transform 0.3s ease;
+    }
+
+    .smp-modal-overlay.active .smp-modal {
+        transform: translateY(0);
+    }
+
+    .smp-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+
+    .smp-modal-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .smp-modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--smp-gray-500);
+        transition: color 0.2s;
+    }
+
+    .smp-modal-close:hover {
+        color: var(--smp-primary);
+    }
+
+    /* Empty State */
+    .smp-empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--smp-gray-500);
+    }
+
+    .smp-empty-state-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        opacity: 0.5;
+    }
+
+    .smp-empty-state-text {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+    }
+
+    /* Action Items */
+    .smp-action-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        background: var(--smp-white);
+        border-radius: 8px;
+        margin-bottom: 10px;
+        border-left: 4px solid var(--smp-accent);
+    }
+
+    .smp-action-status {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 12px;
+    }
+
+    .smp-action-status.pending { background: var(--smp-warning); }
+    .smp-action-status.completed { background: var(--smp-success); }
+
+    .smp-action-content {
+        flex: 1;
+    }
+
+    .smp-action-title {
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    .smp-action-meta {
+        font-size: 0.85rem;
+        color: var(--smp-gray-600);
+    }
+
+    /* Badge */
+    .smp-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .smp-badge-success { background: rgba(40, 167, 69, 0.15); color: var(--smp-success); }
+    .smp-badge-warning { background: rgba(255, 193, 7, 0.15); color: #d39e00; }
+    .smp-badge-danger { background: rgba(220, 53, 69, 0.15); color: var(--smp-danger); }
+    .smp-badge-info { background: rgba(23, 162, 184, 0.15); color: var(--smp-info); }
+
+    /* Save Indicator */
+    .smp-save-indicator {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--smp-success);
+        color: var(--smp-white);
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        z-index: 10000;
+    }
+
+    .smp-save-indicator.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Grid Layouts */
+    .smp-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .smp-meetings-container {
+            grid-template-columns: 1fr;
+        }
+        .smp-meeting-list {
+            max-height: 300px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .smp-header {
+            padding: 20px;
+        }
+        .smp-header h1 {
+            font-size: 1.3rem;
+        }
+        .smp-nav-tabs {
+            flex-direction: column;
+        }
+        .smp-nav-tab {
+            text-align: center;
+        }
+        .smp-grid-2, .smp-form-row {
+            grid-template-columns: 1fr;
+        }
+        .smp-kpi-value {
+            font-size: 1.5rem;
+        }
+        .smp-data-table {
+            font-size: 0.8rem;
+        }
+        .smp-data-table th,
+        .smp-data-table td {
+            padding: 8px 10px;
+        }
+    }
+</style>
+
+<div class="smp-portal">
+    <!-- Header -->
+    <header class="smp-header">
+        <div>
+            <h1>Sengo Meeting Portal</h1>
+            <p class="smp-subtitle">Weekly meetings, discussion points, and KPI tracking</p>
+        </div>
+        <div class="smp-header-actions">
+            <button class="smp-btn smp-btn-primary" onclick="SMP.openNewMeetingModal()">+ New Meeting</button>
+            <button class="smp-btn smp-btn-secondary" onclick="SMP.exportData()">Export Data</button>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="smp-nav-tabs">
+        <button class="smp-nav-tab active" data-tab="smp-meetings">Meetings</button>
+        <button class="smp-nav-tab" data-tab="smp-kpis">KPI Dashboard</button>
+        <button class="smp-nav-tab" data-tab="smp-data">Data Tracking</button>
+        <button class="smp-nav-tab" data-tab="smp-actions">Action Items</button>
+    </nav>
+
+    <!-- Meetings Tab -->
+    <div id="smp-meetings" class="smp-tab-content active">
+        <div class="smp-meetings-container">
+            <div class="smp-card">
+                <div class="smp-card-header">
+                    <h3 class="smp-card-title">All Meetings</h3>
+                </div>
+                <div class="smp-meeting-list" id="smpMeetingList"></div>
+            </div>
+            <div class="smp-card" id="smpMeetingDetail">
+                <div class="smp-empty-state" id="smpNoMeetingSelected">
+                    <div class="smp-empty-state-icon">📅</div>
+                    <p class="smp-empty-state-text">Select a meeting to view details or create a new one</p>
+                    <button class="smp-btn smp-btn-primary" onclick="SMP.openNewMeetingModal()">+ Create Meeting</button>
+                </div>
+                <div id="smpMeetingContent" style="display: none;">
+                    <div style="margin-bottom: 30px;">
+                        <h2 id="smpDetailTitle" style="font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;"></h2>
+                        <div id="smpDetailMeta" style="color: var(--smp-gray-600); font-size: 0.9rem;"></div>
+                    </div>
+                    <div class="smp-discussion-section" style="margin-bottom: 30px;">
+                        <div class="smp-card-header">
+                            <h3 class="smp-card-title">Discussion Points</h3>
+                            <button class="smp-btn smp-btn-sm smp-btn-primary" onclick="SMP.addDiscussionPoint()">+ Add Point</button>
+                        </div>
+                        <div id="smpDiscussionPoints"></div>
+                    </div>
+                    <div class="smp-notes-section">
+                        <div class="smp-card-header">
+                            <h3 class="smp-card-title">Meeting Notes</h3>
+                        </div>
+                        <textarea class="smp-notes-textarea" id="smpMeetingNotes" placeholder="Add meeting notes here..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KPI Dashboard Tab -->
+    <div id="smp-kpis" class="smp-tab-content">
+        <div class="smp-kpi-grid">
+            <div class="smp-kpi-card revenue">
+                <div class="smp-kpi-label">Total Raised</div>
+                <div class="smp-kpi-value" id="smpKpiRevenue">$0</div>
+                <div class="smp-kpi-change positive"><span>↑</span> vs last month</div>
+            </div>
+            <div class="smp-kpi-card users">
+                <div class="smp-kpi-label">App Members</div>
+                <div class="smp-kpi-value" id="smpKpiUsers">0</div>
+                <div class="smp-kpi-change positive"><span>↑</span> new this month</div>
+            </div>
+            <div class="smp-kpi-card founders">
+                <div class="smp-kpi-label">Active Founders</div>
+                <div class="smp-kpi-value" id="smpKpiFounders">0</div>
+                <div class="smp-kpi-change positive"><span>↑</span> new this month</div>
+            </div>
+            <div class="smp-kpi-card funders">
+                <div class="smp-kpi-label">Active Funders</div>
+                <div class="smp-kpi-value" id="smpKpiFunders">0</div>
+                <div class="smp-kpi-change positive"><span>↑</span> new this month</div>
+            </div>
+            <div class="smp-kpi-card deals">
+                <div class="smp-kpi-label">Deals Facilitated</div>
+                <div class="smp-kpi-value" id="smpKpiDeals">0</div>
+                <div class="smp-kpi-change positive"><span>↑</span> this quarter</div>
+            </div>
+            <div class="smp-kpi-card events">
+                <div class="smp-kpi-label">Events Hosted</div>
+                <div class="smp-kpi-value" id="smpKpiEvents">0</div>
+                <div class="smp-kpi-change positive"><span>↑</span> this month</div>
+            </div>
+        </div>
+
+        <div class="smp-grid-2">
+            <div class="smp-chart-container">
+                <div class="smp-card-header">
+                    <h3 class="smp-card-title">Monthly Growth</h3>
+                </div>
+                <div class="smp-bar-chart" id="smpGrowthChart"></div>
+            </div>
+            <div class="smp-chart-container">
+                <div class="smp-card-header">
+                    <h3 class="smp-card-title">Funding by Quarter</h3>
+                </div>
+                <div class="smp-bar-chart" id="smpFundingChart"></div>
+            </div>
+        </div>
+
+        <div class="smp-card">
+            <div class="smp-card-header">
+                <h3 class="smp-card-title">KPI History</h3>
+                <button class="smp-btn smp-btn-sm smp-btn-primary" onclick="SMP.openKPIModal()">+ Add Entry</button>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="smp-data-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Total Raised</th>
+                            <th>Members</th>
+                            <th>Founders</th>
+                            <th>Funders</th>
+                            <th>Deals</th>
+                            <th>Events</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="smpKpiHistory"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Tracking Tab -->
+    <div id="smp-data" class="smp-tab-content">
+        <div class="smp-grid-2">
+            <div class="smp-card">
+                <div class="smp-card-header">
+                    <h3 class="smp-card-title">Add Data Entry</h3>
+                </div>
+                <form id="smpDataEntryForm">
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Category</label>
+                        <select class="smp-form-select" id="smpDataCategory" required>
+                            <option value="">Select category...</option>
+                            <option value="founder">New Founder</option>
+                            <option value="funder">New Funder</option>
+                            <option value="deal">Deal Closed</option>
+                            <option value="event">Event Hosted</option>
+                            <option value="funding">Funding Raised</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Title/Name</label>
+                        <input type="text" class="smp-form-input" id="smpDataTitle" required placeholder="Enter title or name">
+                    </div>
+                    <div class="smp-form-row">
+                        <div class="smp-form-group">
+                            <label class="smp-form-label">Date</label>
+                            <input type="date" class="smp-form-input" id="smpDataDate" required>
+                        </div>
+                        <div class="smp-form-group">
+                            <label class="smp-form-label">Amount (if applicable)</label>
+                            <input type="number" class="smp-form-input" id="smpDataAmount" placeholder="$0">
+                        </div>
+                    </div>
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Notes</label>
+                        <textarea class="smp-notes-textarea" id="smpDataNotes" style="min-height: 80px;" placeholder="Additional details..."></textarea>
+                    </div>
+                    <button type="submit" class="smp-btn smp-btn-primary">Add Entry</button>
+                </form>
+            </div>
+            <div class="smp-card">
+                <div class="smp-card-header">
+                    <h3 class="smp-card-title">Recent Entries</h3>
+                </div>
+                <div id="smpRecentEntries"></div>
+            </div>
+        </div>
+
+        <div class="smp-card">
+            <div class="smp-card-header">
+                <h3 class="smp-card-title">All Data Entries</h3>
+                <select class="smp-form-select" id="smpDataFilter" style="width: auto;">
+                    <option value="all">All Categories</option>
+                    <option value="founder">Founders</option>
+                    <option value="funder">Funders</option>
+                    <option value="deal">Deals</option>
+                    <option value="event">Events</option>
+                    <option value="funding">Funding</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="smp-data-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Title</th>
+                            <th>Amount</th>
+                            <th>Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="smpDataTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Items Tab -->
+    <div id="smp-actions" class="smp-tab-content">
+        <div class="smp-grid-2">
+            <div class="smp-card">
+                <div class="smp-card-header">
+                    <h3 class="smp-card-title">Pending Actions</h3>
+                    <button class="smp-btn smp-btn-sm smp-btn-primary" onclick="SMP.openActionModal()">+ Add Action</button>
+                </div>
+                <div id="smpPendingActions"></div>
+            </div>
+            <div class="smp-card">
+                <div class="smp-card-header">
+                    <h3 class="smp-card-title">Completed Actions</h3>
+                </div>
+                <div id="smpCompletedActions"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meeting Modal -->
+    <div class="smp-modal-overlay" id="smpMeetingModal">
+        <div class="smp-modal">
+            <div class="smp-modal-header">
+                <h3 class="smp-modal-title">New Meeting</h3>
+                <button class="smp-modal-close" onclick="SMP.closeMeetingModal()">&times;</button>
+            </div>
+            <form id="smpNewMeetingForm">
+                <div class="smp-form-group">
+                    <label class="smp-form-label">Meeting Title</label>
+                    <input type="text" class="smp-form-input" id="smpMeetingTitle" required placeholder="e.g., Weekly Team Sync">
+                </div>
+                <div class="smp-form-row">
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Date</label>
+                        <input type="date" class="smp-form-input" id="smpMeetingDate" required>
+                    </div>
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Time</label>
+                        <input type="time" class="smp-form-input" id="smpMeetingTime">
+                    </div>
+                </div>
+                <div class="smp-form-group">
+                    <label class="smp-form-label">Attendees</label>
+                    <input type="text" class="smp-form-input" id="smpMeetingAttendees" placeholder="e.g., John, Sarah, Mike">
+                </div>
+                <div class="smp-form-group">
+                    <label class="smp-form-label">Agenda (one item per line)</label>
+                    <textarea class="smp-notes-textarea" id="smpMeetingAgenda" style="min-height: 80px;" placeholder="Item 1&#10;Item 2&#10;Item 3"></textarea>
+                </div>
+                <button type="submit" class="smp-btn smp-btn-primary">Create Meeting</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- KPI Modal -->
+    <div class="smp-modal-overlay" id="smpKpiModal">
+        <div class="smp-modal">
+            <div class="smp-modal-header">
+                <h3 class="smp-modal-title">Add KPI Entry</h3>
+                <button class="smp-modal-close" onclick="SMP.closeKPIModal()">&times;</button>
+            </div>
+            <form id="smpKpiForm">
+                <div class="smp-form-group">
+                    <label class="smp-form-label">Date</label>
+                    <input type="date" class="smp-form-input" id="smpKpiDate" required>
+                </div>
+                <div class="smp-form-row">
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Total Raised ($)</label>
+                        <input type="number" class="smp-form-input" id="smpKpiTotalRaised" placeholder="5000000">
+                    </div>
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">App Members</label>
+                        <input type="number" class="smp-form-input" id="smpKpiMembers" placeholder="600">
+                    </div>
+                </div>
+                <div class="smp-form-row">
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Active Founders</label>
+                        <input type="number" class="smp-form-input" id="smpKpiActiveFounders" placeholder="150">
+                    </div>
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Active Funders</label>
+                        <input type="number" class="smp-form-input" id="smpKpiActiveFunders" placeholder="75">
+                    </div>
+                </div>
+                <div class="smp-form-row">
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Deals Facilitated</label>
+                        <input type="number" class="smp-form-input" id="smpKpiDealsFacilitated" placeholder="25">
+                    </div>
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Events Hosted</label>
+                        <input type="number" class="smp-form-input" id="smpKpiEventsHosted" placeholder="12">
+                    </div>
+                </div>
+                <button type="submit" class="smp-btn smp-btn-primary">Save KPI Entry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Action Modal -->
+    <div class="smp-modal-overlay" id="smpActionModal">
+        <div class="smp-modal">
+            <div class="smp-modal-header">
+                <h3 class="smp-modal-title">Add Action Item</h3>
+                <button class="smp-modal-close" onclick="SMP.closeActionModal()">&times;</button>
+            </div>
+            <form id="smpActionForm">
+                <div class="smp-form-group">
+                    <label class="smp-form-label">Action Title</label>
+                    <input type="text" class="smp-form-input" id="smpActionTitle" required placeholder="What needs to be done?">
+                </div>
+                <div class="smp-form-row">
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Assigned To</label>
+                        <input type="text" class="smp-form-input" id="smpActionAssignee" placeholder="Person responsible">
+                    </div>
+                    <div class="smp-form-group">
+                        <label class="smp-form-label">Due Date</label>
+                        <input type="date" class="smp-form-input" id="smpActionDueDate">
+                    </div>
+                </div>
+                <div class="smp-form-group">
+                    <label class="smp-form-label">Priority</label>
+                    <select class="smp-form-select" id="smpActionPriority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button type="submit" class="smp-btn smp-btn-primary">Add Action Item</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Save Indicator -->
+    <div class="smp-save-indicator" id="smpSaveIndicator">Changes saved</div>
+</div>
+
+<script>
+// Sengo Meeting Portal - Namespaced to avoid conflicts
+const SMP = (function() {
+    const STORAGE_KEYS = {
+        meetings: 'sengo_meetings',
+        kpiHistory: 'sengo_kpi_history',
+        dataEntries: 'sengo_data_entries',
+        actionItems: 'sengo_action_items'
+    };
+
+    let currentMeetingId = null;
+
+    // Data helpers
+    function getData(key) {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : [];
+    }
+
+    function setData(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+        showSaveIndicator();
+    }
+
+    function showSaveIndicator() {
+        const indicator = document.getElementById('smpSaveIndicator');
+        indicator.classList.add('show');
+        setTimeout(() => indicator.classList.remove('show'), 2000);
+    }
+
+    function generateId() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    }
+
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(amount);
+    }
+
+    function formatCurrencyShort(amount) {
+        if (amount >= 1000000) return '$' + (amount / 1000000).toFixed(1) + 'M';
+        if (amount >= 1000) return '$' + (amount / 1000).toFixed(0) + 'K';
+        return '$' + amount;
+    }
+
+    function formatMonthShort(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-US', { month: 'short' });
+    }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+
+    // Tab Navigation
+    function setupTabs() {
+        document.querySelectorAll('.smp-nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.smp-nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.smp-tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+    }
+
+    // Meetings
+    function renderMeetings() {
+        const meetings = getData(STORAGE_KEYS.meetings);
+        const container = document.getElementById('smpMeetingList');
+
+        if (meetings.length === 0) {
+            container.innerHTML = '<div class="smp-empty-state"><p>No meetings yet</p></div>';
+            return;
+        }
+
+        meetings.sort((a, b) => new Date(b.date) - new Date(a.date));
+        container.innerHTML = meetings.map(m => `
+            <div class="smp-meeting-item ${currentMeetingId === m.id ? 'active' : ''}" onclick="SMP.selectMeeting('${m.id}')">
+                <div class="smp-meeting-date">${formatDate(m.date)} ${m.time ? '@ ' + m.time : ''}</div>
+                <div class="smp-meeting-title">${m.title}</div>
+                <div class="smp-meeting-attendees">${m.attendees || 'No attendees specified'}</div>
+            </div>
+        `).join('');
+    }
+
+    function selectMeeting(id) {
+        currentMeetingId = id;
+        const meetings = getData(STORAGE_KEYS.meetings);
+        const meeting = meetings.find(m => m.id === id);
+        if (!meeting) return;
+
+        document.getElementById('smpNoMeetingSelected').style.display = 'none';
+        document.getElementById('smpMeetingContent').style.display = 'block';
+        document.getElementById('smpDetailTitle').textContent = meeting.title;
+        document.getElementById('smpDetailMeta').textContent = formatDate(meeting.date) + (meeting.time ? ' @ ' + meeting.time : '') + (meeting.attendees ? ' • 👥 ' + meeting.attendees : '');
+        document.getElementById('smpMeetingNotes').value = meeting.notes || '';
+
+        renderDiscussionPoints(meeting);
+        renderMeetings();
+    }
+
+    function renderDiscussionPoints(meeting) {
+        const container = document.getElementById('smpDiscussionPoints');
+        const points = meeting.discussionPoints || [];
+
+        if (points.length === 0) {
+            container.innerHTML = '<p style="color: var(--smp-gray-500); text-align: center; padding: 20px;">No discussion points yet.</p>';
+            return;
+        }
+
+        container.innerHTML = points.map((p, i) => `
+            <div class="smp-discussion-item ${p.completed ? 'completed' : ''}">
+                <div class="smp-checkbox ${p.completed ? 'checked' : ''}" onclick="SMP.toggleDiscussionPoint(${i})"></div>
+                <div class="smp-discussion-text">${p.text}</div>
+                <button class="smp-icon-btn" onclick="SMP.deleteDiscussionPoint(${i})">🗑️</button>
+            </div>
+        `).join('');
+    }
+
+    function addDiscussionPoint() {
+        const text = prompt('Enter discussion point:');
+        if (!text) return;
+        const meetings = getData(STORAGE_KEYS.meetings);
+        const meeting = meetings.find(m => m.id === currentMeetingId);
+        if (!meeting.discussionPoints) meeting.discussionPoints = [];
+        meeting.discussionPoints.push({ text, completed: false });
+        setData(STORAGE_KEYS.meetings, meetings);
+        renderDiscussionPoints(meeting);
+    }
+
+    function toggleDiscussionPoint(index) {
+        const meetings = getData(STORAGE_KEYS.meetings);
+        const meeting = meetings.find(m => m.id === currentMeetingId);
+        meeting.discussionPoints[index].completed = !meeting.discussionPoints[index].completed;
+        setData(STORAGE_KEYS.meetings, meetings);
+        renderDiscussionPoints(meeting);
+    }
+
+    function deleteDiscussionPoint(index) {
+        if (!confirm('Delete this discussion point?')) return;
+        const meetings = getData(STORAGE_KEYS.meetings);
+        const meeting = meetings.find(m => m.id === currentMeetingId);
+        meeting.discussionPoints.splice(index, 1);
+        setData(STORAGE_KEYS.meetings, meetings);
+        renderDiscussionPoints(meeting);
+    }
+
+    function openNewMeetingModal() {
+        document.getElementById('smpMeetingModal').classList.add('active');
+        document.getElementById('smpMeetingDate').valueAsDate = new Date();
+    }
+
+    function closeMeetingModal() {
+        document.getElementById('smpMeetingModal').classList.remove('active');
+        document.getElementById('smpNewMeetingForm').reset();
+    }
+
+    // KPIs
+    function renderKPIs() {
+        const kpiData = getData(STORAGE_KEYS.kpiHistory);
+        const dataEntries = getData(STORAGE_KEYS.dataEntries);
+
+        const latestKPI = kpiData.length > 0 ? kpiData.sort((a, b) => new Date(b.date) - new Date(a.date))[0] : {
+            totalRaised: dataEntries.filter(e => e.category === 'funding').reduce((s, e) => s + (parseFloat(e.amount) || 0), 0),
+            members: dataEntries.filter(e => ['founder', 'funder'].includes(e.category)).length,
+            activeFounders: dataEntries.filter(e => e.category === 'founder').length,
+            activeFunders: dataEntries.filter(e => e.category === 'funder').length,
+            dealsFacilitated: dataEntries.filter(e => e.category === 'deal').length,
+            eventsHosted: dataEntries.filter(e => e.category === 'event').length
+        };
+
+        document.getElementById('smpKpiRevenue').textContent = formatCurrency(latestKPI.totalRaised || 0);
+        document.getElementById('smpKpiUsers').textContent = latestKPI.members || 0;
+        document.getElementById('smpKpiFounders').textContent = latestKPI.activeFounders || 0;
+        document.getElementById('smpKpiFunders').textContent = latestKPI.activeFunders || 0;
+        document.getElementById('smpKpiDeals').textContent = latestKPI.dealsFacilitated || 0;
+        document.getElementById('smpKpiEvents').textContent = latestKPI.eventsHosted || 0;
+
+        renderKPIHistory();
+        renderGrowthChart();
+        renderFundingChart();
+    }
+
+    function renderKPIHistory() {
+        const kpiData = getData(STORAGE_KEYS.kpiHistory);
+        const container = document.getElementById('smpKpiHistory');
+
+        if (kpiData.length === 0) {
+            container.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--smp-gray-500);">No KPI history yet.</td></tr>';
+            return;
+        }
+
+        kpiData.sort((a, b) => new Date(b.date) - new Date(a.date));
+        container.innerHTML = kpiData.map(k => `
+            <tr>
+                <td>${formatDate(k.date)}</td>
+                <td>${formatCurrency(k.totalRaised || 0)}</td>
+                <td>${k.members || 0}</td>
+                <td>${k.activeFounders || 0}</td>
+                <td>${k.activeFunders || 0}</td>
+                <td>${k.dealsFacilitated || 0}</td>
+                <td>${k.eventsHosted || 0}</td>
+                <td><button class="smp-btn smp-btn-sm smp-btn-danger" onclick="SMP.deleteKPI('${k.id}')">Delete</button></td>
+            </tr>
+        `).join('');
+    }
+
+    function renderGrowthChart() {
+        const container = document.getElementById('smpGrowthChart');
+        const kpiData = getData(STORAGE_KEYS.kpiHistory);
+
+        if (kpiData.length < 2) {
+            container.innerHTML = '<div style="text-align: center; color: var(--smp-gray-500); padding: 50px;">Add at least 2 KPI entries to see chart</div>';
+            return;
+        }
+
+        const sortedData = kpiData.sort((a, b) => new Date(a.date) - new Date(b.date)).slice(-6);
+        const maxMembers = Math.max(...sortedData.map(d => d.members || 0));
+
+        container.innerHTML = sortedData.map(d => {
+            const height = maxMembers > 0 ? ((d.members || 0) / maxMembers * 150) : 0;
+            return `
+                <div class="smp-bar-item">
+                    <div class="smp-bar-value">${d.members || 0}</div>
+                    <div class="smp-bar" style="height: ${height}px;"></div>
+                    <div class="smp-bar-label">${formatMonthShort(d.date)}</div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function renderFundingChart() {
+        const container = document.getElementById('smpFundingChart');
+        const dataEntries = getData(STORAGE_KEYS.dataEntries);
+        const fundingEntries = dataEntries.filter(e => e.category === 'funding');
+
+        if (fundingEntries.length === 0) {
+            container.innerHTML = '<div style="text-align: center; color: var(--smp-gray-500); padding: 50px;">Add funding data to see chart</div>';
+            return;
+        }
+
+        const quarters = {};
+        fundingEntries.forEach(entry => {
+            const date = new Date(entry.date);
+            const quarter = `Q${Math.floor(date.getMonth() / 3) + 1} ${date.getFullYear()}`;
+            quarters[quarter] = (quarters[quarter] || 0) + (parseFloat(entry.amount) || 0);
+        });
+
+        const quarterData = Object.entries(quarters).slice(-4);
+        const maxFunding = Math.max(...quarterData.map(([_, v]) => v));
+
+        container.innerHTML = quarterData.map(([quarter, amount]) => {
+            const height = maxFunding > 0 ? (amount / maxFunding * 150) : 0;
+            return `
+                <div class="smp-bar-item">
+                    <div class="smp-bar-value">${formatCurrencyShort(amount)}</div>
+                    <div class="smp-bar" style="height: ${height}px;"></div>
+                    <div class="smp-bar-label">${quarter}</div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function openKPIModal() {
+        document.getElementById('smpKpiModal').classList.add('active');
+        document.getElementById('smpKpiDate').valueAsDate = new Date();
+    }
+
+    function closeKPIModal() {
+        document.getElementById('smpKpiModal').classList.remove('active');
+        document.getElementById('smpKpiForm').reset();
+    }
+
+    function deleteKPI(id) {
+        if (!confirm('Delete this KPI entry?')) return;
+        const kpiData = getData(STORAGE_KEYS.kpiHistory).filter(k => k.id !== id);
+        setData(STORAGE_KEYS.kpiHistory, kpiData);
+        renderKPIs();
+    }
+
+    // Data Tracking
+    function renderDataEntries() {
+        const entries = getData(STORAGE_KEYS.dataEntries);
+        const filter = document.getElementById('smpDataFilter').value;
+        const filtered = filter === 'all' ? entries : entries.filter(e => e.category === filter);
+
+        const tableBody = document.getElementById('smpDataTable');
+        const categoryColors = { founder: 'info', funder: 'success', deal: 'warning', event: 'danger', funding: 'success', other: 'info' };
+
+        if (filtered.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--smp-gray-500);">No data entries yet.</td></tr>';
+        } else {
+            filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+            tableBody.innerHTML = filtered.map(e => `
+                <tr>
+                    <td>${formatDate(e.date)}</td>
+                    <td><span class="smp-badge smp-badge-${categoryColors[e.category] || 'info'}">${e.category}</span></td>
+                    <td>${e.title}</td>
+                    <td>${e.amount ? formatCurrency(e.amount) : '-'}</td>
+                    <td>${e.notes || '-'}</td>
+                    <td><button class="smp-btn smp-btn-sm smp-btn-danger" onclick="SMP.deleteDataEntry('${e.id}')">Delete</button></td>
+                </tr>
+            `).join('');
+        }
+
+        const recentContainer = document.getElementById('smpRecentEntries');
+        const recent = entries.slice(-5).reverse();
+
+        if (recent.length === 0) {
+            recentContainer.innerHTML = '<p style="color: var(--smp-gray-500); text-align: center; padding: 20px;">No recent entries</p>';
+        } else {
+            recentContainer.innerHTML = recent.map(e => `
+                <div class="smp-action-item">
+                    <div class="smp-action-status" style="background: var(--smp-${categoryColors[e.category] || 'info'})"></div>
+                    <div class="smp-action-content">
+                        <div class="smp-action-title">${e.title}</div>
+                        <div class="smp-action-meta">${e.category} • ${formatDate(e.date)} ${e.amount ? '• ' + formatCurrency(e.amount) : ''}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+
+    function deleteDataEntry(id) {
+        if (!confirm('Delete this entry?')) return;
+        const entries = getData(STORAGE_KEYS.dataEntries).filter(e => e.id !== id);
+        setData(STORAGE_KEYS.dataEntries, entries);
+        renderDataEntries();
+        renderKPIs();
+    }
+
+    // Action Items
+    function renderActionItems() {
+        const actions = getData(STORAGE_KEYS.actionItems);
+        const pending = actions.filter(a => a.status !== 'completed');
+        const completed = actions.filter(a => a.status === 'completed');
+        const priorityColors = { high: 'danger', medium: 'warning', low: 'info' };
+
+        const pendingContainer = document.getElementById('smpPendingActions');
+        if (pending.length === 0) {
+            pendingContainer.innerHTML = '<p style="color: var(--smp-gray-500); text-align: center; padding: 20px;">No pending actions</p>';
+        } else {
+            pending.sort((a, b) => ({ high: 0, medium: 1, low: 2 }[a.priority] - { high: 0, medium: 1, low: 2 }[b.priority]));
+            pendingContainer.innerHTML = pending.map(a => `
+                <div class="smp-action-item" style="border-left-color: var(--smp-${priorityColors[a.priority] || 'info'});">
+                    <div class="smp-action-status pending"></div>
+                    <div class="smp-action-content">
+                        <div class="smp-action-title">${a.title}</div>
+                        <div class="smp-action-meta">${a.assignee ? a.assignee + ' • ' : ''}${a.dueDate ? 'Due: ' + formatDate(a.dueDate) : ''} <span class="smp-badge smp-badge-${priorityColors[a.priority]}">${a.priority}</span></div>
+                    </div>
+                    <button class="smp-icon-btn" onclick="SMP.completeAction('${a.id}')" title="Mark complete">✓</button>
+                    <button class="smp-icon-btn" onclick="SMP.deleteAction('${a.id}')" title="Delete">🗑️</button>
+                </div>
+            `).join('');
+        }
+
+        const completedContainer = document.getElementById('smpCompletedActions');
+        if (completed.length === 0) {
+            completedContainer.innerHTML = '<p style="color: var(--smp-gray-500); text-align: center; padding: 20px;">No completed actions</p>';
+        } else {
+            completedContainer.innerHTML = completed.slice(-10).reverse().map(a => `
+                <div class="smp-action-item" style="opacity: 0.6;">
+                    <div class="smp-action-status completed"></div>
+                    <div class="smp-action-content">
+                        <div class="smp-action-title" style="text-decoration: line-through;">${a.title}</div>
+                        <div class="smp-action-meta">${a.assignee || ''}</div>
+                    </div>
+                    <button class="smp-icon-btn" onclick="SMP.reopenAction('${a.id}')" title="Reopen">↩</button>
+                    <button class="smp-icon-btn" onclick="SMP.deleteAction('${a.id}')" title="Delete">🗑️</button>
+                </div>
+            `).join('');
+        }
+    }
+
+    function openActionModal() {
+        document.getElementById('smpActionModal').classList.add('active');
+        document.getElementById('smpActionDueDate').valueAsDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    }
+
+    function closeActionModal() {
+        document.getElementById('smpActionModal').classList.remove('active');
+        document.getElementById('smpActionForm').reset();
+    }
+
+    function completeAction(id) {
+        const actions = getData(STORAGE_KEYS.actionItems);
+        const action = actions.find(a => a.id === id);
+        if (action) {
+            action.status = 'completed';
+            action.completedAt = new Date().toISOString();
+            setData(STORAGE_KEYS.actionItems, actions);
+            renderActionItems();
+        }
+    }
+
+    function reopenAction(id) {
+        const actions = getData(STORAGE_KEYS.actionItems);
+        const action = actions.find(a => a.id === id);
+        if (action) {
+            action.status = 'pending';
+            delete action.completedAt;
+            setData(STORAGE_KEYS.actionItems, actions);
+            renderActionItems();
+        }
+    }
+
+    function deleteAction(id) {
+        if (!confirm('Delete this action item?')) return;
+        const actions = getData(STORAGE_KEYS.actionItems).filter(a => a.id !== id);
+        setData(STORAGE_KEYS.actionItems, actions);
+        renderActionItems();
+    }
+
+    // Export
+    function exportData() {
+        const data = {
+            meetings: getData(STORAGE_KEYS.meetings),
+            kpiHistory: getData(STORAGE_KEYS.kpiHistory),
+            dataEntries: getData(STORAGE_KEYS.dataEntries),
+            actionItems: getData(STORAGE_KEYS.actionItems),
+            exportedAt: new Date().toISOString()
+        };
+
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `sengo-portal-export-${new Date().toISOString().split('T')[0]}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    // Initialize
+    function init() {
+        setupTabs();
+
+        // Set default dates
+        document.getElementById('smpDataDate').value = new Date().toISOString().split('T')[0];
+
+        // Form handlers
+        document.getElementById('smpNewMeetingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const meeting = {
+                id: generateId(),
+                title: document.getElementById('smpMeetingTitle').value,
+                date: document.getElementById('smpMeetingDate').value,
+                time: document.getElementById('smpMeetingTime').value,
+                attendees: document.getElementById('smpMeetingAttendees').value,
+                discussionPoints: document.getElementById('smpMeetingAgenda').value.split('\n').filter(l => l.trim()).map(t => ({ text: t.trim(), completed: false })),
+                notes: '',
+                createdAt: new Date().toISOString()
+            };
+            const meetings = getData(STORAGE_KEYS.meetings);
+            meetings.push(meeting);
+            setData(STORAGE_KEYS.meetings, meetings);
+            closeMeetingModal();
+            renderMeetings();
+            selectMeeting(meeting.id);
+        });
+
+        document.getElementById('smpKpiForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const kpiEntry = {
+                id: generateId(),
+                date: document.getElementById('smpKpiDate').value,
+                totalRaised: parseFloat(document.getElementById('smpKpiTotalRaised').value) || 0,
+                members: parseInt(document.getElementById('smpKpiMembers').value) || 0,
+                activeFounders: parseInt(document.getElementById('smpKpiActiveFounders').value) || 0,
+                activeFunders: parseInt(document.getElementById('smpKpiActiveFunders').value) || 0,
+                dealsFacilitated: parseInt(document.getElementById('smpKpiDealsFacilitated').value) || 0,
+                eventsHosted: parseInt(document.getElementById('smpKpiEventsHosted').value) || 0,
+                createdAt: new Date().toISOString()
+            };
+            const kpiData = getData(STORAGE_KEYS.kpiHistory);
+            kpiData.push(kpiEntry);
+            setData(STORAGE_KEYS.kpiHistory, kpiData);
+            closeKPIModal();
+            renderKPIs();
+        });
+
+        document.getElementById('smpDataEntryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const entry = {
+                id: generateId(),
+                category: document.getElementById('smpDataCategory').value,
+                title: document.getElementById('smpDataTitle').value,
+                date: document.getElementById('smpDataDate').value,
+                amount: document.getElementById('smpDataAmount').value,
+                notes: document.getElementById('smpDataNotes').value,
+                createdAt: new Date().toISOString()
+            };
+            const entries = getData(STORAGE_KEYS.dataEntries);
+            entries.push(entry);
+            setData(STORAGE_KEYS.dataEntries, entries);
+            this.reset();
+            document.getElementById('smpDataDate').value = new Date().toISOString().split('T')[0];
+            renderDataEntries();
+            renderKPIs();
+        });
+
+        document.getElementById('smpActionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const action = {
+                id: generateId(),
+                title: document.getElementById('smpActionTitle').value,
+                assignee: document.getElementById('smpActionAssignee').value,
+                dueDate: document.getElementById('smpActionDueDate').value,
+                priority: document.getElementById('smpActionPriority').value,
+                status: 'pending',
+                createdAt: new Date().toISOString()
+            };
+            const actions = getData(STORAGE_KEYS.actionItems);
+            actions.push(action);
+            setData(STORAGE_KEYS.actionItems, actions);
+            closeActionModal();
+            renderActionItems();
+        });
+
+        document.getElementById('smpMeetingNotes').addEventListener('input', debounce(function() {
+            if (!currentMeetingId) return;
+            const meetings = getData(STORAGE_KEYS.meetings);
+            const meeting = meetings.find(m => m.id === currentMeetingId);
+            meeting.notes = this.value;
+            setData(STORAGE_KEYS.meetings, meetings);
+        }, 500));
+
+        document.getElementById('smpDataFilter').addEventListener('change', renderDataEntries);
+
+        // Initial render
+        renderMeetings();
+        renderKPIs();
+        renderDataEntries();
+        renderActionItems();
+    }
+
+    // Run init on DOM ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    // Public API
+    return {
+        selectMeeting,
+        addDiscussionPoint,
+        toggleDiscussionPoint,
+        deleteDiscussionPoint,
+        openNewMeetingModal,
+        closeMeetingModal,
+        openKPIModal,
+        closeKPIModal,
+        deleteKPI,
+        deleteDataEntry,
+        openActionModal,
+        closeActionModal,
+        completeAction,
+        reopenAction,
+        deleteAction,
+        exportData
+    };
+})();
+</script>
