@@ -6,7 +6,9 @@ from reportlab.lib.units import inch
 from reportlab.lib.colors import HexColor
 from reportlab.pdfgen import canvas
 from reportlab.lib.utils import ImageReader
+from PIL import Image
 import os
+import io
 
 # Brand colors
 TEAL = HexColor('#1B3533')
@@ -22,6 +24,25 @@ PAGE_W, PAGE_H = letter  # 8.5 x 11 portrait
 MARGIN = 0.45 * inch
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT = os.path.join(BASE_DIR, 'Sengo_One_Pager.pdf')
+
+
+def compressed_image(path, max_dim=600, quality=75, keep_alpha=False):
+    """Resize and compress image, return ImageReader."""
+    img = Image.open(path)
+    # Resize if larger than max_dim
+    if max(img.size) > max_dim:
+        ratio = max_dim / max(img.size)
+        new_size = (int(img.size[0] * ratio), int(img.size[1] * ratio))
+        img = img.resize(new_size, Image.LANCZOS)
+    buf = io.BytesIO()
+    if keep_alpha and img.mode == 'RGBA':
+        img.save(buf, format='PNG', optimize=True)
+    else:
+        if img.mode in ('RGBA', 'P'):
+            img = img.convert('RGB')
+        img.save(buf, format='JPEG', quality=quality, optimize=True)
+    buf.seek(0)
+    return ImageReader(buf)
 
 
 def rrect(c, x, y, w, h, r, fill_color):
@@ -82,7 +103,7 @@ def build():
     logo_path = os.path.join(BASE_DIR, 'Sengo 2.PNG')
     logo_h = 60
     logo_w = logo_h * (3533 / 3089)
-    c.drawImage(ImageReader(logo_path),
+    c.drawImage(compressed_image(logo_path, max_dim=300, keep_alpha=True),
                 MARGIN, PAGE_H - 66,
                 width=logo_w, height=logo_h, mask='auto')
 
@@ -299,7 +320,7 @@ def build():
     p.close()
     c.clipPath(p, stroke=0)
     if os.path.exists(rama_path):
-        c.drawImage(ImageReader(rama_path),
+        c.drawImage(compressed_image(rama_path, max_dim=150),
                      photo_cx - photo_r, photo_cy - photo_r,
                      width=photo_r * 2, height=photo_r * 2)
     c.restoreState()
@@ -334,7 +355,7 @@ def build():
         img_draw_w = photo_r * 2
         img_draw_h = img_draw_w * (1542 / 1064)
         img_y_offset = (img_draw_h - photo_r * 2) * 0.65
-        c.drawImage(ImageReader(jasmine_path),
+        c.drawImage(compressed_image(jasmine_path, max_dim=200),
                      photo_cx2 - photo_r, photo_cy2 - photo_r - img_y_offset,
                      width=img_draw_w, height=img_draw_h)
     c.restoreState()
@@ -367,12 +388,12 @@ def build():
     photo2_path = os.path.join(BASE_DIR, 'IMG_4246.JPG')
 
     if os.path.exists(photo1_path):
-        c.drawImage(ImageReader(photo1_path),
+        c.drawImage(compressed_image(photo1_path, max_dim=800, quality=70),
                      MARGIN, img_y - img_h,
                      width=img_w, height=img_h,
                      preserveAspectRatio=True, mask='auto')
     if os.path.exists(photo2_path):
-        c.drawImage(ImageReader(photo2_path),
+        c.drawImage(compressed_image(photo2_path, max_dim=800, quality=70),
                      MARGIN + img_w + 10, img_y - img_h,
                      width=img_w, height=img_h,
                      preserveAspectRatio=True, mask='auto')
