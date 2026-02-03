@@ -916,6 +916,53 @@
     border-radius: 0 !important;
     z-index: 999999;
   }
+
+  /* Pledge Modal */
+  .pledge-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000000;
+    align-items: center;
+    justify-content: center;
+  }
+  .pledge-modal.active {
+    display: flex;
+  }
+  .pledge-modal-content {
+    background: #fff;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    position: relative;
+    overflow: hidden;
+  }
+  .pledge-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: var(--orange);
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  .pledge-modal-close:hover {
+    background: var(--teal);
+  }
 </style>
 
 <div class="sengo-deck" id="sengoDeck">
@@ -1285,13 +1332,21 @@
     <div class="hero-title" style="font-size:clamp(24px,4vw,48px);">Build With Us</div>
     <div class="accent-line"></div>
     <ul class="cta-list">
-      <li><a href="https://bysengo.com" target="_blank" style="color:inherit;text-decoration:none;">Join the Sengo community</a></li>
-      <li><a href="https://www.bysengo.com/partnerships" target="_blank" style="color:inherit;text-decoration:none;">Partner on readiness, education, or grants</a></li>
-      <li>Attend an event or workshop</li>
-      <li>Support founders building with intention</li>
+      <li><a href="https://app.bysengo.com/founder-enrollment" target="_blank" style="color:inherit;text-decoration:none;">Join the Sengo community as a Founder</a></li>
+      <li><a href="https://app.bysengo.com/investor-enrollment" target="_blank" style="color:inherit;text-decoration:none;">Join the Sengo community as a Funder</a></li>
+      <li><a href="#" id="pledgeBtn" style="color:inherit;text-decoration:none;">Pledge capital with Sengo</a></li>
+      <li><a href="https://www.bysengo.com/partnerships" target="_blank" style="color:inherit;text-decoration:none;">Partner with Sengo to maximize impact</a></li>
     </ul>
-    <div class="body-text" style="margin-top:18px;font-weight:700;color:var(--orange);font-size:clamp(11px,1.4vw,17px);">Sengo is reimagining the way communities fundraise and invest by opening access.</div>
+    <div class="body-text" style="margin-top:18px;font-weight:700;color:var(--orange);font-size:clamp(11px,1.4vw,17px);">Sengo is reimagining the way communities invest in each other.<br>Join us on the road to maximizing our 2026 impact.</div>
     <div class="footer-line">SENGO · Founded by Ila B Corcoran · 2025</div>
+  </div>
+
+  <!-- Pledge Modal -->
+  <div class="pledge-modal" id="pledgeModal">
+    <div class="pledge-modal-content">
+      <button class="pledge-modal-close" id="pledgeClose">&times;</button>
+      <iframe class="airtable-embed" src="https://airtable.com/embed/appOWBYoFeQFT4Yp4/shrMUj7oIzwWh2fjY" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+    </div>
   </div>
 
   <!-- Fullscreen button -->
@@ -1425,6 +1480,36 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && deck.classList.contains('is-fullscreen')) {
       exitFs();
+    }
+  });
+
+  // Pledge Modal
+  var pledgeModal = document.getElementById('pledgeModal');
+  var pledgeBtn = document.getElementById('pledgeBtn');
+  var pledgeClose = document.getElementById('pledgeClose');
+
+  if (pledgeBtn) {
+    pledgeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      pledgeModal.classList.add('active');
+    });
+  }
+
+  if (pledgeClose) {
+    pledgeClose.addEventListener('click', function() {
+      pledgeModal.classList.remove('active');
+    });
+  }
+
+  pledgeModal.addEventListener('click', function(e) {
+    if (e.target === pledgeModal) {
+      pledgeModal.classList.remove('active');
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && pledgeModal.classList.contains('active')) {
+      pledgeModal.classList.remove('active');
     }
   });
 })();
