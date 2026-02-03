@@ -281,6 +281,25 @@
       background: var(--bg-main);
     }
 
+    .video-section .section-title{
+      margin-bottom: 40px;
+    }
+
+    .video-title-main{
+      color: var(--accent);
+      display: block;
+    }
+
+    .video-title-sub{
+      display: block;
+      font-family: "Inter", sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-top: 12px;
+      letter-spacing: 0;
+    }
+
     .video-container{
       max-width: 900px;
       margin: 0 auto;
@@ -643,7 +662,10 @@
   <!-- VIDEO -->
   <section class="video-section">
     <div class="container">
-      <h2 class="section-title">Ila in Conversation: Capital, Community, and the Future of Funding</h2>
+      <h2 class="section-title">
+        <span class="video-title-main">Ila in Conversation</span>
+        <span class="video-title-sub">Capital, Community, and the Future of Funding</span>
+      </h2>
       <div class="video-container">
         <div class="video-wrapper">
           <iframe
