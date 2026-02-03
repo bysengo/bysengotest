@@ -457,23 +457,35 @@
   /* Model slide */
   .sengo-deck .model-hub {
     position: relative;
-    width: clamp(160px, 22vw, 260px);
-    height: clamp(160px, 22vw, 260px);
+    width: clamp(180px, 24vw, 280px);
+    height: clamp(180px, 24vw, 280px);
     flex-shrink: 0;
+  }
+  .sengo-deck .model-lines {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  .sengo-deck .model-lines line {
+    stroke: var(--orange);
+    stroke-width: 2;
   }
   .sengo-deck .model-center {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 55%;
-    height: 55%;
+    width: 45%;
+    height: 45%;
     border-radius: 50%;
     background: var(--teal);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--orange);
+    border: 3px solid var(--orange);
     overflow: hidden;
+    z-index: 2;
   }
   .sengo-deck .model-center img {
     width: 70%;
@@ -489,11 +501,12 @@
     padding: 5px 12px;
     border-radius: 20px;
     white-space: nowrap;
+    z-index: 1;
   }
-  .sengo-deck .model-node.n-top { top: -5%; left: 50%; transform: translateX(-50%); }
-  .sengo-deck .model-node.n-right { top: 50%; right: -10%; transform: translateY(-50%); }
-  .sengo-deck .model-node.n-bottom { bottom: -5%; left: 50%; transform: translateX(-50%); }
-  .sengo-deck .model-node.n-left { top: 50%; left: -10%; transform: translateY(-50%); }
+  .sengo-deck .model-node.n-top { top: 0; left: 50%; transform: translateX(-50%); }
+  .sengo-deck .model-node.n-right { top: 50%; right: 0; transform: translate(50%, -50%); }
+  .sengo-deck .model-node.n-bottom { bottom: 0; left: 50%; transform: translateX(-50%); }
+  .sengo-deck .model-node.n-left { top: 50%; left: 0; transform: translate(-50%, -50%); }
 
   /* Charts */
   .sengo-deck .charts-row {
@@ -1196,6 +1209,12 @@
       </div>
       <div class="col" style="display:flex;align-items:center;justify-content:center;">
         <div class="model-hub">
+          <svg class="model-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <line x1="50" y1="50" x2="50" y2="8"/>
+            <line x1="50" y1="50" x2="92" y2="50"/>
+            <line x1="50" y1="50" x2="50" y2="92"/>
+            <line x1="50" y1="50" x2="8" y2="50"/>
+          </svg>
           <div class="model-center"><img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/f28e57cc-eb1f-4898-a4fd-476adda1265a/4.png?format=1500w" alt="Sengo"></div>
           <div class="model-node n-top">Technology</div>
           <div class="model-node n-right">Community</div>
