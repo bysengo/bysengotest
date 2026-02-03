@@ -275,6 +275,38 @@
       margin-bottom: 0;
     }
 
+    /* VIDEO SECTION */
+    .video-section{
+      padding: 60px 0 80px;
+      background: var(--bg-main);
+    }
+
+    .video-container{
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .video-wrapper{
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-wrapper iframe{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     /* CREDENTIALS SECTION */
     .credentials-section{
       padding: 40px 0 60px;
@@ -604,6 +636,22 @@
         <p>Ila Corcoran's journey in real estate began from a pressing need for housing and the resources to support it—a mission that has fueled her work ever since. Since 2018, she has managed and overseen over $100 million in real estate transactions across the U.S., excelling in roles as an investor, asset manager, realtor, advisor, and financier. Ila is known for her expertise in navigating complex deal structures and nontraditional financing solutions, holding both a Series 65 securities license and a California real estate license.</p>
 
         <p>In 2023, Ila founded Sengo, a financial services platform dedicated to democratizing access to private markets. Sengo emphasizes education and community, offering a space where founders and funders can connect meaningfully through events that go beyond traditional networking. With a mission to inspire community-minded innovation and resource sharing, Sengo is deconstructing barriers to funding and creating new pathways for diverse investors and founders to thrive.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="video-section">
+    <div class="container">
+      <div class="video-container">
+        <div class="video-wrapper">
+          <iframe
+            src="https://player.vimeo.com/video/1135454470?h=fe02e92b83&title=0&byline=0&portrait=0"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            allowfullscreen
+            title="Video">
+          </iframe>
+        </div>
       </div>
     </div>
   </section>
