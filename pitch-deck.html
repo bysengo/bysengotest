@@ -1,0 +1,1106 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+  .sengo-pitch * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .sengo-pitch {
+    --teal: #1B3533;
+    --brown: #67441A;
+    --orange: #D57028;
+    --cream: #F3EDE7;
+    --olive: #717E36;
+    --tan: #AF8145;
+    --light-teal: #244A47;
+    font-family: 'Montserrat', Arial, sans-serif;
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    background: var(--teal);
+    user-select: none;
+  }
+
+  .sengo-pitch .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5% 7%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  .sengo-pitch .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sengo-pitch .bg-teal { background: var(--teal); }
+  .sengo-pitch .bg-cream { background: var(--cream); }
+
+  .sengo-pitch .slide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--orange);
+  }
+
+  .sengo-pitch .section-label {
+    font-size: clamp(9px, 1.2vw, 13px);
+    color: var(--orange);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .sengo-pitch .slide-title {
+    font-family: 'Arimo', sans-serif;
+    font-size: clamp(18px, 3.2vw, 38px);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .sengo-pitch .bg-teal .slide-title { color: #fff; }
+  .sengo-pitch .bg-cream .slide-title { color: var(--teal); }
+
+  .sengo-pitch .accent-line {
+    width: 80px;
+    height: 3px;
+    background: var(--orange);
+    margin: 8px auto 16px;
+    border-radius: 2px;
+  }
+
+  .sengo-pitch .body-text {
+    font-size: clamp(10px, 1.4vw, 16px);
+    line-height: 1.6;
+    text-align: center;
+    max-width: 85%;
+  }
+  .sengo-pitch .bg-teal .body-text { color: var(--cream); }
+  .sengo-pitch .bg-cream .body-text { color: var(--brown); }
+
+  .sengo-pitch .card-grid {
+    display: flex;
+    gap: clamp(6px, 1vw, 14px);
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-top: 12px;
+  }
+  .sengo-pitch .card {
+    background: var(--light-teal);
+    border-radius: 10px;
+    padding: clamp(10px, 1.8vw, 22px) clamp(8px, 1.2vw, 16px);
+    text-align: center;
+    flex: 1 1 0;
+    min-width: 100px;
+    max-width: 240px;
+  }
+  .sengo-pitch .bg-cream .card {
+    background: var(--teal);
+  }
+
+  .sengo-pitch .card .stat-num {
+    font-family: 'Arimo', sans-serif;
+    font-size: clamp(16px, 2.5vw, 32px);
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  .sengo-pitch .card .stat-label {
+    font-size: clamp(8px, 1vw, 12px);
+    color: var(--cream);
+    margin-top: 4px;
+    line-height: 1.35;
+  }
+
+  .sengo-pitch .card .card-title {
+    font-size: clamp(11px, 1.3vw, 16px);
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 6px;
+  }
+  .sengo-pitch .card .card-body {
+    font-size: clamp(9px, 1vw, 12px);
+    color: var(--cream);
+    line-height: 1.45;
+  }
+
+  .sengo-pitch .callout-bar {
+    background: var(--orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: clamp(11px, 1.3vw, 16px);
+    padding: clamp(8px, 1.2vw, 14px) clamp(14px, 2vw, 24px);
+    border-radius: 8px;
+    text-align: center;
+    width: 85%;
+    max-width: 700px;
+    margin-top: 12px;
+  }
+
+  .sengo-pitch .two-col {
+    display: flex;
+    gap: clamp(12px, 2vw, 24px);
+    width: 100%;
+    margin-top: 10px;
+  }
+  .sengo-pitch .two-col .col { flex: 1; }
+  .sengo-pitch .two-col .col-text {
+    font-size: clamp(10px, 1.15vw, 14px);
+    line-height: 1.6;
+  }
+  .sengo-pitch .bg-cream .two-col .col-text { color: var(--brown); }
+  .sengo-pitch .bg-teal .two-col .col-text { color: var(--cream); }
+
+  .sengo-pitch .problem-box {
+    background: var(--light-teal);
+    border-radius: 10px;
+    padding: clamp(14px, 2vw, 24px);
+    margin-bottom: 10px;
+    border-left: 4px solid var(--orange);
+  }
+  .sengo-pitch .problem-box h4 {
+    font-size: clamp(11px, 1.3vw, 16px);
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .sengo-pitch .problem-box p {
+    font-size: clamp(9px, 1.1vw, 13px);
+    color: var(--cream);
+    line-height: 1.5;
+  }
+
+  .sengo-pitch .feature-list {
+    list-style: none;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .sengo-pitch .feature-list li {
+    background: var(--light-teal);
+    color: var(--cream);
+    font-size: clamp(10px, 1.2vw, 14px);
+    padding: clamp(8px, 1vw, 14px) clamp(10px, 1.5vw, 18px);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sengo-pitch .bg-cream .feature-list li {
+    background: var(--teal);
+  }
+  .sengo-pitch .feature-list li .icon {
+    font-size: clamp(16px, 2vw, 24px);
+    flex-shrink: 0;
+  }
+
+  .sengo-pitch .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(8px, 1.2vw, 14px);
+    width: 100%;
+    margin-top: 12px;
+  }
+  .sengo-pitch .pillar {
+    background: var(--light-teal);
+    border-radius: 10px;
+    padding: clamp(12px, 1.8vw, 20px);
+    border-left: 3px solid var(--orange);
+  }
+  .sengo-pitch .pillar h4 {
+    font-size: clamp(11px, 1.2vw, 15px);
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .sengo-pitch .pillar p {
+    font-size: clamp(9px, 1vw, 12px);
+    color: var(--cream);
+    line-height: 1.4;
+  }
+
+  .sengo-pitch .revenue-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(8px, 1.2vw, 14px);
+    width: 100%;
+    margin-top: 12px;
+  }
+  .sengo-pitch .revenue-card {
+    background: var(--light-teal);
+    border-radius: 10px;
+    padding: clamp(14px, 2vw, 22px);
+    text-align: center;
+  }
+  .sengo-pitch .revenue-card .rev-icon {
+    font-size: clamp(20px, 3vw, 36px);
+    margin-bottom: 6px;
+  }
+  .sengo-pitch .revenue-card h4 {
+    font-size: clamp(10px, 1.2vw, 14px);
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .sengo-pitch .revenue-card p {
+    font-size: clamp(8px, 0.9vw, 11px);
+    color: var(--cream);
+    line-height: 1.4;
+  }
+
+  .sengo-pitch .market-stat {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--light-teal);
+    border-radius: 10px;
+    padding: clamp(10px, 1.5vw, 18px) clamp(14px, 2vw, 24px);
+    margin-bottom: 8px;
+    width: 100%;
+  }
+  .sengo-pitch .market-stat .big-num {
+    font-family: 'Arimo', sans-serif;
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .sengo-pitch .market-stat .stat-desc {
+    font-size: clamp(10px, 1.2vw, 14px);
+    color: var(--cream);
+    line-height: 1.4;
+  }
+
+  .sengo-pitch .comp-table {
+    width: 100%;
+    margin-top: 12px;
+    border-collapse: collapse;
+  }
+  .sengo-pitch .comp-table th {
+    background: var(--orange);
+    color: #fff;
+    font-size: clamp(9px, 1vw, 12px);
+    font-weight: 700;
+    padding: clamp(6px, 0.8vw, 10px);
+    text-align: left;
+  }
+  .sengo-pitch .comp-table th:first-child {
+    border-radius: 8px 0 0 0;
+  }
+  .sengo-pitch .comp-table th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+  .sengo-pitch .comp-table td {
+    background: var(--light-teal);
+    color: var(--cream);
+    font-size: clamp(8px, 0.9vw, 11px);
+    padding: clamp(6px, 0.8vw, 10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .sengo-pitch .comp-table tr:last-child td:first-child {
+    border-radius: 0 0 0 8px;
+  }
+  .sengo-pitch .comp-table tr:last-child td:last-child {
+    border-radius: 0 0 8px 0;
+  }
+  .sengo-pitch .comp-table .highlight {
+    background: var(--teal);
+    font-weight: 700;
+    color: var(--orange);
+  }
+
+  .sengo-pitch .timeline {
+    display: flex;
+    gap: 4px;
+    width: 100%;
+    margin-top: 12px;
+  }
+  .sengo-pitch .timeline-item {
+    flex: 1;
+    background: var(--light-teal);
+    border-radius: 10px;
+    padding: clamp(10px, 1.5vw, 18px) clamp(8px, 1vw, 14px);
+    text-align: center;
+    position: relative;
+  }
+  .sengo-pitch .timeline-item::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid var(--light-teal);
+  }
+  .sengo-pitch .timeline-item:last-child::after {
+    display: none;
+  }
+  .sengo-pitch .timeline-item .year {
+    font-size: clamp(10px, 1.2vw, 14px);
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .sengo-pitch .timeline-item .milestone {
+    font-size: clamp(8px, 0.9vw, 11px);
+    color: var(--cream);
+    line-height: 1.35;
+  }
+
+  .sengo-pitch .founder-section {
+    display: flex;
+    gap: clamp(16px, 2.5vw, 32px);
+    align-items: center;
+    width: 100%;
+    margin-top: 12px;
+  }
+  .sengo-pitch .founder-photo-wrap {
+    width: clamp(120px, 18vw, 200px);
+    height: clamp(120px, 18vw, 200px);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--orange);
+    flex-shrink: 0;
+  }
+  .sengo-pitch .founder-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .sengo-pitch .founder-bio h3 {
+    font-size: clamp(14px, 1.8vw, 22px);
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .sengo-pitch .founder-bio .title {
+    font-size: clamp(10px, 1.2vw, 14px);
+    color: var(--tan);
+    margin-bottom: 8px;
+  }
+  .sengo-pitch .founder-bio p {
+    font-size: clamp(9px, 1.1vw, 13px);
+    color: var(--cream);
+    line-height: 1.5;
+  }
+
+  .sengo-pitch .ask-box {
+    background: var(--orange);
+    border-radius: 12px;
+    padding: clamp(16px, 2.5vw, 32px);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    margin-top: 16px;
+  }
+  .sengo-pitch .ask-box h3 {
+    font-size: clamp(14px, 1.8vw, 22px);
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .sengo-pitch .ask-box p {
+    font-size: clamp(10px, 1.2vw, 14px);
+    color: #fff;
+    opacity: 0.9;
+    line-height: 1.5;
+  }
+
+  .sengo-pitch .cta-list {
+    list-style: none;
+    margin-top: 14px;
+    width: 100%;
+    max-width: 420px;
+  }
+  .sengo-pitch .cta-list li {
+    background: var(--light-teal);
+    color: var(--cream);
+    font-size: clamp(11px, 1.3vw, 15px);
+    padding: clamp(7px, 1vw, 12px) clamp(14px, 2vw, 24px);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+
+  .sengo-pitch .hero-title {
+    font-family: 'Arimo', sans-serif;
+    font-size: clamp(28px, 4.5vw, 52px);
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    line-height: 1.15;
+    margin: 6px 0;
+  }
+  .sengo-pitch .hero-subtitle {
+    font-size: clamp(12px, 1.8vw, 20px);
+    color: var(--cream);
+    text-align: center;
+    max-width: 80%;
+    line-height: 1.4;
+  }
+  .sengo-pitch .subtitle {
+    font-size: clamp(10px, 1.3vw, 15px);
+    color: var(--tan);
+    text-align: center;
+    margin-top: 4px;
+  }
+  .sengo-pitch .footer-line {
+    font-size: clamp(8px, 0.85vw, 11px);
+    color: var(--tan);
+    text-align: center;
+    margin-top: 14px;
+  }
+
+  /* Navigation */
+  .sengo-pitch .deck-nav {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+  }
+  .sengo-pitch .deck-nav button {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .sengo-pitch .deck-nav button:hover {
+    background: var(--orange);
+  }
+  .sengo-pitch .deck-dots {
+    display: flex;
+    gap: 5px;
+  }
+  .sengo-pitch .deck-dots span {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .sengo-pitch .deck-dots span.active {
+    background: var(--orange);
+    transform: scale(1.3);
+  }
+  .sengo-pitch .slide-counter {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    z-index: 10;
+  }
+
+  /* Fullscreen button */
+  .sengo-pitch .fs-btn {
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  .sengo-pitch .fs-btn:hover {
+    background: var(--orange);
+  }
+
+  /* Fullscreen mode */
+  .sengo-pitch:fullscreen,
+  .sengo-pitch:-webkit-full-screen {
+    max-width: 100vw;
+    width: 100vw;
+    height: 100vh;
+    aspect-ratio: auto;
+    border-radius: 0;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.7); }
+    70% { transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .sengo-pitch .slide.active .card {
+    animation: fadeInUp 0.6s ease both;
+  }
+  .sengo-pitch .slide.active .card:nth-child(1) { animation-delay: 0.1s; }
+  .sengo-pitch .slide.active .card:nth-child(2) { animation-delay: 0.2s; }
+  .sengo-pitch .slide.active .card:nth-child(3) { animation-delay: 0.3s; }
+  .sengo-pitch .slide.active .card:nth-child(4) { animation-delay: 0.4s; }
+  .sengo-pitch .slide.active .card:nth-child(5) { animation-delay: 0.5s; }
+
+  .sengo-pitch .slide.active .pillar {
+    animation: fadeInUp 0.6s ease both;
+  }
+  .sengo-pitch .slide.active .pillar:nth-child(1) { animation-delay: 0.1s; }
+  .sengo-pitch .slide.active .pillar:nth-child(2) { animation-delay: 0.2s; }
+  .sengo-pitch .slide.active .pillar:nth-child(3) { animation-delay: 0.3s; }
+  .sengo-pitch .slide.active .pillar:nth-child(4) { animation-delay: 0.4s; }
+
+  .sengo-pitch .slide.active .revenue-card {
+    animation: popIn 0.5s ease both;
+  }
+  .sengo-pitch .slide.active .revenue-card:nth-child(1) { animation-delay: 0.15s; }
+  .sengo-pitch .slide.active .revenue-card:nth-child(2) { animation-delay: 0.25s; }
+  .sengo-pitch .slide.active .revenue-card:nth-child(3) { animation-delay: 0.35s; }
+
+  .sengo-pitch .slide.active .market-stat {
+    animation: fadeInUp 0.6s ease both;
+  }
+  .sengo-pitch .slide.active .market-stat:nth-child(1) { animation-delay: 0.1s; }
+  .sengo-pitch .slide.active .market-stat:nth-child(2) { animation-delay: 0.2s; }
+  .sengo-pitch .slide.active .market-stat:nth-child(3) { animation-delay: 0.3s; }
+
+  .sengo-pitch .slide.active .timeline-item {
+    animation: fadeInUp 0.5s ease both;
+  }
+  .sengo-pitch .slide.active .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .sengo-pitch .slide.active .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+  .sengo-pitch .slide.active .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+  .sengo-pitch .slide.active .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+  .sengo-pitch .slide.active .stat-num {
+    animation: popIn 0.5s ease both;
+  }
+
+  .sengo-pitch .slide.active .founder-photo-wrap {
+    animation: slideInLeft 0.7s ease both;
+    animation-delay: 0.2s;
+  }
+  .sengo-pitch .slide.active .founder-bio {
+    animation: slideInRight 0.7s ease both;
+    animation-delay: 0.3s;
+  }
+
+  .sengo-pitch .slide.active .problem-box {
+    animation: fadeInUp 0.6s ease both;
+  }
+  .sengo-pitch .slide.active .problem-box:nth-child(1) { animation-delay: 0.1s; }
+  .sengo-pitch .slide.active .problem-box:nth-child(2) { animation-delay: 0.25s; }
+
+  .sengo-pitch .slide.active .ask-box {
+    animation: popIn 0.6s ease both;
+    animation-delay: 0.3s;
+  }
+
+  .sengo-pitch .slide.active .feature-list li {
+    animation: fadeInUp 0.5s ease both;
+  }
+  .sengo-pitch .slide.active .feature-list li:nth-child(1) { animation-delay: 0.1s; }
+  .sengo-pitch .slide.active .feature-list li:nth-child(2) { animation-delay: 0.2s; }
+  .sengo-pitch .slide.active .feature-list li:nth-child(3) { animation-delay: 0.3s; }
+  .sengo-pitch .slide.active .feature-list li:nth-child(4) { animation-delay: 0.4s; }
+
+  /* Mobile responsive */
+  @media (max-width: 680px) {
+    .sengo-pitch {
+      aspect-ratio: auto;
+      min-height: 100vw;
+      border-radius: 0;
+      max-width: 100%;
+    }
+    .sengo-pitch .slide {
+      padding: 12% 5% 14%;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .sengo-pitch .card-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+    .sengo-pitch .card {
+      max-width: 100%;
+      min-width: 0;
+      width: 100%;
+    }
+    .sengo-pitch .two-col {
+      flex-direction: column;
+    }
+    .sengo-pitch .pillar-grid {
+      grid-template-columns: 1fr;
+    }
+    .sengo-pitch .revenue-grid {
+      grid-template-columns: 1fr;
+    }
+    .sengo-pitch .timeline {
+      flex-direction: column;
+    }
+    .sengo-pitch .timeline-item::after {
+      display: none;
+    }
+    .sengo-pitch .founder-section {
+      flex-direction: column;
+      text-align: center;
+    }
+    .sengo-pitch .deck-nav button {
+      width: 40px; height: 40px;
+      font-size: 20px;
+    }
+    .sengo-pitch .fs-btn {
+      width: 38px; height: 38px;
+      font-size: 18px;
+    }
+    .sengo-pitch .deck-dots span {
+      width: 10px; height: 10px;
+    }
+    .sengo-pitch .slide-counter {
+      font-size: 13px;
+    }
+  }
+
+  /* Fullscreen on all devices including mobile */
+  .sengo-pitch.is-fullscreen {
+    position: fixed !important;
+    top: 0; left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    aspect-ratio: auto !important;
+    border-radius: 0 !important;
+    z-index: 999999;
+  }
+</style>
+
+<div class="sengo-pitch" id="sengoPitch">
+
+  <!-- SLIDE 1 - Hero -->
+  <div class="slide bg-teal active" data-slide="0">
+    <div style="margin-bottom:12px;"><img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/f28e57cc-eb1f-4898-a4fd-476adda1265a/4.png?format=1500w" alt="Sengo" style="width:clamp(140px,22vw,260px);height:auto;display:block;margin:0 auto;"></div>
+    <div class="hero-title">Reimagining Fundraising<br>& Investing</div>
+    <div class="accent-line"></div>
+    <div class="hero-subtitle">Building informed founders, prepared funders, and durable ecosystems through community, education, and access.</div>
+    <div class="subtitle">Transforming social capital into financial capital</div>
+    <div class="footer-line" style="margin-top:24px;">Founded by Ila B Corcoran | bysengo.com</div>
+  </div>
+
+  <!-- SLIDE 2 - The Problem -->
+  <div class="slide bg-teal" data-slide="1">
+    <div class="section-label">The Problem</div>
+    <div class="slide-title">A $14 Trillion Wealth Gap</div>
+    <div class="accent-line"></div>
+    <div class="two-col">
+      <div class="col">
+        <div class="problem-box">
+          <h4>For Founders</h4>
+          <p>Less than <strong style="color:var(--orange);">0.5%</strong> of Black founders received venture capital in Q2 2025. Underrepresented founders face systemic barriers to capital access, often lacking the networks and resources needed to fundraise effectively.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="problem-box">
+          <h4>For Investors</h4>
+          <p>Despite <strong style="color:var(--orange);">97%</strong> of the US population being technically eligible to invest in private assets, less than 2% actually do. Communities are locked out of wealth-building opportunities in private markets.</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout-bar">The gap is fed from both sides: founders who can't access capital, and communities locked out of private investment.</div>
+  </div>
+
+  <!-- SLIDE 3 - The Solution -->
+  <div class="slide bg-cream" data-slide="2">
+    <div class="section-label">The Solution</div>
+    <div class="slide-title">Readiness-First Capital Infrastructure</div>
+    <div class="accent-line"></div>
+    <div class="body-text" style="margin-bottom:14px;">Sengo helps people make investments in private companies, and helps founders package themselves to receive them.</div>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <h4>Readiness Technology</h4>
+        <p>Fundraise Readiness Score + Personalized Roadmap to assess preparedness and create clear action plans</p>
+      </div>
+      <div class="pillar">
+        <h4>Human Support</h4>
+        <p>1:1 advisory at key inflection points, providing expert guidance when founders need it most</p>
+      </div>
+      <div class="pillar">
+        <h4>Community Layer</h4>
+        <p>Education, events, and peer learning that transforms social capital into financial capital</p>
+      </div>
+      <div class="pillar">
+        <h4>Grant Programs</h4>
+        <p>Non-dilutive capital to support founder readiness without giving up equity</p>
+      </div>
+    </div>
+    <div class="callout-bar" style="background:var(--teal);">Other platforms service transactions. Sengo builds economies.</div>
+  </div>
+
+  <!-- SLIDE 4 - Traction -->
+  <div class="slide bg-teal" data-slide="3">
+    <div class="section-label">Traction & Validation</div>
+    <div class="slide-title">Proven Results</div>
+    <div class="accent-line"></div>
+    <div class="card-grid">
+      <div class="card"><div class="stat-num">600+</div><div class="stat-label">Members across tiers</div></div>
+      <div class="card"><div class="stat-num">9,500+</div><div class="stat-label">Email subscribers</div></div>
+      <div class="card"><div class="stat-num">$32,150</div><div class="stat-label">Grants deployed</div></div>
+      <div class="card"><div class="stat-num">$5M+</div><div class="stat-label">Follow-on capital</div></div>
+      <div class="card"><div class="stat-num">167x</div><div class="stat-label">Grant multiplier</div></div>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <div class="card" style="max-width:200px;"><div class="stat-num">46.5%</div><div class="stat-label">Email open rate<br><span style="font-size:0.85em;opacity:0.7;">(vs 21% industry avg)</span></div></div>
+      <div class="card" style="max-width:200px;"><div class="stat-num">$200K</div><div class="stat-label">Revenue milestone<br><span style="font-size:0.85em;opacity:0.7;">within 365 days</span></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 - Business Model -->
+  <div class="slide bg-cream" data-slide="4">
+    <div class="section-label">Business Model</div>
+    <div class="slide-title">Multiple Revenue Streams</div>
+    <div class="accent-line"></div>
+    <div class="revenue-grid">
+      <div class="revenue-card">
+        <div class="rev-icon">&#128179;</div>
+        <h4>Subscriptions</h4>
+        <p>Monthly app access for founders and investors with tiered membership levels</p>
+      </div>
+      <div class="revenue-card">
+        <div class="rev-icon">&#128101;</div>
+        <h4>Monthly Retainers</h4>
+        <p>High-touch 1:1 support for founders actively raising capital</p>
+      </div>
+      <div class="revenue-card">
+        <div class="rev-icon">&#127970;</div>
+        <h4>B2B Partners</h4>
+        <p>Institutions pay for deal flow, programming, and community access</p>
+      </div>
+    </div>
+    <div class="callout-bar" style="background:var(--teal);margin-top:20px;">Sustainable model with multiple paths to revenue</div>
+  </div>
+
+  <!-- SLIDE 6 - Market Opportunity -->
+  <div class="slide bg-teal" data-slide="5">
+    <div class="section-label">Market Opportunity</div>
+    <div class="slide-title">Massive & Growing TAM</div>
+    <div class="accent-line"></div>
+    <div style="width:100%;max-width:600px;">
+      <div class="market-stat">
+        <div class="big-num">$23T+</div>
+        <div class="stat-desc">Private markets projected to exceed $23 trillion in the next two years</div>
+      </div>
+      <div class="market-stat">
+        <div class="big-num">$10B+</div>
+        <div class="stat-desc">US crowdfunding and alternative investing to exceed $10 billion annually</div>
+      </div>
+      <div class="market-stat">
+        <div class="big-num">49M</div>
+        <div class="stat-desc">Americans now eligible to invest in private companies as accredited investors</div>
+      </div>
+    </div>
+    <div class="body-text" style="margin-top:14px;font-style:italic;opacity:0.9;">The fastest-growing asset class is finally becoming accessible.</div>
+  </div>
+
+  <!-- SLIDE 7 - Competitive Landscape -->
+  <div class="slide bg-teal" data-slide="6" style="justify-content:flex-start;padding-top:4%;">
+    <div class="section-label">Competitive Landscape</div>
+    <div class="slide-title">Unique Market Position</div>
+    <div class="accent-line"></div>
+    <table class="comp-table">
+      <tr>
+        <th>Platform</th>
+        <th>Founder Support</th>
+        <th>Investor Education</th>
+        <th>Community</th>
+        <th>Readiness Tools</th>
+      </tr>
+      <tr>
+        <td>AngelList</td>
+        <td>Transaction-focused</td>
+        <td>Limited</td>
+        <td>None</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Republic</td>
+        <td>Crowdfunding only</td>
+        <td>Basic</td>
+        <td>Limited</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Accelerators</td>
+        <td>High-touch (selective)</td>
+        <td>None</td>
+        <td>Cohort-based</td>
+        <td>Limited</td>
+      </tr>
+      <tr class="highlight">
+        <td style="color:#fff;font-weight:700;">SENGO</td>
+        <td style="color:var(--orange);">Full readiness</td>
+        <td style="color:var(--orange);">Comprehensive</td>
+        <td style="color:var(--orange);">Both sides</td>
+        <td style="color:var(--orange);">AI-powered</td>
+      </tr>
+    </table>
+    <div class="callout-bar" style="margin-top:16px;">Sengo is the only platform serving both sides of the capital equation with readiness-first approach.</div>
+  </div>
+
+  <!-- SLIDE 8 - Case Studies -->
+  <div class="slide bg-cream" data-slide="7">
+    <div class="section-label">Success Stories</div>
+    <div class="slide-title">Real Founders, Real Impact</div>
+    <div class="accent-line"></div>
+    <div class="two-col" style="margin-top:8px;">
+      <div class="col">
+        <div class="problem-box" style="background:var(--teal);">
+          <h4>Satlyt - Rama Afullo</h4>
+          <p style="margin-bottom:8px;"><strong>Former SpaceX, Tesla & Google</strong><br>$3K grant for satellite virtual data centers</p>
+          <p style="color:var(--orange);font-weight:700;">$3M raised post-Sengo<br>12 new hires | 10 customers</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="problem-box" style="background:var(--teal);">
+          <h4>Versed Wellness - Jasmine Bowie</h4>
+          <p style="margin-bottom:8px;">$500 micro-grant<br>Concept to physical prototype</p>
+          <p style="color:var(--orange);font-weight:700;">25 new customers<br>Chose readiness over premature fundraising</p>
+        </div>
+      </div>
+    </div>
+    <div class="callout-bar" style="background:var(--teal);margin-top:14px;">We funded <strong>19 founders</strong> in 2025 with a <strong>167x grant multiplier</strong></div>
+  </div>
+
+  <!-- SLIDE 9 - Roadmap -->
+  <div class="slide bg-teal" data-slide="8">
+    <div class="section-label">Growth Roadmap</div>
+    <div class="slide-title">Path to Scale</div>
+    <div class="accent-line"></div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="year">2024</div>
+        <div class="milestone">Research & pilots<br>Platform foundations<br>Initial community</div>
+      </div>
+      <div class="timeline-item">
+        <div class="year">2025</div>
+        <div class="milestone">MVP launch<br>$200K revenue<br>19 founders funded</div>
+      </div>
+      <div class="timeline-item">
+        <div class="year">2026</div>
+        <div class="milestone">Scale technology<br>Expand markets<br>B2B partnerships</div>
+      </div>
+      <div class="timeline-item">
+        <div class="year">2027+</div>
+        <div class="milestone">National expansion<br>Investment platform<br>Full ecosystem</div>
+      </div>
+    </div>
+    <div class="body-text" style="margin-top:18px;">From experimentation to infrastructure - building repeatable, technology-enabled programs.</div>
+  </div>
+
+  <!-- SLIDE 10 - Founder -->
+  <div class="slide bg-cream" data-slide="9">
+    <div class="section-label">Leadership</div>
+    <div class="slide-title">Meet the Founder</div>
+    <div class="accent-line"></div>
+    <div class="founder-section">
+      <div class="founder-photo-wrap">
+        <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/c8f7fa07-fa13-4d2e-ba76-5f6195bc6c1e/Ila+Headshot.jpg?format=1500w" alt="Ila B Corcoran">
+      </div>
+      <div class="founder-bio">
+        <h3>Ila B Corcoran</h3>
+        <div class="title">Founder & CEO</div>
+        <p>Former investment professional with deep experience in private markets. Recognized thought leader in democratizing capital access. Built Sengo to solve the problem she witnessed firsthand: talented founders locked out of capital, and communities locked out of wealth-building opportunities.</p>
+        <p style="margin-top:10px;color:var(--teal);"><strong>Featured in:</strong> Forbes, TechCrunch, Black Enterprise, and 15+ speaking engagements</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11 - The Ask -->
+  <div class="slide bg-teal" data-slide="10">
+    <div class="section-label">The Opportunity</div>
+    <div class="slide-title">Join Us in Building the Future</div>
+    <div class="accent-line"></div>
+    <div class="ask-box">
+      <h3>We're Raising Our Next Round</h3>
+      <p>Seeking strategic partners who believe in democratizing capital access and building durable ecosystems for underrepresented founders and investors.</p>
+    </div>
+    <ul class="cta-list" style="margin-top:20px;">
+      <li>Invest in Sengo</li>
+      <li>Partner on programming & deal flow</li>
+      <li>Join the community</li>
+      <li>Sponsor founder grants</li>
+    </ul>
+    <div class="body-text" style="margin-top:18px;font-weight:700;color:var(--orange);font-size:clamp(11px,1.4vw,17px);">Sengo is reimagining the way communities fundraise and invest by opening access.</div>
+    <div class="footer-line">hello@bysengo.com | bysengo.com</div>
+  </div>
+
+  <!-- Fullscreen button -->
+  <button class="fs-btn" id="pitchFs" aria-label="Toggle fullscreen" title="Fullscreen">&#x26F6;</button>
+  <!-- Navigation -->
+  <div class="deck-nav">
+    <button id="pitchPrev" aria-label="Previous slide">&#8249;</button>
+    <div class="deck-dots" id="pitchDots"></div>
+    <button id="pitchNext" aria-label="Next slide">&#8250;</button>
+  </div>
+  <div class="slide-counter" id="pitchCounter"></div>
+</div>
+
+<script>
+(function() {
+  var deck = document.getElementById('sengoPitch');
+  var slides = deck.querySelectorAll('.slide');
+  var dots = document.getElementById('pitchDots');
+  var counter = document.getElementById('pitchCounter');
+  var current = 0;
+  var total = slides.length;
+
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('span');
+    d.dataset.idx = i;
+    if (i === 0) d.className = 'active';
+    d.addEventListener('click', function() { goTo(parseInt(this.dataset.idx)); });
+    dots.appendChild(d);
+  }
+
+  function goTo(n) {
+    if (n < 0) n = total - 1;
+    if (n >= total) n = 0;
+    slides[current].classList.remove('active');
+    dots.children[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dots.children[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + total;
+    animateSlide(n);
+  }
+
+  document.getElementById('pitchPrev').addEventListener('click', function() { goTo(current - 1); });
+  document.getElementById('pitchNext').addEventListener('click', function() { goTo(current + 1); });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+  });
+
+  var startX = 0;
+  deck.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, {passive: true});
+  deck.addEventListener('touchend', function(e) {
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      diff > 0 ? goTo(current + 1) : goTo(current - 1);
+    }
+  }, {passive: true});
+
+  counter.textContent = '1 / ' + total;
+
+  // Count-up animation for stat numbers
+  function countUp(el) {
+    var raw = el.getAttribute('data-val') || el.textContent;
+    if (!el.getAttribute('data-val')) el.setAttribute('data-val', raw);
+    var prefix = raw.match(/^[^0-9]*/)[0];
+    var suffix = raw.match(/[^0-9]*$/)[0];
+    var numStr = raw.replace(prefix, '').replace(suffix, '').replace(/,/g, '');
+    var target = parseInt(numStr, 10);
+    if (isNaN(target)) return;
+    var duration = 1200;
+    var start = performance.now();
+    function step(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      var val = Math.floor(ease * target);
+      el.textContent = prefix + val.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    el.textContent = prefix + '0' + suffix;
+    requestAnimationFrame(step);
+  }
+
+  var animatedSlides = {};
+  function animateSlide(n) {
+    if (animatedSlides[n]) return;
+    animatedSlides[n] = true;
+    var slide = slides[n];
+    var nums = slide.querySelectorAll('.stat-num, .big-num');
+    nums.forEach(function(el) { setTimeout(function() { countUp(el); }, 300); });
+  }
+
+  // Fullscreen toggle
+  var fsBtn = document.getElementById('pitchFs');
+  var isFs = false;
+
+  function enterFs() {
+    if (deck.requestFullscreen) { deck.requestFullscreen(); return; }
+    if (deck.webkitRequestFullscreen) { deck.webkitRequestFullscreen(); return; }
+    deck.classList.add('is-fullscreen');
+    document.body.style.overflow = 'hidden';
+    isFs = true;
+    updateFsBtn();
+  }
+
+  function exitFs() {
+    if (document.fullscreenElement) { document.exitFullscreen(); return; }
+    if (document.webkitFullscreenElement) { document.webkitExitFullscreen(); return; }
+    deck.classList.remove('is-fullscreen');
+    document.body.style.overflow = '';
+    isFs = false;
+    updateFsBtn();
+  }
+
+  function updateFsBtn() {
+    var active = document.fullscreenElement || document.webkitFullscreenElement || deck.classList.contains('is-fullscreen');
+    fsBtn.innerHTML = active ? '&#x2716;' : '&#x26F6;';
+  }
+
+  fsBtn.addEventListener('click', function() {
+    var active = document.fullscreenElement || document.webkitFullscreenElement || deck.classList.contains('is-fullscreen');
+    active ? exitFs() : enterFs();
+  });
+
+  document.addEventListener('fullscreenchange', updateFsBtn);
+  document.addEventListener('webkitfullscreenchange', updateFsBtn);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && deck.classList.contains('is-fullscreen')) {
+      exitFs();
+    }
+  });
+})();
+</script>
