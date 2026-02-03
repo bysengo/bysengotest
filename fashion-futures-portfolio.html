@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fashion x Futures — Brand Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F3EDE7;
+      color: #1B3533;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #1B3533 0%, #2a4f4c 50%, #1B3533 100%);
+      color: #F3EDE7;
+      padding: 80px 40px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(213, 112, 40, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 50%, rgba(103, 68, 26, 0.06) 0%, transparent 50%);
+      animation: heroShimmer 15s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroShimmer {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-5%, 3%) rotate(2deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #D57028;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Arimo', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #D57028;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      font-weight: 300;
+      max-width: 650px;
+      margin: 0 auto;
+      opacity: 0.85;
+      line-height: 1.7;
+    }
+
+    .brand-count {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 28px;
+      background: rgba(213, 112, 40, 0.15);
+      border: 1px solid rgba(213, 112, 40, 0.3);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #D57028;
+      letter-spacing: 1px;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 30px 40px 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #67441A;
+      margin-right: 8px;
+    }
+
+    .filter-btn {
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1.5px solid #1B3533;
+      background: transparent;
+      color: #1B3533;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-btn:hover {
+      background: #1B3533;
+      color: #F3EDE7;
+    }
+
+    .filter-btn.active {
+      background: #D57028;
+      border-color: #D57028;
+      color: white;
+    }
+
+    /* Brand Grid */
+    .brands-section {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 20px 40px 80px;
+    }
+
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    /* Brand Card */
+    .brand-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px 28px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(27, 53, 51, 0.06);
+    }
+
+    .brand-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #D57028, #67441A);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .brand-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(27, 53, 51, 0.12);
+    }
+
+    .brand-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .brand-card-initial {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Arimo', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #1B3533, #2a4f4c);
+    }
+
+    .brand-card-initial.accent-1 { background: linear-gradient(135deg, #D57028, #e8924e); }
+    .brand-card-initial.accent-2 { background: linear-gradient(135deg, #67441A, #8a6230); }
+    .brand-card-initial.accent-3 { background: linear-gradient(135deg, #1B3533, #2a4f4c); }
+    .brand-card-initial.accent-4 { background: linear-gradient(135deg, #4a2c6e, #6b4090); }
+    .brand-card-initial.accent-5 { background: linear-gradient(135deg, #2c5f5a, #3d7d77); }
+
+    .brand-card h3 {
+      font-family: 'Arimo', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1B3533;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .brand-card-founder {
+      font-size: 0.82rem;
+      color: #67441A;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .brand-card-desc {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .brand-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .brand-tag {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .brand-tag.product {
+      background: rgba(27, 53, 51, 0.08);
+      color: #1B3533;
+    }
+
+    .brand-tag.funding {
+      background: rgba(213, 112, 40, 0.1);
+      color: #D57028;
+    }
+
+    .brand-card-arrow {
+      position: absolute;
+      bottom: 28px;
+      right: 28px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(27, 53, 51, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      color: #1B3533;
+      font-size: 0.9rem;
+    }
+
+    .brand-card:hover .brand-card-arrow {
+      background: #D57028;
+      color: white;
+      transform: translateX(3px);
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(27, 53, 51, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s ease;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 24px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(30px) scale(0.95);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      padding: 40px 40px 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .modal-brand-info {
+      flex: 1;
+    }
+
+    .modal-brand-initial {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Arimo', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .modal-brand-name {
+      font-family: 'Arimo', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1B3533;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .modal-founder-name {
+      font-size: 1rem;
+      color: #67441A;
+      font-weight: 500;
+    }
+
+    .modal-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(27, 53, 51, 0.06);
+      color: #1B3533;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover {
+      background: #D57028;
+      color: white;
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      padding: 30px 40px 40px;
+    }
+
+    .modal-description {
+      font-size: 1rem;
+      color: #333;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(27, 53, 51, 0.08);
+    }
+
+    .modal-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .modal-detail-block {
+      background: #F3EDE7;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .modal-detail-block.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .modal-detail-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #67441A;
+      margin-bottom: 8px;
+    }
+
+    .modal-detail-value {
+      font-size: 0.95rem;
+      color: #1B3533;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .funding-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .funding-tag {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: rgba(213, 112, 40, 0.1);
+      color: #D57028;
+    }
+
+    .funding-tag.grant { background: rgba(27, 53, 51, 0.08); color: #1B3533; }
+    .funding-tag.crowdfunding { background: rgba(103, 68, 26, 0.1); color: #67441A; }
+    .funding-tag.revenue { background: rgba(213, 112, 40, 0.1); color: #D57028; }
+    .funding-tag.venture { background: rgba(74, 44, 110, 0.1); color: #4a2c6e; }
+    .funding-tag.unsure { background: rgba(100, 100, 100, 0.08); color: #666; }
+
+    .raised-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .raised-badge.yes {
+      background: rgba(44, 95, 90, 0.1);
+      color: #2c5f5a;
+    }
+
+    .raised-badge.no {
+      background: rgba(100, 100, 100, 0.06);
+      color: #888;
+    }
+
+    .modal-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(27, 53, 51, 0.08);
+    }
+
+    .modal-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .modal-link.primary {
+      background: #D57028;
+      color: white;
+    }
+
+    .modal-link.primary:hover {
+      background: #c06020;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(213, 112, 40, 0.3);
+    }
+
+    .modal-link.secondary {
+      background: rgba(27, 53, 51, 0.06);
+      color: #1B3533;
+    }
+
+    .modal-link.secondary:hover {
+      background: #1B3533;
+      color: #F3EDE7;
+      transform: translateY(-2px);
+    }
+
+    /* Scrollbar Styling */
+    .modal::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .modal::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .modal::-webkit-scrollbar-thumb {
+      background: rgba(27, 53, 51, 0.15);
+      border-radius: 3px;
+    }
+
+    /* Footer */
+    .portfolio-footer {
+      background: #1B3533;
+      color: #F3EDE7;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .portfolio-footer p {
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    .portfolio-footer a {
+      color: #D57028;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .portfolio-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animations */
+    .brand-card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 24px 48px;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .filter-bar {
+        padding: 24px 24px 8px;
+      }
+
+      .brands-section {
+        padding: 16px 24px 60px;
+      }
+
+      .brands-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .modal-header {
+        padding: 28px 24px 0;
+      }
+
+      .modal-body {
+        padding: 24px 24px 32px;
+      }
+
+      .modal-brand-name {
+        font-size: 1.5rem;
+      }
+
+      .modal-details-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .modal-links {
+        flex-direction: column;
+      }
+
+      .modal-link {
+        justify-content: center;
+      }
+
+      .brand-count {
+        margin-top: 20px;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .brand-card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-label">Sengo Presents</div>
+      <h1>Fashion <span>x</span> Futures</h1>
+      <p>Meet the designers, makers, and visionaries building the future of fashion. Explore their stories and discover how you can support their journey.</p>
+      <div class="brand-count">21 Brands &mdash; One Community</div>
+    </div>
+  </section>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" data-filter="all">All Brands</button>
+    <button class="filter-btn" data-filter="grant">Open to Grants</button>
+    <button class="filter-btn" data-filter="venture">Seeking Investment</button>
+    <button class="filter-btn" data-filter="crowdfunding">Crowdfunding</button>
+    <button class="filter-btn" data-filter="raised">Previously Raised</button>
+  </div>
+
+  <!-- Brands Grid -->
+  <section class="brands-section">
+    <div class="brands-grid" id="brandsGrid">
+      <!-- Cards injected by JS -->
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="brandModal">
+      <div class="modal-header">
+        <div class="modal-brand-info">
+          <div class="modal-brand-initial" id="modalInitial"></div>
+          <div class="modal-brand-name" id="modalName"></div>
+          <div class="modal-founder-name" id="modalFounder"></div>
+        </div>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-description" id="modalDesc"></div>
+        <div class="modal-details-grid" id="modalDetails"></div>
+        <div class="modal-links" id="modalLinks"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="portfolio-footer">
+    <p>Fashion x Futures is a Sengo initiative connecting emerging fashion brands with the capital and community they need to grow.</p>
+  </footer>
+
+<script>
+  const brands = [
+    {
+      name: "FAR FROM PRIVACY",
+      founder: "Tavian D'Amore",
+      description: "FAR FROM PRIVACY is a luxury fashion house creating one-of-a-kind, hand-crafted pieces, defined by meticulous craftsmanship with avant-garde artistry.",
+      products: "Unique 1 of 1 items",
+      funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Revenue-based financing", "Venture capital / angel investment"],
+      raised: "No",
+      website: "https://farfromprivacy.com",
+      instagram: "https://www.instagram.com/farfromprivacy"
+    },
+    {
+      name: "A Grimm Company",
+      founder: "Rachid Sherif",
+      description: "A brand based in utility, modularity and absurdist motifs.",
+      products: "Mens and womens clothing",
+      funding: ["Revenue-based financing", "Not sure yet/Not seeking"],
+      raised: "No",
+      website: "https://agrimmco.com",
+      instagram: "https://www.instagram.com/agrimmcompany"
+    },
+    {
+      name: "ar*ky*ved",
+      founder: "Kylee Morgan",
+      description: "Born of curiosity, informed by personal experiences, and refined by experimentation — ar*ky*ved draws from an unconventional mix of influences — minimalism, sportiness, and sensuality — to dress the sexy tomboy.",
+      products: "Tank tops, boleros, ballerina flats, hoodies",
+      funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Revenue-based financing", "Venture capital / angel investment"],
+      raised: "No",
+      website: "https://www.arkyved.store",
+      instagram: "https://www.instagram.com/ar.ky.ved"
+    },
+    {
+      name: "Aworan",
+      founder: "Moni Fagbamiye",
+      description: "A Nigerian-American brand rooted in the belief that fashion is art. Each piece is thoughtfully curated from original, self-made paintings, transforming visual storytelling into wearable form. Blending culture, creativity, and craftsmanship, the brand exists at the intersection of art and fashion.",
+      products: "Unisex clothing, ready to wear and handmade runway pieces",
+      funding: ["Grant Funding"],
+      raised: "No",
+      website: "https://shop-aworan.com",
+      instagram: "https://www.instagram.com/aworan__"
+    },
+    {
+      name: "Favelo World Wide",
+      founder: "Thabiso Molutsoane",
+      description: "Faveloworldwide is a premium high-end streetwear brand rooted in exclusivity, quality, and authenticity. Founded in Johannesburg, South Africa, the brand draws inspiration from the favela — symbolizing resilience, ambition, and the rise from adversity. More than fashion, Faveloworldwide tells a story of empowerment — from raw beginnings to refined sophistication.",
+      products: "Leather goods, bags, belts, pants, T-shirts, jackets",
+      funding: ["Not sure yet/Not seeking"],
+      raised: "No",
+      website: null,
+      instagram: null
+    },
+    {
+      name: "Hause of Oninku",
+      founder: "Christensen Oninku",
+      description: "Hause of Oninku is a Black luxury brand operating in Brooklyn, New York. Rooted in Ghanaian heritage, H.O.O serves as a conduit for motifs of love and loss, through the lens of familial experiences — constantly trying to seek the balance of what makes a hause a home.",
+      products: "Jackets, tees, skirts, shirts, pants",
+      funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Venture capital / angel investment"],
+      raised: "No",
+      website: "https://hauseofoninku.com",
+      instagram: "https://www.instagram.com/HauseofOninku"
+    },
+    {
+      name: "Hoop York City",
+      founder: "Alex Taylor",
+      description: "Alex Taylor is the founder of Hoop York City, a women's basketball collective that blends sport, community, and creativity. Through curated pickup runs and events, she's built a platform where women can compete, connect, and community-build both on and off the court. With a background in fashion design, Alex brings a distinct creative vision to the brand's identity and apparel, merging sport, style, and storytelling to celebrate the culture of women's basketball.",
+      products: "Hats, tees, hoodies, socks, sunnies",
+      funding: ["Grant Funding"],
+      raised: "Yes — grants",
+      website: "https://www.hoopyorkcity.com",
+      instagram: "https://www.instagram.com/hoopyorkcity"
+    },
+    {
+      name: "J.Lew Atelier",
+      founder: "Justin Williams",
+      description: "A brand with the mission to produce quality pieces that adapts to all styles.",
+      products: "Bottoms, tops, knitwear, sunglasses",
+      funding: ["Grant Funding", "Venture capital / angel investment", "Not sure yet/Not seeking"],
+      raised: "No",
+      website: "https://jlewatelier.com",
+      instagram: "https://www.instagram.com/jlewatelier"
+    },
+    {
+      name: "Justin Mensinger",
+      founder: "Justin Mensinger",
+      description: "Wearable art handcrafted in Los Angeles reusing materials by Justin Mensinger.",
+      products: "Clothing",
+      funding: ["Grant Funding", "Venture capital / angel investment"],
+      raised: "Yes — grants",
+      website: "https://justinmensinger.com",
+      instagram: null
+    },
+    {
+      name: "Maddy Kelly",
+      founder: "Madison Kelly",
+      description: "Maddy Kelly is a womenswear couture designer who merges technical mastery with emotional depth. Every stitch, every embellishment is a reflection of lived experience. Working with couture techniques and intricate handmade surface embellishments, she crafts garments that speak to resilience, identity, and transformation. Her first collection, Get Home!, is a visceral response to the violence faced by feminine-presenting individuals — a call for safety, dignity, and the right to exist freely. This is couture with a conscience.",
+      products: "Clothing and accessories",
+      funding: ["Grant Funding", "Revenue-based financing", "Venture capital / angel investment"],
+      raised: "Yes — grants, debt/equity",
+      website: "https://www.maddykellydesigns.com",
+      instagram: null
+    },
+    {
+      name: "Maison Ravi",
+      founder: "Ravi Mahadevan",
+      description: "Maison Ravi is a fashion house creating Americana through the eyes of the diaspora — weaving together layered identity, cultural memory and stories that shape us.",
+      products: "Unisex streetwear",
+      funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Venture capital / angel investment"],
+      raised: "No",
+      website: "https://maisonravi.us",
+      instagram: "https://www.instagram.com/maison.ravi"
+    },
+    {
+      name: "Maya Winston",
+      founder: "Maya Winston",
+      description: "Maya Winston is a luxury accessories brand that celebrates Black women through intentional design, refined craftsmanship, and storytelling rooted in culture. MW creates elevated handbags that make every woman feel like she is living a life of luxury on her own terms — not because of price, but because of purpose.",
+      products: "Handbags",
+      funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Revenue-based financing", "Venture capital / angel investment"],
+      raised: "Yes — grants",
+      website: "https://mayawinston.com",
+      instagram: "https://www.instagram.com/mayawinston"
+    },
+    {
+      name: "Michael Wright",
+      founder: "Michael Wright",
+      description: "Our vision is to create timeless pieces that stand the test of time, combining classic elegance with contemporary edge.",
+      products: "Menswear — hoodies, jackets, pants",
+      funding: ["Grant Funding", "Venture capital / angel investment"],
+      raised: "No",
+      website: null,
+      instagram: "https://www.instagram.com/MichaelWrightCollection"
+    },
+    {
+      name: "Mingo by Domingo",
+      founder: "Yanju Padonu",
+      description: "A Maryland-based lifestyle brand rooted in elevating wardrobes while building community.",
+      products: "Shirts, mesh tops, sweaters, sweatsuits",
+      funding: ["Grant Funding", "Revenue-based financing", "Venture capital / angel investment"],
+      raised: "Yes — grants, debt/equity",
+      website: "https://mingo008.com",
+      instagram: "https://www.instagram.com/mingobydomingo"
+    },
+    {
+      name: "SHOP NIKITA",
+      founder: "Nikita Madhyani",
+      description: "A luxury nightwear label creating silk pieces for evening, rest, and ritual, crafted in India using traditional techniques and refined silhouettes. Designed for women who see nightwear as an extension of personal style, sensuality, and self-possession.",
+      products: "Luxury nightwear — sheer silk organza pajamas, hand-embroidered satin pajama sets, robes, camisole dresses",
+      funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Revenue-based financing", "Venture capital / angel investment", "Not sure yet/Not seeking"],
+      raised: "No",
+      website: null,
+      instagram: null
+    },
+    {
+      name: "Oberon Asscher",
+      founder: "Husani Spann",
+      description: "Hustle Chic.",
+      products: "Denim jackets, tees, bombers, denim jeans, beanies",
+      funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Revenue-based financing", "Venture capital / angel investment"],
+      raised: "Yes — grants",
+      website: "https://www.oberonasscher.com",
+      instagram: "https://www.instagram.com/oberonasscher"
+    },
+    {
+      name: "SoulMaison",
+      founder: "Lindsey Guion",
+      description: "SoulMaison is an intentional children's brand rooted in culture, craftsmanship, and individuality. Designed for longevity and made to be lived in, each piece honors childhood as a space for creativity, confidence, and self-expression. Built on sustainability and quality.",
+      products: "Cut and sew children's clothing",
+      funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)"],
+      raised: "No",
+      website: "https://soulmaison.com",
+      instagram: "https://www.instagram.com/Soulmaison"
+    },
+    {
+      name: "Starfish Mrkt",
+      founder: "Zarah Spencer",
+      description: "A clothing brand for the cool girl.",
+      products: "Women's clothing",
+      funding: ["Grant Funding"],
+      raised: "No",
+      website: "https://www.starfishmrkt.com",
+      instagram: "https://www.instagram.com/starfishmrkt"
+    },
+    {
+      name: "Studio Tanaïs",
+      founder: "Tanaïs",
+      description: "Sensual scentscapes inspired by ritual, the ancestral, the cosmic, the femme, and the future. Studio Tanaïs is a perfume house and design studio founded by the New York City-based, award-winning author and perfumer, Tanaïs. Surreal, psychedelic, sultry scentscapes — inspired by ancestral and spiritual homes: Bangladesh, New York City, India, Hawaii, Bali, and California. These are opulent, original works of art.",
+      products: "Perfumes — curated for a sexy romantic vibe",
+      funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Venture capital / angel investment"],
+      raised: "Yes — debt/equity",
+      website: "https://studiotanais.com",
+      instagram: "https://www.instagram.com/studiotanais"
+    },
+    {
+      name: "Verdictstillout",
+      founder: "Jason Scott",
+      description: "Verdictstillout is a non-binary clothing label born from the idea that individuality can never be labeled or put in a box. The label was started in fall 2018 by creative director Jason Scott and made its debut at Paris Fashion Week, where it immediately became a niche brand offering something different. Already pulled from showrooms for magazines such as L'Officiel and Teen Vanity, it's positioning itself in the fashion industry.",
+      products: "Moto jackets, cardigans, jeans, denim trucker jackets, nylon joggers",
+      funding: ["Grant Funding", "Venture capital / angel investment"],
+      raised: "No",
+      website: "https://www.verdictstillout.com",
+      instagram: "https://www.instagram.com/verdictstillout"
+    },
+    {
+      name: "Wildly Black",
+      founder: "Siham Omer",
+      description: "Wildly Black is a sustainable fashion brand helping women reconnect with the roots of their own sustainability stories through intentional, beautifully crafted essentials.",
+      products: "Bodysuit",
+      funding: ["Grant Funding"],
+      raised: "No",
+      website: "https://www.wildlyblack.com",
+      instagram: "https://www.instagram.com/wildlyblack"
+    }
+  ];
+
+  const accentClasses = ['accent-1', 'accent-2', 'accent-3', 'accent-4', 'accent-5'];
+
+  function getInitials(name) {
+    return name.split(' ').map(w => w.replace(/[^a-zA-Z]/g, '')).filter(w => w.length > 0).map(w => w[0].toUpperCase()).slice(0, 2).join('');
+  }
+
+  function getAccent(index) {
+    return accentClasses[index % accentClasses.length];
+  }
+
+  function getAccentGradient(index) {
+    const gradients = [
+      'linear-gradient(135deg, #D57028, #e8924e)',
+      'linear-gradient(135deg, #67441A, #8a6230)',
+      'linear-gradient(135deg, #1B3533, #2a4f4c)',
+      'linear-gradient(135deg, #4a2c6e, #6b4090)',
+      'linear-gradient(135deg, #2c5f5a, #3d7d77)'
+    ];
+    return gradients[index % gradients.length];
+  }
+
+  function getFundingClass(f) {
+    if (f.includes('Grant')) return 'grant';
+    if (f.includes('Crowdfunding')) return 'crowdfunding';
+    if (f.includes('Revenue')) return 'revenue';
+    if (f.includes('Venture') || f.includes('angel')) return 'venture';
+    return 'unsure';
+  }
+
+  function matchesFilter(brand, filter) {
+    if (filter === 'all') return true;
+    if (filter === 'grant') return brand.funding.some(f => f.includes('Grant'));
+    if (filter === 'venture') return brand.funding.some(f => f.includes('Venture') || f.includes('angel'));
+    if (filter === 'crowdfunding') return brand.funding.some(f => f.includes('Crowdfunding'));
+    if (filter === 'raised') return brand.raised !== 'No';
+    return true;
+  }
+
+  function renderCards(filter) {
+    const grid = document.getElementById('brandsGrid');
+    grid.innerHTML = '';
+
+    brands.forEach((brand, index) => {
+      if (!matchesFilter(brand, filter)) return;
+
+      const card = document.createElement('div');
+      card.className = 'brand-card';
+      card.style.animationDelay = `${(index % 12) * 0.06}s`;
+      card.onclick = () => openModal(index);
+
+      const primaryFunding = brand.funding.find(f => !f.includes('Not sure')) || brand.funding[0];
+      const shortFunding = primaryFunding.includes('Grant') ? 'Grants' :
+                           primaryFunding.includes('Crowdfunding') ? 'Crowdfunding' :
+                           primaryFunding.includes('Revenue') ? 'Revenue' :
+                           primaryFunding.includes('Venture') ? 'Investment' : 'Exploring';
+
+      card.innerHTML = `
+        <div class="brand-card-initial ${getAccent(index)}">${getInitials(brand.name)}</div>
+        <h3>${brand.name}</h3>
+        <div class="brand-card-founder">${brand.founder}</div>
+        <div class="brand-card-desc">${brand.description}</div>
+        <div class="brand-card-tags">
+          <span class="brand-tag product">${brand.products.split(',')[0].trim()}</span>
+          <span class="brand-tag funding">${shortFunding}</span>
+        </div>
+        <div class="brand-card-arrow">&#8594;</div>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
+
+  function openModal(index) {
+    const brand = brands[index];
+    const overlay = document.getElementById('modalOverlay');
+    const modal = document.getElementById('brandModal');
+
+    document.getElementById('modalInitial').style.background = getAccentGradient(index);
+    document.getElementById('modalInitial').textContent = getInitials(brand.name);
+    document.getElementById('modalName').textContent = brand.name;
+    document.getElementById('modalFounder').textContent = 'Founded by ' + brand.founder;
+    document.getElementById('modalDesc').textContent = brand.description;
+
+    // Build details
+    const detailsGrid = document.getElementById('modalDetails');
+    const activeFunding = brand.funding.filter(f => !f.includes('Not sure'));
+    const raisedHtml = brand.raised !== 'No'
+      ? `<span class="raised-badge yes">&#10003; ${brand.raised}</span>`
+      : `<span class="raised-badge no">Not yet</span>`;
+
+    detailsGrid.innerHTML = `
+      <div class="modal-detail-block">
+        <div class="modal-detail-label">What They Sell</div>
+        <div class="modal-detail-value">${brand.products}</div>
+      </div>
+      <div class="modal-detail-block">
+        <div class="modal-detail-label">Previously Raised</div>
+        <div class="modal-detail-value">${raisedHtml}</div>
+      </div>
+      <div class="modal-detail-block full-width">
+        <div class="modal-detail-label">Open to Funding</div>
+        <div class="funding-tags">
+          ${activeFunding.map(f => `<span class="funding-tag ${getFundingClass(f)}">${f.replace(' (Reg CF / Community Raise)', '')}</span>`).join('')}
+          ${activeFunding.length === 0 ? '<span class="funding-tag unsure">Exploring options</span>' : ''}
+        </div>
+      </div>
+    `;
+
+    // Build links
+    const linksContainer = document.getElementById('modalLinks');
+    let linksHtml = '';
+    if (brand.website) {
+      linksHtml += `<a href="${brand.website}" target="_blank" rel="noopener" class="modal-link primary">Visit Website &#8599;</a>`;
+    }
+    if (brand.instagram) {
+      linksHtml += `<a href="${brand.instagram}" target="_blank" rel="noopener" class="modal-link secondary">Instagram &#8599;</a>`;
+    }
+    if (!brand.website && !brand.instagram) {
+      linksHtml = `<span class="modal-link secondary" style="cursor:default;opacity:0.6;">Links coming soon</span>`;
+    }
+    linksContainer.innerHTML = linksHtml;
+
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Event listeners
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalOverlay').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Filters
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCards(btn.dataset.filter);
+    });
+  });
+
+  // Initial render
+  renderCards('all');
+</script>
+</body>
+</html>
