@@ -190,26 +190,31 @@
       transform: scaleX(1);
     }
 
-    .brand-card-initial {
-      width: 52px;
-      height: 52px;
+    .brand-card-logo {
+      width: 100%;
+      height: 80px;
       border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Arimo', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: white;
       margin-bottom: 18px;
-      background: linear-gradient(135deg, #1B3533, #2a4f4c);
+      padding: 12px 16px;
+      overflow: hidden;
     }
 
-    .brand-card-initial.accent-1 { background: linear-gradient(135deg, #D57028, #e8924e); }
-    .brand-card-initial.accent-2 { background: linear-gradient(135deg, #67441A, #8a6230); }
-    .brand-card-initial.accent-3 { background: linear-gradient(135deg, #1B3533, #2a4f4c); }
-    .brand-card-initial.accent-4 { background: linear-gradient(135deg, #4a2c6e, #6b4090); }
-    .brand-card-initial.accent-5 { background: linear-gradient(135deg, #2c5f5a, #3d7d77); }
+    .brand-card-logo.bg-dark {
+      background: #1B3533;
+    }
+
+    .brand-card-logo.bg-light {
+      background: #F3EDE7;
+    }
+
+    .brand-card-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
 
     .brand-card h3 {
       font-family: 'Arimo', serif;
@@ -337,18 +342,31 @@
       flex: 1;
     }
 
-    .modal-brand-initial {
-      width: 64px;
-      height: 64px;
+    .modal-brand-logo {
+      width: 100%;
+      max-width: 200px;
+      height: 80px;
       border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Arimo', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: white;
       margin-bottom: 16px;
+      padding: 14px 20px;
+      overflow: hidden;
+    }
+
+    .modal-brand-logo.bg-dark {
+      background: #1B3533;
+    }
+
+    .modal-brand-logo.bg-light {
+      background: #F3EDE7;
+    }
+
+    .modal-brand-logo img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
     }
 
     .modal-brand-name {
@@ -675,7 +693,7 @@
     <div class="modal" id="brandModal">
       <div class="modal-header">
         <div class="modal-brand-info">
-          <div class="modal-brand-initial" id="modalInitial"></div>
+          <div class="modal-brand-logo" id="modalLogo"></div>
           <div class="modal-brand-name" id="modalName"></div>
           <div class="modal-founder-name" id="modalFounder"></div>
         </div>
@@ -699,6 +717,8 @@
     {
       name: "FAR FROM PRIVACY",
       founder: "Tavian D'Amore",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/acfa8358-ac27-4bc8-b711-21f4e980a589/FFP_DESIGN2_WHITE.png?format=750w",
+      logoBg: "dark",
       description: "FAR FROM PRIVACY is a luxury fashion house creating one-of-a-kind, hand-crafted pieces, defined by meticulous craftsmanship with avant-garde artistry.",
       products: "Unique 1 of 1 items",
       funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Revenue-based financing", "Venture capital / angel investment"],
@@ -709,6 +729,8 @@
     {
       name: "A Grimm Company",
       founder: "Rachid Sherif",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/62d2c71d-038a-4e7e-a291-9632d88edc59/AGCtransparent.png?format=750w",
+      logoBg: "light",
       description: "A brand based in utility, modularity and absurdist motifs.",
       products: "Mens and womens clothing",
       funding: ["Revenue-based financing", "Not sure yet/Not seeking"],
@@ -719,6 +741,8 @@
     {
       name: "ar*ky*ved",
       founder: "Kylee Morgan",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/30fb60a7-2d86-44b8-8994-20761e7bbcfe/arkyvedlogo.png?format=750w",
+      logoBg: "light",
       description: "Born of curiosity, informed by personal experiences, and refined by experimentation — ar*ky*ved draws from an unconventional mix of influences — minimalism, sportiness, and sensuality — to dress the sexy tomboy.",
       products: "Tank tops, boleros, ballerina flats, hoodies",
       funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Revenue-based financing", "Venture capital / angel investment"],
@@ -729,6 +753,8 @@
     {
       name: "Aworan",
       founder: "Moni Fagbamiye",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/9d60f764-c0c6-4269-b32d-a960fe6692bf/Logo+Transparent.png?format=750w",
+      logoBg: "light",
       description: "A Nigerian-American brand rooted in the belief that fashion is art. Each piece is thoughtfully curated from original, self-made paintings, transforming visual storytelling into wearable form. Blending culture, creativity, and craftsmanship, the brand exists at the intersection of art and fashion.",
       products: "Unisex clothing, ready to wear and handmade runway pieces",
       funding: ["Grant Funding"],
@@ -739,6 +765,8 @@
     {
       name: "Favelo World Wide",
       founder: "Thabiso Molutsoane",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/e03754e1-8509-4603-9836-e88858053dd9/favelo+logo.png?format=750w",
+      logoBg: "light",
       description: "Faveloworldwide is a premium high-end streetwear brand rooted in exclusivity, quality, and authenticity. Founded in Johannesburg, South Africa, the brand draws inspiration from the favela — symbolizing resilience, ambition, and the rise from adversity. More than fashion, Faveloworldwide tells a story of empowerment — from raw beginnings to refined sophistication.",
       products: "Leather goods, bags, belts, pants, T-shirts, jackets",
       funding: ["Not sure yet/Not seeking"],
@@ -749,6 +777,8 @@
     {
       name: "Hause of Oninku",
       founder: "Christensen Oninku",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/24a1c3ad-2c16-4af1-92a9-3a1f66720e70/Hause+of+Oninku+logo.png?format=750w",
+      logoBg: "light",
       description: "Hause of Oninku is a Black luxury brand operating in Brooklyn, New York. Rooted in Ghanaian heritage, H.O.O serves as a conduit for motifs of love and loss, through the lens of familial experiences — constantly trying to seek the balance of what makes a hause a home.",
       products: "Jackets, tees, skirts, shirts, pants",
       funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Venture capital / angel investment"],
@@ -759,6 +789,8 @@
     {
       name: "Hoop York City",
       founder: "Alex Taylor",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/ab8887f4-49c0-4c4c-b2a6-54ebe05a7644/HYC_Graphic.png?format=750w",
+      logoBg: "light",
       description: "Alex Taylor is the founder of Hoop York City, a women's basketball collective that blends sport, community, and creativity. Through curated pickup runs and events, she's built a platform where women can compete, connect, and community-build both on and off the court. With a background in fashion design, Alex brings a distinct creative vision to the brand's identity and apparel, merging sport, style, and storytelling to celebrate the culture of women's basketball.",
       products: "Hats, tees, hoodies, socks, sunnies",
       funding: ["Grant Funding"],
@@ -769,6 +801,8 @@
     {
       name: "J.Lew Atelier",
       founder: "Justin Williams",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1baab940-2994-40c8-995f-27d318ef4cdc/LewLogo.png?format=750w",
+      logoBg: "light",
       description: "A brand with the mission to produce quality pieces that adapts to all styles.",
       products: "Bottoms, tops, knitwear, sunglasses",
       funding: ["Grant Funding", "Venture capital / angel investment", "Not sure yet/Not seeking"],
@@ -779,6 +813,8 @@
     {
       name: "Justin Mensinger",
       founder: "Justin Mensinger",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/316ba488-b8c0-44c8-99e4-a92ad4518e8b/Untitled+design.png?format=750w",
+      logoBg: "light",
       description: "Wearable art handcrafted in Los Angeles reusing materials by Justin Mensinger.",
       products: "Clothing",
       funding: ["Grant Funding", "Venture capital / angel investment"],
@@ -789,6 +825,8 @@
     {
       name: "Maddy Kelly",
       founder: "Madison Kelly",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/a86da67a-7a9e-466b-9b4a-a7b78eb42abc/Maddy+Kelly+transparent+logo.png?format=750w",
+      logoBg: "light",
       description: "Maddy Kelly is a womenswear couture designer who merges technical mastery with emotional depth. Every stitch, every embellishment is a reflection of lived experience. Working with couture techniques and intricate handmade surface embellishments, she crafts garments that speak to resilience, identity, and transformation. Her first collection, Get Home!, is a visceral response to the violence faced by feminine-presenting individuals — a call for safety, dignity, and the right to exist freely. This is couture with a conscience.",
       products: "Clothing and accessories",
       funding: ["Grant Funding", "Revenue-based financing", "Venture capital / angel investment"],
@@ -799,6 +837,8 @@
     {
       name: "Maison Ravi",
       founder: "Ravi Mahadevan",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/39c321aa-516c-40ea-bb0b-1b51c3c75a23/MaisonRavi.png?format=750w",
+      logoBg: "light",
       description: "Maison Ravi is a fashion house creating Americana through the eyes of the diaspora — weaving together layered identity, cultural memory and stories that shape us.",
       products: "Unisex streetwear",
       funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Venture capital / angel investment"],
@@ -809,6 +849,8 @@
     {
       name: "Maya Winston",
       founder: "Maya Winston",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/cf10d43f-b778-430f-92de-8ec17c9b6764/MAYA+WINSTON+LOGO+PNG.png?format=750w",
+      logoBg: "light",
       description: "Maya Winston is a luxury accessories brand that celebrates Black women through intentional design, refined craftsmanship, and storytelling rooted in culture. MW creates elevated handbags that make every woman feel like she is living a life of luxury on her own terms — not because of price, but because of purpose.",
       products: "Handbags",
       funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Revenue-based financing", "Venture capital / angel investment"],
@@ -819,6 +861,8 @@
     {
       name: "Michael Wright",
       founder: "Michael Wright",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/c39af135-be09-443a-8cab-248ce9ee431e/MIchael+Wright+Logo+-White.png?format=750w",
+      logoBg: "dark",
       description: "Our vision is to create timeless pieces that stand the test of time, combining classic elegance with contemporary edge.",
       products: "Menswear — hoodies, jackets, pants",
       funding: ["Grant Funding", "Venture capital / angel investment"],
@@ -829,6 +873,8 @@
     {
       name: "Mingo by Domingo",
       founder: "Yanju Padonu",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/dad96f01-2843-4f5a-a3a3-e3d934a0acee/Mingo.png?format=750w",
+      logoBg: "light",
       description: "A Maryland-based lifestyle brand rooted in elevating wardrobes while building community.",
       products: "Shirts, mesh tops, sweaters, sweatsuits",
       funding: ["Grant Funding", "Revenue-based financing", "Venture capital / angel investment"],
@@ -839,6 +885,8 @@
     {
       name: "SHOP NIKITA",
       founder: "Nikita Madhyani",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/afffa300-7d37-4e5a-8652-faaac9f37a91/SHOP+NIKITA+brand+logo.png?format=750w",
+      logoBg: "light",
       description: "A luxury nightwear label creating silk pieces for evening, rest, and ritual, crafted in India using traditional techniques and refined silhouettes. Designed for women who see nightwear as an extension of personal style, sensuality, and self-possession.",
       products: "Luxury nightwear — sheer silk organza pajamas, hand-embroidered satin pajama sets, robes, camisole dresses",
       funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Revenue-based financing", "Venture capital / angel investment", "Not sure yet/Not seeking"],
@@ -849,6 +897,8 @@
     {
       name: "Oberon Asscher",
       founder: "Husani Spann",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/ec554611-7ee3-46c6-83ad-f97a8075b6b3/oa+logo.png?format=750w",
+      logoBg: "light",
       description: "Hustle Chic.",
       products: "Denim jackets, tees, bombers, denim jeans, beanies",
       funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Revenue-based financing", "Venture capital / angel investment"],
@@ -859,6 +909,8 @@
     {
       name: "SoulMaison",
       founder: "Lindsey Guion",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/b45be828-6785-42db-b2fa-a79fb73160cf/SoulMaison_MainLogo_Normal.png?format=750w",
+      logoBg: "light",
       description: "SoulMaison is an intentional children's brand rooted in culture, craftsmanship, and individuality. Designed for longevity and made to be lived in, each piece honors childhood as a space for creativity, confidence, and self-expression. Built on sustainability and quality.",
       products: "Cut and sew children's clothing",
       funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)"],
@@ -869,6 +921,8 @@
     {
       name: "Starfish Mrkt",
       founder: "Zarah Spencer",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/fc9c80ee-e854-4b1e-843e-5012f75319b7/STARFISH+MRKT+LOGO+2.png?format=750w",
+      logoBg: "light",
       description: "A clothing brand for the cool girl.",
       products: "Women's clothing",
       funding: ["Grant Funding"],
@@ -879,6 +933,8 @@
     {
       name: "Studio Tanaïs",
       founder: "Tanaïs",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/d80e6fbc-58b3-413c-bbdf-c2ea29f62a6e/Untitled+design+%281%29.png?format=750w",
+      logoBg: "light",
       description: "Sensual scentscapes inspired by ritual, the ancestral, the cosmic, the femme, and the future. Studio Tanaïs is a perfume house and design studio founded by the New York City-based, award-winning author and perfumer, Tanaïs. Surreal, psychedelic, sultry scentscapes — inspired by ancestral and spiritual homes: Bangladesh, New York City, India, Hawaii, Bali, and California. These are opulent, original works of art.",
       products: "Perfumes — curated for a sexy romantic vibe",
       funding: ["Grant Funding", "Crowdfunding (Reg CF / Community Raise)", "Venture capital / angel investment"],
@@ -889,6 +945,8 @@
     {
       name: "Verdictstillout",
       founder: "Jason Scott",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/33fbdd4e-b6cc-4cf2-a43a-500c8c45061e/VERDICT4.png?format=750w",
+      logoBg: "light",
       description: "Verdictstillout is a non-binary clothing label born from the idea that individuality can never be labeled or put in a box. The label was started in fall 2018 by creative director Jason Scott and made its debut at Paris Fashion Week, where it immediately became a niche brand offering something different. Already pulled from showrooms for magazines such as L'Officiel and Teen Vanity, it's positioning itself in the fashion industry.",
       products: "Moto jackets, cardigans, jeans, denim trucker jackets, nylon joggers",
       funding: ["Grant Funding", "Venture capital / angel investment"],
@@ -899,6 +957,8 @@
     {
       name: "Wildly Black",
       founder: "Siham Omer",
+      logo: "https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1564fe8e-cd81-4b83-9f91-d1e5495b5b6e/wildlyblack-black+%284%29.png?format=750w",
+      logoBg: "light",
       description: "Wildly Black is a sustainable fashion brand helping women reconnect with the roots of their own sustainability stories through intentional, beautifully crafted essentials.",
       products: "Bodysuit",
       funding: ["Grant Funding"],
@@ -907,27 +967,6 @@
       instagram: "https://www.instagram.com/wildlyblack"
     }
   ];
-
-  const accentClasses = ['accent-1', 'accent-2', 'accent-3', 'accent-4', 'accent-5'];
-
-  function getInitials(name) {
-    return name.split(' ').map(w => w.replace(/[^a-zA-Z]/g, '')).filter(w => w.length > 0).map(w => w[0].toUpperCase()).slice(0, 2).join('');
-  }
-
-  function getAccent(index) {
-    return accentClasses[index % accentClasses.length];
-  }
-
-  function getAccentGradient(index) {
-    const gradients = [
-      'linear-gradient(135deg, #D57028, #e8924e)',
-      'linear-gradient(135deg, #67441A, #8a6230)',
-      'linear-gradient(135deg, #1B3533, #2a4f4c)',
-      'linear-gradient(135deg, #4a2c6e, #6b4090)',
-      'linear-gradient(135deg, #2c5f5a, #3d7d77)'
-    ];
-    return gradients[index % gradients.length];
-  }
 
   function getFundingClass(f) {
     if (f.includes('Grant')) return 'grant';
@@ -965,7 +1004,7 @@
                            primaryFunding.includes('Venture') ? 'Investment' : 'Exploring';
 
       card.innerHTML = `
-        <div class="brand-card-initial ${getAccent(index)}">${getInitials(brand.name)}</div>
+        <div class="brand-card-logo bg-${brand.logoBg}"><img src="${brand.logo}" alt="${brand.name} logo"></div>
         <h3>${brand.name}</h3>
         <div class="brand-card-founder">${brand.founder}</div>
         <div class="brand-card-desc">${brand.description}</div>
@@ -985,8 +1024,9 @@
     const overlay = document.getElementById('modalOverlay');
     const modal = document.getElementById('brandModal');
 
-    document.getElementById('modalInitial').style.background = getAccentGradient(index);
-    document.getElementById('modalInitial').textContent = getInitials(brand.name);
+    const modalLogo = document.getElementById('modalLogo');
+    modalLogo.className = 'modal-brand-logo bg-' + brand.logoBg;
+    modalLogo.innerHTML = `<img src="${brand.logo}" alt="${brand.name} logo">`;
     document.getElementById('modalName').textContent = brand.name;
     document.getElementById('modalFounder').textContent = 'Founded by ' + brand.founder;
     document.getElementById('modalDesc').textContent = brand.description;
