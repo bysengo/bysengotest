@@ -6,1063 +6,349 @@
   <title>Sengo Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ========== RESET & BASE ========== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow: hidden; }
     body {
       font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #F3EDE7;
-      color: #1B3533;
-      display: flex;
+      background: #F3EDE7; color: #1B3533; display: flex;
     }
-    h1, h2, h3, h4 { font-family: 'Arimo', sans-serif; }
+    h1,h2,h3,h4 { font-family: 'Arimo', sans-serif; }
     button { cursor: pointer; font-family: inherit; border: none; outline: none; }
     input, textarea, select { font-family: inherit; outline: none; }
 
-    /* ========== SIDEBAR ========== */
+    /* ===== LOGIN ===== */
+    .login-screen {
+      position: fixed; inset: 0; background: #1B3533;
+      display: flex; align-items: center; justify-content: center; z-index: 9999;
+    }
+    .login-screen.hidden { display: none; }
+    .login-box {
+      background: #fff; border-radius: 20px; padding: 48px 40px; width: 400px; max-width: 92vw;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center;
+    }
+    .login-box h1 { font-size: 2rem; margin-bottom: 6px; color: #1B3533; }
+    .login-box .login-sub { font-size: 0.82rem; color: rgba(27,53,51,0.5); margin-bottom: 32px; }
+    .login-field { margin-bottom: 16px; text-align: left; }
+    .login-field label { display: block; font-size: 0.75rem; font-weight: 600; color: rgba(27,53,51,0.5); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .login-field input { width: 100%; padding: 12px 16px; border: 1px solid rgba(27,53,51,0.12); border-radius: 10px; font-size: 0.9rem; background: #FAFAFA; transition: border-color 0.2s; }
+    .login-field input:focus { border-color: #D57028; background: #fff; }
+    .login-btn { width: 100%; padding: 14px; border-radius: 10px; background: #D57028; color: #fff; font-size: 0.95rem; font-weight: 700; margin-top: 8px; transition: background 0.2s; }
+    .login-btn:hover { background: #c06020; }
+    .login-error { color: #c82828; font-size: 0.8rem; margin-top: 10px; min-height: 20px; }
+
+    /* ===== SIDEBAR ===== */
     .sidebar {
-      width: 260px;
-      min-width: 260px;
-      background: #1B3533;
-      color: #F3EDE7;
-      display: flex;
-      flex-direction: column;
-      padding: 0;
-      height: 100vh;
-      position: relative;
-      z-index: 10;
+      width: 260px; min-width: 260px; background: #1B3533; color: #F3EDE7;
+      display: flex; flex-direction: column; height: 100vh; z-index: 10;
     }
-    .sidebar-logo {
-      padding: 28px 24px 20px;
-      border-bottom: 1px solid rgba(243,237,231,0.1);
-    }
-    .sidebar-logo h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .sidebar-logo span {
-      font-size: 0.75rem;
-      font-weight: 400;
-      opacity: 0.6;
-      display: block;
-      margin-top: 4px;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .sidebar-nav {
-      flex: 1;
-      padding: 16px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .sidebar-nav-label {
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      opacity: 0.4;
-      padding: 16px 12px 8px;
-      font-weight: 600;
-    }
+    .sidebar-logo { padding: 28px 24px 20px; border-bottom: 1px solid rgba(243,237,231,0.1); }
+    .sidebar-logo h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; }
+    .sidebar-logo span { font-size: 0.75rem; opacity: 0.6; display: block; margin-top: 4px; }
+    .sidebar-nav { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto; }
+    .sidebar-nav-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.4; padding: 16px 12px 8px; font-weight: 600; }
     .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      border-radius: 10px;
-      background: transparent;
-      color: rgba(243,237,231,0.7);
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      width: 100%;
-      text-align: left;
+      display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px;
+      background: transparent; color: rgba(243,237,231,0.7); font-size: 0.88rem; font-weight: 500;
+      transition: all 0.2s; width: 100%; text-align: left;
     }
-    .nav-item:hover {
-      background: rgba(243,237,231,0.08);
-      color: #F3EDE7;
-    }
-    .nav-item.active {
-      background: rgba(213,112,40,0.25);
-      color: #F3EDE7;
-    }
-    .nav-item .nav-icon {
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-    }
-    .nav-item .nav-badge {
-      margin-left: auto;
-      background: #D57028;
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 10px;
-      min-width: 22px;
-      text-align: center;
-    }
-    .sidebar-footer {
-      padding: 16px 20px;
-      border-top: 1px solid rgba(243,237,231,0.1);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .sidebar-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #D57028;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
-    .sidebar-user-info {
-      flex: 1;
-    }
-    .sidebar-user-info .name {
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-    .sidebar-user-info .role {
-      font-size: 0.7rem;
-      opacity: 0.5;
-    }
+    .nav-item:hover { background: rgba(243,237,231,0.08); color: #F3EDE7; }
+    .nav-item.active { background: rgba(213,112,40,0.25); color: #F3EDE7; }
+    .nav-item .nav-icon { width: 20px; text-align: center; font-size: 1.05rem; }
+    .nav-item .nav-badge { margin-left: auto; background: #D57028; color: #fff; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; min-width: 20px; text-align: center; }
+    .nav-item.nav-hidden { display: none; }
+    .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(243,237,231,0.1); display: flex; align-items: center; gap: 12px; }
+    .sidebar-avatar { width: 36px; height: 36px; border-radius: 50%; background: #D57028; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0; }
+    .sidebar-user-info { flex: 1; }
+    .sidebar-user-info .name { font-size: 0.85rem; font-weight: 600; }
+    .sidebar-user-info .role { font-size: 0.7rem; opacity: 0.5; }
+    .logout-btn { background: rgba(243,237,231,0.1); color: rgba(243,237,231,0.6); padding: 6px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 600; transition: all 0.2s; }
+    .logout-btn:hover { background: rgba(243,237,231,0.2); color: #F3EDE7; }
 
-    /* ========== MAIN CONTENT ========== */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
-    }
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 32px;
-      background: #fff;
-      border-bottom: 1px solid rgba(27,53,51,0.08);
-      min-height: 64px;
-    }
-    .topbar-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-    }
-    .topbar-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .topbar-search {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #F3EDE7;
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 0.85rem;
-      color: rgba(27,53,51,0.5);
-    }
-    .topbar-search input {
-      border: none;
-      background: transparent;
-      color: #1B3533;
-      font-size: 0.85rem;
-      width: 180px;
-    }
+    /* ===== MAIN ===== */
+    .main { flex: 1; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; background: #fff; border-bottom: 1px solid rgba(27,53,51,0.08); min-height: 64px; }
+    .topbar-title { font-size: 1.25rem; font-weight: 700; }
+    .topbar-search { display: flex; align-items: center; gap: 8px; background: #F3EDE7; border-radius: 8px; padding: 8px 14px; }
+    .topbar-search input { border: none; background: transparent; color: #1B3533; font-size: 0.85rem; width: 180px; }
     .topbar-search input::placeholder { color: rgba(27,53,51,0.4); }
+    .content-area { flex: 1; overflow-y: auto; padding: 28px 32px; }
 
-    .content-area {
-      flex: 1;
-      overflow-y: auto;
-      padding: 28px 32px;
-    }
-
-    /* ========== PANEL VISIBILITY ========== */
+    /* ===== PANELS ===== */
     .panel { display: none; height: 100%; }
     .panel.active { display: flex; flex-direction: column; }
 
-    /* ========== CHAT PANEL ========== */
-    #chat-panel {
-      display: none;
-      flex-direction: column;
-      height: 100%;
-    }
-    #chat-panel.active { display: flex; }
-
-    .chat-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .chat-threads {
-      display: flex;
-      gap: 8px;
-      padding: 0 0 20px;
-      border-bottom: 1px solid rgba(27,53,51,0.08);
-      overflow-x: auto;
-      flex-shrink: 0;
-    }
-    .chat-thread-btn {
-      padding: 8px 18px;
-      border-radius: 20px;
-      background: #fff;
-      color: #1B3533;
-      font-size: 0.8rem;
-      font-weight: 600;
-      border: 1px solid rgba(27,53,51,0.1);
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
+    /* ===== CHAT ===== */
+    .chat-container { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .chat-threads { display: flex; gap: 8px; padding: 0 0 16px; border-bottom: 1px solid rgba(27,53,51,0.08); overflow-x: auto; flex-shrink: 0; }
+    .chat-thread-btn { padding: 8px 16px; border-radius: 20px; background: #fff; color: #1B3533; font-size: 0.78rem; font-weight: 600; border: 1px solid rgba(27,53,51,0.1); white-space: nowrap; transition: all 0.2s; }
     .chat-thread-btn:hover { border-color: #D57028; }
-    .chat-thread-btn.active {
-      background: #1B3533;
-      color: #F3EDE7;
-      border-color: #1B3533;
-    }
-    .chat-thread-btn.new-thread {
-      background: transparent;
-      border: 1px dashed rgba(27,53,51,0.25);
-      color: rgba(27,53,51,0.5);
-    }
-    .chat-thread-btn.new-thread:hover {
-      border-color: #D57028;
-      color: #D57028;
-    }
-
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 24px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .chat-msg {
-      display: flex;
-      gap: 12px;
-      max-width: 80%;
-      animation: msgIn 0.3s ease;
-    }
-    @keyframes msgIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .chat-msg.user {
-      align-self: flex-end;
-      flex-direction: row-reverse;
-    }
-    .chat-msg-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #1B3533;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #F3EDE7;
-      flex-shrink: 0;
-    }
-    .chat-msg.user .chat-msg-avatar {
-      background: #D57028;
-    }
-    .chat-msg-bubble {
-      background: #fff;
-      border: 1px solid rgba(27,53,51,0.08);
-      border-radius: 16px;
-      padding: 14px 18px;
-      font-size: 0.88rem;
-      line-height: 1.6;
-    }
-    .chat-msg.user .chat-msg-bubble {
-      background: #1B3533;
-      color: #F3EDE7;
-      border-color: #1B3533;
-    }
-    .chat-msg-meta {
-      font-size: 0.7rem;
-      opacity: 0.4;
-      margin-top: 6px;
-    }
-    .chat-msg-tag {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-top: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+    .chat-thread-btn.active { background: #1B3533; color: #F3EDE7; border-color: #1B3533; }
+    .chat-thread-btn.new-thread { background: transparent; border: 1px dashed rgba(27,53,51,0.25); color: rgba(27,53,51,0.5); }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 20px 0; display: flex; flex-direction: column; gap: 14px; }
+    .chat-msg { display: flex; gap: 10px; max-width: 80%; animation: msgIn 0.3s ease; }
+    @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .chat-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+    .chat-msg-avatar { width: 32px; height: 32px; border-radius: 50%; background: #1B3533; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: #F3EDE7; flex-shrink: 0; }
+    .chat-msg.user .chat-msg-avatar { background: #D57028; }
+    .chat-msg-bubble { background: #fff; border: 1px solid rgba(27,53,51,0.08); border-radius: 14px; padding: 12px 16px; font-size: 0.86rem; line-height: 1.6; }
+    .chat-msg.user .chat-msg-bubble { background: #1B3533; color: #F3EDE7; border-color: #1B3533; }
+    .chat-msg-meta { font-size: 0.68rem; opacity: 0.4; margin-top: 4px; }
+    .chat-msg-tag { display: inline-block; font-size: 0.63rem; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
     .chat-msg-tag.idea { background: rgba(213,112,40,0.15); color: #D57028; }
     .chat-msg-tag.priority { background: rgba(200,40,40,0.12); color: #c82828; }
     .chat-msg-tag.need { background: rgba(40,120,200,0.12); color: #2878c8; }
     .chat-msg-tag.action { background: rgba(40,160,80,0.12); color: #28a050; }
-
-    .chat-input-area {
-      border-top: 1px solid rgba(27,53,51,0.08);
-      padding: 16px 0 0;
-      flex-shrink: 0;
-    }
-    .chat-tag-selector {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
-    .chat-tag-btn {
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      background: rgba(27,53,51,0.06);
-      color: rgba(27,53,51,0.5);
-      transition: all 0.2s;
-    }
+    .chat-msg-tag.content-suggestion { background: rgba(128,0,128,0.12); color: #8B008B; }
+    .chat-input-area { border-top: 1px solid rgba(27,53,51,0.08); padding: 14px 0 0; flex-shrink: 0; }
+    .chat-tag-selector { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+    .chat-tag-btn { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(27,53,51,0.06); color: rgba(27,53,51,0.5); transition: all 0.2s; }
     .chat-tag-btn:hover { background: rgba(27,53,51,0.1); color: #1B3533; }
     .chat-tag-btn.active-idea { background: rgba(213,112,40,0.15); color: #D57028; }
     .chat-tag-btn.active-priority { background: rgba(200,40,40,0.12); color: #c82828; }
     .chat-tag-btn.active-need { background: rgba(40,120,200,0.12); color: #2878c8; }
     .chat-tag-btn.active-action { background: rgba(40,160,80,0.12); color: #28a050; }
-
-    .chat-input-row {
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-    }
-    .chat-input-row textarea {
-      flex: 1;
-      border: 1px solid rgba(27,53,51,0.12);
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-size: 0.88rem;
-      resize: none;
-      min-height: 46px;
-      max-height: 120px;
-      line-height: 1.5;
-      background: #fff;
-      transition: border-color 0.2s;
-    }
+    .chat-tag-btn.active-content-suggestion { background: rgba(128,0,128,0.12); color: #8B008B; }
+    .chat-input-row { display: flex; gap: 10px; align-items: flex-end; }
+    .chat-input-row textarea { flex: 1; border: 1px solid rgba(27,53,51,0.12); border-radius: 12px; padding: 12px 16px; font-size: 0.86rem; resize: none; min-height: 46px; max-height: 120px; line-height: 1.5; background: #fff; transition: border-color 0.2s; }
     .chat-input-row textarea:focus { border-color: #D57028; }
-    .chat-send-btn {
-      background: #D57028;
-      color: #fff;
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-      flex-shrink: 0;
-    }
+    .chat-send-btn { background: #D57028; color: #fff; width: 46px; height: 46px; border-radius: 12px; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; flex-shrink: 0; }
     .chat-send-btn:hover { background: #c06020; }
+    .chat-promote-btn { margin-top: 6px; padding: 4px 10px; border-radius: 6px; font-size: 0.68rem; font-weight: 600; background: rgba(128,0,128,0.1); color: #8B008B; transition: all 0.15s; }
+    .chat-promote-btn:hover { background: #8B008B; color: #fff; }
 
-    /* ========== TASKS PANEL ========== */
-    .tasks-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .tasks-tabs {
-      display: flex;
-      gap: 4px;
-      background: #fff;
-      border-radius: 10px;
-      padding: 4px;
-      border: 1px solid rgba(27,53,51,0.08);
-    }
-    .tasks-tab {
-      padding: 8px 20px;
-      border-radius: 8px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      background: transparent;
-      color: rgba(27,53,51,0.5);
-      transition: all 0.2s;
-    }
+    /* ===== TASKS ===== */
+    .tasks-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .tasks-tabs { display: flex; gap: 4px; background: #fff; border-radius: 10px; padding: 4px; border: 1px solid rgba(27,53,51,0.08); }
+    .tasks-tab { padding: 8px 18px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; background: transparent; color: rgba(27,53,51,0.5); transition: all 0.2s; }
     .tasks-tab:hover { color: #1B3533; }
-    .tasks-tab.active {
-      background: #1B3533;
-      color: #F3EDE7;
-    }
-    .tasks-filters {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .filter-select {
-      padding: 8px 14px;
-      border-radius: 8px;
-      border: 1px solid rgba(27,53,51,0.12);
-      font-size: 0.82rem;
-      background: #fff;
-      color: #1B3533;
-      cursor: pointer;
-    }
-    .add-task-btn {
-      padding: 8px 18px;
-      border-radius: 8px;
-      background: #D57028;
-      color: #fff;
-      font-size: 0.82rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.2s;
-    }
-    .add-task-btn:hover { background: #c06020; }
-
-    /* Task columns */
-    .tasks-board {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      flex: 1;
-      overflow-y: auto;
-    }
-    .task-column {
-      background: rgba(255,255,255,0.5);
-      border-radius: 14px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-    }
-    .task-col-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid rgba(27,53,51,0.06);
-    }
-    .task-col-title {
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .task-col-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
+    .tasks-tab.active { background: #1B3533; color: #F3EDE7; }
+    .tasks-filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .filter-select { padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(27,53,51,0.12); font-size: 0.8rem; background: #fff; color: #1B3533; cursor: pointer; }
+    .add-btn { padding: 8px 16px; border-radius: 8px; background: #D57028; color: #fff; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 6px; transition: background 0.2s; }
+    .add-btn:hover { background: #c06020; }
+    .tasks-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; flex: 1; overflow-y: auto; }
+    .task-column { background: rgba(255,255,255,0.5); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; }
+    .task-col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid rgba(27,53,51,0.06); }
+    .task-col-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+    .task-col-dot { width: 8px; height: 8px; border-radius: 50%; }
     .task-col-dot.todo { background: #AF8145; }
     .task-col-dot.progress { background: #D57028; }
     .task-col-dot.done { background: #28a050; }
-    .task-col-count {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: rgba(27,53,51,0.3);
-    }
-    .task-col-cards {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .task-card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 14px 16px;
-      border: 1px solid rgba(27,53,51,0.06);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .task-card:hover {
-      border-color: rgba(213,112,40,0.3);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(27,53,51,0.06);
-    }
-    .task-card-title {
-      font-size: 0.88rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-    .task-card-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .task-card-tag {
-      font-size: 0.68rem;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
+    .task-col-count { font-size: 0.72rem; font-weight: 700; color: rgba(27,53,51,0.3); }
+    .task-col-cards { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+    .task-card { background: #fff; border-radius: 10px; padding: 12px 14px; border: 1px solid rgba(27,53,51,0.06); cursor: pointer; transition: all 0.2s; }
+    .task-card:hover { border-color: rgba(213,112,40,0.3); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(27,53,51,0.06); }
+    .task-card-title { font-size: 0.86rem; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+    .task-card-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .task-card-tag { font-size: 0.65rem; font-weight: 600; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; }
     .task-card-tag.work { background: rgba(27,53,51,0.08); color: #1B3533; }
     .task-card-tag.personal { background: rgba(175,129,69,0.15); color: #AF8145; }
     .task-card-tag.sengo { background: rgba(213,112,40,0.12); color: #D57028; }
-    .task-card-tag.other { background: rgba(40,120,200,0.1); color: #2878c8; }
-    .task-card-date {
-      font-size: 0.72rem;
-      color: rgba(27,53,51,0.4);
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+    .task-card-tag.tbc { background: rgba(128,0,128,0.1); color: #8B008B; }
+    .task-card-tag.pb { background: rgba(40,120,200,0.1); color: #2878c8; }
+    .task-card-tag.rei { background: rgba(40,160,80,0.1); color: #28a050; }
+    .task-card-date { font-size: 0.7rem; color: rgba(27,53,51,0.4); margin-left: auto; }
     .task-card-date.overdue { color: #c82828; font-weight: 600; }
-    .task-card-actions {
-      display: flex;
-      gap: 4px;
-      margin-top: 10px;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
+    .task-card-actions { display: flex; gap: 4px; margin-top: 8px; opacity: 0; transition: opacity 0.2s; }
     .task-card:hover .task-card-actions { opacity: 1; }
-    .task-action-btn {
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      background: rgba(27,53,51,0.05);
-      color: rgba(27,53,51,0.5);
-      transition: all 0.15s;
-    }
+    .task-action-btn { padding: 4px 10px; border-radius: 6px; font-size: 0.68rem; font-weight: 600; background: rgba(27,53,51,0.05); color: rgba(27,53,51,0.5); transition: all 0.15s; }
     .task-action-btn:hover { background: #D57028; color: #fff; }
     .task-action-btn.delete:hover { background: #c82828; }
 
-    /* ========== ADD TASK MODAL ========== */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(27,53,51,0.4);
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-overlay.active { display: flex; }
-    .modal {
-      background: #fff;
-      border-radius: 16px;
-      width: 480px;
-      max-width: 92vw;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 28px;
-      box-shadow: 0 20px 60px rgba(27,53,51,0.15);
-      animation: modalIn 0.25s ease;
-    }
-    @keyframes modalIn {
-      from { opacity: 0; transform: scale(0.95) translateY(10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    .modal h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-    .modal-field {
-      margin-bottom: 16px;
-    }
-    .modal-field label {
-      display: block;
-      font-size: 0.78rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: rgba(27,53,51,0.6);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .modal-field input,
-    .modal-field select,
-    .modal-field textarea {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid rgba(27,53,51,0.12);
-      border-radius: 8px;
-      font-size: 0.88rem;
-      background: #FAFAFA;
-      transition: border-color 0.2s;
-    }
-    .modal-field input:focus,
-    .modal-field select:focus,
-    .modal-field textarea:focus { border-color: #D57028; background: #fff; }
-    .modal-field textarea { min-height: 80px; resize: vertical; }
-    .modal-row {
-      display: flex;
-      gap: 12px;
-    }
-    .modal-row .modal-field { flex: 1; }
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-      margin-top: 24px;
-    }
-    .modal-cancel {
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      background: rgba(27,53,51,0.06);
-      color: #1B3533;
-    }
-    .modal-submit {
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      background: #D57028;
-      color: #fff;
-    }
-    .modal-submit:hover { background: #c06020; }
+    /* ===== EVENTS ===== */
+    .events-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .events-tabs { display: flex; gap: 4px; background: #fff; border-radius: 10px; padding: 4px; border: 1px solid rgba(27,53,51,0.08); }
+    .events-tab { padding: 8px 18px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; background: transparent; color: rgba(27,53,51,0.5); transition: all 0.2s; white-space: nowrap; }
+    .events-tab:hover { color: #1B3533; }
+    .events-tab.active { background: #1B3533; color: #F3EDE7; }
+    .events-list { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; flex: 1; }
+    .event-card { background: #fff; border-radius: 12px; padding: 18px 20px; border: 1px solid rgba(27,53,51,0.06); display: flex; gap: 16px; align-items: flex-start; transition: all 0.2s; }
+    .event-card:hover { border-color: rgba(213,112,40,0.25); box-shadow: 0 4px 12px rgba(27,53,51,0.05); }
+    .event-date-block { background: #1B3533; color: #F3EDE7; border-radius: 10px; padding: 10px 14px; text-align: center; min-width: 60px; flex-shrink: 0; }
+    .event-date-block .month { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+    .event-date-block .day { font-size: 1.4rem; font-weight: 700; line-height: 1.2; }
+    .event-info { flex: 1; }
+    .event-info h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .event-info p { font-size: 0.82rem; color: rgba(27,53,51,0.5); line-height: 1.4; margin-bottom: 8px; }
+    .event-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .event-tag { font-size: 0.65rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; }
+    .event-tag.sengo { background: rgba(213,112,40,0.12); color: #D57028; }
+    .event-tag.personal { background: rgba(175,129,69,0.15); color: #AF8145; }
+    .event-tag.tbc { background: rgba(128,0,128,0.1); color: #8B008B; }
+    .event-tag.pb { background: rgba(40,120,200,0.1); color: #2878c8; }
+    .event-tag.rei { background: rgba(40,160,80,0.1); color: #28a050; }
+    .event-time { font-size: 0.72rem; color: rgba(27,53,51,0.4); }
+    .event-actions { display: flex; gap: 4px; }
+    .event-action-btn { padding: 6px 12px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; background: rgba(27,53,51,0.05); color: rgba(27,53,51,0.5); transition: all 0.15s; }
+    .event-action-btn:hover { background: #D57028; color: #fff; }
+    .event-action-btn.delete:hover { background: #c82828; }
 
-    /* ========== CONTENT PANEL ========== */
-    .content-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .channel-tabs {
-      display: flex;
-      gap: 4px;
-      overflow-x: auto;
-      background: #fff;
-      border-radius: 10px;
-      padding: 4px;
-      border: 1px solid rgba(27,53,51,0.08);
-    }
-    .channel-tab {
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      background: transparent;
-      color: rgba(27,53,51,0.5);
-      transition: all 0.2s;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    /* ===== CONTENT ===== */
+    .content-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .channel-tabs { display: flex; gap: 4px; overflow-x: auto; background: #fff; border-radius: 10px; padding: 4px; border: 1px solid rgba(27,53,51,0.08); }
+    .channel-tab { padding: 7px 14px; border-radius: 8px; font-size: 0.76rem; font-weight: 600; background: transparent; color: rgba(27,53,51,0.5); transition: all 0.2s; white-space: nowrap; display: flex; align-items: center; gap: 5px; }
     .channel-tab:hover { color: #1B3533; }
-    .channel-tab.active {
-      background: #1B3533;
-      color: #F3EDE7;
-    }
-    .add-content-btn {
-      padding: 8px 18px;
-      border-radius: 8px;
-      background: #D57028;
-      color: #fff;
-      font-size: 0.82rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.2s;
-    }
-    .add-content-btn:hover { background: #c06020; }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      overflow-y: auto;
-      flex: 1;
-    }
-    .content-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      border: 1px solid rgba(27,53,51,0.06);
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-    .content-card:hover {
-      border-color: rgba(213,112,40,0.3);
-      box-shadow: 0 4px 16px rgba(27,53,51,0.06);
-    }
-    .content-card-channel {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .content-card-channel .ch-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-    .ch-instagram { background: #E1306C; }
+    .channel-tab.active { background: #1B3533; color: #F3EDE7; }
+    .ch-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+    .ch-substack { background: #FF6719; }
     .ch-linkedin { background: #0077B5; }
-    .ch-twitter { background: #1DA1F2; }
-    .ch-email { background: #D57028; }
-    .ch-blog { background: #28a050; }
     .ch-tiktok { background: #010101; }
-    .content-card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-    .content-card-notes {
-      font-size: 0.82rem;
-      color: rgba(27,53,51,0.5);
-      line-height: 1.5;
-      margin-bottom: 14px;
-      flex: 1;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .content-card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid rgba(27,53,51,0.06);
-      padding-top: 12px;
-    }
-    .content-card-date {
-      font-size: 0.72rem;
-      color: rgba(27,53,51,0.4);
-    }
-    .content-card-status {
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+    .ch-instagram { background: #E1306C; }
+    .ch-personal-ig { background: #C13584; }
+    .ch-founder-feed { background: #D57028; }
+    .ch-investor-feed { background: #1B3533; }
+    .ch-email { background: #AF8145; }
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; overflow-y: auto; flex: 1; }
+    .content-card { background: #fff; border-radius: 12px; padding: 18px; border: 1px solid rgba(27,53,51,0.06); cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; }
+    .content-card:hover { border-color: rgba(213,112,40,0.3); box-shadow: 0 4px 16px rgba(27,53,51,0.06); }
+    .content-card-channel { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .content-card-title { font-size: 0.92rem; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
+    .content-card-notes { font-size: 0.8rem; color: rgba(27,53,51,0.5); line-height: 1.5; margin-bottom: 12px; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .content-card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(27,53,51,0.06); padding-top: 10px; }
+    .content-card-date { font-size: 0.7rem; color: rgba(27,53,51,0.4); }
+    .content-card-status { font-size: 0.65rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
     .content-card-status.draft { background: rgba(175,129,69,0.12); color: #AF8145; }
     .content-card-status.scheduled { background: rgba(40,120,200,0.1); color: #2878c8; }
     .content-card-status.published { background: rgba(40,160,80,0.1); color: #28a050; }
 
-    /* ========== CONTENT DETAIL PANEL ========== */
-    .content-detail-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(27,53,51,0.4);
-      z-index: 100;
-      justify-content: flex-end;
-    }
+    /* ===== PERSONNEL ===== */
+    .personnel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .personnel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; overflow-y: auto; flex: 1; }
+    .person-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid rgba(27,53,51,0.06); }
+    .person-card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .person-avatar { width: 44px; height: 44px; border-radius: 50%; background: #1B3533; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: #F3EDE7; flex-shrink: 0; }
+    .person-info h4 { font-size: 0.95rem; font-weight: 700; }
+    .person-info p { font-size: 0.78rem; color: rgba(27,53,51,0.5); }
+    .person-perms { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .person-perm { font-size: 0.68rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: rgba(27,53,51,0.06); color: rgba(27,53,51,0.6); }
+    .person-perm.active { background: rgba(40,160,80,0.1); color: #28a050; }
+    .person-actions { display: flex; gap: 8px; }
+
+    /* ===== MODALS ===== */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(27,53,51,0.4); z-index: 100; align-items: center; justify-content: center; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: #fff; border-radius: 16px; width: 500px; max-width: 92vw; max-height: 90vh; overflow-y: auto; padding: 28px; box-shadow: 0 20px 60px rgba(27,53,51,0.15); animation: modalIn 0.25s ease; }
+    @keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .modal h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+    .modal-field { margin-bottom: 14px; }
+    .modal-field label { display: block; font-size: 0.75rem; font-weight: 600; margin-bottom: 5px; color: rgba(27,53,51,0.5); text-transform: uppercase; letter-spacing: 0.5px; }
+    .modal-field input, .modal-field select, .modal-field textarea { width: 100%; padding: 10px 14px; border: 1px solid rgba(27,53,51,0.12); border-radius: 8px; font-size: 0.86rem; background: #FAFAFA; transition: border-color 0.2s; }
+    .modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus { border-color: #D57028; background: #fff; }
+    .modal-field textarea { min-height: 70px; resize: vertical; }
+    .modal-row { display: flex; gap: 12px; }
+    .modal-row .modal-field { flex: 1; }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+    .modal-cancel { padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; background: rgba(27,53,51,0.06); color: #1B3533; }
+    .modal-submit { padding: 10px 24px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; background: #D57028; color: #fff; }
+    .modal-submit:hover { background: #c06020; }
+    .perm-checkboxes { display: flex; flex-wrap: wrap; gap: 8px; }
+    .perm-checkbox { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; cursor: pointer; }
+    .perm-checkbox input { width: 16px; height: 16px; accent-color: #D57028; }
+
+    /* ===== CONTENT DETAIL ===== */
+    .content-detail-overlay { display: none; position: fixed; inset: 0; background: rgba(27,53,51,0.4); z-index: 100; justify-content: flex-end; }
     .content-detail-overlay.active { display: flex; }
-    .content-detail {
-      width: 600px;
-      max-width: 95vw;
-      background: #fff;
-      height: 100vh;
-      overflow-y: auto;
-      padding: 32px;
-      box-shadow: -10px 0 40px rgba(27,53,51,0.1);
-      animation: slideIn 0.3s ease;
-    }
-    @keyframes slideIn {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
-    }
-    .content-detail-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 24px;
-    }
-    .content-detail-close {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: rgba(27,53,51,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      color: rgba(27,53,51,0.4);
-      transition: all 0.2s;
-    }
+    .content-detail { width: 600px; max-width: 95vw; background: #fff; height: 100vh; overflow-y: auto; padding: 32px; box-shadow: -10px 0 40px rgba(27,53,51,0.1); animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+    .content-detail-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
+    .content-detail-close { width: 36px; height: 36px; border-radius: 8px; background: rgba(27,53,51,0.06); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: rgba(27,53,51,0.4); }
     .content-detail-close:hover { background: rgba(27,53,51,0.1); color: #1B3533; }
-    .detail-channel-badge {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 4px 12px;
-      border-radius: 6px;
-      margin-bottom: 12px;
-      display: inline-block;
-    }
-    .detail-channel-badge.instagram { background: rgba(225,48,108,0.1); color: #E1306C; }
-    .detail-channel-badge.linkedin { background: rgba(0,119,181,0.1); color: #0077B5; }
-    .detail-channel-badge.twitter { background: rgba(29,161,242,0.1); color: #1DA1F2; }
-    .detail-channel-badge.email { background: rgba(213,112,40,0.1); color: #D57028; }
-    .detail-channel-badge.blog { background: rgba(40,160,80,0.1); color: #28a050; }
-    .detail-channel-badge.tiktok { background: rgba(1,1,1,0.08); color: #010101; }
-
-    .detail-title-input {
-      width: 100%;
-      border: none;
-      font-size: 1.3rem;
-      font-weight: 700;
-      font-family: 'Arimo', sans-serif;
-      color: #1B3533;
-      margin-bottom: 8px;
-      padding: 4px 0;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.2s;
-    }
+    .detail-channel-badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 6px; display: inline-block; margin-bottom: 10px; }
+    .detail-title-input { width: 100%; border: none; font-size: 1.2rem; font-weight: 700; font-family: 'Arimo', sans-serif; color: #1B3533; margin-bottom: 8px; padding: 4px 0; border-bottom: 2px solid transparent; }
     .detail-title-input:focus { border-bottom-color: #D57028; }
-
-    .detail-section {
-      margin-bottom: 24px;
-    }
-    .detail-section-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: rgba(27,53,51,0.4);
-      margin-bottom: 8px;
-    }
-    .detail-notes-area {
-      width: 100%;
-      border: 1px solid rgba(27,53,51,0.1);
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 0.88rem;
-      line-height: 1.7;
-      min-height: 120px;
-      resize: vertical;
-      background: #FAFAFA;
-      transition: all 0.2s;
-    }
+    .detail-section { margin-bottom: 20px; }
+    .detail-section-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(27,53,51,0.4); margin-bottom: 6px; }
+    .detail-notes-area { width: 100%; border: 1px solid rgba(27,53,51,0.1); border-radius: 10px; padding: 12px 14px; font-size: 0.86rem; line-height: 1.7; min-height: 100px; resize: vertical; background: #FAFAFA; }
     .detail-notes-area:focus { border-color: #D57028; background: #fff; }
-
-    .detail-meta-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .detail-meta-item {
-      flex: 1;
-    }
-    .detail-meta-item label {
-      display: block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: rgba(27,53,51,0.4);
-      margin-bottom: 6px;
-    }
-    .detail-meta-item input,
-    .detail-meta-item select {
-      width: 100%;
-      padding: 8px 12px;
-      border: 1px solid rgba(27,53,51,0.1);
-      border-radius: 8px;
-      font-size: 0.85rem;
-      background: #FAFAFA;
-    }
-    .detail-meta-item input:focus,
-    .detail-meta-item select:focus { border-color: #D57028; background: #fff; }
-
-    /* AI Suggestions area */
-    .ai-section {
-      background: linear-gradient(135deg, rgba(27,53,51,0.03), rgba(213,112,40,0.05));
-      border-radius: 12px;
-      padding: 20px;
-      border: 1px solid rgba(213,112,40,0.12);
-    }
-    .ai-section-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .ai-section-header h4 {
-      font-size: 0.88rem;
-      font-weight: 700;
-    }
-    .ai-spark {
-      font-size: 1rem;
-    }
-    .ai-suggestion-btns {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-    .ai-suggest-btn {
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      background: #fff;
-      color: #1B3533;
-      border: 1px solid rgba(27,53,51,0.1);
-      transition: all 0.2s;
-    }
-    .ai-suggest-btn:hover {
-      border-color: #D57028;
-      color: #D57028;
-    }
-    .ai-output {
-      background: #fff;
-      border-radius: 10px;
-      padding: 16px;
-      font-size: 0.85rem;
-      line-height: 1.7;
-      color: rgba(27,53,51,0.7);
-      min-height: 60px;
-      border: 1px solid rgba(27,53,51,0.06);
-    }
-    .ai-output.loading {
-      color: rgba(27,53,51,0.3);
-      font-style: italic;
-    }
-    .cross-post-section {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(27,53,51,0.08);
-    }
-    .cross-post-section h4 {
-      font-size: 0.82rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .cross-post-channels {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .cross-post-btn {
-      padding: 6px 14px;
-      border-radius: 8px;
-      font-size: 0.76rem;
-      font-weight: 600;
-      background: rgba(27,53,51,0.05);
-      color: rgba(27,53,51,0.6);
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .detail-meta-row { display: flex; gap: 12px; margin-bottom: 16px; }
+    .detail-meta-item { flex: 1; }
+    .detail-meta-item label { display: block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(27,53,51,0.4); margin-bottom: 5px; }
+    .detail-meta-item input, .detail-meta-item select { width: 100%; padding: 8px 12px; border: 1px solid rgba(27,53,51,0.1); border-radius: 8px; font-size: 0.84rem; background: #FAFAFA; }
+    .ai-section { background: linear-gradient(135deg, rgba(27,53,51,0.03), rgba(213,112,40,0.05)); border-radius: 12px; padding: 18px; border: 1px solid rgba(213,112,40,0.12); }
+    .ai-section-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .ai-section-header h4 { font-size: 0.86rem; font-weight: 700; }
+    .ai-suggestion-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .ai-suggest-btn { padding: 7px 12px; border-radius: 8px; font-size: 0.76rem; font-weight: 600; background: #fff; color: #1B3533; border: 1px solid rgba(27,53,51,0.1); transition: all 0.2s; }
+    .ai-suggest-btn:hover { border-color: #D57028; color: #D57028; }
+    .ai-output { background: #fff; border-radius: 10px; padding: 14px; font-size: 0.84rem; line-height: 1.7; color: rgba(27,53,51,0.7); min-height: 50px; border: 1px solid rgba(27,53,51,0.06); }
+    .ai-output.loading { color: rgba(27,53,51,0.3); font-style: italic; }
+    .cross-post-section { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(27,53,51,0.08); }
+    .cross-post-section h4 { font-size: 0.8rem; font-weight: 700; margin-bottom: 8px; }
+    .cross-post-channels { display: flex; gap: 6px; flex-wrap: wrap; }
+    .cross-post-btn { padding: 5px 12px; border-radius: 8px; font-size: 0.74rem; font-weight: 600; background: rgba(27,53,51,0.05); color: rgba(27,53,51,0.6); transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
     .cross-post-btn:hover { background: rgba(213,112,40,0.12); color: #D57028; }
     .cross-post-btn.active { background: #1B3533; color: #F3EDE7; }
 
-    /* ========== SCROLLBAR ========== */
-    ::-webkit-scrollbar { width: 6px; }
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(27,53,51,0.15); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(27,53,51,0.25); }
+    .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 50px 20px; color: rgba(27,53,51,0.3); text-align: center; }
+    .empty-state-icon { font-size: 2.2rem; margin-bottom: 12px; }
+    .empty-state-text { font-size: 0.88rem; font-weight: 500; }
+    .empty-state-sub { font-size: 0.78rem; margin-top: 4px; opacity: 0.7; }
 
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 1024px) {
-      .tasks-board { grid-template-columns: 1fr; }
-      .content-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 768px) {
-      .sidebar { display: none; }
-      .topbar { padding: 12px 16px; }
-      .content-area { padding: 16px; }
-      .chat-msg { max-width: 95%; }
-      .modal { padding: 20px; }
-    }
-
-    /* ========== EMPTY STATE ========== */
-    .empty-state {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 20px;
-      color: rgba(27,53,51,0.3);
-      text-align: center;
-    }
-    .empty-state-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .empty-state-text { font-size: 0.9rem; font-weight: 500; }
-    .empty-state-sub { font-size: 0.8rem; margin-top: 6px; opacity: 0.7; }
+    @media (max-width: 1024px) { .tasks-board { grid-template-columns: 1fr; } .content-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .sidebar { display: none; } .content-area { padding: 16px; } }
   </style>
 </head>
 <body>
 
-<!-- ==================== SIDEBAR ==================== -->
-<nav class="sidebar">
+<!-- ===== LOGIN SCREEN ===== -->
+<div class="login-screen" id="login-screen">
+  <div class="login-box">
+    <h1>Sengo</h1>
+    <p class="login-sub">Sign in to your dashboard</p>
+    <div class="login-field">
+      <label>Username</label>
+      <input type="text" id="login-user" placeholder="Enter username" autocomplete="username">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="Enter password" autocomplete="current-password">
+    </div>
+    <button class="login-btn" id="login-btn">Sign In</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- ===== SIDEBAR ===== -->
+<nav class="sidebar" id="sidebar" style="display:none;">
   <div class="sidebar-logo">
     <h1>Sengo</h1>
     <span>Dashboard</span>
   </div>
   <div class="sidebar-nav">
     <div class="sidebar-nav-label">Main</div>
-    <button class="nav-item active" data-panel="chat">
-      <span class="nav-icon">&#128172;</span>
-      Chat
-    </button>
-    <button class="nav-item" data-panel="tasks">
-      <span class="nav-icon">&#9745;</span>
-      Tasks
-      <span class="nav-badge" id="task-count-badge">0</span>
-    </button>
-    <button class="nav-item" data-panel="content">
-      <span class="nav-icon">&#128196;</span>
-      Content
-      <span class="nav-badge" id="content-count-badge">0</span>
-    </button>
+    <button class="nav-item active" data-panel="chat"><span class="nav-icon">&#128172;</span>Chat</button>
+    <button class="nav-item" data-panel="tasks"><span class="nav-icon">&#9745;</span>Tasks<span class="nav-badge" id="task-count-badge">0</span></button>
+    <button class="nav-item" data-panel="events"><span class="nav-icon">&#128197;</span>Events<span class="nav-badge" id="event-count-badge">0</span></button>
+    <button class="nav-item" data-panel="content"><span class="nav-icon">&#128196;</span>Content<span class="nav-badge" id="content-count-badge">0</span></button>
+    <div class="sidebar-nav-label">Admin</div>
+    <button class="nav-item" data-panel="personnel" id="nav-personnel"><span class="nav-icon">&#128101;</span>Personnel</button>
   </div>
   <div class="sidebar-footer">
-    <div class="sidebar-avatar">S</div>
+    <div class="sidebar-avatar" id="sidebar-avatar">S</div>
     <div class="sidebar-user-info">
-      <div class="name">Sengo</div>
-      <div class="role">Admin</div>
+      <div class="name" id="sidebar-name">Sengo</div>
+      <div class="role" id="sidebar-role">Admin</div>
     </div>
+    <button class="logout-btn" id="logout-btn">Sign Out</button>
   </div>
 </nav>
 
-<!-- ==================== MAIN AREA ==================== -->
-<div class="main">
+<!-- ===== MAIN ===== -->
+<div class="main" id="main-area" style="display:none;">
   <div class="topbar">
     <h2 class="topbar-title" id="topbar-title">Chat</h2>
-    <div class="topbar-actions">
-      <div class="topbar-search">
-        <span>&#128269;</span>
-        <input type="text" placeholder="Search..." id="global-search">
-      </div>
+    <div class="topbar-search">
+      <span>&#128269;</span>
+      <input type="text" placeholder="Search..." id="global-search">
     </div>
   </div>
-
   <div class="content-area">
 
-    <!-- ========== CHAT PANEL ========== -->
+    <!-- CHAT PANEL -->
     <div class="panel active" id="chat-panel">
       <div class="chat-container">
         <div class="chat-threads" id="chat-threads">
@@ -1072,29 +358,28 @@
           <button class="chat-thread-btn" data-thread="needs">Needs</button>
           <button class="chat-thread-btn new-thread" id="new-thread-btn">+ New Thread</button>
         </div>
-        <div class="chat-messages" id="chat-messages">
-          <!-- Messages injected by JS -->
-        </div>
+        <div class="chat-messages" id="chat-messages"></div>
         <div class="chat-input-area">
           <div class="chat-tag-selector">
             <button class="chat-tag-btn" data-tag="idea">Idea</button>
             <button class="chat-tag-btn" data-tag="priority">Priority</button>
             <button class="chat-tag-btn" data-tag="need">Need</button>
             <button class="chat-tag-btn" data-tag="action">Action</button>
+            <button class="chat-tag-btn" data-tag="content-suggestion">Content Suggestion</button>
           </div>
           <div class="chat-input-row">
-            <textarea id="chat-input" placeholder="Type your thoughts, ideas, priorities..." rows="1"></textarea>
+            <textarea id="chat-input" placeholder="Type your thoughts, ideas, content suggestions..." rows="1"></textarea>
             <button class="chat-send-btn" id="chat-send">&#10148;</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ========== TASKS PANEL ========== -->
+    <!-- TASKS PANEL -->
     <div class="panel" id="tasks-panel">
       <div class="tasks-header">
         <div class="tasks-tabs">
-          <button class="tasks-tab active" data-task-view="all">All Tasks</button>
+          <button class="tasks-tab active" data-task-view="all">All</button>
           <button class="tasks-tab" data-task-view="work">Work</button>
           <button class="tasks-tab" data-task-view="personal">Personal</button>
         </div>
@@ -1102,7 +387,9 @@
           <select class="filter-select" id="filter-business">
             <option value="all">All Businesses</option>
             <option value="sengo">Sengo</option>
-            <option value="other">Other</option>
+            <option value="tbc">Tulsa Beauty Collective</option>
+            <option value="pb">Personal Brand</option>
+            <option value="rei">Real Estate Investments</option>
           </select>
           <select class="filter-select" id="filter-type">
             <option value="all">All Types</option>
@@ -1112,176 +399,172 @@
             <option value="finance">Finance</option>
             <option value="product">Product</option>
             <option value="outreach">Outreach</option>
+            <option value="content">Content</option>
+            <option value="legal">Legal</option>
           </select>
-          <button class="add-task-btn" id="open-add-task">+ Add Task</button>
+          <button class="add-btn" id="open-add-task">+ Add Task</button>
         </div>
       </div>
       <div class="tasks-board" id="tasks-board">
-        <div class="task-column">
-          <div class="task-col-header">
-            <div class="task-col-title"><span class="task-col-dot todo"></span> To Do</div>
-            <span class="task-col-count" id="todo-count">0</span>
-          </div>
-          <div class="task-col-cards" id="todo-cards"></div>
-        </div>
-        <div class="task-column">
-          <div class="task-col-header">
-            <div class="task-col-title"><span class="task-col-dot progress"></span> In Progress</div>
-            <span class="task-col-count" id="progress-count">0</span>
-          </div>
-          <div class="task-col-cards" id="progress-cards"></div>
-        </div>
-        <div class="task-column">
-          <div class="task-col-header">
-            <div class="task-col-title"><span class="task-col-dot done"></span> Done</div>
-            <span class="task-col-count" id="done-count">0</span>
-          </div>
-          <div class="task-col-cards" id="done-cards"></div>
-        </div>
+        <div class="task-column"><div class="task-col-header"><div class="task-col-title"><span class="task-col-dot todo"></span> To Do</div><span class="task-col-count" id="todo-count">0</span></div><div class="task-col-cards" id="todo-cards"></div></div>
+        <div class="task-column"><div class="task-col-header"><div class="task-col-title"><span class="task-col-dot progress"></span> In Progress</div><span class="task-col-count" id="progress-count">0</span></div><div class="task-col-cards" id="progress-cards"></div></div>
+        <div class="task-column"><div class="task-col-header"><div class="task-col-title"><span class="task-col-dot done"></span> Done</div><span class="task-col-count" id="done-count">0</span></div><div class="task-col-cards" id="done-cards"></div></div>
       </div>
     </div>
 
-    <!-- ========== CONTENT PANEL ========== -->
+    <!-- EVENTS PANEL -->
+    <div class="panel" id="events-panel">
+      <div class="events-header">
+        <div class="events-tabs">
+          <button class="events-tab active" data-event-view="all">All</button>
+          <button class="events-tab" data-event-view="sengo">Sengo</button>
+          <button class="events-tab" data-event-view="personal">Personal</button>
+          <button class="events-tab" data-event-view="tbc">Tulsa Beauty Collective</button>
+          <button class="events-tab" data-event-view="pb">Personal Brand</button>
+          <button class="events-tab" data-event-view="rei">Real Estate</button>
+        </div>
+        <button class="add-btn" id="open-add-event">+ Add Event</button>
+      </div>
+      <div class="events-list" id="events-list"></div>
+    </div>
+
+    <!-- CONTENT PANEL -->
     <div class="panel" id="content-panel">
       <div class="content-header">
         <div class="channel-tabs" id="channel-tabs">
           <button class="channel-tab active" data-channel="all">All</button>
-          <button class="channel-tab" data-channel="instagram"><span class="ch-dot ch-instagram"></span> Instagram</button>
-          <button class="channel-tab" data-channel="linkedin"><span class="ch-dot ch-linkedin"></span> LinkedIn</button>
-          <button class="channel-tab" data-channel="twitter"><span class="ch-dot ch-twitter"></span> Twitter/X</button>
-          <button class="channel-tab" data-channel="email"><span class="ch-dot ch-email"></span> Email</button>
-          <button class="channel-tab" data-channel="blog"><span class="ch-dot ch-blog"></span> Blog</button>
-          <button class="channel-tab" data-channel="tiktok"><span class="ch-dot ch-tiktok"></span> TikTok</button>
+          <button class="channel-tab" data-channel="substack"><span class="ch-dot ch-substack"></span>Substack</button>
+          <button class="channel-tab" data-channel="linkedin"><span class="ch-dot ch-linkedin"></span>LinkedIn</button>
+          <button class="channel-tab" data-channel="tiktok"><span class="ch-dot ch-tiktok"></span>TikTok</button>
+          <button class="channel-tab" data-channel="instagram"><span class="ch-dot ch-instagram"></span>Instagram</button>
+          <button class="channel-tab" data-channel="personal-ig"><span class="ch-dot ch-personal-ig"></span>Personal IG</button>
+          <button class="channel-tab" data-channel="founder-feed"><span class="ch-dot ch-founder-feed"></span>Founder Feed</button>
+          <button class="channel-tab" data-channel="investor-feed"><span class="ch-dot ch-investor-feed"></span>Investor Feed</button>
+          <button class="channel-tab" data-channel="email"><span class="ch-dot ch-email"></span>Email</button>
         </div>
-        <button class="add-content-btn" id="open-add-content">+ Add Content</button>
+        <button class="add-btn" id="open-add-content">+ Add Content</button>
       </div>
-      <div class="content-grid" id="content-grid">
-        <!-- Content cards injected by JS -->
+      <div class="content-grid" id="content-grid"></div>
+    </div>
+
+    <!-- PERSONNEL PANEL -->
+    <div class="panel" id="personnel-panel">
+      <div class="personnel-header">
+        <h3>Team Members</h3>
+        <button class="add-btn" id="open-add-person">+ Add Person</button>
       </div>
+      <div class="personnel-grid" id="personnel-grid"></div>
     </div>
 
   </div>
 </div>
 
-<!-- ==================== ADD TASK MODAL ==================== -->
+<!-- ===== TASK MODAL ===== -->
 <div class="modal-overlay" id="task-modal">
   <div class="modal">
     <h3 id="task-modal-title">Add New Task</h3>
-    <div class="modal-field">
-      <label>Task Title</label>
-      <input type="text" id="task-title-input" placeholder="What needs to be done?">
-    </div>
-    <div class="modal-field">
-      <label>Description</label>
-      <textarea id="task-desc-input" placeholder="Additional details..."></textarea>
+    <div class="modal-field"><label>Title</label><input type="text" id="task-title-input" placeholder="What needs to be done?"></div>
+    <div class="modal-field"><label>Description</label><textarea id="task-desc-input" placeholder="Details..."></textarea></div>
+    <div class="modal-row">
+      <div class="modal-field"><label>Category</label><select id="task-category-input"><option value="work">Work</option><option value="personal">Personal</option></select></div>
+      <div class="modal-field"><label>Business</label><select id="task-business-input"><option value="sengo">Sengo</option><option value="tbc">Tulsa Beauty Collective</option><option value="pb">Personal Brand</option><option value="rei">Real Estate Investments</option></select></div>
     </div>
     <div class="modal-row">
-      <div class="modal-field">
-        <label>Category</label>
-        <select id="task-category-input">
-          <option value="work">Work</option>
-          <option value="personal">Personal</option>
-        </select>
-      </div>
-      <div class="modal-field">
-        <label>Business</label>
-        <select id="task-business-input">
-          <option value="sengo">Sengo</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
+      <div class="modal-field"><label>Type</label><select id="task-type-input"><option value="strategy">Strategy</option><option value="marketing">Marketing</option><option value="operations">Operations</option><option value="finance">Finance</option><option value="product">Product</option><option value="outreach">Outreach</option><option value="content">Content</option><option value="legal">Legal</option></select></div>
+      <div class="modal-field"><label>Due Date</label><input type="date" id="task-date-input"></div>
     </div>
-    <div class="modal-row">
-      <div class="modal-field">
-        <label>Type</label>
-        <select id="task-type-input">
-          <option value="strategy">Strategy</option>
-          <option value="marketing">Marketing</option>
-          <option value="operations">Operations</option>
-          <option value="finance">Finance</option>
-          <option value="product">Product</option>
-          <option value="outreach">Outreach</option>
-        </select>
-      </div>
-      <div class="modal-field">
-        <label>Due Date</label>
-        <input type="date" id="task-date-input">
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="modal-cancel" id="close-task-modal">Cancel</button>
-      <button class="modal-submit" id="submit-task">Add Task</button>
-    </div>
+    <div class="modal-actions"><button class="modal-cancel" id="close-task-modal">Cancel</button><button class="modal-submit" id="submit-task">Save</button></div>
   </div>
 </div>
 
-<!-- ==================== ADD CONTENT MODAL ==================== -->
+<!-- ===== EVENT MODAL ===== -->
+<div class="modal-overlay" id="event-modal">
+  <div class="modal">
+    <h3 id="event-modal-title">Add New Event</h3>
+    <div class="modal-field"><label>Event Name</label><input type="text" id="event-name-input" placeholder="Event name"></div>
+    <div class="modal-field"><label>Description</label><textarea id="event-desc-input" placeholder="Details about the event..."></textarea></div>
+    <div class="modal-row">
+      <div class="modal-field"><label>Date</label><input type="date" id="event-date-input"></div>
+      <div class="modal-field"><label>Time</label><input type="time" id="event-time-input"></div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field"><label>Category</label>
+        <select id="event-category-input">
+          <option value="sengo">Sengo</option>
+          <option value="personal">Personal</option>
+          <option value="tbc">Tulsa Beauty Collective</option>
+          <option value="pb">Personal Brand</option>
+          <option value="rei">Real Estate Investments</option>
+        </select>
+      </div>
+      <div class="modal-field"><label>Location</label><input type="text" id="event-location-input" placeholder="Location or link"></div>
+    </div>
+    <div class="modal-actions"><button class="modal-cancel" id="close-event-modal">Cancel</button><button class="modal-submit" id="submit-event">Save</button></div>
+  </div>
+</div>
+
+<!-- ===== CONTENT MODAL ===== -->
 <div class="modal-overlay" id="content-modal">
   <div class="modal">
     <h3>Add New Content</h3>
-    <div class="modal-field">
-      <label>Title</label>
-      <input type="text" id="content-title-input" placeholder="Content title or topic...">
-    </div>
-    <div class="modal-field">
-      <label>Notes / Brief</label>
-      <textarea id="content-notes-input" placeholder="Jot down your ideas, key points, rough draft..."></textarea>
-    </div>
+    <div class="modal-field"><label>Title</label><input type="text" id="content-title-input" placeholder="Content title or topic..."></div>
+    <div class="modal-field"><label>Notes / Brief</label><textarea id="content-notes-input" placeholder="Ideas, key points, rough draft..."></textarea></div>
     <div class="modal-row">
-      <div class="modal-field">
-        <label>Channel</label>
+      <div class="modal-field"><label>Channel</label>
         <select id="content-channel-input">
-          <option value="instagram">Instagram</option>
+          <option value="substack">Substack</option>
           <option value="linkedin">LinkedIn</option>
-          <option value="twitter">Twitter/X</option>
-          <option value="email">Email</option>
-          <option value="blog">Blog</option>
           <option value="tiktok">TikTok</option>
+          <option value="instagram">Instagram</option>
+          <option value="personal-ig">Personal Instagram</option>
+          <option value="founder-feed">Founder Feed</option>
+          <option value="investor-feed">Investor Feed</option>
+          <option value="email">Email Communication</option>
         </select>
       </div>
-      <div class="modal-field">
-        <label>Publish Date</label>
-        <input type="date" id="content-date-input">
-      </div>
+      <div class="modal-field"><label>Publish Date</label><input type="date" id="content-date-input"></div>
     </div>
-    <div class="modal-field">
-      <label>Status</label>
-      <select id="content-status-input">
-        <option value="draft">Draft</option>
-        <option value="scheduled">Scheduled</option>
-        <option value="published">Published</option>
-      </select>
-    </div>
-    <div class="modal-actions">
-      <button class="modal-cancel" id="close-content-modal">Cancel</button>
-      <button class="modal-submit" id="submit-content">Add Content</button>
-    </div>
+    <div class="modal-field"><label>Status</label><select id="content-status-input"><option value="draft">Draft</option><option value="scheduled">Scheduled</option><option value="published">Published</option></select></div>
+    <div class="modal-actions"><button class="modal-cancel" id="close-content-modal">Cancel</button><button class="modal-submit" id="submit-content">Save</button></div>
   </div>
 </div>
 
-<!-- ==================== CONTENT DETAIL SIDE PANEL ==================== -->
+<!-- ===== PERSONNEL MODAL ===== -->
+<div class="modal-overlay" id="person-modal">
+  <div class="modal">
+    <h3 id="person-modal-title">Add Team Member</h3>
+    <div class="modal-row">
+      <div class="modal-field"><label>Full Name</label><input type="text" id="person-name-input" placeholder="Full name"></div>
+      <div class="modal-field"><label>Role</label><input type="text" id="person-role-input" placeholder="e.g. Content Manager"></div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field"><label>Username</label><input type="text" id="person-user-input" placeholder="Login username"></div>
+      <div class="modal-field"><label>Password</label><input type="text" id="person-pass-input" placeholder="Login password"></div>
+    </div>
+    <div class="modal-field">
+      <label>Dashboard Access (customize what they see)</label>
+      <div class="perm-checkboxes" id="perm-checkboxes">
+        <label class="perm-checkbox"><input type="checkbox" value="chat" checked> Chat</label>
+        <label class="perm-checkbox"><input type="checkbox" value="tasks" checked> Tasks</label>
+        <label class="perm-checkbox"><input type="checkbox" value="events" checked> Events</label>
+        <label class="perm-checkbox"><input type="checkbox" value="content" checked> Content</label>
+      </div>
+    </div>
+    <div class="modal-actions"><button class="modal-cancel" id="close-person-modal">Cancel</button><button class="modal-submit" id="submit-person">Save</button></div>
+  </div>
+</div>
+
+<!-- ===== CONTENT DETAIL SIDE PANEL ===== -->
 <div class="content-detail-overlay" id="content-detail-overlay">
   <div class="content-detail" id="content-detail">
     <div class="content-detail-header">
-      <div>
-        <span class="detail-channel-badge" id="detail-channel-badge">Instagram</span>
-      </div>
+      <div><span class="detail-channel-badge" id="detail-channel-badge">Substack</span></div>
       <button class="content-detail-close" id="close-detail">&#10005;</button>
     </div>
     <input class="detail-title-input" id="detail-title" placeholder="Content title...">
     <div class="detail-meta-row">
-      <div class="detail-meta-item">
-        <label>Publish Date</label>
-        <input type="date" id="detail-date">
-      </div>
-      <div class="detail-meta-item">
-        <label>Status</label>
-        <select id="detail-status">
-          <option value="draft">Draft</option>
-          <option value="scheduled">Scheduled</option>
-          <option value="published">Published</option>
-        </select>
-      </div>
+      <div class="detail-meta-item"><label>Publish Date</label><input type="date" id="detail-date"></div>
+      <div class="detail-meta-item"><label>Status</label><select id="detail-status"><option value="draft">Draft</option><option value="scheduled">Scheduled</option><option value="published">Published</option></select></div>
     </div>
     <div class="detail-section">
       <div class="detail-section-label">Your Notes</div>
@@ -1289,10 +572,7 @@
     </div>
     <div class="detail-section">
       <div class="ai-section">
-        <div class="ai-section-header">
-          <span class="ai-spark">&#9889;</span>
-          <h4>Content Assistant</h4>
-        </div>
+        <div class="ai-section-header"><span>&#9889;</span><h4>Content Assistant</h4></div>
         <div class="ai-suggestion-btns">
           <button class="ai-suggest-btn" data-action="interpret">Interpret My Notes</button>
           <button class="ai-suggest-btn" data-action="expand">Expand Into Full Post</button>
@@ -1301,19 +581,15 @@
           <button class="ai-suggest-btn" data-action="cta">Write a CTA</button>
           <button class="ai-suggest-btn" data-action="rewrite">Rewrite for Tone</button>
         </div>
-        <div class="ai-output" id="ai-output">
-          Click a suggestion button above to get AI-powered content recommendations based on your notes.
-        </div>
+        <div class="ai-output" id="ai-output">Click a suggestion button above to get content recommendations based on your notes.</div>
         <div class="cross-post-section">
-          <h4>Cross-Produce for Other Channels</h4>
-          <div class="cross-post-channels" id="cross-post-channels">
-            <!-- Dynamically populated -->
-          </div>
-          <div class="ai-output" id="cross-post-output" style="margin-top: 12px; display:none;"></div>
+          <h4>Adapt for Other Channels</h4>
+          <div class="cross-post-channels" id="cross-post-channels"></div>
+          <div class="ai-output" id="cross-post-output" style="margin-top:10px;display:none;"></div>
         </div>
       </div>
     </div>
-    <div class="modal-actions" style="margin-top: 20px;">
+    <div class="modal-actions" style="margin-top:16px;">
       <button class="modal-cancel" id="delete-content-btn">Delete</button>
       <button class="modal-submit" id="save-content-detail">Save Changes</button>
     </div>
@@ -1321,834 +597,734 @@
 </div>
 
 <script>
-// ==================== STATE MANAGEMENT ====================
-const STATE_KEY = 'sengo_dashboard_state';
+// ==================== CONSTANTS ====================
+const STATE_KEY = 'sengo_dashboard_v2';
+const CHANNELS = {
+  'substack': { label: 'Substack', dot: 'ch-substack', tone: 'long-form, editorial, subscriber-focused', format: 'newsletter article (1000-3000 words)' },
+  'linkedin': { label: 'LinkedIn', dot: 'ch-linkedin', tone: 'professional, data-driven, thought leadership', format: 'text post (3000 char) or article' },
+  'tiktok': { label: 'TikTok', dot: 'ch-tiktok', tone: 'casual, energetic, trend-aware', format: 'short video (15-60s) with hook in first 3 sec' },
+  'instagram': { label: 'Instagram', dot: 'ch-instagram', tone: 'visual, authentic, community-driven', format: 'carousel or single image with caption' },
+  'personal-ig': { label: 'Personal Instagram', dot: 'ch-personal-ig', tone: 'personal, behind-the-scenes, relatable', format: 'story, reel, or personal post' },
+  'founder-feed': { label: 'Founder Feed', dot: 'ch-founder-feed', tone: 'supportive, educational, resource-oriented', format: 'in-app feed post for founders' },
+  'investor-feed': { label: 'Investor Feed', dot: 'ch-investor-feed', tone: 'data-forward, opportunity-focused, professional', format: 'in-app feed post for investors' },
+  'email': { label: 'Email Communication', dot: 'ch-email', tone: 'direct, personal, value-packed', format: 'email with clear sections and CTA' }
+};
+const BUSINESSES = {
+  'sengo': { label: 'Sengo', cssClass: 'sengo' },
+  'tbc': { label: 'Tulsa Beauty Collective', cssClass: 'tbc' },
+  'pb': { label: 'Personal Brand', cssClass: 'pb' },
+  'rei': { label: 'Real Estate Investments', cssClass: 'rei' }
+};
+
+function fd(days) { const d = new Date(); d.setDate(d.getDate() + days); return d.toISOString().split('T')[0]; }
 
 function getDefaultState() {
   return {
+    users: [
+      { id: 1, username: 'admin', password: 'sengo2025', name: 'Sengo Admin', role: 'Admin', perms: ['chat','tasks','events','content','personnel'], isAdmin: true }
+    ],
+    currentUser: null,
     chat: {
       threads: {
-        general: [
-          { id: 1, sender: 'system', text: 'Welcome to your Sengo Dashboard. Use this chat to think through ideas, set priorities, and track your needs. Tag messages to keep them organized.', tag: null, time: new Date().toISOString() }
-        ],
-        ideas: [],
-        priorities: [],
-        needs: []
+        general: [{ id: 1, sender: 'system', senderName: 'Sengo', text: 'Welcome to your dashboard. Use this chat to work through ideas, set priorities, track needs, and suggest content. Tag messages to keep things organized.', tag: null, time: new Date().toISOString() }],
+        ideas: [], priorities: [], needs: []
       },
       activeThread: 'general'
     },
     tasks: [
-      { id: 1, title: 'Finalize Q1 fundraising strategy', desc: 'Review deck, update financial projections', category: 'work', business: 'sengo', type: 'strategy', status: 'todo', date: getFutureDate(3) },
-      { id: 2, title: 'Schedule investor update email', desc: 'Monthly update to LP base', category: 'work', business: 'sengo', type: 'outreach', status: 'todo', date: getFutureDate(5) },
-      { id: 3, title: 'Review content calendar for Feb', desc: '', category: 'work', business: 'sengo', type: 'marketing', status: 'progress', date: getFutureDate(2) },
-      { id: 4, title: 'Personal tax prep documents', desc: 'Gather W2s, 1099s', category: 'personal', business: 'other', type: 'finance', status: 'todo', date: getFutureDate(14) },
-      { id: 5, title: 'App onboarding flow improvements', desc: 'Simplify founder enrollment steps', category: 'work', business: 'sengo', type: 'product', status: 'progress', date: getFutureDate(7) },
-      { id: 6, title: 'Send partnership proposal to BGV', desc: '', category: 'work', business: 'sengo', type: 'outreach', status: 'done', date: getFutureDate(-2) },
+      { id: 1, title: 'Finalize Q1 fundraising strategy', desc: 'Review deck, update projections', category: 'work', business: 'sengo', type: 'strategy', status: 'todo', date: fd(3) },
+      { id: 2, title: 'Schedule investor update email', desc: 'Monthly update to LP base', category: 'work', business: 'sengo', type: 'outreach', status: 'todo', date: fd(5) },
+      { id: 3, title: 'Review content calendar for Feb', desc: '', category: 'work', business: 'sengo', type: 'marketing', status: 'progress', date: fd(2) },
+      { id: 4, title: 'TBC pop-up event planning', desc: 'Venue, vendors, marketing', category: 'work', business: 'tbc', type: 'operations', status: 'todo', date: fd(10) },
+      { id: 5, title: 'Record personal brand podcast ep', desc: 'Topic: lessons from fundraising', category: 'work', business: 'pb', type: 'content', status: 'todo', date: fd(7) },
+      { id: 6, title: 'Review rental property lease renewals', desc: '', category: 'work', business: 'rei', type: 'legal', status: 'progress', date: fd(4) },
+      { id: 7, title: 'Personal tax prep documents', desc: 'Gather W2s, 1099s', category: 'personal', business: 'sengo', type: 'finance', status: 'todo', date: fd(14) },
+    ],
+    events: [
+      { id: 1, name: 'Sengo Founder Pitch Night', desc: 'Monthly pitch event for cohort founders', date: fd(5), time: '18:00', category: 'sengo', location: '36 Degrees North, Tulsa' },
+      { id: 2, name: 'Investor Office Hours', desc: 'Open Q&A for LPs and prospective investors', date: fd(8), time: '14:00', category: 'sengo', location: 'Virtual (Zoom)' },
+      { id: 3, name: 'TBC Beauty Market Pop-Up', desc: 'Monthly vendor pop-up for Tulsa Beauty Collective members', date: fd(12), time: '10:00', category: 'tbc', location: 'Brookside, Tulsa' },
+      { id: 4, name: 'Property inspection - Unit 4B', desc: 'Annual inspection before lease renewal', date: fd(6), time: '09:00', category: 'rei', location: '1234 Main St' },
+      { id: 5, name: 'Dentist appointment', desc: '', date: fd(3), time: '11:00', category: 'personal', location: '' },
     ],
     content: [
-      { id: 1, title: 'Founder Spotlight: Q1 Cohort', notes: 'Highlight 2-3 founders from the latest cohort. Focus on traction, unique value prop, and what support they need from funders.', channel: 'instagram', date: getFutureDate(4), status: 'draft' },
-      { id: 2, title: 'Why Private Markets Need More Diversity', notes: 'Stat-driven post about the wealth gap in private assets. Reference the 90+ touchpoints stat and the $5M raised figure.', channel: 'linkedin', date: getFutureDate(6), status: 'scheduled' },
-      { id: 3, title: 'Monthly Investor Update', notes: 'Portfolio performance, new founders onboarded, upcoming events. Keep it concise and data-forward.', channel: 'email', date: getFutureDate(8), status: 'draft' },
-      { id: 4, title: 'Behind the Scenes: Sengo Events', notes: 'Quick video recap of the latest networking event. Show energy, connections, and real conversations.', channel: 'tiktok', date: getFutureDate(3), status: 'draft' },
-      { id: 5, title: 'The Future of Community-Driven Investing', notes: 'Long-form piece on how community-driven models are reshaping venture. Mention Sengo model as case study.', channel: 'blog', date: getFutureDate(12), status: 'draft' },
+      { id: 1, title: 'Founder Spotlight: Q1 Cohort', notes: 'Highlight 2-3 founders from the latest cohort. Focus on traction, unique value prop.', channel: 'instagram', date: fd(4), status: 'draft' },
+      { id: 2, title: 'Why Private Markets Need Diversity', notes: 'Stat-driven post about wealth gap in private assets. Reference 90+ touchpoints, $5M raised.', channel: 'linkedin', date: fd(6), status: 'scheduled' },
+      { id: 3, title: 'Monthly Investor Update', notes: 'Portfolio performance, new founders, upcoming events. Concise and data-forward.', channel: 'email', date: fd(8), status: 'draft' },
+      { id: 4, title: 'Behind the Scenes: Pitch Night', notes: 'Quick video recap of the latest pitch event. Show energy and real conversations.', channel: 'tiktok', date: fd(3), status: 'draft' },
+      { id: 5, title: 'Community-Driven Investing Deep Dive', notes: 'Long-form on how community models reshape venture. Sengo as case study.', channel: 'substack', date: fd(12), status: 'draft' },
+      { id: 6, title: 'New founder resources this week', notes: 'Roundup of new tools, grants, and opportunities posted to the founder feed.', channel: 'founder-feed', date: fd(5), status: 'draft' },
+      { id: 7, title: 'Deal flow update for investors', notes: 'Summary of new companies in pipeline, sector breakdown, key metrics.', channel: 'investor-feed', date: fd(7), status: 'draft' },
     ],
     activePanel: 'chat',
     taskView: 'all',
+    eventView: 'all',
     contentChannel: 'all',
-    nextTaskId: 7,
-    nextContentId: 6
+    nid: { task: 8, content: 8, event: 6, user: 2 }
   };
 }
 
-function getFutureDate(days) {
-  const d = new Date();
-  d.setDate(d.getDate() + days);
-  return d.toISOString().split('T')[0];
-}
-
-function loadState() {
-  try {
-    const saved = localStorage.getItem(STATE_KEY);
-    if (saved) return JSON.parse(saved);
-  } catch (e) {}
-  return getDefaultState();
-}
-
-function saveState() {
-  try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); } catch(e) {}
-}
-
+// ==================== STATE ====================
 let state = loadState();
+function loadState() { try { const s = localStorage.getItem(STATE_KEY); if (s) return JSON.parse(s); } catch(e) {} return getDefaultState(); }
+function save() { try { localStorage.setItem(STATE_KEY, JSON.stringify(state)); } catch(e) {} }
+function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML.replace(/\n/g, '<br>'); }
+function fmtDate(s) { if (!s) return ''; const d = new Date(s + 'T00:00:00'); return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()] + ' ' + d.getDate(); }
+function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+let currentUser = null;
+let activeDetailId = null;
+let activeTag = null;
+
+// ==================== AUTH ====================
+const loginScreen = document.getElementById('login-screen');
+const sidebar = document.getElementById('sidebar');
+const mainArea = document.getElementById('main-area');
+
+function attemptLogin() {
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value;
+  const user = state.users.find(x => x.username === u && x.password === p);
+  if (!user) { document.getElementById('login-error').textContent = 'Invalid username or password'; return; }
+  currentUser = user;
+  state.currentUser = user.id;
+  save();
+  showDashboard();
+}
+
+function showDashboard() {
+  loginScreen.classList.add('hidden');
+  sidebar.style.display = 'flex';
+  mainArea.style.display = 'flex';
+  document.getElementById('sidebar-avatar').textContent = currentUser.name.split(' ').map(w=>w[0]).join('').substring(0,2);
+  document.getElementById('sidebar-name').textContent = currentUser.name;
+  document.getElementById('sidebar-role').textContent = currentUser.role;
+
+  // Set nav visibility based on permissions
+  document.querySelectorAll('.nav-item').forEach(n => {
+    const panel = n.dataset.panel;
+    if (panel === 'personnel') {
+      n.classList.toggle('nav-hidden', !currentUser.isAdmin);
+    } else if (panel) {
+      n.classList.toggle('nav-hidden', !currentUser.perms.includes(panel));
+    }
+  });
+
+  // Default to first available panel
+  const firstAvail = currentUser.perms[0] || 'chat';
+  switchPanel(currentUser.perms.includes(state.activePanel) ? state.activePanel : firstAvail);
+  renderAll();
+}
+
+function logout() {
+  currentUser = null;
+  state.currentUser = null;
+  save();
+  loginScreen.classList.remove('hidden');
+  sidebar.style.display = 'none';
+  mainArea.style.display = 'none';
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-error').textContent = '';
+}
+
+document.getElementById('login-btn').addEventListener('click', attemptLogin);
+document.getElementById('login-pass').addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+document.getElementById('login-user').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('login-pass').focus(); });
+document.getElementById('logout-btn').addEventListener('click', logout);
+
+// Auto-login if session persists
+if (state.currentUser) {
+  const u = state.users.find(x => x.id === state.currentUser);
+  if (u) { currentUser = u; showDashboard(); }
+}
 
 // ==================== NAVIGATION ====================
-const navItems = document.querySelectorAll('.nav-item');
 const panels = document.querySelectorAll('.panel');
-const topbarTitle = document.getElementById('topbar-title');
-
-function switchPanel(panelName) {
-  state.activePanel = panelName;
-  navItems.forEach(n => n.classList.toggle('active', n.dataset.panel === panelName));
-  panels.forEach(p => p.classList.toggle('active', p.id === panelName + '-panel'));
-  const titles = { chat: 'Chat', tasks: 'Tasks', content: 'Content' };
-  topbarTitle.textContent = titles[panelName] || panelName;
-  saveState();
+function switchPanel(name) {
+  state.activePanel = name;
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.panel === name));
+  panels.forEach(p => p.classList.toggle('active', p.id === name + '-panel'));
+  document.getElementById('topbar-title').textContent = { chat:'Chat', tasks:'Tasks', events:'Events', content:'Content', personnel:'Personnel' }[name] || name;
+  save();
 }
+document.querySelectorAll('.nav-item').forEach(btn => btn.addEventListener('click', () => {
+  if (!btn.classList.contains('nav-hidden')) switchPanel(btn.dataset.panel);
+}));
 
-navItems.forEach(btn => {
-  btn.addEventListener('click', () => switchPanel(btn.dataset.panel));
-});
+// ==================== RENDER ALL ====================
+function renderAll() { renderChat(); renderTasks(); renderEvents(); renderContent(); renderPersonnel(); }
 
 // ==================== CHAT ====================
 const chatMessages = document.getElementById('chat-messages');
 const chatInput = document.getElementById('chat-input');
-const chatSendBtn = document.getElementById('chat-send');
-const chatThreadBtns = document.querySelectorAll('.chat-thread-btn:not(.new-thread)');
-const newThreadBtn = document.getElementById('new-thread-btn');
-let activeTag = null;
 
-// Tag selector
 document.querySelectorAll('.chat-tag-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const tag = btn.dataset.tag;
-    if (activeTag === tag) {
-      activeTag = null;
-      btn.className = 'chat-tag-btn';
-    } else {
-      document.querySelectorAll('.chat-tag-btn').forEach(b => b.className = 'chat-tag-btn');
-      activeTag = tag;
-      btn.className = 'chat-tag-btn active-' + tag;
-    }
+    if (activeTag === tag) { activeTag = null; btn.className = 'chat-tag-btn'; }
+    else { document.querySelectorAll('.chat-tag-btn').forEach(b => b.className = 'chat-tag-btn'); activeTag = tag; btn.className = 'chat-tag-btn active-' + tag; }
   });
 });
 
 function renderChat() {
   const thread = state.chat.activeThread;
-  const messages = state.chat.threads[thread] || [];
-
-  if (messages.length === 0) {
-    chatMessages.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-state-icon">&#128488;</div>
-        <div class="empty-state-text">No messages in this thread yet</div>
-        <div class="empty-state-sub">Start typing to capture your thoughts</div>
-      </div>`;
-    return;
-  }
-
-  chatMessages.innerHTML = messages.map(m => {
+  const msgs = state.chat.threads[thread] || [];
+  if (!msgs.length) { chatMessages.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128488;</div><div class="empty-state-text">No messages yet</div><div class="empty-state-sub">Start typing to capture your thoughts</div></div>'; return; }
+  chatMessages.innerHTML = msgs.map(m => {
     const isUser = m.sender === 'user';
-    const tagHtml = m.tag ? `<div class="chat-msg-tag ${m.tag}">${m.tag}</div>` : '';
-    const timeStr = new Date(m.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    return `
-      <div class="chat-msg ${isUser ? 'user' : ''}">
-        <div class="chat-msg-avatar">${isUser ? 'You' : 'S'}</div>
-        <div>
-          <div class="chat-msg-bubble">${escapeHtml(m.text)}</div>
-          <div class="chat-msg-meta">${timeStr}</div>
-          ${tagHtml}
-        </div>
-      </div>`;
+    const tagHtml = m.tag ? `<div class="chat-msg-tag ${m.tag}">${m.tag.replace('-',' ')}</div>` : '';
+    const time = new Date(m.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    const senderName = m.senderName || (isUser ? 'You' : 'S');
+    const initials = senderName.split(' ').map(w=>w[0]).join('').substring(0,2);
+    // Show promote-to-content button for content suggestions
+    const promoteHtml = m.tag === 'content-suggestion' && isUser ? `<button class="chat-promote-btn" onclick="promoteToContent(${m.id})">+ Create Content Item</button>` : '';
+    return `<div class="chat-msg ${isUser ? 'user' : ''}">
+      <div class="chat-msg-avatar">${initials}</div>
+      <div><div class="chat-msg-bubble">${esc(m.text)}</div>
+      <div class="chat-msg-meta">${senderName} &middot; ${time}</div>${tagHtml}${promoteHtml}</div></div>`;
   }).join('');
-
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function sendChatMessage() {
+function sendChat() {
   const text = chatInput.value.trim();
   if (!text) return;
-
   const thread = state.chat.activeThread;
   if (!state.chat.threads[thread]) state.chat.threads[thread] = [];
-
+  const msgId = Date.now();
   state.chat.threads[thread].push({
-    id: Date.now(),
-    sender: 'user',
-    text: text,
-    tag: activeTag,
-    time: new Date().toISOString()
+    id: msgId, sender: 'user', senderName: currentUser ? currentUser.name : 'You',
+    text, tag: activeTag, time: new Date().toISOString()
   });
+  chatInput.value = ''; chatInput.style.height = 'auto'; save(); renderChat();
 
-  chatInput.value = '';
-  chatInput.style.height = 'auto';
-  saveState();
-  renderChat();
-
-  // Auto-response after a moment
+  // Auto-response
   setTimeout(() => {
-    const responses = generateSmartResponse(text, activeTag, thread);
-    state.chat.threads[thread].push({
-      id: Date.now(),
-      sender: 'system',
-      text: responses,
-      tag: null,
-      time: new Date().toISOString()
-    });
-    saveState();
-    renderChat();
-  }, 600);
+    const resp = generateResponse(text, activeTag, thread);
+    state.chat.threads[thread].push({ id: Date.now(), sender: 'system', senderName: 'Sengo', text: resp, tag: null, time: new Date().toISOString() });
+    save(); renderChat();
+  }, 500);
 }
 
-function generateSmartResponse(text, tag, thread) {
+// Promote a content-suggestion chat message into an actual content item
+window.promoteToContent = function(msgId) {
+  let msg = null;
+  for (const t in state.chat.threads) {
+    msg = state.chat.threads[t].find(m => m.id === msgId);
+    if (msg) break;
+  }
+  if (!msg) return;
+  // Open content modal pre-filled
+  document.getElementById('content-title-input').value = msg.text.split('\n')[0].substring(0, 80);
+  document.getElementById('content-notes-input').value = msg.text;
+  document.getElementById('content-date-input').value = fd(7);
+  document.getElementById('content-status-input').value = 'draft';
+  document.getElementById('content-modal').classList.add('active');
+};
+
+function generateResponse(text, tag, thread) {
   const lower = text.toLowerCase();
-
+  if (tag === 'content-suggestion') {
+    return `Content suggestion received! I've flagged this for the content pipeline.\n\nTo turn this into a content item, click the "Create Content Item" button on your message. From there you can:\n- Choose the right channel (Substack, LinkedIn, TikTok, etc.)\n- Set a publish date\n- Use the Content Assistant to expand your idea\n\nGreat input from ${currentUser ? currentUser.name : 'the team'}!`;
+  }
   if (tag === 'idea') {
-    const ideaResponses = [
-      `That's worth exploring. A few angles to consider:\n\n1. How does this align with current quarterly goals?\n2. What resources or partnerships would this require?\n3. What's the smallest version you could test first?\n\nWant to turn this into a task or content piece?`,
-      `Noted. To develop this further, think about:\n\n- Target audience / who benefits most\n- Timeline to prototype or pilot\n- Any existing assets you can leverage\n\nI've logged this in your ideas thread.`,
-      `Interesting direction. Consider validating by:\n\n1. Checking if this resonates with your community\n2. Mapping it against current priorities\n3. Identifying quick wins vs. long-term plays`
-    ];
-    return ideaResponses[Math.floor(Math.random() * ideaResponses.length)];
+    return `Interesting idea. A few angles to consider:\n\n1. How does this align with current priorities across your businesses?\n2. Which business does this impact most - Sengo, TBC, Personal Brand, or Real Estate?\n3. What's the smallest version you could test first?\n\nTag it as an Action or create a Task when you're ready to move on it.`;
   }
-
   if (tag === 'priority') {
-    return `Flagged as a priority. Here's how I'd think about sequencing this:\n\n- Urgency: Is there a hard deadline?\n- Impact: Does this unlock other work?\n- Effort: Can you delegate or break it down?\n\nWant me to create a task for this so it's tracked on your board?`;
+    return `Flagged as a priority. Here's how to sequence this:\n\n- Urgency: Is there a hard deadline?\n- Impact: Does this unlock other work?\n- Effort: Can you delegate or break it down?\n\nI'd recommend creating a Task so it's tracked on the board.`;
   }
-
   if (tag === 'need') {
-    return `Understood. To move on this, you'll want to:\n\n1. Define the specific outcome you need\n2. Identify who can help fulfill this\n3. Set a target date for resolution\n\nShould I add this as a task with a due date?`;
+    return `Noted as a need. To move forward:\n\n1. Define the specific outcome\n2. Identify who can help (check your Personnel tab)\n3. Set a target date\n\nConsider adding this as a Task with a due date.`;
   }
-
   if (tag === 'action') {
-    return `Action item captured. I'd recommend:\n\n- Breaking this into clear next steps\n- Assigning it a due date\n- Deciding if it's work or personal\n\nReady to add this to your task board?`;
+    return `Action item captured. Next steps:\n\n- Break into clear subtasks\n- Assign a due date\n- Decide which business it falls under\n\nHead to Tasks to add this to your board.`;
   }
-
   if (lower.includes('content') || lower.includes('post') || lower.includes('social')) {
-    return `Great thinking on the content front. A few prompts:\n\n- What channel would this perform best on?\n- Can you repurpose this across multiple platforms?\n- What's the core message in one sentence?\n\nHead to the Content tab to start drafting.`;
+    return `For content ideas, try tagging your message as "Content Suggestion" - that way you can promote it directly into the Content pipeline and choose which channel it belongs to (Substack, LinkedIn, TikTok, Instagram, Personal IG, Founder Feed, Investor Feed, or Email).`;
   }
-
-  if (lower.includes('fund') || lower.includes('invest') || lower.includes('raise')) {
-    return `On the fundraising / investment front, key considerations:\n\n- Where are you in the current raise cycle?\n- Who are the warm leads to follow up with?\n- What materials need updating?\n\nI'd suggest creating tasks for each action item.`;
-  }
-
-  const defaults = [
-    `Good input. A few ways to think about this:\n\n- What's the immediate next step?\n- Does this connect to any existing priorities?\n- Should this become a task or content item?\n\nTag your messages with Idea, Priority, Need, or Action to keep things organized.`,
-    `Captured. To make this actionable:\n\n1. Clarify the desired outcome\n2. Identify any blockers\n3. Decide on timing\n\nUse the tags below to categorize your thoughts.`,
-    `Thanks for thinking through this. Consider:\n\n- Is this time-sensitive?\n- Who else needs to be involved?\n- What does success look like?\n\nYou can move this to Tasks or Content when you're ready to act on it.`
-  ];
-  return defaults[Math.floor(Math.random() * defaults.length)];
+  return `Captured. Consider:\n\n- Is this time-sensitive?\n- Which business does this relate to?\n- Should this become a Task, Event, or Content item?\n\nUse the tags below (Idea, Priority, Need, Action, Content Suggestion) to keep things organized.`;
 }
 
-chatSendBtn.addEventListener('click', sendChatMessage);
-chatInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChatMessage(); }
-});
-chatInput.addEventListener('input', () => {
-  chatInput.style.height = 'auto';
-  chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
-});
+document.getElementById('chat-send').addEventListener('click', sendChat);
+chatInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); } });
+chatInput.addEventListener('input', () => { chatInput.style.height = 'auto'; chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px'; });
 
-// Thread switching
-document.getElementById('chat-threads').addEventListener('click', (e) => {
+document.getElementById('chat-threads').addEventListener('click', e => {
   const btn = e.target.closest('.chat-thread-btn');
   if (!btn || btn.id === 'new-thread-btn') return;
   document.querySelectorAll('.chat-thread-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   state.chat.activeThread = btn.dataset.thread;
-  saveState();
-  renderChat();
+  save(); renderChat();
 });
 
-newThreadBtn.addEventListener('click', () => {
+document.getElementById('new-thread-btn').addEventListener('click', () => {
   const name = prompt('Thread name:');
   if (!name || !name.trim()) return;
   const key = name.trim().toLowerCase().replace(/\s+/g, '-');
-  if (state.chat.threads[key]) { alert('Thread already exists'); return; }
+  if (state.chat.threads[key]) return;
   state.chat.threads[key] = [];
   const btn = document.createElement('button');
-  btn.className = 'chat-thread-btn';
-  btn.dataset.thread = key;
-  btn.textContent = name.trim();
-  newThreadBtn.insertAdjacentElement('beforebegin', btn);
+  btn.className = 'chat-thread-btn'; btn.dataset.thread = key; btn.textContent = name.trim();
+  document.getElementById('new-thread-btn').insertAdjacentElement('beforebegin', btn);
   document.querySelectorAll('.chat-thread-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  state.chat.activeThread = key;
-  saveState();
-  renderChat();
+  state.chat.activeThread = key; save(); renderChat();
 });
 
 // ==================== TASKS ====================
-const tasksTabs = document.querySelectorAll('.tasks-tab');
-const filterBusiness = document.getElementById('filter-business');
-const filterType = document.getElementById('filter-type');
-
 function renderTasks() {
   const view = state.taskView;
-  const biz = filterBusiness.value;
-  const type = filterType.value;
-
-  let filtered = state.tasks.filter(t => {
+  const biz = document.getElementById('filter-business').value;
+  const type = document.getElementById('filter-type').value;
+  let f = state.tasks.filter(t => {
     if (view === 'work' && t.category !== 'work') return false;
     if (view === 'personal' && t.category !== 'personal') return false;
     if (biz !== 'all' && t.business !== biz) return false;
     if (type !== 'all' && t.type !== type) return false;
     return true;
   });
-
-  const todo = filtered.filter(t => t.status === 'todo');
-  const progress = filtered.filter(t => t.status === 'progress');
-  const done = filtered.filter(t => t.status === 'done');
-
+  const todo = f.filter(t => t.status === 'todo');
+  const prog = f.filter(t => t.status === 'progress');
+  const done = f.filter(t => t.status === 'done');
   document.getElementById('todo-count').textContent = todo.length;
-  document.getElementById('progress-count').textContent = progress.length;
+  document.getElementById('progress-count').textContent = prog.length;
   document.getElementById('done-count').textContent = done.length;
   document.getElementById('task-count-badge').textContent = state.tasks.filter(t => t.status !== 'done').length;
-
-  renderTaskColumn('todo-cards', todo);
-  renderTaskColumn('progress-cards', progress);
-  renderTaskColumn('done-cards', done);
+  renderTaskCol('todo-cards', todo);
+  renderTaskCol('progress-cards', prog);
+  renderTaskCol('done-cards', done);
 }
 
-function renderTaskColumn(containerId, tasks) {
-  const container = document.getElementById(containerId);
-  if (tasks.length === 0) {
-    container.innerHTML = '<div class="empty-state" style="padding:30px 10px"><div class="empty-state-text" style="font-size:0.8rem">No tasks</div></div>';
-    return;
-  }
-  container.innerHTML = tasks.map(t => {
-    const today = new Date().toISOString().split('T')[0];
-    const isOverdue = t.date < today && t.status !== 'done';
-    const dateClass = isOverdue ? 'overdue' : '';
-    const dateDisplay = t.date ? formatDate(t.date) : '';
-
-    let nextStatus = '';
-    let nextLabel = '';
-    if (t.status === 'todo') { nextStatus = 'progress'; nextLabel = 'Start'; }
-    else if (t.status === 'progress') { nextStatus = 'done'; nextLabel = 'Complete'; }
-    else { nextStatus = 'todo'; nextLabel = 'Reopen'; }
-
-    return `
-      <div class="task-card" data-id="${t.id}">
-        <div class="task-card-title">${escapeHtml(t.title)}</div>
-        <div class="task-card-meta">
-          <span class="task-card-tag ${t.category}">${t.category}</span>
-          <span class="task-card-tag ${t.business}">${t.business}</span>
-          <span class="task-card-tag" style="background:rgba(27,53,51,0.05);color:rgba(27,53,51,0.5)">${t.type}</span>
-          ${dateDisplay ? `<span class="task-card-date ${dateClass}">${dateDisplay}</span>` : ''}
-        </div>
-        <div class="task-card-actions">
-          <button class="task-action-btn" onclick="moveTask(${t.id}, '${nextStatus}')">${nextLabel}</button>
-          <button class="task-action-btn" onclick="editTask(${t.id})">Edit</button>
-          <button class="task-action-btn delete" onclick="deleteTask(${t.id})">Delete</button>
-        </div>
-      </div>`;
+function renderTaskCol(id, tasks) {
+  const el = document.getElementById(id);
+  if (!tasks.length) { el.innerHTML = '<div class="empty-state" style="padding:20px 10px"><div class="empty-state-text" style="font-size:0.78rem">No tasks</div></div>'; return; }
+  const today = new Date().toISOString().split('T')[0];
+  el.innerHTML = tasks.map(t => {
+    const overdue = t.date < today && t.status !== 'done';
+    const bizLabel = BUSINESSES[t.business] ? BUSINESSES[t.business].label : t.business;
+    const bizClass = BUSINESSES[t.business] ? BUSINESSES[t.business].cssClass : '';
+    let nextS = '', nextL = '';
+    if (t.status === 'todo') { nextS = 'progress'; nextL = 'Start'; }
+    else if (t.status === 'progress') { nextS = 'done'; nextL = 'Complete'; }
+    else { nextS = 'todo'; nextL = 'Reopen'; }
+    return `<div class="task-card">
+      <div class="task-card-title">${esc(t.title)}</div>
+      <div class="task-card-meta">
+        <span class="task-card-tag ${t.category}">${t.category}</span>
+        <span class="task-card-tag ${bizClass}">${bizLabel}</span>
+        <span class="task-card-tag" style="background:rgba(27,53,51,0.05);color:rgba(27,53,51,0.5)">${t.type}</span>
+        ${t.date ? `<span class="task-card-date ${overdue?'overdue':''}">${fmtDate(t.date)}</span>` : ''}
+      </div>
+      <div class="task-card-actions">
+        <button class="task-action-btn" onclick="moveTask(${t.id},'${nextS}')">${nextL}</button>
+        <button class="task-action-btn" onclick="editTask(${t.id})">Edit</button>
+        <button class="task-action-btn delete" onclick="deleteTask(${t.id})">Delete</button>
+      </div></div>`;
   }).join('');
 }
 
-function moveTask(id, newStatus) {
-  const task = state.tasks.find(t => t.id === id);
-  if (task) { task.status = newStatus; saveState(); renderTasks(); }
-}
-
-function deleteTask(id) {
-  state.tasks = state.tasks.filter(t => t.id !== id);
-  saveState();
-  renderTasks();
-}
-
-function editTask(id) {
-  const task = state.tasks.find(t => t.id === id);
-  if (!task) return;
+window.moveTask = (id, s) => { const t = state.tasks.find(x=>x.id===id); if(t){t.status=s;save();renderTasks();} };
+window.deleteTask = id => { state.tasks=state.tasks.filter(x=>x.id!==id); save(); renderTasks(); };
+window.editTask = id => {
+  const t = state.tasks.find(x=>x.id===id); if(!t) return;
   document.getElementById('task-modal-title').textContent = 'Edit Task';
-  document.getElementById('task-title-input').value = task.title;
-  document.getElementById('task-desc-input').value = task.desc;
-  document.getElementById('task-category-input').value = task.category;
-  document.getElementById('task-business-input').value = task.business;
-  document.getElementById('task-type-input').value = task.type;
-  document.getElementById('task-date-input').value = task.date;
-  document.getElementById('task-modal').classList.add('active');
+  document.getElementById('task-title-input').value = t.title;
+  document.getElementById('task-desc-input').value = t.desc;
+  document.getElementById('task-category-input').value = t.category;
+  document.getElementById('task-business-input').value = t.business;
+  document.getElementById('task-type-input').value = t.type;
+  document.getElementById('task-date-input').value = t.date;
   document.getElementById('submit-task').dataset.editId = id;
-}
+  document.getElementById('task-modal').classList.add('active');
+};
 
-tasksTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    tasksTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    state.taskView = tab.dataset.taskView;
-    saveState();
-    renderTasks();
-  });
-});
+document.querySelectorAll('.tasks-tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('.tasks-tab').forEach(x=>x.classList.remove('active')); t.classList.add('active');
+  state.taskView = t.dataset.taskView; save(); renderTasks();
+}));
+document.getElementById('filter-business').addEventListener('change', renderTasks);
+document.getElementById('filter-type').addEventListener('change', renderTasks);
 
-filterBusiness.addEventListener('change', renderTasks);
-filterType.addEventListener('change', renderTasks);
-
-// Add Task Modal
 document.getElementById('open-add-task').addEventListener('click', () => {
   document.getElementById('task-modal-title').textContent = 'Add New Task';
   document.getElementById('task-title-input').value = '';
   document.getElementById('task-desc-input').value = '';
-  document.getElementById('task-date-input').value = getFutureDate(7);
+  document.getElementById('task-date-input').value = fd(7);
   delete document.getElementById('submit-task').dataset.editId;
   document.getElementById('task-modal').classList.add('active');
 });
-
-document.getElementById('close-task-modal').addEventListener('click', () => {
-  document.getElementById('task-modal').classList.remove('active');
-});
+document.getElementById('close-task-modal').addEventListener('click', () => document.getElementById('task-modal').classList.remove('active'));
+document.getElementById('task-modal').addEventListener('click', e => { if(e.target===document.getElementById('task-modal')) document.getElementById('task-modal').classList.remove('active'); });
 
 document.getElementById('submit-task').addEventListener('click', () => {
-  const title = document.getElementById('task-title-input').value.trim();
-  if (!title) return;
-
+  const title = document.getElementById('task-title-input').value.trim(); if(!title) return;
   const editId = document.getElementById('submit-task').dataset.editId;
-
   if (editId) {
-    const task = state.tasks.find(t => t.id === parseInt(editId));
-    if (task) {
-      task.title = title;
-      task.desc = document.getElementById('task-desc-input').value.trim();
-      task.category = document.getElementById('task-category-input').value;
-      task.business = document.getElementById('task-business-input').value;
-      task.type = document.getElementById('task-type-input').value;
-      task.date = document.getElementById('task-date-input').value;
+    const t = state.tasks.find(x=>x.id===parseInt(editId)); if(t) {
+      t.title=title; t.desc=document.getElementById('task-desc-input').value.trim();
+      t.category=document.getElementById('task-category-input').value; t.business=document.getElementById('task-business-input').value;
+      t.type=document.getElementById('task-type-input').value; t.date=document.getElementById('task-date-input').value;
     }
     delete document.getElementById('submit-task').dataset.editId;
   } else {
-    state.tasks.push({
-      id: state.nextTaskId++,
-      title: title,
-      desc: document.getElementById('task-desc-input').value.trim(),
-      category: document.getElementById('task-category-input').value,
-      business: document.getElementById('task-business-input').value,
-      type: document.getElementById('task-type-input').value,
-      status: 'todo',
-      date: document.getElementById('task-date-input').value
-    });
+    state.tasks.push({ id: state.nid.task++, title, desc: document.getElementById('task-desc-input').value.trim(),
+      category: document.getElementById('task-category-input').value, business: document.getElementById('task-business-input').value,
+      type: document.getElementById('task-type-input').value, status: 'todo', date: document.getElementById('task-date-input').value });
   }
-
-  saveState();
-  renderTasks();
-  document.getElementById('task-modal').classList.remove('active');
+  save(); renderTasks(); document.getElementById('task-modal').classList.remove('active');
 });
 
-document.getElementById('task-modal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('task-modal')) {
-    document.getElementById('task-modal').classList.remove('active');
-  }
-});
-
-// ==================== CONTENT ====================
-const channelTabs = document.querySelectorAll('.channel-tab');
-let activeDetailId = null;
-
-function renderContent() {
-  const channel = state.contentChannel;
-  let filtered = state.content;
-  if (channel !== 'all') {
-    filtered = filtered.filter(c => c.channel === channel);
-  }
-
-  document.getElementById('content-count-badge').textContent = state.content.filter(c => c.status !== 'published').length;
-
-  const grid = document.getElementById('content-grid');
-  if (filtered.length === 0) {
-    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#128196;</div><div class="empty-state-text">No content items yet</div><div class="empty-state-sub">Click "+ Add Content" to get started</div></div>';
-    return;
-  }
-
-  grid.innerHTML = filtered.map(c => {
-    const channelLabels = { instagram: 'Instagram', linkedin: 'LinkedIn', twitter: 'Twitter/X', email: 'Email', blog: 'Blog', tiktok: 'TikTok' };
-    return `
-      <div class="content-card" onclick="openContentDetail(${c.id})">
-        <div class="content-card-channel">
-          <span class="ch-dot ch-${c.channel}"></span>
-          ${channelLabels[c.channel] || c.channel}
+// ==================== EVENTS ====================
+function renderEvents() {
+  const view = state.eventView;
+  let f = state.events.filter(e => view === 'all' || e.category === view);
+  f.sort((a,b) => a.date.localeCompare(b.date));
+  document.getElementById('event-count-badge').textContent = state.events.filter(e => e.date >= new Date().toISOString().split('T')[0]).length;
+  const list = document.getElementById('events-list');
+  if (!f.length) { list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#128197;</div><div class="empty-state-text">No events</div><div class="empty-state-sub">Click "+ Add Event" to get started</div></div>'; return; }
+  list.innerHTML = f.map(e => {
+    const d = new Date(e.date + 'T00:00:00');
+    const mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()];
+    const day = d.getDate();
+    const catLabel = e.category === 'personal' ? 'Personal' : (BUSINESSES[e.category] ? BUSINESSES[e.category].label : e.category);
+    const catClass = e.category === 'personal' ? 'personal' : (BUSINESSES[e.category] ? BUSINESSES[e.category].cssClass : '');
+    return `<div class="event-card">
+      <div class="event-date-block"><div class="month">${mon}</div><div class="day">${day}</div></div>
+      <div class="event-info">
+        <h4>${esc(e.name)}</h4>
+        ${e.desc ? `<p>${esc(e.desc)}</p>` : ''}
+        <div class="event-meta">
+          <span class="event-tag ${catClass}">${catLabel}</span>
+          ${e.time ? `<span class="event-time">${e.time}</span>` : ''}
+          ${e.location ? `<span class="event-time">${esc(e.location)}</span>` : ''}
         </div>
-        <div class="content-card-title">${escapeHtml(c.title)}</div>
-        <div class="content-card-notes">${escapeHtml(c.notes)}</div>
-        <div class="content-card-footer">
-          <span class="content-card-date">${c.date ? formatDate(c.date) : 'No date'}</span>
-          <span class="content-card-status ${c.status}">${c.status}</span>
-        </div>
-      </div>`;
+      </div>
+      <div class="event-actions">
+        <button class="event-action-btn" onclick="editEvent(${e.id})">Edit</button>
+        <button class="event-action-btn delete" onclick="deleteEvent(${e.id})">Delete</button>
+      </div>
+    </div>`;
   }).join('');
 }
 
-channelTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    channelTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    state.contentChannel = tab.dataset.channel;
-    saveState();
-    renderContent();
-  });
+document.querySelectorAll('.events-tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('.events-tab').forEach(x=>x.classList.remove('active')); t.classList.add('active');
+  state.eventView = t.dataset.eventView; save(); renderEvents();
+}));
+
+document.getElementById('open-add-event').addEventListener('click', () => {
+  document.getElementById('event-modal-title').textContent = 'Add New Event';
+  document.getElementById('event-name-input').value = '';
+  document.getElementById('event-desc-input').value = '';
+  document.getElementById('event-date-input').value = fd(7);
+  document.getElementById('event-time-input').value = '';
+  document.getElementById('event-location-input').value = '';
+  delete document.getElementById('submit-event').dataset.editId;
+  document.getElementById('event-modal').classList.add('active');
+});
+document.getElementById('close-event-modal').addEventListener('click', () => document.getElementById('event-modal').classList.remove('active'));
+document.getElementById('event-modal').addEventListener('click', e => { if(e.target===document.getElementById('event-modal')) document.getElementById('event-modal').classList.remove('active'); });
+
+document.getElementById('submit-event').addEventListener('click', () => {
+  const name = document.getElementById('event-name-input').value.trim(); if(!name) return;
+  const editId = document.getElementById('submit-event').dataset.editId;
+  if (editId) {
+    const ev = state.events.find(x=>x.id===parseInt(editId)); if(ev) {
+      ev.name=name; ev.desc=document.getElementById('event-desc-input').value.trim();
+      ev.date=document.getElementById('event-date-input').value; ev.time=document.getElementById('event-time-input').value;
+      ev.category=document.getElementById('event-category-input').value; ev.location=document.getElementById('event-location-input').value.trim();
+    }
+    delete document.getElementById('submit-event').dataset.editId;
+  } else {
+    state.events.push({ id: state.nid.event++, name, desc: document.getElementById('event-desc-input').value.trim(),
+      date: document.getElementById('event-date-input').value, time: document.getElementById('event-time-input').value,
+      category: document.getElementById('event-category-input').value, location: document.getElementById('event-location-input').value.trim() });
+  }
+  save(); renderEvents(); document.getElementById('event-modal').classList.remove('active');
 });
 
-// Add Content Modal
+window.editEvent = id => {
+  const ev = state.events.find(x=>x.id===id); if(!ev) return;
+  document.getElementById('event-modal-title').textContent = 'Edit Event';
+  document.getElementById('event-name-input').value = ev.name;
+  document.getElementById('event-desc-input').value = ev.desc;
+  document.getElementById('event-date-input').value = ev.date;
+  document.getElementById('event-time-input').value = ev.time;
+  document.getElementById('event-category-input').value = ev.category;
+  document.getElementById('event-location-input').value = ev.location;
+  document.getElementById('submit-event').dataset.editId = id;
+  document.getElementById('event-modal').classList.add('active');
+};
+window.deleteEvent = id => { state.events=state.events.filter(x=>x.id!==id); save(); renderEvents(); };
+
+// ==================== CONTENT ====================
+function renderContent() {
+  const ch = state.contentChannel;
+  let f = state.content;
+  if (ch !== 'all') f = f.filter(c => c.channel === ch);
+  document.getElementById('content-count-badge').textContent = state.content.filter(c=>c.status!=='published').length;
+  const grid = document.getElementById('content-grid');
+  if (!f.length) { grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">&#128196;</div><div class="empty-state-text">No content items</div></div>'; return; }
+  grid.innerHTML = f.map(c => {
+    const ch = CHANNELS[c.channel] || { label: c.channel, dot: '' };
+    return `<div class="content-card" onclick="openDetail(${c.id})">
+      <div class="content-card-channel"><span class="ch-dot ${ch.dot}"></span>${ch.label}</div>
+      <div class="content-card-title">${esc(c.title)}</div>
+      <div class="content-card-notes">${esc(c.notes)}</div>
+      <div class="content-card-footer"><span class="content-card-date">${c.date ? fmtDate(c.date) : 'No date'}</span><span class="content-card-status ${c.status}">${c.status}</span></div>
+    </div>`;
+  }).join('');
+}
+
+document.querySelectorAll('.channel-tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('.channel-tab').forEach(x=>x.classList.remove('active')); t.classList.add('active');
+  state.contentChannel = t.dataset.channel; save(); renderContent();
+}));
+
 document.getElementById('open-add-content').addEventListener('click', () => {
   document.getElementById('content-title-input').value = '';
   document.getElementById('content-notes-input').value = '';
-  document.getElementById('content-date-input').value = getFutureDate(7);
+  document.getElementById('content-date-input').value = fd(7);
   document.getElementById('content-status-input').value = 'draft';
   document.getElementById('content-modal').classList.add('active');
 });
-
-document.getElementById('close-content-modal').addEventListener('click', () => {
-  document.getElementById('content-modal').classList.remove('active');
-});
+document.getElementById('close-content-modal').addEventListener('click', () => document.getElementById('content-modal').classList.remove('active'));
+document.getElementById('content-modal').addEventListener('click', e => { if(e.target===document.getElementById('content-modal')) document.getElementById('content-modal').classList.remove('active'); });
 
 document.getElementById('submit-content').addEventListener('click', () => {
-  const title = document.getElementById('content-title-input').value.trim();
-  if (!title) return;
-
-  state.content.push({
-    id: state.nextContentId++,
-    title: title,
-    notes: document.getElementById('content-notes-input').value.trim(),
-    channel: document.getElementById('content-channel-input').value,
-    date: document.getElementById('content-date-input').value,
-    status: document.getElementById('content-status-input').value
-  });
-
-  saveState();
-  renderContent();
-  document.getElementById('content-modal').classList.remove('active');
+  const title = document.getElementById('content-title-input').value.trim(); if(!title) return;
+  state.content.push({ id: state.nid.content++, title, notes: document.getElementById('content-notes-input').value.trim(),
+    channel: document.getElementById('content-channel-input').value, date: document.getElementById('content-date-input').value,
+    status: document.getElementById('content-status-input').value });
+  save(); renderContent(); document.getElementById('content-modal').classList.remove('active');
 });
 
-document.getElementById('content-modal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('content-modal')) {
-    document.getElementById('content-modal').classList.remove('active');
-  }
-});
-
-// Content Detail Panel
-function openContentDetail(id) {
-  const item = state.content.find(c => c.id === id);
-  if (!item) return;
+// Content Detail
+window.openDetail = function(id) {
+  const item = state.content.find(c=>c.id===id); if(!item) return;
   activeDetailId = id;
-
+  const ch = CHANNELS[item.channel] || { label: item.channel };
   const badge = document.getElementById('detail-channel-badge');
-  const channelLabels = { instagram: 'Instagram', linkedin: 'LinkedIn', twitter: 'Twitter/X', email: 'Email', blog: 'Blog', tiktok: 'TikTok' };
-  badge.textContent = channelLabels[item.channel] || item.channel;
-  badge.className = 'detail-channel-badge ' + item.channel;
+  badge.textContent = ch.label;
+  badge.className = 'detail-channel-badge'; badge.style.background = ''; badge.style.color = '';
+  // Color the badge
+  const colors = { 'substack':'#FF6719','linkedin':'#0077B5','tiktok':'#010101','instagram':'#E1306C','personal-ig':'#C13584','founder-feed':'#D57028','investor-feed':'#1B3533','email':'#AF8145' };
+  const c = colors[item.channel] || '#1B3533';
+  badge.style.background = c + '18'; badge.style.color = c;
 
   document.getElementById('detail-title').value = item.title;
   document.getElementById('detail-date').value = item.date;
   document.getElementById('detail-status').value = item.status;
   document.getElementById('detail-notes').value = item.notes;
-  document.getElementById('ai-output').textContent = 'Click a suggestion button above to get AI-powered content recommendations based on your notes.';
+  document.getElementById('ai-output').textContent = 'Click a suggestion button above to get content recommendations based on your notes.';
   document.getElementById('ai-output').classList.remove('loading');
   document.getElementById('cross-post-output').style.display = 'none';
 
-  // Populate cross-post channels
-  const allChannels = ['instagram', 'linkedin', 'twitter', 'email', 'blog', 'tiktok'];
-  const otherChannels = allChannels.filter(ch => ch !== item.channel);
-  const crossContainer = document.getElementById('cross-post-channels');
-  crossContainer.innerHTML = otherChannels.map(ch => {
-    const labels = { instagram: 'Instagram', linkedin: 'LinkedIn', twitter: 'Twitter/X', email: 'Email', blog: 'Blog', tiktok: 'TikTok' };
-    return `<button class="cross-post-btn" data-channel="${ch}"><span class="ch-dot ch-${ch}"></span> ${labels[ch]}</button>`;
+  // Cross-post channels
+  const allCh = Object.keys(CHANNELS);
+  const others = allCh.filter(x => x !== item.channel);
+  document.getElementById('cross-post-channels').innerHTML = others.map(x => {
+    const info = CHANNELS[x];
+    return `<button class="cross-post-btn" data-channel="${x}"><span class="ch-dot ${info.dot}"></span>${info.label}</button>`;
   }).join('');
 
   document.getElementById('content-detail-overlay').classList.add('active');
-}
+};
 
-document.getElementById('close-detail').addEventListener('click', () => {
-  document.getElementById('content-detail-overlay').classList.remove('active');
-  activeDetailId = null;
-});
-
-document.getElementById('content-detail-overlay').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('content-detail-overlay')) {
-    document.getElementById('content-detail-overlay').classList.remove('active');
-    activeDetailId = null;
-  }
-});
+document.getElementById('close-detail').addEventListener('click', () => { document.getElementById('content-detail-overlay').classList.remove('active'); activeDetailId=null; });
+document.getElementById('content-detail-overlay').addEventListener('click', e => { if(e.target===document.getElementById('content-detail-overlay')){ document.getElementById('content-detail-overlay').classList.remove('active'); activeDetailId=null; }});
 
 document.getElementById('save-content-detail').addEventListener('click', () => {
-  if (!activeDetailId) return;
-  const item = state.content.find(c => c.id === activeDetailId);
-  if (!item) return;
+  if(!activeDetailId) return;
+  const item = state.content.find(c=>c.id===activeDetailId); if(!item) return;
   item.title = document.getElementById('detail-title').value.trim();
   item.date = document.getElementById('detail-date').value;
   item.status = document.getElementById('detail-status').value;
   item.notes = document.getElementById('detail-notes').value.trim();
-  saveState();
-  renderContent();
-  document.getElementById('content-detail-overlay').classList.remove('active');
-  activeDetailId = null;
+  save(); renderContent();
+  document.getElementById('content-detail-overlay').classList.remove('active'); activeDetailId=null;
 });
 
 document.getElementById('delete-content-btn').addEventListener('click', () => {
-  if (!activeDetailId) return;
-  state.content = state.content.filter(c => c.id !== activeDetailId);
-  saveState();
-  renderContent();
-  document.getElementById('content-detail-overlay').classList.remove('active');
-  activeDetailId = null;
+  if(!activeDetailId) return;
+  state.content = state.content.filter(c=>c.id!==activeDetailId);
+  save(); renderContent();
+  document.getElementById('content-detail-overlay').classList.remove('active'); activeDetailId=null;
 });
 
-// AI Suggestion Buttons
+// AI Suggestions
 document.querySelectorAll('.ai-suggest-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const action = btn.dataset.action;
     const notes = document.getElementById('detail-notes').value.trim();
-    const item = state.content.find(c => c.id === activeDetailId);
-    if (!item) return;
-
-    const output = document.getElementById('ai-output');
-    output.classList.add('loading');
-    output.textContent = 'Generating suggestions...';
-
-    setTimeout(() => {
-      output.classList.remove('loading');
-      output.innerHTML = generateContentSuggestion(action, notes, item);
-    }, 800);
+    const item = state.content.find(c=>c.id===activeDetailId); if(!item) return;
+    const out = document.getElementById('ai-output');
+    out.classList.add('loading'); out.textContent = 'Generating...';
+    setTimeout(() => { out.classList.remove('loading'); out.innerHTML = aiSuggest(action, notes, item); }, 600);
   });
 });
 
-function generateContentSuggestion(action, notes, item) {
-  const channel = item.channel;
-  const title = item.title;
+function getKeyword(notes) {
+  const stop = new Set(['the','a','an','is','are','was','were','have','has','had','do','does','did','will','would','could','should','to','of','in','for','on','with','at','by','from','as','and','but','or','not','so','yet','this','that','what','which','who','how','about','it','its','they','them','we','our','you','your','just','more','most','some','all','any','each','than','very','can','be','been']);
+  const words = notes.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(w=>w.length>3&&!stop.has(w));
+  const freq={}; words.forEach(w=>freq[w]=(freq[w]||0)+1);
+  const sorted=Object.entries(freq).sort((a,b)=>b[1]-a[1]);
+  return sorted.length ? sorted[0][0] : 'this topic';
+}
 
-  const channelTips = {
-    instagram: { tone: 'visual, authentic, community-driven', format: 'carousel or single image with caption (2200 char max)', audience: 'founders, aspiring investors, community builders' },
-    linkedin: { tone: 'professional, data-driven, thought leadership', format: 'text post (3000 char) or article', audience: 'investors, fund managers, professionals' },
-    twitter: { tone: 'concise, punchy, conversational', format: 'thread (280 char per tweet) or single tweet', audience: 'tech community, startup ecosystem' },
-    email: { tone: 'direct, personal, value-packed', format: 'newsletter with clear sections and CTA', audience: 'subscribers, investors, founders in network' },
-    blog: { tone: 'in-depth, educational, SEO-friendly', format: 'long-form article (800-2000 words)', audience: 'organic search, industry readers' },
-    tiktok: { tone: 'casual, energetic, trend-aware', format: 'short video (15-60s) with hook in first 3 seconds', audience: 'younger investors, aspiring founders' }
-  };
-
-  const tip = channelTips[channel] || channelTips.instagram;
+function aiSuggest(action, notes, item) {
+  const ch = CHANNELS[item.channel] || {};
+  const kw = getKeyword(notes || item.title);
+  if (!notes && action !== 'hooks' && action !== 'cta') return 'Add some notes first so I can generate better suggestions.';
 
   if (action === 'interpret') {
-    if (!notes) return 'Add some notes first, then I can help interpret and structure them into a content plan.';
-    return `<strong>Interpretation of Your Notes:</strong><br><br>` +
-      `Based on your notes about "${title}", here's a structured breakdown:<br><br>` +
-      `<strong>Core Message:</strong> ${extractCore(notes)}<br><br>` +
-      `<strong>Key Points to Hit:</strong><br>` +
-      `${extractBullets(notes)}<br><br>` +
-      `<strong>Suggested Angle for ${capitalize(channel)}:</strong> Lead with ${tip.tone} approach. Format as ${tip.format}. Your audience here is ${tip.audience}.<br><br>` +
-      `<strong>Recommended Hook:</strong> "${generateHook(notes, channel)}"`;
+    const sentences = (notes||'').split(/[.!?\n]+/).filter(s=>s.trim().length>8);
+    const bullets = sentences.slice(0,4).map(s=>'- '+s.trim()).join('<br>');
+    return `<strong>Interpretation:</strong><br><br><strong>Core message:</strong> ${sentences[0]?sentences[0].trim()+'.' : 'Define your core message.'}<br><br><strong>Key points:</strong><br>${bullets || '- Add more detail to your notes'}<br><br><strong>Best angle for ${ch.label||'this channel'}:</strong> Lead with a ${ch.tone||'compelling'} approach. Format as ${ch.format||'a post'}.`;
   }
-
   if (action === 'expand') {
-    if (!notes) return 'Write some notes or a rough draft first, and I\'ll expand them into a full post.';
-    return `<strong>Expanded Draft for ${capitalize(channel)}:</strong><br><br>` +
-      `${expandPost(notes, channel, tip)}`;
+    return `<strong>Expanded Draft for ${ch.label}:</strong><br><br>${notes}<br><br>Here's why ${kw} matters right now:<br><br>The landscape is shifting. Traditional approaches are giving way to community-driven models that prioritize access, education, and genuine connection.<br><br>At Sengo, we've seen this through 90+ annual touchpoints and 600+ members. The takeaway: when barriers come down and real relationships form, everyone benefits.<br><br>Key points:<br>- Access without education isn't enough<br>- Community-driven beats top-down<br>- The gap won't close on its own<br><br><em>Edit this to match your voice and add specific examples.</em>`;
   }
-
   if (action === 'hooks') {
-    return `<strong>Hook Options for "${title}":</strong><br><br>` +
-      `1. "${generateHook(notes, channel)}"<br><br>` +
-      `2. "Most people don't know this about ${getTopicKeyword(notes)}..."<br><br>` +
-      `3. "Here's what changed when we focused on ${getTopicKeyword(notes)}"<br><br>` +
-      `4. "The biggest myth about ${getTopicKeyword(notes)}? Let's break it down."<br><br>` +
-      `5. "${getStatHook(notes)}"<br><br>` +
-      `<em>Pick the one that feels most authentic to your voice.</em>`;
+    const hooks = {
+      'substack': [`"I've been thinking a lot about ${kw} lately. Here's what I've landed on."`, `"The uncomfortable truth about ${kw} that nobody talks about"`, `"A letter to anyone trying to figure out ${kw}"`],
+      'linkedin': [`"After years working in ${kw}, here's the biggest lesson:"`, `"${cap(kw)} is broken. Here's what I'd change."`, `"3 things I wish I knew about ${kw} when I started"`],
+      'tiktok': [`"Wait - you need to know this about ${kw}"`, `"POV: you just discovered the truth about ${kw}"`, `"Stop scrolling. This ${kw} insight will change how you think."`],
+      'instagram': [`"We need to talk about ${kw}."`, `"What nobody tells you about ${kw} (thread)"`, `"This changed everything about how we approach ${kw}"`],
+      'personal-ig': [`"Real talk: here's what ${kw} looks like behind the scenes"`, `"My honest take on ${kw}"`, `"What I learned the hard way about ${kw}"`],
+      'founder-feed': [`"Founders: here's a ${kw} resource you need"`, `"If you're struggling with ${kw}, read this"`, `"Quick win: how to tackle ${kw} this week"`],
+      'investor-feed': [`"Data point: what ${kw} means for your portfolio"`, `"Investor insight: ${kw} trends to watch"`, `"Why smart money is paying attention to ${kw}"`],
+      'email': [`"Something about ${kw} I want to share with you"`, `"Quick update: ${kw} and what's next"`, `"You asked about ${kw}. Here's what we've found."`]
+    };
+    const h = hooks[item.channel] || hooks.linkedin;
+    return `<strong>Hook Options:</strong><br><br>` + h.map((x,i)=>`${i+1}. ${x}`).join('<br><br>') + `<br><br><em>Pick the one that feels most authentic to your voice.</em>`;
   }
-
   if (action === 'hashtags') {
-    const hashtags = generateHashtags(notes, channel);
-    return `<strong>Suggested Hashtags:</strong><br><br>` +
-      `<strong>Primary (high relevance):</strong><br>${hashtags.primary.join(' ')}<br><br>` +
-      `<strong>Discovery (broader reach):</strong><br>${hashtags.discovery.join(' ')}<br><br>` +
-      `<strong>Community:</strong><br>${hashtags.community.join(' ')}<br><br>` +
-      `<em>Use 5-8 hashtags for optimal reach on ${capitalize(channel)}.</em>`;
+    return `<strong>Suggested Hashtags:</strong><br><br><strong>Primary:</strong> #PrivateMarkets #WealthGap #ImpactInvesting #StartupFunding<br><br><strong>Discovery:</strong> #Entrepreneurship #VentureCapital #Innovation #FutureOfFinance<br><br><strong>Community:</strong> #Sengo #BuildWealth #FounderLife #InvestorCommunity #Tulsa<br><br><em>Use 5-8 for optimal reach.</em>`;
   }
-
   if (action === 'cta') {
-    return `<strong>Call-to-Action Options:</strong><br><br>` +
-      `<strong>Direct:</strong> "Join 600+ members reshaping private markets. Link in bio."<br><br>` +
-      `<strong>Engagement:</strong> "What's your take? Drop your thoughts below."<br><br>` +
-      `<strong>Value-first:</strong> "Want to learn more about ${getTopicKeyword(notes)}? We break it all down in our latest guide."<br><br>` +
-      `<strong>Community:</strong> "Tag someone who needs to see this."<br><br>` +
-      `<strong>Newsletter:</strong> "Get insights like these every week - subscribe to our newsletter."`;
+    return `<strong>CTA Options:</strong><br><br><strong>Direct:</strong> "Join 600+ members reshaping private markets. Link in bio."<br><br><strong>Engagement:</strong> "What's your take? Drop your thoughts below."<br><br><strong>Value:</strong> "Want to learn more about ${kw}? Check our latest guide."<br><br><strong>Community:</strong> "Tag someone who needs to see this."<br><br><strong>Subscribe:</strong> "Get insights like these weekly - subscribe to our Substack."`;
   }
-
   if (action === 'rewrite') {
-    return `<strong>Tone Variations:</strong><br><br>` +
-      `<strong>Professional:</strong><br>"${rewriteTone(notes, 'professional')}"<br><br>` +
-      `<strong>Conversational:</strong><br>"${rewriteTone(notes, 'conversational')}"<br><br>` +
-      `<strong>Bold/Provocative:</strong><br>"${rewriteTone(notes, 'bold')}"<br><br>` +
-      `<em>Choose the tone that matches your ${capitalize(channel)} brand voice.</em>`;
+    const core = (notes||'').split(/[.!?]/)[0] || item.title;
+    return `<strong>Tone Variations:</strong><br><br><strong>Professional:</strong> "Our analysis indicates that ${core.toLowerCase()}. This represents a significant opportunity for forward-thinking stakeholders."<br><br><strong>Conversational:</strong> "So here's the thing - ${core.toLowerCase()}. And honestly? It's about time we talked about it."<br><br><strong>Bold:</strong> "Let's be real: ${core.toLowerCase()}. If you're not paying attention, you're already behind."<br><br><em>Match the tone to your ${ch.label||''} brand voice.</em>`;
   }
-
-  return 'Select a suggestion type to get started.';
+  return '';
 }
 
-// Content helper functions
-function extractCore(notes) {
-  const sentences = notes.split(/[.!?]+/).filter(s => s.trim().length > 10);
-  return sentences.length > 0 ? sentences[0].trim() + '.' : 'Your core message needs definition - try writing a one-sentence summary.';
-}
-
-function extractBullets(notes) {
-  const words = notes.split(/\s+/);
-  const phrases = [];
-  for (let i = 0; i < words.length; i += Math.ceil(words.length / 3)) {
-    const chunk = words.slice(i, i + Math.ceil(words.length / 3)).join(' ');
-    if (chunk.trim()) phrases.push('- ' + chunk.trim());
-  }
-  return phrases.slice(0, 4).join('<br>');
-}
-
-function generateHook(notes, channel) {
-  const keyword = getTopicKeyword(notes);
-  const hooks = {
-    instagram: `We need to talk about ${keyword}.`,
-    linkedin: `After working in ${keyword} for years, here's what I've learned:`,
-    twitter: `Hot take on ${keyword}:`,
-    email: `Something important about ${keyword} that most people miss`,
-    blog: `The Complete Guide to ${capitalize(keyword)}: What You Need to Know`,
-    tiktok: `Wait - did you know this about ${keyword}?`
-  };
-  return hooks[channel] || hooks.instagram;
-}
-
-function getTopicKeyword(notes) {
-  const stopWords = new Set(['the','a','an','is','are','was','were','be','been','being','have','has','had','do','does','did','will','would','could','should','may','might','must','shall','can','need','dare','ought','used','to','of','in','for','on','with','at','by','from','as','into','through','during','before','after','above','below','between','out','off','over','under','again','further','then','once','and','but','or','nor','not','so','yet','both','either','neither','each','every','all','any','few','more','most','other','some','such','no','only','own','same','than','too','very','just','about','it','its','this','that','these','those','what','which','who','whom','whose','where','when','why','how']);
-  const words = notes.toLowerCase().replace(/[^a-z\s]/g, '').split(/\s+/).filter(w => w.length > 3 && !stopWords.has(w));
-  const freq = {};
-  words.forEach(w => freq[w] = (freq[w] || 0) + 1);
-  const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
-  return sorted.length > 0 ? sorted[0][0] : 'this topic';
-}
-
-function getStatHook(notes) {
-  const nums = notes.match(/\d+/g);
-  if (nums && nums.length > 0) return `${nums[0]}+ and counting. Here's the story behind the numbers.`;
-  return `The numbers don't lie. Here's what the data shows.`;
-}
-
-function generateHashtags(notes, channel) {
-  return {
-    primary: ['#PrivateMarkets', '#WealthGap', '#ImpactInvesting', '#StartupFunding'],
-    discovery: ['#Entrepreneurship', '#VentureCapital', '#Innovation', '#FutureOfFinance'],
-    community: ['#Sengo', '#BuildWealth', '#FounderLife', '#InvestorCommunity']
-  };
-}
-
-function expandPost(notes, channel, tip) {
-  const core = extractCore(notes);
-  const keyword = getTopicKeyword(notes);
-
-  if (channel === 'linkedin' || channel === 'blog') {
-    return `${core}<br><br>` +
-      `Here's why ${keyword} matters now more than ever:<br><br>` +
-      `The private markets landscape is shifting. Traditional gatekeeping is giving way to community-driven models that prioritize access, education, and real relationships.<br><br>` +
-      `At Sengo, we've seen this firsthand through 90+ annual touchpoints and a growing community of 600+ members. The data tells a clear story: when you lower barriers and build genuine connections, everyone benefits.<br><br>` +
-      `Key takeaways:<br>` +
-      `- Access alone isn't enough - education and support matter<br>` +
-      `- Community-driven models outperform traditional approaches<br>` +
-      `- The wealth gap in private assets won't close itself<br><br>` +
-      `<em>Edit this draft to match your voice and add specific examples from your experience.</em>`;
-  }
-
-  return `${core}<br><br>` +
-    `${notes}<br><br>` +
-    `This is just the beginning. More to come on ${keyword}.<br><br>` +
-    `<em>Adapt this draft for ${capitalize(channel)}'s ${tip.format} format. Keep the tone ${tip.tone}.</em>`;
-}
-
-function rewriteTone(notes, tone) {
-  const core = extractCore(notes);
-  if (tone === 'professional') return `Our analysis indicates that ${core.toLowerCase()} This trend represents a significant opportunity for forward-thinking investors and founders alike.`;
-  if (tone === 'conversational') return `So here's the thing - ${core.toLowerCase()} And honestly? It's about time we talked about it more openly.`;
-  if (tone === 'bold') return `Let's be real: ${core.toLowerCase()} If you're not paying attention to this, you're already behind.`;
-  return core;
-}
-
-// Cross-post functionality
-document.getElementById('cross-post-channels').addEventListener('click', (e) => {
-  const btn = e.target.closest('.cross-post-btn');
-  if (!btn) return;
-
+// Cross-post
+document.getElementById('cross-post-channels').addEventListener('click', e => {
+  const btn = e.target.closest('.cross-post-btn'); if(!btn) return;
   btn.classList.toggle('active');
-  const selectedChannels = [...document.querySelectorAll('#cross-post-channels .cross-post-btn.active')].map(b => b.dataset.channel);
-
-  const output = document.getElementById('cross-post-output');
-  if (selectedChannels.length === 0) {
-    output.style.display = 'none';
-    return;
-  }
-
+  const selected = [...document.querySelectorAll('#cross-post-channels .cross-post-btn.active')].map(b=>b.dataset.channel);
+  const out = document.getElementById('cross-post-output');
+  if (!selected.length) { out.style.display='none'; return; }
   const notes = document.getElementById('detail-notes').value.trim();
-  const item = state.content.find(c => c.id === activeDetailId);
-  if (!item) return;
-
-  output.style.display = 'block';
-  output.classList.add('loading');
-  output.textContent = 'Adapting content for selected channels...';
-
+  const item = state.content.find(c=>c.id===activeDetailId); if(!item) return;
+  out.style.display='block'; out.classList.add('loading'); out.textContent='Adapting...';
   setTimeout(() => {
-    output.classList.remove('loading');
-    const adaptations = selectedChannels.map(ch => {
-      const labels = { instagram: 'Instagram', linkedin: 'LinkedIn', twitter: 'Twitter/X', email: 'Email', blog: 'Blog', tiktok: 'TikTok' };
-      return `<strong>${labels[ch]}:</strong><br>${adaptForChannel(notes, item.channel, ch)}`;
-    }).join('<br><br>');
-
-    output.innerHTML = `<strong>Cross-Channel Adaptations:</strong><br><br>${adaptations}<br><br><em>Click "Save Changes" and create new content items for each channel you want to publish to.</em>`;
-  }, 600);
+    out.classList.remove('loading');
+    out.innerHTML = '<strong>Cross-Channel Adaptations:</strong><br><br>' + selected.map(ch => {
+      const info = CHANNELS[ch];
+      const core = (notes||item.title).split(/[.!?\n]/)[0];
+      return `<strong>${info.label}:</strong><br>Adapt for ${info.format}. Tone: ${info.tone}. Lead with: "${core}." Tailor the depth and format to what works on ${info.label}.`;
+    }).join('<br><br>') + '<br><br><em>Save changes and create new content items for each channel.</em>';
+  }, 500);
 });
 
-function adaptForChannel(notes, fromChannel, toChannel) {
-  const core = extractCore(notes);
-  const adapts = {
-    instagram: `Visual-first approach: Create a carousel with the key points. Caption: "${core}" Keep it authentic and use relevant hashtags. Consider a Reel for more engagement.`,
-    linkedin: `Professional angle: Expand into a thought leadership post. Lead with data and insights. "${core}" Add your professional perspective and invite discussion.`,
-    twitter: `Thread format: Break into 3-5 tweets. Tweet 1 (hook): "${core}" Follow with supporting points and end with a CTA. Keep each tweet punchy.`,
-    email: `Newsletter segment: Use as a featured section. Subject line based on "${core}" Include a clear CTA and link back to your full content.`,
-    blog: `Long-form: Expand into a 800-1500 word article. Use "${core}" as the thesis. Add research, examples, and actionable takeaways. Optimize for SEO.`,
-    tiktok: `Short video: 30-60 second take on this topic. Hook in first 3 seconds with "${core}" Use trending audio if applicable. Keep it conversational and direct-to-camera.`
-  };
-  return adapts[toChannel] || 'Adapt the core message for this platform\'s format and audience.';
+// ==================== PERSONNEL ====================
+function renderPersonnel() {
+  const grid = document.getElementById('personnel-grid');
+  if (!currentUser || !currentUser.isAdmin) { grid.innerHTML = ''; return; }
+  grid.innerHTML = state.users.map(u => {
+    const initials = u.name.split(' ').map(w=>w[0]).join('').substring(0,2);
+    const perms = ['chat','tasks','events','content'].map(p =>
+      `<span class="person-perm ${u.perms.includes(p)?'active':''}">${cap(p)}</span>`
+    ).join('');
+    const adminBadge = u.isAdmin ? '<span class="person-perm active" style="background:rgba(213,112,40,0.15);color:#D57028">Admin</span>' : '';
+    return `<div class="person-card">
+      <div class="person-card-header">
+        <div class="person-avatar">${initials}</div>
+        <div class="person-info"><h4>${esc(u.name)}</h4><p>${esc(u.role)} &middot; @${esc(u.username)}</p></div>
+      </div>
+      <div class="person-perms">${adminBadge}${perms}</div>
+      <div class="person-actions">
+        ${!u.isAdmin ? `<button class="event-action-btn" onclick="editPerson(${u.id})">Edit</button><button class="event-action-btn delete" onclick="deletePerson(${u.id})">Remove</button>` : '<span style="font-size:0.75rem;color:rgba(27,53,51,0.4)">Primary admin</span>'}
+      </div>
+    </div>`;
+  }).join('');
 }
+
+document.getElementById('open-add-person').addEventListener('click', () => {
+  document.getElementById('person-modal-title').textContent = 'Add Team Member';
+  document.getElementById('person-name-input').value = '';
+  document.getElementById('person-role-input').value = '';
+  document.getElementById('person-user-input').value = '';
+  document.getElementById('person-pass-input').value = '';
+  document.querySelectorAll('#perm-checkboxes input').forEach(cb => cb.checked = true);
+  delete document.getElementById('submit-person').dataset.editId;
+  document.getElementById('person-modal').classList.add('active');
+});
+document.getElementById('close-person-modal').addEventListener('click', () => document.getElementById('person-modal').classList.remove('active'));
+document.getElementById('person-modal').addEventListener('click', e => { if(e.target===document.getElementById('person-modal')) document.getElementById('person-modal').classList.remove('active'); });
+
+document.getElementById('submit-person').addEventListener('click', () => {
+  const name = document.getElementById('person-name-input').value.trim();
+  const username = document.getElementById('person-user-input').value.trim();
+  const password = document.getElementById('person-pass-input').value;
+  if (!name || !username || !password) return;
+  const perms = [...document.querySelectorAll('#perm-checkboxes input:checked')].map(cb=>cb.value);
+  const editId = document.getElementById('submit-person').dataset.editId;
+  if (editId) {
+    const u = state.users.find(x=>x.id===parseInt(editId)); if(u) {
+      u.name=name; u.role=document.getElementById('person-role-input').value.trim();
+      u.username=username; u.password=password; u.perms=perms;
+    }
+    delete document.getElementById('submit-person').dataset.editId;
+  } else {
+    if (state.users.find(x=>x.username===username)) { alert('Username already taken'); return; }
+    state.users.push({ id: state.nid.user++, username, password, name, role: document.getElementById('person-role-input').value.trim() || 'Team Member', perms, isAdmin: false });
+  }
+  save(); renderPersonnel(); document.getElementById('person-modal').classList.remove('active');
+});
+
+window.editPerson = id => {
+  const u = state.users.find(x=>x.id===id); if(!u || u.isAdmin) return;
+  document.getElementById('person-modal-title').textContent = 'Edit Team Member';
+  document.getElementById('person-name-input').value = u.name;
+  document.getElementById('person-role-input').value = u.role;
+  document.getElementById('person-user-input').value = u.username;
+  document.getElementById('person-pass-input').value = u.password;
+  document.querySelectorAll('#perm-checkboxes input').forEach(cb => cb.checked = u.perms.includes(cb.value));
+  document.getElementById('submit-person').dataset.editId = id;
+  document.getElementById('person-modal').classList.add('active');
+};
+window.deletePerson = id => { state.users=state.users.filter(x=>x.id!==id); save(); renderPersonnel(); };
 
 // ==================== SEARCH ====================
-document.getElementById('global-search').addEventListener('input', (e) => {
-  const query = e.target.value.toLowerCase().trim();
-  if (!query) {
-    if (state.activePanel === 'tasks') renderTasks();
-    if (state.activePanel === 'content') renderContent();
-    return;
-  }
-
+document.getElementById('global-search').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  if (!q) { renderAll(); return; }
   if (state.activePanel === 'tasks') {
-    const original = [...state.tasks];
-    state.tasks = original.filter(t =>
-      t.title.toLowerCase().includes(query) ||
-      t.desc.toLowerCase().includes(query) ||
-      t.type.toLowerCase().includes(query)
-    );
-    renderTasks();
-    state.tasks = original;
+    const orig = [...state.tasks];
+    state.tasks = orig.filter(t => t.title.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) || t.type.includes(q));
+    renderTasks(); state.tasks = orig;
   }
-
   if (state.activePanel === 'content') {
-    const original = [...state.content];
-    state.content = original.filter(c =>
-      c.title.toLowerCase().includes(query) ||
-      c.notes.toLowerCase().includes(query) ||
-      c.channel.toLowerCase().includes(query)
-    );
-    renderContent();
-    state.content = original;
+    const orig = [...state.content];
+    state.content = orig.filter(c => c.title.toLowerCase().includes(q) || c.notes.toLowerCase().includes(q) || c.channel.includes(q));
+    renderContent(); state.content = orig;
+  }
+  if (state.activePanel === 'events') {
+    const orig = [...state.events];
+    state.events = orig.filter(ev => ev.name.toLowerCase().includes(q) || ev.desc.toLowerCase().includes(q));
+    renderEvents(); state.events = orig;
   }
 });
 
-// ==================== UTILITIES ====================
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML.replace(/\n/g, '<br>');
-}
-
-function formatDate(dateStr) {
-  const d = new Date(dateStr + 'T00:00:00');
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return months[d.getMonth()] + ' ' + d.getDate();
-}
-
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 // ==================== INIT ====================
-switchPanel(state.activePanel);
-renderChat();
-renderTasks();
-renderContent();
+renderAll();
 </script>
 </body>
 </html>
