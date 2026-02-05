@@ -59,19 +59,36 @@
     margin: 0 auto;
   }
 
-  .fxf-hero-label {
-    font-size: 0.85rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: #D57028;
-    font-weight: 600;
-    margin-bottom: 20px;
+  .fxf-hero-presents {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .fxf-hero-presents img {
+    height: 40px;
+    width: auto;
+  }
+
+  .fxf-hero-presents .fxf-ru-logo {
+    filter: brightness(0) invert(1);
+  }
+
+  .fxf-hero-presents span {
+    font-family: 'Addington CF', Georgia, serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #F3EDE7;
   }
 
   .fxf-hero-logo {
-    max-width: 280px;
+    max-width: 500px;
+    width: 90%;
     height: auto;
-    margin-bottom: 24px;
+    margin: 0 auto 30px;
+    display: block;
   }
 
   .fxf-hero p {
@@ -107,6 +124,9 @@
     font-family: 'Addington CF', Georgia, serif;
     font-size: 1.6rem;
     font-weight: 600;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     color: #2d302f;
     margin-bottom: 6px;
   }
@@ -242,6 +262,19 @@
   .fxf-brand-match-count strong {
     color: #D57028;
     font-size: 1.1rem;
+  }
+
+  /* ── Email Signup ── */
+  .fxf-email-signup {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px 40px 20px;
+    text-align: center;
+  }
+
+  .fxf-email-signup iframe {
+    max-width: 600px;
+    width: 100%;
   }
 
   /* ── Grid Section ── */
@@ -631,7 +664,11 @@
   <!-- Hero -->
   <section class="fxf-hero">
     <div class="fxf-hero-inner">
-      <div class="fxf-hero-label">Sengo Presents</div>
+      <div class="fxf-hero-presents">
+        <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/f28e57cc-eb1f-4898-a4fd-476adda1265a/4.png?format=750w" alt="Sengo">
+        <span>x</span>
+        <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/668c945a-a178-49e1-8a0e-3f6f2b144fad/ru-logo-upward.png?format=750w" alt="RU" class="fxf-ru-logo">
+      </div>
       <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/e6af4fb9-6259-4982-905c-bfd1d3f18923/fxf-circle-logo.png?format=750w" alt="Fashion x Futures" class="fxf-hero-logo">
       <p>Meet the designers, makers, and visionaries building the future of fashion. Explore their stories and discover how you can support their journey.</p>
       <div class="fxf-hero-count">21 Brands &mdash; One Community</div>
@@ -655,6 +692,11 @@
   <!-- Dynamic Summary -->
   <section class="fxf-summary" id="fxfSummary">
     <div class="fxf-summary-inner" id="fxfSummaryInner"></div>
+  </section>
+
+  <!-- Email Signup -->
+  <section class="fxf-email-signup">
+    <script src="https://app.bysengo.com/forms/2149439059/embed.js"></script>
   </section>
 
   <!-- Brand Grid -->
