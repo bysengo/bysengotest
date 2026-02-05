@@ -21,14 +21,13 @@
             color: #1B3533;
         }
 
-        /* Main Container */
         .proposal-container {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 40px 24px 60px;
         }
 
-        /* Header Section */
+        /* Header */
         .proposal-header {
             text-align: center;
             margin-bottom: 50px;
@@ -44,7 +43,6 @@
             border-radius: 50px;
             font-size: 1.2rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
             margin-bottom: 30px;
         }
 
@@ -61,17 +59,17 @@
 
         .proposal-title {
             font-family: 'Arimo', sans-serif;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: #1B3533;
             margin-bottom: 16px;
-            line-height: 1.15;
+            line-height: 1.2;
         }
 
         .proposal-subtitle {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #67441A;
-            max-width: 650px;
+            max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
         }
@@ -80,8 +78,8 @@
         .vision-section {
             background: linear-gradient(135deg, #1B3533 0%, #2A4A47 100%);
             border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 40px;
+            padding: 36px;
+            margin-bottom: 32px;
             color: #F3EDE7;
         }
 
@@ -95,286 +93,216 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .vision-quote {
-            font-size: 1.35rem;
+            font-size: 1.2rem;
             font-style: italic;
             line-height: 1.7;
             color: #F3EDE7;
             border-left: 4px solid #D57028;
-            padding-left: 24px;
-            margin-bottom: 24px;
+            padding-left: 20px;
         }
 
-        .vision-highlight {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .highlight-tag {
-            background: rgba(243, 237, 231, 0.1);
-            border: 1px solid rgba(243, 237, 231, 0.3);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        /* What You Need Section */
-        .needs-section {
-            margin-bottom: 40px;
-        }
-
-        .needs-title {
-            font-family: 'Arimo', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .needs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .need-card {
-            background: white;
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 4px 20px rgba(27, 53, 51, 0.06);
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .need-card:hover {
-            border-color: #D57028;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(213, 112, 40, 0.12);
-        }
-
-        .need-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-        }
-
-        .need-card h3 {
-            font-family: 'Arimo', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #1B3533;
-        }
-
-        .need-card p {
-            font-size: 0.9rem;
-            color: #67441A;
-            line-height: 1.6;
-        }
-
-        /* Plan Selection Section */
-        .plan-section {
+        /* Scope Section */
+        .scope-section {
             background: white;
             border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 40px;
+            padding: 36px;
+            margin-bottom: 32px;
             box-shadow: 0 4px 30px rgba(27, 53, 51, 0.08);
         }
 
-        .plan-header {
-            text-align: center;
-            margin-bottom: 36px;
-        }
-
-        .plan-header h2 {
+        .scope-title {
             font-family: 'Arimo', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .plan-header p {
-            color: #67441A;
-            font-size: 1rem;
-        }
-
-        /* Plan Tier Indicator */
-        .plan-tier {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .tier-badge {
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .tier-badge.active {
-            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(213, 112, 40, 0.3);
-        }
-
-        .tier-badge.inactive {
-            background: #E0DAD4;
-            color: #67441A;
-        }
-
-        .tier-badge .tier-price {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-top: 4px;
-            opacity: 0.9;
-        }
-
-        /* Selector Controls */
-        .selector-container {
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-
-        .selector-group {
-            margin-bottom: 32px;
-        }
-
-        .selector-label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .selector-label h4 {
-            font-family: 'Arimo', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
+            margin-bottom: 24px;
             color: #1B3533;
         }
 
-        .selector-label p {
-            font-size: 0.85rem;
-            color: #67441A;
+        .scope-list {
+            list-style: none;
         }
 
-        .selector-value {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #D57028;
-            background: rgba(213, 112, 40, 0.1);
-            padding: 6px 16px;
-            border-radius: 20px;
-        }
-
-        /* Custom Range Slider */
-        .range-slider {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: #E0DAD4;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
-            cursor: pointer;
-        }
-
-        .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(213, 112, 40, 0.4);
-            transition: transform 0.2s ease;
-        }
-
-        .range-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.1);
-        }
-
-        .range-slider::-moz-range-thumb {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 2px 10px rgba(213, 112, 40, 0.4);
-        }
-
-        .range-labels {
+        .scope-item {
             display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: #67441A;
-        }
-
-        /* Toggle Switches Container */
-        .toggle-container {
-            max-width: 700px;
-            margin: 0 auto 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(27, 53, 51, 0.1);
-        }
-
-        .toggle-section-title {
-            font-family: 'Arimo', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #67441A;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .toggle-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 0;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 0;
             border-bottom: 1px solid rgba(27, 53, 51, 0.08);
         }
 
-        .toggle-row:last-child {
+        .scope-item:last-child {
             border-bottom: none;
         }
 
-        .toggle-row.included {
-            background: rgba(213, 112, 40, 0.05);
-            margin: 0 -20px;
-            padding: 18px 20px;
+        .scope-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
             border-radius: 12px;
-            border-bottom: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .scope-text h4 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1B3533;
+            margin-bottom: 4px;
+        }
+
+        .scope-text p {
+            font-size: 0.9rem;
+            color: #67441A;
+            line-height: 1.5;
+        }
+
+        /* Context Section */
+        .context-section {
+            background: #F8F5F1;
+            border-radius: 24px;
+            padding: 36px;
+            margin-bottom: 32px;
+        }
+
+        .context-title {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1B3533;
+        }
+
+        .context-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .context-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .context-card h4 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #D57028;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .context-card .stat {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1B3533;
             margin-bottom: 8px;
         }
 
-        .toggle-info {
-            flex: 1;
+        .context-card p {
+            font-size: 0.85rem;
+            color: #67441A;
+            line-height: 1.5;
         }
 
-        .toggle-info h4 {
+        .context-card .highlight {
+            display: inline-block;
+            background: rgba(46, 125, 50, 0.12);
+            color: #2E7D32;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: white;
+            border-radius: 24px;
+            padding: 36px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 30px rgba(27, 53, 51, 0.08);
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .pricing-header h2 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .pricing-header p {
+            color: #67441A;
+            font-size: 0.95rem;
+        }
+
+        .payment-timeline {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .payment-step {
+            display: flex;
+            gap: 20px;
+            position: relative;
+            padding-bottom: 24px;
+        }
+
+        .payment-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .payment-step:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 44px;
+            width: 2px;
+            height: calc(100% - 44px);
+            background: #E0DAD4;
+        }
+
+        .step-marker {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-marker.success {
+            background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%);
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 6px;
+        }
+
+        .step-content h4 {
             font-family: 'Arimo', sans-serif;
             font-size: 1rem;
             font-weight: 600;
@@ -382,307 +310,61 @@
             margin-bottom: 4px;
         }
 
-        .toggle-info p {
+        .step-content p {
             font-size: 0.85rem;
             color: #67441A;
         }
 
-        .included-badge {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #D57028;
-            background: rgba(213, 112, 40, 0.15);
-            padding: 4px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .free-badge {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #2E7D32;
-            background: rgba(46, 125, 50, 0.12);
-            padding: 3px 10px;
-            border-radius: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-left: 8px;
-        }
-
-        /* Deferral Checkbox */
-        .deferral-section {
-            max-width: 700px;
-            margin: 0 auto 32px;
-            padding: 24px;
-            background: linear-gradient(135deg, rgba(46, 125, 50, 0.08) 0%, rgba(46, 125, 50, 0.03) 100%);
-            border: 2px solid rgba(46, 125, 50, 0.3);
-            border-radius: 16px;
-        }
-
-        .deferral-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-        }
-
-        .deferral-checkbox {
-            width: 24px;
-            height: 24px;
-            accent-color: #2E7D32;
-            cursor: pointer;
-        }
-
-        .deferral-title {
+        .step-amount {
             font-family: 'Arimo', sans-serif;
-            font-size: 1.05rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #D57028;
+            margin-top: 8px;
+        }
+
+        /* Success Fee Note */
+        .success-fee-note {
+            background: linear-gradient(135deg, rgba(213, 112, 40, 0.08) 0%, rgba(213, 112, 40, 0.03) 100%);
+            border: 2px solid rgba(213, 112, 40, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .success-fee-note h4 {
+            font-family: 'Arimo', sans-serif;
+            font-size: 1rem;
             font-weight: 600;
             color: #1B3533;
+            margin-bottom: 8px;
         }
 
-        .deferral-badge {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: white;
-            background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%);
-            padding: 4px 10px;
-            border-radius: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .deferral-details {
-            display: none;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(46, 125, 50, 0.2);
-        }
-
-        .deferral-details.visible {
-            display: block;
-        }
-
-        .deferral-details p {
+        .success-fee-note p {
             font-size: 0.9rem;
             color: #67441A;
             line-height: 1.6;
-            margin-bottom: 12px;
         }
 
-        .deferral-breakdown {
-            background: white;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-        }
-
-        .deferral-breakdown .line {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(27, 53, 51, 0.08);
-        }
-
-        .deferral-breakdown .line:last-child {
-            border-bottom: none;
+        .success-fee-note .fee-calc {
             font-weight: 600;
             color: #D57028;
         }
 
-        /* Custom Toggle Switch */
-        .toggle-switch {
-            position: relative;
-            width: 56px;
-            height: 30px;
-            flex-shrink: 0;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #E0DAD4;
-            transition: 0.3s;
-            border-radius: 30px;
-        }
-
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 24px;
-            width: 24px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: 0.3s;
-            border-radius: 50%;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        }
-
-        .toggle-switch input:checked + .toggle-slider {
-            background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
-        }
-
-        .toggle-switch input:checked + .toggle-slider:before {
-            transform: translateX(26px);
-        }
-
-        .toggle-switch input:disabled + .toggle-slider {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        /* Pricing Display */
-        .pricing-display {
+        /* CTA Section */
+        .cta-section {
             text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, #1B3533 0%, #2A4A47 100%);
-            border-radius: 20px;
-            margin-bottom: 32px;
-            color: #F3EDE7;
-        }
-
-        .price-label {
-            font-size: 0.9rem;
-            color: rgba(243, 237, 231, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-        }
-
-        .price-amount {
-            font-family: 'Arimo', sans-serif;
-            font-size: 4.5rem;
-            font-weight: 700;
-            color: #F3EDE7;
-            line-height: 1;
-        }
-
-        .price-amount span {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: rgba(243, 237, 231, 0.7);
-        }
-
-        .price-description {
-            font-size: 1rem;
-            color: rgba(243, 237, 231, 0.8);
-            margin-top: 16px;
-        }
-
-        .price-commitment {
-            display: inline-block;
-            background: rgba(213, 112, 40, 0.3);
-            color: #F3EDE7;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-top: 16px;
-        }
-
-        /* Upgrade Notice */
-        .upgrade-notice {
-            background: linear-gradient(135deg, rgba(213, 112, 40, 0.1) 0%, rgba(213, 112, 40, 0.05) 100%);
-            border: 2px solid #D57028;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 32px;
-            text-align: center;
-            display: none;
-        }
-
-        .upgrade-notice.visible {
-            display: block;
-        }
-
-        .upgrade-notice h4 {
-            font-family: 'Arimo', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #D57028;
-            margin-bottom: 8px;
-        }
-
-        .upgrade-notice p {
-            font-size: 0.9rem;
-            color: #67441A;
-        }
-
-        /* Included Features List */
-        .features-included {
-            background: #F8F5F1;
-            border-radius: 16px;
-            padding: 24px;
-            margin-top: 24px;
-        }
-
-        .features-included h4 {
-            font-family: 'Arimo', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #1B3533;
-        }
-
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            color: #1B3533;
-        }
-
-        .feature-item.disabled {
-            color: #A9A29A;
-            text-decoration: line-through;
-        }
-
-        .feature-check {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: #D57028;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            flex-shrink: 0;
-        }
-
-        .feature-check.disabled {
-            background: #D0CBC5;
-        }
-
-        /* CTA Button */
-        .cta-container {
-            text-align: center;
+            padding: 20px 0;
         }
 
         .cta-button {
             display: inline-block;
             background: linear-gradient(135deg, #D57028 0%, #E8864A 100%);
             color: white;
-            padding: 20px 56px;
+            padding: 18px 48px;
             border-radius: 50px;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
@@ -728,7 +410,6 @@
             max-width: 600px;
             max-height: 90vh;
             overflow: hidden;
-            position: relative;
         }
 
         .checkout-header {
@@ -741,7 +422,7 @@
 
         .checkout-header h3 {
             font-family: 'Arimo', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
         }
 
@@ -776,51 +457,36 @@
             min-height: 600px;
         }
 
+        /* Sources */
+        .sources {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(27, 53, 51, 0.1);
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        .sources a {
+            color: #67441A;
+            text-decoration: none;
+        }
+
+        .sources a:hover {
+            text-decoration: underline;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .proposal-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
-            .vision-section {
-                padding: 28px;
-            }
-
-            .vision-quote {
-                font-size: 1.1rem;
-            }
-
-            .plan-section {
+            .vision-section, .scope-section, .context-section, .pricing-section {
                 padding: 28px 20px;
             }
 
-            .toggle-row {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .toggle-info {
-                width: 100%;
-                margin-bottom: 8px;
-            }
-
-            .price-amount {
-                font-size: 3.5rem;
-            }
-
-            .feature-list {
+            .context-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .plan-tier {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .selector-label {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
             }
         }
 
@@ -846,499 +512,163 @@
                 <span>×</span>
                 <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/f28e57cc-eb1f-4898-a4fd-476adda1265a/4.png?format=750w" alt="Sengo">
             </div>
-            <h1 class="proposal-title">Fundraising Support Tailored for Satta</h1>
-            <p class="proposal-subtitle">Based on your vision, pace, and what you need most right now, here's your personalized support plan.</p>
+            <h1 class="proposal-title">Fundraising Support for Satta</h1>
+            <p class="proposal-subtitle">Lightweight, founder-friendly support to help you close your round with confidence.</p>
         </header>
 
         <!-- Vision Section -->
         <section class="vision-section fade-in-up">
             <span class="section-badge">Your Vision</span>
             <blockquote class="vision-quote">
-                "Money shapes nearly every life decision, yet it is rarely talked about or taught in a healthy way. Satta exists to change how money is experienced at the very beginning of life."
+                "Satta exists to change how money is experienced at the very beginning of life. We help kids grow up feeling calm, confident, and curious about money."
             </blockquote>
-            <div class="vision-highlight">
-                <span class="highlight-tag">Depth over Scale</span>
-                <span class="highlight-tag">Mission-Aligned Growth</span>
-                <span class="highlight-tag">Kids & Families First</span>
-                <span class="highlight-tag">Building a World, Not Just a Product</span>
+        </section>
+
+        <!-- What's Included -->
+        <section class="scope-section fade-in-up">
+            <h2 class="scope-title">What's Included</h2>
+            <ul class="scope-list">
+                <li class="scope-item">
+                    <div class="scope-icon">📊</div>
+                    <div class="scope-text">
+                        <h4>Pitch Deck Polish</h4>
+                        <p>Small tweaks to sharpen your narrative and make your deck investor-ready.</p>
+                    </div>
+                </li>
+                <li class="scope-item">
+                    <div class="scope-icon">📁</div>
+                    <div class="scope-text">
+                        <h4>Data Room & Model Review</h4>
+                        <p>Review your data room structure and financial model to ensure everything is buttoned up.</p>
+                    </div>
+                </li>
+                <li class="scope-item">
+                    <div class="scope-icon">🤝</div>
+                    <div class="scope-text">
+                        <h4>Warm Introductions</h4>
+                        <p>Introductions to mission-aligned angels and investors in our network who care about impact.</p>
+                    </div>
+                </li>
+                <li class="scope-item">
+                    <div class="scope-icon">✅</div>
+                    <div class="scope-text">
+                        <h4>Success-Aligned Partnership</h4>
+                        <p>Flat fee based on your total raise, paid when checks close. We succeed when you succeed.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Context Section -->
+        <section class="context-section fade-in-up">
+            <h3 class="context-title">Setting Expectations</h3>
+            <div class="context-grid">
+                <div class="context-card">
+                    <h4>Typical Round Timeline</h4>
+                    <div class="stat">1-6 months</div>
+                    <p>Angel-led rounds typically close in <strong>4-8 weeks</strong>. VC-led pre-seed rounds take <strong>3-6 months</strong>. Individual angels often decide after just 1-2 meetings.</p>
+                </div>
+                <div class="context-card">
+                    <h4>Industry Finder's Fees</h4>
+                    <div class="stat">5-10%</div>
+                    <p>Fundraising advisors typically charge <strong>3-10% of capital raised</strong>. Professional consultants average 5% of total funds. Some charge 10%+ for smaller raises.</p>
+                    <span class="highlight">You're paying far less</span>
+                </div>
             </div>
         </section>
 
-        <!-- What You Need Section -->
-        <section class="needs-section fade-in-up">
-            <h2 class="needs-title">What You're Looking For</h2>
-            <div class="needs-grid">
-                <div class="need-card">
-                    <div class="need-icon">🎯</div>
-                    <h3>Fundraising Strategy</h3>
-                    <p>You're brand new to fundraising and want a clear strategy with investor targeting that aligns with your mission.</p>
+        <!-- Pricing Section -->
+        <section class="pricing-section fade-in-up">
+            <div class="pricing-header">
+                <h2>Simple, Founder-Friendly Pricing</h2>
+                <p>Low upfront, success-aligned payments</p>
+            </div>
+
+            <div class="payment-timeline">
+                <div class="payment-step">
+                    <div class="step-marker">1</div>
+                    <div class="step-content">
+                        <h4>February (Now)</h4>
+                        <p>Get started immediately with deck review and data room</p>
+                        <div class="step-amount">$250</div>
+                    </div>
                 </div>
-                <div class="need-card">
-                    <div class="need-icon">📋</div>
-                    <h3>Data Room & Narrative</h3>
-                    <p>Sharpening your story so investors understand the depth and impact of what you're building.</p>
+
+                <div class="payment-step">
+                    <div class="step-marker">2</div>
+                    <div class="step-content">
+                        <h4>March (2 weeks later)</h4>
+                        <p>Introductions begin, ongoing support</p>
+                        <div class="step-amount">$250</div>
+                    </div>
                 </div>
-                <div class="need-card">
-                    <div class="need-icon">🤝</div>
-                    <h3>A Trusted Sounding Board</h3>
-                    <p>Support and expertise without someone making decisions for you. You're capable of execution.</p>
+
+                <div class="payment-step">
+                    <div class="step-marker success">3</div>
+                    <div class="step-content">
+                        <h4>First Check Closes</h4>
+                        <p>Success fee payment #1 when your first investor commits</p>
+                        <div class="step-amount">50% of remaining fee</div>
+                    </div>
                 </div>
-                <div class="need-card">
-                    <div class="need-icon">⚡</div>
-                    <h3>Momentum & Clarity</h3>
-                    <p>Moving with confidence and clear options so you can close your round and make your team proud.</p>
+
+                <div class="payment-step">
+                    <div class="step-marker success">4</div>
+                    <div class="step-content">
+                        <h4>Round Closes</h4>
+                        <p>Final payment when you close your round</p>
+                        <div class="step-amount">Remaining balance</div>
+                    </div>
                 </div>
+            </div>
+
+            <div class="success-fee-note">
+                <h4>Success Fee Structure</h4>
+                <p>Total fee based on <span class="fee-calc">your total raise amount</span> (not just introductions). This keeps incentives aligned—the more you raise, the more we both win. Final fee calculated at close, minus the $500 already paid upfront.</p>
             </div>
         </section>
 
-        <!-- Plan Selection -->
-        <section class="plan-section fade-in-up">
-            <div class="plan-header">
-                <h2>Customize Your Support</h2>
-                <p>Adjust your commitment and raise target to see your plan</p>
-            </div>
-
-            <!-- Plan Tier Indicator -->
-            <div class="plan-tier">
-                <span class="tier-badge" id="tier-foundation">
-                    Foundation
-                    <span class="tier-price">$1,000/mo</span>
-                </span>
-                <span class="tier-badge" id="tier-accelerator">
-                    Accelerator
-                    <span class="tier-price">$2,000/mo</span>
-                </span>
-            </div>
-
-            <!-- Selectors -->
-            <div class="selector-container">
-                <!-- Months Commitment Slider -->
-                <div class="selector-group">
-                    <div class="selector-label">
-                        <div>
-                            <h4>Commitment Duration</h4>
-                            <p>How many months of support do you need?</p>
-                        </div>
-                        <span class="selector-value" id="months-value">4 months</span>
-                    </div>
-                    <input type="range" class="range-slider" id="months-slider" min="2" max="12" value="4" step="1">
-                    <div class="range-labels">
-                        <span>2 months (min)</span>
-                        <span>12 months</span>
-                    </div>
-                </div>
-
-                <!-- Raise Amount Slider -->
-                <div class="selector-group">
-                    <div class="selector-label">
-                        <div>
-                            <h4>Fundraising Target</h4>
-                            <p>How much are you looking to raise?</p>
-                        </div>
-                        <span class="selector-value" id="raise-value">$500K</span>
-                    </div>
-                    <input type="range" class="range-slider" id="raise-slider" min="250" max="3000" value="500" step="50">
-                    <div class="range-labels">
-                        <span>$250K</span>
-                        <span>$3M+</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Upgrade Notice -->
-            <div class="upgrade-notice" id="upgrade-notice">
-                <h4>Accelerator Plan Recommended</h4>
-                <p>For raises above $1.5M, we recommend the Accelerator plan for comprehensive support.</p>
-            </div>
-
-            <!-- What's Included -->
-            <div class="toggle-container">
-                <p class="toggle-section-title">What's Included</p>
-
-                <div class="toggle-row included">
-                    <div class="toggle-info">
-                        <h4>Bi-Weekly Strategy Calls</h4>
-                        <p>Deep-dive sessions on fundraising progress & investor pipeline</p>
-                    </div>
-                    <span class="included-badge">Included</span>
-                </div>
-
-                <div class="toggle-row included">
-                    <div class="toggle-info">
-                        <h4>Investor Targeting List</h4>
-                        <p>Curated list of mission-aligned angels, pre-seed & grant opportunities</p>
-                    </div>
-                    <span class="included-badge">Included</span>
-                </div>
-
-                <div class="toggle-row included">
-                    <div class="toggle-info">
-                        <h4>Data Room Review & Setup</h4>
-                        <p>Professional data room structure with all essential fundraising documents</p>
-                    </div>
-                    <span class="included-badge">Included</span>
-                </div>
-
-                <div class="toggle-row included">
-                    <div class="toggle-info">
-                        <h4>Pitch Deck Narrative Coaching</h4>
-                        <p>Refine your story to resonate with mission-aligned investors</p>
-                    </div>
-                    <span class="included-badge">Included</span>
-                </div>
-
-                <p class="toggle-section-title" style="margin-top: 28px;">Optional Add-ons <span class="free-badge">Free</span></p>
-
-                <div class="toggle-row">
-                    <div class="toggle-info">
-                        <h4>Weekly Accountability Check-ins <span class="free-badge">Free</span></h4>
-                        <p>Stay on track with quick weekly progress calls</p>
-                    </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="toggle-accountability">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Deferral Option -->
-            <div class="deferral-section">
-                <label class="deferral-header">
-                    <input type="checkbox" class="deferral-checkbox" id="defer-checkbox">
-                    <span class="deferral-title">I need to defer some costs</span>
-                    <span class="deferral-badge">50% OFF</span>
-                </label>
-                <div class="deferral-details" id="deferral-details">
-                    <p>We understand fundraising can be financially challenging. With cost deferral:</p>
-                    <div class="deferral-breakdown">
-                        <div class="line">
-                            <span>Month 1</span>
-                            <span id="defer-month1">$1,000 (full price)</span>
-                        </div>
-                        <div class="line">
-                            <span id="defer-months-label">Months 2-6</span>
-                            <span id="defer-discounted">$500/mo (50% off)</span>
-                        </div>
-                        <div class="line">
-                            <span>Deferred balance (due at close)</span>
-                            <span id="defer-balance">$2,500</span>
-                        </div>
-                    </div>
-                    <p style="margin-top: 12px; font-size: 0.8rem; color: #67441A;">
-                        * Minimum 6-month commitment required. Deferred balance due when your first investor check closes.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Pricing Display -->
-            <div class="pricing-display">
-                <p class="price-label">Your Monthly Investment</p>
-                <p class="price-amount">$<span id="total-price">1,000</span><span>/mo</span></p>
-                <p class="price-description" id="price-description">Foundation plan with core fundraising support</p>
-                <p class="price-commitment" id="total-commitment">Total: $4,000 over 4 months</p>
-            </div>
-
-            <!-- Features Summary -->
-            <div class="features-included">
-                <h4>Your Plan Includes:</h4>
-                <div class="feature-list">
-                    <div class="feature-item">
-                        <span class="feature-check">✓</span>
-                        Bi-weekly strategy calls
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✓</span>
-                        Investor targeting list
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✓</span>
-                        Data room setup
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✓</span>
-                        Pitch narrative coaching
-                    </div>
-                    <div class="feature-item" id="feature-weekly">
-                        <span class="feature-check disabled">✓</span>
-                        Weekly check-ins
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA Button -->
-            <div class="cta-container" style="margin-top: 32px;">
-                <button class="cta-button" onclick="openCheckout()">
-                    Proceed to Enroll
-                </button>
-                <p class="cta-subtext">Secure checkout. Cancel anytime.</p>
-            </div>
+        <!-- CTA -->
+        <section class="cta-section fade-in-up">
+            <button class="cta-button" onclick="openCheckout()">
+                Let's Get Started — $250
+            </button>
+            <p class="cta-subtext">Secure checkout. Questions? Just reply to any email.</p>
         </section>
+
+        <!-- Sources -->
+        <div class="sources">
+            <p>Sources:
+                <a href="https://lightyear.ai/blogs/so-your-startup-wants-to-raise-an-angel-pre-seed-round-heres-some-advice" target="_blank">Lightyear</a>,
+                <a href="https://www.finrofca.com/startup-qa/pre-seed-funding-2025" target="_blank">Finro</a>,
+                <a href="https://www.kalungi.com/blog/how-to-pay-someone-who-helps-you-raise-money" target="_blank">Kalungi</a>,
+                <a href="https://easyvc.ai/blog/startup-fundraising-finders-fee/" target="_blank">EasyVC</a>
+            </p>
+        </div>
     </div>
 
     <!-- Checkout Modal -->
     <div class="checkout-modal" id="checkout-modal">
         <div class="checkout-content">
             <div class="checkout-header">
-                <h3 id="checkout-title">Complete Your Enrollment</h3>
+                <h3>Complete Your Enrollment</h3>
                 <button class="close-button" onclick="closeCheckout()">×</button>
             </div>
             <div class="checkout-iframe-container">
-                <!-- Kajabi checkout will be embedded here -->
                 <iframe id="checkout-iframe" src="" title="Checkout"></iframe>
             </div>
         </div>
     </div>
 
     <script>
-        // Checkout URLs
-        const CHECKOUT_URLS = {
-            foundation: 'https://app.bysengo.com/offers/UGpzLS43', // $1,000/mo plan
-            accelerator: 'https://app.bysengo.com/offers/RJvoQ2F9/checkout'  // $2,000/mo plan
-        };
-
-        // Plan thresholds
-        const FOUNDATION_MAX_RAISE = 1500; // $1.5M max for Foundation plan
-        const FOUNDATION_MIN_MONTHS = 4;   // 4 months minimum for Foundation plan
-        const ACCELERATOR_MIN_MONTHS = 2;  // 2 months minimum for Accelerator plan
-        const FOUNDATION_PRICE = 1000;
-        const ACCELERATOR_PRICE = 2000;
-
-        // DOM Elements
-        const monthsSlider = document.getElementById('months-slider');
-        const raiseSlider = document.getElementById('raise-slider');
-        const toggleAccountability = document.getElementById('toggle-accountability');
-        const monthsValue = document.getElementById('months-value');
-        const raiseValue = document.getElementById('raise-value');
-        const totalPrice = document.getElementById('total-price');
-        const priceDescription = document.getElementById('price-description');
-        const totalCommitment = document.getElementById('total-commitment');
-        const upgradeNotice = document.getElementById('upgrade-notice');
-        const upgradeNoticeTitle = upgradeNotice.querySelector('h4');
-        const upgradeNoticeText = upgradeNotice.querySelector('p');
-        const tierFoundation = document.getElementById('tier-foundation');
-        const tierAccelerator = document.getElementById('tier-accelerator');
-
-        // Deferral elements
-        const deferCheckbox = document.getElementById('defer-checkbox');
-        const deferralDetails = document.getElementById('deferral-details');
-        const deferMonth1 = document.getElementById('defer-month1');
-        const deferMonthsLabel = document.getElementById('defer-months-label');
-        const deferDiscounted = document.getElementById('defer-discounted');
-        const deferBalance = document.getElementById('defer-balance');
-
-        // State
-        let currentPlan = 'foundation';
-        let currentMonthlyPrice = FOUNDATION_PRICE;
-        let isDeferralActive = false;
-
-        // Format currency
-        function formatCurrency(amount) {
-            if (amount >= 1000) {
-                return '$' + (amount / 1000).toFixed(amount % 1000 === 0 ? 0 : 1) + 'M';
-            }
-            return '$' + amount + 'K';
-        }
-
-        // Update display
-        function updateDisplay() {
-            const months = parseInt(monthsSlider.value);
-            const raiseAmount = parseInt(raiseSlider.value);
-
-            // Update displayed values
-            monthsValue.textContent = months + ' month' + (months > 1 ? 's' : '');
-            raiseValue.textContent = formatCurrency(raiseAmount);
-
-            // Check if Accelerator conditions are met
-            const needsAcceleratorForMonths = months < FOUNDATION_MIN_MONTHS;
-            const needsAcceleratorForRaise = raiseAmount > FOUNDATION_MAX_RAISE;
-
-            // Determine plan based on current values
-            if (needsAcceleratorForMonths || needsAcceleratorForRaise) {
-                currentPlan = 'accelerator';
-                currentMonthlyPrice = ACCELERATOR_PRICE;
-                tierFoundation.className = 'tier-badge inactive';
-                tierAccelerator.className = 'tier-badge active';
-                upgradeNotice.classList.add('visible');
-
-                // Update notice message based on reason
-                if (needsAcceleratorForMonths && needsAcceleratorForRaise) {
-                    upgradeNoticeTitle.textContent = 'Accelerator Plan';
-                    upgradeNoticeText.textContent = 'Shorter commitments and larger raises require the Accelerator plan for intensive support.';
-                } else if (needsAcceleratorForMonths) {
-                    upgradeNoticeTitle.textContent = 'Accelerator Plan';
-                    upgradeNoticeText.textContent = 'Commitments under 4 months require the Accelerator plan. Add more months to switch to Foundation ($1k/mo).';
-                } else {
-                    upgradeNoticeTitle.textContent = 'Accelerator Plan';
-                    upgradeNoticeText.textContent = 'Raises above $1.5M require the Accelerator plan. Lower your target to switch to Foundation ($1k/mo).';
-                }
-
-                priceDescription.textContent = 'Accelerator plan with intensive fundraising support';
-            } else {
-                currentPlan = 'foundation';
-                currentMonthlyPrice = FOUNDATION_PRICE;
-                tierFoundation.className = 'tier-badge active';
-                tierAccelerator.className = 'tier-badge inactive';
-                upgradeNotice.classList.remove('visible');
-                priceDescription.textContent = 'Foundation plan with core fundraising support';
-            }
-
-            // Update price display based on deferral status
-            if (isDeferralActive) {
-                const discountedPrice = currentMonthlyPrice / 2;
-                totalPrice.textContent = discountedPrice.toLocaleString();
-
-                // Calculate totals for deferral
-                const remainingMonths = months - 1;
-                const upfrontTotal = currentMonthlyPrice + (discountedPrice * remainingMonths);
-                const deferredAmount = discountedPrice * remainingMonths;
-
-                totalCommitment.innerHTML = 'Month 1: $' + currentMonthlyPrice.toLocaleString() +
-                    ' &bull; Months 2-' + months + ': $' + discountedPrice.toLocaleString() + '/mo' +
-                    '<br><span style="color: #D57028;">Deferred: $' + deferredAmount.toLocaleString() + ' due at close</span>';
-
-                // Update deferral breakdown
-                deferMonth1.textContent = '$' + currentMonthlyPrice.toLocaleString() + ' (full price)';
-                deferMonthsLabel.textContent = 'Months 2-' + months;
-                deferDiscounted.textContent = '$' + discountedPrice.toLocaleString() + '/mo (50% off)';
-                deferBalance.textContent = '$' + deferredAmount.toLocaleString();
-            } else {
-                totalPrice.textContent = currentMonthlyPrice.toLocaleString();
-
-                // Update total commitment
-                const total = currentMonthlyPrice * months;
-                totalCommitment.textContent = 'Total: $' + total.toLocaleString() + ' over ' + months + ' month' + (months > 1 ? 's' : '');
-            }
-
-            // Update weekly check-ins feature
-            updateFeatureList();
-        }
-
-        function updateFeatureList() {
-            const featureWeekly = document.getElementById('feature-weekly');
-            if (toggleAccountability.checked) {
-                featureWeekly.classList.remove('disabled');
-                featureWeekly.querySelector('.feature-check').classList.remove('disabled');
-            } else {
-                featureWeekly.classList.add('disabled');
-                featureWeekly.querySelector('.feature-check').classList.add('disabled');
-            }
-        }
-
-        // Event listeners
-        monthsSlider.addEventListener('input', updateDisplay);
-        raiseSlider.addEventListener('input', updateDisplay);
-        toggleAccountability.addEventListener('change', updateFeatureList);
-
-        // Deferral checkbox handler
-        deferCheckbox.addEventListener('change', function() {
-            isDeferralActive = this.checked;
-            deferralDetails.classList.toggle('visible', this.checked);
-
-            if (this.checked) {
-                // Enforce 6-month minimum for deferral
-                if (parseInt(monthsSlider.value) < 6) {
-                    monthsSlider.value = 6;
-                }
-                monthsSlider.min = 6;
-                document.querySelector('.range-labels span:first-child').textContent = '6 months (min)';
-            } else {
-                // Reset to normal minimum
-                monthsSlider.min = 2;
-                document.querySelector('.range-labels span:first-child').textContent = '2 months (min)';
-            }
-
-            updateDisplay();
-        });
-
-        // Tier badge click handlers
-        tierFoundation.addEventListener('click', function() {
-            // Set to Foundation-compatible values
-            if (parseInt(raiseSlider.value) > FOUNDATION_MAX_RAISE) {
-                raiseSlider.value = FOUNDATION_MAX_RAISE;
-            }
-            if (parseInt(monthsSlider.value) < FOUNDATION_MIN_MONTHS) {
-                monthsSlider.value = FOUNDATION_MIN_MONTHS;
-            }
-            updateDisplay();
-        });
-
-        tierAccelerator.addEventListener('click', function() {
-            // Switch to Accelerator by going over $1.5M raise, keep at 4 months
-            if (parseInt(raiseSlider.value) <= FOUNDATION_MAX_RAISE) {
-                raiseSlider.value = FOUNDATION_MAX_RAISE + 100; // Set to $1.6M
-            }
-            if (parseInt(monthsSlider.value) < FOUNDATION_MIN_MONTHS) {
-                monthsSlider.value = FOUNDATION_MIN_MONTHS; // Set to 4 months
-            }
-            updateDisplay();
-        });
-
-        // Initialize
-        updateDisplay();
-
-        // Checkout modal functions
-        // Email notification configuration
-        // Get your free access key at: https://web3forms.com/
-        const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'; // Replace with your key
-
-        async function sendEmailNotification() {
-            const months = parseInt(monthsSlider.value);
-            const raiseAmount = parseInt(raiseSlider.value);
-            const discountedPrice = currentMonthlyPrice / 2;
-            const total = isDeferralActive
-                ? currentMonthlyPrice + (discountedPrice * (months - 1))
-                : currentMonthlyPrice * months;
-            const deferredAmount = isDeferralActive ? discountedPrice * (months - 1) : 0;
-
-            const formData = {
-                access_key: WEB3FORMS_KEY,
-                subject: '🎉 New Satta Enrollment Started - ' + (currentPlan === 'accelerator' ? 'Accelerator' : 'Foundation') + ' Plan',
-                from_name: 'Satta Proposal Page',
-                // Enrollment details
-                plan: currentPlan === 'accelerator' ? 'Accelerator ($2,000/mo)' : 'Foundation ($1,000/mo)',
-                commitment_months: months + ' months',
-                fundraising_target: formatCurrency(raiseAmount),
-                cost_deferral: isDeferralActive ? 'Yes (50% off after Month 1)' : 'No',
-                weekly_checkins: toggleAccountability.checked ? 'Yes' : 'No',
-                monthly_price: '$' + currentMonthlyPrice.toLocaleString(),
-                total_commitment: '$' + total.toLocaleString(),
-                deferred_balance: isDeferralActive ? '$' + deferredAmount.toLocaleString() + ' (due at close)' : 'N/A',
-                timestamp: new Date().toLocaleString()
-            };
-
-            try {
-                await fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-            } catch (error) {
-                console.log('Email notification failed:', error);
-                // Continue to checkout even if email fails
-            }
-        }
+        // Checkout URL - $250 initial payment
+        const CHECKOUT_URL = 'https://app.bysengo.com/offers/UGpzLS43';
 
         function openCheckout() {
             const modal = document.getElementById('checkout-modal');
             const iframe = document.getElementById('checkout-iframe');
-            const checkoutTitle = document.getElementById('checkout-title');
-            const months = parseInt(monthsSlider.value);
 
-            // Send email notification (non-blocking)
-            sendEmailNotification();
-
-            // Determine which checkout URL to use
-            let checkoutUrl;
-            if (currentPlan === 'accelerator') {
-                checkoutUrl = CHECKOUT_URLS.accelerator;
-                checkoutTitle.textContent = 'Accelerator Plan - $' + currentMonthlyPrice.toLocaleString() + '/mo × ' + months + ' months';
-            } else {
-                checkoutUrl = CHECKOUT_URLS.foundation;
-                checkoutTitle.textContent = 'Foundation Plan - $' + currentMonthlyPrice.toLocaleString() + '/mo × ' + months + ' months';
-            }
-
-            // Set iframe source and show modal
-            iframe.src = checkoutUrl;
+            iframe.src = CHECKOUT_URL;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1367,18 +697,13 @@
         });
 
         // Scroll animations
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.15 });
 
         document.querySelectorAll('.fade-in-up').forEach(el => {
             observer.observe(el);
