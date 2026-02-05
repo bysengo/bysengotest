@@ -113,20 +113,27 @@
     letter-spacing: 1px;
   }
 
-  /* ── Role Selector ── */
-  .fxf-roles {
+  /* ── Role Selector & Email Row ── */
+  .fxf-interaction-row {
     max-width: 1300px;
     margin: 0 auto;
     padding: 48px 40px 0;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  .fxf-roles {
+    flex: 1;
   }
 
   .fxf-roles-heading {
     font-family: 'Addington CF', Georgia, serif;
-    font-size: 1.6rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 300;
     font-style: italic;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     color: #2d302f;
     margin-bottom: 6px;
   }
@@ -266,14 +273,11 @@
 
   /* ── Email Signup ── */
   .fxf-email-signup {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 40px 40px 20px;
-    text-align: center;
+    flex: 1;
+    max-width: 500px;
   }
 
   .fxf-email-signup iframe {
-    max-width: 600px;
     width: 100%;
   }
 
@@ -630,7 +634,8 @@
     .fxf-hero { padding: 60px 24px 48px; }
     .fxf-hero h1 { font-size: 2.4rem; }
     .fxf-hero p { font-size: 1rem; }
-    .fxf-roles { padding: 36px 24px 0; }
+    .fxf-interaction-row { flex-direction: column; padding: 36px 24px 0; gap: 30px; }
+    .fxf-email-signup { max-width: 100%; }
     .fxf-summary.visible { padding: 20px 24px; }
     .fxf-brands { padding: 20px 24px 60px; }
     .fxf-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
@@ -675,28 +680,29 @@
     </div>
   </section>
 
-  <!-- Role Selector -->
-  <section class="fxf-roles">
-    <div class="fxf-roles-heading">How do you want to get involved?</div>
-    <div class="fxf-roles-sub">Select all that apply &mdash; we'll show you the brands and opportunities that match.</div>
-    <div class="fxf-roles-grid" id="fxfRoles">
-      <button class="fxf-role-btn" data-role="shopper">Shopper</button>
-      <button class="fxf-role-btn" data-role="investor">Investor / Angel</button>
-      <button class="fxf-role-btn" data-role="foundation">Non-Profit / Foundation</button>
-      <button class="fxf-role-btn" data-role="crowdfund">Community Supporter</button>
-      <button class="fxf-role-btn" data-role="service">Service Provider</button>
-      <button class="fxf-role-btn" data-role="media">Media / Press</button>
-    </div>
-  </section>
+  <!-- Role Selector & Email Row -->
+  <div class="fxf-interaction-row">
+    <section class="fxf-roles">
+      <div class="fxf-roles-heading">How do you want to get involved?</div>
+      <div class="fxf-roles-sub">Select all that apply &mdash; we'll show you the brands and opportunities that match.</div>
+      <div class="fxf-roles-grid" id="fxfRoles">
+        <button class="fxf-role-btn" data-role="shopper">Shopper</button>
+        <button class="fxf-role-btn" data-role="investor">Investor / Angel</button>
+        <button class="fxf-role-btn" data-role="foundation">Non-Profit / Foundation</button>
+        <button class="fxf-role-btn" data-role="crowdfund">Community Supporter</button>
+        <button class="fxf-role-btn" data-role="service">Service Provider</button>
+        <button class="fxf-role-btn" data-role="media">Media / Press</button>
+      </div>
+    </section>
+
+    <section class="fxf-email-signup">
+      <script src="https://app.bysengo.com/forms/2149439059/embed.js"></script>
+    </section>
+  </div>
 
   <!-- Dynamic Summary -->
   <section class="fxf-summary" id="fxfSummary">
     <div class="fxf-summary-inner" id="fxfSummaryInner"></div>
-  </section>
-
-  <!-- Email Signup -->
-  <section class="fxf-email-signup">
-    <script src="https://app.bysengo.com/forms/2149439059/embed.js"></script>
   </section>
 
   <!-- Brand Grid -->
