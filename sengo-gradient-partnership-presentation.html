@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo x Gradient Partnership Proposal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-teal: #1B3533;
+      --brown: #67441A;
+      --orange: #D57028;
+      --muted-brown: #AF8145;
+      --cream: #F3EDE7;
+      --green: #717E36;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--dark-teal);
+    }
+
+    /* Slide Container */
+    .deck {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 80px;
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+
+    .slide.exit-left {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 100;
+      background: rgba(27, 53, 51, 0.9);
+      padding: 12px 24px;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--cream);
+      background: transparent;
+      color: var(--cream);
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      font-family: 'Arimo', sans-serif;
+      font-weight: 700;
+    }
+
+    .nav-btn:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .nav-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(243, 237, 231, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .nav-dot.active {
+      background: var(--orange);
+      transform: scale(1.3);
+    }
+
+    .slide-counter {
+      color: var(--cream);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    /* Typography */
+    .slide-badge {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      padding: 8px 24px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+    }
+
+    .slide-badge.green {
+      background: var(--green);
+    }
+
+    .slide-badge.teal {
+      background: var(--dark-teal);
+    }
+
+    .slide-badge.brown {
+      background: var(--brown);
+    }
+
+    h1 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 0.85;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      color: var(--dark-teal);
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      color: var(--dark-teal);
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--brown);
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    .body-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--dark-teal);
+      max-width: 800px;
+    }
+
+    /* Layouts */
+    .slide-inner {
+      max-width: 1100px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      text-align: left;
+      max-width: 1100px;
+      width: 100%;
+      align-items: start;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      text-align: left;
+      max-width: 1100px;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--white);
+      border: 3px solid var(--dark-teal);
+      padding: 36px 30px;
+      position: relative;
+      box-shadow: 8px 8px 0 rgba(27, 53, 51, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 11px 11px 0 rgba(213, 112, 40, 0.2);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      color: var(--dark-teal);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--brown);
+    }
+
+    /* Feature list */
+    .feature-list {
+      list-style: none;
+      text-align: left;
+      margin-top: 16px;
+    }
+
+    .feature-list li {
+      font-size: 1rem;
+      line-height: 1.5;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(27, 53, 51, 0.1);
+      color: var(--dark-teal);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .feature-list li::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--orange);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    /* Dark slides */
+    .slide-dark {
+      background: linear-gradient(135deg, var(--dark-teal) 0%, var(--brown) 100%);
+      color: var(--cream);
+    }
+
+    .slide-dark h1,
+    .slide-dark h2,
+    .slide-dark h3 {
+      color: var(--cream);
+    }
+
+    .slide-dark .subtitle {
+      color: rgba(243, 237, 231, 0.8);
+    }
+
+    .slide-dark .body-text {
+      color: rgba(243, 237, 231, 0.9);
+    }
+
+    .slide-dark .feature-list li {
+      color: var(--cream);
+      border-bottom-color: rgba(243, 237, 231, 0.15);
+    }
+
+    /* Orange slides */
+    .slide-orange {
+      background: linear-gradient(135deg, var(--orange) 20%, var(--muted-brown) 100%);
+      color: var(--cream);
+    }
+
+    .slide-orange h1,
+    .slide-orange h2,
+    .slide-orange h3 {
+      color: var(--cream);
+    }
+
+    .slide-orange .subtitle {
+      color: rgba(243, 237, 231, 0.85);
+    }
+
+    /* Pricing Table */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      max-width: 1000px;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    .pricing-card {
+      background: var(--white);
+      border: 3px solid var(--dark-teal);
+      padding: 40px 28px 36px;
+      text-align: center;
+      position: relative;
+      box-shadow: 8px 8px 0 rgba(27, 53, 51, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 11px 11px 0 rgba(213, 112, 40, 0.25);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--orange);
+      box-shadow: 8px 8px 0 rgba(213, 112, 40, 0.3);
+    }
+
+    .pricing-card.featured::before {
+      content: 'RECOMMENDED';
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: var(--white);
+      padding: 4px 20px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .pricing-tier {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--dark-teal);
+      margin-bottom: 8px;
+    }
+
+    .pricing-duration {
+      font-size: 0.85rem;
+      color: var(--muted-brown);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .pricing-amount {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--dark-teal);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pricing-per {
+      font-size: 0.8rem;
+      color: var(--muted-brown);
+      margin-bottom: 20px;
+    }
+
+    .pricing-total {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--brown);
+      padding: 10px 0;
+      border-top: 2px solid rgba(27, 53, 51, 0.1);
+      border-bottom: 2px solid rgba(27, 53, 51, 0.1);
+      margin: 16px 0;
+    }
+
+    .pricing-features {
+      list-style: none;
+      text-align: left;
+      margin-top: 16px;
+    }
+
+    .pricing-features li {
+      font-size: 0.85rem;
+      padding: 6px 0;
+      color: var(--dark-teal);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .pricing-features li::before {
+      content: '\2713';
+      color: var(--green);
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .pricing-savings {
+      display: inline-block;
+      background: var(--green);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-top: 12px;
+    }
+
+    /* Comparison table */
+    .comparison-table {
+      width: 100%;
+      max-width: 900px;
+      border-collapse: collapse;
+      margin-top: 30px;
+      font-size: 0.95rem;
+    }
+
+    .comparison-table th {
+      background: var(--dark-teal);
+      color: var(--cream);
+      padding: 14px 20px;
+      text-align: left;
+      font-family: 'Arimo', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+    }
+
+    .comparison-table td {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(27, 53, 51, 0.1);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) td {
+      background: rgba(243, 237, 231, 0.5);
+    }
+
+    .comparison-table .check {
+      color: var(--green);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .comparison-table .cross {
+      color: rgba(27, 53, 51, 0.25);
+      font-size: 1.1rem;
+    }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      max-width: 1000px;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    .flow-stage {
+      flex: 1;
+      padding: 28px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .flow-stage-label {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--muted-brown);
+      margin-bottom: 10px;
+    }
+
+    .flow-stage-name {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--dark-teal);
+      text-transform: uppercase;
+    }
+
+    .flow-stage-desc {
+      font-size: 0.8rem;
+      color: var(--brown);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: var(--orange);
+      flex-shrink: 0;
+      font-weight: 900;
+    }
+
+    .flow-sengo {
+      background: rgba(213, 112, 40, 0.1);
+      border: 2px solid var(--orange);
+      border-radius: 8px;
+    }
+
+    .flow-vettable {
+      background: rgba(27, 53, 51, 0.08);
+      border: 2px solid var(--dark-teal);
+      border-radius: 8px;
+    }
+
+    .flow-both {
+      background: rgba(113, 126, 54, 0.1);
+      border: 2px solid var(--green);
+      border-radius: 8px;
+    }
+
+    /* Impact metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    .metric-card {
+      background: rgba(243, 237, 231, 0.1);
+      border: 2px solid rgba(243, 237, 231, 0.2);
+      padding: 24px 16px;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .metric-icon {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+
+    /* Divider line */
+    .divider {
+      width: 60px;
+      height: 4px;
+      background: var(--orange);
+      margin: 20px auto;
+    }
+
+    /* Sengo Logo inline */
+    .logo-inline {
+      height: 40px;
+      margin-bottom: 16px;
+      color: var(--dark-teal);
+    }
+
+    .slide-dark .logo-inline {
+      color: var(--cream);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .slide {
+        padding: 40px 30px;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      h2 {
+        font-size: 2.2rem;
+      }
+
+      .two-col,
+      .three-col,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        flex-direction: column;
+      }
+
+      .flow-arrow {
+        transform: rotate(90deg);
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .comparison-table {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide slide-dark active" data-slide="0">
+    <div class="slide-inner">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" class="logo-inline" aria-label="Sengo Logo">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <h1 style="font-size: 5.5rem; margin-bottom: 16px;">Sengo<br><span style="color: var(--orange);">x</span> Gradient</h1>
+      <div class="divider" style="margin: 20px auto;"></div>
+      <p class="subtitle" style="text-align: center; margin: 0 auto;">Partnership Proposal<br>Building a Full Capital Lifecycle Stack for Founders</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: The Problem -->
+  <div class="slide" data-slide="1">
+    <div class="slide-inner">
+      <span class="slide-badge">The Challenge</span>
+      <h2 style="font-size: 3rem;">Most founders aren't<br>venture-ready yet</h2>
+      <div class="divider"></div>
+      <p class="body-text" style="text-align: center; margin: 0 auto 30px;">
+        Incubators and accelerators serve the founders who get in. But what about the rest &mdash; rejected applicants, early-stage founders, and alumni who still need support? Without a system, they leave the ecosystem entirely.
+      </p>
+      <div class="three-col" style="margin-top: 20px;">
+        <div class="card">
+          <div class="card-icon">01</div>
+          <h3>Before the Program</h3>
+          <p>Founders lack capital education and readiness frameworks to even apply successfully.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">02</div>
+          <h3>During the Program</h3>
+          <p>Education and workshops end when the session does. No persistent learning layer exists.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">03</div>
+          <h3>After Demo Day</h3>
+          <p>Alumni lose momentum. No community, accountability, or continued pathway support.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: What is Sengo -->
+  <div class="slide slide-dark" data-slide="2">
+    <div class="slide-inner">
+      <span class="slide-badge">Platform Overview</span>
+      <h2 style="font-size: 3.5rem;">What is Sengo?</h2>
+      <p class="subtitle" style="text-align: center; margin: 0 auto 16px;">The community, education, and readiness layer for founders and funders.</p>
+      <div class="divider"></div>
+      <div class="two-col" style="margin-top: 30px;">
+        <div>
+          <h3 style="color: var(--orange);">For Founders</h3>
+          <ul class="feature-list">
+            <li>Capital readiness tools and assessments</li>
+            <li>Education on multiple capital paths (VC, grants, angels, non-dilutive)</li>
+            <li>Community and accountability structures</li>
+            <li>Workshop extensions beyond the room</li>
+            <li>Readiness frameworks to build toward venture intentionally</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="color: var(--orange);">For Funders</h3>
+          <ul class="feature-list">
+            <li>Investor education and onboarding</li>
+            <li>Dealflow discovery and curation</li>
+            <li>Funder-founder matching</li>
+            <li>Alternative investment pathways</li>
+            <li>Community connection with vetted founders</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: What is Vettable -->
+  <div class="slide" data-slide="3">
+    <div class="slide-inner">
+      <span class="slide-badge teal">Platform Overview</span>
+      <h2 style="font-size: 3.5rem;">What is Vettable?</h2>
+      <p class="subtitle" style="text-align: center; margin: 0 auto 16px;">The venture operating system for founders pursuing venture capital.</p>
+      <div class="divider"></div>
+      <div class="three-col" style="margin-top: 20px;">
+        <div class="card">
+          <h3>Fundability Scoring</h3>
+          <p>Objective venture-readiness assessments that tell founders where they stand and what to improve.</p>
+        </div>
+        <div class="card">
+          <h3>Diligence-Ready Data Rooms</h3>
+          <p>Structured, investor-grade documentation that accelerates conversations and builds trust.</p>
+        </div>
+        <div class="card">
+          <h3>Investor Matching</h3>
+          <p>Aligned introductions based on stage, sector, and thesis &mdash; not cold outreach.</p>
+        </div>
+        <div class="card">
+          <h3>Cohort Analytics</h3>
+          <p>Track fundability progression across entire cohorts over time with real data.</p>
+        </div>
+        <div class="card">
+          <h3>LP-Grade Reporting</h3>
+          <p>Outcome-based reporting that satisfies limited partners, foundations, and institutional funders.</p>
+        </div>
+        <div class="card">
+          <h3>Capital Tracking</h3>
+          <p>Monitor capital raised post-program across all funding types &mdash; not just VC.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Full Lifecycle Stack -->
+  <div class="slide slide-orange" data-slide="4">
+    <div class="slide-inner">
+      <span class="slide-badge" style="background: var(--dark-teal);">The Stack</span>
+      <h2 style="font-size: 3rem; color: var(--cream);">The Full Capital<br>Lifecycle Stack</h2>
+      <p class="subtitle" style="text-align: center; margin: 0 auto 10px; color: rgba(243,237,231,0.9);">Not a single-point solution. A complete system from readiness to raise.</p>
+      <div class="flow">
+        <div class="flow-stage flow-sengo">
+          <div class="flow-stage-label" style="color: var(--orange);">Sengo</div>
+          <div class="flow-stage-name" style="color: var(--dark-teal);">Readiness</div>
+          <div class="flow-stage-desc" style="color: var(--dark-teal);">Education, community, capital path discovery</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-stage flow-sengo">
+          <div class="flow-stage-label" style="color: var(--orange);">Sengo</div>
+          <div class="flow-stage-name" style="color: var(--dark-teal);">Assessment</div>
+          <div class="flow-stage-desc" style="color: var(--dark-teal);">Capital readiness scoring &amp; alternative paths</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-stage flow-vettable">
+          <div class="flow-stage-label" style="color: var(--dark-teal);">Vettable</div>
+          <div class="flow-stage-name" style="color: var(--dark-teal);">Venture Ops</div>
+          <div class="flow-stage-desc" style="color: var(--dark-teal);">Fundability scoring, data rooms, investor matching</div>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-stage flow-both">
+          <div class="flow-stage-label" style="color: var(--green);">Together</div>
+          <div class="flow-stage-name" style="color: var(--dark-teal);">Impact</div>
+          <div class="flow-stage-desc" style="color: var(--dark-teal);">Longitudinal reporting &amp; ecosystem retention</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Where Sengo Fits for Gradient -->
+  <div class="slide" data-slide="5">
+    <div class="slide-inner">
+      <span class="slide-badge">For Gradient</span>
+      <h2>Where Sengo<br>Fits In</h2>
+      <div class="divider"></div>
+      <div class="two-col" style="margin-top: 24px;">
+        <div>
+          <p class="body-text" style="margin-bottom: 20px;">
+            Sengo supports the <strong>majority of founders</strong> who are not yet venture-ready &mdash; including rejected applicants, early-stage founders, and alumni &mdash; without losing them from the ecosystem.
+          </p>
+          <p class="body-text">
+            It extends Gradient's education and workshops <strong>beyond the room</strong>, providing ongoing support before, during, and after program cycles.
+          </p>
+        </div>
+        <div>
+          <h3 style="color: var(--orange);">Sengo Enables Gradient To:</h3>
+          <ul class="feature-list">
+            <li>Provide ongoing founder and funder education</li>
+            <li>Deliver capital readiness tools and assessments</li>
+            <li>Expose founders to multiple capital paths (not just VC)</li>
+            <li>Build community and accountability between sessions</li>
+            <li>Retain alumni engagement after demo day</li>
+            <li>Help founders build toward venture intentionally, not prematurely</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: Where Vettable Fits -->
+  <div class="slide slide-dark" data-slide="6">
+    <div class="slide-inner">
+      <span class="slide-badge green">For Gradient</span>
+      <h2>Where Vettable<br>Fits In</h2>
+      <div class="divider"></div>
+      <div class="two-col" style="margin-top: 24px;">
+        <div>
+          <p class="body-text" style="margin-bottom: 20px;">
+            Once founders are truly <strong>venture-bound</strong>, Vettable becomes the system of record &mdash; the operational backbone for tracking, matching, and reporting.
+          </p>
+          <p class="body-text">
+            It gives Gradient <strong>real data</strong> to support investor conversations, LP reporting, and cohort analysis.
+          </p>
+        </div>
+        <div>
+          <h3 style="color: var(--orange);">Vettable Enables Gradient To:</h3>
+          <ul class="feature-list">
+            <li>Assess venture readiness objectively</li>
+            <li>Track cohort fundability and graduation rates</li>
+            <li>Support faster, more aligned investor conversations</li>
+            <li>Report outcomes to LPs and partners with real data</li>
+            <li>Build a defensible, data-driven capital story</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: Impact Reporting -->
+  <div class="slide slide-dark" data-slide="7">
+    <div class="slide-inner">
+      <span class="slide-badge">The Differentiator</span>
+      <h2 style="font-size: 3rem;">Impact Reporting<br>That Matters</h2>
+      <p class="subtitle" style="text-align: center; margin: 0 auto 10px;">Most tools report activity. This stack reports <strong>outcomes</strong>.</p>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon">&#9650;</div>
+          <div class="metric-label">% of founders who become venture-ready</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">&#36;</div>
+          <div class="metric-label">Capital raised post-program (including non-dilutive &amp; angel)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">&#9201;</div>
+          <div class="metric-label">Time from readiness to capital</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">&#8634;</div>
+          <div class="metric-label">Alumni retention &amp; ecosystem participation</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">&#9734;</div>
+          <div class="metric-label">Founder diversity &amp; access metrics</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">&#9745;</div>
+          <div class="metric-label">LP- &amp; foundation-grade reporting</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: vs PitchBook -->
+  <div class="slide" data-slide="8">
+    <div class="slide-inner">
+      <span class="slide-badge brown">Comparison</span>
+      <h2 style="font-size: 2.6rem;">Sengo + Vettable<br>vs. PitchBook</h2>
+      <div class="divider"></div>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th style="width: 35%;">Capability</th>
+            <th style="width: 20%;">PitchBook</th>
+            <th style="width: 22%;">Sengo</th>
+            <th style="width: 23%;">Vettable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Founder education &amp; readiness</td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="check">&check;</span></td>
+            <td><span class="cross">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td>Capital path discovery (grants, angels, non-dilutive)</td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="check">&check;</span></td>
+            <td><span class="cross">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td>Fundability scoring &amp; assessment</td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="check">&check;</span></td>
+            <td><span class="check">&check;</span></td>
+          </tr>
+          <tr>
+            <td>Community &amp; accountability</td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="check">&check;</span></td>
+            <td><span class="cross">&mdash;</span></td>
+          </tr>
+          <tr>
+            <td>Diligence-ready data rooms</td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="check">&check;</span></td>
+          </tr>
+          <tr>
+            <td>Investor matching</td>
+            <td>Static data only</td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="check">&check;</span></td>
+          </tr>
+          <tr>
+            <td>Cohort analytics &amp; tracking</td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="check">&check;</span></td>
+          </tr>
+          <tr>
+            <td>Longitudinal impact reporting</td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="check">&check;</span></td>
+            <td><span class="check">&check;</span></td>
+          </tr>
+          <tr>
+            <td>Embedded &amp; outcome-driven</td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="check">&check;</span></td>
+            <td><span class="check">&check;</span></td>
+          </tr>
+          <tr>
+            <td>External market data</td>
+            <td><span class="check">&check;</span></td>
+            <td><span class="cross">&mdash;</span></td>
+            <td><span class="cross">&mdash;</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="body-text" style="text-align: center; margin-top: 20px; font-size: 0.95rem;">
+        PitchBook tells you what exists. <strong>Sengo + Vettable help founders become investable &mdash; and prove it over time.</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: Partnership Proposal / Pricing -->
+  <div class="slide slide-dark" data-slide="9">
+    <div class="slide-inner">
+      <span class="slide-badge">Partnership Proposal</span>
+      <h2 style="font-size: 2.8rem;">50-Seat Sengo<br>Pilot for Gradient</h2>
+      <p class="subtitle" style="text-align: center; margin: 0 auto 10px;">All plans include quarterly assessment and reporting.</p>
+      <div class="pricing-grid">
+        <!-- 3-Month -->
+        <div class="pricing-card">
+          <div class="pricing-tier">Sprint</div>
+          <div class="pricing-duration">3 Months</div>
+          <div class="pricing-amount">$125</div>
+          <div class="pricing-per">per seat / month</div>
+          <div class="pricing-total">$18,750 total</div>
+          <ul class="pricing-features">
+            <li>50 founder/funder seats</li>
+            <li>Full Sengo platform access</li>
+            <li>Capital readiness assessments</li>
+            <li>1 quarterly impact review</li>
+            <li>Onboarding support</li>
+            <li>Pilot case study development</li>
+          </ul>
+        </div>
+
+        <!-- 6-Month -->
+        <div class="pricing-card featured">
+          <div class="pricing-tier">Growth</div>
+          <div class="pricing-duration">6 Months</div>
+          <div class="pricing-amount">$110</div>
+          <div class="pricing-per">per seat / month</div>
+          <div class="pricing-total">$33,000 total</div>
+          <ul class="pricing-features">
+            <li>50 founder/funder seats</li>
+            <li>Full Sengo platform access</li>
+            <li>Capital readiness assessments</li>
+            <li>2 quarterly impact reviews</li>
+            <li>Onboarding + ongoing support</li>
+            <li>Workshops and office hours</li>
+            <li>Pilot case study development</li>
+          </ul>
+          <div class="pricing-savings">SAVE 12%</div>
+        </div>
+
+        <!-- 1-Year -->
+        <div class="pricing-card">
+          <div class="pricing-tier">Partnership</div>
+          <div class="pricing-duration">12 Months</div>
+          <div class="pricing-amount">$95</div>
+          <div class="pricing-per">per seat / month</div>
+          <div class="pricing-total">$57,000 total</div>
+          <ul class="pricing-features">
+            <li>50 founder/funder seats</li>
+            <li>Full Sengo platform access</li>
+            <li>Capital readiness assessments</li>
+            <li>4 quarterly impact reviews</li>
+            <li>Dedicated onboarding + support</li>
+            <li>Workshops and office hours</li>
+            <li>Full impact reporting loop</li>
+            <li>Priority Vettable integration</li>
+            <li>Reusable partner case study</li>
+          </ul>
+          <div class="pricing-savings">SAVE 24%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: On-Site Support -->
+  <div class="slide" data-slide="10">
+    <div class="slide-inner">
+      <span class="slide-badge green">Included</span>
+      <h2 style="font-size: 3rem;">On-Site Support<br>in Tulsa</h2>
+      <div class="divider"></div>
+      <p class="body-text" style="text-align: center; margin: 0 auto 30px;">
+        This isn't about replacing anything Gradient already does &mdash; it's about <strong>extending founder support</strong>, improving capital outcomes, and giving Gradient a stronger, more defensible capital story.
+      </p>
+      <div class="three-col">
+        <div class="card">
+          <h3>Founder Onboarding</h3>
+          <p>Hands-on readiness assessments and platform setup for every enrolled founder.</p>
+        </div>
+        <div class="card">
+          <h3>Workshops &amp; Office Hours</h3>
+          <p>Extended education sessions that complement Gradient's existing programming.</p>
+        </div>
+        <div class="card">
+          <h3>Impact Reporting Loop</h3>
+          <p>Building the first full reporting cycle with the Gradient team for reuse across partners.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: CTA -->
+  <div class="slide slide-dark" data-slide="11">
+    <div class="slide-inner">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" class="logo-inline" aria-label="Sengo Logo">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+      <h1 style="font-size: 4.5rem;">Let's Build<br>This Together</h1>
+      <div class="divider" style="margin: 24px auto;"></div>
+      <p class="subtitle" style="text-align: center; margin: 0 auto 30px;">
+        A stronger capital story for Gradient.<br>
+        Better outcomes for founders.<br>
+        Impact you can prove.
+      </p>
+      <p style="font-size: 1rem; color: var(--muted-brown); margin-top: 30px;">
+        Ready to discuss a pilot or phased rollout?<br>
+        <strong style="color: var(--orange);">Let's continue the conversation.</strong>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button class="nav-btn" id="prevBtn" onclick="prevSlide()" aria-label="Previous slide">&larr;</button>
+  <div class="nav-dots" id="navDots"></div>
+  <span class="slide-counter" id="slideCounter">1 / 12</span>
+  <button class="nav-btn" id="nextBtn" onclick="nextSlide()" aria-label="Next slide">&rarr;</button>
+</div>
+
+<script>
+  var currentSlide = 0;
+  var slides = document.querySelectorAll('.slide');
+  var totalSlides = slides.length;
+  var dotsContainer = document.getElementById('navDots');
+  var counter = document.getElementById('slideCounter');
+
+  // Build dots
+  for (var i = 0; i < totalSlides; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('data-index', i);
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.onclick = (function(idx) {
+      return function() { goToSlide(idx); };
+    })(i);
+    dotsContainer.appendChild(dot);
+  }
+
+  function goToSlide(index) {
+    if (index < 0 || index >= totalSlides || index === currentSlide) return;
+
+    var direction = index > currentSlide ? 1 : -1;
+    var current = slides[currentSlide];
+    var next = slides[index];
+
+    // Exit current
+    current.classList.remove('active');
+    current.classList.add(direction > 0 ? 'exit-left' : '');
+    current.style.transform = direction > 0 ? 'translateX(-60px)' : 'translateX(60px)';
+    current.style.opacity = '0';
+
+    // Enter next
+    next.style.transform = direction > 0 ? 'translateX(60px)' : 'translateX(-60px)';
+    next.style.opacity = '0';
+
+    setTimeout(function() {
+      current.classList.remove('exit-left');
+      current.style.transform = '';
+      current.style.opacity = '';
+      next.classList.add('active');
+    }, 50);
+
+    currentSlide = index;
+
+    // Update dots
+    var dots = dotsContainer.querySelectorAll('.nav-dot');
+    dots.forEach(function(d) { d.classList.remove('active'); });
+    dots[currentSlide].classList.add('active');
+
+    // Update counter
+    counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+  }
+
+  function nextSlide() {
+    if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1);
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) goToSlide(currentSlide - 1);
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      nextSlide();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      prevSlide();
+    }
+  });
+
+  // Touch/swipe support
+  var touchStartX = 0;
+  var touchEndX = 0;
+
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    var diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+  }, { passive: true });
+</script>
+
+</body>
+</html>
