@@ -106,6 +106,16 @@
   .st-rec-badge.educational { background: #2A7B6F; color: #fff; }
   .st-enroll-badge { display: inline-block; margin-top: 10px; margin-left: 12px; background: linear-gradient(135deg, #D57028, #AF8145); color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.8rem; padding: 8px 18px; border-radius: 6px; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; letter-spacing: 0.02em; }
   .st-enroll-badge:hover { opacity: 0.9; transform: translateY(-1px); }
+  .st-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27,53,51,0.6); z-index: 99999; justify-content: center; align-items: center; }
+  .st-modal-overlay.open { display: flex; }
+  .st-modal { background: #fff; border-radius: 12px; width: 480px; max-width: 92vw; height: 600px; max-height: 85vh; box-shadow: 0 20px 60px rgba(0,0,0,0.3); display: flex; flex-direction: column; overflow: hidden; animation: stModalIn 0.25s ease; }
+  @keyframes stModalIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .st-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid #E8E0D8; background: #F8F4EF; }
+  .st-modal-title { font-family: 'Arimo', sans-serif; font-weight: 700; font-size: 0.92rem; color: #1B3533; }
+  .st-modal-close { background: none; border: none; font-size: 1.4rem; color: #67441A; cursor: pointer; padding: 0 4px; line-height: 1; transition: color 0.2s; }
+  .st-modal-close:hover { color: #1B3533; }
+  .st-modal-body { flex: 1; overflow: hidden; }
+  .st-modal-body iframe { width: 100%; height: 100%; border: none; }
   .st-rec-desc { font-size: 0.88rem; color: #67441A; margin-bottom: 10px; line-height: 1.5; }
   .st-rec-details { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: #1B3533; }
   .st-rec-detail { display: flex; align-items: center; gap: 4px; }
@@ -144,7 +154,7 @@
   </div>
   <div class="st-progress-wrap" id="stProgress">
     <div class="st-progress-bar"><div class="st-progress-fill" id="stProgressFill"></div></div>
-    <div class="st-progress-label" id="stProgressLabel">Step 1 of 6</div>
+    <div class="st-progress-label" id="stProgressLabel">Step 1 of 7</div>
   </div>
 
   <!-- Step 1: Accreditation -->
@@ -168,18 +178,31 @@
     <div class="st-nav"><span></span><button class="st-btn st-btn-next" id="btnNext1" disabled>Next</button></div>
   </div>
 
-  <!-- Step 2: Budget -->
+  <!-- Step 2: Income -->
   <div class="st-step" data-step="2">
-    <div class="st-question">How much are you looking to invest?</div>
-    <div class="st-question-sub">Your budget helps us recommend platforms with appropriate minimums. Only invest what you can afford to lose.</div>
-    <div class="st-options" data-key="budget">
-      <div class="st-option" data-value="under-1k"><div class="st-option-label">Under $1,000</div><div class="st-option-desc">Exploring with a small initial amount to learn the space.</div></div>
-      <div class="st-option" data-value="1k-10k"><div class="st-option-label">$1,000 – $10,000</div><div class="st-option-desc">Ready to make meaningful initial investments in a few companies.</div></div>
-      <div class="st-option" data-value="10k-50k"><div class="st-option-label">$10,000 – $50,000</div><div class="st-option-desc">Building a small portfolio across multiple opportunities.</div></div>
-      <div class="st-option" data-value="50k-100k"><div class="st-option-label">$50,000 – $100,000</div><div class="st-option-desc">Actively deploying capital into private markets.</div></div>
-      <div class="st-option" data-value="100k-plus"><div class="st-option-label">$100,000+</div><div class="st-option-desc">Significant allocation to angel and private investments.</div></div>
+    <div class="st-question">What is your annual income range?</div>
+    <div class="st-question-sub">This helps us understand which platforms and opportunity types fit your financial profile. Your information is not stored.</div>
+    <div class="st-options" data-key="income">
+      <div class="st-option" data-value="under-50k"><div class="st-option-label">Under $50,000</div><div class="st-option-desc">Early career or building income — focused on learning and smaller entry points.</div></div>
+      <div class="st-option" data-value="50k-100k"><div class="st-option-label">$50,000 – $100,000</div><div class="st-option-desc">Stable income with potential to allocate a portion toward investments.</div></div>
+      <div class="st-option" data-value="100k-200k"><div class="st-option-label">$100,000 – $200,000</div><div class="st-option-desc">Strong income that may support meaningful investment allocations.</div></div>
+      <div class="st-option" data-value="200k-plus"><div class="st-option-label">$200,000+</div><div class="st-option-desc">High-earning — may meet accredited investor income thresholds ($200K individual / $300K joint).</div></div>
     </div>
     <div class="st-nav"><button class="st-btn st-btn-back" onclick="goStep(-1)">Back</button><button class="st-btn st-btn-next" id="btnNext2" disabled>Next</button></div>
+  </div>
+
+  <!-- Step 2B: Net Worth & Experience -->
+  <div class="st-step" data-step="2b">
+    <div class="st-question">What is your estimated net worth and investment experience?</div>
+    <div class="st-question-sub">Net worth excludes your primary residence. Prior experience helps us tailor platform complexity.</div>
+    <div class="st-options" data-key="networth">
+      <div class="st-option" data-value="under-100k-new"><div class="st-option-label">Under $100K net worth — New to investing</div><div class="st-option-desc">Just getting started. Haven't invested in startups or private companies before.</div></div>
+      <div class="st-option" data-value="under-100k-some"><div class="st-option-label">Under $100K net worth — Some experience</div><div class="st-option-desc">I've invested in stocks, crypto, or crowdfunding campaigns before.</div></div>
+      <div class="st-option" data-value="100k-500k"><div class="st-option-label">$100K – $500K net worth</div><div class="st-option-desc">Growing wealth with some investment experience across different asset classes.</div></div>
+      <div class="st-option" data-value="500k-1m"><div class="st-option-label">$500K – $1M net worth</div><div class="st-option-desc">Established portfolio. May be approaching or at accredited investor status.</div></div>
+      <div class="st-option" data-value="1m-plus"><div class="st-option-label">$1M+ net worth</div><div class="st-option-desc">Meets the SEC net worth threshold for accredited investor status.</div></div>
+    </div>
+    <div class="st-nav"><button class="st-btn st-btn-back" onclick="goStep(-1)">Back</button><button class="st-btn st-btn-next" id="btnNext2b" disabled>Next</button></div>
   </div>
 
   <!-- Step 3: Risk -->
@@ -241,12 +264,24 @@
   </div>
 
   <div class="st-results" id="stResults"></div>
+
+  <div class="st-modal-overlay" id="stModal">
+    <div class="st-modal">
+      <div class="st-modal-header">
+        <span class="st-modal-title">Angel Due Diligence Checklist</span>
+        <button class="st-modal-close" id="stModalClose">&times;</button>
+      </div>
+      <div class="st-modal-body">
+        <iframe id="stModalIframe" src="about:blank"></iframe>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
 (function(){
   'use strict';
-  var currentStep=1,totalSteps=6,answers={};
+  var stepOrder=['1','2','2b','3','4','5','6'],totalSteps=stepOrder.length,currentStepIndex=0,answers={};
   var platforms=[
     {name:'Republic',url:'https://republic.com',type:'Equity Crowdfunding',description:'SEC-regulated platform allowing both accredited and non-accredited investors to invest in startups, real estate, crypto, and more. Strong community features and accessible minimums.',minInvestment:'$50',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['pre-seed','seed','mixed'],sectors:['tech','fintech','consumer','food','social','ai','diverse','climate','any'],involvement:['passive','semi-active'],highlight:'Low minimums, open to all investors'},
     {name:'Wefunder',url:'https://wefunder.com',type:'Equity Crowdfunding',description:'One of the largest Regulation Crowdfunding platforms. Invest as little as $100 in vetted startups across all sectors. Focuses on founder-community relationships.',minInvestment:'$100',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['pre-seed','seed','mixed'],sectors:['tech','consumer','food','media','social','ai','any'],involvement:['passive','semi-active'],highlight:'Large deal flow, community-driven'},
@@ -266,21 +301,23 @@
     {name:'Sengo Community',url:'https://app.bysengo.com',type:'Investor Education & Network',description:'Sengo connects founders and funders to democratize access to capital and private investment. Access curated deal flow, investor education, events, and a community of active angel investors.',minInvestment:'Membership-based',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['conservative','moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','realestate','climate','food','media','social','ai','diverse','any'],involvement:['passive','semi-active','active'],highlight:'Education, deal flow, and community',isEducational:true,isSengo:true}
   ];
 
+  function currentStepId(){return stepOrder[currentStepIndex];}
   function updateProgress(){
-    var pct=((currentStep-1)/totalSteps)*100;
+    var pct=(currentStepIndex/totalSteps)*100;
     document.getElementById('stProgressFill').style.width=pct+'%';
-    document.getElementById('stProgressLabel').textContent='Step '+currentStep+' of '+totalSteps;
+    document.getElementById('stProgressLabel').textContent='Step '+(currentStepIndex+1)+' of '+totalSteps;
   }
-  function showStep(n){
+  function showStepByIndex(idx){
+    if(idx<0||idx>=totalSteps)return;
+    currentStepIndex=idx;
     document.querySelectorAll('.st-step').forEach(function(s){s.classList.remove('active');});
-    var t=document.querySelector('.st-step[data-step="'+n+'"]');
+    var t=document.querySelector('.st-step[data-step="'+stepOrder[idx]+'"]');
     if(t)t.classList.add('active');
-    currentStep=n;
     updateProgress();
     document.getElementById('stResults').classList.remove('active');
     document.getElementById('stProgress').style.display='';
   }
-  window.goStep=function(dir){showStep(currentStep+dir);};
+  window.goStep=function(dir){showStepByIndex(currentStepIndex+dir);};
 
   document.querySelectorAll('.st-options').forEach(function(group){
     var key=group.getAttribute('data-key');
@@ -308,21 +345,35 @@
   });
 
   function enableNext(){
-    var step=currentStep;
-    var btn=document.getElementById(step===6?'btnResults':'btnNext'+step);
+    var sid=currentStepId();
+    var btn;
+    if(sid==='6'){btn=document.getElementById('btnResults');}
+    else{btn=document.getElementById('btnNext'+sid);}
     if(!btn)return;
-    if(step===4){btn.disabled=!answers.sectors||answers.sectors.length===0;}
-    else{var keys=['','accreditation','budget','risk','sectors','stage','involvement'];btn.disabled=!answers[keys[step]];}
+    var keyMap={'1':'accreditation','2':'income','2b':'networth','3':'risk','4':'sectors','5':'stage','6':'involvement'};
+    var key=keyMap[sid];
+    if(sid==='4'){btn.disabled=!answers.sectors||answers.sectors.length===0;}
+    else{btn.disabled=!answers[key];}
   }
 
-  for(var i=1;i<=5;i++){(function(s){var btn=document.getElementById('btnNext'+s);if(btn){btn.addEventListener('click',function(){showStep(s+1);});}})(i);}
+  var nextBtnIds=['btnNext1','btnNext2','btnNext2b','btnNext3','btnNext4','btnNext5'];
+  nextBtnIds.forEach(function(id){var btn=document.getElementById(id);if(btn){btn.addEventListener('click',function(){showStepByIndex(currentStepIndex+1);});}});
   document.getElementById('btnResults').addEventListener('click',function(){generateResults();});
 
+  function deriveBudget(){
+    var nw=answers.networth,inc=answers.income;
+    if(nw==='1m-plus'||inc==='200k-plus')return '100k-plus';
+    if(nw==='500k-1m'||inc==='100k-200k')return '50k-100k';
+    if(nw==='100k-500k'||inc==='50k-100k')return '10k-50k';
+    if(nw==='under-100k-some')return '1k-10k';
+    return 'under-1k';
+  }
   function scorePlatform(p){
-    var score=0;
+    var score=0,budget=deriveBudget();
     if(p.accreditation.indexOf(answers.accreditation)===-1)return -1;
     score+=10;
-    if(p.budgets.indexOf(answers.budget)!==-1)score+=8;
+    if(p.budgets.indexOf(budget)!==-1)score+=8;
+    if(answers.networth&&answers.networth.indexOf('new')!==-1&&p.isEducational)score+=3;
     if(p.risk.indexOf(answers.risk)!==-1)score+=6;
     if(p.stages.indexOf(answers.stage)!==-1)score+=5;
     if(answers.sectors&&answers.sectors.length>0){var hits=0;answers.sectors.forEach(function(s){if(p.sectors.indexOf(s)!==-1)hits++;});if(hits>0)score+=Math.min(7,Math.round((hits/answers.sectors.length)*7));}
@@ -342,13 +393,14 @@
       else other.push(item);
     });
 
-    var profileLabels={accreditation:{'accredited':'Accredited Investor','non-accredited':'Non-Accredited Investor','unsure':'Accreditation TBD'},budget:{'under-1k':'Under $1K','1k-10k':'$1K\u2013$10K','10k-50k':'$10K\u2013$50K','50k-100k':'$50K\u2013$100K','100k-plus':'$100K+'},risk:{'conservative':'Conservative Risk','moderate':'Moderate Risk','aggressive':'Aggressive Risk'},stage:{'pre-seed':'Pre-Seed Stage','seed':'Seed Stage','series-a':'Series A+','mixed':'Mixed Stages'},involvement:{'passive':'Passive Investor','semi-active':'Semi-Active','active':'Active / Hands-On'}};
+    var profileLabels={accreditation:{'accredited':'Accredited Investor','non-accredited':'Non-Accredited Investor','unsure':'Accreditation TBD'},income:{'under-50k':'Income: Under $50K','50k-100k':'Income: $50K\u2013$100K','100k-200k':'Income: $100K\u2013$200K','200k-plus':'Income: $200K+'},networth:{'under-100k-new':'Net Worth: Under $100K (New)','under-100k-some':'Net Worth: Under $100K (Experienced)','100k-500k':'Net Worth: $100K\u2013$500K','500k-1m':'Net Worth: $500K\u2013$1M','1m-plus':'Net Worth: $1M+'},risk:{'conservative':'Conservative Risk','moderate':'Moderate Risk','aggressive':'Aggressive Risk'},stage:{'pre-seed':'Pre-Seed Stage','seed':'Seed Stage','series-a':'Series A+','mixed':'Mixed Stages'},involvement:{'passive':'Passive Investor','semi-active':'Semi-Active','active':'Active / Hands-On'}};
     var sectorLabels={tech:'Technology',fintech:'Fintech',health:'Healthcare',consumer:'Consumer',realestate:'Real Estate',climate:'Climate',food:'Food & Bev',media:'Media',social:'Social Impact',ai:'AI / ML',diverse:'Diverse Founders',any:'Open to All'};
 
     var html='<div class="st-results-header"><h2>Your Personalized Recommendations</h2><p>Based on your investor profile, here are the platforms and resources worth exploring.</p></div>';
     html+='<div class="st-profile-summary"><h3>Your Investor Profile</h3><div class="st-profile-tags">';
     html+='<span class="st-profile-tag">'+profileLabels.accreditation[answers.accreditation]+'</span>';
-    html+='<span class="st-profile-tag">'+profileLabels.budget[answers.budget]+'</span>';
+    html+='<span class="st-profile-tag">'+profileLabels.income[answers.income]+'</span>';
+    html+='<span class="st-profile-tag">'+profileLabels.networth[answers.networth]+'</span>';
     html+='<span class="st-profile-tag">'+profileLabels.risk[answers.risk]+'</span>';
     html+='<span class="st-profile-tag">'+profileLabels.stage[answers.stage]+'</span>';
     html+='<span class="st-profile-tag">'+profileLabels.involvement[answers.involvement]+'</span>';
@@ -391,21 +443,35 @@
     h+='<div class="st-rec-desc">'+p.description+'</div>';
     h+='<div class="st-rec-details"><div class="st-rec-detail"><strong>Type:</strong>&nbsp;'+p.type+'</div><div class="st-rec-detail"><strong>Min Investment:</strong>&nbsp;'+p.minInvestment+'</div><div class="st-rec-detail"><strong>Highlight:</strong>&nbsp;'+p.highlight+'</div></div>';
     h+='<a class="st-rec-link" href="'+p.url+'" target="_blank" rel="noopener noreferrer">Visit '+p.name+' &rarr;</a>';
-    if(p.isSengo){h+='<a class="st-enroll-badge" href="https://app.bysengo.com/offers/BGMPY9cY/checkout" target="_blank" rel="noopener noreferrer">Enroll to Get Our Angel Due Diligence Checklist</a>';}
+    if(p.isSengo){h+='<button class="st-enroll-badge" onclick="openCheckout()">Enroll to Get Our Angel Due Diligence Checklist</button>';}
     h+='</div>';
     return h;
   }
 
   window.restartTool=function(){
-    answers={};currentStep=1;
+    answers={};currentStepIndex=0;
     document.querySelectorAll('.st-option.selected, .st-chip.selected').forEach(function(el){el.classList.remove('selected');});
-    for(var i=1;i<=5;i++){var btn=document.getElementById('btnNext'+i);if(btn)btn.disabled=true;}
+    nextBtnIds.forEach(function(id){var btn=document.getElementById(id);if(btn)btn.disabled=true;});
     document.getElementById('btnResults').disabled=true;
     document.getElementById('stResults').classList.remove('active');
     document.getElementById('stResults').innerHTML='';
-    showStep(1);
+    showStepByIndex(0);
     document.getElementById('sengoTool').scrollIntoView({behavior:'smooth',block:'start'});
   };
+  window.openCheckout=function(){
+    var modal=document.getElementById('stModal');
+    var iframe=document.getElementById('stModalIframe');
+    iframe.src='https://app.bysengo.com/offers/BGMPY9cY/checkout';
+    modal.classList.add('open');
+  };
+  document.getElementById('stModalClose').addEventListener('click',function(){
+    var modal=document.getElementById('stModal');
+    modal.classList.remove('open');
+    document.getElementById('stModalIframe').src='about:blank';
+  });
+  document.getElementById('stModal').addEventListener('click',function(e){
+    if(e.target===this){this.classList.remove('open');document.getElementById('stModalIframe').src='about:blank';}
+  });
   updateProgress();
 })();
 </script>
