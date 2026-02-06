@@ -1,0 +1,398 @@
+<!--
+  =====================================================
+  SENGO ANGEL INVESTMENT EXPLORER — KAJABI EMBED
+  =====================================================
+
+  HOW TO ADD THIS TO KAJABI:
+
+  OPTION 1: Custom Code Block (Recommended)
+  1. In the Kajabi page editor, add a "Custom Code" block
+  2. Paste this ENTIRE file into the code editor
+  3. Save and preview
+
+  OPTION 2: Full Page / Landing Page
+  1. Go to Website > Pages > Add Page > Blank page
+  2. Add a Custom Code section
+  3. Paste this code into the custom code block
+  4. Adjust page padding to 0 if you want edge-to-edge
+
+  OPTION 3: Blog Post / Product Page
+  1. In the content editor, switch to HTML/Source view
+  2. Paste this code where you want the tool to appear
+  3. Switch back to visual view (tool will appear as a block)
+
+  NOTES:
+  - This is fully self-contained (no external JS dependencies)
+  - Only loads Google Fonts (Montserrat & Arimo)
+  - All CSS is scoped under .sengo-tool to avoid conflicts
+  - Works on mobile, tablet, and desktop
+  - No cookies, no tracking, no data collection
+  =====================================================
+-->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Scoped reset to avoid Kajabi conflicts */
+  .sengo-tool *, .sengo-tool *::before, .sengo-tool *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .sengo-tool {
+    font-family: 'Montserrat', sans-serif;
+    color: #1B3533;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 20px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .sengo-tool h1, .sengo-tool h2, .sengo-tool h3 {
+    font-family: 'Arimo', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .st-header { text-align: center; padding: 40px 20px 30px; border-bottom: 2px solid #D57028; margin-bottom: 30px; }
+  .st-header h1 { font-size: 2rem; color: #1B3533; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .st-header p { font-size: 1rem; color: #67441A; font-weight: 400; max-width: 600px; margin: 0 auto; }
+  .st-progress-wrap { margin-bottom: 30px; }
+  .st-progress-bar { width: 100%; height: 6px; background: #E8E0D8; border-radius: 3px; overflow: hidden; }
+  .st-progress-fill { height: 100%; background: linear-gradient(90deg, #D57028, #AF8145); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+  .st-progress-label { font-size: 0.8rem; color: #67441A; margin-top: 6px; text-align: right; }
+  .st-step { display: none; animation: stFadeIn 0.35s ease; }
+  .st-step.active { display: block; }
+  @keyframes stFadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .st-question { font-size: 1.25rem; font-weight: 600; margin-bottom: 6px; color: #1B3533; }
+  .st-question-sub { font-size: 0.9rem; color: #67441A; margin-bottom: 20px; font-weight: 400; }
+  .st-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .st-option { border: 2px solid #E8E0D8; border-radius: 10px; padding: 16px 20px; cursor: pointer; transition: all 0.2s ease; background: #fff; position: relative; }
+  .st-option:hover { border-color: #AF8145; background: #FDFBF8; }
+  .st-option.selected { border-color: #D57028; background: #FDF5EE; }
+  .st-option.selected::after { content: '\2713'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: #D57028; font-weight: 700; font-size: 1.1rem; }
+  .st-option-label { font-weight: 600; font-size: 0.95rem; color: #1B3533; margin-bottom: 2px; }
+  .st-option-desc { font-size: 0.82rem; color: #67441A; font-weight: 400; }
+  .st-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .st-chip { border: 2px solid #E8E0D8; border-radius: 24px; padding: 8px 18px; cursor: pointer; transition: all 0.2s ease; background: #fff; font-size: 0.88rem; font-weight: 500; color: #1B3533; user-select: none; }
+  .st-chip:hover { border-color: #AF8145; background: #FDFBF8; }
+  .st-chip.selected { border-color: #D57028; background: #D57028; color: #fff; }
+  .st-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; }
+  .st-btn { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 12px 28px; border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.02em; }
+  .st-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .st-btn-back { background: transparent; color: #67441A; border: 2px solid #E8E0D8; }
+  .st-btn-back:hover:not(:disabled) { border-color: #AF8145; }
+  .st-btn-next { background: #1B3533; color: #F3EDE7; }
+  .st-btn-next:hover:not(:disabled) { background: #2A4A47; }
+  .st-btn-results { background: linear-gradient(135deg, #D57028, #AF8145); color: #fff; padding: 14px 36px; font-size: 1rem; }
+  .st-btn-results:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+  .st-results { display: none; animation: stFadeIn 0.4s ease; }
+  .st-results.active { display: block; }
+  .st-results-header { text-align: center; margin-bottom: 30px; }
+  .st-results-header h2 { font-size: 1.6rem; color: #1B3533; margin-bottom: 8px; }
+  .st-results-header p { color: #67441A; font-size: 0.95rem; }
+  .st-profile-summary { background: linear-gradient(135deg, #1B3533, #2A4A47); color: #F3EDE7; border-radius: 12px; padding: 24px; margin-bottom: 28px; }
+  .st-profile-summary h3 { font-size: 1.1rem; margin-bottom: 14px; color: #D57028; }
+  .st-profile-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .st-profile-tag { background: rgba(213,112,40,0.2); border: 1px solid rgba(213,112,40,0.4); border-radius: 20px; padding: 5px 14px; font-size: 0.82rem; color: #F3EDE7; font-weight: 500; }
+  .st-rec-section { margin-bottom: 28px; }
+  .st-rec-section h3 { font-size: 1.15rem; color: #1B3533; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #E8E0D8; }
+  .st-rec-card { border: 2px solid #E8E0D8; border-radius: 12px; padding: 20px; margin-bottom: 12px; background: #fff; transition: border-color 0.2s; }
+  .st-rec-card:hover { border-color: #AF8145; }
+  .st-rec-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 12px; }
+  .st-rec-name { font-weight: 700; font-size: 1.05rem; color: #1B3533; }
+  .st-rec-badge { flex-shrink: 0; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 4px; background: #EDE6DE; color: #67441A; }
+  .st-rec-badge.high { background: #D57028; color: #fff; }
+  .st-rec-badge.medium { background: #AF8145; color: #fff; }
+  .st-rec-desc { font-size: 0.88rem; color: #67441A; margin-bottom: 10px; line-height: 1.5; }
+  .st-rec-details { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: #1B3533; }
+  .st-rec-detail { display: flex; align-items: center; gap: 4px; }
+  .st-rec-detail strong { font-weight: 600; }
+  .st-rec-link { display: inline-block; margin-top: 10px; font-size: 0.85rem; font-weight: 600; color: #D57028; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .st-rec-link:hover { border-bottom-color: #D57028; }
+  .st-disclaimer { background: #F8F4EF; border: 1px solid #E8E0D8; border-radius: 10px; padding: 20px; margin-top: 30px; font-size: 0.78rem; color: #67441A; line-height: 1.65; }
+  .st-disclaimer h4 { font-family: 'Arimo', sans-serif; font-weight: 700; font-size: 0.88rem; color: #1B3533; margin-bottom: 8px; }
+  .st-disclaimer p { margin-bottom: 8px; }
+  .st-disclaimer p:last-child { margin-bottom: 0; }
+  .st-restart { text-align: center; margin-top: 24px; }
+  .st-restart button { background: transparent; border: 2px solid #1B3533; color: #1B3533; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 12px 30px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+  .st-restart button:hover { background: #1B3533; color: #F3EDE7; }
+  .st-cta { background: linear-gradient(135deg, #D57028, #AF8145); border-radius: 12px; padding: 28px; text-align: center; margin-top: 28px; }
+  .st-cta h3 { color: #fff; font-size: 1.2rem; margin-bottom: 8px; }
+  .st-cta p { color: rgba(255,255,255,0.9); font-size: 0.9rem; margin-bottom: 16px; }
+  .st-cta a { display: inline-block; background: #1B3533; color: #F3EDE7; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; padding: 12px 30px; border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+  .st-cta a:hover { background: #2A4A47; }
+  @media (max-width: 640px) {
+    .sengo-tool { padding: 12px; }
+    .st-header { padding: 28px 12px 20px; }
+    .st-header h1 { font-size: 1.5rem; }
+    .st-question { font-size: 1.1rem; }
+    .st-rec-top { flex-direction: column; }
+    .st-rec-details { flex-direction: column; gap: 6px; }
+    .st-nav { flex-direction: column-reverse; }
+    .st-btn { width: 100%; text-align: center; }
+    .st-results-header h2 { font-size: 1.3rem; }
+  }
+</style>
+
+<div class="sengo-tool" id="sengoTool">
+  <div class="st-header">
+    <h1>Angel Investment Explorer</h1>
+    <p>Answer a few questions about your goals and preferences, and we'll suggest platforms and opportunities worth exploring.</p>
+  </div>
+  <div class="st-progress-wrap" id="stProgress">
+    <div class="st-progress-bar"><div class="st-progress-fill" id="stProgressFill"></div></div>
+    <div class="st-progress-label" id="stProgressLabel">Step 1 of 6</div>
+  </div>
+
+  <!-- Step 1: Accreditation -->
+  <div class="st-step active" data-step="1">
+    <div class="st-question">What is your investor accreditation status?</div>
+    <div class="st-question-sub">This determines which types of investment opportunities are available to you under SEC regulations.</div>
+    <div class="st-options" data-key="accreditation">
+      <div class="st-option" data-value="accredited">
+        <div class="st-option-label">Accredited Investor</div>
+        <div class="st-option-desc">Annual income over $200K ($300K joint) or net worth over $1M excluding primary residence, or hold Series 7/65/82 license.</div>
+      </div>
+      <div class="st-option" data-value="non-accredited">
+        <div class="st-option-label">Non-Accredited Investor</div>
+        <div class="st-option-desc">I don't currently meet accredited investor thresholds, but I'm interested in opportunities open to all investors.</div>
+      </div>
+      <div class="st-option" data-value="unsure">
+        <div class="st-option-label">I'm Not Sure</div>
+        <div class="st-option-desc">I'd like to see options and learn more about the requirements.</div>
+      </div>
+    </div>
+    <div class="st-nav"><span></span><button class="st-btn st-btn-next" id="btnNext1" disabled>Next</button></div>
+  </div>
+
+  <!-- Step 2: Budget -->
+  <div class="st-step" data-step="2">
+    <div class="st-question">How much are you looking to invest?</div>
+    <div class="st-question-sub">Your budget helps us recommend platforms with appropriate minimums. Only invest what you can afford to lose.</div>
+    <div class="st-options" data-key="budget">
+      <div class="st-option" data-value="under-1k"><div class="st-option-label">Under $1,000</div><div class="st-option-desc">Exploring with a small initial amount to learn the space.</div></div>
+      <div class="st-option" data-value="1k-10k"><div class="st-option-label">$1,000 – $10,000</div><div class="st-option-desc">Ready to make meaningful initial investments in a few companies.</div></div>
+      <div class="st-option" data-value="10k-50k"><div class="st-option-label">$10,000 – $50,000</div><div class="st-option-desc">Building a small portfolio across multiple opportunities.</div></div>
+      <div class="st-option" data-value="50k-100k"><div class="st-option-label">$50,000 – $100,000</div><div class="st-option-desc">Actively deploying capital into private markets.</div></div>
+      <div class="st-option" data-value="100k-plus"><div class="st-option-label">$100,000+</div><div class="st-option-desc">Significant allocation to angel and private investments.</div></div>
+    </div>
+    <div class="st-nav"><button class="st-btn st-btn-back" onclick="goStep(-1)">Back</button><button class="st-btn st-btn-next" id="btnNext2" disabled>Next</button></div>
+  </div>
+
+  <!-- Step 3: Risk -->
+  <div class="st-step" data-step="3">
+    <div class="st-question">What is your risk tolerance?</div>
+    <div class="st-question-sub">Angel investing is inherently high-risk. Understanding your comfort level helps tailor recommendations.</div>
+    <div class="st-options" data-key="risk">
+      <div class="st-option" data-value="conservative"><div class="st-option-label">Conservative</div><div class="st-option-desc">I prefer lower-risk opportunities with more established companies or revenue-sharing models.</div></div>
+      <div class="st-option" data-value="moderate"><div class="st-option-label">Moderate</div><div class="st-option-desc">I'm comfortable with some risk and want a mix of established and early-stage ventures.</div></div>
+      <div class="st-option" data-value="aggressive"><div class="st-option-label">Aggressive</div><div class="st-option-desc">I understand most startups fail and I'm looking for high-risk, high-reward early-stage deals.</div></div>
+    </div>
+    <div class="st-nav"><button class="st-btn st-btn-back" onclick="goStep(-1)">Back</button><button class="st-btn st-btn-next" id="btnNext3" disabled>Next</button></div>
+  </div>
+
+  <!-- Step 4: Sectors -->
+  <div class="st-step" data-step="4">
+    <div class="st-question">Which sectors interest you most?</div>
+    <div class="st-question-sub">Select all that apply. This helps us highlight platforms with deal flow in your areas of interest.</div>
+    <div class="st-chips" data-key="sectors">
+      <div class="st-chip" data-value="tech">Technology / SaaS</div>
+      <div class="st-chip" data-value="fintech">Fintech</div>
+      <div class="st-chip" data-value="health">Healthcare / Biotech</div>
+      <div class="st-chip" data-value="consumer">Consumer Products</div>
+      <div class="st-chip" data-value="realestate">Real Estate</div>
+      <div class="st-chip" data-value="climate">Climate / Clean Energy</div>
+      <div class="st-chip" data-value="food">Food & Beverage</div>
+      <div class="st-chip" data-value="media">Media & Entertainment</div>
+      <div class="st-chip" data-value="social">Social Impact</div>
+      <div class="st-chip" data-value="ai">AI / Machine Learning</div>
+      <div class="st-chip" data-value="diverse">Diverse & Underrepresented Founders</div>
+      <div class="st-chip" data-value="any">Open to Anything</div>
+    </div>
+    <div class="st-nav"><button class="st-btn st-btn-back" onclick="goStep(-1)">Back</button><button class="st-btn st-btn-next" id="btnNext4" disabled>Next</button></div>
+  </div>
+
+  <!-- Step 5: Stage -->
+  <div class="st-step" data-step="5">
+    <div class="st-question">What company stage do you prefer?</div>
+    <div class="st-question-sub">Earlier stages are riskier but may offer higher upside. Later stages have more traction data.</div>
+    <div class="st-options" data-key="stage">
+      <div class="st-option" data-value="pre-seed"><div class="st-option-label">Pre-Seed / Idea Stage</div><div class="st-option-desc">Very early — backing a vision and a team before significant revenue.</div></div>
+      <div class="st-option" data-value="seed"><div class="st-option-label">Seed Stage</div><div class="st-option-desc">Product exists with early customers or initial revenue traction.</div></div>
+      <div class="st-option" data-value="series-a"><div class="st-option-label">Series A and Beyond</div><div class="st-option-desc">Proven business model with significant growth and metrics.</div></div>
+      <div class="st-option" data-value="mixed"><div class="st-option-label">Mix of Stages</div><div class="st-option-desc">I want exposure across different stages for portfolio diversification.</div></div>
+    </div>
+    <div class="st-nav"><button class="st-btn st-btn-back" onclick="goStep(-1)">Back</button><button class="st-btn st-btn-next" id="btnNext5" disabled>Next</button></div>
+  </div>
+
+  <!-- Step 6: Involvement -->
+  <div class="st-step" data-step="6">
+    <div class="st-question">How involved do you want to be?</div>
+    <div class="st-question-sub">Some investors prefer hands-off exposure while others want to mentor and advise founders directly.</div>
+    <div class="st-options" data-key="involvement">
+      <div class="st-option" data-value="passive"><div class="st-option-label">Passive</div><div class="st-option-desc">Invest and receive updates. I don't need a hands-on role.</div></div>
+      <div class="st-option" data-value="semi-active"><div class="st-option-label">Semi-Active</div><div class="st-option-desc">I'd like to engage when relevant — attend events, review updates, network with founders.</div></div>
+      <div class="st-option" data-value="active"><div class="st-option-label">Active / Hands-On</div><div class="st-option-desc">I want to mentor, advise, or take advisory equity alongside investments.</div></div>
+    </div>
+    <div class="st-nav"><button class="st-btn st-btn-back" onclick="goStep(-1)">Back</button><button class="st-btn st-btn-results" id="btnResults" disabled>See My Recommendations</button></div>
+  </div>
+
+  <div class="st-results" id="stResults"></div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var currentStep=1,totalSteps=6,answers={};
+  var platforms=[
+    {name:'Republic',url:'https://republic.com',type:'Equity Crowdfunding',description:'SEC-regulated platform allowing both accredited and non-accredited investors to invest in startups, real estate, crypto, and more. Strong community features and accessible minimums.',minInvestment:'$50',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['pre-seed','seed','mixed'],sectors:['tech','fintech','consumer','food','social','ai','diverse','climate','any'],involvement:['passive','semi-active'],highlight:'Low minimums, open to all investors'},
+    {name:'Wefunder',url:'https://wefunder.com',type:'Equity Crowdfunding',description:'One of the largest Regulation Crowdfunding platforms. Invest as little as $100 in vetted startups across all sectors. Focuses on founder-community relationships.',minInvestment:'$100',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['pre-seed','seed','mixed'],sectors:['tech','consumer','food','media','social','ai','any'],involvement:['passive','semi-active'],highlight:'Large deal flow, community-driven'},
+    {name:'StartEngine',url:'https://www.startengine.com',type:'Equity Crowdfunding',description:'Major platform for Reg CF and Reg A+ offerings. Features a secondary market for trading shares before an exit. Open to all investor types.',minInvestment:'$100',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['seed','series-a','mixed'],sectors:['tech','consumer','fintech','realestate','food','media','any'],involvement:['passive'],highlight:'Secondary market for liquidity'},
+    {name:'AngelList',url:'https://www.angellist.com',type:'Angel Syndicates & Funds',description:'The industry-standard platform for angel investing. Access syndicate deals led by experienced angels, or invest through rolling funds. Primarily for accredited investors.',minInvestment:'$1,000',accreditation:['accredited'],budgets:['1k-10k','10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','ai','climate','any'],involvement:['passive','semi-active'],highlight:'Premier angel platform, syndicate model'},
+    {name:'SeedInvest (by Circle)',url:'https://www.seedinvest.com',type:'Curated Equity Platform',description:'Highly curated platform that accepts less than 1% of companies that apply. Both Reg CF and Reg D offerings. Thorough vetting process gives additional confidence.',minInvestment:'$200',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['conservative','moderate'],stages:['seed','series-a','mixed'],sectors:['tech','fintech','health','ai','any'],involvement:['passive'],highlight:'Heavy curation, <1% acceptance rate'},
+    {name:'Allocations',url:'https://allocations.com',type:'SPV & Fund Infrastructure',description:'Platform for creating and managing Special Purpose Vehicles (SPVs) and funds. Ideal for investors who want to lead or co-invest through structured vehicles.',minInvestment:'$5,000',accreditation:['accredited'],budgets:['10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','ai','any'],involvement:['active','semi-active'],highlight:'Lead your own SPVs and syndicates'},
+    {name:'Fundable',url:'https://www.fundable.com',type:'Equity & Rewards Crowdfunding',description:'Platform offering both equity and rewards-based crowdfunding for startups. Good entry point for investors looking to support early-stage companies.',minInvestment:'$100',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k'],risk:['moderate','aggressive'],stages:['pre-seed','seed'],sectors:['tech','consumer','food','social','any'],involvement:['passive','semi-active'],highlight:'Rewards + equity options'},
+    {name:'Mainvest',url:'https://mainvest.com',type:'Revenue-Sharing Notes',description:'Focus on local and small businesses using revenue-sharing note structures. Lower risk than equity with returns tied to business revenue. Great for community-oriented investors.',minInvestment:'$100',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k'],risk:['conservative','moderate'],stages:['seed','series-a'],sectors:['food','consumer','social','any'],involvement:['passive'],highlight:'Revenue-sharing, lower-risk structure'},
+    {name:'Fundera / NerdWallet Angel Guides',url:'https://www.nerdwallet.com/article/investing/angel-investing',type:'Educational Resource',description:'Not an investment platform \u2014 a comprehensive educational resource for understanding angel investing fundamentals, risks, and strategies before committing capital.',minInvestment:'N/A',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['conservative','moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','realestate','climate','food','media','social','ai','diverse','any'],involvement:['passive','semi-active','active'],highlight:'Start here if you are new'},
+    {name:'Angel Capital Association (ACA)',url:'https://www.angelcapitalassociation.org',type:'Angel Network Directory',description:'The largest professional development organization for angel investors. Access local angel groups, educational programming, and co-investment opportunities across North America.',minInvestment:'Varies by group',accreditation:['accredited'],budgets:['10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','climate','ai','any'],involvement:['semi-active','active'],highlight:'Network of 400+ angel groups'},
+    {name:'Keiretsu Forum',url:'https://www.keiretsu.com',type:'Angel Investment Network',description:'One of the largest angel investor networks globally with regional chapters. Presents vetted deals at monthly meetings. Membership-based with co-investment opportunities.',minInvestment:'$25,000',accreditation:['accredited'],budgets:['50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['seed','series-a','mixed'],sectors:['tech','health','consumer','climate','ai','any'],involvement:['semi-active','active'],highlight:'Global network, vetted deal flow'},
+    {name:'Backstage Capital',url:'https://backstagecapital.com',type:'VC Fund / Community',description:'Venture fund investing in underrepresented founders \u2014 women, people of color, and LGBTQ+ entrepreneurs. Focused on closing the funding gap for diverse founders.',minInvestment:'Varies',accreditation:['accredited'],budgets:['10k-50k','50k-100k','100k-plus'],risk:['aggressive'],stages:['pre-seed','seed'],sectors:['tech','consumer','social','diverse','any'],involvement:['semi-active','active'],highlight:'Diverse founder focus'},
+    {name:'Calm Company Fund',url:'https://calmfund.com',type:'Alternative Fund',description:'Invests in sustainable, profitable "calm companies" \u2014 businesses designed for steady growth rather than venture-scale exits. Revenue-based financing model.',minInvestment:'LP commitment varies',accreditation:['accredited'],budgets:['10k-50k','50k-100k','100k-plus'],risk:['conservative','moderate'],stages:['seed','series-a'],sectors:['tech','consumer','any'],involvement:['passive'],highlight:'Sustainable, profitable companies'},
+    {name:'Fundrise Innovation Fund',url:'https://fundrise.com/innovation-fund',type:'Interval Fund',description:'Access late-stage private tech companies pre-IPO through a registered interval fund. Lower minimums than traditional venture funds with quarterly liquidity windows.',minInvestment:'$10',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['moderate'],stages:['series-a'],sectors:['tech','ai','any'],involvement:['passive'],highlight:'Pre-IPO tech, very low minimum'},
+    {name:'MicroVentures',url:'https://microventures.com',type:'Venture Investing Platform',description:'Offers both Reg CF (open to all) and Reg D (accredited) deals. Access pre-IPO companies and early-stage startups. Known for later-stage secondary market deals.',minInvestment:'$100',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['seed','series-a','mixed'],sectors:['tech','fintech','health','ai','any'],involvement:['passive'],highlight:'Pre-IPO and secondary market access'},
+    {name:'Sengo Community',url:'https://app.bysengo.com',type:'Investor Education & Network',description:'Sengo connects founders and funders to democratize access to capital and private investment. Access curated deal flow, investor education, events, and a community of active angel investors.',minInvestment:'Membership-based',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['conservative','moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','realestate','climate','food','media','social','ai','diverse','any'],involvement:['passive','semi-active','active'],highlight:'Education, deal flow, and community'}
+  ];
+
+  function updateProgress(){
+    var pct=((currentStep-1)/totalSteps)*100;
+    document.getElementById('stProgressFill').style.width=pct+'%';
+    document.getElementById('stProgressLabel').textContent='Step '+currentStep+' of '+totalSteps;
+  }
+  function showStep(n){
+    document.querySelectorAll('.st-step').forEach(function(s){s.classList.remove('active');});
+    var t=document.querySelector('.st-step[data-step="'+n+'"]');
+    if(t)t.classList.add('active');
+    currentStep=n;
+    updateProgress();
+    document.getElementById('stResults').classList.remove('active');
+    document.getElementById('stProgress').style.display='';
+  }
+  window.goStep=function(dir){showStep(currentStep+dir);};
+
+  document.querySelectorAll('.st-options').forEach(function(group){
+    var key=group.getAttribute('data-key');
+    group.querySelectorAll('.st-option').forEach(function(opt){
+      opt.addEventListener('click',function(){
+        group.querySelectorAll('.st-option').forEach(function(o){o.classList.remove('selected');});
+        opt.classList.add('selected');
+        answers[key]=opt.getAttribute('data-value');
+        enableNext();
+      });
+    });
+  });
+
+  document.querySelectorAll('.st-chips').forEach(function(group){
+    var key=group.getAttribute('data-key');
+    group.querySelectorAll('.st-chip').forEach(function(chip){
+      chip.addEventListener('click',function(){
+        chip.classList.toggle('selected');
+        var sel=[];
+        group.querySelectorAll('.st-chip.selected').forEach(function(c){sel.push(c.getAttribute('data-value'));});
+        answers[key]=sel;
+        enableNext();
+      });
+    });
+  });
+
+  function enableNext(){
+    var step=currentStep;
+    var btn=document.getElementById(step===6?'btnResults':'btnNext'+step);
+    if(!btn)return;
+    if(step===4){btn.disabled=!answers.sectors||answers.sectors.length===0;}
+    else{var keys=['','accreditation','budget','risk','sectors','stage','involvement'];btn.disabled=!answers[keys[step]];}
+  }
+
+  for(var i=1;i<=5;i++){(function(s){var btn=document.getElementById('btnNext'+s);if(btn){btn.addEventListener('click',function(){showStep(s+1);});}})(i);}
+  document.getElementById('btnResults').addEventListener('click',function(){generateResults();});
+
+  function scorePlatform(p){
+    var score=0;
+    if(p.accreditation.indexOf(answers.accreditation)===-1)return -1;
+    score+=10;
+    if(p.budgets.indexOf(answers.budget)!==-1)score+=8;
+    if(p.risk.indexOf(answers.risk)!==-1)score+=6;
+    if(p.stages.indexOf(answers.stage)!==-1)score+=5;
+    if(answers.sectors&&answers.sectors.length>0){var hits=0;answers.sectors.forEach(function(s){if(p.sectors.indexOf(s)!==-1)hits++;});if(hits>0)score+=Math.min(7,Math.round((hits/answers.sectors.length)*7));}
+    if(p.involvement.indexOf(answers.involvement)!==-1)score+=4;
+    return score;
+  }
+
+  function generateResults(){
+    var scored=[];
+    platforms.forEach(function(p){var s=scorePlatform(p);if(s>=0)scored.push({platform:p,score:s});});
+    scored.sort(function(a,b){return b.score-a.score;});
+    var topScore=scored.length>0?scored[0].score:0;
+    var high=[],medium=[],other=[];
+    scored.forEach(function(item){
+      if(item.score>=topScore*0.85)high.push(item);
+      else if(item.score>=topScore*0.6)medium.push(item);
+      else other.push(item);
+    });
+
+    var profileLabels={accreditation:{'accredited':'Accredited Investor','non-accredited':'Non-Accredited Investor','unsure':'Accreditation TBD'},budget:{'under-1k':'Under $1K','1k-10k':'$1K\u2013$10K','10k-50k':'$10K\u2013$50K','50k-100k':'$50K\u2013$100K','100k-plus':'$100K+'},risk:{'conservative':'Conservative Risk','moderate':'Moderate Risk','aggressive':'Aggressive Risk'},stage:{'pre-seed':'Pre-Seed Stage','seed':'Seed Stage','series-a':'Series A+','mixed':'Mixed Stages'},involvement:{'passive':'Passive Investor','semi-active':'Semi-Active','active':'Active / Hands-On'}};
+    var sectorLabels={tech:'Technology',fintech:'Fintech',health:'Healthcare',consumer:'Consumer',realestate:'Real Estate',climate:'Climate',food:'Food & Bev',media:'Media',social:'Social Impact',ai:'AI / ML',diverse:'Diverse Founders',any:'Open to All'};
+
+    var html='<div class="st-results-header"><h2>Your Personalized Recommendations</h2><p>Based on your investor profile, here are the platforms and resources worth exploring.</p></div>';
+    html+='<div class="st-profile-summary"><h3>Your Investor Profile</h3><div class="st-profile-tags">';
+    html+='<span class="st-profile-tag">'+profileLabels.accreditation[answers.accreditation]+'</span>';
+    html+='<span class="st-profile-tag">'+profileLabels.budget[answers.budget]+'</span>';
+    html+='<span class="st-profile-tag">'+profileLabels.risk[answers.risk]+'</span>';
+    html+='<span class="st-profile-tag">'+profileLabels.stage[answers.stage]+'</span>';
+    html+='<span class="st-profile-tag">'+profileLabels.involvement[answers.involvement]+'</span>';
+    if(answers.sectors)answers.sectors.forEach(function(s){html+='<span class="st-profile-tag">'+(sectorLabels[s]||s)+'</span>';});
+    html+='</div></div>';
+
+    if(high.length>0){html+='<div class="st-rec-section"><h3>Top Matches for You</h3>';high.forEach(function(item){html+=renderCard(item.platform,'high');});html+='</div>';}
+    if(medium.length>0){html+='<div class="st-rec-section"><h3>Also Worth Exploring</h3>';medium.forEach(function(item){html+=renderCard(item.platform,'medium');});html+='</div>';}
+    if(other.length>0){html+='<div class="st-rec-section"><h3>Additional Options</h3>';other.forEach(function(item){html+=renderCard(item.platform,'');});html+='</div>';}
+
+    html+='<div class="st-cta"><h3>Ready to Start Your Angel Investing Journey?</h3><p>Join the Sengo community for investor education, curated deal flow, events, and a network of funders and founders.</p><a href="https://app.bysengo.com/investor-enrollment" target="_blank" rel="noopener">Join Sengo as a Funder</a></div>';
+
+    html+='<div class="st-disclaimer"><h4>Important Disclaimers</h4>';
+    html+='<p><strong>Not Investment Advice.</strong> This tool is for educational and informational purposes only. The recommendations generated by this tool do not constitute investment advice, financial advice, trading advice, or any other sort of advice, and you should not treat any of this content as such. Sengo does not recommend that any investment be bought, sold, or held by you.</p>';
+    html+='<p><strong>No Guarantees.</strong> Angel investing and startup investing carry substantial risk, including the complete loss of your investment. The majority of startups fail. Past performance of any platform, fund, or investment is not indicative of future results.</p>';
+    html+='<p><strong>Do Your Own Due Diligence.</strong> Before making any investment, you should conduct your own research and due diligence, and consider obtaining advice from a qualified financial advisor, attorney, and/or tax professional who is aware of your individual circumstances.</p>';
+    html+='<p><strong>Third-Party Platforms.</strong> Sengo is not affiliated with, does not endorse, and has not been compensated by any of the third-party platforms listed in these results unless explicitly stated. Platform information may change \u2014 verify all details directly with each platform before investing.</p>';
+    html+='<p><strong>Accreditation.</strong> Some investment opportunities are limited to accredited investors as defined by the SEC under Rule 501 of Regulation D. It is your responsibility to determine whether you qualify and to truthfully represent your status to any platform.</p>';
+    html+='<p><strong>Regulatory Notice.</strong> Investments in private companies are speculative, illiquid, and involve a high degree of risk. Securities offered through Regulation Crowdfunding (Reg CF), Regulation A+ (Reg A+), and Regulation D (Reg D) have different requirements, limitations, and investor protections. Understand the regulations that apply to any offering before investing.</p>';
+    html+='</div>';
+
+    html+='<div class="st-restart"><button onclick="restartTool()">Start Over</button></div>';
+
+    document.querySelectorAll('.st-step').forEach(function(s){s.classList.remove('active');});
+    document.getElementById('stProgress').style.display='none';
+    var r=document.getElementById('stResults');r.innerHTML=html;r.classList.add('active');
+    document.getElementById('sengoTool').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function renderCard(p,tier){
+    var bc=tier==='high'?' high':(tier==='medium'?' medium':'');
+    var bt=tier==='high'?'Strong Match':(tier==='medium'?'Good Fit':'Explore');
+    var h='<div class="st-rec-card"><div class="st-rec-top"><span class="st-rec-name">'+p.name+'</span><span class="st-rec-badge'+bc+'">'+bt+'</span></div>';
+    h+='<div class="st-rec-desc">'+p.description+'</div>';
+    h+='<div class="st-rec-details"><div class="st-rec-detail"><strong>Type:</strong>&nbsp;'+p.type+'</div><div class="st-rec-detail"><strong>Min Investment:</strong>&nbsp;'+p.minInvestment+'</div><div class="st-rec-detail"><strong>Highlight:</strong>&nbsp;'+p.highlight+'</div></div>';
+    h+='<a class="st-rec-link" href="'+p.url+'" target="_blank" rel="noopener noreferrer">Visit '+p.name+' &rarr;</a></div>';
+    return h;
+  }
+
+  window.restartTool=function(){
+    answers={};currentStep=1;
+    document.querySelectorAll('.st-option.selected, .st-chip.selected').forEach(function(el){el.classList.remove('selected');});
+    for(var i=1;i<=5;i++){var btn=document.getElementById('btnNext'+i);if(btn)btn.disabled=true;}
+    document.getElementById('btnResults').disabled=true;
+    document.getElementById('stResults').classList.remove('active');
+    document.getElementById('stResults').innerHTML='';
+    showStep(1);
+    document.getElementById('sengoTool').scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  updateProgress();
+})();
+</script>
