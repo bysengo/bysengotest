@@ -334,6 +334,15 @@
       border-color: #AF8145;
     }
 
+    .st-rec-card.educational {
+      border-color: #2A7B6F;
+      background: #F0FAF8;
+    }
+
+    .st-rec-card.educational:hover {
+      border-color: #1B5E54;
+    }
+
     .st-rec-top {
       display: flex;
       justify-content: space-between;
@@ -368,6 +377,34 @@
     .st-rec-badge.medium {
       background: #AF8145;
       color: #fff;
+    }
+
+    .st-rec-badge.educational {
+      background: #2A7B6F;
+      color: #fff;
+    }
+
+    .st-enroll-badge {
+      display: inline-block;
+      margin-top: 10px;
+      margin-left: 12px;
+      background: linear-gradient(135deg, #D57028, #AF8145);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      letter-spacing: 0.02em;
+    }
+
+    .st-enroll-badge:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     .st-rec-desc {
@@ -857,7 +894,8 @@
       stages: ['pre-seed', 'seed', 'series-a', 'mixed'],
       sectors: ['tech', 'fintech', 'health', 'consumer', 'realestate', 'climate', 'food', 'media', 'social', 'ai', 'diverse', 'any'],
       involvement: ['passive', 'semi-active', 'active'],
-      highlight: 'Start here if you are new'
+      highlight: 'Start here if you are new',
+      isEducational: true
     },
     {
       name: 'Angel Capital Association (ACA)',
@@ -955,7 +993,9 @@
       stages: ['pre-seed', 'seed', 'series-a', 'mixed'],
       sectors: ['tech', 'fintech', 'health', 'consumer', 'realestate', 'climate', 'food', 'media', 'social', 'ai', 'diverse', 'any'],
       involvement: ['passive', 'semi-active', 'active'],
-      highlight: 'Education, deal flow, and community'
+      highlight: 'Education, deal flow, and community',
+      isEducational: true,
+      isSengo: true
     }
   ];
 
@@ -1094,10 +1134,15 @@
 
   function generateResults() {
     var scored = [];
+    var sengoItem = null;
     platforms.forEach(function(p) {
       var s = scoreplatform(p);
       if (s >= 0) {
-        scored.push({ platform: p, score: s });
+        if (p.isSengo) {
+          sengoItem = { platform: p, score: s };
+        } else {
+          scored.push({ platform: p, score: s });
+        }
       }
     });
 
@@ -1159,6 +1204,25 @@
     }
     html += '</div></div>';
 
+    // Sengo always first
+    if (sengoItem) {
+      html += '<div class="st-rec-section">';
+      html += '<h3>Recommended Education & Community</h3>';
+      html += renderCard(sengoItem.platform, 'educational');
+      // Also render Fundera if it qualified
+      high.concat(medium).concat(other).forEach(function(item) {
+        if (item.platform.isEducational) {
+          html += renderCard(item.platform, 'educational');
+        }
+      });
+      html += '</div>';
+    }
+
+    // Remove educational items from the tier lists
+    high = high.filter(function(item) { return !item.platform.isEducational; });
+    medium = medium.filter(function(item) { return !item.platform.isEducational; });
+    other = other.filter(function(item) { return !item.platform.isEducational; });
+
     // Top matches
     if (high.length > 0) {
       html += '<div class="st-rec-section">';
@@ -1218,10 +1282,12 @@
   }
 
   function renderCard(p, tier) {
-    var badgeClass = tier === 'high' ? ' high' : (tier === 'medium' ? ' medium' : '');
-    var badgeText = tier === 'high' ? 'Strong Match' : (tier === 'medium' ? 'Good Fit' : 'Explore');
+    var isEdu = tier === 'educational';
+    var badgeClass = isEdu ? ' educational' : (tier === 'high' ? ' high' : (tier === 'medium' ? ' medium' : ''));
+    var badgeText = isEdu ? 'Education Resource' : (tier === 'high' ? 'Strong Match' : (tier === 'medium' ? 'Good Fit' : 'Explore'));
+    var cardClass = isEdu ? ' educational' : '';
 
-    var html = '<div class="st-rec-card">';
+    var html = '<div class="st-rec-card' + cardClass + '">';
     html += '<div class="st-rec-top">';
     html += '<span class="st-rec-name">' + p.name + '</span>';
     html += '<span class="st-rec-badge' + badgeClass + '">' + badgeText + '</span>';
@@ -1233,6 +1299,9 @@
     html += '<div class="st-rec-detail"><strong>Highlight:</strong>&nbsp;' + p.highlight + '</div>';
     html += '</div>';
     html += '<a class="st-rec-link" href="' + p.url + '" target="_blank" rel="noopener noreferrer">Visit ' + p.name + ' &rarr;</a>';
+    if (p.isSengo) {
+      html += '<a class="st-enroll-badge" href="https://app.bysengo.com/offers/BGMPY9cY/checkout" target="_blank" rel="noopener noreferrer">Enroll to Get Our Angel Due Diligence Checklist</a>';
+    }
     html += '</div>';
     return html;
   }

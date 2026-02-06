@@ -96,11 +96,16 @@
   .st-rec-section h3 { font-size: 1.15rem; color: #1B3533; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #E8E0D8; }
   .st-rec-card { border: 2px solid #E8E0D8; border-radius: 12px; padding: 20px; margin-bottom: 12px; background: #fff; transition: border-color 0.2s; }
   .st-rec-card:hover { border-color: #AF8145; }
+  .st-rec-card.educational { border-color: #2A7B6F; background: #F0FAF8; }
+  .st-rec-card.educational:hover { border-color: #1B5E54; }
   .st-rec-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 12px; }
   .st-rec-name { font-weight: 700; font-size: 1.05rem; color: #1B3533; }
   .st-rec-badge { flex-shrink: 0; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 4px; background: #EDE6DE; color: #67441A; }
   .st-rec-badge.high { background: #D57028; color: #fff; }
   .st-rec-badge.medium { background: #AF8145; color: #fff; }
+  .st-rec-badge.educational { background: #2A7B6F; color: #fff; }
+  .st-enroll-badge { display: inline-block; margin-top: 10px; margin-left: 12px; background: linear-gradient(135deg, #D57028, #AF8145); color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.8rem; padding: 8px 18px; border-radius: 6px; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; letter-spacing: 0.02em; }
+  .st-enroll-badge:hover { opacity: 0.9; transform: translateY(-1px); }
   .st-rec-desc { font-size: 0.88rem; color: #67441A; margin-bottom: 10px; line-height: 1.5; }
   .st-rec-details { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.8rem; color: #1B3533; }
   .st-rec-detail { display: flex; align-items: center; gap: 4px; }
@@ -251,14 +256,14 @@
     {name:'Allocations',url:'https://allocations.com',type:'SPV & Fund Infrastructure',description:'Platform for creating and managing Special Purpose Vehicles (SPVs) and funds. Ideal for investors who want to lead or co-invest through structured vehicles.',minInvestment:'$5,000',accreditation:['accredited'],budgets:['10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','ai','any'],involvement:['active','semi-active'],highlight:'Lead your own SPVs and syndicates'},
     {name:'Fundable',url:'https://www.fundable.com',type:'Equity & Rewards Crowdfunding',description:'Platform offering both equity and rewards-based crowdfunding for startups. Good entry point for investors looking to support early-stage companies.',minInvestment:'$100',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k'],risk:['moderate','aggressive'],stages:['pre-seed','seed'],sectors:['tech','consumer','food','social','any'],involvement:['passive','semi-active'],highlight:'Rewards + equity options'},
     {name:'Mainvest',url:'https://mainvest.com',type:'Revenue-Sharing Notes',description:'Focus on local and small businesses using revenue-sharing note structures. Lower risk than equity with returns tied to business revenue. Great for community-oriented investors.',minInvestment:'$100',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k'],risk:['conservative','moderate'],stages:['seed','series-a'],sectors:['food','consumer','social','any'],involvement:['passive'],highlight:'Revenue-sharing, lower-risk structure'},
-    {name:'Fundera / NerdWallet Angel Guides',url:'https://www.nerdwallet.com/article/investing/angel-investing',type:'Educational Resource',description:'Not an investment platform \u2014 a comprehensive educational resource for understanding angel investing fundamentals, risks, and strategies before committing capital.',minInvestment:'N/A',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['conservative','moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','realestate','climate','food','media','social','ai','diverse','any'],involvement:['passive','semi-active','active'],highlight:'Start here if you are new'},
+    {name:'Fundera / NerdWallet Angel Guides',url:'https://www.nerdwallet.com/article/investing/angel-investing',type:'Educational Resource',description:'Not an investment platform \u2014 a comprehensive educational resource for understanding angel investing fundamentals, risks, and strategies before committing capital.',minInvestment:'N/A',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['conservative','moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','realestate','climate','food','media','social','ai','diverse','any'],involvement:['passive','semi-active','active'],highlight:'Start here if you are new',isEducational:true},
     {name:'Angel Capital Association (ACA)',url:'https://www.angelcapitalassociation.org',type:'Angel Network Directory',description:'The largest professional development organization for angel investors. Access local angel groups, educational programming, and co-investment opportunities across North America.',minInvestment:'Varies by group',accreditation:['accredited'],budgets:['10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','climate','ai','any'],involvement:['semi-active','active'],highlight:'Network of 400+ angel groups'},
     {name:'Keiretsu Forum',url:'https://www.keiretsu.com',type:'Angel Investment Network',description:'One of the largest angel investor networks globally with regional chapters. Presents vetted deals at monthly meetings. Membership-based with co-investment opportunities.',minInvestment:'$25,000',accreditation:['accredited'],budgets:['50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['seed','series-a','mixed'],sectors:['tech','health','consumer','climate','ai','any'],involvement:['semi-active','active'],highlight:'Global network, vetted deal flow'},
     {name:'Backstage Capital',url:'https://backstagecapital.com',type:'VC Fund / Community',description:'Venture fund investing in underrepresented founders \u2014 women, people of color, and LGBTQ+ entrepreneurs. Focused on closing the funding gap for diverse founders.',minInvestment:'Varies',accreditation:['accredited'],budgets:['10k-50k','50k-100k','100k-plus'],risk:['aggressive'],stages:['pre-seed','seed'],sectors:['tech','consumer','social','diverse','any'],involvement:['semi-active','active'],highlight:'Diverse founder focus'},
     {name:'Calm Company Fund',url:'https://calmfund.com',type:'Alternative Fund',description:'Invests in sustainable, profitable "calm companies" \u2014 businesses designed for steady growth rather than venture-scale exits. Revenue-based financing model.',minInvestment:'LP commitment varies',accreditation:['accredited'],budgets:['10k-50k','50k-100k','100k-plus'],risk:['conservative','moderate'],stages:['seed','series-a'],sectors:['tech','consumer','any'],involvement:['passive'],highlight:'Sustainable, profitable companies'},
     {name:'Fundrise Innovation Fund',url:'https://fundrise.com/innovation-fund',type:'Interval Fund',description:'Access late-stage private tech companies pre-IPO through a registered interval fund. Lower minimums than traditional venture funds with quarterly liquidity windows.',minInvestment:'$10',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['moderate'],stages:['series-a'],sectors:['tech','ai','any'],involvement:['passive'],highlight:'Pre-IPO tech, very low minimum'},
     {name:'MicroVentures',url:'https://microventures.com',type:'Venture Investing Platform',description:'Offers both Reg CF (open to all) and Reg D (accredited) deals. Access pre-IPO companies and early-stage startups. Known for later-stage secondary market deals.',minInvestment:'$100',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['moderate','aggressive'],stages:['seed','series-a','mixed'],sectors:['tech','fintech','health','ai','any'],involvement:['passive'],highlight:'Pre-IPO and secondary market access'},
-    {name:'Sengo Community',url:'https://app.bysengo.com',type:'Investor Education & Network',description:'Sengo connects founders and funders to democratize access to capital and private investment. Access curated deal flow, investor education, events, and a community of active angel investors.',minInvestment:'Membership-based',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['conservative','moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','realestate','climate','food','media','social','ai','diverse','any'],involvement:['passive','semi-active','active'],highlight:'Education, deal flow, and community'}
+    {name:'Sengo Community',url:'https://app.bysengo.com',type:'Investor Education & Network',description:'Sengo connects founders and funders to democratize access to capital and private investment. Access curated deal flow, investor education, events, and a community of active angel investors.',minInvestment:'Membership-based',accreditation:['accredited','non-accredited','unsure'],budgets:['under-1k','1k-10k','10k-50k','50k-100k','100k-plus'],risk:['conservative','moderate','aggressive'],stages:['pre-seed','seed','series-a','mixed'],sectors:['tech','fintech','health','consumer','realestate','climate','food','media','social','ai','diverse','any'],involvement:['passive','semi-active','active'],highlight:'Education, deal flow, and community',isEducational:true,isSengo:true}
   ];
 
   function updateProgress(){
@@ -326,8 +331,8 @@
   }
 
   function generateResults(){
-    var scored=[];
-    platforms.forEach(function(p){var s=scorePlatform(p);if(s>=0)scored.push({platform:p,score:s});});
+    var scored=[],sengoItem=null;
+    platforms.forEach(function(p){var s=scorePlatform(p);if(s>=0){if(p.isSengo){sengoItem={platform:p,score:s};}else{scored.push({platform:p,score:s});}}});
     scored.sort(function(a,b){return b.score-a.score;});
     var topScore=scored.length>0?scored[0].score:0;
     var high=[],medium=[],other=[];
@@ -350,6 +355,10 @@
     if(answers.sectors)answers.sectors.forEach(function(s){html+='<span class="st-profile-tag">'+(sectorLabels[s]||s)+'</span>';});
     html+='</div></div>';
 
+    if(sengoItem){html+='<div class="st-rec-section"><h3>Recommended Education & Community</h3>';html+=renderCard(sengoItem.platform,'educational');high.concat(medium).concat(other).forEach(function(item){if(item.platform.isEducational){html+=renderCard(item.platform,'educational');}});html+='</div>';}
+    high=high.filter(function(item){return !item.platform.isEducational;});
+    medium=medium.filter(function(item){return !item.platform.isEducational;});
+    other=other.filter(function(item){return !item.platform.isEducational;});
     if(high.length>0){html+='<div class="st-rec-section"><h3>Top Matches for You</h3>';high.forEach(function(item){html+=renderCard(item.platform,'high');});html+='</div>';}
     if(medium.length>0){html+='<div class="st-rec-section"><h3>Also Worth Exploring</h3>';medium.forEach(function(item){html+=renderCard(item.platform,'medium');});html+='</div>';}
     if(other.length>0){html+='<div class="st-rec-section"><h3>Additional Options</h3>';other.forEach(function(item){html+=renderCard(item.platform,'');});html+='</div>';}
@@ -374,12 +383,16 @@
   }
 
   function renderCard(p,tier){
-    var bc=tier==='high'?' high':(tier==='medium'?' medium':'');
-    var bt=tier==='high'?'Strong Match':(tier==='medium'?'Good Fit':'Explore');
-    var h='<div class="st-rec-card"><div class="st-rec-top"><span class="st-rec-name">'+p.name+'</span><span class="st-rec-badge'+bc+'">'+bt+'</span></div>';
+    var isEdu=tier==='educational';
+    var bc=isEdu?' educational':(tier==='high'?' high':(tier==='medium'?' medium':''));
+    var bt=isEdu?'Education Resource':(tier==='high'?'Strong Match':(tier==='medium'?'Good Fit':'Explore'));
+    var cc=isEdu?' educational':'';
+    var h='<div class="st-rec-card'+cc+'"><div class="st-rec-top"><span class="st-rec-name">'+p.name+'</span><span class="st-rec-badge'+bc+'">'+bt+'</span></div>';
     h+='<div class="st-rec-desc">'+p.description+'</div>';
     h+='<div class="st-rec-details"><div class="st-rec-detail"><strong>Type:</strong>&nbsp;'+p.type+'</div><div class="st-rec-detail"><strong>Min Investment:</strong>&nbsp;'+p.minInvestment+'</div><div class="st-rec-detail"><strong>Highlight:</strong>&nbsp;'+p.highlight+'</div></div>';
-    h+='<a class="st-rec-link" href="'+p.url+'" target="_blank" rel="noopener noreferrer">Visit '+p.name+' &rarr;</a></div>';
+    h+='<a class="st-rec-link" href="'+p.url+'" target="_blank" rel="noopener noreferrer">Visit '+p.name+' &rarr;</a>';
+    if(p.isSengo){h+='<a class="st-enroll-badge" href="https://app.bysengo.com/offers/BGMPY9cY/checkout" target="_blank" rel="noopener noreferrer">Enroll to Get Our Angel Due Diligence Checklist</a>';}
+    h+='</div>';
     return h;
   }
 
