@@ -1454,7 +1454,9 @@
       document.getElementById('btnPublishLive').style.display = 'none';
       document.getElementById('btnDisconnect').style.display = 'none';
       document.getElementById('snapshotBanner').style.display = 'none';
-      document.getElementById('liveBanner').style.display = 'none';
+
+      // Show live banner
+      document.getElementById('liveBanner').style.display = 'flex';
 
       try {
         // If base + table are specified, go straight to loading
@@ -1471,6 +1473,8 @@
 
           await loadTable(cfg.tableId);
           document.getElementById('loadingScreen').style.display = 'none';
+          updateLiveTimestamp();
+          startAutoRefresh();
           return;
         }
 
@@ -1505,6 +1509,8 @@
           : tables[0];
 
         await loadTable(targetTable.id);
+        updateLiveTimestamp();
+        startAutoRefresh();
 
       } catch(e) {
         console.error('Auto-connect failed:', e);
@@ -1661,6 +1667,23 @@
           hour: 'numeric', minute: '2-digit'
         });
       }
+    }
+
+    let autoRefreshInterval = null;
+    function startAutoRefresh() {
+      // Auto-refresh data every 5 minutes
+      if (autoRefreshInterval) clearInterval(autoRefreshInterval);
+      autoRefreshInterval = setInterval(async () => {
+        try {
+          allRecords = await fetchAllRecords();
+          filteredRecords = [...allRecords];
+          buildFilterUI();
+          renderCurrentView();
+          updateLiveTimestamp();
+        } catch(e) {
+          console.warn('Auto-refresh failed:', e);
+        }
+      }, 5 * 60 * 1000);
     }
 
     /* ─── Setup / Connection ──────────────────────────────── */
