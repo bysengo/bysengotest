@@ -1,0 +1,1815 @@
+<!-- Sengo Angel Due Diligence Tool for Squarespace -->
+<!-- Add this to an Embed Block on your Squarespace page -->
+<!-- Interactive tool to help angel investors systematically evaluate startups -->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { box-sizing: border-box; }
+
+  .dd-tool {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1B3533;
+  }
+
+  /* Header */
+  .dd-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 3px solid #D57028;
+  }
+
+  .dd-header h1 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    color: #1B3533;
+    margin: 0 0 12px 0;
+  }
+
+  .dd-header p {
+    font-size: 1.05rem;
+    color: #67441A;
+    margin: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Progress Bar */
+  .dd-progress-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 40px;
+    padding: 0 4px;
+  }
+
+  .dd-progress-step {
+    flex: 1;
+    height: 6px;
+    background: #e8e0d8;
+    border-radius: 3px;
+    transition: background 0.4s ease;
+    cursor: pointer;
+  }
+
+  .dd-progress-step.active {
+    background: #D57028;
+  }
+
+  .dd-progress-step.completed {
+    background: #1B3533;
+  }
+
+  /* Section Navigation */
+  .dd-section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+    justify-content: center;
+  }
+
+  .dd-nav-btn {
+    padding: 8px 16px;
+    border: 2px solid #e8e0d8;
+    background: #F3EDE7;
+    color: #67441A;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dd-nav-btn:hover {
+    border-color: #AF8145;
+    background: #fff;
+  }
+
+  .dd-nav-btn.active {
+    background: #1B3533;
+    color: #F3EDE7;
+    border-color: #1B3533;
+  }
+
+  .dd-nav-btn.has-data {
+    border-color: #D57028;
+  }
+
+  /* Sections */
+  .dd-section {
+    display: none;
+    animation: ddFadeIn 0.4s ease;
+  }
+
+  .dd-section.visible {
+    display: block;
+  }
+
+  @keyframes ddFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .dd-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .dd-section-title .section-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #D57028;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .dd-section-desc {
+    color: #67441A;
+    font-size: 0.9rem;
+    margin: 0 0 28px 48px;
+    line-height: 1.5;
+  }
+
+  /* Form Elements */
+  .dd-field-group {
+    margin-bottom: 20px;
+  }
+
+  .dd-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .dd-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1B3533;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .dd-input, .dd-select, .dd-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e8e0d8;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    color: #1B3533;
+    background: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .dd-input:focus, .dd-select:focus, .dd-textarea:focus {
+    outline: none;
+    border-color: #D57028;
+    box-shadow: 0 0 0 3px rgba(213, 112, 40, 0.12);
+  }
+
+  .dd-textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  .dd-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2367441A' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  /* Rating Scale */
+  .dd-rating-group {
+    margin-bottom: 24px;
+    padding: 16px 20px;
+    background: #faf8f5;
+    border-radius: 10px;
+    border: 1px solid #e8e0d8;
+  }
+
+  .dd-rating-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1B3533;
+    margin-bottom: 4px;
+  }
+
+  .dd-rating-hint {
+    font-size: 0.75rem;
+    color: #AF8145;
+    margin-bottom: 10px;
+  }
+
+  .dd-rating-scale {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .dd-rating-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #e8e0d8;
+    background: #fff;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #67441A;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .dd-rating-btn:hover {
+    border-color: #D57028;
+    background: #fdf6f0;
+  }
+
+  .dd-rating-btn.selected {
+    background: #D57028;
+    color: #fff;
+    border-color: #D57028;
+  }
+
+  .dd-rating-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: #AF8145;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dd-rating-note {
+    margin-top: 8px;
+  }
+
+  .dd-rating-note textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e8e0d8;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    color: #1B3533;
+    resize: vertical;
+    min-height: 40px;
+    background: #fff;
+  }
+
+  .dd-rating-note textarea:focus {
+    outline: none;
+    border-color: #D57028;
+  }
+
+  .dd-rating-note textarea::placeholder {
+    color: #c4b8aa;
+  }
+
+  /* Checklist */
+  .dd-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dd-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0ebe5;
+    transition: background 0.2s ease;
+  }
+
+  .dd-checklist li:hover {
+    background: #faf8f5;
+  }
+
+  .dd-checklist li:last-child {
+    border-bottom: none;
+  }
+
+  .dd-check {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #d0c8be;
+    border-radius: 5px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    background: #fff;
+  }
+
+  .dd-check:hover {
+    border-color: #D57028;
+  }
+
+  .dd-check.checked {
+    background: #1B3533;
+    border-color: #1B3533;
+  }
+
+  .dd-check.checked::after {
+    content: '';
+    width: 6px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-top: -2px;
+  }
+
+  .dd-check-text {
+    font-size: 0.9rem;
+    color: #1B3533;
+    line-height: 1.5;
+  }
+
+  .dd-check-text .check-category {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #AF8145;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+  }
+
+  /* Red Flags */
+  .dd-flag-group {
+    margin-bottom: 16px;
+  }
+
+  .dd-flag-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border: 2px solid #f0ebe5;
+    background: #fff;
+    transition: all 0.2s ease;
+  }
+
+  .dd-flag-item:hover {
+    border-color: #e8c8b0;
+  }
+
+  .dd-flag-item.flagged {
+    background: #fef2f0;
+    border-color: #d94f3c;
+  }
+
+  .dd-flag-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .dd-flag-text {
+    font-size: 0.88rem;
+    color: #1B3533;
+    line-height: 1.5;
+  }
+
+  .dd-flag-text strong {
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .dd-flag-text span {
+    color: #67441A;
+    font-size: 0.82rem;
+  }
+
+  /* Score Dashboard */
+  .dd-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .dd-score-card {
+    background: #faf8f5;
+    border: 1px solid #e8e0d8;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .dd-score-card.overall {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #1B3533, #2d524f);
+    color: #F3EDE7;
+    border: none;
+    padding: 28px;
+  }
+
+  .dd-score-value {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+
+  .dd-score-card.overall .dd-score-value {
+    font-size: 3.5rem;
+    color: #D57028;
+  }
+
+  .dd-score-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #AF8145;
+  }
+
+  .dd-score-card.overall .dd-score-label {
+    color: #c4d8d5;
+  }
+
+  .dd-score-meter {
+    width: 100%;
+    height: 6px;
+    background: #e8e0d8;
+    border-radius: 3px;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+
+  .dd-score-card.overall .dd-score-meter {
+    background: rgba(255,255,255,0.15);
+  }
+
+  .dd-score-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+    background: #D57028;
+  }
+
+  .dd-verdict {
+    margin-top: 16px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .dd-verdict.strong { background: rgba(113, 126, 54, 0.2); color: #4a5a10; }
+  .dd-verdict.moderate { background: rgba(213, 112, 40, 0.2); color: #a0500e; }
+  .dd-verdict.weak { background: rgba(217, 79, 60, 0.2); color: #a03020; }
+
+  /* Summary */
+  .dd-summary-section {
+    margin-bottom: 24px;
+  }
+
+  .dd-summary-section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin: 0 0 12px 0;
+  }
+
+  .dd-strengths-list, .dd-risks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dd-strengths-list li, .dd-risks-list li {
+    padding: 8px 0;
+    font-size: 0.9rem;
+    color: #67441A;
+    border-bottom: 1px solid #f0ebe5;
+  }
+
+  .dd-strengths-list li::before { content: '+ '; font-weight: 700; color: #717E36; }
+  .dd-risks-list li::before { content: '- '; font-weight: 700; color: #d94f3c; }
+
+  /* Action Buttons */
+  .dd-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  .dd-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dd-btn-primary {
+    background: #D57028;
+    color: #fff;
+  }
+
+  .dd-btn-primary:hover {
+    background: #c0621f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(213, 112, 40, 0.3);
+  }
+
+  .dd-btn-secondary {
+    background: #F3EDE7;
+    color: #1B3533;
+    border: 2px solid #e8e0d8;
+  }
+
+  .dd-btn-secondary:hover {
+    border-color: #1B3533;
+  }
+
+  .dd-btn-dark {
+    background: #1B3533;
+    color: #F3EDE7;
+  }
+
+  .dd-btn-dark:hover {
+    background: #2d524f;
+    transform: translateY(-1px);
+  }
+
+  /* Navigation Footer */
+  .dd-nav-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 2px solid #f0ebe5;
+  }
+
+  /* Deal Terms Highlight */
+  .dd-terms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .dd-term-card {
+    background: #faf8f5;
+    border: 1px solid #e8e0d8;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .dd-term-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin-bottom: 4px;
+  }
+
+  .dd-term-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #AF8145;
+  }
+
+  /* Save notification */
+  .dd-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #1B3533;
+    color: #F3EDE7;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  .dd-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .dd-header h1 { font-size: 1.8rem; }
+    .dd-field-row { grid-template-columns: 1fr; }
+    .dd-dashboard { grid-template-columns: 1fr; }
+    .dd-score-card.overall { grid-column: 1; }
+    .dd-terms-grid { grid-template-columns: 1fr; }
+    .dd-section-nav { gap: 6px; }
+    .dd-nav-btn { padding: 6px 10px; font-size: 0.7rem; }
+    .dd-actions { flex-direction: column; }
+    .dd-btn { width: 100%; text-align: center; }
+    .dd-rating-scale { flex-wrap: wrap; }
+    .dd-nav-footer { flex-direction: column; gap: 12px; }
+  }
+</style>
+
+<div class="dd-tool">
+  <div class="dd-header">
+    <h1>Angel Due Diligence</h1>
+    <p>Systematically evaluate startup investment opportunities. Rate each dimension, flag risks, and generate a comprehensive assessment.</p>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="dd-progress-bar" id="ddProgressBar"></div>
+
+  <!-- Section Navigation -->
+  <div class="dd-section-nav" id="ddSectionNav"></div>
+
+  <!-- Section 1: Company Overview -->
+  <div class="dd-section" id="section-0" data-section="overview">
+    <h2 class="dd-section-title"><span class="section-number">1</span> Company Overview</h2>
+    <p class="dd-section-desc">Capture the basics about the startup you're evaluating.</p>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">Company Name</label>
+        <input class="dd-input" type="text" data-field="companyName" placeholder="e.g. Acme Inc.">
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">Industry / Sector</label>
+        <input class="dd-input" type="text" data-field="industry" placeholder="e.g. FinTech, HealthTech">
+      </div>
+    </div>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">Stage</label>
+        <select class="dd-select" data-field="stage">
+          <option value="">Select stage...</option>
+          <option value="Pre-Seed">Pre-Seed</option>
+          <option value="Seed">Seed</option>
+          <option value="Series A">Series A</option>
+          <option value="Series B+">Series B+</option>
+        </select>
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">Founded</label>
+        <input class="dd-input" type="text" data-field="founded" placeholder="e.g. 2023">
+      </div>
+    </div>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">Location</label>
+        <input class="dd-input" type="text" data-field="location" placeholder="e.g. San Francisco, CA">
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">Website</label>
+        <input class="dd-input" type="url" data-field="website" placeholder="https://...">
+      </div>
+    </div>
+
+    <div class="dd-field-group">
+      <label class="dd-label">One-Line Description</label>
+      <input class="dd-input" type="text" data-field="oneLiner" placeholder="What does this company do in one sentence?">
+    </div>
+
+    <div class="dd-field-group">
+      <label class="dd-label">Source / How You Found This Deal</label>
+      <select class="dd-select" data-field="dealSource">
+        <option value="">Select source...</option>
+        <option value="Personal network">Personal network</option>
+        <option value="Angel group">Angel group / syndicate</option>
+        <option value="Accelerator">Accelerator / incubator</option>
+        <option value="Conference">Conference / event</option>
+        <option value="Online platform">Online platform</option>
+        <option value="Cold inbound">Cold inbound</option>
+        <option value="VC co-invest">VC co-invest</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="dd-field-group">
+      <label class="dd-label">Initial Notes</label>
+      <textarea class="dd-textarea" data-field="initialNotes" placeholder="First impressions, context, why you're interested..."></textarea>
+    </div>
+  </div>
+
+  <!-- Section 2: Team -->
+  <div class="dd-section" id="section-1" data-section="team">
+    <h2 class="dd-section-title"><span class="section-number">2</span> Team Assessment</h2>
+    <p class="dd-section-desc">The team is often the most important factor at the early stage. Evaluate the founders and key hires.</p>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Founder-Market Fit</div>
+      <div class="dd-rating-hint">Do the founders have deep domain expertise and unique insight into this problem?</div>
+      <div class="dd-rating-scale" data-rating="founderMarketFit"></div>
+      <div class="dd-rating-labels"><span>Weak</span><span>Strong</span></div>
+      <div class="dd-rating-note"><textarea data-field="founderMarketFitNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Execution Ability</div>
+      <div class="dd-rating-hint">Have founders demonstrated the ability to build, ship, and iterate quickly?</div>
+      <div class="dd-rating-scale" data-rating="executionAbility"></div>
+      <div class="dd-rating-labels"><span>Weak</span><span>Strong</span></div>
+      <div class="dd-rating-note"><textarea data-field="executionAbilityNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Coachability & Self-Awareness</div>
+      <div class="dd-rating-hint">Are the founders receptive to feedback and honest about challenges?</div>
+      <div class="dd-rating-scale" data-rating="coachability"></div>
+      <div class="dd-rating-labels"><span>Weak</span><span>Strong</span></div>
+      <div class="dd-rating-note"><textarea data-field="coachabilityNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Team Completeness</div>
+      <div class="dd-rating-hint">Does the team cover technical, business, and domain needs? Any critical gaps?</div>
+      <div class="dd-rating-scale" data-rating="teamCompleteness"></div>
+      <div class="dd-rating-labels"><span>Weak</span><span>Strong</span></div>
+      <div class="dd-rating-note"><textarea data-field="teamCompletenessNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Founder Resilience & Grit</div>
+      <div class="dd-rating-hint">Evidence of perseverance through adversity? Past failures and what they learned?</div>
+      <div class="dd-rating-scale" data-rating="founderGrit"></div>
+      <div class="dd-rating-labels"><span>Weak</span><span>Strong</span></div>
+      <div class="dd-rating-note"><textarea data-field="founderGritNote" placeholder="Notes..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Section 3: Market -->
+  <div class="dd-section" id="section-2" data-section="market">
+    <h2 class="dd-section-title"><span class="section-number">3</span> Market Opportunity</h2>
+    <p class="dd-section-desc">Assess the size, growth, and dynamics of the target market.</p>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">TAM (Total Addressable Market)</label>
+        <input class="dd-input" type="text" data-field="tam" placeholder="e.g. $50B">
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">SAM (Serviceable Market)</label>
+        <input class="dd-input" type="text" data-field="sam" placeholder="e.g. $5B">
+      </div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Market Size & Growth</div>
+      <div class="dd-rating-hint">Is this a large and/or rapidly growing market?</div>
+      <div class="dd-rating-scale" data-rating="marketSize"></div>
+      <div class="dd-rating-labels"><span>Small/Stagnant</span><span>Large/Growing</span></div>
+      <div class="dd-rating-note"><textarea data-field="marketSizeNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Timing</div>
+      <div class="dd-rating-hint">Is now the right time for this solution? What tailwinds or headwinds exist?</div>
+      <div class="dd-rating-scale" data-rating="timing"></div>
+      <div class="dd-rating-labels"><span>Too early/late</span><span>Perfect timing</span></div>
+      <div class="dd-rating-note"><textarea data-field="timingNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Competitive Landscape</div>
+      <div class="dd-rating-hint">How crowded is the space? Can this company win despite competition?</div>
+      <div class="dd-rating-scale" data-rating="competition"></div>
+      <div class="dd-rating-labels"><span>Crowded/Tough</span><span>Open/Winnable</span></div>
+      <div class="dd-rating-note"><textarea data-field="competitionNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-field-group">
+      <label class="dd-label">Key Competitors</label>
+      <textarea class="dd-textarea" data-field="competitors" placeholder="List main competitors and how this company differentiates..."></textarea>
+    </div>
+  </div>
+
+  <!-- Section 4: Product -->
+  <div class="dd-section" id="section-3" data-section="product">
+    <h2 class="dd-section-title"><span class="section-number">4</span> Product & Technology</h2>
+    <p class="dd-section-desc">Evaluate the product's current state, defensibility, and technical foundation.</p>
+
+    <div class="dd-field-group">
+      <label class="dd-label">Product Stage</label>
+      <select class="dd-select" data-field="productStage">
+        <option value="">Select stage...</option>
+        <option value="Idea / concept">Idea / concept</option>
+        <option value="Prototype / MVP">Prototype / MVP</option>
+        <option value="Beta with users">Beta with users</option>
+        <option value="Launched with revenue">Launched with revenue</option>
+        <option value="Growth stage">Growth stage</option>
+      </select>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Product Quality & UX</div>
+      <div class="dd-rating-hint">Is the product well-built? Is the user experience compelling?</div>
+      <div class="dd-rating-scale" data-rating="productQuality"></div>
+      <div class="dd-rating-labels"><span>Poor</span><span>Excellent</span></div>
+      <div class="dd-rating-note"><textarea data-field="productQualityNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Defensibility / Moat</div>
+      <div class="dd-rating-hint">Network effects, IP, switching costs, data advantages, brand, regulatory?</div>
+      <div class="dd-rating-scale" data-rating="moat"></div>
+      <div class="dd-rating-labels"><span>No moat</span><span>Strong moat</span></div>
+      <div class="dd-rating-note"><textarea data-field="moatNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Technical Risk</div>
+      <div class="dd-rating-hint">Can the technology actually deliver? Any fundamental technical challenges?</div>
+      <div class="dd-rating-scale" data-rating="techRisk"></div>
+      <div class="dd-rating-labels"><span>High risk</span><span>Low risk</span></div>
+      <div class="dd-rating-note"><textarea data-field="techRiskNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Scalability</div>
+      <div class="dd-rating-hint">Can the product/business scale without proportional cost increases?</div>
+      <div class="dd-rating-scale" data-rating="scalability"></div>
+      <div class="dd-rating-labels"><span>Hard to scale</span><span>Highly scalable</span></div>
+      <div class="dd-rating-note"><textarea data-field="scalabilityNote" placeholder="Notes..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Section 5: Traction -->
+  <div class="dd-section" id="section-4" data-section="traction">
+    <h2 class="dd-section-title"><span class="section-number">5</span> Traction & Metrics</h2>
+    <p class="dd-section-desc">Hard numbers matter. Evaluate the evidence of product-market fit.</p>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">Monthly Revenue (MRR/ARR)</label>
+        <input class="dd-input" type="text" data-field="revenue" placeholder="e.g. $25K MRR">
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">Revenue Growth Rate</label>
+        <input class="dd-input" type="text" data-field="growthRate" placeholder="e.g. 20% MoM">
+      </div>
+    </div>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">Number of Customers / Users</label>
+        <input class="dd-input" type="text" data-field="users" placeholder="e.g. 500 paying customers">
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">Key Engagement Metric</label>
+        <input class="dd-input" type="text" data-field="engagement" placeholder="e.g. 60% DAU/MAU">
+      </div>
+    </div>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">Churn Rate</label>
+        <input class="dd-input" type="text" data-field="churn" placeholder="e.g. 3% monthly">
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">CAC / LTV</label>
+        <input class="dd-input" type="text" data-field="cacLtv" placeholder="e.g. CAC $50, LTV $600">
+      </div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Product-Market Fit Signal</div>
+      <div class="dd-rating-hint">Do users love this product? Organic growth, retention, NPS?</div>
+      <div class="dd-rating-scale" data-rating="pmf"></div>
+      <div class="dd-rating-labels"><span>No signal</span><span>Strong PMF</span></div>
+      <div class="dd-rating-note"><textarea data-field="pmfNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Unit Economics</div>
+      <div class="dd-rating-hint">Are the unit economics viable and improving?</div>
+      <div class="dd-rating-scale" data-rating="unitEconomics"></div>
+      <div class="dd-rating-labels"><span>Unsustainable</span><span>Strong</span></div>
+      <div class="dd-rating-note"><textarea data-field="unitEconomicsNote" placeholder="Notes..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Section 6: Financials & Deal Terms -->
+  <div class="dd-section" id="section-5" data-section="deal">
+    <h2 class="dd-section-title"><span class="section-number">6</span> Financials & Deal Terms</h2>
+    <p class="dd-section-desc">Evaluate the financial health and proposed investment terms.</p>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">Raise Amount</label>
+        <input class="dd-input" type="text" data-field="raiseAmount" placeholder="e.g. $2M">
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">Pre-Money Valuation / Cap</label>
+        <input class="dd-input" type="text" data-field="valuation" placeholder="e.g. $10M pre">
+      </div>
+    </div>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">Instrument</label>
+        <select class="dd-select" data-field="instrument">
+          <option value="">Select type...</option>
+          <option value="SAFE">SAFE</option>
+          <option value="Convertible Note">Convertible Note</option>
+          <option value="Priced Equity">Priced Equity Round</option>
+          <option value="KISS">KISS</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">Your Check Size</label>
+        <input class="dd-input" type="text" data-field="checkSize" placeholder="e.g. $25K">
+      </div>
+    </div>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">Monthly Burn Rate</label>
+        <input class="dd-input" type="text" data-field="burnRate" placeholder="e.g. $80K/mo">
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">Runway After Raise</label>
+        <input class="dd-input" type="text" data-field="runway" placeholder="e.g. 18 months">
+      </div>
+    </div>
+
+    <div class="dd-field-row">
+      <div class="dd-field-group">
+        <label class="dd-label">Prior Funding Raised</label>
+        <input class="dd-input" type="text" data-field="priorFunding" placeholder="e.g. $500K from friends & family">
+      </div>
+      <div class="dd-field-group">
+        <label class="dd-label">Notable Investors</label>
+        <input class="dd-input" type="text" data-field="investors" placeholder="e.g. Y Combinator, angels">
+      </div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Valuation Reasonableness</div>
+      <div class="dd-rating-hint">Is the valuation justified given stage, traction, and market comps?</div>
+      <div class="dd-rating-scale" data-rating="valuationFairness"></div>
+      <div class="dd-rating-labels"><span>Overvalued</span><span>Fair/Attractive</span></div>
+      <div class="dd-rating-note"><textarea data-field="valuationFairnessNote" placeholder="Notes..."></textarea></div>
+    </div>
+
+    <div class="dd-rating-group">
+      <div class="dd-rating-label">Terms Favorability</div>
+      <div class="dd-rating-hint">Pro-rata rights, information rights, investor-friendly terms?</div>
+      <div class="dd-rating-scale" data-rating="termsFairness"></div>
+      <div class="dd-rating-labels"><span>Unfavorable</span><span>Very favorable</span></div>
+      <div class="dd-rating-note"><textarea data-field="termsFairnessNote" placeholder="Notes..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- Section 7: Red Flags -->
+  <div class="dd-section" id="section-6" data-section="flags">
+    <h2 class="dd-section-title"><span class="section-number">7</span> Red Flags & Risks</h2>
+    <p class="dd-section-desc">Click any item that applies. Be honest -- identifying risks early protects your capital.</p>
+
+    <div class="dd-flag-group">
+      <div class="dd-flag-item" data-flag="noFullTimeFounder" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>No full-time founder</strong>
+          <span>All founders still working other jobs with no transition plan</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="founderConflict" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>Founder conflict or dysfunction</strong>
+          <span>Signs of disagreement, unclear roles, or founder breakup risk</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="noTraction" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>No traction after significant time</strong>
+          <span>Company has been working for 12+ months with minimal progress</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="unclearRevModel" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>Unclear revenue model</strong>
+          <span>No convincing path to monetization or unrealistic pricing assumptions</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="highValuation" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>Unreasonably high valuation</strong>
+          <span>Valuation out of line with stage, metrics, and market comps</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="singleCustomer" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>Single customer dependency</strong>
+          <span>Revenue concentrated in one or two customers</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="regulatoryRisk" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>Regulatory or legal risk</strong>
+          <span>Business model may face regulatory challenges or pending legal issues</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="noIP" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>No defensibility</strong>
+          <span>Easy to replicate, no IP, no network effects, no switching costs</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="highBurn" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>Excessive burn rate</strong>
+          <span>Spending far exceeds revenue with insufficient runway</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="reluctantInfo" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>Reluctant to share information</strong>
+          <span>Founders evasive about metrics, financials, or cap table</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="pivotHistory" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>Excessive pivots</strong>
+          <span>Company has changed direction multiple times without traction</span>
+        </div>
+      </div>
+
+      <div class="dd-flag-item" data-flag="capTableIssues" onclick="ddToggleFlag(this)">
+        <span class="dd-flag-icon">&#9873;</span>
+        <div class="dd-flag-text">
+          <strong>Cap table problems</strong>
+          <span>Founders have too little equity, too many investors, or messy structure</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dd-field-group">
+      <label class="dd-label">Additional Risk Notes</label>
+      <textarea class="dd-textarea" data-field="riskNotes" placeholder="Any other risks, concerns, or things that need further investigation..." style="min-height: 100px;"></textarea>
+    </div>
+  </div>
+
+  <!-- Section 8: Due Diligence Checklist -->
+  <div class="dd-section" id="section-7" data-section="checklist">
+    <h2 class="dd-section-title"><span class="section-number">8</span> Due Diligence Checklist</h2>
+    <p class="dd-section-desc">Track the documents and references you've reviewed. Click to mark as complete.</p>
+
+    <ul class="dd-checklist" id="ddChecklist">
+      <li>
+        <div class="dd-check" data-check="pitchDeck" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Reviewed pitch deck<span class="check-category">Documents</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="financials" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Reviewed financial model / projections<span class="check-category">Documents</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="capTable" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Reviewed cap table<span class="check-category">Documents</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="legalDocs" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Reviewed legal docs (SAFE, term sheet, articles of incorporation)<span class="check-category">Legal</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="founderCall" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Had in-depth call or meeting with founders<span class="check-category">Diligence Calls</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="customerRefs" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Spoke with customers or users<span class="check-category">References</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="founderRefs" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Completed founder reference checks (former colleagues, investors)<span class="check-category">References</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="productDemo" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Saw product demo or used the product<span class="check-category">Product</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="marketResearch" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Conducted independent market research<span class="check-category">Market</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="competitorAnalysis" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Analyzed competitors independently<span class="check-category">Market</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="linkedinReview" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Reviewed founder LinkedIn profiles and background<span class="check-category">Background</span></div>
+      </li>
+      <li>
+        <div class="dd-check" data-check="legalCheck" onclick="ddToggleCheck(this)"></div>
+        <div class="dd-check-text">Checked for lawsuits, liens, or legal issues<span class="check-category">Legal</span></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Section 9: Summary & Decision -->
+  <div class="dd-section" id="section-8" data-section="summary">
+    <h2 class="dd-section-title"><span class="section-number">9</span> Summary & Decision</h2>
+    <p class="dd-section-desc">Your overall assessment based on all the data gathered.</p>
+
+    <!-- Score Dashboard -->
+    <div class="dd-dashboard" id="ddDashboard">
+      <div class="dd-score-card overall">
+        <div class="dd-score-value" id="overallScore">--</div>
+        <div class="dd-score-label">Overall Score (out of 50)</div>
+        <div class="dd-score-meter"><div class="dd-score-fill" id="overallFill" style="width: 0%"></div></div>
+        <div class="dd-verdict" id="ddVerdict" style="display:none;"></div>
+      </div>
+      <div class="dd-score-card">
+        <div class="dd-score-value" id="teamScore">--</div>
+        <div class="dd-score-label">Team</div>
+        <div class="dd-score-meter"><div class="dd-score-fill" id="teamFill" style="width: 0%"></div></div>
+      </div>
+      <div class="dd-score-card">
+        <div class="dd-score-value" id="marketScore">--</div>
+        <div class="dd-score-label">Market</div>
+        <div class="dd-score-meter"><div class="dd-score-fill" id="marketFill" style="width: 0%"></div></div>
+      </div>
+      <div class="dd-score-card">
+        <div class="dd-score-value" id="productScore">--</div>
+        <div class="dd-score-label">Product</div>
+        <div class="dd-score-meter"><div class="dd-score-fill" id="productFill" style="width: 0%"></div></div>
+      </div>
+      <div class="dd-score-card">
+        <div class="dd-score-value" id="tractionScore">--</div>
+        <div class="dd-score-label">Traction</div>
+        <div class="dd-score-meter"><div class="dd-score-fill" id="tractionFill" style="width: 0%"></div></div>
+      </div>
+      <div class="dd-score-card">
+        <div class="dd-score-value" id="dealScore">--</div>
+        <div class="dd-score-label">Deal Terms</div>
+        <div class="dd-score-meter"><div class="dd-score-fill" id="dealFill" style="width: 0%"></div></div>
+      </div>
+      <div class="dd-score-card">
+        <div class="dd-score-value" id="flagCount">0</div>
+        <div class="dd-score-label">Red Flags</div>
+        <div class="dd-score-meter"><div class="dd-score-fill" id="flagFill" style="width: 0%; background: #d94f3c;"></div></div>
+      </div>
+    </div>
+
+    <!-- Deal Terms Summary -->
+    <div class="dd-terms-grid" id="ddTermsSummary">
+      <div class="dd-term-card">
+        <div class="dd-term-value" id="summaryValuation">--</div>
+        <div class="dd-term-label">Valuation / Cap</div>
+      </div>
+      <div class="dd-term-card">
+        <div class="dd-term-value" id="summaryCheck">--</div>
+        <div class="dd-term-label">Your Check</div>
+      </div>
+      <div class="dd-term-card">
+        <div class="dd-term-value" id="summaryInstrument">--</div>
+        <div class="dd-term-label">Instrument</div>
+      </div>
+    </div>
+
+    <div class="dd-field-group">
+      <label class="dd-label">Investment Thesis</label>
+      <textarea class="dd-textarea" data-field="thesis" placeholder="Why would you invest? What's the core belief this investment depends on?" style="min-height: 100px;"></textarea>
+    </div>
+
+    <div class="dd-field-group">
+      <label class="dd-label">Key Concerns</label>
+      <textarea class="dd-textarea" data-field="concerns" placeholder="What are the biggest risks and open questions?" style="min-height: 80px;"></textarea>
+    </div>
+
+    <div class="dd-field-group">
+      <label class="dd-label">Decision</label>
+      <select class="dd-select" data-field="decision" style="font-weight: 700;">
+        <option value="">Select your decision...</option>
+        <option value="Strong Yes">Strong Yes -- Invest</option>
+        <option value="Lean Yes">Lean Yes -- Invest with reservations</option>
+        <option value="Need More Info">Need More Info -- Continue diligence</option>
+        <option value="Lean No">Lean No -- Likely pass</option>
+        <option value="Strong No">Strong No -- Pass</option>
+      </select>
+    </div>
+
+    <div class="dd-field-group">
+      <label class="dd-label">Follow-Up Actions</label>
+      <textarea class="dd-textarea" data-field="followUp" placeholder="Next steps: additional calls, documents to request, items to verify..." style="min-height: 80px;"></textarea>
+    </div>
+
+    <div class="dd-actions">
+      <button class="dd-btn dd-btn-primary" onclick="ddExportReport()">Export Report</button>
+      <button class="dd-btn dd-btn-secondary" onclick="ddSaveLocal()">Save Progress</button>
+      <button class="dd-btn dd-btn-secondary" onclick="ddLoadLocal()">Load Saved</button>
+      <button class="dd-btn dd-btn-secondary" onclick="ddClearAll()">Clear All</button>
+    </div>
+  </div>
+
+  <!-- Navigation Footer -->
+  <div class="dd-nav-footer">
+    <button class="dd-btn dd-btn-secondary" id="ddPrevBtn" onclick="ddNavigate(-1)">Previous</button>
+    <button class="dd-btn dd-btn-dark" id="ddNextBtn" onclick="ddNavigate(1)">Next Section</button>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="dd-toast" id="ddToast"></div>
+
+<script>
+(function() {
+  const SECTIONS = [
+    { key: 'overview', label: 'Overview' },
+    { key: 'team', label: 'Team' },
+    { key: 'market', label: 'Market' },
+    { key: 'product', label: 'Product' },
+    { key: 'traction', label: 'Traction' },
+    { key: 'deal', label: 'Deal Terms' },
+    { key: 'flags', label: 'Red Flags' },
+    { key: 'checklist', label: 'Checklist' },
+    { key: 'summary', label: 'Summary' }
+  ];
+
+  const RATING_GROUPS = {
+    team: ['founderMarketFit', 'executionAbility', 'coachability', 'teamCompleteness', 'founderGrit'],
+    market: ['marketSize', 'timing', 'competition'],
+    product: ['productQuality', 'moat', 'techRisk', 'scalability'],
+    traction: ['pmf', 'unitEconomics'],
+    deal: ['valuationFairness', 'termsFairness']
+  };
+
+  let currentSection = 0;
+  let ratings = {};
+  let flags = {};
+  let checks = {};
+
+  // Initialize
+  function init() {
+    buildProgressBar();
+    buildSectionNav();
+    buildRatingScales();
+    showSection(0);
+    attachAutoSave();
+  }
+
+  function buildProgressBar() {
+    const bar = document.getElementById('ddProgressBar');
+    SECTIONS.forEach(function(s, i) {
+      const step = document.createElement('div');
+      step.className = 'dd-progress-step';
+      step.onclick = function() { showSection(i); };
+      bar.appendChild(step);
+    });
+  }
+
+  function buildSectionNav() {
+    const nav = document.getElementById('ddSectionNav');
+    SECTIONS.forEach(function(s, i) {
+      const btn = document.createElement('button');
+      btn.className = 'dd-nav-btn';
+      btn.textContent = s.label;
+      btn.onclick = function() { showSection(i); };
+      nav.appendChild(btn);
+    });
+  }
+
+  function buildRatingScales() {
+    var scales = document.querySelectorAll('.dd-rating-scale');
+    scales.forEach(function(scale) {
+      var key = scale.getAttribute('data-rating');
+      for (var i = 1; i <= 5; i++) {
+        var btn = document.createElement('button');
+        btn.className = 'dd-rating-btn';
+        btn.textContent = i;
+        btn.setAttribute('data-value', i);
+        (function(k, v, b) {
+          b.onclick = function() { setRating(k, v, scale); };
+        })(key, i, btn);
+        scale.appendChild(btn);
+      }
+    });
+  }
+
+  function setRating(key, value, container) {
+    ratings[key] = value;
+    var btns = container.querySelectorAll('.dd-rating-btn');
+    btns.forEach(function(b) {
+      b.classList.toggle('selected', parseInt(b.getAttribute('data-value')) <= value);
+    });
+    updateScores();
+  }
+
+  function showSection(index) {
+    currentSection = index;
+    var sections = document.querySelectorAll('.dd-section');
+    sections.forEach(function(s, i) {
+      s.classList.toggle('visible', i === index);
+    });
+
+    // Update progress bar
+    var steps = document.querySelectorAll('.dd-progress-step');
+    steps.forEach(function(s, i) {
+      s.classList.remove('active', 'completed');
+      if (i === index) s.classList.add('active');
+      else if (i < index) s.classList.add('completed');
+    });
+
+    // Update nav buttons
+    var navBtns = document.querySelectorAll('.dd-nav-btn');
+    navBtns.forEach(function(b, i) {
+      b.classList.toggle('active', i === index);
+    });
+
+    // Update nav footer
+    document.getElementById('ddPrevBtn').style.visibility = index === 0 ? 'hidden' : 'visible';
+    var nextBtn = document.getElementById('ddNextBtn');
+    if (index === SECTIONS.length - 1) {
+      nextBtn.textContent = 'Back to Start';
+    } else {
+      nextBtn.textContent = 'Next Section';
+    }
+
+    // If summary section, update scores
+    if (index === 8) {
+      updateScores();
+      updateSummaryTerms();
+    }
+
+    // Scroll to top of tool
+    var tool = document.querySelector('.dd-tool');
+    if (tool) tool.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window.ddNavigate = function(direction) {
+    var next = currentSection + direction;
+    if (next < 0) next = 0;
+    if (next >= SECTIONS.length) next = 0;
+    showSection(next);
+  };
+
+  // Flags
+  window.ddToggleFlag = function(el) {
+    var key = el.getAttribute('data-flag');
+    flags[key] = !flags[key];
+    el.classList.toggle('flagged', flags[key]);
+    updateScores();
+  };
+
+  // Checklist
+  window.ddToggleCheck = function(el) {
+    var key = el.getAttribute('data-check');
+    checks[key] = !checks[key];
+    el.classList.toggle('checked', checks[key]);
+  };
+
+  // Scoring
+  function calcCategoryScore(category) {
+    var keys = RATING_GROUPS[category];
+    if (!keys) return { score: 0, max: 0, count: 0 };
+    var sum = 0;
+    var count = 0;
+    keys.forEach(function(k) {
+      if (ratings[k]) { sum += ratings[k]; count++; }
+    });
+    return { score: sum, max: keys.length * 5, count: count, total: keys.length };
+  }
+
+  function updateScores() {
+    var categories = ['team', 'market', 'product', 'traction', 'deal'];
+    var overall = 0;
+    var overallMax = 0;
+
+    categories.forEach(function(cat) {
+      var result = calcCategoryScore(cat);
+      var el = document.getElementById(cat + 'Score');
+      var fill = document.getElementById(cat + 'Fill');
+      if (result.count > 0) {
+        var avg = (result.score / result.count).toFixed(1);
+        el.textContent = avg;
+        fill.style.width = ((result.score / result.max) * 100) + '%';
+        overall += result.score;
+        overallMax += result.max;
+      } else {
+        el.textContent = '--';
+        fill.style.width = '0%';
+      }
+    });
+
+    // Overall
+    var overallEl = document.getElementById('overallScore');
+    var overallFill = document.getElementById('overallFill');
+    var verdict = document.getElementById('ddVerdict');
+
+    if (overallMax > 0) {
+      var totalRatings = 0;
+      var totalSum = 0;
+      for (var k in ratings) {
+        if (ratings[k]) { totalSum += ratings[k]; totalRatings++; }
+      }
+      var scaledScore = overallMax > 0 ? Math.round((overall / overallMax) * 50) : 0;
+      overallEl.textContent = scaledScore;
+      overallFill.style.width = ((scaledScore / 50) * 100) + '%';
+
+      verdict.style.display = 'inline-block';
+      if (scaledScore >= 38) {
+        verdict.className = 'dd-verdict strong';
+        verdict.textContent = 'Strong Opportunity';
+      } else if (scaledScore >= 25) {
+        verdict.className = 'dd-verdict moderate';
+        verdict.textContent = 'Moderate -- Dig Deeper';
+      } else {
+        verdict.className = 'dd-verdict weak';
+        verdict.textContent = 'Weak -- Proceed with Caution';
+      }
+    } else {
+      overallEl.textContent = '--';
+      overallFill.style.width = '0%';
+      verdict.style.display = 'none';
+    }
+
+    // Flags
+    var flagCount = 0;
+    for (var f in flags) { if (flags[f]) flagCount++; }
+    document.getElementById('flagCount').textContent = flagCount;
+    document.getElementById('flagFill').style.width = ((flagCount / 12) * 100) + '%';
+  }
+
+  function updateSummaryTerms() {
+    var valEl = document.querySelector('[data-field="valuation"]');
+    var checkEl = document.querySelector('[data-field="checkSize"]');
+    var instEl = document.querySelector('[data-field="instrument"]');
+    document.getElementById('summaryValuation').textContent = (valEl && valEl.value) || '--';
+    document.getElementById('summaryCheck').textContent = (checkEl && checkEl.value) || '--';
+    document.getElementById('summaryInstrument').textContent = (instEl && instEl.value) || '--';
+  }
+
+  // Auto-save on input change
+  function attachAutoSave() {
+    var inputs = document.querySelectorAll('.dd-input, .dd-textarea, .dd-select');
+    inputs.forEach(function(input) {
+      input.addEventListener('change', function() { });
+    });
+  }
+
+  // Gather all data
+  function gatherData() {
+    var data = { ratings: ratings, flags: flags, checks: checks, fields: {} };
+    var inputs = document.querySelectorAll('[data-field]');
+    inputs.forEach(function(input) {
+      data.fields[input.getAttribute('data-field')] = input.value;
+    });
+    return data;
+  }
+
+  // Restore data
+  function restoreData(data) {
+    if (!data) return;
+    // Fields
+    if (data.fields) {
+      for (var key in data.fields) {
+        var el = document.querySelector('[data-field="' + key + '"]');
+        if (el) el.value = data.fields[key];
+      }
+    }
+    // Ratings
+    if (data.ratings) {
+      ratings = data.ratings;
+      for (var rk in ratings) {
+        var scale = document.querySelector('[data-rating="' + rk + '"]');
+        if (scale) {
+          var btns = scale.querySelectorAll('.dd-rating-btn');
+          btns.forEach(function(b) {
+            b.classList.toggle('selected', parseInt(b.getAttribute('data-value')) <= ratings[rk]);
+          });
+        }
+      }
+    }
+    // Flags
+    if (data.flags) {
+      flags = data.flags;
+      for (var fk in flags) {
+        if (flags[fk]) {
+          var flagEl = document.querySelector('[data-flag="' + fk + '"]');
+          if (flagEl) flagEl.classList.add('flagged');
+        }
+      }
+    }
+    // Checks
+    if (data.checks) {
+      checks = data.checks;
+      for (var ck in checks) {
+        if (checks[ck]) {
+          var checkEl = document.querySelector('[data-check="' + ck + '"]');
+          if (checkEl) checkEl.classList.add('checked');
+        }
+      }
+    }
+    updateScores();
+  }
+
+  // Save / Load / Clear
+  window.ddSaveLocal = function() {
+    var data = gatherData();
+    var companyName = data.fields.companyName || 'untitled';
+    var storageKey = 'sengo_dd_' + companyName.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(data));
+      localStorage.setItem('sengo_dd_last', storageKey);
+      showToast('Saved: ' + companyName);
+    } catch(e) {
+      showToast('Save failed');
+    }
+  };
+
+  window.ddLoadLocal = function() {
+    var lastKey = localStorage.getItem('sengo_dd_last');
+    if (!lastKey) {
+      showToast('No saved evaluation found');
+      return;
+    }
+    try {
+      var data = JSON.parse(localStorage.getItem(lastKey));
+      if (data) {
+        restoreData(data);
+        showToast('Loaded: ' + (data.fields.companyName || 'evaluation'));
+      }
+    } catch(e) {
+      showToast('Load failed');
+    }
+  };
+
+  window.ddClearAll = function() {
+    if (!confirm('Clear all data? This cannot be undone.')) return;
+    ratings = {};
+    flags = {};
+    checks = {};
+    var inputs = document.querySelectorAll('.dd-input, .dd-textarea, .dd-select');
+    inputs.forEach(function(input) { input.value = ''; });
+    var ratingBtns = document.querySelectorAll('.dd-rating-btn');
+    ratingBtns.forEach(function(b) { b.classList.remove('selected'); });
+    var flagItems = document.querySelectorAll('.dd-flag-item');
+    flagItems.forEach(function(f) { f.classList.remove('flagged'); });
+    var checkItems = document.querySelectorAll('.dd-check');
+    checkItems.forEach(function(c) { c.classList.remove('checked'); });
+    updateScores();
+    showToast('All data cleared');
+  };
+
+  // Export
+  window.ddExportReport = function() {
+    var data = gatherData();
+    var lines = [];
+    var divider = '========================================';
+
+    lines.push(divider);
+    lines.push('ANGEL DUE DILIGENCE REPORT');
+    lines.push('Generated via Sengo');
+    lines.push('Date: ' + new Date().toLocaleDateString());
+    lines.push(divider);
+    lines.push('');
+
+    // Company Overview
+    lines.push('1. COMPANY OVERVIEW');
+    lines.push('---');
+    lines.push('Company: ' + (data.fields.companyName || 'N/A'));
+    lines.push('Industry: ' + (data.fields.industry || 'N/A'));
+    lines.push('Stage: ' + (data.fields.stage || 'N/A'));
+    lines.push('Founded: ' + (data.fields.founded || 'N/A'));
+    lines.push('Location: ' + (data.fields.location || 'N/A'));
+    lines.push('Website: ' + (data.fields.website || 'N/A'));
+    lines.push('Description: ' + (data.fields.oneLiner || 'N/A'));
+    lines.push('Deal Source: ' + (data.fields.dealSource || 'N/A'));
+    if (data.fields.initialNotes) lines.push('Notes: ' + data.fields.initialNotes);
+    lines.push('');
+
+    // Scores
+    lines.push('2. SCORES');
+    lines.push('---');
+    var categories = ['team', 'market', 'product', 'traction', 'deal'];
+    var overall = 0, overallMax = 0;
+    categories.forEach(function(cat) {
+      var result = calcCategoryScore(cat);
+      if (result.count > 0) {
+        var avg = (result.score / result.count).toFixed(1);
+        lines.push(cat.charAt(0).toUpperCase() + cat.slice(1) + ': ' + avg + '/5 (' + result.count + '/' + result.total + ' rated)');
+        overall += result.score;
+        overallMax += result.max;
+      }
+    });
+    if (overallMax > 0) {
+      var scaledScore = Math.round((overall / overallMax) * 50);
+      lines.push('');
+      lines.push('OVERALL: ' + scaledScore + '/50');
+      if (scaledScore >= 38) lines.push('Verdict: STRONG OPPORTUNITY');
+      else if (scaledScore >= 25) lines.push('Verdict: MODERATE -- DIG DEEPER');
+      else lines.push('Verdict: WEAK -- PROCEED WITH CAUTION');
+    }
+    lines.push('');
+
+    // Detailed ratings
+    lines.push('3. DETAILED RATINGS');
+    lines.push('---');
+    var ratingLabels = {
+      founderMarketFit: 'Founder-Market Fit',
+      executionAbility: 'Execution Ability',
+      coachability: 'Coachability',
+      teamCompleteness: 'Team Completeness',
+      founderGrit: 'Founder Grit',
+      marketSize: 'Market Size & Growth',
+      timing: 'Timing',
+      competition: 'Competitive Landscape',
+      productQuality: 'Product Quality',
+      moat: 'Defensibility / Moat',
+      techRisk: 'Technical Risk',
+      scalability: 'Scalability',
+      pmf: 'Product-Market Fit',
+      unitEconomics: 'Unit Economics',
+      valuationFairness: 'Valuation Reasonableness',
+      termsFairness: 'Terms Favorability'
+    };
+    for (var rk in ratingLabels) {
+      if (ratings[rk]) {
+        lines.push(ratingLabels[rk] + ': ' + ratings[rk] + '/5');
+        var noteField = rk + 'Note';
+        if (data.fields[noteField]) lines.push('  Note: ' + data.fields[noteField]);
+      }
+    }
+    lines.push('');
+
+    // Traction
+    lines.push('4. TRACTION & METRICS');
+    lines.push('---');
+    if (data.fields.revenue) lines.push('Revenue: ' + data.fields.revenue);
+    if (data.fields.growthRate) lines.push('Growth: ' + data.fields.growthRate);
+    if (data.fields.users) lines.push('Customers/Users: ' + data.fields.users);
+    if (data.fields.engagement) lines.push('Engagement: ' + data.fields.engagement);
+    if (data.fields.churn) lines.push('Churn: ' + data.fields.churn);
+    if (data.fields.cacLtv) lines.push('CAC/LTV: ' + data.fields.cacLtv);
+    lines.push('');
+
+    // Deal Terms
+    lines.push('5. DEAL TERMS');
+    lines.push('---');
+    lines.push('Raise: ' + (data.fields.raiseAmount || 'N/A'));
+    lines.push('Valuation/Cap: ' + (data.fields.valuation || 'N/A'));
+    lines.push('Instrument: ' + (data.fields.instrument || 'N/A'));
+    lines.push('Your Check: ' + (data.fields.checkSize || 'N/A'));
+    lines.push('Burn Rate: ' + (data.fields.burnRate || 'N/A'));
+    lines.push('Runway: ' + (data.fields.runway || 'N/A'));
+    lines.push('Prior Funding: ' + (data.fields.priorFunding || 'N/A'));
+    lines.push('Notable Investors: ' + (data.fields.investors || 'N/A'));
+    lines.push('');
+
+    // Red Flags
+    var flagLabels = {
+      noFullTimeFounder: 'No full-time founder',
+      founderConflict: 'Founder conflict or dysfunction',
+      noTraction: 'No traction after significant time',
+      unclearRevModel: 'Unclear revenue model',
+      highValuation: 'Unreasonably high valuation',
+      singleCustomer: 'Single customer dependency',
+      regulatoryRisk: 'Regulatory or legal risk',
+      noIP: 'No defensibility',
+      highBurn: 'Excessive burn rate',
+      reluctantInfo: 'Reluctant to share information',
+      pivotHistory: 'Excessive pivots',
+      capTableIssues: 'Cap table problems'
+    };
+    var activeFlags = [];
+    for (var fk in flags) { if (flags[fk]) activeFlags.push(flagLabels[fk] || fk); }
+    lines.push('6. RED FLAGS (' + activeFlags.length + ')');
+    lines.push('---');
+    if (activeFlags.length > 0) {
+      activeFlags.forEach(function(f) { lines.push('  [X] ' + f); });
+    } else {
+      lines.push('  None flagged');
+    }
+    if (data.fields.riskNotes) lines.push('Risk Notes: ' + data.fields.riskNotes);
+    lines.push('');
+
+    // Checklist
+    var checkLabels = {
+      pitchDeck: 'Reviewed pitch deck',
+      financials: 'Reviewed financial model',
+      capTable: 'Reviewed cap table',
+      legalDocs: 'Reviewed legal docs',
+      founderCall: 'Founder call/meeting',
+      customerRefs: 'Customer references',
+      founderRefs: 'Founder references',
+      productDemo: 'Product demo',
+      marketResearch: 'Market research',
+      competitorAnalysis: 'Competitor analysis',
+      linkedinReview: 'LinkedIn review',
+      legalCheck: 'Legal check'
+    };
+    var doneChecks = 0, totalChecks = Object.keys(checkLabels).length;
+    lines.push('7. DILIGENCE CHECKLIST');
+    lines.push('---');
+    for (var chk in checkLabels) {
+      var done = checks[chk] ? 'X' : ' ';
+      if (checks[chk]) doneChecks++;
+      lines.push('  [' + done + '] ' + checkLabels[chk]);
+    }
+    lines.push('Completed: ' + doneChecks + '/' + totalChecks);
+    lines.push('');
+
+    // Decision
+    lines.push('8. DECISION');
+    lines.push('---');
+    lines.push('Decision: ' + (data.fields.decision || 'Not yet decided'));
+    if (data.fields.thesis) lines.push('Thesis: ' + data.fields.thesis);
+    if (data.fields.concerns) lines.push('Concerns: ' + data.fields.concerns);
+    if (data.fields.followUp) lines.push('Follow-up: ' + data.fields.followUp);
+    lines.push('');
+    lines.push(divider);
+
+    var report = lines.join('\n');
+
+    // Download
+    var blob = new Blob([report], { type: 'text/plain' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    var filename = (data.fields.companyName || 'startup').replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+    a.download = 'due-diligence-' + filename + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Report exported');
+  };
+
+  function showToast(msg) {
+    var toast = document.getElementById('ddToast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 2500);
+  }
+
+  // Boot
+  init();
+})();
+</script>
