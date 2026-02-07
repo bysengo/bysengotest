@@ -571,6 +571,63 @@
     color: #F3EDE7 !important;
   }
 
+  /* Brand logos on title */
+  .sgp-wrap .sgp-brand-logos {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 24px !important;
+    margin-bottom: 24px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .sgp-wrap .sgp-brand-logo {
+    height: 60px !important;
+    width: auto !important;
+    max-width: 200px !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  .sgp-wrap .sgp-brand-x {
+    font-family: 'Arimo', sans-serif !important;
+    font-size: 2rem !important;
+    font-weight: 900 !important;
+    color: #D57028 !important;
+    line-height: 1 !important;
+  }
+
+  /* Competitor logos in comparison */
+  .sgp-wrap .sgp-comp-logo {
+    height: 24px !important;
+    width: auto !important;
+    max-width: 100px !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+
+  .sgp-wrap .sgp-table th .sgp-comp-logo {
+    filter: brightness(0) invert(1) !important;
+  }
+
+  /* Upgrade callout */
+  .sgp-wrap .sgp-callout {
+    background: rgba(113, 126, 54, 0.15) !important;
+    border: 2px solid #717E36 !important;
+    border-radius: 8px !important;
+    padding: 20px 24px !important;
+    margin-top: 20px !important;
+    text-align: center !important;
+  }
+
+  .sgp-wrap .sgp-callout p {
+    font-size: 0.9rem !important;
+    color: #1B3533 !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .sgp-wrap .sgp-slide {
@@ -618,19 +675,17 @@
 
 <div class="sgp-wrap" id="sgpWrap">
 
-  <!-- SLIDE 1: Title -->
+  <!-- SLIDE 1: Title with logos -->
   <div class="sgp-slide sgp-dark sgp-active" data-sgp="0">
     <div class="sgp-inner">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" class="sgp-logo" aria-label="Sengo">
-        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
-        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
-        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
-        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
-        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
-      </svg>
-      <h1>Sengo<br><span style="color:#D57028 !important;">x</span> Gradient</h1>
+      <div class="sgp-brand-logos">
+        <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/49ad9e2d-2005-440d-a255-06abb54abb64/SENGO.PNG?format=750w" alt="Sengo" class="sgp-brand-logo" style="filter:brightness(0) invert(1) !important;" />
+        <span class="sgp-brand-x">x</span>
+        <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/06a2adc6-d84b-438c-96c1-9ec1e781e846/Untitled+design.png?format=750w" alt="Gradient" class="sgp-brand-logo" />
+      </div>
       <div class="sgp-divider" style="margin:16px auto !important;"></div>
-      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto !important;">Partnership Proposal<br>Building a Full Capital Lifecycle Stack for Founders</p>
+      <h2 style="font-size:2rem !important;text-transform:none !important;letter-spacing:0 !important;line-height:1.3 !important;">Partnership Proposal</h2>
+      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto !important;">Building a Full Capital Lifecycle Stack for Founders</p>
     </div>
   </div>
 
@@ -666,7 +721,7 @@
   <!-- SLIDE 3: What is Sengo -->
   <div class="sgp-slide sgp-dark" data-sgp="2">
     <div class="sgp-inner">
-      <span class="sgp-badge">Platform Overview</span>
+      <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/49ad9e2d-2005-440d-a255-06abb54abb64/SENGO.PNG?format=750w" alt="Sengo" class="sgp-brand-logo" style="height:40px !important;filter:brightness(0) invert(1) !important;margin-bottom:16px !important;" />
       <h2>What is Sengo?</h2>
       <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 10px !important;">The community, education, and readiness layer for founders and funders.</p>
       <div class="sgp-divider"></div>
@@ -695,78 +750,42 @@
     </div>
   </div>
 
-  <!-- SLIDE 4: What is Vettable -->
-  <div class="sgp-slide" data-sgp="3">
+  <!-- SLIDE 4: Sengo's Capital Lifecycle -->
+  <div class="sgp-slide sgp-orange" data-sgp="3">
     <div class="sgp-inner">
-      <span class="sgp-badge sgp-badge-teal">Platform Overview</span>
-      <h2>What is Vettable?</h2>
-      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 10px !important;">The venture operating system for founders pursuing venture capital.</p>
-      <div class="sgp-divider"></div>
-      <div class="sgp-three-col">
-        <div class="sgp-card">
-          <h3>Fundability Scoring</h3>
-          <p>Objective venture-readiness assessments that tell founders where they stand.</p>
-        </div>
-        <div class="sgp-card">
-          <h3>Data Rooms</h3>
-          <p>Diligence-ready, investor-grade documentation that builds trust.</p>
-        </div>
-        <div class="sgp-card">
-          <h3>Investor Matching</h3>
-          <p>Aligned introductions based on stage, sector, and thesis.</p>
-        </div>
-        <div class="sgp-card">
-          <h3>Cohort Analytics</h3>
-          <p>Track fundability progression across entire cohorts over time.</p>
-        </div>
-        <div class="sgp-card">
-          <h3>LP-Grade Reporting</h3>
-          <p>Outcome-based reporting for limited partners and foundations.</p>
-        </div>
-        <div class="sgp-card">
-          <h3>Capital Tracking</h3>
-          <p>Monitor capital raised post-program across all funding types.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 5: Full Lifecycle Stack -->
-  <div class="sgp-slide sgp-orange" data-sgp="4">
-    <div class="sgp-inner">
-      <span class="sgp-badge" style="background:#1B3533 !important;">The Stack</span>
-      <h2>The Full Capital<br>Lifecycle Stack</h2>
-      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 6px !important;color:rgba(243,237,231,0.9) !important;">Not a single-point solution. A complete system from readiness to raise.</p>
+      <span class="sgp-badge" style="background:#1B3533 !important;">How It Works</span>
+      <h2>Sengo's Capital<br>Lifecycle</h2>
+      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 6px !important;color:rgba(243,237,231,0.9) !important;">Supporting founders at every stage &mdash; not just the ones who are venture-ready.</p>
       <div class="sgp-flow">
         <div class="sgp-stage sgp-s-sengo">
           <div class="sgp-stage-label" style="color:#D57028 !important;">Sengo</div>
-          <div class="sgp-stage-name" style="color:#1B3533 !important;">Readiness</div>
-          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Education, community, capital path discovery</div>
+          <div class="sgp-stage-name" style="color:#1B3533 !important;">Educate</div>
+          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Capital education, community, alternative funding paths</div>
         </div>
         <div class="sgp-flow-arrow">&rarr;</div>
         <div class="sgp-stage sgp-s-sengo">
           <div class="sgp-stage-label" style="color:#D57028 !important;">Sengo</div>
-          <div class="sgp-stage-name" style="color:#1B3533 !important;">Assessment</div>
-          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Capital readiness scoring &amp; alternative paths</div>
+          <div class="sgp-stage-name" style="color:#1B3533 !important;">Assess</div>
+          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Capital readiness scoring &amp; pathway matching</div>
         </div>
         <div class="sgp-flow-arrow">&rarr;</div>
-        <div class="sgp-stage sgp-s-vettable">
-          <div class="sgp-stage-label" style="color:#1B3533 !important;">Vettable</div>
-          <div class="sgp-stage-name" style="color:#1B3533 !important;">Venture Ops</div>
-          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Fundability scoring, data rooms, matching</div>
+        <div class="sgp-stage sgp-s-sengo">
+          <div class="sgp-stage-label" style="color:#D57028 !important;">Sengo</div>
+          <div class="sgp-stage-name" style="color:#1B3533 !important;">Connect</div>
+          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Community, accountability, ongoing support</div>
         </div>
         <div class="sgp-flow-arrow">&rarr;</div>
         <div class="sgp-stage sgp-s-both">
-          <div class="sgp-stage-label" style="color:#717E36 !important;">Together</div>
-          <div class="sgp-stage-name" style="color:#1B3533 !important;">Impact</div>
-          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Longitudinal reporting &amp; retention</div>
+          <div class="sgp-stage-label" style="color:#717E36 !important;">Sengo</div>
+          <div class="sgp-stage-name" style="color:#1B3533 !important;">Report</div>
+          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Impact reporting &amp; ecosystem retention</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 6: Where Sengo Fits -->
-  <div class="sgp-slide" data-sgp="5">
+  <!-- SLIDE 5: Where Sengo Fits for Gradient -->
+  <div class="sgp-slide" data-sgp="4">
     <div class="sgp-inner">
       <span class="sgp-badge">For Gradient</span>
       <h2>Where Sengo<br>Fits In</h2>
@@ -788,47 +807,19 @@
             <li>Expose founders to multiple capital paths (not just VC)</li>
             <li>Build community and accountability between sessions</li>
             <li>Retain alumni engagement after demo day</li>
+            <li>Help founders build toward venture intentionally</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 7: Where Vettable Fits -->
-  <div class="sgp-slide sgp-dark" data-sgp="6">
-    <div class="sgp-inner">
-      <span class="sgp-badge sgp-badge-green">For Gradient</span>
-      <h2>Where Vettable<br>Fits In</h2>
-      <div class="sgp-divider"></div>
-      <div class="sgp-two-col" style="margin-top:16px !important;">
-        <div>
-          <p class="sgp-body" style="margin-bottom:14px !important;">
-            Once founders are truly <strong>venture-bound</strong>, Vettable becomes the system of record &mdash; the operational backbone for tracking, matching, and reporting.
-          </p>
-          <p class="sgp-body">
-            It gives Gradient <strong>real data</strong> to support investor conversations, LP reporting, and cohort analysis.
-          </p>
-        </div>
-        <div>
-          <h3 style="color:#D57028 !important;">Vettable Enables Gradient To:</h3>
-          <ul class="sgp-features">
-            <li>Assess venture readiness objectively</li>
-            <li>Track cohort fundability and graduation rates</li>
-            <li>Support faster, more aligned investor conversations</li>
-            <li>Report outcomes to LPs and partners with real data</li>
-            <li>Build a defensible, data-driven capital story</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 8: Impact Reporting -->
-  <div class="sgp-slide sgp-dark" data-sgp="7">
+  <!-- SLIDE 6: Impact Reporting -->
+  <div class="sgp-slide sgp-dark" data-sgp="5">
     <div class="sgp-inner">
       <span class="sgp-badge">The Differentiator</span>
       <h2>Impact Reporting<br>That Matters</h2>
-      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 6px !important;">Most tools report activity. This stack reports <strong>outcomes</strong>.</p>
+      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 6px !important;">Most tools report activity. Sengo reports <strong>outcomes</strong>.</p>
       <div class="sgp-metrics">
         <div class="sgp-metric">
           <div class="sgp-metric-icon">&#9650;</div>
@@ -858,41 +849,41 @@
     </div>
   </div>
 
-  <!-- SLIDE 9: vs PitchBook -->
-  <div class="sgp-slide" data-sgp="8">
+  <!-- SLIDE 7: Competitor Comparison with logos -->
+  <div class="sgp-slide" data-sgp="6">
     <div class="sgp-inner">
       <span class="sgp-badge sgp-badge-brown">Comparison</span>
-      <h2>Sengo + Vettable<br>vs. PitchBook</h2>
+      <h2>How Sengo<br>Stacks Up</h2>
       <div class="sgp-divider"></div>
       <table class="sgp-table">
         <thead>
           <tr>
-            <th style="width:38%;">Capability</th>
-            <th style="width:18%;">PitchBook</th>
-            <th style="width:22%;">Sengo</th>
-            <th style="width:22%;">Vettable</th>
+            <th style="width:34%;">Capability</th>
+            <th style="width:22%;text-align:center !important;"><img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/cb9bfd74-a1e6-4558-b449-b415059743e9/PitchBook_Logo.jpg?format=750w" alt="PitchBook" class="sgp-comp-logo" /></th>
+            <th style="width:22%;text-align:center !important;"><img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/49ad9e2d-2005-440d-a255-06abb54abb64/SENGO.PNG?format=750w" alt="Sengo" class="sgp-comp-logo" /></th>
+            <th style="width:22%;text-align:center !important;"><img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1a433d10-81e2-4cf7-9179-b92754d1c522/Vettable-Logo-Full-B_Color-Dark%404x.png?format=750w" alt="Vettable" class="sgp-comp-logo" /></th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>Founder education &amp; readiness</td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-check">&check;</span></td><td><span class="sgp-cross">&mdash;</span></td></tr>
-          <tr><td>Capital path discovery (grants, angels)</td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-check">&check;</span></td><td><span class="sgp-cross">&mdash;</span></td></tr>
-          <tr><td>Fundability scoring &amp; assessment</td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-check">&check;</span></td><td><span class="sgp-check">&check;</span></td></tr>
-          <tr><td>Community &amp; accountability</td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-check">&check;</span></td><td><span class="sgp-cross">&mdash;</span></td></tr>
-          <tr><td>Diligence-ready data rooms</td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-check">&check;</span></td></tr>
-          <tr><td>Investor matching</td><td>Static only</td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-check">&check;</span></td></tr>
-          <tr><td>Cohort analytics &amp; tracking</td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-check">&check;</span></td></tr>
-          <tr><td>Longitudinal impact reporting</td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-check">&check;</span></td><td><span class="sgp-check">&check;</span></td></tr>
-          <tr><td>Embedded &amp; outcome-driven</td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-check">&check;</span></td><td><span class="sgp-check">&check;</span></td></tr>
+          <tr><td>Founder education &amp; readiness</td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td></tr>
+          <tr><td>Capital path discovery (grants, angels, non-dilutive)</td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td></tr>
+          <tr><td>Fundability scoring &amp; assessment</td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td></tr>
+          <tr><td>Community &amp; accountability</td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td></tr>
+          <tr><td>Diligence-ready data rooms</td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td></tr>
+          <tr><td>Investor matching</td><td style="text-align:center !important;">Static only</td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td></tr>
+          <tr><td>Cohort analytics &amp; tracking</td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td></tr>
+          <tr><td>Longitudinal impact reporting</td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td></tr>
+          <tr><td>Embedded &amp; outcome-driven</td><td style="text-align:center !important;"><span class="sgp-cross">&mdash;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td><td style="text-align:center !important;"><span class="sgp-check">&check;</span></td></tr>
         </tbody>
       </table>
-      <p class="sgp-body" style="text-align:center !important;margin-top:12px !important;font-size:0.85rem !important;">
-        PitchBook tells you what exists. <strong>Sengo + Vettable help founders become investable &mdash; and prove it.</strong>
-      </p>
+      <div class="sgp-callout">
+        <p><strong>Best together:</strong> Sengo handles readiness &amp; education. Vettable handles venture operations. Combined, they create a full capital lifecycle stack &mdash; from first education to LP-grade reporting.</p>
+      </div>
     </div>
   </div>
 
-  <!-- SLIDE 10: Pricing -->
-  <div class="sgp-slide sgp-dark" data-sgp="9">
+  <!-- SLIDE 8: Pricing -->
+  <div class="sgp-slide sgp-dark" data-sgp="7">
     <div class="sgp-inner">
       <span class="sgp-badge">Partnership Proposal</span>
       <h2>50-Seat Sengo<br>Pilot for Gradient</h2>
@@ -944,7 +935,7 @@
             <li>Dedicated onboarding + support</li>
             <li>Workshops and office hours</li>
             <li>Full impact reporting loop</li>
-            <li>Priority Vettable integration</li>
+            <li>Vettable integration path</li>
             <li>Reusable partner case study</li>
           </ul>
           <div class="sgp-savings">SAVE 33%</div>
@@ -953,8 +944,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 11: On-Site Support -->
-  <div class="sgp-slide" data-sgp="10">
+  <!-- SLIDE 9: On-Site Support -->
+  <div class="sgp-slide" data-sgp="8">
     <div class="sgp-inner">
       <span class="sgp-badge sgp-badge-green">Included</span>
       <h2>On-Site Support<br>in Tulsa</h2>
@@ -979,16 +970,14 @@
     </div>
   </div>
 
-  <!-- SLIDE 12: CTA -->
-  <div class="sgp-slide sgp-dark" data-sgp="11">
+  <!-- SLIDE 10: CTA -->
+  <div class="sgp-slide sgp-dark" data-sgp="9">
     <div class="sgp-inner">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" class="sgp-logo" aria-label="Sengo">
-        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
-        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
-        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
-        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
-        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
-      </svg>
+      <div class="sgp-brand-logos">
+        <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/49ad9e2d-2005-440d-a255-06abb54abb64/SENGO.PNG?format=750w" alt="Sengo" class="sgp-brand-logo" style="filter:brightness(0) invert(1) !important;" />
+        <span class="sgp-brand-x">x</span>
+        <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/06a2adc6-d84b-438c-96c1-9ec1e781e846/Untitled+design.png?format=750w" alt="Gradient" class="sgp-brand-logo" />
+      </div>
       <h1 style="font-size:3.4rem !important;">Let's Build<br>This Together</h1>
       <div class="sgp-divider" style="margin:16px auto !important;"></div>
       <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 20px !important;">
@@ -1007,7 +996,7 @@
   <div class="sgp-nav">
     <button class="sgp-nav-btn" onclick="sgpPrev()" aria-label="Previous slide">&larr;</button>
     <div class="sgp-dots" id="sgpDots"></div>
-    <span class="sgp-counter" id="sgpCounter">1 / 12</span>
+    <span class="sgp-counter" id="sgpCounter">1 / 10</span>
     <button class="sgp-nav-btn" onclick="sgpNext()" aria-label="Next slide">&rarr;</button>
   </div>
 
@@ -1015,7 +1004,7 @@
 
 <script>
 var sgpCurrent = 0;
-var sgpTotal = 12;
+var sgpTotal = 10;
 
 function sgpGo(idx) {
   if (idx < 0 || idx >= sgpTotal || idx === sgpCurrent) return;
