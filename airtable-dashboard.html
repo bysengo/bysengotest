@@ -1008,6 +1008,11 @@
         <option value="">-- Connect first to list tables --</option>
       </select>
 
+      <div id="tableNameFallback" style="display: none;">
+        <label for="tableNameInput">Table Name</label>
+        <input type="text" id="tableNameInput" placeholder="e.g. Table 1, Contacts, Deals...">
+      </div>
+
       <button class="btn btn-primary" id="btnConnect" onclick="connectToAirtable()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         Connect &amp; Load
@@ -1017,7 +1022,7 @@
         <strong>How to create your token:</strong><br>
         1. Go to <a href="https://airtable.com/create/tokens" target="_blank">airtable.com/create/tokens</a><br>
         2. Click "Create new token"<br>
-        3. Add scopes: <code>data.records:read</code> + <code>schema.bases:read</code><br>
+        3. Add scope: <code>data.records:read</code> (required) and optionally <code>schema.bases:read</code><br>
         4. Under "Access", click "Add a base" and select your base<br>
         5. Click "Create token" and paste it above
       </p>
@@ -1382,58 +1387,86 @@
       btn.textContent = 'Connecting...';
 
       try {
-        const schemaRes = await airtableFetch(`https://api.airtable.com/v0/meta/bases/${baseId}/tables`);
-        if (!schemaRes.ok) {
-          const err = await schemaRes.json().catch(() => ({}));
-          const msg = err.error?.message || '';
-          const status = schemaRes.status;
+        // Try schema endpoint first (needs schema.bases:read scope)
+        let schemaWorked = false;
+        try {
+          const schemaRes = await airtableFetch(`https://api.airtable.com/v0/meta/bases/${baseId}/tables`);
+          if (schemaRes.ok) {
+            const schema = await schemaRes.json();
+            const tables = schema.tables || [];
+            if (tables.length > 0) {
+              schemaWorked = true;
 
-          if (status === 401 || msg.toLowerCase().includes('authentication')) {
-            throw new Error(
-              'Authentication failed. When creating your token at airtable.com/create/tokens, make sure:\n' +
-              '1. Add scope: data.records:read\n' +
-              '2. Add scope: schema.bases:read\n' +
-              '3. Under "Access", add your base (appwqkwXRvE1lN2Rs)\n' +
-              '4. Copy the full token starting with "pat..."'
-            );
+              const sel = document.getElementById('tableSelect');
+              sel.innerHTML = '';
+              sel.disabled = false;
+              tables.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.id;
+                opt.textContent = t.name;
+                sel.appendChild(opt);
+              });
+
+              window._tableSchemas = {};
+              tables.forEach(t => { window._tableSchemas[t.id] = t; });
+
+              sel.onchange = () => loadTable(sel.value);
+              await loadTable(tables[0].id);
+            }
           }
-
-          if (status === 403) {
-            throw new Error(
-              'Token does not have access to this base. Edit your token at airtable.com/create/tokens ' +
-              'and make sure this base is listed under the "Access" section.'
-            );
-          }
-
-          if (status === 404) {
-            throw new Error(
-              'Base not found. Check that the Base ID is correct. You can find it in your Airtable URL: ' +
-              'airtable.com/[BASE_ID]/...'
-            );
-          }
-
-          throw new Error(msg || `API error ${status}.`);
+        } catch(schemaErr) {
+          console.log('Schema endpoint failed, trying direct record fetch...');
         }
 
-        const schema = await schemaRes.json();
-        const tables = schema.tables || [];
-        if (tables.length === 0) throw new Error('No tables found in this base.');
+        // Fallback: try fetching records directly with table name
+        if (!schemaWorked) {
+          const tblName = document.getElementById('tableNameInput').value.trim();
 
-        const sel = document.getElementById('tableSelect');
-        sel.innerHTML = '';
-        sel.disabled = false;
-        tables.forEach(t => {
-          const opt = document.createElement('option');
-          opt.value = t.id;
-          opt.textContent = t.name;
-          sel.appendChild(opt);
-        });
+          if (!tblName) {
+            // Show the table name input and ask the user to provide it
+            document.getElementById('tableNameFallback').style.display = 'block';
+            document.getElementById('tableSelect').parentElement && (document.getElementById('tableSelect').style.display = 'none');
+            document.querySelector('label[for="tableSelect"]').style.display = 'none';
+            showSetupError(
+              'Connected to Airtable, but could not list tables automatically. ' +
+              'Type your table name below and click Connect again.\n' +
+              '(You can find it in the tab at the top of your Airtable base.)'
+            );
+            btn.disabled = false;
+            btn.textContent = 'Connect & Load';
+            return;
+          }
 
-        window._tableSchemas = {};
-        tables.forEach(t => { window._tableSchemas[t.id] = t; });
+          // Try fetching records using the table name directly
+          const testRes = await airtableFetch(
+            `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tblName)}?pageSize=1`
+          );
 
-        sel.onchange = () => loadTable(sel.value);
-        await loadTable(tables[0].id);
+          if (!testRes.ok) {
+            const err = await testRes.json().catch(() => ({}));
+            const msg = err.error?.message || '';
+            const status = testRes.status;
+
+            if (status === 401 || msg.toLowerCase().includes('authentication')) {
+              throw new Error(
+                'Authentication failed. Your token may not have access to this base.\n' +
+                'Edit your token at airtable.com/create/tokens and make sure:\n' +
+                '1. Scope "data.records:read" is added\n' +
+                '2. Your base is listed under "Access"'
+              );
+            }
+            if (status === 404 || msg.toLowerCase().includes('not find')) {
+              throw new Error(
+                `Table "${tblName}" not found. Check the exact table name — ` +
+                'it\'s the text on the tab at the top of your Airtable base. It\'s case-sensitive.'
+              );
+            }
+            throw new Error(msg || `API error ${status}`);
+          }
+
+          // Success! Load using table name directly
+          await loadTableByName(tblName);
+        }
 
         localStorage.setItem('sengo_airtable_session', JSON.stringify({
           token: apiToken, baseId: baseId
@@ -1444,6 +1477,46 @@
         btn.disabled = false;
         btn.textContent = 'Connect & Load';
       }
+    }
+
+    async function loadTableByName(tblName) {
+      tableId = tblName;  // Airtable API accepts table names as well as IDs
+      tableName = tblName;
+      fields = [];
+      fieldMap = {};
+
+      document.getElementById('setupScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('topbarTable').textContent = tableName;
+
+      document.getElementById('loadingScreen').style.display = 'flex';
+      document.getElementById('portfolioView').style.display = 'none';
+      document.getElementById('swipeView').style.display = 'none';
+
+      // Show admin controls
+      document.getElementById('btnPublishSnapshot').style.display = 'flex';
+      document.getElementById('btnPublishLive').style.display = 'flex';
+      document.getElementById('btnDisconnect').style.display = 'block';
+      document.getElementById('snapshotBanner').style.display = 'none';
+      document.getElementById('liveBanner').style.display = 'none';
+
+      try {
+        allRecords = await fetchAllRecords();
+
+        // Infer fields from the records since we don't have schema
+        if (allRecords.length > 0) {
+          inferFieldsFromRecords();
+        }
+
+        filteredRecords = [...allRecords];
+        buildFilterUI();
+        renderCurrentView();
+      } catch(e) {
+        console.error(e);
+        alert('Failed to load records: ' + e.message);
+      }
+
+      document.getElementById('loadingScreen').style.display = 'none';
     }
 
     function showSetupError(msg) {
