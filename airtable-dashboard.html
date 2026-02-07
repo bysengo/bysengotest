@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo – Airtable Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Variables ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark-teal: #1B3533;
+      --orange: #D57028;
+      --cream: #F3EDE7;
+      --brown: #67441A;
+      --white: #FFFFFF;
+      --light-gray: #f7f5f2;
+      --mid-gray: #e0dbd5;
+      --text-dark: #1B3533;
+      --text-muted: #6b6560;
+      --shadow-sm: 0 1px 3px rgba(27,53,51,0.08);
+      --shadow-md: 0 4px 12px rgba(27,53,51,0.1);
+      --shadow-lg: 0 8px 30px rgba(27,53,51,0.15);
+      --shadow-xl: 0 16px 50px rgba(27,53,51,0.2);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Arimo', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Setup Screen ──────────────────────────────────────── */
+    .setup-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .setup-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 48px;
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .setup-card h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--dark-teal);
+      margin-bottom: 8px;
+    }
+
+    .setup-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .setup-card label {
+      display: block;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .setup-card input, .setup-card select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--mid-gray);
+      border-radius: var(--radius-sm);
+      font-family: 'Arimo', sans-serif;
+      font-size: 15px;
+      color: var(--text-dark);
+      background: var(--light-gray);
+      transition: border-color var(--transition);
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    .setup-card input:focus, .setup-card select:focus {
+      border-color: var(--orange);
+    }
+
+    .setup-card .pre-filled {
+      background: var(--cream);
+      color: var(--text-muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background: #c06220;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .setup-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 16px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .setup-hint a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .error-msg {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    /* ── Dashboard Layout ──────────────────────────────────── */
+    .dashboard { display: none; min-height: 100vh; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark-teal);
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-md);
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .topbar-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .topbar-table {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .view-toggle {
+      display: flex;
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .view-toggle button {
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Arimo', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .view-toggle button.active {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .view-toggle button:hover:not(.active) {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .btn-disconnect {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-disconnect:hover {
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+    }
+
+    /* ── Toolbar ───────────────────────────────────────────── */
+    .toolbar {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: var(--white);
+      border-bottom: 1px solid var(--mid-gray);
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      max-width: 360px;
+      position: relative;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 12px 10px 38px;
+      border: 2px solid var(--mid-gray);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-family: 'Arimo', sans-serif;
+      background: var(--light-gray);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .search-box input:focus {
+      border-color: var(--orange);
+    }
+
+    .record-count {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-left: auto;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filter-select {
+      padding: 10px 32px 10px 12px;
+      border: 2px solid var(--mid-gray);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: 'Arimo', sans-serif;
+      background: var(--light-gray);
+      color: var(--text-dark);
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6560' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    .btn-export {
+      padding: 10px 18px;
+      background: var(--dark-teal);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--transition);
+    }
+
+    .btn-export:hover {
+      background: #264a47;
+      transform: translateY(-1px);
+    }
+
+    /* ── Loading Spinner ───────────────────────────────────── */
+    .loading-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 20px;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--mid-gray);
+      border-top-color: var(--orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-screen p {
+      margin-top: 16px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* ── Portfolio (Grid) View ─────────────────────────────── */
+    .portfolio-view {
+      padding: 28px 32px;
+      display: none;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .portfolio-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: all var(--transition);
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .portfolio-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: var(--orange);
+    }
+
+    .portfolio-card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: linear-gradient(135deg, var(--dark-teal), #2a5a56);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portfolio-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .portfolio-card-image .placeholder-icon {
+      font-size: 48px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .portfolio-card-body {
+      padding: 20px;
+    }
+
+    .portfolio-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--dark-teal);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .portfolio-card-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .portfolio-card-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .field-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      background: var(--cream);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .field-chip .field-label {
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    .portfolio-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .tag-green { background: #ecfdf5; color: #065f46; }
+    .tag-blue { background: #eff6ff; color: #1e40af; }
+    .tag-orange { background: #fff7ed; color: #9a3412; }
+    .tag-purple { background: #f5f3ff; color: #5b21b6; }
+    .tag-red { background: #fef2f2; color: #991b1b; }
+    .tag-teal { background: #f0fdfa; color: #134e4a; }
+
+    /* ── Swipe View ────────────────────────────────────────── */
+    .swipe-view {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: calc(100vh - 64px);
+    }
+
+    .swipe-progress {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .swipe-progress-bar {
+      width: 300px;
+      max-width: 90%;
+      height: 4px;
+      background: var(--mid-gray);
+      border-radius: 2px;
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .swipe-progress-fill {
+      height: 100%;
+      background: var(--orange);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .swipe-container {
+      position: relative;
+      width: 420px;
+      max-width: 90vw;
+      height: 560px;
+      perspective: 1000px;
+    }
+
+    .swipe-card {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.5s ease;
+      cursor: grab;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .swipe-card:active { cursor: grabbing; }
+
+    .swipe-card.swiping-left {
+      transform: translateX(-120%) rotate(-15deg);
+      opacity: 0;
+    }
+
+    .swipe-card.swiping-right {
+      transform: translateX(120%) rotate(15deg);
+      opacity: 0;
+    }
+
+    .swipe-card-image {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, var(--dark-teal), #2a5a56);
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .swipe-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .swipe-card-image .placeholder-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 64px;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .swipe-card-body {
+      padding: 24px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .swipe-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--dark-teal);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .swipe-card-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .swipe-card-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--light-gray);
+      font-size: 14px;
+    }
+
+    .swipe-card-detail:last-child { border-bottom: none; }
+
+    .swipe-card-detail .detail-label {
+      font-weight: 600;
+      color: var(--brown);
+      min-width: 100px;
+      flex-shrink: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      padding-top: 2px;
+    }
+
+    .swipe-card-detail .detail-value {
+      color: var(--text-dark);
+      line-height: 1.4;
+    }
+
+    .swipe-overlay {
+      position: absolute;
+      top: 20px;
+      padding: 8px 24px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .swipe-overlay-left {
+      right: 20px;
+      border: 3px solid #ef4444;
+      color: #ef4444;
+      transform: rotate(15deg);
+    }
+
+    .swipe-overlay-right {
+      left: 20px;
+      border: 3px solid #22c55e;
+      color: #22c55e;
+      transform: rotate(-15deg);
+    }
+
+    .swipe-actions {
+      display: flex;
+      gap: 24px;
+      margin-top: 28px;
+      align-items: center;
+    }
+
+    .swipe-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 3px solid;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .swipe-btn:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-md);
+    }
+
+    .swipe-btn-skip {
+      border-color: #ef4444;
+      color: #ef4444;
+    }
+
+    .swipe-btn-skip:hover { background: #fef2f2; }
+
+    .swipe-btn-save {
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+
+    .swipe-btn-save:hover { background: #f0fdf4; }
+
+    .swipe-btn-info {
+      width: 48px;
+      height: 48px;
+      border-color: var(--mid-gray);
+      color: var(--text-muted);
+    }
+
+    .swipe-btn-info:hover { background: var(--light-gray); }
+
+    .swipe-end-msg {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .swipe-end-msg h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--dark-teal);
+      margin-bottom: 8px;
+    }
+
+    .swipe-end-msg p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .btn-restart {
+      background: var(--orange);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ── Detail Modal ──────────────────────────────────────── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(27,53,51,0.5);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-backdrop.visible {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      max-width: 600px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from { transform: scale(0.95) translateY(20px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 240px;
+      background: linear-gradient(135deg, var(--dark-teal), #2a5a56);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.4);
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+
+    .modal-close:hover { background: rgba(0,0,0,0.6); }
+
+    .modal-body {
+      padding: 28px;
+    }
+
+    .modal-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--dark-teal);
+      margin-bottom: 20px;
+    }
+
+    .modal-field {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .modal-field:last-child { border-bottom: none; }
+
+    .modal-field-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .modal-field-value {
+      font-size: 15px;
+      color: var(--text-dark);
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .modal-field-value a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .modal-field-value a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .topbar { padding: 0 16px; }
+      .topbar-table { display: none; }
+      .toolbar { padding: 16px; }
+      .portfolio-view { padding: 16px; }
+      .portfolio-grid { grid-template-columns: 1fr; gap: 16px; }
+      .swipe-container { height: 480px; }
+      .swipe-card-body { padding: 16px; }
+      .swipe-card-title { font-size: 18px; }
+      .setup-card { padding: 28px; }
+      .filter-group { width: 100%; }
+      .filter-select { flex: 1; }
+      .search-box { max-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .view-toggle button span.label-text { display: none; }
+      .swipe-container { height: 420px; }
+      .swipe-card-image { height: 160px; }
+    }
+
+    /* ── Empty State ───────────────────────────────────────── */
+    .empty-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .empty-state svg {
+      color: var(--mid-gray);
+      margin-bottom: 16px;
+    }
+
+    .empty-state h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--dark-teal);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Setup Screen ────────────────────────────────────── -->
+  <div class="setup-screen" id="setupScreen">
+    <div class="setup-card">
+      <h1>Connect to Airtable</h1>
+      <p>Enter your Airtable Personal Access Token to load your base and display it as an interactive dashboard.</p>
+
+      <div class="error-msg" id="setupError"></div>
+
+      <label for="apiToken">Personal Access Token</label>
+      <input type="password" id="apiToken" placeholder="pat_xxxxxxxxxxxx.xxxxx" autocomplete="off">
+
+      <label for="baseId">Base ID</label>
+      <input type="text" id="baseId" value="appwqkwXRvE1lN2Rs" class="pre-filled">
+
+      <label for="tableSelect">Table</label>
+      <select id="tableSelect" disabled>
+        <option value="">-- Connect first to list tables --</option>
+      </select>
+
+      <button class="btn btn-primary" id="btnConnect" onclick="connectToAirtable()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Connect &amp; Load
+      </button>
+
+      <p class="setup-hint">
+        Generate a token at <a href="https://airtable.com/create/tokens" target="_blank">airtable.com/create/tokens</a><br>
+        with <code>data.records:read</code> and <code>schema.bases:read</code> scopes.
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── Dashboard ───────────────────────────────────────── -->
+  <div class="dashboard" id="dashboard">
+    <!-- Top Bar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-brand">Sengo</span>
+        <span class="topbar-table" id="topbarTable"></span>
+      </div>
+      <div class="topbar-right">
+        <div class="view-toggle">
+          <button class="active" onclick="switchView('portfolio')" id="btnPortfolio">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            <span class="label-text">Portfolio</span>
+          </button>
+          <button onclick="switchView('swipe')" id="btnSwipe">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 9v6"/><path d="M9 12l3 3 3-3"/></svg>
+            <span class="label-text">Swipe</span>
+          </button>
+        </div>
+        <button class="btn-disconnect" onclick="disconnect()">Disconnect</button>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar" id="toolbar">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Search records..." oninput="filterRecords()">
+      </div>
+      <div class="filter-group" id="filterGroup"></div>
+      <span class="record-count" id="recordCount"></span>
+      <button class="btn-export" onclick="exportCSV()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export CSV
+      </button>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="spinner"></div>
+      <p>Loading records from Airtable...</p>
+    </div>
+
+    <!-- Portfolio View -->
+    <div class="portfolio-view" id="portfolioView">
+      <div class="portfolio-grid" id="portfolioGrid"></div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      <h3>No records found</h3>
+      <p>Try adjusting your search or filter criteria.</p>
+    </div>
+
+    <!-- Swipe View -->
+    <div class="swipe-view" id="swipeView">
+      <div class="swipe-progress" id="swipeProgress">1 / 0</div>
+      <div class="swipe-progress-bar">
+        <div class="swipe-progress-fill" id="swipeProgressFill"></div>
+      </div>
+      <div class="swipe-container" id="swipeContainer"></div>
+      <div class="swipe-actions" id="swipeActions">
+        <button class="swipe-btn swipe-btn-skip" onclick="swipeAction('left')" title="Skip">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <button class="swipe-btn swipe-btn-info" onclick="openModal(filteredRecords[swipeIndex])" title="Details">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        </button>
+        <button class="swipe-btn swipe-btn-save" onclick="swipeAction('right')" title="Save">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+      </div>
+      <div class="swipe-end-msg" id="swipeEndMsg">
+        <h2>All Done!</h2>
+        <p id="swipeSummary"></p>
+        <button class="btn btn-restart" onclick="restartSwipe()">Start Over</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Detail Modal ────────────────────────────────────── -->
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
+    <div class="modal" id="modal" onclick="event.stopPropagation()">
+      <div class="modal-image" id="modalImage">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ─── State ───────────────────────────────────────────── */
+    let allRecords = [];
+    let filteredRecords = [];
+    let fields = [];
+    let fieldMap = {};    // field id -> field object
+    let currentView = 'portfolio';
+    let swipeIndex = 0;
+    let swipeSaved = [];
+    let swipeSkipped = [];
+    let apiToken = '';
+    let baseId = '';
+    let tableId = '';
+    let imageField = null;
+    let titleField = null;
+    let subtitleField = null;
+    let filterableFields = [];
+    let tagColors = ['tag-green','tag-blue','tag-orange','tag-purple','tag-red','tag-teal'];
+
+    /* ─── Setup / Connection ──────────────────────────────── */
+    // Check for saved session
+    (function initFromStorage() {
+      const saved = localStorage.getItem('sengo_airtable_session');
+      if (saved) {
+        try {
+          const s = JSON.parse(saved);
+          document.getElementById('apiToken').value = s.token || '';
+          document.getElementById('baseId').value = s.baseId || 'appwqkwXRvE1lN2Rs';
+        } catch(e) {}
+      }
+    })();
+
+    async function connectToAirtable() {
+      const btn = document.getElementById('btnConnect');
+      const errEl = document.getElementById('setupError');
+      errEl.style.display = 'none';
+
+      apiToken = document.getElementById('apiToken').value.trim();
+      baseId = document.getElementById('baseId').value.trim();
+
+      if (!apiToken) return showSetupError('Please enter your Personal Access Token.');
+      if (!baseId) return showSetupError('Please enter the Base ID.');
+
+      btn.disabled = true;
+      btn.textContent = 'Connecting...';
+
+      try {
+        // Fetch base schema to list tables
+        const schemaRes = await airtableFetch(`https://api.airtable.com/v0/meta/bases/${baseId}/tables`);
+        if (!schemaRes.ok) {
+          const err = await schemaRes.json().catch(() => ({}));
+          throw new Error(err.error?.message || `API error ${schemaRes.status}. Check your token and base ID.`);
+        }
+
+        const schema = await schemaRes.json();
+        const tables = schema.tables || [];
+        if (tables.length === 0) throw new Error('No tables found in this base.');
+
+        // Populate table selector
+        const sel = document.getElementById('tableSelect');
+        sel.innerHTML = '';
+        sel.disabled = false;
+        tables.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t.id;
+          opt.textContent = t.name;
+          sel.appendChild(opt);
+        });
+
+        // Store field info for each table
+        window._tableSchemas = {};
+        tables.forEach(t => { window._tableSchemas[t.id] = t; });
+
+        // Auto-select first table and load
+        sel.onchange = () => loadTable(sel.value);
+        await loadTable(tables[0].id);
+
+        // Save session
+        localStorage.setItem('sengo_airtable_session', JSON.stringify({
+          token: apiToken, baseId: baseId
+        }));
+
+      } catch(e) {
+        showSetupError(e.message);
+        btn.disabled = false;
+        btn.textContent = 'Connect & Load';
+      }
+    }
+
+    function showSetupError(msg) {
+      const el = document.getElementById('setupError');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    async function loadTable(tblId) {
+      tableId = tblId;
+      const tableSchema = window._tableSchemas[tblId];
+
+      // Setup field info
+      fields = tableSchema.fields || [];
+      fieldMap = {};
+      fields.forEach(f => { fieldMap[f.id] = f; });
+
+      // Auto-detect special fields
+      detectSpecialFields();
+
+      // Show dashboard
+      document.getElementById('setupScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('topbarTable').textContent = tableSchema.name;
+
+      // Show loading
+      document.getElementById('loadingScreen').style.display = 'flex';
+      document.getElementById('portfolioView').style.display = 'none';
+      document.getElementById('swipeView').style.display = 'none';
+
+      try {
+        allRecords = await fetchAllRecords();
+        filteredRecords = [...allRecords];
+        buildFilterUI();
+        renderCurrentView();
+      } catch(e) {
+        console.error(e);
+        alert('Failed to load records: ' + e.message);
+      }
+
+      document.getElementById('loadingScreen').style.display = 'none';
+    }
+
+    function detectSpecialFields() {
+      imageField = null;
+      titleField = null;
+      subtitleField = null;
+      filterableFields = [];
+
+      for (const f of fields) {
+        const nameL = f.name.toLowerCase();
+
+        // Detect image field
+        if (!imageField && (f.type === 'multipleAttachments' || f.type === 'singleAttachment' ||
+            nameL.includes('image') || nameL.includes('photo') || nameL.includes('logo') ||
+            nameL.includes('picture') || nameL.includes('headshot') || nameL.includes('avatar'))) {
+          imageField = f;
+        }
+
+        // Detect title field (first single-line text or name field)
+        if (!titleField && (f.type === 'singleLineText' || f.type === 'formula') &&
+            (nameL.includes('name') || nameL.includes('title') || nameL.includes('company'))) {
+          titleField = f;
+        }
+
+        // Filterable fields: singleSelect, multipleSelects, checkbox
+        if (f.type === 'singleSelect' || f.type === 'multipleSelects') {
+          filterableFields.push(f);
+        }
+      }
+
+      // Fallback: first single-line text as title
+      if (!titleField) {
+        titleField = fields.find(f => f.type === 'singleLineText') || fields[0];
+      }
+
+      // Subtitle: second text-like field
+      const textFields = fields.filter(f =>
+        (f.type === 'singleLineText' || f.type === 'email' || f.type === 'url' || f.type === 'formula')
+        && f !== titleField
+      );
+      subtitleField = textFields[0] || null;
+    }
+
+    /* ─── Airtable API Helpers ────────────────────────────── */
+    async function airtableFetch(url) {
+      return fetch(url, {
+        headers: { 'Authorization': `Bearer ${apiToken}` }
+      });
+    }
+
+    async function fetchAllRecords() {
+      let records = [];
+      let offset = null;
+
+      do {
+        let url = `https://api.airtable.com/v0/${baseId}/${tableId}?pageSize=100`;
+        if (offset) url += `&offset=${offset}`;
+
+        const res = await airtableFetch(url);
+        if (!res.ok) throw new Error(`Failed to fetch records (${res.status})`);
+
+        const data = await res.json();
+        records = records.concat(data.records || []);
+        offset = data.offset || null;
+      } while (offset);
+
+      return records;
+    }
+
+    /* ─── Filter & Search ─────────────────────────────────── */
+    function buildFilterUI() {
+      const group = document.getElementById('filterGroup');
+      group.innerHTML = '';
+
+      filterableFields.slice(0, 3).forEach(f => {
+        const sel = document.createElement('select');
+        sel.className = 'filter-select';
+        sel.dataset.fieldName = f.name;
+
+        const allOpt = document.createElement('option');
+        allOpt.value = '';
+        allOpt.textContent = `All ${f.name}`;
+        sel.appendChild(allOpt);
+
+        // Gather unique values
+        const vals = new Set();
+        allRecords.forEach(r => {
+          const v = r.fields[f.name];
+          if (Array.isArray(v)) v.forEach(x => vals.add(x));
+          else if (v) vals.add(v);
+        });
+
+        [...vals].sort().forEach(v => {
+          const opt = document.createElement('option');
+          opt.value = v;
+          opt.textContent = v;
+          sel.appendChild(opt);
+        });
+
+        sel.onchange = () => filterRecords();
+        group.appendChild(sel);
+      });
+    }
+
+    function filterRecords() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filters = {};
+
+      document.querySelectorAll('.filter-select').forEach(sel => {
+        if (sel.value) filters[sel.dataset.fieldName] = sel.value;
+      });
+
+      filteredRecords = allRecords.filter(record => {
+        // Search
+        if (query) {
+          const text = Object.values(record.fields).map(v => {
+            if (Array.isArray(v)) return v.map(x => typeof x === 'object' ? (x.filename || '') : String(x)).join(' ');
+            if (typeof v === 'object' && v !== null) return JSON.stringify(v);
+            return String(v || '');
+          }).join(' ').toLowerCase();
+          if (!text.includes(query)) return false;
+        }
+
+        // Filters
+        for (const [fieldName, filterVal] of Object.entries(filters)) {
+          const val = record.fields[fieldName];
+          if (Array.isArray(val)) {
+            if (!val.includes(filterVal)) return false;
+          } else if (val !== filterVal) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+
+      renderCurrentView();
+    }
+
+    /* ─── View Switching ──────────────────────────────────── */
+    function switchView(view) {
+      currentView = view;
+      document.getElementById('btnPortfolio').classList.toggle('active', view === 'portfolio');
+      document.getElementById('btnSwipe').classList.toggle('active', view === 'swipe');
+      document.getElementById('toolbar').style.display = view === 'portfolio' ? 'flex' : 'none';
+      renderCurrentView();
+    }
+
+    function renderCurrentView() {
+      document.getElementById('portfolioView').style.display = 'none';
+      document.getElementById('swipeView').style.display = 'none';
+      document.getElementById('emptyState').style.display = 'none';
+
+      document.getElementById('recordCount').textContent =
+        `${filteredRecords.length} of ${allRecords.length} records`;
+
+      if (currentView === 'portfolio') {
+        if (filteredRecords.length === 0) {
+          document.getElementById('emptyState').style.display = 'flex';
+        } else {
+          renderPortfolio();
+        }
+      } else {
+        renderSwipeView();
+      }
+    }
+
+    /* ─── Portfolio View Rendering ─────────────────────────── */
+    function renderPortfolio() {
+      const grid = document.getElementById('portfolioGrid');
+      grid.innerHTML = '';
+      document.getElementById('portfolioView').style.display = 'block';
+
+      filteredRecords.forEach((record, idx) => {
+        const card = document.createElement('div');
+        card.className = 'portfolio-card';
+        card.onclick = () => openModal(record);
+
+        // Image
+        const imgUrl = getImageUrl(record);
+        const imgDiv = document.createElement('div');
+        imgDiv.className = 'portfolio-card-image';
+        if (imgUrl) {
+          const img = document.createElement('img');
+          img.src = imgUrl;
+          img.alt = '';
+          img.loading = 'lazy';
+          imgDiv.appendChild(img);
+        } else {
+          const icon = document.createElement('div');
+          icon.className = 'placeholder-icon';
+          icon.textContent = getInitials(record);
+          icon.style.fontSize = '40px';
+          icon.style.fontFamily = 'Montserrat, sans-serif';
+          icon.style.fontWeight = '800';
+          icon.style.color = 'rgba(255,255,255,0.3)';
+          imgDiv.appendChild(icon);
+        }
+        card.appendChild(imgDiv);
+
+        // Body
+        const body = document.createElement('div');
+        body.className = 'portfolio-card-body';
+
+        const title = document.createElement('div');
+        title.className = 'portfolio-card-title';
+        title.textContent = getTitle(record);
+        body.appendChild(title);
+
+        if (subtitleField) {
+          const sub = document.createElement('div');
+          sub.className = 'portfolio-card-subtitle';
+          sub.textContent = record.fields[subtitleField.name] || '';
+          body.appendChild(sub);
+        }
+
+        // Show key fields as chips
+        const chipsDiv = document.createElement('div');
+        chipsDiv.className = 'portfolio-card-fields';
+        getDisplayFields(record).slice(0, 4).forEach(({label, value}) => {
+          const chip = document.createElement('span');
+          chip.className = 'field-chip';
+          chip.innerHTML = `<span class="field-label">${escHtml(label)}</span> ${escHtml(truncate(value, 30))}`;
+          chipsDiv.appendChild(chip);
+        });
+        body.appendChild(chipsDiv);
+
+        // Tags (select fields)
+        const tags = getSelectValues(record);
+        if (tags.length > 0) {
+          const tagsDiv = document.createElement('div');
+          tagsDiv.className = 'portfolio-card-tags';
+          tags.slice(0, 5).forEach((tag, i) => {
+            const el = document.createElement('span');
+            el.className = `tag ${tagColors[i % tagColors.length]}`;
+            el.textContent = tag;
+            tagsDiv.appendChild(el);
+          });
+          body.appendChild(tagsDiv);
+        }
+
+        card.appendChild(body);
+        grid.appendChild(card);
+      });
+    }
+
+    /* ─── Swipe View Rendering ─────────────────────────────── */
+    function renderSwipeView() {
+      const container = document.getElementById('swipeContainer');
+      const view = document.getElementById('swipeView');
+      const endMsg = document.getElementById('swipeEndMsg');
+      const actions = document.getElementById('swipeActions');
+
+      view.style.display = 'flex';
+
+      if (filteredRecords.length === 0) {
+        container.innerHTML = '';
+        endMsg.style.display = 'block';
+        actions.style.display = 'none';
+        document.getElementById('swipeSummary').textContent = 'No records to review.';
+        return;
+      }
+
+      if (swipeIndex >= filteredRecords.length) {
+        showSwipeEnd();
+        return;
+      }
+
+      endMsg.style.display = 'none';
+      actions.style.display = 'flex';
+      updateSwipeProgress();
+      renderSwipeCard();
+    }
+
+    function renderSwipeCard() {
+      const container = document.getElementById('swipeContainer');
+      container.innerHTML = '';
+
+      if (swipeIndex >= filteredRecords.length) return;
+
+      const record = filteredRecords[swipeIndex];
+      const card = document.createElement('div');
+      card.className = 'swipe-card';
+      card.id = 'currentSwipeCard';
+
+      // Overlays
+      card.innerHTML = `
+        <div class="swipe-overlay swipe-overlay-left" id="overlayLeft">SKIP</div>
+        <div class="swipe-overlay swipe-overlay-right" id="overlayRight">SAVE</div>
+      `;
+
+      // Image
+      const imgDiv = document.createElement('div');
+      imgDiv.className = 'swipe-card-image';
+      const imgUrl = getImageUrl(record);
+      if (imgUrl) {
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = '';
+        imgDiv.appendChild(img);
+      } else {
+        const icon = document.createElement('div');
+        icon.className = 'placeholder-icon';
+        icon.textContent = getInitials(record);
+        icon.style.fontFamily = 'Montserrat, sans-serif';
+        icon.style.fontWeight = '800';
+        imgDiv.appendChild(icon);
+      }
+      card.appendChild(imgDiv);
+
+      // Body
+      const body = document.createElement('div');
+      body.className = 'swipe-card-body';
+
+      const title = document.createElement('div');
+      title.className = 'swipe-card-title';
+      title.textContent = getTitle(record);
+      body.appendChild(title);
+
+      if (subtitleField) {
+        const sub = document.createElement('div');
+        sub.className = 'swipe-card-subtitle';
+        sub.textContent = record.fields[subtitleField.name] || '';
+        body.appendChild(sub);
+      }
+
+      // Detail rows
+      getDisplayFields(record).slice(0, 6).forEach(({label, value}) => {
+        const row = document.createElement('div');
+        row.className = 'swipe-card-detail';
+        row.innerHTML = `<span class="detail-label">${escHtml(label)}</span><span class="detail-value">${escHtml(truncate(value, 60))}</span>`;
+        body.appendChild(row);
+      });
+
+      card.appendChild(body);
+      container.appendChild(card);
+
+      // Setup touch/drag
+      setupSwipeDrag(card);
+    }
+
+    function setupSwipeDrag(card) {
+      let startX = 0, currentX = 0, isDragging = false;
+
+      const onStart = (x) => {
+        isDragging = true;
+        startX = x;
+        card.style.transition = 'none';
+      };
+
+      const onMove = (x) => {
+        if (!isDragging) return;
+        currentX = x - startX;
+        const rotate = currentX * 0.08;
+        card.style.transform = `translateX(${currentX}px) rotate(${rotate}deg)`;
+
+        const opacity = Math.min(Math.abs(currentX) / 120, 1);
+        if (currentX < 0) {
+          document.getElementById('overlayLeft').style.opacity = opacity;
+          document.getElementById('overlayRight').style.opacity = 0;
+        } else {
+          document.getElementById('overlayRight').style.opacity = opacity;
+          document.getElementById('overlayLeft').style.opacity = 0;
+        }
+      };
+
+      const onEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.style.transition = '';
+
+        if (Math.abs(currentX) > 100) {
+          swipeAction(currentX > 0 ? 'right' : 'left');
+        } else {
+          card.style.transform = '';
+          document.getElementById('overlayLeft').style.opacity = 0;
+          document.getElementById('overlayRight').style.opacity = 0;
+        }
+      };
+
+      // Mouse events
+      card.addEventListener('mousedown', e => { e.preventDefault(); onStart(e.clientX); });
+      document.addEventListener('mousemove', e => onMove(e.clientX));
+      document.addEventListener('mouseup', onEnd);
+
+      // Touch events
+      card.addEventListener('touchstart', e => onStart(e.touches[0].clientX), { passive: true });
+      card.addEventListener('touchmove', e => onMove(e.touches[0].clientX), { passive: true });
+      card.addEventListener('touchend', onEnd);
+    }
+
+    function swipeAction(direction) {
+      const card = document.getElementById('currentSwipeCard');
+      if (!card) return;
+
+      card.classList.add(direction === 'left' ? 'swiping-left' : 'swiping-right');
+
+      if (direction === 'right') {
+        swipeSaved.push(filteredRecords[swipeIndex]);
+      } else {
+        swipeSkipped.push(filteredRecords[swipeIndex]);
+      }
+
+      swipeIndex++;
+      updateSwipeProgress();
+
+      setTimeout(() => {
+        if (swipeIndex >= filteredRecords.length) {
+          showSwipeEnd();
+        } else {
+          renderSwipeCard();
+        }
+      }, 350);
+    }
+
+    function updateSwipeProgress() {
+      const total = filteredRecords.length;
+      const current = Math.min(swipeIndex + 1, total);
+      document.getElementById('swipeProgress').textContent = `${current} / ${total}`;
+      document.getElementById('swipeProgressFill').style.width = `${(current / total) * 100}%`;
+    }
+
+    function showSwipeEnd() {
+      document.getElementById('swipeContainer').innerHTML = '';
+      document.getElementById('swipeActions').style.display = 'none';
+      const endMsg = document.getElementById('swipeEndMsg');
+      endMsg.style.display = 'block';
+      document.getElementById('swipeSummary').textContent =
+        `You saved ${swipeSaved.length} and skipped ${swipeSkipped.length} records.`;
+    }
+
+    function restartSwipe() {
+      swipeIndex = 0;
+      swipeSaved = [];
+      swipeSkipped = [];
+      renderSwipeView();
+    }
+
+    /* ─── Modal ───────────────────────────────────────────── */
+    function openModal(record) {
+      if (!record) return;
+      const backdrop = document.getElementById('modalBackdrop');
+      const imgContainer = document.getElementById('modalImage');
+      const body = document.getElementById('modalBody');
+
+      // Image
+      const imgUrl = getImageUrl(record);
+      imgContainer.innerHTML = '<button class="modal-close" onclick="closeModal()">&times;</button>';
+      if (imgUrl) {
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = '';
+        imgContainer.insertBefore(img, imgContainer.firstChild);
+      }
+
+      // Body
+      body.innerHTML = `<div class="modal-title">${escHtml(getTitle(record))}</div>`;
+
+      // All fields
+      fields.forEach(f => {
+        const val = record.fields[f.name];
+        if (val === undefined || val === null || val === '') return;
+        if (f === imageField) return; // skip image
+
+        const fieldDiv = document.createElement('div');
+        fieldDiv.className = 'modal-field';
+
+        const label = document.createElement('div');
+        label.className = 'modal-field-label';
+        label.textContent = f.name;
+        fieldDiv.appendChild(label);
+
+        const valueDiv = document.createElement('div');
+        valueDiv.className = 'modal-field-value';
+        valueDiv.innerHTML = formatFieldValue(f, val);
+        fieldDiv.appendChild(valueDiv);
+
+        body.appendChild(fieldDiv);
+      });
+
+      backdrop.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(event) {
+      if (event && event.target !== document.getElementById('modalBackdrop') && event.target !== document.querySelector('.modal-close')) return;
+      document.getElementById('modalBackdrop').classList.remove('visible');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+      if (currentView === 'swipe' && swipeIndex < filteredRecords.length) {
+        if (e.key === 'ArrowLeft') swipeAction('left');
+        if (e.key === 'ArrowRight') swipeAction('right');
+      }
+    });
+
+    /* ─── Export ───────────────────────────────────────────── */
+    function exportCSV() {
+      if (filteredRecords.length === 0) return;
+
+      const headers = fields.map(f => f.name);
+      const rows = filteredRecords.map(r =>
+        fields.map(f => {
+          const v = r.fields[f.name];
+          if (v === undefined || v === null) return '';
+          if (Array.isArray(v)) {
+            if (v.length > 0 && typeof v[0] === 'object') return v.map(x => x.url || x.filename || '').join('; ');
+            return v.join('; ');
+          }
+          if (typeof v === 'object') return JSON.stringify(v);
+          return String(v);
+        })
+      );
+
+      let csv = [headers, ...rows]
+        .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+        .join('\n');
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `airtable-export-${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    /* ─── Helpers ─────────────────────────────────────────── */
+    function getTitle(record) {
+      if (titleField) return record.fields[titleField.name] || 'Untitled';
+      const firstVal = Object.values(record.fields)[0];
+      return firstVal ? String(firstVal) : 'Untitled';
+    }
+
+    function getInitials(record) {
+      const t = getTitle(record);
+      return t.split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+    }
+
+    function getImageUrl(record) {
+      if (!imageField) return null;
+      const val = record.fields[imageField.name];
+      if (!val) return null;
+      if (Array.isArray(val) && val.length > 0) {
+        const att = val[0];
+        return att.thumbnails?.large?.url || att.url || null;
+      }
+      if (typeof val === 'string' && val.startsWith('http')) return val;
+      return null;
+    }
+
+    function getDisplayFields(record) {
+      const result = [];
+      for (const f of fields) {
+        if (f === titleField || f === subtitleField || f === imageField) continue;
+        const v = record.fields[f.name];
+        if (v === undefined || v === null || v === '') continue;
+        if (f.type === 'singleSelect' || f.type === 'multipleSelects') continue; // shown as tags
+
+        let display = '';
+        if (Array.isArray(v)) {
+          if (v.length > 0 && typeof v[0] === 'object') continue;
+          display = v.join(', ');
+        } else if (typeof v === 'object') {
+          continue;
+        } else {
+          display = String(v);
+        }
+
+        if (display) result.push({ label: f.name, value: display });
+      }
+      return result;
+    }
+
+    function getSelectValues(record) {
+      const vals = [];
+      for (const f of fields) {
+        if (f.type === 'singleSelect') {
+          const v = record.fields[f.name];
+          if (v) vals.push(v);
+        } else if (f.type === 'multipleSelects') {
+          const v = record.fields[f.name];
+          if (Array.isArray(v)) vals.push(...v);
+        }
+      }
+      return vals;
+    }
+
+    function formatFieldValue(field, value) {
+      if (Array.isArray(value)) {
+        if (value.length > 0 && typeof value[0] === 'object' && value[0].url) {
+          return value.map(a => `<a href="${escHtml(a.url)}" target="_blank">${escHtml(a.filename || 'Attachment')}</a>`).join(', ');
+        }
+        return escHtml(value.join(', '));
+      }
+
+      if (field.type === 'url' || (typeof value === 'string' && value.match(/^https?:\/\//))) {
+        return `<a href="${escHtml(value)}" target="_blank">${escHtml(truncate(value, 50))}</a>`;
+      }
+
+      if (field.type === 'email') {
+        return `<a href="mailto:${escHtml(value)}">${escHtml(value)}</a>`;
+      }
+
+      if (field.type === 'checkbox') {
+        return value ? '&#10003; Yes' : '&#10007; No';
+      }
+
+      if (field.type === 'number' || field.type === 'currency' || field.type === 'percent') {
+        if (field.type === 'currency') return '$' + Number(value).toLocaleString();
+        if (field.type === 'percent') return (Number(value) * 100).toFixed(1) + '%';
+        return Number(value).toLocaleString();
+      }
+
+      if (field.type === 'date' || field.type === 'dateTime') {
+        try { return new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }); }
+        catch(e) { return escHtml(String(value)); }
+      }
+
+      if (typeof value === 'object') return escHtml(JSON.stringify(value));
+
+      return escHtml(String(value));
+    }
+
+    function escHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function truncate(str, max) {
+      if (str.length <= max) return str;
+      return str.slice(0, max) + '...';
+    }
+
+    function disconnect() {
+      localStorage.removeItem('sengo_airtable_session');
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('setupScreen').style.display = 'flex';
+      document.getElementById('apiToken').value = '';
+      document.getElementById('btnConnect').disabled = false;
+      document.getElementById('btnConnect').textContent = 'Connect & Load';
+      allRecords = [];
+      filteredRecords = [];
+    }
+  </script>
+</body>
+</html>
