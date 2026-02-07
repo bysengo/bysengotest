@@ -158,8 +158,10 @@
       padding: 12px 16px;
       border-radius: var(--radius-sm);
       font-size: 14px;
+      line-height: 1.6;
       margin-bottom: 16px;
       display: none;
+      text-align: left;
     }
 
     /* ── Dashboard Layout ──────────────────────────────────── */
@@ -1012,8 +1014,12 @@
       </button>
 
       <p class="setup-hint">
-        Generate a token at <a href="https://airtable.com/create/tokens" target="_blank">airtable.com/create/tokens</a><br>
-        with <code>data.records:read</code> and <code>schema.bases:read</code> scopes.
+        <strong>How to create your token:</strong><br>
+        1. Go to <a href="https://airtable.com/create/tokens" target="_blank">airtable.com/create/tokens</a><br>
+        2. Click "Create new token"<br>
+        3. Add scopes: <code>data.records:read</code> + <code>schema.bases:read</code><br>
+        4. Under "Access", click "Add a base" and select your base<br>
+        5. Click "Create token" and paste it above
       </p>
     </div>
   </div>
@@ -1355,6 +1361,23 @@
       if (!apiToken) return showSetupError('Please enter your Personal Access Token.');
       if (!baseId) return showSetupError('Please enter the Base ID.');
 
+      // Validate token format
+      if (apiToken.startsWith('key')) {
+        return showSetupError(
+          'It looks like you entered an old-style API key (starts with "key..."). ' +
+          'Airtable retired these. You need a Personal Access Token instead — ' +
+          'go to airtable.com/create/tokens to generate one.'
+        );
+      }
+
+      if (!apiToken.startsWith('pat')) {
+        return showSetupError(
+          'Token should start with "pat". Go to airtable.com/create/tokens to create a ' +
+          'Personal Access Token with these scopes: data.records:read and schema.bases:read. ' +
+          'Make sure to grant it access to your base.'
+        );
+      }
+
       btn.disabled = true;
       btn.textContent = 'Connecting...';
 
@@ -1362,7 +1385,34 @@
         const schemaRes = await airtableFetch(`https://api.airtable.com/v0/meta/bases/${baseId}/tables`);
         if (!schemaRes.ok) {
           const err = await schemaRes.json().catch(() => ({}));
-          throw new Error(err.error?.message || `API error ${schemaRes.status}. Check your token and base ID.`);
+          const msg = err.error?.message || '';
+          const status = schemaRes.status;
+
+          if (status === 401 || msg.toLowerCase().includes('authentication')) {
+            throw new Error(
+              'Authentication failed. When creating your token at airtable.com/create/tokens, make sure:\n' +
+              '1. Add scope: data.records:read\n' +
+              '2. Add scope: schema.bases:read\n' +
+              '3. Under "Access", add your base (appwqkwXRvE1lN2Rs)\n' +
+              '4. Copy the full token starting with "pat..."'
+            );
+          }
+
+          if (status === 403) {
+            throw new Error(
+              'Token does not have access to this base. Edit your token at airtable.com/create/tokens ' +
+              'and make sure this base is listed under the "Access" section.'
+            );
+          }
+
+          if (status === 404) {
+            throw new Error(
+              'Base not found. Check that the Base ID is correct. You can find it in your Airtable URL: ' +
+              'airtable.com/[BASE_ID]/...'
+            );
+          }
+
+          throw new Error(msg || `API error ${status}.`);
         }
 
         const schema = await schemaRes.json();
@@ -1398,7 +1448,12 @@
 
     function showSetupError(msg) {
       const el = document.getElementById('setupError');
-      el.textContent = msg;
+      el.innerHTML = '';
+      // Support multi-line messages
+      msg.split('\n').forEach((line, i) => {
+        if (i > 0) el.appendChild(document.createElement('br'));
+        el.appendChild(document.createTextNode(line));
+      });
       el.style.display = 'block';
     }
 
