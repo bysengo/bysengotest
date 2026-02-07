@@ -324,10 +324,8 @@
       background-position: right 10px center;
     }
 
-    .btn-export {
+    .btn-toolbar {
       padding: 10px 18px;
-      background: var(--dark-teal);
-      color: var(--white);
       border: none;
       border-radius: var(--radius-sm);
       font-size: 13px;
@@ -339,9 +337,38 @@
       transition: all var(--transition);
     }
 
+    .btn-export {
+      background: var(--dark-teal);
+      color: var(--white);
+    }
+
     .btn-export:hover {
       background: #264a47;
       transform: translateY(-1px);
+    }
+
+    .btn-publish {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .btn-publish:hover {
+      background: #c06220;
+      transform: translateY(-1px);
+    }
+
+    /* ── Snapshot Banner ───────────────────────────────────── */
+    .snapshot-banner {
+      display: none;
+      padding: 10px 32px;
+      background: linear-gradient(135deg, var(--dark-teal), #2a5a56);
+      color: rgba(255,255,255,0.85);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .snapshot-banner strong {
+      color: var(--white);
     }
 
     /* ── Loading Spinner ───────────────────────────────────── */
@@ -840,6 +867,28 @@
       text-decoration: underline;
     }
 
+    /* ── Publish Toast ─────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--dark-teal);
+      color: var(--white);
+      padding: 16px 28px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: var(--shadow-xl);
+      z-index: 2000;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+
+    .toast.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
     /* ── Responsive ────────────────────────────────────────── */
     @media (max-width: 768px) {
       .topbar { padding: 0 16px; }
@@ -892,11 +941,21 @@
 </head>
 <body>
 
+  <!--
+    ═══════════════════════════════════════════════════════════
+    EMBEDDED SNAPSHOT DATA
+    When this file is published as a viewable snapshot, the
+    data gets baked in below. If the script tag is empty,
+    the setup screen is shown instead.
+    ═══════════════════════════════════════════════════════════
+  -->
+  <script id="embeddedData" type="application/json"></script>
+
   <!-- ─── Setup Screen ────────────────────────────────────── -->
   <div class="setup-screen" id="setupScreen">
     <div class="setup-card">
       <h1>Connect to Airtable</h1>
-      <p>Enter your Airtable Personal Access Token to load your base and display it as an interactive dashboard.</p>
+      <p>Enter your Airtable Personal Access Token to load your base and display it as an interactive dashboard. Once loaded, you can <strong>publish a viewable snapshot</strong> that anyone can open without a token.</p>
 
       <div class="error-msg" id="setupError"></div>
 
@@ -925,6 +984,11 @@
 
   <!-- ─── Dashboard ───────────────────────────────────────── -->
   <div class="dashboard" id="dashboard">
+    <!-- Snapshot Banner (shown only on published snapshots) -->
+    <div class="snapshot-banner" id="snapshotBanner">
+      <strong>Snapshot</strong> — This is a static view of the data captured on <span id="snapshotDate"></span>
+    </div>
+
     <!-- Top Bar -->
     <div class="topbar">
       <div class="topbar-left">
@@ -942,7 +1006,7 @@
             <span class="label-text">Swipe</span>
           </button>
         </div>
-        <button class="btn-disconnect" onclick="disconnect()">Disconnect</button>
+        <button class="btn-disconnect" id="btnDisconnect" onclick="disconnect()">Disconnect</button>
       </div>
     </div>
 
@@ -954,9 +1018,13 @@
       </div>
       <div class="filter-group" id="filterGroup"></div>
       <span class="record-count" id="recordCount"></span>
-      <button class="btn-export" onclick="exportCSV()">
+      <button class="btn-toolbar btn-export" onclick="exportCSV()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Export CSV
+      </button>
+      <button class="btn-toolbar btn-publish" id="btnPublish" onclick="publishSnapshot()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Publish Viewable Dashboard
       </button>
     </div>
 
@@ -1014,12 +1082,15 @@
     </div>
   </div>
 
+  <!-- ─── Toast ───────────────────────────────────────────── -->
+  <div class="toast" id="toast"></div>
+
   <script>
     /* ─── State ───────────────────────────────────────────── */
     let allRecords = [];
     let filteredRecords = [];
     let fields = [];
-    let fieldMap = {};    // field id -> field object
+    let fieldMap = {};
     let currentView = 'portfolio';
     let swipeIndex = 0;
     let swipeSaved = [];
@@ -1027,15 +1098,33 @@
     let apiToken = '';
     let baseId = '';
     let tableId = '';
+    let tableName = '';
     let imageField = null;
     let titleField = null;
     let subtitleField = null;
     let filterableFields = [];
+    let isSnapshot = false;
     let tagColors = ['tag-green','tag-blue','tag-orange','tag-purple','tag-red','tag-teal'];
 
-    /* ─── Setup / Connection ──────────────────────────────── */
-    // Check for saved session
-    (function initFromStorage() {
+    /* ─── Initialization ──────────────────────────────────── */
+    (function init() {
+      // Check if this file has embedded snapshot data
+      const embeddedEl = document.getElementById('embeddedData');
+      const raw = (embeddedEl && embeddedEl.textContent) ? embeddedEl.textContent.trim() : '';
+
+      if (raw) {
+        // This is a published snapshot — load embedded data directly
+        try {
+          const snapshot = JSON.parse(raw);
+          isSnapshot = true;
+          loadFromSnapshot(snapshot);
+          return;
+        } catch(e) {
+          console.error('Failed to parse embedded data:', e);
+        }
+      }
+
+      // Otherwise check for saved session token
       const saved = localStorage.getItem('sengo_airtable_session');
       if (saved) {
         try {
@@ -1046,6 +1135,35 @@
       }
     })();
 
+    function loadFromSnapshot(snapshot) {
+      allRecords = snapshot.records || [];
+      fields = snapshot.fields || [];
+      tableName = snapshot.tableName || 'Dashboard';
+      fieldMap = {};
+      fields.forEach(f => { fieldMap[f.id] = f; });
+
+      detectSpecialFields();
+
+      // Show dashboard, hide setup
+      document.getElementById('setupScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('topbarTable').textContent = tableName;
+
+      // Show snapshot banner
+      const banner = document.getElementById('snapshotBanner');
+      banner.style.display = 'block';
+      document.getElementById('snapshotDate').textContent = snapshot.exportedAt || 'unknown';
+
+      // Hide admin-only controls
+      document.getElementById('btnPublish').style.display = 'none';
+      document.getElementById('btnDisconnect').style.display = 'none';
+
+      filteredRecords = [...allRecords];
+      buildFilterUI();
+      renderCurrentView();
+    }
+
+    /* ─── Setup / Connection ──────────────────────────────── */
     async function connectToAirtable() {
       const btn = document.getElementById('btnConnect');
       const errEl = document.getElementById('setupError');
@@ -1061,7 +1179,6 @@
       btn.textContent = 'Connecting...';
 
       try {
-        // Fetch base schema to list tables
         const schemaRes = await airtableFetch(`https://api.airtable.com/v0/meta/bases/${baseId}/tables`);
         if (!schemaRes.ok) {
           const err = await schemaRes.json().catch(() => ({}));
@@ -1072,7 +1189,6 @@
         const tables = schema.tables || [];
         if (tables.length === 0) throw new Error('No tables found in this base.');
 
-        // Populate table selector
         const sel = document.getElementById('tableSelect');
         sel.innerHTML = '';
         sel.disabled = false;
@@ -1083,15 +1199,12 @@
           sel.appendChild(opt);
         });
 
-        // Store field info for each table
         window._tableSchemas = {};
         tables.forEach(t => { window._tableSchemas[t.id] = t; });
 
-        // Auto-select first table and load
         sel.onchange = () => loadTable(sel.value);
         await loadTable(tables[0].id);
 
-        // Save session
         localStorage.setItem('sengo_airtable_session', JSON.stringify({
           token: apiToken, baseId: baseId
         }));
@@ -1112,24 +1225,26 @@
     async function loadTable(tblId) {
       tableId = tblId;
       const tableSchema = window._tableSchemas[tblId];
+      tableName = tableSchema.name;
 
-      // Setup field info
       fields = tableSchema.fields || [];
       fieldMap = {};
       fields.forEach(f => { fieldMap[f.id] = f; });
 
-      // Auto-detect special fields
       detectSpecialFields();
 
-      // Show dashboard
       document.getElementById('setupScreen').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
-      document.getElementById('topbarTable').textContent = tableSchema.name;
+      document.getElementById('topbarTable').textContent = tableName;
 
-      // Show loading
       document.getElementById('loadingScreen').style.display = 'flex';
       document.getElementById('portfolioView').style.display = 'none';
       document.getElementById('swipeView').style.display = 'none';
+
+      // Show admin controls
+      document.getElementById('btnPublish').style.display = 'flex';
+      document.getElementById('btnDisconnect').style.display = 'block';
+      document.getElementById('snapshotBanner').style.display = 'none';
 
       try {
         allRecords = await fetchAllRecords();
@@ -1153,31 +1268,26 @@
       for (const f of fields) {
         const nameL = f.name.toLowerCase();
 
-        // Detect image field
         if (!imageField && (f.type === 'multipleAttachments' || f.type === 'singleAttachment' ||
             nameL.includes('image') || nameL.includes('photo') || nameL.includes('logo') ||
             nameL.includes('picture') || nameL.includes('headshot') || nameL.includes('avatar'))) {
           imageField = f;
         }
 
-        // Detect title field (first single-line text or name field)
         if (!titleField && (f.type === 'singleLineText' || f.type === 'formula') &&
             (nameL.includes('name') || nameL.includes('title') || nameL.includes('company'))) {
           titleField = f;
         }
 
-        // Filterable fields: singleSelect, multipleSelects, checkbox
         if (f.type === 'singleSelect' || f.type === 'multipleSelects') {
           filterableFields.push(f);
         }
       }
 
-      // Fallback: first single-line text as title
       if (!titleField) {
         titleField = fields.find(f => f.type === 'singleLineText') || fields[0];
       }
 
-      // Subtitle: second text-like field
       const textFields = fields.filter(f =>
         (f.type === 'singleLineText' || f.type === 'email' || f.type === 'url' || f.type === 'formula')
         && f !== titleField
@@ -1211,6 +1321,60 @@
       return records;
     }
 
+    /* ─── Publish Snapshot ────────────────────────────────── */
+    function publishSnapshot() {
+      if (allRecords.length === 0) {
+        showToast('No records to publish.');
+        return;
+      }
+
+      // Build the snapshot data object
+      const snapshot = {
+        tableName: tableName,
+        fields: fields,
+        records: allRecords,
+        exportedAt: new Date().toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        })
+      };
+
+      // Get the full HTML of this page
+      const html = document.documentElement.outerHTML;
+
+      // Find and replace the empty embedded data script with populated one
+      // We reconstruct the page from scratch to keep it clean
+      const snapshotJson = JSON.stringify(snapshot);
+
+      const newHtml = html.replace(
+        /<script id="embeddedData" type="application\/json">[^]*?<\/script>/,
+        `<script id="embeddedData" type="application/json">${snapshotJson}<\/script>`
+      );
+
+      // Create the full document
+      const fullDoc = `<!DOCTYPE html>\n<html lang="en">${newHtml.replace(/^<html[^>]*>/, '').replace(/<\/html>$/, '')}</html>`;
+
+      // Download
+      const blob = new Blob([fullDoc], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+
+      const safeName = tableName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+      a.download = `sengo-dashboard-${safeName}.html`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      showToast(`Published! Share "${a.download}" — no token needed.`);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 4000);
+    }
+
     /* ─── Filter & Search ─────────────────────────────────── */
     function buildFilterUI() {
       const group = document.getElementById('filterGroup');
@@ -1226,7 +1390,6 @@
         allOpt.textContent = `All ${f.name}`;
         sel.appendChild(allOpt);
 
-        // Gather unique values
         const vals = new Set();
         allRecords.forEach(r => {
           const v = r.fields[f.name];
@@ -1255,7 +1418,6 @@
       });
 
       filteredRecords = allRecords.filter(record => {
-        // Search
         if (query) {
           const text = Object.values(record.fields).map(v => {
             if (Array.isArray(v)) return v.map(x => typeof x === 'object' ? (x.filename || '') : String(x)).join(' ');
@@ -1265,7 +1427,6 @@
           if (!text.includes(query)) return false;
         }
 
-        // Filters
         for (const [fieldName, filterVal] of Object.entries(filters)) {
           const val = record.fields[fieldName];
           if (Array.isArray(val)) {
@@ -1320,7 +1481,6 @@
         card.className = 'portfolio-card';
         card.onclick = () => openModal(record);
 
-        // Image
         const imgUrl = getImageUrl(record);
         const imgDiv = document.createElement('div');
         imgDiv.className = 'portfolio-card-image';
@@ -1342,7 +1502,6 @@
         }
         card.appendChild(imgDiv);
 
-        // Body
         const body = document.createElement('div');
         body.className = 'portfolio-card-body';
 
@@ -1358,7 +1517,6 @@
           body.appendChild(sub);
         }
 
-        // Show key fields as chips
         const chipsDiv = document.createElement('div');
         chipsDiv.className = 'portfolio-card-fields';
         getDisplayFields(record).slice(0, 4).forEach(({label, value}) => {
@@ -1369,7 +1527,6 @@
         });
         body.appendChild(chipsDiv);
 
-        // Tags (select fields)
         const tags = getSelectValues(record);
         if (tags.length > 0) {
           const tagsDiv = document.createElement('div');
@@ -1427,13 +1584,11 @@
       card.className = 'swipe-card';
       card.id = 'currentSwipeCard';
 
-      // Overlays
       card.innerHTML = `
         <div class="swipe-overlay swipe-overlay-left" id="overlayLeft">SKIP</div>
         <div class="swipe-overlay swipe-overlay-right" id="overlayRight">SAVE</div>
       `;
 
-      // Image
       const imgDiv = document.createElement('div');
       imgDiv.className = 'swipe-card-image';
       const imgUrl = getImageUrl(record);
@@ -1452,7 +1607,6 @@
       }
       card.appendChild(imgDiv);
 
-      // Body
       const body = document.createElement('div');
       body.className = 'swipe-card-body';
 
@@ -1468,7 +1622,6 @@
         body.appendChild(sub);
       }
 
-      // Detail rows
       getDisplayFields(record).slice(0, 6).forEach(({label, value}) => {
         const row = document.createElement('div');
         row.className = 'swipe-card-detail';
@@ -1479,7 +1632,6 @@
       card.appendChild(body);
       container.appendChild(card);
 
-      // Setup touch/drag
       setupSwipeDrag(card);
     }
 
@@ -1522,12 +1674,10 @@
         }
       };
 
-      // Mouse events
       card.addEventListener('mousedown', e => { e.preventDefault(); onStart(e.clientX); });
       document.addEventListener('mousemove', e => onMove(e.clientX));
       document.addEventListener('mouseup', onEnd);
 
-      // Touch events
       card.addEventListener('touchstart', e => onStart(e.touches[0].clientX), { passive: true });
       card.addEventListener('touchmove', e => onMove(e.touches[0].clientX), { passive: true });
       card.addEventListener('touchend', onEnd);
@@ -1587,7 +1737,6 @@
       const imgContainer = document.getElementById('modalImage');
       const body = document.getElementById('modalBody');
 
-      // Image
       const imgUrl = getImageUrl(record);
       imgContainer.innerHTML = '<button class="modal-close" onclick="closeModal()">&times;</button>';
       if (imgUrl) {
@@ -1597,14 +1746,12 @@
         imgContainer.insertBefore(img, imgContainer.firstChild);
       }
 
-      // Body
       body.innerHTML = `<div class="modal-title">${escHtml(getTitle(record))}</div>`;
 
-      // All fields
       fields.forEach(f => {
         const val = record.fields[f.name];
         if (val === undefined || val === null || val === '') return;
-        if (f === imageField) return; // skip image
+        if (f === imageField) return;
 
         const fieldDiv = document.createElement('div');
         fieldDiv.className = 'modal-field';
@@ -1640,7 +1787,7 @@
       }
     });
 
-    /* ─── Export ───────────────────────────────────────────── */
+    /* ─── Export CSV ──────────────────────────────────────── */
     function exportCSV() {
       if (filteredRecords.length === 0) return;
 
@@ -1701,7 +1848,7 @@
         if (f === titleField || f === subtitleField || f === imageField) continue;
         const v = record.fields[f.name];
         if (v === undefined || v === null || v === '') continue;
-        if (f.type === 'singleSelect' || f.type === 'multipleSelects') continue; // shown as tags
+        if (f.type === 'singleSelect' || f.type === 'multipleSelects') continue;
 
         let display = '';
         if (Array.isArray(v)) {
