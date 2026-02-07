@@ -1135,6 +1135,8 @@
   -->
   <script id="embeddedData" type="application/json"></script>
   <script id="liveConfig" type="application/json"></script>
+  <!-- Load external config (token stored separately) -->
+  <script src="config.js" onerror="console.log('No config.js found — showing setup screen')"></script>
 
   <!-- ─── Setup Screen ────────────────────────────────────── -->
   <div class="setup-screen" id="setupScreen">
@@ -1408,7 +1410,15 @@
         }
       }
 
-      // 3. Otherwise show setup screen, pre-fill saved token
+      // 3. Check for config.js (external token file)
+      const cfg = window.SENGO_CONFIG;
+      if (cfg && cfg.token) {
+        apiToken = cfg.token;
+        autoConnectFromConfig(cfg);
+        return;
+      }
+
+      // 4. Otherwise show setup screen, pre-fill saved token
       const saved = localStorage.getItem('sengo_airtable_session');
       if (saved) {
         try {
@@ -1417,6 +1427,82 @@
         } catch(e) {}
       }
     })();
+
+    async function autoConnectFromConfig(cfg) {
+      // Show dashboard immediately with loading state
+      document.getElementById('setupScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('topbarTable').textContent = 'Loading...';
+      document.getElementById('loadingScreen').style.display = 'flex';
+
+      // Show admin controls
+      document.getElementById('btnPublishSnapshot').style.display = 'flex';
+      document.getElementById('btnPublishLive').style.display = 'flex';
+      document.getElementById('btnDisconnect').style.display = 'block';
+      document.getElementById('snapshotBanner').style.display = 'none';
+      document.getElementById('liveBanner').style.display = 'none';
+
+      try {
+        // If base + table are specified, go straight to loading
+        if (cfg.baseId && cfg.tableId) {
+          baseId = cfg.baseId;
+
+          // Get table schema
+          const schemaRes = await airtableFetch(`https://api.airtable.com/v0/meta/bases/${baseId}/tables`);
+          if (schemaRes.ok) {
+            const schema = await schemaRes.json();
+            window._tableSchemas = {};
+            (schema.tables || []).forEach(t => { window._tableSchemas[t.id] = t; });
+          }
+
+          await loadTable(cfg.tableId);
+          document.getElementById('loadingScreen').style.display = 'none';
+          return;
+        }
+
+        // Otherwise auto-discover bases
+        const basesRes = await airtableFetch('https://api.airtable.com/v0/meta/bases');
+        if (!basesRes.ok) throw new Error('Could not list bases (HTTP ' + basesRes.status + ')');
+
+        const basesData = await basesRes.json();
+        const bases = basesData.bases || [];
+        if (bases.length === 0) throw new Error('No bases found for this token.');
+
+        // Pick the base
+        const targetBase = cfg.baseId
+          ? bases.find(b => b.id === cfg.baseId) || bases[0]
+          : bases[0];
+        baseId = targetBase.id;
+
+        // Get tables
+        const schemaRes = await airtableFetch(`https://api.airtable.com/v0/meta/bases/${baseId}/tables`);
+        if (!schemaRes.ok) throw new Error('Could not list tables (HTTP ' + schemaRes.status + ')');
+
+        const schema = await schemaRes.json();
+        const tables = schema.tables || [];
+        if (tables.length === 0) throw new Error('No tables found in base.');
+
+        window._tableSchemas = {};
+        tables.forEach(t => { window._tableSchemas[t.id] = t; });
+
+        // Pick the table
+        const targetTable = cfg.tableId
+          ? tables.find(t => t.id === cfg.tableId) || tables[0]
+          : tables[0];
+
+        await loadTable(targetTable.id);
+
+      } catch(e) {
+        console.error('Auto-connect failed:', e);
+        document.getElementById('loadingScreen').innerHTML =
+          `<p style="color: #b91c1c; text-align: center;">
+            Auto-connect failed: ${e.message}<br><br>
+            <button class="btn btn-primary" onclick="disconnect()" style="width: auto; padding: 12px 24px;">
+              Go to Setup
+            </button>
+          </p>`;
+      }
+    }
 
     function loadFromSnapshot(snapshot) {
       allRecords = snapshot.records || [];
