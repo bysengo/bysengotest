@@ -1915,14 +1915,14 @@
 
     async function loadTable(tblId) {
       tableId = tblId;
-      const tableSchema = window._tableSchemas[tblId];
-      tableName = tableSchema.name;
+      const tableSchema = window._tableSchemas ? window._tableSchemas[tblId] : null;
+      tableName = tableSchema ? tableSchema.name : tblId;
 
-      fields = tableSchema.fields || [];
+      fields = (tableSchema && tableSchema.fields) ? tableSchema.fields : [];
       fieldMap = {};
       fields.forEach(f => { fieldMap[f.id] = f; });
 
-      detectSpecialFields();
+      if (fields.length > 0) detectSpecialFields();
 
       document.getElementById('setupScreen').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
@@ -1939,10 +1939,19 @@
         document.getElementById('btnDisconnect').style.display = 'block';
       }
       document.getElementById('snapshotBanner').style.display = 'none';
-      document.getElementById('liveBanner').style.display = 'none';
+      // Keep live banner visible in auto-connect mode
+      if (!isAutoConnect) {
+        document.getElementById('liveBanner').style.display = 'none';
+      }
 
       try {
         allRecords = await fetchAllRecords();
+
+        // If we didn't get fields from schema, infer from records
+        if (fields.length === 0 && allRecords.length > 0) {
+          inferFieldsFromRecords();
+        }
+
         filteredRecords = [...allRecords];
         loadSwipeArchive();
         buildFilterUI();
