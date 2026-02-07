@@ -1384,6 +1384,7 @@
     let isSnapshot = false;
     let isLive = false;
     let isEmbedOnly = false;
+    let isAutoConnect = false;
     let embedUrl = 'https://airtable.com/embed/appwqkwXRvE1lN2Rs/shroDtJ7aV6y155Sj?layout=card';
     let tagColors = ['tag-green','tag-blue','tag-orange','tag-purple','tag-red','tag-teal'];
     let ogImageCache = {};  // url → og:image url
@@ -1441,16 +1442,17 @@
     })();
 
     async function autoConnectFromConfig(cfg) {
+      isAutoConnect = true;
       // Show dashboard immediately with loading state
       document.getElementById('setupScreen').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
       document.getElementById('topbarTable').textContent = 'Loading...';
       document.getElementById('loadingScreen').style.display = 'flex';
 
-      // Show admin controls
-      document.getElementById('btnPublishSnapshot').style.display = 'flex';
-      document.getElementById('btnPublishLive').style.display = 'flex';
-      document.getElementById('btnDisconnect').style.display = 'block';
+      // Hide admin controls — this is a clean live viewer
+      document.getElementById('btnPublishSnapshot').style.display = 'none';
+      document.getElementById('btnPublishLive').style.display = 'none';
+      document.getElementById('btnDisconnect').style.display = 'none';
       document.getElementById('snapshotBanner').style.display = 'none';
       document.getElementById('liveBanner').style.display = 'none';
 
@@ -1907,10 +1909,12 @@
       document.getElementById('portfolioView').style.display = 'none';
       document.getElementById('swipeView').style.display = 'none';
 
-      // Show admin controls
-      document.getElementById('btnPublishSnapshot').style.display = 'flex';
-      document.getElementById('btnPublishLive').style.display = 'flex';
-      document.getElementById('btnDisconnect').style.display = 'block';
+      // Show admin controls only if not auto-connected
+      if (!isAutoConnect) {
+        document.getElementById('btnPublishSnapshot').style.display = 'flex';
+        document.getElementById('btnPublishLive').style.display = 'flex';
+        document.getElementById('btnDisconnect').style.display = 'block';
+      }
       document.getElementById('snapshotBanner').style.display = 'none';
       document.getElementById('liveBanner').style.display = 'none';
 
