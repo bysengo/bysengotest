@@ -357,8 +357,8 @@
       transform: translateY(-1px);
     }
 
-    /* ── Snapshot Banner ───────────────────────────────────── */
-    .snapshot-banner {
+    /* ── Snapshot / Live Banners ──────────────────────────── */
+    .snapshot-banner, .live-banner {
       display: none;
       padding: 10px 32px;
       background: linear-gradient(135deg, var(--dark-teal), #2a5a56);
@@ -367,9 +367,44 @@
       text-align: center;
     }
 
-    .snapshot-banner strong {
+    .snapshot-banner strong, .live-banner strong {
       color: var(--white);
     }
+
+    .live-banner {
+      background: linear-gradient(135deg, #065f46, #0d9488);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .live-refresh-btn {
+      padding: 4px 12px;
+      background: rgba(255,255,255,0.2);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .live-refresh-btn:hover { background: rgba(255,255,255,0.3); }
 
     /* ── Loading Spinner ───────────────────────────────────── */
     .loading-screen {
@@ -950,6 +985,7 @@
     ═══════════════════════════════════════════════════════════
   -->
   <script id="embeddedData" type="application/json"></script>
+  <script id="liveConfig" type="application/json"></script>
 
   <!-- ─── Setup Screen ────────────────────────────────────── -->
   <div class="setup-screen" id="setupScreen">
@@ -989,6 +1025,14 @@
       <strong>Snapshot</strong> — This is a static view of the data captured on <span id="snapshotDate"></span>
     </div>
 
+    <!-- Live Banner (shown on live dashboards) -->
+    <div class="live-banner" id="liveBanner">
+      <span class="live-dot"></span>
+      <span><strong>Live</strong> — Data refreshes from Airtable each time this page loads</span>
+      <span id="liveLastUpdated"></span>
+      <button class="live-refresh-btn" onclick="refreshLiveData()">Refresh Now</button>
+    </div>
+
     <!-- Top Bar -->
     <div class="topbar">
       <div class="topbar-left">
@@ -1022,9 +1066,13 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Export CSV
       </button>
-      <button class="btn-toolbar btn-publish" id="btnPublish" onclick="publishSnapshot()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Publish Viewable Dashboard
+      <button class="btn-toolbar btn-publish" id="btnPublishSnapshot" onclick="publishSnapshot()" title="Download a static HTML file with today's data baked in">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Publish Snapshot
+      </button>
+      <button class="btn-toolbar btn-export" id="btnPublishLive" onclick="publishLive()" title="Download an HTML file that auto-fetches fresh data on every page load" style="background: #0d9488;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.32 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Publish Live Dashboard
       </button>
     </div>
 
@@ -1104,16 +1152,33 @@
     let subtitleField = null;
     let filterableFields = [];
     let isSnapshot = false;
+    let isLive = false;
     let tagColors = ['tag-green','tag-blue','tag-orange','tag-purple','tag-red','tag-teal'];
 
     /* ─── Initialization ──────────────────────────────────── */
     (function init() {
-      // Check if this file has embedded snapshot data
+      // 1. Check for live config (auto-fetches fresh data)
+      const liveEl = document.getElementById('liveConfig');
+      const liveRaw = (liveEl && liveEl.textContent) ? liveEl.textContent.trim() : '';
+
+      if (liveRaw) {
+        try {
+          const config = JSON.parse(liveRaw);
+          if (config.token && config.baseId && config.tableId) {
+            isLive = true;
+            loadFromLiveConfig(config);
+            return;
+          }
+        } catch(e) {
+          console.error('Failed to parse live config:', e);
+        }
+      }
+
+      // 2. Check for embedded snapshot data (static)
       const embeddedEl = document.getElementById('embeddedData');
       const raw = (embeddedEl && embeddedEl.textContent) ? embeddedEl.textContent.trim() : '';
 
       if (raw) {
-        // This is a published snapshot — load embedded data directly
         try {
           const snapshot = JSON.parse(raw);
           isSnapshot = true;
@@ -1124,7 +1189,7 @@
         }
       }
 
-      // Otherwise check for saved session token
+      // 3. Otherwise show setup screen, check for saved session token
       const saved = localStorage.getItem('sengo_airtable_session');
       if (saved) {
         try {
@@ -1155,12 +1220,127 @@
       document.getElementById('snapshotDate').textContent = snapshot.exportedAt || 'unknown';
 
       // Hide admin-only controls
-      document.getElementById('btnPublish').style.display = 'none';
+      document.getElementById('btnPublishSnapshot').style.display = 'none';
+      document.getElementById('btnPublishLive').style.display = 'none';
       document.getElementById('btnDisconnect').style.display = 'none';
 
       filteredRecords = [...allRecords];
       buildFilterUI();
       renderCurrentView();
+    }
+
+    /* ─── Live Mode ──────────────────────────────────────── */
+    async function loadFromLiveConfig(config) {
+      apiToken = config.token;
+      baseId = config.baseId;
+      tableId = config.tableId;
+      tableName = config.tableName || 'Dashboard';
+
+      // Show dashboard, hide setup
+      document.getElementById('setupScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('topbarTable').textContent = tableName;
+
+      // Show live banner, hide others
+      document.getElementById('liveBanner').style.display = 'flex';
+      document.getElementById('snapshotBanner').style.display = 'none';
+      document.getElementById('btnPublishSnapshot').style.display = 'none';
+      document.getElementById('btnPublishLive').style.display = 'none';
+      document.getElementById('btnDisconnect').style.display = 'none';
+
+      // Show loading
+      document.getElementById('loadingScreen').style.display = 'flex';
+
+      try {
+        // Fetch schema for field info
+        const schemaRes = await airtableFetch(`https://api.airtable.com/v0/meta/bases/${baseId}/tables`);
+        if (schemaRes.ok) {
+          const schema = await schemaRes.json();
+          const tbl = (schema.tables || []).find(t => t.id === tableId);
+          if (tbl) {
+            fields = tbl.fields || [];
+            fieldMap = {};
+            fields.forEach(f => { fieldMap[f.id] = f; });
+          }
+        }
+
+        // If schema fetch failed, use field names from records themselves
+        if (fields.length === 0) {
+          inferFieldsFromRecords();
+        } else {
+          detectSpecialFields();
+        }
+
+        allRecords = await fetchAllRecords();
+        if (fields.length === 0 && allRecords.length > 0) {
+          inferFieldsFromRecords();
+        }
+
+        filteredRecords = [...allRecords];
+        buildFilterUI();
+        renderCurrentView();
+        updateLiveTimestamp();
+
+      } catch(e) {
+        console.error('Live load failed:', e);
+        document.getElementById('loadingScreen').innerHTML =
+          `<p style="color: #b91c1c;">Failed to load data: ${e.message}</p>`;
+      }
+
+      document.getElementById('loadingScreen').style.display = 'none';
+    }
+
+    function inferFieldsFromRecords() {
+      // Build field list from record keys when schema isn't available
+      const fieldNames = new Set();
+      allRecords.forEach(r => {
+        Object.keys(r.fields).forEach(k => fieldNames.add(k));
+      });
+      fields = [...fieldNames].map(name => ({
+        id: name,
+        name: name,
+        type: guessFieldType(name)
+      }));
+      fieldMap = {};
+      fields.forEach(f => { fieldMap[f.id] = f; });
+      detectSpecialFields();
+    }
+
+    function guessFieldType(name) {
+      const n = name.toLowerCase();
+      if (n.includes('image') || n.includes('photo') || n.includes('logo') || n.includes('avatar')) return 'multipleAttachments';
+      if (n.includes('email')) return 'email';
+      if (n.includes('url') || n.includes('website') || n.includes('link')) return 'url';
+      return 'singleLineText';
+    }
+
+    async function refreshLiveData() {
+      const btn = document.querySelector('.live-refresh-btn');
+      btn.textContent = 'Refreshing...';
+      btn.disabled = true;
+
+      try {
+        allRecords = await fetchAllRecords();
+        filteredRecords = [...allRecords];
+        buildFilterUI();
+        renderCurrentView();
+        updateLiveTimestamp();
+        showToast('Data refreshed from Airtable.');
+      } catch(e) {
+        showToast('Refresh failed: ' + e.message);
+      }
+
+      btn.textContent = 'Refresh Now';
+      btn.disabled = false;
+    }
+
+    function updateLiveTimestamp() {
+      const el = document.getElementById('liveLastUpdated');
+      if (el) {
+        el.textContent = '— Updated ' + new Date().toLocaleTimeString('en-US', {
+          hour: 'numeric', minute: '2-digit'
+        });
+      }
     }
 
     /* ─── Setup / Connection ──────────────────────────────── */
@@ -1242,9 +1422,11 @@
       document.getElementById('swipeView').style.display = 'none';
 
       // Show admin controls
-      document.getElementById('btnPublish').style.display = 'flex';
+      document.getElementById('btnPublishSnapshot').style.display = 'flex';
+      document.getElementById('btnPublishLive').style.display = 'flex';
       document.getElementById('btnDisconnect').style.display = 'block';
       document.getElementById('snapshotBanner').style.display = 'none';
+      document.getElementById('liveBanner').style.display = 'none';
 
       try {
         allRecords = await fetchAllRecords();
@@ -1365,7 +1547,54 @@
       a.click();
       URL.revokeObjectURL(url);
 
-      showToast(`Published! Share "${a.download}" — no token needed.`);
+      showToast(`Snapshot published! Share "${a.download}" — no token needed.`);
+    }
+
+    /* ─── Publish Live Dashboard ──────────────────────────── */
+    function publishLive() {
+      if (allRecords.length === 0) {
+        showToast('No records loaded yet.');
+        return;
+      }
+
+      // Build the live config (includes read-only token)
+      const config = {
+        token: apiToken,
+        baseId: baseId,
+        tableId: tableId,
+        tableName: tableName
+      };
+
+      const configJson = JSON.stringify(config);
+
+      // Get the full HTML and inject the live config
+      const html = document.documentElement.outerHTML;
+
+      const newHtml = html
+        // Inject live config
+        .replace(
+          /<script id="liveConfig" type="application\/json">[^]*?<\/script>/,
+          `<script id="liveConfig" type="application/json">${configJson}<\/script>`
+        )
+        // Make sure embedded data is empty (live mode fetches fresh)
+        .replace(
+          /<script id="embeddedData" type="application\/json">[^]*?<\/script>/,
+          `<script id="embeddedData" type="application/json"><\/script>`
+        );
+
+      const fullDoc = `<!DOCTYPE html>\n<html lang="en">${newHtml.replace(/^<html[^>]*>/, '').replace(/<\/html>$/, '')}</html>`;
+
+      const blob = new Blob([fullDoc], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+
+      const safeName = tableName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+      a.download = `sengo-live-dashboard-${safeName}.html`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      showToast(`Live dashboard published! "${a.download}" will auto-refresh from Airtable.`);
     }
 
     function showToast(msg) {
