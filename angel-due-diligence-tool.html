@@ -2,6 +2,9 @@
 <!-- Add this to an Embed Block on your Squarespace page -->
 <!-- Interactive tool to help angel investors systematically evaluate startups -->
 
+<!-- PDF.js for client-side PDF parsing -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -1108,6 +1111,124 @@
 
   .dd-analysis-pane.active { display: block; }
 
+  /* Link Input */
+  .dd-link-input-group {
+    margin-top: 16px;
+    margin-bottom: 28px;
+  }
+
+  .dd-link-input-group .dd-link-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .dd-link-input-group .dd-link-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e8e0d8;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    color: #1B3533;
+    background: #faf8f5;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .dd-link-input-group .dd-link-input:focus {
+    border-color: #D57028;
+  }
+
+  .dd-link-input-group .dd-link-input::placeholder {
+    color: #c4beb8;
+  }
+
+  .dd-link-analyze-btn {
+    padding: 12px 20px;
+    background: #1B3533;
+    color: #F3EDE7;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .dd-link-analyze-btn:hover {
+    background: #2d524f;
+  }
+
+  .dd-link-hint {
+    font-size: 0.7rem;
+    color: #AF8145;
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  .dd-or-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 20px 0;
+    color: #c4beb8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .dd-or-divider::before, .dd-or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e8e0d8;
+  }
+
+  /* Auto-detected slide badge */
+  .dd-slide-badge.auto-badge {
+    background: rgba(113,126,54,0.15);
+    color: #4a5a10;
+  }
+
+  .dd-auto-tag {
+    display: inline-block;
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(213,112,40,0.12);
+    color: #D57028;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* Platform badge */
+  .dd-platform-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: linear-gradient(135deg, #1B3533, #2d524f);
+    color: #F3EDE7;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .dd-platform-badge .platform-name {
+    color: #D57028;
+    font-weight: 700;
+  }
+
   /* Guidance Cards */
   .dd-guidance-card {
     background: #fff;
@@ -1403,7 +1524,7 @@
   <!-- Section 2: Deck Review -->
   <div class="dd-section" id="section-1" data-section="deck">
     <h2 class="dd-section-title"><span class="section-number">2</span> Deck Review</h2>
-    <p class="dd-section-desc">Upload the pitch deck and score each slide. Use AI Assist for guided review prompts on any slide.</p>
+    <p class="dd-section-desc">Upload a pitch deck, paste a Canva link, or drop in a crowdfunding listing URL. Sengo will analyze the content and surface guidance, red flags, and questions to ask.</p>
 
     <!-- Upload Zone -->
     <div class="dd-upload-zone" id="ddUploadZone">
@@ -1412,6 +1533,17 @@
       <div class="dd-upload-hint">PDF, PPT, PPTX, or images accepted</div>
     </div>
     <input type="file" id="ddFileInput" accept=".pdf,.ppt,.pptx,.png,.jpg,.jpeg" style="display:none;">
+
+    <div class="dd-or-divider">or paste a link</div>
+
+    <!-- Link Input -->
+    <div class="dd-link-input-group">
+      <div class="dd-link-row">
+        <input class="dd-link-input" type="url" id="ddLinkInput" placeholder="Paste Canva deck URL, Republic, Wefunder, StartEngine listing link...">
+        <button class="dd-link-analyze-btn" onclick="ddAnalyzeLink()">Analyze</button>
+      </div>
+      <div class="dd-link-hint">Supports: Canva presentation links, Republic, Wefunder, StartEngine, Dealmaker, and other crowdfunding platform listings</div>
+    </div>
 
     <!-- Processing Animation -->
     <div class="dd-processing" id="ddProcessing">
@@ -2195,6 +2327,7 @@
     // If summary section, update scores
     if (index === 9) {
       updateScores();
+      updateDeckScore();
       updateSummaryTerms();
     }
 
@@ -2411,6 +2544,7 @@
 
   window.ddRemoveDeckFile = function() {
     deckFile = null;
+    parsedPageTexts = [];
     var zone = document.getElementById('ddUploadZone');
     zone.classList.remove('has-file');
     zone.innerHTML =
@@ -2420,6 +2554,8 @@
     document.getElementById('ddFileInput').value = '';
     document.getElementById('ddAnalysisPanel').classList.remove('visible');
     document.getElementById('ddProcessing').classList.remove('visible');
+    var linkInput = document.getElementById('ddLinkInput');
+    if (linkInput) linkInput.value = '';
   };
 
   window.ddToggleSlideCard = function(key) {
@@ -2580,32 +2716,456 @@
 
   // === SENGO ANALYSIS ENGINE ===
 
+  // Keywords for auto-detecting slide types from PDF text
+  var SLIDE_KEYWORDS = {
+    cover: { primary: ['pitch deck', 'confidential', 'presentation'], secondary: ['founded', 'inc.', 'ltd', 'co.', 'corp'] },
+    problem: { primary: ['problem', 'challenge', 'pain point', 'the problem', 'why now'], secondary: ['struggle', 'frustration', 'broken', 'inefficient', 'status quo', 'gap'] },
+    solution: { primary: ['solution', 'our solution', 'how it works', 'the product', 'what we do'], secondary: ['platform', 'approach', 'technology', 'innovation', 'how we solve'] },
+    market: { primary: ['market size', 'tam ', 'sam ', 'som ', 'total addressable', 'market opportunity'], secondary: ['billion', 'trillion', 'serviceable', 'market growth', 'cagr', 'market share'] },
+    businessModel: { primary: ['business model', 'revenue model', 'how we make money', 'monetization', 'pricing'], secondary: ['subscription', 'saas', 'freemium', 'arpu', 'revenue stream', 'unit economics'] },
+    traction: { primary: ['traction', 'metrics', 'growth', 'key metrics', 'our progress'], secondary: ['mrr', 'arr', 'users', 'customers', 'revenue', 'month over month', 'yoy', 'retention'] },
+    competition: { primary: ['competition', 'competitive', 'landscape', 'competitors', 'differentiation'], secondary: ['versus', 'vs.', 'advantage', 'moat', 'defensib', 'why us', 'comparison'] },
+    teamSlide: { primary: ['team', 'our team', 'founding team', 'leadership', 'management team'], secondary: ['ceo', 'cto', 'coo', 'co-founder', 'advisor', 'board', 'experience'] },
+    financials: { primary: ['financial', 'projections', 'forecast', 'financial model', 'p&l'], secondary: ['revenue projection', 'burn rate', 'runway', 'cash flow', 'break even', 'ebitda', 'gross margin'] },
+    ask: { primary: ['the ask', 'fundrais', 'use of funds', 'investment', 'seeking', 'raising'], secondary: ['allocation', 'round size', 'how we will use', 'fund allocation', 'bridge round', 'seed round'] },
+    vision: { primary: ['vision', 'roadmap', 'future', 'what\'s next', 'milestones'], secondary: ['timeline', 'phases', 'long-term', '2025', '2026', '2027', 'next steps', 'expansion'] },
+    appendix: { primary: ['appendix', 'backup', 'additional', 'reference', 'supporting'], secondary: ['detailed', 'supplementary', 'extra', 'data room'] }
+  };
+
+  var parsedPageTexts = [];
+
+  function parsePdfAndAnalyze(file, stage, industry) {
+    var processing = document.getElementById('ddProcessing');
+    var panel = document.getElementById('ddAnalysisPanel');
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var typedArray = new Uint8Array(e.target.result);
+      pdfjsLib.getDocument({ data: typedArray }).promise.then(function(pdf) {
+        var totalPages = pdf.numPages;
+        parsedPageTexts = [];
+        var pagesProcessed = 0;
+
+        for (var p = 1; p <= totalPages; p++) {
+          (function(pageNum) {
+            pdf.getPage(pageNum).then(function(page) {
+              page.getTextContent().then(function(textContent) {
+                var text = textContent.items.map(function(item) { return item.str; }).join(' ');
+                parsedPageTexts[pageNum - 1] = text;
+                pagesProcessed++;
+
+                if (pagesProcessed === totalPages) {
+                  // All pages parsed -- run detection
+                  var detectedSlides = autoDetectSlides(parsedPageTexts);
+                  applyDetectedSlides(detectedSlides);
+                  processing.classList.remove('visible');
+                  generateAnalysis(parsedPageTexts, stage, industry, file.name.toLowerCase());
+                  panel.classList.add('visible');
+                  updateDeckScore();
+                }
+              });
+            });
+          })(p);
+        }
+      }).catch(function(err) {
+        // PDF parsing failed -- fall back to basic analysis
+        processing.classList.remove('visible');
+        generateAnalysis(null, stage, industry, file.name.toLowerCase());
+        panel.classList.add('visible');
+        showToast('Could not parse PDF text -- using basic analysis');
+      });
+    };
+    reader.readAsArrayBuffer(file);
+  }
+
+  function autoDetectSlides(pageTexts) {
+    var detected = {};
+    var assignedPages = {};
+
+    // Score each page against each slide type
+    var scores = [];
+    pageTexts.forEach(function(text, pageIdx) {
+      var lowerText = text.toLowerCase();
+      for (var slideKey in SLIDE_KEYWORDS) {
+        var kw = SLIDE_KEYWORDS[slideKey];
+        var score = 0;
+
+        kw.primary.forEach(function(word) {
+          if (lowerText.indexOf(word) >= 0) score += 3;
+        });
+        kw.secondary.forEach(function(word) {
+          if (lowerText.indexOf(word) >= 0) score += 1;
+        });
+
+        if (score > 0) {
+          scores.push({ slideKey: slideKey, pageIdx: pageIdx, score: score, textLength: text.length });
+        }
+      }
+    });
+
+    // Sort by score descending, then by page order for ties
+    scores.sort(function(a, b) {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.pageIdx - b.pageIdx;
+    });
+
+    // Assign best match per slide type (each page can match one slide, each slide matched once)
+    scores.forEach(function(match) {
+      if (!detected[match.slideKey] && !assignedPages[match.pageIdx]) {
+        detected[match.slideKey] = {
+          pageIdx: match.pageIdx,
+          score: match.score,
+          textLength: match.textLength
+        };
+        assignedPages[match.pageIdx] = match.slideKey;
+      }
+    });
+
+    return detected;
+  }
+
+  function applyDetectedSlides(detected) {
+    var detectedCount = 0;
+    DECK_SLIDES.forEach(function(slide) {
+      var det = detected[slide.key];
+      if (det) {
+        detectedCount++;
+        // Auto-mark as present
+        deckSlides[slide.key].present = true;
+
+        // Auto-rate quality based on content density and keyword score
+        var quality = 3; // baseline
+        if (det.score >= 6) quality = 4;
+        if (det.score >= 9 && det.textLength > 100) quality = 5;
+        if (det.score <= 2) quality = 2;
+        if (det.textLength < 30) quality = Math.max(quality - 1, 1);
+        deckSlides[slide.key].quality = quality;
+
+        // Update UI
+        var card = document.getElementById('slide-' + slide.key);
+        var badge = document.getElementById('badge-' + slide.key);
+        var qualityRow = document.getElementById('qualityRow-' + slide.key);
+        var btn = document.getElementById('presentBtn-' + slide.key);
+
+        if (card) {
+          card.classList.add('present');
+          card.classList.remove('missing');
+        }
+        if (badge) {
+          badge.className = 'dd-slide-badge auto-badge';
+          badge.innerHTML = 'Detected (p.' + (det.pageIdx + 1) + ') <span class="dd-auto-tag">auto</span>';
+        }
+        if (qualityRow) qualityRow.style.display = 'block';
+        if (btn) btn.textContent = 'Mark as Missing';
+
+        // Update quality buttons
+        var ratingBtns = document.getElementById('deckRating-' + slide.key);
+        if (ratingBtns) {
+          ratingBtns.querySelectorAll('.dd-rating-btn').forEach(function(b) {
+            b.classList.toggle('selected', parseInt(b.getAttribute('data-value')) <= quality);
+          });
+        }
+      }
+    });
+
+    document.getElementById('ddDeckScoreBar').style.display = 'flex';
+    if (detectedCount > 0) {
+      showToast('Auto-detected ' + detectedCount + ' slide' + (detectedCount > 1 ? 's' : '') + ' from PDF');
+    }
+  }
+
+  // === LINK ANALYSIS ===
+
+  var PLATFORM_CONFIG = {
+    canva: {
+      patterns: ['canva.com/design', 'canva.com/p/'],
+      name: 'Canva',
+      type: 'deck',
+      guidance: 'Canva decks can be exported as PDF for full analysis. In Canva, go to Share > Download > PDF Standard or PDF Print, then upload the PDF above.',
+      embedSupport: true
+    },
+    republic: {
+      patterns: ['republic.com/', 'republic.co/'],
+      name: 'Republic',
+      type: 'crowdfunding',
+      guidance: 'Republic listings include company overview, team, financials, and discussion. Key areas to verify: valuation terms, revenue claims, team backgrounds, and investor perks vs. actual equity.',
+      redFlags: [
+        { title: 'Regulation CF Limits', desc: 'Republic uses Reg CF which caps raises at $5M. Verify the company\'s total capital needs vs. this limit. Many companies need follow-on funding quickly.' },
+        { title: 'Valuation Disconnect', desc: 'Crowdfunding valuations can be disconnected from institutional pricing. Compare the listed valuation to stage-appropriate benchmarks and similar companies.' },
+        { title: 'Crowd vs. Institutional Investors', desc: 'Check whether the company has institutional (VC/angel) co-investors. Purely crowd-funded rounds may lack the guidance and governance institutional investors provide.' },
+        { title: 'Revenue Verification', desc: 'Self-reported metrics on Republic are not always audited. Request financial statements or third-party verification for any revenue or traction claims.' }
+      ],
+      questions: [
+        { q: 'Is this Reg CF, Reg A+, or Reg D? What are the investor rights and liquidity implications of each?', cat: 'Regulatory Structure' },
+        { q: 'What percentage of equity does this round represent? What is the fully diluted cap table?', cat: 'Dilution & Terms' },
+        { q: 'Are there any institutional investors participating in this round or previous rounds?', cat: 'Investor Quality' },
+        { q: 'What is the company\'s plan for follow-on funding after this crowdfunding round closes?', cat: 'Capital Strategy' },
+        { q: 'What are the actual revenue numbers vs. what\'s shown on the listing page? Can you see audited financials?', cat: 'Financial Verification' },
+        { q: 'What investor protections exist -- pro-rata rights, information rights, anti-dilution?', cat: 'Investor Rights' }
+      ]
+    },
+    wefunder: {
+      patterns: ['wefunder.com/'],
+      name: 'Wefunder',
+      type: 'crowdfunding',
+      guidance: 'Wefunder offers Reg CF and Reg D offerings. Review the investment terms carefully -- Wefunder uses a custodian model where investments are held through a fund vehicle.',
+      redFlags: [
+        { title: 'Custodian/SPV Structure', desc: 'Wefunder investments are typically held through a custodian (Wefunder itself) or an SPV. You don\'t hold shares directly -- understand how this affects your voting rights and information access.' },
+        { title: 'Minimum Raise Not Met', desc: 'If the minimum raise target isn\'t met, the round doesn\'t close. Check the minimum vs. current raise progress to gauge likelihood of completion.' },
+        { title: 'Valuation Cap vs. Price', desc: 'Many Wefunder offerings use SAFEs with valuation caps. The actual price per share at conversion could be very different from what the cap implies.' },
+        { title: 'Limited Updates', desc: 'Unlike institutional investors, crowdfunding investors may receive limited ongoing updates. Check the company\'s track record of investor communications.' }
+      ],
+      questions: [
+        { q: 'Is this investment held through Wefunder\'s custodian or a direct relationship? What are the governance implications?', cat: 'Investment Structure' },
+        { q: 'What is the valuation cap on the SAFE, and what does the current traction suggest about likely conversion price?', cat: 'Conversion Terms' },
+        { q: 'How much has been raised so far vs. the target? Is there a minimum close amount?', cat: 'Round Progress' },
+        { q: 'What quarterly/annual reporting will investors receive after the round closes?', cat: 'Information Rights' },
+        { q: 'Have any institutional investors validated this company with their own capital?', cat: 'Institutional Validation' },
+        { q: 'What is the company\'s plan if this round doesn\'t reach its minimum target?', cat: 'Contingency Plan' }
+      ]
+    },
+    startengine: {
+      patterns: ['startengine.com/'],
+      name: 'StartEngine',
+      type: 'crowdfunding',
+      guidance: 'StartEngine offers Reg CF and Reg A+ offerings. Reg A+ allows larger raises (up to $75M) but verify the SEC qualification status and review the offering circular.',
+      redFlags: [
+        { title: 'Secondary Market Liquidity', desc: 'StartEngine has a secondary market but liquidity is very limited. Don\'t invest expecting to sell easily -- treat this as a long-term illiquid investment.' },
+        { title: 'Reg A+ Qualification', desc: 'For Reg A+ offerings, verify the SEC qualification status. Some offerings are still pending qualification when they begin accepting reservations.' },
+        { title: 'Perks vs. Equity', desc: 'StartEngine heavily promotes investor "perks." Evaluate the actual equity terms separately from the perks -- perks should not be the primary investment thesis.' },
+        { title: 'High Marketing Spend', desc: 'Companies on StartEngine often spend heavily on crowdfunding marketing. Ask what percentage of the raise goes to marketing and platform fees vs. building the business.' }
+      ],
+      questions: [
+        { q: 'Is this Reg CF or Reg A+? Has the Reg A+ offering been qualified by the SEC?', cat: 'Regulatory Status' },
+        { q: 'What are the total fees and marketing costs associated with this crowdfunding raise?', cat: 'Cost of Capital' },
+        { q: 'What is the realistic liquidity timeline? When might investors see a return?', cat: 'Liquidity Expectations' },
+        { q: 'What are the actual equity terms -- share class, voting rights, dividend preferences?', cat: 'Share Structure' },
+        { q: 'Has the company raised institutional capital alongside this crowdfunding round?', cat: 'Institutional Interest' },
+        { q: 'What does the cap table look like including all prior rounds, SAFEs, and convertible notes?', cat: 'Cap Table Complexity' }
+      ]
+    },
+    dealmaker: {
+      patterns: ['dealmaker.tech/', 'invest.'],
+      name: 'Dealmaker',
+      type: 'crowdfunding',
+      guidance: 'Dealmaker is a white-label fundraising platform. The company runs their own branded investment page. Review SEC filings directly (EDGAR) to verify the offering details.',
+      redFlags: [
+        { title: 'White-Label Verification', desc: 'Unlike Republic or Wefunder, Dealmaker is white-label so the company controls their own listing. There\'s less platform-level due diligence. Verify claims independently.' },
+        { title: 'Self-Reported Data', desc: 'All metrics, team bios, and financials are self-reported with no platform verification. Cross-reference everything with EDGAR filings and independent sources.' }
+      ],
+      questions: [
+        { q: 'Can you verify the SEC filing for this offering on EDGAR? Does it match what\'s on the investment page?', cat: 'Regulatory Verification' },
+        { q: 'Who is the transfer agent and broker-dealer for this offering?', cat: 'Offering Structure' },
+        { q: 'What third-party due diligence has been done on the company and its claims?', cat: 'Independent Verification' }
+      ]
+    }
+  };
+
+  window.ddAnalyzeLink = function() {
+    var input = document.getElementById('ddLinkInput');
+    var url = (input.value || '').trim();
+    if (!url) {
+      showToast('Please paste a link first');
+      return;
+    }
+
+    // Detect platform
+    var platform = null;
+    var urlLower = url.toLowerCase();
+    for (var key in PLATFORM_CONFIG) {
+      var config = PLATFORM_CONFIG[key];
+      for (var i = 0; i < config.patterns.length; i++) {
+        if (urlLower.indexOf(config.patterns[i]) >= 0) {
+          platform = key;
+          break;
+        }
+      }
+      if (platform) break;
+    }
+
+    var processing = document.getElementById('ddProcessing');
+    var panel = document.getElementById('ddAnalysisPanel');
+    panel.classList.remove('visible');
+    processing.classList.add('visible');
+
+    var stageEl = document.querySelector('[data-field="stage"]');
+    var industryEl = document.querySelector('[data-field="industry"]');
+    var stage = stageEl ? stageEl.value : '';
+    var industry = industryEl ? industryEl.value : '';
+
+    setTimeout(function() {
+      processing.classList.remove('visible');
+
+      if (platform && PLATFORM_CONFIG[platform].type === 'crowdfunding') {
+        generateCrowdfundingAnalysis(platform, url, stage, industry);
+      } else if (platform === 'canva') {
+        generateCanvaAnalysis(url, stage, industry);
+      } else {
+        // Unknown link -- give generic analysis
+        generateAnalysis(null, stage, industry, '');
+        showToast('Link type not recognized -- showing general guidance');
+      }
+
+      panel.classList.add('visible');
+    }, 1800);
+  };
+
+  function generateCrowdfundingAnalysis(platformKey, url, stage, industry) {
+    var config = PLATFORM_CONFIG[platformKey];
+    var stageKey = detectStage(stage);
+
+    document.getElementById('ddAnalysisScore').textContent = '--';
+
+    // Guidance pane -- crowdfunding specific
+    var guidancePane = document.getElementById('ddPane-guidance');
+    var html = '';
+    html += '<div class="dd-platform-badge">Analyzing <span class="platform-name">' + config.name + '</span> investment listing</div>';
+    html += '<div class="dd-guidance-card"><h4>Platform Overview</h4><p>' + escapeHtml(config.guidance) + '</p></div>';
+
+    html += '<h3 style="font-size:1rem;font-weight:700;color:#1B3533;margin:20px 0 12px 0;">Crowdfunding Due Diligence Checklist</h3>';
+
+    var cfChecklist = [
+      { head: 'Verify SEC Filings', body: 'Search EDGAR (sec.gov) for the company\'s Form C (Reg CF) or Form 1-A (Reg A+). Compare filed financials with what\'s shown on the platform listing.', badge: 'critical' },
+      { head: 'Review the Offering Circular', body: 'Every crowdfunding offering must have a disclosure document. Read it carefully -- especially the risk factors, use of proceeds, and capitalization table sections.', badge: 'critical' },
+      { head: 'Check for Institutional Co-Investors', body: 'Strong companies attract both crowd and institutional investors. If only crowdfunding investors are participating, ask why VCs and angels passed.', badge: 'important' },
+      { head: 'Calculate True Valuation', body: 'Factor in all outstanding SAFEs, convertible notes, and option pools. The valuation shown may not reflect true dilution. Request the full cap table.', badge: 'important' },
+      { head: 'Verify Team Backgrounds', body: 'Cross-reference team LinkedIn profiles, prior company claims, and educational backgrounds. Crowdfunding listings sometimes embellish credentials.', badge: 'important' },
+      { head: 'Understand Your Exit Path', body: 'Crowdfunding investments are highly illiquid. Understand that you may not see a return for 5-10 years, if ever. There is no guaranteed secondary market.', badge: 'good' }
+    ];
+
+    cfChecklist.forEach(function(item) {
+      html += '<div class="dd-guidance-card">';
+      html += '<h4>' + escapeHtml(item.head) + ' <span class="card-badge ' + item.badge + '">' + item.badge + '</span></h4>';
+      html += '<p>' + escapeHtml(item.body) + '</p>';
+      html += '</div>';
+    });
+
+    guidancePane.innerHTML = html;
+
+    // Red flags pane
+    var flagsPane = document.getElementById('ddPane-redflags');
+    html = '';
+    html += '<div class="dd-platform-badge">Red flags for <span class="platform-name">' + config.name + '</span> listings</div>';
+    html += '<h3 style="font-size:1rem;font-weight:700;color:#1B3533;margin:0 0 6px 0;">Platform-Specific Red Flags</h3>';
+    html += '<p style="font-size:0.82rem;color:#67441A;margin-bottom:16px;line-height:1.5;">Watch for these issues when evaluating this ' + config.name + ' listing:</p>';
+
+    if (config.redFlags) {
+      config.redFlags.forEach(function(f) {
+        html += '<div class="dd-flag-card warning"><h5>' + escapeHtml(f.title) + '</h5><p>' + escapeHtml(f.desc) + '</p></div>';
+      });
+    }
+
+    // Add general crowdfunding flags
+    html += '<h3 style="font-size:1rem;font-weight:700;color:#1B3533;margin:24px 0 6px 0;">General Crowdfunding Red Flags</h3>';
+    var cfFlags = [
+      { title: 'No Lead Investor', desc: 'If no experienced angel or VC is leading the round, the deal may lack the due diligence and governance that institutional investors provide.' },
+      { title: 'Unrealistic Revenue Projections', desc: 'Crowdfunding listings sometimes show hockey-stick projections without substantiation. Look for bottom-up, assumption-driven models rather than top-down "if we get 1% of the market."' },
+      { title: 'High Platform Fees Eating Capital', desc: 'Between platform fees (5-8%), payment processing (2-3%), and marketing costs, a significant portion of the raise may not go to building the business.' },
+      { title: 'Perks-Focused Marketing', desc: 'If the listing emphasizes investor perks (products, discounts) more than equity value, the fundamentals may not stand on their own.' }
+    ];
+    cfFlags.forEach(function(f) {
+      html += '<div class="dd-flag-card"><h5>' + escapeHtml(f.title) + '</h5><p>' + escapeHtml(f.desc) + '</p></div>';
+    });
+
+    flagsPane.innerHTML = html;
+
+    // Questions pane
+    var questionsPane = document.getElementById('ddPane-questions');
+    html = '';
+    html += '<div class="dd-platform-badge">Questions for <span class="platform-name">' + config.name + '</span> investments</div>';
+    html += '<h3 style="font-size:1rem;font-weight:700;color:#1B3533;margin:0 0 6px 0;">Questions to Investigate</h3>';
+    html += '<p style="font-size:0.82rem;color:#67441A;margin-bottom:16px;line-height:1.5;">Use these questions when evaluating this crowdfunding listing. Many can be answered from the offering documents and SEC filings.</p>';
+
+    var num = 1;
+    if (config.questions) {
+      config.questions.forEach(function(item) {
+        html += '<div class="dd-question-item"><div class="q-num">' + num + '</div><div><div>' + escapeHtml(item.q) + '</div><div class="q-category">' + escapeHtml(item.cat) + '</div></div></div>';
+        num++;
+      });
+    }
+
+    // General crowdfunding questions
+    var cfQuestions = [
+      { q: 'What is the total raised to date across all instruments (equity, SAFEs, convertibles, debt)? What is the fully diluted share count?', cat: 'Capital Structure' },
+      { q: 'What happens to my investment if the company raises a priced round at a lower valuation than the crowdfunding round?', cat: 'Downside Protection' },
+      { q: 'Is there a most-favored-nation clause or anti-dilution protection for crowdfunding investors?', cat: 'Investor Protections' },
+      { q: 'What is the company\'s month-by-month burn rate and how many months of runway does this raise provide?', cat: 'Financial Sustainability' }
+    ];
+    cfQuestions.forEach(function(item) {
+      html += '<div class="dd-question-item"><div class="q-num">' + num + '</div><div><div>' + escapeHtml(item.q) + '</div><div class="q-category">' + escapeHtml(item.cat) + '</div></div></div>';
+      num++;
+    });
+
+    questionsPane.innerHTML = html;
+
+    // Benchmarks pane
+    generateBenchmarksPane(stageKey, industry);
+  }
+
+  function generateCanvaAnalysis(url, stage, industry) {
+    var stageKey = detectStage(stage);
+
+    // Generate standard analysis
+    generateGuidancePane(stageKey, industry, '');
+    generateRedFlagsPane(stageKey, industry);
+    generateQuestionsPane(stageKey, industry);
+    generateBenchmarksPane(stageKey, industry);
+
+    // Prepend Canva-specific guidance to guidance pane
+    var guidancePane = document.getElementById('ddPane-guidance');
+    var canvaHtml = '<div class="dd-platform-badge">Canva deck detected -- <span class="platform-name">export as PDF for full analysis</span></div>';
+    canvaHtml += '<div class="dd-guidance-card" style="border-left:4px solid #D57028;">';
+    canvaHtml += '<h4>Export Your Canva Deck for Slide-by-Slide Analysis <span class="card-badge important">action needed</span></h4>';
+    canvaHtml += '<p>To get Sengo\'s full slide-by-slide detection and scoring, export the deck from Canva as a PDF:</p>';
+    canvaHtml += '<p style="margin-top:8px;"><strong style="color:#D57028;">1.</strong> Open the deck in Canva &nbsp; <strong style="color:#D57028;">2.</strong> Click Share > Download &nbsp; <strong style="color:#D57028;">3.</strong> Select PDF Standard &nbsp; <strong style="color:#D57028;">4.</strong> Upload the PDF above</p>';
+    canvaHtml += '<p style="margin-top:8px;font-size:0.8rem;color:#AF8145;">The stage-appropriate guidance below still applies to your review.</p>';
+    canvaHtml += '</div>';
+
+    guidancePane.innerHTML = canvaHtml + guidancePane.innerHTML;
+
+    var score = computeSengoScore(stageKey, industry, '');
+    document.getElementById('ddAnalysisScore').textContent = score;
+  }
+
   function runSengoAnalysis(file) {
     var processing = document.getElementById('ddProcessing');
     var panel = document.getElementById('ddAnalysisPanel');
     panel.classList.remove('visible');
     processing.classList.add('visible');
 
-    // Get context from company overview
     var stageEl = document.querySelector('[data-field="stage"]');
     var industryEl = document.querySelector('[data-field="industry"]');
     var stage = stageEl ? stageEl.value : '';
     var industry = industryEl ? industryEl.value : '';
-
-    // Simulate analysis with progressive delays
-    setTimeout(function() {
-      processing.classList.remove('visible');
-      generateAnalysis(file, stage, industry);
-      panel.classList.add('visible');
-    }, 2200);
-  }
-
-  function generateAnalysis(file, stage, industry) {
-    var stageKey = detectStage(stage);
     var fileName = file.name.toLowerCase();
 
-    // Compute a Sengo Score based on available context
+    // Check if it's a PDF we can parse
+    if (fileName.endsWith('.pdf') && typeof pdfjsLib !== 'undefined') {
+      parsePdfAndAnalyze(file, stage, industry);
+    } else {
+      // Non-PDF files: run analysis without content parsing
+      setTimeout(function() {
+        processing.classList.remove('visible');
+        generateAnalysis(null, stage, industry, fileName);
+        panel.classList.add('visible');
+      }, 1800);
+    }
+  }
+
+  function generateAnalysis(pageTexts, stage, industry, fileName) {
+    var stageKey = detectStage(stage);
+
+    // Compute Sengo Score -- enhanced when we have page data
     var score = computeSengoScore(stageKey, industry, fileName);
+    if (pageTexts && pageTexts.length > 0) {
+      // Boost score based on actual content quality
+      var detected = autoDetectSlides(pageTexts);
+      var detectedCount = Object.keys(detected).length;
+      var contentBonus = Math.min(detectedCount * 3, 20);
+      score = Math.min(score + contentBonus, 95);
+    }
     document.getElementById('ddAnalysisScore').textContent = score;
 
     // Generate all panes
