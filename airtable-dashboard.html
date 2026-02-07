@@ -2758,18 +2758,24 @@
       const imgContainer = document.getElementById('modalImage');
       const body = document.getElementById('modalBody');
 
-      const imgUrl = getImageUrl(record);
+      const imgUrl = getImageUrl(record) || getOgImage(record);
       imgContainer.innerHTML = '<button class="modal-close" onclick="closeModal()">&times;</button>';
       if (imgUrl) {
         const img = document.createElement('img');
         img.src = imgUrl;
         img.alt = '';
         imgContainer.insertBefore(img, imgContainer.firstChild);
+      } else {
+        // Try to fetch OG image for the modal
+        fetchOgImageForRecord(record, imgContainer);
       }
 
       body.innerHTML = `<div class="modal-title">${escHtml(getTitle(record))}</div>`;
 
-      fields.forEach(f => {
+      // Show all fields from the record, using schema fields if available
+      const fieldsToShow = fields.length > 0 ? fields : Object.keys(record.fields).map(k => ({ id: k, name: k, type: 'singleLineText' }));
+
+      fieldsToShow.forEach(f => {
         const val = record.fields[f.name];
         if (val === undefined || val === null || val === '') return;
         if (f === imageField) return;
@@ -2790,12 +2796,29 @@
         body.appendChild(fieldDiv);
       });
 
+      // Add website link button if available
+      const siteUrl = getWebsiteUrl(record);
+      if (siteUrl) {
+        const linkBtn = document.createElement('a');
+        linkBtn.href = siteUrl;
+        linkBtn.target = '_blank';
+        linkBtn.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:12px 24px;background:var(--orange);color:white;border-radius:var(--radius-sm);text-decoration:none;font-weight:700;font-size:14px;font-family:Montserrat,sans-serif;transition:all 0.2s;';
+        linkBtn.textContent = 'Visit Website';
+        linkBtn.onmouseover = () => { linkBtn.style.background = '#c06220'; };
+        linkBtn.onmouseout = () => { linkBtn.style.background = 'var(--orange)'; };
+        body.appendChild(linkBtn);
+      }
+
       backdrop.classList.add('visible');
       document.body.style.overflow = 'hidden';
     }
 
     function closeModal(event) {
-      if (event && event.target !== document.getElementById('modalBackdrop') && event.target !== document.querySelector('.modal-close')) return;
+      // Close if: no event (Escape key), clicking backdrop, or clicking close button
+      if (event) {
+        const backdrop = document.getElementById('modalBackdrop');
+        if (event.target !== backdrop) return;
+      }
       document.getElementById('modalBackdrop').classList.remove('visible');
       document.body.style.overflow = '';
     }
