@@ -1351,11 +1351,9 @@
   </div>
 
   <!-- ─── Detail Modal ────────────────────────────────────── -->
-  <div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
-    <div class="modal" id="modal" onclick="event.stopPropagation()">
-      <div class="modal-image" id="modalImage">
-        <button class="modal-close" onclick="closeModal()">&times;</button>
-      </div>
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" id="modal">
+      <div class="modal-image" id="modalImage"></div>
       <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
@@ -2277,22 +2275,22 @@
       grid.innerHTML = '';
       document.getElementById('portfolioView').style.display = 'block';
 
-      filteredRecords.forEach((record, idx) => {
-        const card = document.createElement('div');
+      filteredRecords.forEach(function(record, idx) {
+        var card = document.createElement('div');
         card.className = 'portfolio-card';
-        card.onclick = () => openModal(record);
+        card.setAttribute('data-record-idx', String(idx));
 
-        const imgUrl = getImageUrl(record) || getOgImage(record);
-        const imgDiv = document.createElement('div');
+        var imgUrl = getImageUrl(record) || getOgImage(record);
+        var imgDiv = document.createElement('div');
         imgDiv.className = 'portfolio-card-image';
         if (imgUrl) {
-          const img = document.createElement('img');
+          var img = document.createElement('img');
           img.src = imgUrl;
           img.alt = '';
           img.loading = 'lazy';
           imgDiv.appendChild(img);
         } else {
-          const icon = document.createElement('div');
+          var icon = document.createElement('div');
           icon.className = 'placeholder-icon';
           icon.textContent = getInitials(record);
           icon.style.fontSize = '40px';
@@ -2300,43 +2298,42 @@
           icon.style.fontWeight = '800';
           icon.style.color = 'rgba(255,255,255,0.3)';
           imgDiv.appendChild(icon);
-          // Try fetching OG image from their website
           fetchOgImageForRecord(record, imgDiv);
         }
         card.appendChild(imgDiv);
 
-        const body = document.createElement('div');
+        var body = document.createElement('div');
         body.className = 'portfolio-card-body';
 
-        const title = document.createElement('div');
+        var title = document.createElement('div');
         title.className = 'portfolio-card-title';
         title.textContent = getTitle(record);
         body.appendChild(title);
 
         if (subtitleField) {
-          const sub = document.createElement('div');
+          var sub = document.createElement('div');
           sub.className = 'portfolio-card-subtitle';
           sub.textContent = record.fields[subtitleField.name] || '';
           body.appendChild(sub);
         }
 
-        const chipsDiv = document.createElement('div');
+        var chipsDiv = document.createElement('div');
         chipsDiv.className = 'portfolio-card-fields';
-        getDisplayFields(record).slice(0, 4).forEach(({label, value}) => {
-          const chip = document.createElement('span');
+        getDisplayFields(record).slice(0, 4).forEach(function(item) {
+          var chip = document.createElement('span');
           chip.className = 'field-chip';
-          chip.innerHTML = `<span class="field-label">${escHtml(label)}</span> ${escHtml(truncate(value, 30))}`;
+          chip.innerHTML = '<span class="field-label">' + escHtml(item.label) + '</span> ' + escHtml(truncate(item.value, 30));
           chipsDiv.appendChild(chip);
         });
         body.appendChild(chipsDiv);
 
-        const tags = getSelectValues(record);
+        var tags = getSelectValues(record);
         if (tags.length > 0) {
-          const tagsDiv = document.createElement('div');
+          var tagsDiv = document.createElement('div');
           tagsDiv.className = 'portfolio-card-tags';
-          tags.slice(0, 5).forEach((tag, i) => {
-            const el = document.createElement('span');
-            el.className = `tag ${tagColors[i % tagColors.length]}`;
+          tags.slice(0, 5).forEach(function(tag, i) {
+            var el = document.createElement('span');
+            el.className = 'tag ' + tagColors[i % tagColors.length];
             el.textContent = tag;
             tagsDiv.appendChild(el);
           });
@@ -2636,22 +2633,23 @@
       emptyEl.style.display = 'none';
       gridEl.innerHTML = '';
 
-      records.forEach(record => {
-        const card = document.createElement('div');
+      records.forEach(function(record, idx) {
+        var card = document.createElement('div');
         card.className = 'portfolio-card';
-        card.onclick = () => openModal(record);
+        card.setAttribute('data-archive-type', type);
+        card.setAttribute('data-record-idx', String(idx));
 
-        const imgUrl = getImageUrl(record) || getOgImage(record);
-        const imgDiv = document.createElement('div');
+        var imgUrl = getImageUrl(record) || getOgImage(record);
+        var imgDiv = document.createElement('div');
         imgDiv.className = 'portfolio-card-image';
         if (imgUrl) {
-          const img = document.createElement('img');
+          var img = document.createElement('img');
           img.src = imgUrl;
           img.alt = '';
           img.loading = 'lazy';
           imgDiv.appendChild(img);
         } else {
-          const icon = document.createElement('div');
+          var icon = document.createElement('div');
           icon.className = 'placeholder-icon';
           icon.textContent = getInitials(record);
           icon.style.fontSize = '40px';
@@ -2659,43 +2657,42 @@
           icon.style.fontWeight = '800';
           icon.style.color = 'rgba(255,255,255,0.3)';
           imgDiv.appendChild(icon);
-          // Try to fetch OG image in background
           fetchOgImageForRecord(record, imgDiv);
         }
         card.appendChild(imgDiv);
 
-        const body = document.createElement('div');
+        var body = document.createElement('div');
         body.className = 'portfolio-card-body';
 
-        const title = document.createElement('div');
+        var title = document.createElement('div');
         title.className = 'portfolio-card-title';
         title.textContent = getTitle(record);
         body.appendChild(title);
 
         if (subtitleField) {
-          const sub = document.createElement('div');
+          var sub = document.createElement('div');
           sub.className = 'portfolio-card-subtitle';
           sub.textContent = record.fields[subtitleField.name] || '';
           body.appendChild(sub);
         }
 
-        const chipsDiv = document.createElement('div');
+        var chipsDiv = document.createElement('div');
         chipsDiv.className = 'portfolio-card-fields';
-        getDisplayFields(record).slice(0, 4).forEach(({label, value}) => {
-          const chip = document.createElement('span');
+        getDisplayFields(record).slice(0, 4).forEach(function(item) {
+          var chip = document.createElement('span');
           chip.className = 'field-chip';
-          chip.innerHTML = `<span class="field-label">${escHtml(label)}</span> ${escHtml(truncate(value, 30))}`;
+          chip.innerHTML = '<span class="field-label">' + escHtml(item.label) + '</span> ' + escHtml(truncate(item.value, 30));
           chipsDiv.appendChild(chip);
         });
         body.appendChild(chipsDiv);
 
-        const tags = getSelectValues(record);
+        var tags = getSelectValues(record);
         if (tags.length > 0) {
-          const tagsDiv = document.createElement('div');
+          var tagsDiv = document.createElement('div');
           tagsDiv.className = 'portfolio-card-tags';
-          tags.slice(0, 5).forEach((tag, i) => {
-            const el = document.createElement('span');
-            el.className = `tag ${tagColors[i % tagColors.length]}`;
+          tags.slice(0, 5).forEach(function(tag, i) {
+            var el = document.createElement('span');
+            el.className = 'tag ' + tagColors[i % tagColors.length];
             el.textContent = tag;
             tagsDiv.appendChild(el);
           });
@@ -2762,77 +2759,143 @@
 
     /* ─── Modal ───────────────────────────────────────────── */
     function openModal(record) {
-      if (!record) return;
-      const backdrop = document.getElementById('modalBackdrop');
-      const imgContainer = document.getElementById('modalImage');
-      const body = document.getElementById('modalBody');
+      try {
+        if (!record) { console.warn('openModal: no record'); return; }
 
-      const imgUrl = getImageUrl(record) || getOgImage(record);
-      imgContainer.innerHTML = '<button class="modal-close" onclick="closeModal()">&times;</button>';
-      if (imgUrl) {
-        const img = document.createElement('img');
-        img.src = imgUrl;
-        img.alt = '';
-        imgContainer.insertBefore(img, imgContainer.firstChild);
-      } else {
-        // Try to fetch OG image for the modal
-        fetchOgImageForRecord(record, imgContainer);
+        var backdrop = document.getElementById('modalBackdrop');
+        var imgContainer = document.getElementById('modalImage');
+        var body = document.getElementById('modalBody');
+
+        if (!backdrop || !imgContainer || !body) {
+          console.error('openModal: missing DOM elements');
+          return;
+        }
+
+        // Build image area with close button
+        var imgUrl = getImageUrl(record) || getOgImage(record);
+        imgContainer.innerHTML = '';
+        if (imgUrl) {
+          var img = document.createElement('img');
+          img.src = imgUrl;
+          img.alt = '';
+          imgContainer.appendChild(img);
+        }
+        var closeBtn = document.createElement('button');
+        closeBtn.className = 'modal-close';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          closeModal();
+        });
+        imgContainer.appendChild(closeBtn);
+
+        // Build body
+        body.innerHTML = '';
+        var titleDiv = document.createElement('div');
+        titleDiv.className = 'modal-title';
+        titleDiv.textContent = getTitle(record);
+        body.appendChild(titleDiv);
+
+        // Show all fields from the record
+        var recordFields = record.fields || {};
+        var fieldsToShow = fields.length > 0
+          ? fields
+          : Object.keys(recordFields).map(function(k) { return { id: k, name: k, type: 'singleLineText' }; });
+
+        fieldsToShow.forEach(function(f) {
+          var val = recordFields[f.name];
+          if (val === undefined || val === null || val === '') return;
+          if (f === imageField) return;
+
+          var fieldDiv = document.createElement('div');
+          fieldDiv.className = 'modal-field';
+
+          var label = document.createElement('div');
+          label.className = 'modal-field-label';
+          label.textContent = f.name;
+          fieldDiv.appendChild(label);
+
+          var valueDiv = document.createElement('div');
+          valueDiv.className = 'modal-field-value';
+          valueDiv.innerHTML = formatFieldValue(f, val);
+          fieldDiv.appendChild(valueDiv);
+
+          body.appendChild(fieldDiv);
+        });
+
+        // Add website link button if available
+        var siteUrl = getWebsiteUrl(record);
+        if (siteUrl) {
+          var linkBtn = document.createElement('a');
+          linkBtn.href = siteUrl;
+          linkBtn.target = '_blank';
+          linkBtn.rel = 'noopener';
+          linkBtn.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:12px 24px;background:var(--orange);color:white;border-radius:var(--radius-sm);text-decoration:none;font-weight:700;font-size:14px;font-family:Montserrat,sans-serif;';
+          linkBtn.textContent = 'Visit Website';
+          body.appendChild(linkBtn);
+        }
+
+        backdrop.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+      } catch(err) {
+        console.error('Error opening modal:', err);
+        alert('Error opening details: ' + err.message);
       }
-
-      body.innerHTML = `<div class="modal-title">${escHtml(getTitle(record))}</div>`;
-
-      // Show all fields from the record, using schema fields if available
-      const fieldsToShow = fields.length > 0 ? fields : Object.keys(record.fields).map(k => ({ id: k, name: k, type: 'singleLineText' }));
-
-      fieldsToShow.forEach(f => {
-        const val = record.fields[f.name];
-        if (val === undefined || val === null || val === '') return;
-        if (f === imageField) return;
-
-        const fieldDiv = document.createElement('div');
-        fieldDiv.className = 'modal-field';
-
-        const label = document.createElement('div');
-        label.className = 'modal-field-label';
-        label.textContent = f.name;
-        fieldDiv.appendChild(label);
-
-        const valueDiv = document.createElement('div');
-        valueDiv.className = 'modal-field-value';
-        valueDiv.innerHTML = formatFieldValue(f, val);
-        fieldDiv.appendChild(valueDiv);
-
-        body.appendChild(fieldDiv);
-      });
-
-      // Add website link button if available
-      const siteUrl = getWebsiteUrl(record);
-      if (siteUrl) {
-        const linkBtn = document.createElement('a');
-        linkBtn.href = siteUrl;
-        linkBtn.target = '_blank';
-        linkBtn.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:12px 24px;background:var(--orange);color:white;border-radius:var(--radius-sm);text-decoration:none;font-weight:700;font-size:14px;font-family:Montserrat,sans-serif;transition:all 0.2s;';
-        linkBtn.textContent = 'Visit Website';
-        linkBtn.onmouseover = () => { linkBtn.style.background = '#c06220'; };
-        linkBtn.onmouseout = () => { linkBtn.style.background = 'var(--orange)'; };
-        body.appendChild(linkBtn);
-      }
-
-      backdrop.classList.add('visible');
-      document.body.style.overflow = 'hidden';
     }
 
-    function closeModal(event) {
-      // Close if: no event (Escape key), clicking backdrop, or clicking close button
-      if (event) {
-        const backdrop = document.getElementById('modalBackdrop');
-        if (event.target !== backdrop) return;
+    function closeModal() {
+      var backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) {
+        backdrop.classList.remove('visible');
       }
-      document.getElementById('modalBackdrop').classList.remove('visible');
       document.body.style.overflow = '';
     }
 
-    document.addEventListener('keydown', e => {
+    /* ─── Event Delegation for Card Clicks ────────────────── */
+    // Portfolio grid: click any card to open its modal
+    document.getElementById('portfolioGrid').addEventListener('click', function(e) {
+      var card = e.target.closest('.portfolio-card');
+      if (!card) return;
+      var idx = parseInt(card.getAttribute('data-record-idx'), 10);
+      if (!isNaN(idx) && filteredRecords[idx]) {
+        openModal(filteredRecords[idx]);
+      }
+    });
+
+    // Saved archive grid
+    document.getElementById('savedGrid').addEventListener('click', function(e) {
+      var card = e.target.closest('.portfolio-card');
+      if (!card) return;
+      var idx = parseInt(card.getAttribute('data-record-idx'), 10);
+      if (!isNaN(idx) && swipeSaved[idx]) {
+        openModal(swipeSaved[idx]);
+      }
+    });
+
+    // Skipped archive grid
+    document.getElementById('skippedGrid').addEventListener('click', function(e) {
+      var card = e.target.closest('.portfolio-card');
+      if (!card) return;
+      var idx = parseInt(card.getAttribute('data-record-idx'), 10);
+      if (!isNaN(idx) && swipeSkipped[idx]) {
+        openModal(swipeSkipped[idx]);
+      }
+    });
+
+    // Modal: close on backdrop click
+    document.getElementById('modalBackdrop').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Modal: stop clicks inside modal from closing backdrop
+    document.getElementById('modal').addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeModal();
       if (currentView === 'swipe' && swipeIndex < filteredRecords.length) {
         if (e.key === 'ArrowLeft') swipeAction('left');
