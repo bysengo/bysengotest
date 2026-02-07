@@ -1,616 +1,617 @@
 <!-- Sengo x Gradient Partnership Presentation -->
-<!-- Embed-ready: paste into Kajabi Custom Code Block, Squarespace Embed, or any HTML embed -->
+<!-- Embed-ready: paste into Kajabi Custom Code Block -->
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
   .sgp-wrap {
-    --dark-teal: #1B3533;
-    --brown: #67441A;
-    --orange: #D57028;
-    --muted-brown: #AF8145;
-    --cream: #F3EDE7;
-    --green: #717E36;
-    --white: #ffffff;
-
-    width: 100%;
-    height: 680px;
-    position: relative;
-    overflow: hidden;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--cream);
-    color: var(--dark-teal);
-    box-sizing: border-box;
-    line-height: 1.5;
+    width: 100% !important;
+    min-height: 680px !important;
+    position: relative !important;
+    display: block !important;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    background: #F3EDE7 !important;
+    color: #1B3533 !important;
+    box-sizing: border-box !important;
+    line-height: 1.5 !important;
+    overflow: visible !important;
   }
 
   .sgp-wrap *, .sgp-wrap *::before, .sgp-wrap *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box !important;
   }
 
-  /* Slide Container */
+  /* Slides: hidden by default, shown when active */
   .sgp-wrap .sgp-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 60px 70px;
-    opacity: 0;
-    transform: translateX(60px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    pointer-events: none;
-    overflow-y: auto;
+    display: none !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 680px !important;
+    padding: 50px 60px 80px !important;
+    width: 100% !important;
   }
 
   .sgp-wrap .sgp-slide.sgp-active {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: all;
+    display: flex !important;
   }
 
   /* Navigation */
   .sgp-wrap .sgp-nav {
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    z-index: 100;
-    background: rgba(27, 53, 51, 0.92);
-    padding: 10px 20px;
-    border-radius: 50px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    background: rgba(27, 53, 51, 0.92) !important;
+    padding: 10px 20px !important;
+    border-radius: 50px !important;
+    margin: -60px auto 20px !important;
+    position: relative !important;
+    z-index: 10 !important;
+    width: fit-content !important;
   }
 
   .sgp-wrap .sgp-nav-btn {
-    width: 34px;
-    height: 34px;
-    border: 2px solid #F3EDE7;
-    background: transparent;
-    color: #F3EDE7;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    font-family: 'Arimo', sans-serif;
-    font-weight: 700;
-    line-height: 1;
+    width: 34px !important;
+    height: 34px !important;
+    border: 2px solid #F3EDE7 !important;
+    background: transparent !important;
+    color: #F3EDE7 !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Arimo', sans-serif !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   .sgp-wrap .sgp-nav-btn:hover {
-    background: #D57028;
-    border-color: #D57028;
+    background: #D57028 !important;
+    border-color: #D57028 !important;
   }
 
   .sgp-wrap .sgp-dots {
-    display: flex;
-    gap: 6px;
+    display: flex !important;
+    gap: 6px !important;
+    align-items: center !important;
   }
 
   .sgp-wrap .sgp-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(243, 237, 231, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: rgba(243, 237, 231, 0.3) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
-  .sgp-wrap .sgp-dot.sgp-active {
-    background: #D57028;
-    transform: scale(1.3);
+  .sgp-wrap .sgp-dot.sgp-on {
+    background: #D57028 !important;
+    transform: scale(1.3) !important;
   }
 
   .sgp-wrap .sgp-counter {
-    color: #F3EDE7;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    min-width: 44px;
-    text-align: center;
+    color: #F3EDE7 !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    min-width: 44px !important;
+    text-align: center !important;
   }
 
   /* Typography */
   .sgp-wrap .sgp-badge {
-    display: inline-block;
-    background: var(--orange);
-    color: var(--white);
-    padding: 6px 18px;
-    border-radius: 40px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
+    display: inline-block !important;
+    background: #D57028 !important;
+    color: #ffffff !important;
+    padding: 6px 18px !important;
+    border-radius: 40px !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 16px !important;
   }
 
-  .sgp-wrap .sgp-badge-green { background: var(--green); }
-  .sgp-wrap .sgp-badge-teal { background: var(--dark-teal); }
-  .sgp-wrap .sgp-badge-brown { background: var(--brown); }
+  .sgp-wrap .sgp-badge-green { background: #717E36 !important; }
+  .sgp-wrap .sgp-badge-teal { background: #1B3533 !important; }
+  .sgp-wrap .sgp-badge-brown { background: #67441A !important; }
 
   .sgp-wrap h1 {
-    font-family: 'Arimo', sans-serif;
-    font-size: 3.8rem;
-    font-weight: 900;
-    line-height: 0.88;
-    letter-spacing: -0.06em;
-    text-transform: uppercase;
-    color: var(--dark-teal);
-    margin-bottom: 16px;
+    font-family: 'Arimo', sans-serif !important;
+    font-size: 3.8rem !important;
+    font-weight: 900 !important;
+    line-height: 0.88 !important;
+    letter-spacing: -0.06em !important;
+    text-transform: uppercase !important;
+    color: #1B3533 !important;
+    margin: 0 0 16px 0 !important;
+    padding: 0 !important;
   }
 
   .sgp-wrap h2 {
-    font-family: 'Arimo', sans-serif;
-    font-size: 2.6rem;
-    font-weight: 800;
-    line-height: 0.92;
-    letter-spacing: -0.05em;
-    text-transform: uppercase;
-    color: var(--dark-teal);
-    margin-bottom: 14px;
+    font-family: 'Arimo', sans-serif !important;
+    font-size: 2.6rem !important;
+    font-weight: 800 !important;
+    line-height: 0.92 !important;
+    letter-spacing: -0.05em !important;
+    text-transform: uppercase !important;
+    color: #1B3533 !important;
+    margin: 0 0 14px 0 !important;
+    padding: 0 !important;
   }
 
   .sgp-wrap h3 {
-    font-family: 'Arimo', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
+    font-family: 'Arimo', sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: -0.02em !important;
+    margin: 0 0 8px 0 !important;
+    padding: 0 !important;
   }
 
   .sgp-wrap .sgp-subtitle {
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--brown);
-    max-width: 600px;
-    line-height: 1.5;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    color: #67441A !important;
+    max-width: 600px !important;
+    line-height: 1.5 !important;
   }
 
   .sgp-wrap .sgp-body {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--dark-teal);
-    max-width: 700px;
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    color: #1B3533 !important;
+    max-width: 700px !important;
   }
 
   /* Layouts */
   .sgp-wrap .sgp-inner {
-    max-width: 960px;
-    width: 100%;
-    text-align: center;
+    max-width: 960px !important;
+    width: 100% !important;
+    text-align: center !important;
   }
 
   .sgp-wrap .sgp-two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 36px;
-    text-align: left;
-    width: 100%;
-    align-items: start;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 36px !important;
+    text-align: left !important;
+    width: 100% !important;
+    align-items: start !important;
   }
 
   .sgp-wrap .sgp-three-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    text-align: left;
-    width: 100%;
-    margin-top: 16px;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 16px !important;
+    text-align: left !important;
+    width: 100% !important;
+    margin-top: 16px !important;
   }
 
   /* Cards */
   .sgp-wrap .sgp-card {
-    background: var(--white);
-    border: 2px solid var(--dark-teal);
-    padding: 24px 20px;
-    position: relative;
-    box-shadow: 6px 6px 0 rgba(27, 53, 51, 0.1);
+    background: #ffffff !important;
+    border: 2px solid #1B3533 !important;
+    padding: 24px 20px !important;
+    position: relative !important;
+    box-shadow: 6px 6px 0 rgba(27, 53, 51, 0.1) !important;
   }
 
   .sgp-wrap .sgp-card h3 {
-    color: var(--dark-teal);
-    margin-bottom: 6px;
-    font-size: 0.85rem;
+    color: #1B3533 !important;
+    margin-bottom: 6px !important;
+    font-size: 0.85rem !important;
   }
 
   .sgp-wrap .sgp-card p {
-    font-size: 0.8rem;
-    line-height: 1.5;
-    color: var(--brown);
+    font-size: 0.8rem !important;
+    line-height: 1.5 !important;
+    color: #67441A !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .sgp-wrap .sgp-card-icon {
-    font-size: 1.4rem;
-    margin-bottom: 8px;
-    font-weight: 800;
-    font-family: 'Arimo', sans-serif;
-    color: var(--orange);
+    font-size: 1.4rem !important;
+    margin-bottom: 8px !important;
+    font-weight: 800 !important;
+    font-family: 'Arimo', sans-serif !important;
+    color: #D57028 !important;
   }
 
   /* Feature list */
   .sgp-wrap .sgp-features {
-    list-style: none;
-    text-align: left;
-    margin-top: 10px;
+    list-style: none !important;
+    text-align: left !important;
+    margin: 10px 0 0 0 !important;
+    padding: 0 !important;
   }
 
   .sgp-wrap .sgp-features li {
-    font-size: 0.85rem;
-    line-height: 1.4;
-    padding: 7px 0;
-    border-bottom: 1px solid rgba(27, 53, 51, 0.1);
-    color: var(--dark-teal);
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+    padding: 7px 0 !important;
+    border-bottom: 1px solid rgba(27, 53, 51, 0.1) !important;
+    color: #1B3533 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    list-style: none !important;
+    margin: 0 !important;
   }
 
   .sgp-wrap .sgp-features li::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: var(--orange);
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 6px;
+    content: '' !important;
+    width: 6px !important;
+    height: 6px !important;
+    min-width: 6px !important;
+    background: #D57028 !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+    margin-top: 6px !important;
+    display: inline-block !important;
   }
 
   /* Dark slides */
   .sgp-wrap .sgp-dark {
-    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
-    color: #F3EDE7;
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%) !important;
+    color: #F3EDE7 !important;
   }
 
   .sgp-wrap .sgp-dark h1,
   .sgp-wrap .sgp-dark h2,
   .sgp-wrap .sgp-dark h3 {
-    color: #F3EDE7;
+    color: #F3EDE7 !important;
   }
 
   .sgp-wrap .sgp-dark .sgp-subtitle {
-    color: rgba(243, 237, 231, 0.8);
+    color: rgba(243, 237, 231, 0.8) !important;
   }
 
   .sgp-wrap .sgp-dark .sgp-body {
-    color: rgba(243, 237, 231, 0.9);
+    color: rgba(243, 237, 231, 0.9) !important;
   }
 
   .sgp-wrap .sgp-dark .sgp-features li {
-    color: #F3EDE7;
-    border-bottom-color: rgba(243, 237, 231, 0.15);
+    color: #F3EDE7 !important;
+    border-bottom-color: rgba(243, 237, 231, 0.15) !important;
   }
 
   /* Orange slides */
   .sgp-wrap .sgp-orange {
-    background: linear-gradient(135deg, #D57028 20%, #AF8145 100%);
-    color: #F3EDE7;
+    background: linear-gradient(135deg, #D57028 20%, #AF8145 100%) !important;
+    color: #F3EDE7 !important;
   }
 
   .sgp-wrap .sgp-orange h1,
   .sgp-wrap .sgp-orange h2,
   .sgp-wrap .sgp-orange h3 {
-    color: #F3EDE7;
+    color: #F3EDE7 !important;
   }
 
   .sgp-wrap .sgp-orange .sgp-subtitle {
-    color: rgba(243, 237, 231, 0.85);
+    color: rgba(243, 237, 231, 0.85) !important;
   }
 
   /* Pricing */
   .sgp-wrap .sgp-pricing {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    width: 100%;
-    margin-top: 16px;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+    margin-top: 16px !important;
   }
 
   .sgp-wrap .sgp-price-card {
-    background: var(--white);
-    border: 2px solid var(--dark-teal);
-    padding: 28px 18px 24px;
-    text-align: center;
-    position: relative;
-    box-shadow: 6px 6px 0 rgba(27, 53, 51, 0.1);
+    background: #ffffff !important;
+    border: 2px solid #1B3533 !important;
+    padding: 28px 18px 24px !important;
+    text-align: center !important;
+    position: relative !important;
+    box-shadow: 6px 6px 0 rgba(27, 53, 51, 0.1) !important;
   }
 
   .sgp-wrap .sgp-price-card.sgp-featured {
-    border-color: var(--orange);
-    box-shadow: 6px 6px 0 rgba(213, 112, 40, 0.3);
+    border-color: #D57028 !important;
+    box-shadow: 6px 6px 0 rgba(213, 112, 40, 0.3) !important;
   }
 
   .sgp-wrap .sgp-price-card.sgp-featured::before {
-    content: 'RECOMMENDED';
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--orange);
-    color: var(--white);
-    padding: 3px 14px;
-    font-size: 0.6rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    white-space: nowrap;
+    content: 'RECOMMENDED' !important;
+    position: absolute !important;
+    top: -12px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: #D57028 !important;
+    color: #ffffff !important;
+    padding: 3px 14px !important;
+    font-size: 0.6rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 2px !important;
+    white-space: nowrap !important;
+    display: block !important;
   }
 
   .sgp-wrap .sgp-tier {
-    font-family: 'Arimo', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--dark-teal);
-    margin-bottom: 4px;
+    font-family: 'Arimo', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    color: #1B3533 !important;
+    margin-bottom: 4px !important;
   }
 
   .sgp-wrap .sgp-duration {
-    font-size: 0.75rem;
-    color: var(--muted-brown);
-    font-weight: 600;
-    margin-bottom: 12px;
+    font-size: 0.75rem !important;
+    color: #AF8145 !important;
+    font-weight: 600 !important;
+    margin-bottom: 12px !important;
   }
 
   .sgp-wrap .sgp-amount {
-    font-family: 'Arimo', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: var(--dark-teal);
-    line-height: 1;
-    margin-bottom: 2px;
+    font-family: 'Arimo', sans-serif !important;
+    font-size: 2.2rem !important;
+    font-weight: 900 !important;
+    color: #1B3533 !important;
+    line-height: 1 !important;
+    margin-bottom: 2px !important;
   }
 
   .sgp-wrap .sgp-per {
-    font-size: 0.7rem;
-    color: var(--muted-brown);
-    margin-bottom: 12px;
+    font-size: 0.7rem !important;
+    color: #AF8145 !important;
+    margin-bottom: 12px !important;
   }
 
   .sgp-wrap .sgp-total {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--brown);
-    padding: 8px 0;
-    border-top: 2px solid rgba(27, 53, 51, 0.1);
-    border-bottom: 2px solid rgba(27, 53, 51, 0.1);
-    margin: 10px 0;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    color: #67441A !important;
+    padding: 8px 0 !important;
+    border-top: 2px solid rgba(27, 53, 51, 0.1) !important;
+    border-bottom: 2px solid rgba(27, 53, 51, 0.1) !important;
+    margin: 10px 0 !important;
   }
 
   .sgp-wrap .sgp-price-features {
-    list-style: none;
-    text-align: left;
-    margin-top: 10px;
+    list-style: none !important;
+    text-align: left !important;
+    margin: 10px 0 0 0 !important;
+    padding: 0 !important;
   }
 
   .sgp-wrap .sgp-price-features li {
-    font-size: 0.75rem;
-    padding: 4px 0;
-    color: var(--dark-teal);
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-    line-height: 1.3;
+    font-size: 0.75rem !important;
+    padding: 4px 0 !important;
+    color: #1B3533 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    line-height: 1.3 !important;
+    list-style: none !important;
+    margin: 0 !important;
   }
 
   .sgp-wrap .sgp-price-features li::before {
-    content: '\2713';
-    color: var(--green);
-    font-weight: 800;
-    flex-shrink: 0;
+    content: '\2713' !important;
+    color: #717E36 !important;
+    font-weight: 800 !important;
+    flex-shrink: 0 !important;
+    display: inline !important;
   }
 
   .sgp-wrap .sgp-savings {
-    display: inline-block;
-    background: var(--green);
-    color: var(--white);
-    font-size: 0.6rem;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 20px;
-    letter-spacing: 1px;
-    margin-top: 8px;
+    display: inline-block !important;
+    background: #717E36 !important;
+    color: #ffffff !important;
+    font-size: 0.6rem !important;
+    font-weight: 800 !important;
+    padding: 2px 8px !important;
+    border-radius: 20px !important;
+    letter-spacing: 1px !important;
+    margin-top: 8px !important;
   }
 
   /* Comparison table */
   .sgp-wrap .sgp-table {
-    width: 100%;
-    max-width: 800px;
-    border-collapse: collapse;
-    margin-top: 16px;
-    font-size: 0.8rem;
+    width: 100% !important;
+    max-width: 800px !important;
+    border-collapse: collapse !important;
+    margin: 16px auto 0 !important;
+    font-size: 0.8rem !important;
   }
 
   .sgp-wrap .sgp-table th {
-    background: var(--dark-teal);
-    color: #F3EDE7;
-    padding: 10px 14px;
-    text-align: left;
-    font-family: 'Arimo', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.7rem;
+    background: #1B3533 !important;
+    color: #F3EDE7 !important;
+    padding: 10px 14px !important;
+    text-align: left !important;
+    font-family: 'Arimo', sans-serif !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    font-size: 0.7rem !important;
   }
 
   .sgp-wrap .sgp-table td {
-    padding: 8px 14px;
-    border-bottom: 1px solid rgba(27, 53, 51, 0.1);
+    padding: 8px 14px !important;
+    border-bottom: 1px solid rgba(27, 53, 51, 0.1) !important;
   }
 
   .sgp-wrap .sgp-table tr:nth-child(even) td {
-    background: rgba(243, 237, 231, 0.5);
+    background: rgba(243, 237, 231, 0.5) !important;
   }
 
-  .sgp-wrap .sgp-check { color: #717E36; font-weight: 800; }
-  .sgp-wrap .sgp-cross { color: rgba(27, 53, 51, 0.25); }
+  .sgp-wrap .sgp-check { color: #717E36 !important; font-weight: 800 !important; }
+  .sgp-wrap .sgp-cross { color: rgba(27, 53, 51, 0.25) !important; }
 
   /* Flow */
   .sgp-wrap .sgp-flow {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    width: 100%;
-    margin-top: 20px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0 !important;
+    width: 100% !important;
+    margin-top: 20px !important;
   }
 
   .sgp-wrap .sgp-stage {
-    flex: 1;
-    padding: 20px 14px;
-    text-align: center;
-    border-radius: 8px;
+    flex: 1 !important;
+    padding: 20px 14px !important;
+    text-align: center !important;
+    border-radius: 8px !important;
   }
 
   .sgp-wrap .sgp-stage-label {
-    font-family: 'Arimo', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 6px;
+    font-family: 'Arimo', sans-serif !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 6px !important;
   }
 
   .sgp-wrap .sgp-stage-name {
-    font-family: 'Arimo', sans-serif;
-    font-size: 1rem;
-    font-weight: 800;
-    text-transform: uppercase;
+    font-family: 'Arimo', sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
   }
 
   .sgp-wrap .sgp-stage-desc {
-    font-size: 0.7rem;
-    margin-top: 4px;
-    line-height: 1.3;
+    font-size: 0.7rem !important;
+    margin-top: 4px !important;
+    line-height: 1.3 !important;
   }
 
   .sgp-wrap .sgp-flow-arrow {
-    font-size: 1.2rem;
-    color: var(--cream);
-    flex-shrink: 0;
-    font-weight: 900;
-    padding: 0 2px;
+    font-size: 1.2rem !important;
+    color: #F3EDE7 !important;
+    flex-shrink: 0 !important;
+    font-weight: 900 !important;
+    padding: 0 2px !important;
   }
 
   .sgp-wrap .sgp-s-sengo {
-    background: rgba(213, 112, 40, 0.15);
-    border: 2px solid #D57028;
+    background: rgba(213, 112, 40, 0.15) !important;
+    border: 2px solid #D57028 !important;
   }
 
   .sgp-wrap .sgp-s-vettable {
-    background: rgba(27, 53, 51, 0.1);
-    border: 2px solid #1B3533;
+    background: rgba(27, 53, 51, 0.1) !important;
+    border: 2px solid #1B3533 !important;
   }
 
   .sgp-wrap .sgp-s-both {
-    background: rgba(113, 126, 54, 0.15);
-    border: 2px solid #717E36;
+    background: rgba(113, 126, 54, 0.15) !important;
+    border: 2px solid #717E36 !important;
   }
 
   /* Impact metrics */
   .sgp-wrap .sgp-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    width: 100%;
-    max-width: 800px;
-    margin-top: 20px;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 14px !important;
+    width: 100% !important;
+    max-width: 800px !important;
+    margin: 20px auto 0 !important;
   }
 
   .sgp-wrap .sgp-metric {
-    background: rgba(243, 237, 231, 0.1);
-    border: 1px solid rgba(243, 237, 231, 0.2);
-    padding: 16px 12px;
-    text-align: center;
-    border-radius: 4px;
+    background: rgba(243, 237, 231, 0.1) !important;
+    border: 1px solid rgba(243, 237, 231, 0.2) !important;
+    padding: 16px 12px !important;
+    text-align: center !important;
+    border-radius: 4px !important;
   }
 
   .sgp-wrap .sgp-metric-icon {
-    font-size: 1.1rem;
-    margin-bottom: 6px;
+    font-size: 1.1rem !important;
+    margin-bottom: 6px !important;
   }
 
   .sgp-wrap .sgp-metric-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #F3EDE7;
-    line-height: 1.3;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    color: #F3EDE7 !important;
+    line-height: 1.3 !important;
   }
 
   /* Divider */
   .sgp-wrap .sgp-divider {
-    width: 50px;
-    height: 3px;
-    background: var(--orange);
-    margin: 14px auto;
+    width: 50px !important;
+    height: 3px !important;
+    background: #D57028 !important;
+    margin: 14px auto !important;
+    display: block !important;
   }
 
   /* Logo */
   .sgp-wrap .sgp-logo {
-    height: 32px;
-    margin-bottom: 12px;
-    color: var(--dark-teal);
+    height: 32px !important;
+    width: auto !important;
+    margin-bottom: 12px !important;
+    color: #1B3533 !important;
+    display: inline-block !important;
   }
 
   .sgp-wrap .sgp-dark .sgp-logo {
-    color: #F3EDE7;
+    color: #F3EDE7 !important;
   }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .sgp-wrap {
-      height: 580px;
-    }
-
     .sgp-wrap .sgp-slide {
-      padding: 30px 20px 60px;
+      padding: 30px 20px 70px !important;
+      min-height: 580px !important;
     }
 
     .sgp-wrap h1 {
-      font-size: 2.4rem;
+      font-size: 2.4rem !important;
     }
 
     .sgp-wrap h2 {
-      font-size: 1.8rem;
+      font-size: 1.8rem !important;
     }
 
     .sgp-wrap .sgp-two-col,
     .sgp-wrap .sgp-three-col,
     .sgp-wrap .sgp-pricing {
-      grid-template-columns: 1fr;
-      gap: 10px;
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
     }
 
     .sgp-wrap .sgp-flow {
-      flex-direction: column;
-      gap: 4px;
+      flex-direction: column !important;
+      gap: 4px !important;
     }
 
     .sgp-wrap .sgp-flow-arrow {
-      transform: rotate(90deg);
+      transform: rotate(90deg) !important;
     }
 
     .sgp-wrap .sgp-metrics {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr !important;
     }
 
     .sgp-wrap .sgp-table {
-      font-size: 0.7rem;
+      font-size: 0.7rem !important;
     }
 
     .sgp-wrap .sgp-card {
-      padding: 14px 12px;
+      padding: 14px 12px !important;
     }
   }
 </style>
@@ -627,9 +628,9 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <h1>Sengo<br><span style="color:#D57028;">x</span> Gradient</h1>
-      <div class="sgp-divider" style="margin:16px auto;"></div>
-      <p class="sgp-subtitle" style="text-align:center;margin:0 auto;">Partnership Proposal<br>Building a Full Capital Lifecycle Stack for Founders</p>
+      <h1>Sengo<br><span style="color:#D57028 !important;">x</span> Gradient</h1>
+      <div class="sgp-divider" style="margin:16px auto !important;"></div>
+      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto !important;">Partnership Proposal<br>Building a Full Capital Lifecycle Stack for Founders</p>
     </div>
   </div>
 
@@ -639,7 +640,7 @@
       <span class="sgp-badge">The Challenge</span>
       <h2>Most founders aren't<br>venture-ready yet</h2>
       <div class="sgp-divider"></div>
-      <p class="sgp-body" style="text-align:center;margin:0 auto 20px;">
+      <p class="sgp-body" style="text-align:center !important;margin:0 auto 20px !important;">
         Incubators and accelerators serve the founders who get in. But what about the rest &mdash; rejected applicants, early-stage founders, and alumni who still need support?
       </p>
       <div class="sgp-three-col">
@@ -667,11 +668,11 @@
     <div class="sgp-inner">
       <span class="sgp-badge">Platform Overview</span>
       <h2>What is Sengo?</h2>
-      <p class="sgp-subtitle" style="text-align:center;margin:0 auto 10px;">The community, education, and readiness layer for founders and funders.</p>
+      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 10px !important;">The community, education, and readiness layer for founders and funders.</p>
       <div class="sgp-divider"></div>
-      <div class="sgp-two-col" style="margin-top:20px;">
+      <div class="sgp-two-col" style="margin-top:20px !important;">
         <div>
-          <h3 style="color:#D57028;">For Founders</h3>
+          <h3 style="color:#D57028 !important;">For Founders</h3>
           <ul class="sgp-features">
             <li>Capital readiness tools and assessments</li>
             <li>Education on multiple capital paths (VC, grants, angels, non-dilutive)</li>
@@ -681,7 +682,7 @@
           </ul>
         </div>
         <div>
-          <h3 style="color:#D57028;">For Funders</h3>
+          <h3 style="color:#D57028 !important;">For Funders</h3>
           <ul class="sgp-features">
             <li>Investor education and onboarding</li>
             <li>Dealflow discovery and curation</li>
@@ -699,7 +700,7 @@
     <div class="sgp-inner">
       <span class="sgp-badge sgp-badge-teal">Platform Overview</span>
       <h2>What is Vettable?</h2>
-      <p class="sgp-subtitle" style="text-align:center;margin:0 auto 10px;">The venture operating system for founders pursuing venture capital.</p>
+      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 10px !important;">The venture operating system for founders pursuing venture capital.</p>
       <div class="sgp-divider"></div>
       <div class="sgp-three-col">
         <div class="sgp-card">
@@ -733,32 +734,32 @@
   <!-- SLIDE 5: Full Lifecycle Stack -->
   <div class="sgp-slide sgp-orange" data-sgp="4">
     <div class="sgp-inner">
-      <span class="sgp-badge" style="background:#1B3533;">The Stack</span>
+      <span class="sgp-badge" style="background:#1B3533 !important;">The Stack</span>
       <h2>The Full Capital<br>Lifecycle Stack</h2>
-      <p class="sgp-subtitle" style="text-align:center;margin:0 auto 6px;color:rgba(243,237,231,0.9);">Not a single-point solution. A complete system from readiness to raise.</p>
+      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 6px !important;color:rgba(243,237,231,0.9) !important;">Not a single-point solution. A complete system from readiness to raise.</p>
       <div class="sgp-flow">
         <div class="sgp-stage sgp-s-sengo">
-          <div class="sgp-stage-label" style="color:#D57028;">Sengo</div>
-          <div class="sgp-stage-name" style="color:#1B3533;">Readiness</div>
-          <div class="sgp-stage-desc" style="color:#1B3533;">Education, community, capital path discovery</div>
+          <div class="sgp-stage-label" style="color:#D57028 !important;">Sengo</div>
+          <div class="sgp-stage-name" style="color:#1B3533 !important;">Readiness</div>
+          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Education, community, capital path discovery</div>
         </div>
         <div class="sgp-flow-arrow">&rarr;</div>
         <div class="sgp-stage sgp-s-sengo">
-          <div class="sgp-stage-label" style="color:#D57028;">Sengo</div>
-          <div class="sgp-stage-name" style="color:#1B3533;">Assessment</div>
-          <div class="sgp-stage-desc" style="color:#1B3533;">Capital readiness scoring &amp; alternative paths</div>
+          <div class="sgp-stage-label" style="color:#D57028 !important;">Sengo</div>
+          <div class="sgp-stage-name" style="color:#1B3533 !important;">Assessment</div>
+          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Capital readiness scoring &amp; alternative paths</div>
         </div>
         <div class="sgp-flow-arrow">&rarr;</div>
         <div class="sgp-stage sgp-s-vettable">
-          <div class="sgp-stage-label" style="color:#1B3533;">Vettable</div>
-          <div class="sgp-stage-name" style="color:#1B3533;">Venture Ops</div>
-          <div class="sgp-stage-desc" style="color:#1B3533;">Fundability scoring, data rooms, matching</div>
+          <div class="sgp-stage-label" style="color:#1B3533 !important;">Vettable</div>
+          <div class="sgp-stage-name" style="color:#1B3533 !important;">Venture Ops</div>
+          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Fundability scoring, data rooms, matching</div>
         </div>
         <div class="sgp-flow-arrow">&rarr;</div>
         <div class="sgp-stage sgp-s-both">
-          <div class="sgp-stage-label" style="color:#717E36;">Together</div>
-          <div class="sgp-stage-name" style="color:#1B3533;">Impact</div>
-          <div class="sgp-stage-desc" style="color:#1B3533;">Longitudinal reporting &amp; retention</div>
+          <div class="sgp-stage-label" style="color:#717E36 !important;">Together</div>
+          <div class="sgp-stage-name" style="color:#1B3533 !important;">Impact</div>
+          <div class="sgp-stage-desc" style="color:#1B3533 !important;">Longitudinal reporting &amp; retention</div>
         </div>
       </div>
     </div>
@@ -770,9 +771,9 @@
       <span class="sgp-badge">For Gradient</span>
       <h2>Where Sengo<br>Fits In</h2>
       <div class="sgp-divider"></div>
-      <div class="sgp-two-col" style="margin-top:16px;">
+      <div class="sgp-two-col" style="margin-top:16px !important;">
         <div>
-          <p class="sgp-body" style="margin-bottom:14px;">
+          <p class="sgp-body" style="margin-bottom:14px !important;">
             Sengo supports the <strong>majority of founders</strong> who are not yet venture-ready &mdash; including rejected applicants, early-stage founders, and alumni &mdash; without losing them from the ecosystem.
           </p>
           <p class="sgp-body">
@@ -780,7 +781,7 @@
           </p>
         </div>
         <div>
-          <h3 style="color:#D57028;">Sengo Enables Gradient To:</h3>
+          <h3 style="color:#D57028 !important;">Sengo Enables Gradient To:</h3>
           <ul class="sgp-features">
             <li>Provide ongoing founder and funder education</li>
             <li>Deliver capital readiness tools and assessments</li>
@@ -799,9 +800,9 @@
       <span class="sgp-badge sgp-badge-green">For Gradient</span>
       <h2>Where Vettable<br>Fits In</h2>
       <div class="sgp-divider"></div>
-      <div class="sgp-two-col" style="margin-top:16px;">
+      <div class="sgp-two-col" style="margin-top:16px !important;">
         <div>
-          <p class="sgp-body" style="margin-bottom:14px;">
+          <p class="sgp-body" style="margin-bottom:14px !important;">
             Once founders are truly <strong>venture-bound</strong>, Vettable becomes the system of record &mdash; the operational backbone for tracking, matching, and reporting.
           </p>
           <p class="sgp-body">
@@ -809,7 +810,7 @@
           </p>
         </div>
         <div>
-          <h3 style="color:#D57028;">Vettable Enables Gradient To:</h3>
+          <h3 style="color:#D57028 !important;">Vettable Enables Gradient To:</h3>
           <ul class="sgp-features">
             <li>Assess venture readiness objectively</li>
             <li>Track cohort fundability and graduation rates</li>
@@ -827,7 +828,7 @@
     <div class="sgp-inner">
       <span class="sgp-badge">The Differentiator</span>
       <h2>Impact Reporting<br>That Matters</h2>
-      <p class="sgp-subtitle" style="text-align:center;margin:0 auto 6px;">Most tools report activity. This stack reports <strong>outcomes</strong>.</p>
+      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 6px !important;">Most tools report activity. This stack reports <strong>outcomes</strong>.</p>
       <div class="sgp-metrics">
         <div class="sgp-metric">
           <div class="sgp-metric-icon">&#9650;</div>
@@ -884,7 +885,7 @@
           <tr><td>Embedded &amp; outcome-driven</td><td><span class="sgp-cross">&mdash;</span></td><td><span class="sgp-check">&check;</span></td><td><span class="sgp-check">&check;</span></td></tr>
         </tbody>
       </table>
-      <p class="sgp-body" style="text-align:center;margin-top:12px;font-size:0.85rem;">
+      <p class="sgp-body" style="text-align:center !important;margin-top:12px !important;font-size:0.85rem !important;">
         PitchBook tells you what exists. <strong>Sengo + Vettable help founders become investable &mdash; and prove it.</strong>
       </p>
     </div>
@@ -895,9 +896,8 @@
     <div class="sgp-inner">
       <span class="sgp-badge">Partnership Proposal</span>
       <h2>50-Seat Sengo<br>Pilot for Gradient</h2>
-      <p class="sgp-subtitle" style="text-align:center;margin:0 auto 6px;">All plans include quarterly assessment and reporting.</p>
+      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 6px !important;">All plans include quarterly assessment and reporting.</p>
       <div class="sgp-pricing">
-        <!-- 3-Month -->
         <div class="sgp-price-card">
           <div class="sgp-tier">Sprint</div>
           <div class="sgp-duration">3 Months</div>
@@ -913,7 +913,6 @@
             <li>Pilot case study development</li>
           </ul>
         </div>
-        <!-- 6-Month -->
         <div class="sgp-price-card sgp-featured">
           <div class="sgp-tier">Growth</div>
           <div class="sgp-duration">6 Months</div>
@@ -931,7 +930,6 @@
           </ul>
           <div class="sgp-savings">SAVE 20%</div>
         </div>
-        <!-- 1-Year -->
         <div class="sgp-price-card">
           <div class="sgp-tier">Partnership</div>
           <div class="sgp-duration">12 Months</div>
@@ -961,7 +959,7 @@
       <span class="sgp-badge sgp-badge-green">Included</span>
       <h2>On-Site Support<br>in Tulsa</h2>
       <div class="sgp-divider"></div>
-      <p class="sgp-body" style="text-align:center;margin:0 auto 20px;">
+      <p class="sgp-body" style="text-align:center !important;margin:0 auto 20px !important;">
         This isn't about replacing anything Gradient already does &mdash; it's about <strong>extending founder support</strong>, improving capital outcomes, and giving Gradient a stronger, more defensible capital story.
       </p>
       <div class="sgp-three-col">
@@ -991,95 +989,93 @@
         <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
         <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       </svg>
-      <h1 style="font-size:3.4rem;">Let's Build<br>This Together</h1>
-      <div class="sgp-divider" style="margin:16px auto;"></div>
-      <p class="sgp-subtitle" style="text-align:center;margin:0 auto 20px;">
+      <h1 style="font-size:3.4rem !important;">Let's Build<br>This Together</h1>
+      <div class="sgp-divider" style="margin:16px auto !important;"></div>
+      <p class="sgp-subtitle" style="text-align:center !important;margin:0 auto 20px !important;">
         A stronger capital story for Gradient.<br>
         Better outcomes for founders.<br>
         Impact you can prove.
       </p>
-      <p style="font-size:0.9rem;color:#AF8145;margin-top:20px;">
+      <p style="font-size:0.9rem !important;color:#AF8145 !important;margin-top:20px !important;">
         Ready to discuss a pilot or phased rollout?<br>
-        <strong style="color:#D57028;">Let's continue the conversation.</strong>
+        <strong style="color:#D57028 !important;">Let's continue the conversation.</strong>
       </p>
     </div>
   </div>
 
   <!-- Navigation -->
   <div class="sgp-nav">
-    <button class="sgp-nav-btn" id="sgpPrev" aria-label="Previous slide">&larr;</button>
+    <button class="sgp-nav-btn" onclick="sgpPrev()" aria-label="Previous slide">&larr;</button>
     <div class="sgp-dots" id="sgpDots"></div>
     <span class="sgp-counter" id="sgpCounter">1 / 12</span>
-    <button class="sgp-nav-btn" id="sgpNext" aria-label="Next slide">&rarr;</button>
+    <button class="sgp-nav-btn" onclick="sgpNext()" aria-label="Next slide">&rarr;</button>
   </div>
 
 </div>
 
 <script>
-(function() {
+var sgpCurrent = 0;
+var sgpTotal = 12;
+
+function sgpGo(idx) {
+  if (idx < 0 || idx >= sgpTotal || idx === sgpCurrent) return;
   var wrap = document.getElementById('sgpWrap');
   if (!wrap) return;
-
   var slides = wrap.querySelectorAll('.sgp-slide');
-  var total = slides.length;
-  var current = 0;
-  var dotsEl = document.getElementById('sgpDots');
-  var counterEl = document.getElementById('sgpCounter');
+  var dots = document.getElementById('sgpDots');
+  var counter = document.getElementById('sgpCounter');
 
-  // Build dots
-  for (var i = 0; i < total; i++) {
-    var dot = document.createElement('button');
-    dot.className = 'sgp-dot' + (i === 0 ? ' sgp-active' : '');
-    dot.setAttribute('data-idx', i);
-    dot.onclick = (function(idx) { return function() { go(idx); }; })(i);
-    dotsEl.appendChild(dot);
-  }
+  // Hide current
+  slides[sgpCurrent].classList.remove('sgp-active');
+  // Show next
+  slides[idx].classList.add('sgp-active');
 
-  function go(idx) {
-    if (idx < 0 || idx >= total || idx === current) return;
-    var dir = idx > current ? 1 : -1;
-    var cur = slides[current];
-    var nxt = slides[idx];
+  sgpCurrent = idx;
 
-    cur.classList.remove('sgp-active');
-    cur.style.transform = dir > 0 ? 'translateX(-60px)' : 'translateX(60px)';
-    cur.style.opacity = '0';
-
-    nxt.style.transform = dir > 0 ? 'translateX(60px)' : 'translateX(-60px)';
-    nxt.style.opacity = '0';
-
-    setTimeout(function() {
-      cur.style.transform = '';
-      cur.style.opacity = '';
-      nxt.classList.add('sgp-active');
-    }, 50);
-
-    current = idx;
-
-    var dots = dotsEl.querySelectorAll('.sgp-dot');
-    for (var d = 0; d < dots.length; d++) {
-      dots[d].classList.toggle('sgp-active', d === current);
+  // Update dots
+  if (dots) {
+    var dotEls = dots.querySelectorAll('.sgp-dot');
+    for (var d = 0; d < dotEls.length; d++) {
+      if (d === sgpCurrent) { dotEls[d].classList.add('sgp-on'); }
+      else { dotEls[d].classList.remove('sgp-on'); }
     }
-    counterEl.textContent = (current + 1) + ' / ' + total;
   }
 
-  document.getElementById('sgpNext').onclick = function() {
-    if (current < total - 1) go(current + 1);
-  };
-  document.getElementById('sgpPrev').onclick = function() {
-    if (current > 0) go(current - 1);
-  };
+  // Update counter
+  if (counter) { counter.textContent = (sgpCurrent + 1) + ' / ' + sgpTotal; }
 
+  // Scroll wrapper into view
+  wrap.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+}
+
+function sgpNext() { if (sgpCurrent < sgpTotal - 1) sgpGo(sgpCurrent + 1); }
+function sgpPrev() { if (sgpCurrent > 0) sgpGo(sgpCurrent - 1); }
+
+// Build dots on load
+(function() {
+  function sgpInit() {
+    var dots = document.getElementById('sgpDots');
+    if (!dots) return;
+    dots.innerHTML = '';
+    for (var i = 0; i < sgpTotal; i++) {
+      var dot = document.createElement('span');
+      dot.className = 'sgp-dot' + (i === 0 ? ' sgp-on' : '');
+      dot.setAttribute('onclick', 'sgpGo(' + i + ')');
+      dot.style.cursor = 'pointer';
+      dots.appendChild(dot);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', sgpInit);
+  } else {
+    sgpInit();
+  }
+
+  // Keyboard nav
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); if (current < total - 1) go(current + 1); }
-    else if (e.key === 'ArrowLeft') { e.preventDefault(); if (current > 0) go(current - 1); }
+    if (e.key === 'ArrowRight') { sgpNext(); }
+    else if (e.key === 'ArrowLeft') { sgpPrev(); }
   });
-
-  var tx = 0;
-  wrap.addEventListener('touchstart', function(e) { tx = e.changedTouches[0].screenX; }, {passive:true});
-  wrap.addEventListener('touchend', function(e) {
-    var diff = tx - e.changedTouches[0].screenX;
-    if (Math.abs(diff) > 50) { if (diff > 0 && current < total - 1) go(current + 1); else if (diff < 0 && current > 0) go(current - 1); }
-  }, {passive:true});
 })();
 </script>
