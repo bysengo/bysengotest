@@ -720,6 +720,10 @@
         <div class="st-option-label">$200,000+</div>
         <div class="st-option-desc">High-earning — may meet accredited investor income thresholds ($200K individual / $300K joint).</div>
       </div>
+      <div class="st-option" data-value="unsure">
+        <div class="st-option-label">I'd Rather Not Say / Not Sure</div>
+        <div class="st-option-desc">No problem — we'll show you a broad range of options across all income levels.</div>
+      </div>
     </div>
     <div class="st-nav">
       <button class="st-btn st-btn-back" onclick="goStep(-1)">Back</button>
@@ -752,6 +756,10 @@
         <div class="st-option-label">$1M+ net worth</div>
         <div class="st-option-desc">Meets the SEC net worth threshold for accredited investor status.</div>
       </div>
+      <div class="st-option" data-value="unsure">
+        <div class="st-option-label">I'm Not Sure / Prefer Not to Say</div>
+        <div class="st-option-desc">That's okay — we'll recommend a wide range of platforms suitable for different experience levels.</div>
+      </div>
     </div>
     <div class="st-nav">
       <button class="st-btn st-btn-back" onclick="goStep(-1)">Back</button>
@@ -775,6 +783,10 @@
       <div class="st-option" data-value="aggressive">
         <div class="st-option-label">Aggressive</div>
         <div class="st-option-desc">I understand most startups fail and I'm looking for high-risk, high-reward early-stage deals.</div>
+      </div>
+      <div class="st-option" data-value="unsure">
+        <div class="st-option-label">I'm Not Sure Yet</div>
+        <div class="st-option-desc">I'm still learning about risk in angel investing — show me a mix of options.</div>
       </div>
     </div>
     <div class="st-nav">
@@ -828,6 +840,10 @@
         <div class="st-option-label">Mix of Stages</div>
         <div class="st-option-desc">I want exposure across different stages for portfolio diversification.</div>
       </div>
+      <div class="st-option" data-value="unsure">
+        <div class="st-option-label">I'm Not Sure Yet</div>
+        <div class="st-option-desc">I don't know enough about company stages yet — show me everything.</div>
+      </div>
     </div>
     <div class="st-nav">
       <button class="st-btn st-btn-back" onclick="goStep(-1)">Back</button>
@@ -851,6 +867,10 @@
       <div class="st-option" data-value="active">
         <div class="st-option-label">Active / Hands-On</div>
         <div class="st-option-desc">I want to mentor, advise, or take advisory equity alongside investments.</div>
+      </div>
+      <div class="st-option" data-value="unsure">
+        <div class="st-option-label">I'm Not Sure Yet</div>
+        <div class="st-option-desc">I haven't decided how involved I want to be — show me all types of opportunities.</div>
       </div>
     </div>
     <div class="st-nav">
@@ -1216,6 +1236,11 @@
   function deriveBudget() {
     var nw = answers.networth;
     var inc = answers.income;
+    // If both are unsure, return null to signal broad matching
+    if (nw === 'unsure' && inc === 'unsure') return null;
+    // If one is unsure, derive from the other alone
+    if (inc === 'unsure') inc = null;
+    if (nw === 'unsure') nw = null;
     // Higher net worth or income → larger budget tier
     if (nw === '1m-plus' || inc === '200k-plus') return '100k-plus';
     if (nw === '500k-1m' || inc === '100k-200k') return '50k-100k';
@@ -1236,22 +1261,29 @@
     }
 
     // Budget match (derived from income + net worth)
-    if (p.budgets.indexOf(budget) !== -1) {
+    if (budget === null) {
+      // Unsure — give partial credit to all platforms
+      score += 4;
+    } else if (p.budgets.indexOf(budget) !== -1) {
       score += 8;
     }
 
-    // Experience bonus — new investors get points for educational platforms
-    if (answers.networth && answers.networth.indexOf('new') !== -1 && p.isEducational) {
+    // Experience bonus — new investors or unsure get points for educational platforms
+    if (p.isEducational && answers.networth && (answers.networth.indexOf('new') !== -1 || answers.networth === 'unsure')) {
       score += 3;
     }
 
-    // Risk match
-    if (p.risk.indexOf(answers.risk) !== -1) {
+    // Risk match — unsure gets partial credit
+    if (answers.risk === 'unsure') {
+      score += 3;
+    } else if (p.risk.indexOf(answers.risk) !== -1) {
       score += 6;
     }
 
-    // Stage match
-    if (p.stages.indexOf(answers.stage) !== -1) {
+    // Stage match — unsure gets partial credit
+    if (answers.stage === 'unsure') {
+      score += 3;
+    } else if (p.stages.indexOf(answers.stage) !== -1) {
       score += 5;
     }
 
@@ -1266,8 +1298,10 @@
       }
     }
 
-    // Involvement match
-    if (p.involvement.indexOf(answers.involvement) !== -1) {
+    // Involvement match — unsure gets partial credit
+    if (answers.involvement === 'unsure') {
+      score += 2;
+    } else if (p.involvement.indexOf(answers.involvement) !== -1) {
       score += 4;
     }
 
@@ -1309,11 +1343,11 @@
     // Build labels for profile
     var profileLabels = {
       accreditation: { 'accredited': 'Accredited Investor', 'non-accredited': 'Non-Accredited Investor', 'unsure': 'Accreditation TBD' },
-      income: { 'under-50k': 'Income: Under $50K', '50k-100k': 'Income: $50K–$100K', '100k-200k': 'Income: $100K–$200K', '200k-plus': 'Income: $200K+' },
-      networth: { 'under-100k-new': 'Net Worth: Under $100K (New)', 'under-100k-some': 'Net Worth: Under $100K (Experienced)', '100k-500k': 'Net Worth: $100K–$500K', '500k-1m': 'Net Worth: $500K–$1M', '1m-plus': 'Net Worth: $1M+' },
-      risk: { 'conservative': 'Conservative Risk', 'moderate': 'Moderate Risk', 'aggressive': 'Aggressive Risk' },
-      stage: { 'pre-seed': 'Pre-Seed Stage', 'seed': 'Seed Stage', 'series-a': 'Series A+', 'mixed': 'Mixed Stages' },
-      involvement: { 'passive': 'Passive Investor', 'semi-active': 'Semi-Active', 'active': 'Active / Hands-On' }
+      income: { 'under-50k': 'Income: Under $50K', '50k-100k': 'Income: $50K–$100K', '100k-200k': 'Income: $100K–$200K', '200k-plus': 'Income: $200K+', 'unsure': 'Income: Not Specified' },
+      networth: { 'under-100k-new': 'Net Worth: Under $100K (New)', 'under-100k-some': 'Net Worth: Under $100K (Experienced)', '100k-500k': 'Net Worth: $100K–$500K', '500k-1m': 'Net Worth: $500K–$1M', '1m-plus': 'Net Worth: $1M+', 'unsure': 'Net Worth: Not Specified' },
+      risk: { 'conservative': 'Conservative Risk', 'moderate': 'Moderate Risk', 'aggressive': 'Aggressive Risk', 'unsure': 'Risk Tolerance: Exploring' },
+      stage: { 'pre-seed': 'Pre-Seed Stage', 'seed': 'Seed Stage', 'series-a': 'Series A+', 'mixed': 'Mixed Stages', 'unsure': 'Stage: Exploring' },
+      involvement: { 'passive': 'Passive Investor', 'semi-active': 'Semi-Active', 'active': 'Active / Hands-On', 'unsure': 'Involvement: Exploring' }
     };
 
     var sectorLabels = {
