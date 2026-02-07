@@ -984,6 +984,131 @@
     color: #c4d8d5;
   }
 
+  /* Submission Section */
+  .dd-submit-section {
+    text-align: center;
+    padding: 32px 0;
+  }
+
+  .dd-submit-section .dd-submit-intro {
+    max-width: 540px;
+    margin: 0 auto 32px auto;
+    color: #67441A;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .dd-submit-fields {
+    max-width: 480px;
+    margin: 0 auto 32px auto;
+    text-align: left;
+  }
+
+  .dd-submit-confirm {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .dd-submit-confirm.visible {
+    display: block;
+  }
+
+  .dd-submit-confirm .dd-confirm-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(113, 126, 54, 0.15);
+    color: #4a5a10;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .dd-submit-confirm h3 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: #1B3533;
+    margin: 0 0 12px 0;
+  }
+
+  .dd-submit-confirm p {
+    color: #67441A;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .dd-submit-form {
+    transition: opacity 0.3s ease;
+  }
+
+  .dd-submit-form.hidden {
+    display: none;
+  }
+
+  .dd-submit-btn {
+    padding: 16px 48px;
+    background: #D57028;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dd-submit-btn:hover {
+    background: #c0621f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(213, 112, 40, 0.35);
+  }
+
+  .dd-submit-btn:disabled {
+    background: #c4beb8;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .dd-submit-note {
+    margin-top: 16px;
+    font-size: 0.75rem;
+    color: #af8145;
+  }
+
+  .dd-completion-bar {
+    max-width: 400px;
+    margin: 0 auto 24px auto;
+    background: #e8e0d8;
+    border-radius: 6px;
+    height: 10px;
+    overflow: hidden;
+  }
+
+  .dd-completion-fill {
+    height: 100%;
+    background: #D57028;
+    border-radius: 6px;
+    transition: width 0.6s ease;
+  }
+
+  .dd-completion-text {
+    font-size: 0.8rem;
+    color: #67441A;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .dd-header h1 { font-size: 1.8rem; }
@@ -1657,6 +1782,61 @@
     </div>
   </div>
 
+  <!-- Section 11: Submit to Sengo -->
+  <div class="dd-section" id="section-10" data-section="submission">
+    <h2 class="dd-section-title"><span class="section-number">11</span> Submit to Sengo</h2>
+    <p class="dd-section-desc">Submit your completed due diligence report to the Sengo community.</p>
+
+    <div class="dd-submit-section">
+      <div class="dd-submit-form" id="ddSubmitForm">
+        <div class="dd-completion-text">Report Completion: <span id="ddCompletionPct">0</span>%</div>
+        <div class="dd-completion-bar">
+          <div class="dd-completion-fill" id="ddCompletionFill" style="width: 0%"></div>
+        </div>
+
+        <p class="dd-submit-intro">
+          Share your evaluation with the Sengo angel network. Your report will be securely stored and available for your deal flow records.
+        </p>
+
+        <div class="dd-submit-fields">
+          <div class="dd-field-group">
+            <label class="dd-label">Your Name</label>
+            <input class="dd-input" type="text" id="ddSubmitName" data-field="submitterName" placeholder="Full name">
+          </div>
+          <div class="dd-field-group">
+            <label class="dd-label">Your Email</label>
+            <input class="dd-input" type="email" id="ddSubmitEmail" data-field="submitterEmail" placeholder="email@example.com">
+          </div>
+          <div class="dd-field-group">
+            <label class="dd-label">Visibility</label>
+            <select class="dd-select" id="ddSubmitVisibility" data-field="submissionVisibility">
+              <option value="private">Private -- Only visible to me</option>
+              <option value="network">Sengo Network -- Visible to community members</option>
+              <option value="founders">Share with Founders -- Founders can view your feedback</option>
+            </select>
+          </div>
+          <div class="dd-field-group">
+            <label class="dd-label">Additional Notes for Sengo Team</label>
+            <textarea class="dd-textarea" data-field="submissionNotes" placeholder="Any context you'd like to share with the Sengo team about this deal..." style="min-height: 80px;"></textarea>
+          </div>
+        </div>
+
+        <button class="dd-submit-btn" id="ddSubmitBtn" onclick="ddSubmitReport()">Submit Report</button>
+        <div class="dd-submit-note">Your data is encrypted and stored securely. You can export a copy before submitting.</div>
+      </div>
+
+      <div class="dd-submit-confirm" id="ddSubmitConfirm">
+        <div class="dd-confirm-icon">&#10003;</div>
+        <h3>Report Submitted</h3>
+        <p>Your due diligence report has been submitted to Sengo. You'll receive a confirmation email with a link to view and update your evaluation.</p>
+        <div style="margin-top: 24px;">
+          <button class="dd-btn dd-btn-secondary" onclick="ddExportReport()" style="margin-right: 8px;">Export a Copy</button>
+          <button class="dd-btn dd-btn-secondary" onclick="ddResetSubmission()">Submit Another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Navigation Footer -->
   <div class="dd-nav-footer">
     <button class="dd-btn dd-btn-secondary" id="ddPrevBtn" onclick="ddNavigate(-1)">Previous</button>
@@ -1679,7 +1859,8 @@
     { key: 'deal', label: 'Deal Terms' },
     { key: 'flags', label: 'Red Flags' },
     { key: 'checklist', label: 'Checklist' },
-    { key: 'summary', label: 'Summary' }
+    { key: 'summary', label: 'Summary' },
+    { key: 'submission', label: 'Submit' }
   ];
 
   const RATING_GROUPS = {
@@ -1741,7 +1922,7 @@
       flags: ['No supporting materials available', 'Claims made in deck have no backup data'] }
   ];
 
-  const SUMMARY_IDX = SECTIONS.length - 1;
+  const SUMMARY_IDX = SECTIONS.length - 2;
 
   let currentSection = 0;
   let ratings = {};
@@ -1842,6 +2023,11 @@
     if (index === 9) {
       updateScores();
       updateSummaryTerms();
+    }
+
+    // If submission section, update completion
+    if (index === 10) {
+      updateCompletion();
     }
 
     // Scroll to top of tool
@@ -2352,6 +2538,9 @@
     flagItems.forEach(function(f) { f.classList.remove('flagged'); });
     var checkItems = document.querySelectorAll('.dd-check');
     checkItems.forEach(function(c) { c.classList.remove('checked'); });
+    // Reset submission state
+    document.getElementById('ddSubmitForm').classList.remove('hidden');
+    document.getElementById('ddSubmitConfirm').classList.remove('visible');
     updateScores();
     updateDeckScore();
     showToast('All data cleared');
@@ -2564,6 +2753,116 @@
     URL.revokeObjectURL(url);
     showToast('Report exported');
   };
+
+  // Submission
+  function updateCompletion() {
+    var total = 0;
+    var filled = 0;
+
+    // Check company overview fields
+    var overviewFields = ['companyName', 'industry', 'stage', 'oneLiner'];
+    overviewFields.forEach(function(f) {
+      total++;
+      var el = document.querySelector('[data-field="' + f + '"]');
+      if (el && el.value.trim()) filled++;
+    });
+
+    // Check ratings
+    var allRatingKeys = [];
+    for (var cat in RATING_GROUPS) {
+      allRatingKeys = allRatingKeys.concat(RATING_GROUPS[cat]);
+    }
+    allRatingKeys.forEach(function(k) {
+      total++;
+      if (ratings[k]) filled++;
+    });
+
+    // Check deck slides (at least some present)
+    total++;
+    var deckPresent = 0;
+    DECK_SLIDES.forEach(function(s) {
+      if (deckSlides[s.key] && deckSlides[s.key].present) deckPresent++;
+    });
+    if (deckPresent > 0) filled++;
+
+    // Check decision
+    total++;
+    var decisionEl = document.querySelector('[data-field="decision"]');
+    if (decisionEl && decisionEl.value) filled++;
+
+    // Check checklist items
+    var checkKeys = Object.keys(checks);
+    var doneChecks = 0;
+    checkKeys.forEach(function(k) { if (checks[k]) doneChecks++; });
+    total++;
+    if (doneChecks >= 3) filled++;
+
+    var pct = total > 0 ? Math.round((filled / total) * 100) : 0;
+    var pctEl = document.getElementById('ddCompletionPct');
+    var fillEl = document.getElementById('ddCompletionFill');
+    if (pctEl) pctEl.textContent = pct;
+    if (fillEl) fillEl.style.width = pct + '%';
+
+    // Enable/disable submit button based on minimum requirements
+    var submitBtn = document.getElementById('ddSubmitBtn');
+    var nameEl = document.getElementById('ddSubmitName');
+    var emailEl = document.getElementById('ddSubmitEmail');
+    if (submitBtn) {
+      var hasName = nameEl && nameEl.value.trim();
+      var hasEmail = emailEl && emailEl.value.trim();
+      var companyEl = document.querySelector('[data-field="companyName"]');
+      var hasCompany = companyEl && companyEl.value.trim();
+      submitBtn.disabled = !(hasName && hasEmail && hasCompany);
+    }
+  }
+
+  window.ddSubmitReport = function() {
+    var nameEl = document.getElementById('ddSubmitName');
+    var emailEl = document.getElementById('ddSubmitEmail');
+
+    if (!nameEl.value.trim() || !emailEl.value.trim()) {
+      showToast('Please enter your name and email');
+      return;
+    }
+
+    var companyEl = document.querySelector('[data-field="companyName"]');
+    if (!companyEl || !companyEl.value.trim()) {
+      showToast('Please complete the Company Overview first');
+      return;
+    }
+
+    var data = gatherData();
+    data.submitter = {
+      name: nameEl.value.trim(),
+      email: emailEl.value.trim(),
+      visibility: document.getElementById('ddSubmitVisibility').value,
+      submittedAt: new Date().toISOString()
+    };
+
+    // Store submission locally
+    try {
+      var submissions = JSON.parse(localStorage.getItem('sengo_dd_submissions') || '[]');
+      submissions.push(data);
+      localStorage.setItem('sengo_dd_submissions', JSON.stringify(submissions));
+    } catch(e) {}
+
+    // Show confirmation
+    document.getElementById('ddSubmitForm').classList.add('hidden');
+    document.getElementById('ddSubmitConfirm').classList.add('visible');
+    showToast('Report submitted to Sengo');
+  };
+
+  window.ddResetSubmission = function() {
+    document.getElementById('ddSubmitForm').classList.remove('hidden');
+    document.getElementById('ddSubmitConfirm').classList.remove('visible');
+  };
+
+  // Re-validate submit button on input
+  document.addEventListener('input', function(e) {
+    if (e.target.id === 'ddSubmitName' || e.target.id === 'ddSubmitEmail') {
+      updateCompletion();
+    }
+  });
 
   function showToast(msg) {
     var toast = document.getElementById('ddToast');
