@@ -1135,8 +1135,20 @@
   -->
   <script id="embeddedData" type="application/json"></script>
   <script id="liveConfig" type="application/json"></script>
-  <!-- Load external config (token stored separately) -->
-  <script src="config.js" onerror="console.log('No config.js found — showing setup screen')"></script>
+
+  <!--
+    ═══════════════════════════════════════════════════════════
+    YOUR CONFIG — paste your token below and save the file.
+    The dashboard will auto-connect on load. No setup screen.
+    ═══════════════════════════════════════════════════════════
+  -->
+  <script>
+    window.SENGO_CONFIG = {
+      token: "",      // ← PASTE YOUR TOKEN HERE (starts with "pat")
+      baseId: "",     // ← Optional: leave empty to auto-discover
+      tableId: ""     // ← Optional: leave empty to auto-discover
+    };
+  </script>
 
   <!-- ─── Setup Screen ────────────────────────────────────── -->
   <div class="setup-screen" id="setupScreen">
