@@ -639,6 +639,351 @@
     opacity: 1;
   }
 
+  /* Deck Upload Zone */
+  .dd-upload-zone {
+    border: 3px dashed #d0c8be;
+    border-radius: 16px;
+    padding: 48px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #faf8f5;
+    margin-bottom: 28px;
+  }
+
+  .dd-upload-zone:hover, .dd-upload-zone.dragover {
+    border-color: #D57028;
+    background: #fdf6f0;
+  }
+
+  .dd-upload-zone.has-file {
+    border-style: solid;
+    border-color: #1B3533;
+    background: #f0f7f6;
+    padding: 24px;
+  }
+
+  .dd-upload-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .dd-upload-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1B3533;
+    margin-bottom: 4px;
+  }
+
+  .dd-upload-hint {
+    font-size: 0.8rem;
+    color: #AF8145;
+  }
+
+  .dd-file-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .dd-file-name {
+    font-weight: 700;
+    color: #1B3533;
+    font-size: 1rem;
+  }
+
+  .dd-file-remove {
+    background: none;
+    border: 1px solid #d0c8be;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    color: #67441A;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .dd-file-remove:hover { border-color: #d94f3c; color: #d94f3c; }
+
+  /* Deck Slide Cards */
+  .dd-slide-card {
+    border: 2px solid #e8e0d8;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .dd-slide-card.present {
+    border-color: #1B3533;
+  }
+
+  .dd-slide-card.missing {
+    border-color: #e8c8b0;
+    background: #fffbf7;
+  }
+
+  .dd-slide-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: #faf8f5;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .dd-slide-header:hover { background: #f3ede7; }
+
+  .dd-slide-card.present .dd-slide-header { background: #f0f7f6; }
+
+  .dd-slide-toggle {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #d0c8be;
+    border-radius: 5px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    background: #fff;
+  }
+
+  .dd-slide-card.present .dd-slide-toggle {
+    background: #1B3533;
+    border-color: #1B3533;
+  }
+
+  .dd-slide-card.present .dd-slide-toggle::after {
+    content: '';
+    width: 6px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-top: -2px;
+  }
+
+  .dd-slide-info { flex: 1; }
+
+  .dd-slide-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1B3533;
+  }
+
+  .dd-slide-desc {
+    font-size: 0.75rem;
+    color: #AF8145;
+    margin-top: 2px;
+  }
+
+  .dd-slide-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dd-slide-badge.present-badge {
+    background: rgba(27,53,51,0.1);
+    color: #1B3533;
+  }
+
+  .dd-slide-badge.missing-badge {
+    background: rgba(217,79,60,0.1);
+    color: #d94f3c;
+  }
+
+  .dd-slide-body {
+    display: none;
+    padding: 16px 18px;
+    border-top: 1px solid #e8e0d8;
+  }
+
+  .dd-slide-card.expanded .dd-slide-body { display: block; }
+
+  .dd-slide-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .dd-slide-rating-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #67441A;
+    text-transform: uppercase;
+    min-width: 60px;
+  }
+
+  /* AI Assist Panel */
+  .dd-ai-panel {
+    background: linear-gradient(135deg, #1B3533, #2d524f);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 12px;
+    display: none;
+    animation: ddFadeIn 0.3s ease;
+  }
+
+  .dd-ai-panel.visible { display: block; }
+
+  .dd-ai-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .dd-ai-panel-header span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #D57028;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dd-ai-section {
+    margin-bottom: 14px;
+  }
+
+  .dd-ai-section:last-child { margin-bottom: 0; }
+
+  .dd-ai-section h4 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #c4d8d5;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 6px 0;
+  }
+
+  .dd-ai-section p, .dd-ai-section li {
+    font-size: 0.82rem;
+    color: #e8e0d8;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .dd-ai-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dd-ai-section li {
+    padding: 3px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .dd-ai-section li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: #D57028;
+    font-weight: 700;
+  }
+
+  .dd-ai-btn {
+    padding: 8px 16px;
+    border: 1px solid #D57028;
+    background: transparent;
+    color: #D57028;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+  }
+
+  .dd-ai-btn:hover {
+    background: #D57028;
+    color: #fff;
+  }
+
+  .dd-ai-btn.active {
+    background: #D57028;
+    color: #fff;
+  }
+
+  /* Deck Score Summary */
+  .dd-deck-score-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, #1B3533, #2d524f);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    color: #F3EDE7;
+  }
+
+  .dd-deck-score-num {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #D57028;
+    line-height: 1;
+  }
+
+  .dd-deck-score-detail {
+    flex: 1;
+  }
+
+  .dd-deck-score-detail .label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #c4d8d5;
+    margin-bottom: 6px;
+  }
+
+  .dd-deck-meter {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .dd-deck-meter-fill {
+    height: 100%;
+    background: #D57028;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+  }
+
+  .dd-deck-stats {
+    display: flex;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .dd-deck-stat-val {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #D57028;
+  }
+
+  .dd-deck-stat-lbl {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #c4d8d5;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .dd-header h1 { font-size: 1.8rem; }
@@ -652,6 +997,8 @@
     .dd-btn { width: 100%; text-align: center; }
     .dd-rating-scale { flex-wrap: wrap; }
     .dd-nav-footer { flex-direction: column; gap: 12px; }
+    .dd-deck-score-bar { flex-direction: column; text-align: center; }
+    .dd-deck-stats { justify-content: center; }
   }
 </style>
 
@@ -737,9 +1084,45 @@
     </div>
   </div>
 
-  <!-- Section 2: Team -->
-  <div class="dd-section" id="section-1" data-section="team">
-    <h2 class="dd-section-title"><span class="section-number">2</span> Team Assessment</h2>
+  <!-- Section 2: Deck Review -->
+  <div class="dd-section" id="section-1" data-section="deck">
+    <h2 class="dd-section-title"><span class="section-number">2</span> Deck Review</h2>
+    <p class="dd-section-desc">Upload the pitch deck and score each slide. Use AI Assist for guided review prompts on any slide.</p>
+
+    <!-- Upload Zone -->
+    <div class="dd-upload-zone" id="ddUploadZone">
+      <span class="dd-upload-icon">&#128196;</span>
+      <div class="dd-upload-text">Drop pitch deck here or click to upload</div>
+      <div class="dd-upload-hint">PDF, PPT, PPTX, or images accepted</div>
+    </div>
+    <input type="file" id="ddFileInput" accept=".pdf,.ppt,.pptx,.png,.jpg,.jpeg" style="display:none;">
+
+    <!-- Deck Score Bar -->
+    <div class="dd-deck-score-bar" id="ddDeckScoreBar" style="display:none;">
+      <div class="dd-deck-score-num" id="ddDeckScoreNum">0</div>
+      <div class="dd-deck-score-detail">
+        <div class="label">Deck Completeness & Quality</div>
+        <div class="dd-deck-meter"><div class="dd-deck-meter-fill" id="ddDeckMeterFill" style="width:0%"></div></div>
+      </div>
+      <div class="dd-deck-stats">
+        <div><div class="dd-deck-stat-val" id="ddSlidesPresent">0</div><div class="dd-deck-stat-lbl">Present</div></div>
+        <div><div class="dd-deck-stat-val" id="ddSlidesMissing">0</div><div class="dd-deck-stat-lbl">Missing</div></div>
+        <div><div class="dd-deck-stat-val" id="ddSlidesAvgQ">--</div><div class="dd-deck-stat-lbl">Avg Quality</div></div>
+      </div>
+    </div>
+
+    <!-- Slide Cards -->
+    <div id="ddSlideCards"></div>
+
+    <div class="dd-field-group" style="margin-top: 20px;">
+      <label class="dd-label">Overall Deck Notes</label>
+      <textarea class="dd-textarea" data-field="deckNotes" placeholder="General impressions of the deck: storytelling quality, design, clarity, what stood out, what was missing..." style="min-height: 100px;"></textarea>
+    </div>
+  </div>
+
+  <!-- Section 3: Team -->
+  <div class="dd-section" id="section-2" data-section="team">
+    <h2 class="dd-section-title"><span class="section-number">3</span> Team Assessment</h2>
     <p class="dd-section-desc">The team is often the most important factor at the early stage. Evaluate the founders and key hires.</p>
 
     <div class="dd-rating-group">
@@ -783,9 +1166,9 @@
     </div>
   </div>
 
-  <!-- Section 3: Market -->
-  <div class="dd-section" id="section-2" data-section="market">
-    <h2 class="dd-section-title"><span class="section-number">3</span> Market Opportunity</h2>
+  <!-- Section 4: Market -->
+  <div class="dd-section" id="section-3" data-section="market">
+    <h2 class="dd-section-title"><span class="section-number">4</span> Market Opportunity</h2>
     <p class="dd-section-desc">Assess the size, growth, and dynamics of the target market.</p>
 
     <div class="dd-field-row">
@@ -829,9 +1212,9 @@
     </div>
   </div>
 
-  <!-- Section 4: Product -->
-  <div class="dd-section" id="section-3" data-section="product">
-    <h2 class="dd-section-title"><span class="section-number">4</span> Product & Technology</h2>
+  <!-- Section 5: Product -->
+  <div class="dd-section" id="section-4" data-section="product">
+    <h2 class="dd-section-title"><span class="section-number">5</span> Product & Technology</h2>
     <p class="dd-section-desc">Evaluate the product's current state, defensibility, and technical foundation.</p>
 
     <div class="dd-field-group">
@@ -879,9 +1262,9 @@
     </div>
   </div>
 
-  <!-- Section 5: Traction -->
-  <div class="dd-section" id="section-4" data-section="traction">
-    <h2 class="dd-section-title"><span class="section-number">5</span> Traction & Metrics</h2>
+  <!-- Section 6: Traction -->
+  <div class="dd-section" id="section-5" data-section="traction">
+    <h2 class="dd-section-title"><span class="section-number">6</span> Traction & Metrics</h2>
     <p class="dd-section-desc">Hard numbers matter. Evaluate the evidence of product-market fit.</p>
 
     <div class="dd-field-row">
@@ -934,9 +1317,9 @@
     </div>
   </div>
 
-  <!-- Section 6: Financials & Deal Terms -->
-  <div class="dd-section" id="section-5" data-section="deal">
-    <h2 class="dd-section-title"><span class="section-number">6</span> Financials & Deal Terms</h2>
+  <!-- Section 7: Financials & Deal Terms -->
+  <div class="dd-section" id="section-6" data-section="deal">
+    <h2 class="dd-section-title"><span class="section-number">7</span> Financials & Deal Terms</h2>
     <p class="dd-section-desc">Evaluate the financial health and proposed investment terms.</p>
 
     <div class="dd-field-row">
@@ -1007,9 +1390,9 @@
     </div>
   </div>
 
-  <!-- Section 7: Red Flags -->
-  <div class="dd-section" id="section-6" data-section="flags">
-    <h2 class="dd-section-title"><span class="section-number">7</span> Red Flags & Risks</h2>
+  <!-- Section 8: Red Flags -->
+  <div class="dd-section" id="section-7" data-section="flags">
+    <h2 class="dd-section-title"><span class="section-number">8</span> Red Flags & Risks</h2>
     <p class="dd-section-desc">Click any item that applies. Be honest -- identifying risks early protects your capital.</p>
 
     <div class="dd-flag-group">
@@ -1116,9 +1499,9 @@
     </div>
   </div>
 
-  <!-- Section 8: Due Diligence Checklist -->
-  <div class="dd-section" id="section-7" data-section="checklist">
-    <h2 class="dd-section-title"><span class="section-number">8</span> Due Diligence Checklist</h2>
+  <!-- Section 9: Due Diligence Checklist -->
+  <div class="dd-section" id="section-8" data-section="checklist">
+    <h2 class="dd-section-title"><span class="section-number">9</span> Due Diligence Checklist</h2>
     <p class="dd-section-desc">Track the documents and references you've reviewed. Click to mark as complete.</p>
 
     <ul class="dd-checklist" id="ddChecklist">
@@ -1173,9 +1556,9 @@
     </ul>
   </div>
 
-  <!-- Section 9: Summary & Decision -->
-  <div class="dd-section" id="section-8" data-section="summary">
-    <h2 class="dd-section-title"><span class="section-number">9</span> Summary & Decision</h2>
+  <!-- Section 10: Summary & Decision -->
+  <div class="dd-section" id="section-9" data-section="summary">
+    <h2 class="dd-section-title"><span class="section-number">10</span> Summary & Decision</h2>
     <p class="dd-section-desc">Your overall assessment based on all the data gathered.</p>
 
     <!-- Score Dashboard -->
@@ -1210,6 +1593,11 @@
         <div class="dd-score-value" id="dealScore">--</div>
         <div class="dd-score-label">Deal Terms</div>
         <div class="dd-score-meter"><div class="dd-score-fill" id="dealFill" style="width: 0%"></div></div>
+      </div>
+      <div class="dd-score-card">
+        <div class="dd-score-value" id="deckScoreSummary">--</div>
+        <div class="dd-score-label">Deck Score</div>
+        <div class="dd-score-meter"><div class="dd-score-fill" id="deckFill" style="width: 0%"></div></div>
       </div>
       <div class="dd-score-card">
         <div class="dd-score-value" id="flagCount">0</div>
@@ -1283,6 +1671,7 @@
 (function() {
   const SECTIONS = [
     { key: 'overview', label: 'Overview' },
+    { key: 'deck', label: 'Deck Review' },
     { key: 'team', label: 'Team' },
     { key: 'market', label: 'Market' },
     { key: 'product', label: 'Product' },
@@ -1301,16 +1690,73 @@
     deal: ['valuationFairness', 'termsFairness']
   };
 
+  const DECK_SLIDES = [
+    { key: 'cover', name: 'Cover / Title Slide', desc: 'Company name, tagline, contact info',
+      good: 'Clean design with a compelling one-liner that instantly communicates the value proposition. Includes logo, founder name, and contact info.',
+      questions: ['Does the tagline clearly communicate what the company does?', 'Is the branding professional and memorable?', 'Would you understand the business from this slide alone?'],
+      flags: ['Generic or vague tagline', 'No contact information', 'Unprofessional design or typos'] },
+    { key: 'problem', name: 'Problem Statement', desc: 'The pain point being solved',
+      good: 'Clearly articulates a specific, painful problem with data or stories. Makes you feel the urgency. Quantifies the cost of the status quo.',
+      questions: ['Is the problem real and validated, or hypothetical?', 'How painful is this problem -- painkiller or vitamin?', 'Who specifically has this problem and how many of them are there?', 'What are people doing today to solve this?'],
+      flags: ['Problem is too vague or broad', 'No evidence the problem actually exists', 'Solution looking for a problem'] },
+    { key: 'solution', name: 'Solution', desc: 'How the product solves the problem',
+      good: 'Simple, clear explanation of the product. Shows the key insight or unique approach. Demonstrates why this solution is 10x better than alternatives.',
+      questions: ['Is the solution clearly connected to the problem?', 'What is the unique insight or approach?', 'Why is this 10x better than existing solutions?', 'Can you explain the solution in one sentence?'],
+      flags: ['Solution is overly complex or confusing', 'Not clearly connected to the stated problem', 'Too many features without focus'] },
+    { key: 'market', name: 'Market Opportunity', desc: 'TAM, SAM, SOM analysis',
+      good: 'Bottom-up market sizing (not just top-down). Shows clear path from SOM to SAM. Identifies specific market trends and tailwinds driving growth.',
+      questions: ['Is the TAM/SAM/SOM analysis bottom-up or just top-down?', 'What market trends support this timing?', 'Is the market growing? At what rate?', 'How did they arrive at these numbers?'],
+      flags: ['Only top-down sizing ("1% of a $X billion market")', 'Market size seems inflated or unrealistic', 'No discussion of market trends or timing'] },
+    { key: 'businessModel', name: 'Business Model', desc: 'How the company makes money',
+      good: 'Clear revenue model with pricing. Shows path to strong unit economics. Multiple revenue streams or clear expansion potential.',
+      questions: ['Is the pricing model validated with real customers?', 'What are the gross margins?', 'Is this a recurring or one-time revenue model?', 'How does revenue scale with the customer base?'],
+      flags: ['Revenue model is vague or "TBD"', 'Pricing not validated with real customers', 'No path to profitability discussed'] },
+    { key: 'traction', name: 'Traction / Metrics', desc: 'Key growth metrics and milestones',
+      good: 'Shows clear growth trajectory with specific numbers. Includes revenue, users, engagement, and retention data. Highlights key milestones achieved.',
+      questions: ['Are the growth numbers real or projected?', 'What is the month-over-month growth rate?', 'What does retention/churn look like?', 'Are there any vanity metrics being highlighted over meaningful ones?'],
+      flags: ['Only showing vanity metrics (downloads, signups without engagement)', 'No revenue or very early with high burn', 'Flat or declining growth hidden by cumulative charts'] },
+    { key: 'competition', name: 'Competitive Landscape', desc: 'Competitors and differentiation',
+      good: 'Honest assessment of the competitive landscape. Clear differentiation on axes that matter to customers. Shows awareness of indirect competitors too.',
+      questions: ['Is the competitive analysis honest or are they ignoring key players?', 'Are the differentiation axes meaningful to customers?', 'What happens if a large incumbent enters this space?', 'What is the moat that keeps competitors out?'],
+      flags: ['Claims "no competition"', '2x2 matrix with self in top-right corner only', 'Ignores obvious competitors or big tech risk'] },
+    { key: 'teamSlide', name: 'Team', desc: 'Founders and key team members',
+      good: 'Shows relevant experience and domain expertise. Highlights prior exits, relevant companies, or unique qualifications. Shows team completeness.',
+      questions: ['Do the founders have domain expertise in this space?', 'Have they worked together before?', 'Are there critical skill gaps on the team?', 'What is their unfair advantage in building this?'],
+      flags: ['No relevant domain experience', 'Solo non-technical founder for a tech product', 'Key roles unfilled with no plan to hire'] },
+    { key: 'financials', name: 'Financial Projections', desc: 'Revenue forecasts and key assumptions',
+      good: 'Realistic 3-5 year projections with clearly stated assumptions. Shows path to profitability. Includes key drivers and sensitivity analysis.',
+      questions: ['What are the key assumptions behind the projections?', 'Are the growth assumptions realistic given current traction?', 'When does the company reach profitability?', 'How sensitive are projections to key assumptions?'],
+      flags: ['Hockey stick projections with no justification', 'Assumes unrealistic growth rates (100x in 2 years)', 'No explanation of underlying assumptions'] },
+    { key: 'ask', name: 'The Ask / Use of Funds', desc: 'How much they are raising and how they will use it',
+      good: 'Clear amount with specific allocation. Shows what milestones the funding will achieve. Demonstrates capital efficiency and a plan to reach the next round.',
+      questions: ['What specific milestones will this funding achieve?', 'What is the runway at current and projected burn?', 'How does this get them to the next raise or profitability?', 'Is the allocation reasonable (too much on one area)?'],
+      flags: ['Vague use of funds ("growth and development")', 'No clear milestones tied to the raise', 'Raise amount seems too small or too large for the stage'] },
+    { key: 'vision', name: 'Vision / Roadmap', desc: 'Long-term vision and product roadmap',
+      good: 'Compelling long-term vision that shows a big outcome. Clear near-term roadmap with achievable milestones. Shows how small wins build toward the vision.',
+      questions: ['Is the vision inspiring but also grounded in reality?', 'Is the near-term roadmap achievable?', 'Does the roadmap align with the use of funds?', 'What does success look like in 5-10 years?'],
+      flags: ['Vision is too grandiose without near-term grounding', 'No clear roadmap or next steps', 'Roadmap is unrealistically ambitious for the resources available'] },
+    { key: 'appendix', name: 'Appendix / Backup', desc: 'Additional data, testimonials, technical details',
+      good: 'Includes detailed financials, customer testimonials, technical architecture, or additional market data. Shows depth of preparation.',
+      questions: ['Are there customer testimonials or case studies?', 'Is there additional market data to support claims?', 'Are technical details available for deeper dives?'],
+      flags: ['No supporting materials available', 'Claims made in deck have no backup data'] }
+  ];
+
+  const SUMMARY_IDX = SECTIONS.length - 1;
+
   let currentSection = 0;
   let ratings = {};
   let flags = {};
   let checks = {};
+  let deckSlides = {};
+  let deckFile = null;
 
   // Initialize
   function init() {
     buildProgressBar();
     buildSectionNav();
     buildRatingScales();
+    buildDeckSlideCards();
+    initDeckUpload();
     showSection(0);
     attachAutoSave();
   }
@@ -1393,7 +1839,7 @@
     }
 
     // If summary section, update scores
-    if (index === 8) {
+    if (index === 9) {
       updateScores();
       updateSummaryTerms();
     }
@@ -1514,9 +1960,270 @@
     });
   }
 
+  // === DECK REVIEW FUNCTIONS ===
+
+  function buildDeckSlideCards() {
+    var container = document.getElementById('ddSlideCards');
+    if (!container) return;
+    DECK_SLIDES.forEach(function(slide) {
+      deckSlides[slide.key] = { present: false, quality: 0, note: '' };
+      var card = document.createElement('div');
+      card.className = 'dd-slide-card';
+      card.id = 'slide-' + slide.key;
+      card.innerHTML =
+        '<div class="dd-slide-header" onclick="ddToggleSlideCard(\'' + slide.key + '\')">' +
+          '<div class="dd-slide-toggle"></div>' +
+          '<div class="dd-slide-info">' +
+            '<div class="dd-slide-name">' + slide.name + '</div>' +
+            '<div class="dd-slide-desc">' + slide.desc + '</div>' +
+          '</div>' +
+          '<span class="dd-slide-badge missing-badge" id="badge-' + slide.key + '">Missing</span>' +
+        '</div>' +
+        '<div class="dd-slide-body">' +
+          '<div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">' +
+            '<button class="dd-btn dd-btn-secondary" style="padding:8px 14px;font-size:0.75rem;" onclick="event.stopPropagation();ddMarkSlidePresent(\'' + slide.key + '\')" id="presentBtn-' + slide.key + '">Mark as Present</button>' +
+            '<button class="dd-ai-btn" onclick="event.stopPropagation();ddToggleAiAssist(\'' + slide.key + '\')" id="aiBtn-' + slide.key + '">AI Assist</button>' +
+          '</div>' +
+          '<div id="qualityRow-' + slide.key + '" style="display:none;">' +
+            '<div class="dd-slide-rating">' +
+              '<span class="dd-slide-rating-label">Quality</span>' +
+              '<div class="dd-rating-scale" id="deckRating-' + slide.key + '"></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="dd-field-group" style="margin-bottom:0;">' +
+            '<textarea class="dd-textarea" data-field="deckNote_' + slide.key + '" placeholder="Your notes on this slide..." style="min-height:50px;font-size:0.85rem;"></textarea>' +
+          '</div>' +
+          '<div class="dd-ai-panel" id="aiPanel-' + slide.key + '"></div>' +
+        '</div>';
+      container.appendChild(card);
+
+      // Build quality rating buttons
+      var ratingContainer = document.getElementById('deckRating-' + slide.key);
+      for (var i = 1; i <= 5; i++) {
+        var btn = document.createElement('button');
+        btn.className = 'dd-rating-btn';
+        btn.textContent = i;
+        btn.setAttribute('data-value', i);
+        btn.style.width = '34px';
+        btn.style.height = '34px';
+        btn.style.fontSize = '0.8rem';
+        (function(k, v) {
+          btn.onclick = function(e) { e.stopPropagation(); ddSetSlideQuality(k, v); };
+        })(slide.key, i);
+        ratingContainer.appendChild(btn);
+      }
+    });
+  }
+
+  function initDeckUpload() {
+    var zone = document.getElementById('ddUploadZone');
+    var input = document.getElementById('ddFileInput');
+    if (!zone || !input) return;
+
+    zone.onclick = function() { input.click(); };
+    input.onchange = function() {
+      if (input.files && input.files[0]) handleDeckFile(input.files[0]);
+    };
+    zone.ondragover = function(e) { e.preventDefault(); zone.classList.add('dragover'); };
+    zone.ondragleave = function() { zone.classList.remove('dragover'); };
+    zone.ondrop = function(e) {
+      e.preventDefault();
+      zone.classList.remove('dragover');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) handleDeckFile(e.dataTransfer.files[0]);
+    };
+  }
+
+  function handleDeckFile(file) {
+    deckFile = file;
+    var zone = document.getElementById('ddUploadZone');
+    zone.classList.add('has-file');
+    zone.innerHTML =
+      '<div class="dd-file-info">' +
+        '<span style="font-size:1.5rem;">&#128196;</span>' +
+        '<span class="dd-file-name">' + escapeHtml(file.name) + '</span>' +
+        '<span style="color:#AF8145;font-size:0.8rem;">(' + (file.size / 1024).toFixed(0) + ' KB)</span>' +
+        '<button class="dd-file-remove" onclick="event.stopPropagation();ddRemoveDeckFile()">Remove</button>' +
+      '</div>';
+    showToast('Deck uploaded: ' + file.name);
+    document.getElementById('ddDeckScoreBar').style.display = 'flex';
+  }
+
+  function escapeHtml(text) {
+    var d = document.createElement('div');
+    d.textContent = text;
+    return d.innerHTML;
+  }
+
+  window.ddRemoveDeckFile = function() {
+    deckFile = null;
+    var zone = document.getElementById('ddUploadZone');
+    zone.classList.remove('has-file');
+    zone.innerHTML =
+      '<span class="dd-upload-icon">&#128196;</span>' +
+      '<div class="dd-upload-text">Drop pitch deck here or click to upload</div>' +
+      '<div class="dd-upload-hint">PDF, PPT, PPTX, or images accepted</div>';
+    document.getElementById('ddFileInput').value = '';
+  };
+
+  window.ddToggleSlideCard = function(key) {
+    var card = document.getElementById('slide-' + key);
+    card.classList.toggle('expanded');
+  };
+
+  window.ddMarkSlidePresent = function(key) {
+    var isPresent = !deckSlides[key].present;
+    deckSlides[key].present = isPresent;
+    var card = document.getElementById('slide-' + key);
+    var badge = document.getElementById('badge-' + key);
+    var qualityRow = document.getElementById('qualityRow-' + key);
+    var btn = document.getElementById('presentBtn-' + key);
+
+    card.classList.toggle('present', isPresent);
+    card.classList.toggle('missing', !isPresent);
+    badge.className = 'dd-slide-badge ' + (isPresent ? 'present-badge' : 'missing-badge');
+    badge.textContent = isPresent ? 'Present' : 'Missing';
+    qualityRow.style.display = isPresent ? 'block' : 'none';
+    btn.textContent = isPresent ? 'Mark as Missing' : 'Mark as Present';
+
+    if (!isPresent) {
+      deckSlides[key].quality = 0;
+      var btns = document.getElementById('deckRating-' + key).querySelectorAll('.dd-rating-btn');
+      btns.forEach(function(b) { b.classList.remove('selected'); });
+    }
+
+    document.getElementById('ddDeckScoreBar').style.display = 'flex';
+    updateDeckScore();
+  };
+
+  function ddSetSlideQuality(key, value) {
+    deckSlides[key].quality = value;
+    var btns = document.getElementById('deckRating-' + key).querySelectorAll('.dd-rating-btn');
+    btns.forEach(function(b) {
+      b.classList.toggle('selected', parseInt(b.getAttribute('data-value')) <= value);
+    });
+    updateDeckScore();
+  }
+
+  window.ddToggleAiAssist = function(key) {
+    var panel = document.getElementById('aiPanel-' + key);
+    var btn = document.getElementById('aiBtn-' + key);
+    var isVisible = panel.classList.contains('visible');
+
+    if (isVisible) {
+      panel.classList.remove('visible');
+      btn.classList.remove('active');
+      return;
+    }
+
+    var slide = DECK_SLIDES.find(function(s) { return s.key === key; });
+    if (!slide) return;
+
+    var quality = deckSlides[key].quality;
+    var isPresent = deckSlides[key].present;
+
+    var html = '<div class="dd-ai-panel-header"><span>AI Review Assistant -- ' + escapeHtml(slide.name) + '</span></div>';
+
+    if (!isPresent) {
+      html += '<div class="dd-ai-section"><h4>Missing Slide Alert</h4>';
+      html += '<p>This slide is not present in the deck. ' + getMissingSlideAdvice(key) + '</p></div>';
+    }
+
+    html += '<div class="dd-ai-section"><h4>What Good Looks Like</h4><p>' + escapeHtml(slide.good) + '</p></div>';
+
+    html += '<div class="dd-ai-section"><h4>Questions to Ask the Founder</h4><ul>';
+    slide.questions.forEach(function(q) { html += '<li>' + escapeHtml(q) + '</li>'; });
+    html += '</ul></div>';
+
+    html += '<div class="dd-ai-section"><h4>Red Flags to Watch For</h4><ul>';
+    slide.flags.forEach(function(f) { html += '<li>' + escapeHtml(f) + '</li>'; });
+    html += '</ul></div>';
+
+    if (isPresent && quality > 0) {
+      html += '<div class="dd-ai-section"><h4>Score-Based Guidance</h4><p>' + getScoreGuidance(key, quality) + '</p></div>';
+    }
+
+    panel.innerHTML = html;
+    panel.classList.add('visible');
+    btn.classList.add('active');
+  };
+
+  function getMissingSlideAdvice(key) {
+    var advice = {
+      cover: 'A missing cover slide is unusual. The deck may be informal or a draft. Ask the founder for a polished version.',
+      problem: 'This is critical. Without a clear problem statement, the entire investment thesis is unclear. Request the founder explain the problem before proceeding.',
+      solution: 'A deck without a solution slide is a major gap. The founder needs to articulate how they solve the problem.',
+      market: 'No market sizing is a concern. It suggests the founder may not understand the opportunity scale. Ask them to walk you through their market analysis.',
+      businessModel: 'A missing business model is a significant red flag at any stage beyond idea. How does this company plan to make money?',
+      traction: 'If the company has any traction at all, it should be front and center. Missing traction data may indicate very early stage or lack of progress.',
+      competition: 'Claiming no competition is a red flag. Every company has competitors, even if they are indirect. Press the founder on this.',
+      teamSlide: 'Unusual to omit the team slide. Team is the #1 factor at early stage. Request background information on all founders.',
+      financials: 'For pre-seed this is sometimes acceptable, but for seed and beyond, financial projections are expected. Ask for their financial model.',
+      ask: 'Not stating the ask clearly makes it hard to evaluate the deal. Clarify the amount, terms, and use of funds directly.',
+      vision: 'Not critical but a strong vision slide shows ambition and long-term thinking. Ask the founder about their 5-year vision.',
+      appendix: 'Not having backup data is common, but strong founders come prepared with appendix slides for investor deep-dives.'
+    };
+    return advice[key] || 'Consider asking the founder why this was not included.';
+  }
+
+  function getScoreGuidance(key, quality) {
+    if (quality >= 4) {
+      return 'This slide scores well. Verify the claims independently -- strong decks can sometimes mask weak fundamentals. Cross-reference the data in this slide against your own research.';
+    } else if (quality >= 3) {
+      return 'This slide is adequate but not outstanding. There may be room for the founder to strengthen their narrative here. Note specific areas where more data or clarity would help.';
+    } else if (quality >= 2) {
+      return 'This slide needs work. The content may be vague, unsubstantiated, or poorly communicated. This is worth discussing with the founder to understand if the weakness is in presentation or substance.';
+    } else {
+      return 'This slide is weak and raises concerns. Either the founder lacks depth in this area, or they have not invested enough effort in communicating it. Dig deeper before proceeding.';
+    }
+  }
+
+  function updateDeckScore() {
+    var present = 0;
+    var missing = 0;
+    var qualitySum = 0;
+    var qualityCount = 0;
+
+    DECK_SLIDES.forEach(function(slide) {
+      var state = deckSlides[slide.key];
+      if (state && state.present) {
+        present++;
+        if (state.quality > 0) {
+          qualitySum += state.quality;
+          qualityCount++;
+        }
+      } else {
+        missing++;
+      }
+    });
+
+    var total = DECK_SLIDES.length;
+    var completeness = (present / total) * 50;
+    var avgQuality = qualityCount > 0 ? (qualitySum / qualityCount) : 0;
+    var qualityScore = avgQuality * 10;
+    var deckScore = Math.round(completeness + qualityScore);
+    var pct = (deckScore / 100) * 100;
+
+    document.getElementById('ddDeckScoreNum').textContent = deckScore;
+    document.getElementById('ddDeckMeterFill').style.width = pct + '%';
+    document.getElementById('ddSlidesPresent').textContent = present;
+    document.getElementById('ddSlidesMissing').textContent = missing;
+    document.getElementById('ddSlidesAvgQ').textContent = qualityCount > 0 ? avgQuality.toFixed(1) : '--';
+
+    // Update summary
+    var summaryEl = document.getElementById('deckScoreSummary');
+    var summaryFill = document.getElementById('deckFill');
+    if (present > 0 || qualityCount > 0) {
+      summaryEl.textContent = deckScore;
+      summaryFill.style.width = pct + '%';
+    } else {
+      summaryEl.textContent = '--';
+      summaryFill.style.width = '0%';
+    }
+  }
+
   // Gather all data
   function gatherData() {
-    var data = { ratings: ratings, flags: flags, checks: checks, fields: {} };
+    var data = { ratings: ratings, flags: flags, checks: checks, deckSlides: deckSlides, deckFileName: deckFile ? deckFile.name : '', fields: {} };
     var inputs = document.querySelectorAll('[data-field]');
     inputs.forEach(function(input) {
       data.fields[input.getAttribute('data-field')] = input.value;
@@ -1567,7 +2274,19 @@
         }
       }
     }
+    // Deck slides
+    if (data.deckSlides) {
+      deckSlides = data.deckSlides;
+      for (var dk in deckSlides) {
+        var ds = deckSlides[dk];
+        if (ds.present) {
+          window.ddMarkSlidePresent(dk);
+          if (ds.quality > 0) ddSetSlideQuality(dk, ds.quality);
+        }
+      }
+    }
     updateScores();
+    updateDeckScore();
   }
 
   // Save / Load / Clear
@@ -1606,6 +2325,25 @@
     ratings = {};
     flags = {};
     checks = {};
+    // Reset deck
+    DECK_SLIDES.forEach(function(slide) {
+      deckSlides[slide.key] = { present: false, quality: 0, note: '' };
+      var card = document.getElementById('slide-' + slide.key);
+      if (card) { card.classList.remove('present', 'missing', 'expanded'); }
+      var badge = document.getElementById('badge-' + slide.key);
+      if (badge) { badge.className = 'dd-slide-badge missing-badge'; badge.textContent = 'Missing'; }
+      var qualityRow = document.getElementById('qualityRow-' + slide.key);
+      if (qualityRow) qualityRow.style.display = 'none';
+      var presentBtn = document.getElementById('presentBtn-' + slide.key);
+      if (presentBtn) presentBtn.textContent = 'Mark as Present';
+      var aiPanel = document.getElementById('aiPanel-' + slide.key);
+      if (aiPanel) aiPanel.classList.remove('visible');
+      var aiBtn = document.getElementById('aiBtn-' + slide.key);
+      if (aiBtn) aiBtn.classList.remove('active');
+    });
+    window.ddRemoveDeckFile();
+    document.getElementById('ddDeckScoreBar').style.display = 'none';
+    // Reset form fields
     var inputs = document.querySelectorAll('.dd-input, .dd-textarea, .dd-select');
     inputs.forEach(function(input) { input.value = ''; });
     var ratingBtns = document.querySelectorAll('.dd-rating-btn');
@@ -1615,6 +2353,7 @@
     var checkItems = document.querySelectorAll('.dd-check');
     checkItems.forEach(function(c) { c.classList.remove('checked'); });
     updateScores();
+    updateDeckScore();
     showToast('All data cleared');
   };
 
@@ -1645,8 +2384,32 @@
     if (data.fields.initialNotes) lines.push('Notes: ' + data.fields.initialNotes);
     lines.push('');
 
+    // Deck Review
+    lines.push('2. DECK REVIEW');
+    lines.push('---');
+    if (data.deckFileName) lines.push('File: ' + data.deckFileName);
+    var deckPresent = 0, deckQualSum = 0, deckQualCount = 0;
+    DECK_SLIDES.forEach(function(slide) {
+      var ds = data.deckSlides[slide.key];
+      var status = ds && ds.present ? 'PRESENT' : 'MISSING';
+      var quality = ds && ds.present && ds.quality > 0 ? ' (Quality: ' + ds.quality + '/5)' : '';
+      lines.push('  [' + status + '] ' + slide.name + quality);
+      if (ds && ds.present) {
+        deckPresent++;
+        if (ds.quality > 0) { deckQualSum += ds.quality; deckQualCount++; }
+      }
+      var noteKey = 'deckNote_' + slide.key;
+      if (data.fields[noteKey]) lines.push('    Note: ' + data.fields[noteKey]);
+    });
+    var deckCompleteness = Math.round((deckPresent / DECK_SLIDES.length) * 50);
+    var deckAvgQ = deckQualCount > 0 ? (deckQualSum / deckQualCount) : 0;
+    var deckTotal = Math.round(deckCompleteness + (deckAvgQ * 10));
+    lines.push('Deck Score: ' + deckTotal + '/100 (' + deckPresent + '/' + DECK_SLIDES.length + ' slides present, avg quality ' + (deckQualCount > 0 ? deckAvgQ.toFixed(1) : 'N/A') + '/5)');
+    if (data.fields.deckNotes) lines.push('Overall Deck Notes: ' + data.fields.deckNotes);
+    lines.push('');
+
     // Scores
-    lines.push('2. SCORES');
+    lines.push('3. SCORES');
     lines.push('---');
     var categories = ['team', 'market', 'product', 'traction', 'deal'];
     var overall = 0, overallMax = 0;
@@ -1670,7 +2433,7 @@
     lines.push('');
 
     // Detailed ratings
-    lines.push('3. DETAILED RATINGS');
+    lines.push('4. DETAILED RATINGS');
     lines.push('---');
     var ratingLabels = {
       founderMarketFit: 'Founder-Market Fit',
@@ -1700,7 +2463,7 @@
     lines.push('');
 
     // Traction
-    lines.push('4. TRACTION & METRICS');
+    lines.push('5. TRACTION & METRICS');
     lines.push('---');
     if (data.fields.revenue) lines.push('Revenue: ' + data.fields.revenue);
     if (data.fields.growthRate) lines.push('Growth: ' + data.fields.growthRate);
@@ -1711,7 +2474,7 @@
     lines.push('');
 
     // Deal Terms
-    lines.push('5. DEAL TERMS');
+    lines.push('6. DEAL TERMS');
     lines.push('---');
     lines.push('Raise: ' + (data.fields.raiseAmount || 'N/A'));
     lines.push('Valuation/Cap: ' + (data.fields.valuation || 'N/A'));
@@ -1740,7 +2503,7 @@
     };
     var activeFlags = [];
     for (var fk in flags) { if (flags[fk]) activeFlags.push(flagLabels[fk] || fk); }
-    lines.push('6. RED FLAGS (' + activeFlags.length + ')');
+    lines.push('7. RED FLAGS (' + activeFlags.length + ')');
     lines.push('---');
     if (activeFlags.length > 0) {
       activeFlags.forEach(function(f) { lines.push('  [X] ' + f); });
@@ -1766,7 +2529,7 @@
       legalCheck: 'Legal check'
     };
     var doneChecks = 0, totalChecks = Object.keys(checkLabels).length;
-    lines.push('7. DILIGENCE CHECKLIST');
+    lines.push('8. DILIGENCE CHECKLIST');
     lines.push('---');
     for (var chk in checkLabels) {
       var done = checks[chk] ? 'X' : ' ';
@@ -1777,7 +2540,7 @@
     lines.push('');
 
     // Decision
-    lines.push('8. DECISION');
+    lines.push('9. DECISION');
     lines.push('---');
     lines.push('Decision: ' + (data.fields.decision || 'Not yet decided'));
     if (data.fields.thesis) lines.push('Thesis: ' + data.fields.thesis);
