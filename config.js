@@ -18,7 +18,7 @@
 
 window.SENGO_CONFIG = {
   // REQUIRED: Your Airtable Personal Access Token
-  token: "",
+  token: "patpBQcRI6cpGUQFz.1d2542f8b9d4c28b9dfa3ec69a8d21bfe162ec542f71ed445f7ce0555dd5fb10",
 
   // OPTIONAL: Pre-select a specific base (leave empty to auto-pick)
   // If your token only has access to one base, it's auto-selected
