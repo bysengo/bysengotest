@@ -26,7 +26,7 @@
       background: #fff; border-radius: 20px; padding: 48px 40px; width: 400px; max-width: 92vw;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center;
     }
-    .login-box .login-logo { width: 180px; height: auto; margin-bottom: 20px; }
+    .login-box h1 { font-size: 2rem; margin-bottom: 6px; color: #1B3533; }
     .login-box .login-sub { font-size: 0.82rem; color: rgba(27,53,51,0.5); margin-bottom: 32px; }
     .login-field { margin-bottom: 16px; text-align: left; }
     .login-field label { display: block; font-size: 0.75rem; font-weight: 600; color: rgba(27,53,51,0.5); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
@@ -41,8 +41,9 @@
       width: 260px; min-width: 260px; background: #1B3533; color: #F3EDE7;
       display: flex; flex-direction: column; height: 100vh; z-index: 10;
     }
-    .sidebar-logo { padding: 20px; border-bottom: 1px solid rgba(243,237,231,0.1); text-align: center; }
-    .sidebar-logo img { width: 100%; max-width: 200px; height: auto; }
+    .sidebar-logo { padding: 28px 24px 20px; border-bottom: 1px solid rgba(243,237,231,0.1); }
+    .sidebar-logo h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; }
+    .sidebar-logo span { font-size: 0.75rem; opacity: 0.6; display: block; margin-top: 4px; }
     .sidebar-nav { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto; }
     .sidebar-nav-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.4; padding: 16px 12px 8px; font-weight: 600; }
     .nav-item {
@@ -296,7 +297,7 @@
 <!-- ===== LOGIN SCREEN ===== -->
 <div class="login-screen" id="login-screen">
   <div class="login-box">
-    <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/122c4fdc-3465-45ca-a643-3a88eba25911/sengo-x-ru-fxf-circle-logo.png?format=750w" alt="Sengo x RU x Fashion Futures" class="login-logo">
+    <h1>Sengo</h1>
     <p class="login-sub">Sign in to your dashboard</p>
     <div class="login-field">
       <label>Username</label>
@@ -314,7 +315,8 @@
 <!-- ===== SIDEBAR ===== -->
 <nav class="sidebar" id="sidebar" style="display:none;">
   <div class="sidebar-logo">
-    <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/122c4fdc-3465-45ca-a643-3a88eba25911/sengo-x-ru-fxf-circle-logo.png?format=750w" alt="Sengo x RU x Fashion Futures">
+    <h1>Sengo</h1>
+    <span>Dashboard</span>
   </div>
   <div class="sidebar-nav">
     <div class="sidebar-nav-label">Main</div>
