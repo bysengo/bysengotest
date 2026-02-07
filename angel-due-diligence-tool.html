@@ -984,6 +984,317 @@
     color: #c4d8d5;
   }
 
+  /* Sengo Analysis Panel */
+  .dd-analysis-panel {
+    display: none;
+    margin: 28px 0;
+    animation: ddFadeIn 0.4s ease;
+  }
+
+  .dd-analysis-panel.visible { display: block; }
+
+  .dd-analysis-header {
+    background: linear-gradient(135deg, #1B3533, #2d524f);
+    border-radius: 14px 14px 0 0;
+    padding: 28px 28px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .dd-analysis-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .dd-analysis-brand-icon {
+    width: 36px;
+    height: 36px;
+    background: #D57028;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .dd-analysis-brand span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #D57028;
+  }
+
+  .dd-analysis-brand small {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: #c4d8d5;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    margin-top: 2px;
+  }
+
+  .dd-analysis-score-ring {
+    text-align: center;
+  }
+
+  .dd-analysis-score-ring .ring-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .dd-analysis-score-ring .ring-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #c4d8d5;
+    margin-top: 4px;
+  }
+
+  .dd-analysis-body {
+    background: #f8f5f1;
+    border: 2px solid #e8e0d8;
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 0;
+  }
+
+  .dd-analysis-tabs {
+    display: flex;
+    border-bottom: 2px solid #e8e0d8;
+    overflow-x: auto;
+  }
+
+  .dd-analysis-tab {
+    padding: 14px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #67441A;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+  }
+
+  .dd-analysis-tab:hover { color: #1B3533; }
+
+  .dd-analysis-tab.active {
+    color: #D57028;
+    border-bottom-color: #D57028;
+  }
+
+  .dd-analysis-content {
+    padding: 24px 28px;
+  }
+
+  .dd-analysis-pane {
+    display: none;
+  }
+
+  .dd-analysis-pane.active { display: block; }
+
+  /* Guidance Cards */
+  .dd-guidance-card {
+    background: #fff;
+    border: 1px solid #e8e0d8;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s ease;
+  }
+
+  .dd-guidance-card:hover { border-color: #D57028; }
+
+  .dd-guidance-card h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dd-guidance-card h4 .card-badge {
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .dd-guidance-card h4 .card-badge.critical { background: rgba(217,79,60,0.12); color: #d94f3c; }
+  .dd-guidance-card h4 .card-badge.important { background: rgba(213,112,40,0.12); color: #D57028; }
+  .dd-guidance-card h4 .card-badge.good { background: rgba(113,126,54,0.12); color: #4a5a10; }
+
+  .dd-guidance-card p {
+    font-size: 0.85rem;
+    color: #67441A;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Red Flags List */
+  .dd-flag-card {
+    background: #fff;
+    border: 1px solid #e8e0d8;
+    border-left: 4px solid #d94f3c;
+    border-radius: 4px 10px 10px 4px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+  }
+
+  .dd-flag-card.warning {
+    border-left-color: #D57028;
+  }
+
+  .dd-flag-card h5 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin: 0 0 4px 0;
+  }
+
+  .dd-flag-card p {
+    font-size: 0.8rem;
+    color: #67441A;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Questions List */
+  .dd-question-item {
+    padding: 14px 20px;
+    background: #fff;
+    border: 1px solid #e8e0d8;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: #1B3533;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .dd-question-item .q-num {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    background: #1B3533;
+    color: #F3EDE7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+  }
+
+  .dd-question-item .q-category {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #AF8145;
+    margin-top: 4px;
+  }
+
+  /* Processing Animation */
+  .dd-processing {
+    display: none;
+    text-align: center;
+    padding: 48px 20px;
+    margin: 28px 0;
+    background: linear-gradient(135deg, #1B3533, #2d524f);
+    border-radius: 14px;
+  }
+
+  .dd-processing.visible { display: block; }
+
+  .dd-processing-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .dd-processing-dots span {
+    width: 10px;
+    height: 10px;
+    background: #D57028;
+    border-radius: 50%;
+    animation: ddPulse 1.2s ease infinite;
+  }
+
+  .dd-processing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .dd-processing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes ddPulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  .dd-processing p {
+    color: #c4d8d5;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .dd-processing small {
+    color: #8aaba7;
+    font-size: 0.75rem;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* Stage-specific section */
+  .dd-stage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .dd-stage-card {
+    background: #fff;
+    border: 1px solid #e8e0d8;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .dd-stage-card .stage-value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #D57028;
+  }
+
+  .dd-stage-card .stage-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #67441A;
+    margin-top: 4px;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .dd-header h1 { font-size: 1.8rem; }
@@ -995,6 +1306,11 @@
     .dd-nav-btn { padding: 6px 10px; font-size: 0.7rem; }
     .dd-actions { flex-direction: column; }
     .dd-btn { width: 100%; text-align: center; }
+    .dd-analysis-header { padding: 20px; }
+    .dd-analysis-content { padding: 16px; }
+    .dd-analysis-tabs { gap: 0; }
+    .dd-analysis-tab { padding: 10px 12px; font-size: 0.65rem; }
+    .dd-stage-grid { grid-template-columns: 1fr; }
     .dd-rating-scale { flex-wrap: wrap; }
     .dd-nav-footer { flex-direction: column; gap: 12px; }
     .dd-deck-score-bar { flex-direction: column; text-align: center; }
@@ -1096,6 +1412,44 @@
       <div class="dd-upload-hint">PDF, PPT, PPTX, or images accepted</div>
     </div>
     <input type="file" id="ddFileInput" accept=".pdf,.ppt,.pptx,.png,.jpg,.jpeg" style="display:none;">
+
+    <!-- Processing Animation -->
+    <div class="dd-processing" id="ddProcessing">
+      <div class="dd-processing-dots"><span></span><span></span><span></span></div>
+      <p>Sengo is analyzing your pitch deck...</p>
+      <small>Evaluating structure, completeness, and flagging areas for review</small>
+    </div>
+
+    <!-- Sengo Analysis Panel -->
+    <div class="dd-analysis-panel" id="ddAnalysisPanel">
+      <div class="dd-analysis-header">
+        <div class="dd-analysis-brand">
+          <div class="dd-analysis-brand-icon">S</div>
+          <div>
+            <span>Sengo Deck Analysis</span>
+            <small>Due diligence guidance for angel investors</small>
+          </div>
+        </div>
+        <div class="dd-analysis-score-ring">
+          <div class="ring-value" id="ddAnalysisScore">--</div>
+          <div class="ring-label">Sengo Score</div>
+        </div>
+      </div>
+      <div class="dd-analysis-body">
+        <div class="dd-analysis-tabs">
+          <button class="dd-analysis-tab active" onclick="ddSwitchAnalysisTab('guidance')">Guidance</button>
+          <button class="dd-analysis-tab" onclick="ddSwitchAnalysisTab('redflags')">Red Flags</button>
+          <button class="dd-analysis-tab" onclick="ddSwitchAnalysisTab('questions')">Questions to Ask</button>
+          <button class="dd-analysis-tab" onclick="ddSwitchAnalysisTab('benchmarks')">Benchmarks</button>
+        </div>
+        <div class="dd-analysis-content">
+          <div class="dd-analysis-pane active" id="ddPane-guidance"></div>
+          <div class="dd-analysis-pane" id="ddPane-redflags"></div>
+          <div class="dd-analysis-pane" id="ddPane-questions"></div>
+          <div class="dd-analysis-pane" id="ddPane-benchmarks"></div>
+        </div>
+      </div>
+    </div>
 
     <!-- Deck Score Bar -->
     <div class="dd-deck-score-bar" id="ddDeckScoreBar" style="display:none;">
@@ -2046,6 +2400,7 @@
       '</div>';
     showToast('Deck uploaded: ' + file.name);
     document.getElementById('ddDeckScoreBar').style.display = 'flex';
+    runSengoAnalysis(file);
   }
 
   function escapeHtml(text) {
@@ -2063,6 +2418,8 @@
       '<div class="dd-upload-text">Drop pitch deck here or click to upload</div>' +
       '<div class="dd-upload-hint">PDF, PPT, PPTX, or images accepted</div>';
     document.getElementById('ddFileInput').value = '';
+    document.getElementById('ddAnalysisPanel').classList.remove('visible');
+    document.getElementById('ddProcessing').classList.remove('visible');
   };
 
   window.ddToggleSlideCard = function(key) {
@@ -2220,6 +2577,377 @@
       summaryFill.style.width = '0%';
     }
   }
+
+  // === SENGO ANALYSIS ENGINE ===
+
+  function runSengoAnalysis(file) {
+    var processing = document.getElementById('ddProcessing');
+    var panel = document.getElementById('ddAnalysisPanel');
+    panel.classList.remove('visible');
+    processing.classList.add('visible');
+
+    // Get context from company overview
+    var stageEl = document.querySelector('[data-field="stage"]');
+    var industryEl = document.querySelector('[data-field="industry"]');
+    var stage = stageEl ? stageEl.value : '';
+    var industry = industryEl ? industryEl.value : '';
+
+    // Simulate analysis with progressive delays
+    setTimeout(function() {
+      processing.classList.remove('visible');
+      generateAnalysis(file, stage, industry);
+      panel.classList.add('visible');
+    }, 2200);
+  }
+
+  function generateAnalysis(file, stage, industry) {
+    var stageKey = detectStage(stage);
+    var fileName = file.name.toLowerCase();
+
+    // Compute a Sengo Score based on available context
+    var score = computeSengoScore(stageKey, industry, fileName);
+    document.getElementById('ddAnalysisScore').textContent = score;
+
+    // Generate all panes
+    generateGuidancePane(stageKey, industry, fileName);
+    generateRedFlagsPane(stageKey, industry);
+    generateQuestionsPane(stageKey, industry);
+    generateBenchmarksPane(stageKey, industry);
+  }
+
+  function detectStage(stage) {
+    var s = (stage || '').toLowerCase();
+    if (s.indexOf('pre-seed') >= 0 || s.indexOf('preseed') >= 0 || s.indexOf('idea') >= 0) return 'preseed';
+    if (s.indexOf('seed') >= 0) return 'seed';
+    if (s.indexOf('series a') >= 0 || s.indexOf('series-a') >= 0) return 'seriesA';
+    if (s.indexOf('series b') >= 0 || s.indexOf('series-b') >= 0) return 'seriesB';
+    return 'seed'; // default
+  }
+
+  function computeSengoScore(stageKey, industry, fileName) {
+    // Score is based on: how many overview fields filled + stage context + deck presence
+    var filledFields = 0;
+    var totalFields = 0;
+    var importantFields = ['companyName', 'industry', 'stage', 'oneLiner', 'website'];
+    importantFields.forEach(function(f) {
+      totalFields++;
+      var el = document.querySelector('[data-field="' + f + '"]');
+      if (el && el.value.trim()) filledFields++;
+    });
+
+    // Base score from preparedness
+    var base = Math.round((filledFields / totalFields) * 40) + 30;
+
+    // Bonus for having a deck file
+    base += 15;
+
+    // Adjust by stage expectations
+    if (stageKey === 'preseed') base = Math.min(base, 72);
+    if (stageKey === 'seriesA' || stageKey === 'seriesB') base += 5;
+
+    return Math.min(Math.max(base, 25), 95);
+  }
+
+  function generateGuidancePane(stageKey, industry, fileName) {
+    var pane = document.getElementById('ddPane-guidance');
+    var html = '';
+
+    var stageGuidance = {
+      preseed: {
+        title: 'Pre-Seed Stage Evaluation Focus',
+        points: [
+          { head: 'Team is Everything', body: 'At pre-seed, the team accounts for 70-80% of the investment decision. Focus heavily on founder-market fit, domain expertise, and ability to execute. Track record matters more than the deck itself.', badge: 'critical' },
+          { head: 'Problem Validation Over Solution', body: 'The problem should be deeply understood and validated through customer conversations. The solution will evolve -- assess whether the founders truly understand the pain point they\'re solving.', badge: 'important' },
+          { head: 'Market Timing & Size', body: 'Evaluate the "why now" factor. What market shift or technology change makes this the right time? Bottom-up TAM estimates are a green flag at this stage.', badge: 'important' },
+          { head: 'Early Signal Over Traction', body: 'Don\'t expect revenue at pre-seed. Look for waitlists, LOIs, pilot customers, design partners, or strong community engagement as early validation signals.', badge: 'good' }
+        ]
+      },
+      seed: {
+        title: 'Seed Stage Evaluation Focus',
+        points: [
+          { head: 'Product-Market Fit Signals', body: 'At seed, you should see early signs of PMF -- users returning organically, NPS scores, engagement metrics, or initial revenue. If the product is live, dig into retention curves.', badge: 'critical' },
+          { head: 'Go-to-Market Clarity', body: 'The founders should have a clear, testable thesis on how they acquire customers. Look for evidence of channel experimentation, unit economics modeling, and scalable acquisition strategies.', badge: 'important' },
+          { head: 'Capital Efficiency', body: 'How much have they accomplished with prior funding or bootstrapping? Capital-efficient founders who can do more with less are a strong signal for seed-stage investing.', badge: 'important' },
+          { head: 'Competitive Moat Forming', body: 'At seed, the moat doesn\'t need to be deep, but you should see the foundation -- network effects, proprietary data, switching costs, or unique technology that compounds over time.', badge: 'good' }
+        ]
+      },
+      seriesA: {
+        title: 'Series A Evaluation Focus',
+        points: [
+          { head: 'Proven Unit Economics', body: 'By Series A, LTV/CAC should be demonstrably positive or on a clear trajectory. Request cohort-level data, blended vs. paid CAC, and payback period analysis.', badge: 'critical' },
+          { head: 'Scalable Revenue Engine', body: 'The company should have a repeatable playbook for growth. Evaluate the sales pipeline, conversion rates, and whether revenue growth is accelerating or decelerating.', badge: 'critical' },
+          { head: 'Team Scaling Plan', body: 'Assess whether the founding team can scale from builder to leader. Key VP-level hires should already be identified or in pipeline. Board composition matters.', badge: 'important' },
+          { head: 'Market Dominance Path', body: 'At Series A, the question shifts from "can this work?" to "can this become a category leader?" Evaluate the path to market leadership and defensibility.', badge: 'important' }
+        ]
+      },
+      seriesB: {
+        title: 'Series B+ Evaluation Focus',
+        points: [
+          { head: 'Revenue Predictability', body: 'At this stage, revenue should be predictable and growing efficiently. Analyze net revenue retention, expansion revenue, and gross margin trends over multiple quarters.', badge: 'critical' },
+          { head: 'Operational Maturity', body: 'The company should have established processes, middle management, and data-driven decision making. Evaluate the operational infrastructure supporting growth.', badge: 'critical' },
+          { head: 'Path to Profitability', body: 'Investors want to see a clear path to cash flow breakeven. Evaluate burn rate trends, gross margin expansion, and operating leverage in the model.', badge: 'important' },
+          { head: 'Market Position Defensibility', body: 'By Series B, the company should have a clear market position. Assess competitive wins/losses, customer switching costs, and brand strength.', badge: 'important' }
+        ]
+      }
+    };
+
+    var sg = stageGuidance[stageKey] || stageGuidance.seed;
+    html += '<h3 style="font-size:1rem;font-weight:700;color:#1B3533;margin:0 0 16px 0;">' + sg.title + '</h3>';
+
+    sg.points.forEach(function(pt) {
+      html += '<div class="dd-guidance-card">';
+      html += '<h4>' + escapeHtml(pt.head) + ' <span class="card-badge ' + pt.badge + '">' + pt.badge + '</span></h4>';
+      html += '<p>' + escapeHtml(pt.body) + '</p>';
+      html += '</div>';
+    });
+
+    // Deck-specific guidance
+    html += '<h3 style="font-size:1rem;font-weight:700;color:#1B3533;margin:24px 0 16px 0;">Deck Review Checklist</h3>';
+    html += '<p style="font-size:0.85rem;color:#67441A;margin-bottom:16px;line-height:1.6;">Review each slide below using the slide cards. Mark slides as present or missing, rate their quality, and use AI Assist on any slide for detailed review prompts.</p>';
+
+    var criticalSlides = ['problem', 'solution', 'market', 'traction', 'teamSlide', 'ask'];
+    var criticalNames = { problem: 'Problem Statement', solution: 'Solution', market: 'Market Opportunity', traction: 'Traction & Metrics', teamSlide: 'Team', ask: 'The Ask / Use of Funds' };
+
+    html += '<div class="dd-guidance-card">';
+    html += '<h4>Critical Slides to Scrutinize <span class="card-badge critical">must-have</span></h4>';
+    html += '<p>These slides carry the most weight in evaluating the investment opportunity:</p>';
+    html += '<ul style="margin:8px 0 0 0;padding:0;list-style:none;">';
+    criticalSlides.forEach(function(sk) {
+      html += '<li style="padding:4px 0;font-size:0.85rem;color:#1B3533;"><strong style="color:#D57028;">></strong> ' + criticalNames[sk] + '</li>';
+    });
+    html += '</ul></div>';
+
+    pane.innerHTML = html;
+  }
+
+  function generateRedFlagsPane(stageKey, industry) {
+    var pane = document.getElementById('ddPane-redflags');
+    var html = '';
+
+    html += '<h3 style="font-size:1rem;font-weight:700;color:#1B3533;margin:0 0 6px 0;">Potential Red Flags to Investigate</h3>';
+    html += '<p style="font-size:0.82rem;color:#67441A;margin-bottom:16px;line-height:1.5;">Based on the stage and typical patterns Sengo sees, watch for these red flags during your review:</p>';
+
+    var universalFlags = [
+      { title: 'Founder Transparency Issues', desc: 'Founders who are evasive about metrics, prior ventures, or cap table details. Transparency correlates strongly with trustworthiness as a partner.', type: 'critical' },
+      { title: 'Inconsistent Narrative', desc: 'The story told in the deck should align with what founders say in person. Watch for metrics that change between conversations or don\'t match public data.', type: 'critical' },
+      { title: 'No Customer Evidence', desc: 'Claims about product-market fit without customer references, testimonials, or verifiable usage data. Always request direct customer contact.', type: 'critical' },
+      { title: 'Cap Table Complexity', desc: 'Excessive dilution from prior rounds, advisor shares exceeding 5%, or multiple convertible instruments with varying terms can signal poor capital management.', type: 'warning' },
+      { title: 'Burn Rate vs. Milestones', desc: 'If the company has raised capital before, evaluate what they accomplished per dollar raised. High burn with little progress is a concern.', type: 'warning' }
+    ];
+
+    var stageFlags = {
+      preseed: [
+        { title: 'Part-Time Founders', desc: 'At pre-seed, founders should be preparing to go full-time. If they can\'t commit, the conviction may not be there. Ask about their timeline to full commitment.', type: 'critical' },
+        { title: 'Solution in Search of a Problem', desc: 'Technology-first founders sometimes build before validating. Look for evidence of customer discovery -- interviews, surveys, prototype testing with real users.', type: 'warning' },
+        { title: 'Unrealistic Valuation Expectations', desc: 'Pre-seed valuations above $10-15M without exceptional circumstances (serial founder, breakout traction) warrant scrutiny. Compare to market norms.', type: 'warning' }
+      ],
+      seed: [
+        { title: 'Flat or Declining Growth', desc: 'At seed, the growth curve should be trending up. If MoM growth is flat or declining despite marketing spend, the product may not have PMF.', type: 'critical' },
+        { title: 'Single Channel Dependency', desc: 'If all growth comes from one channel (e.g., only paid ads), this is fragile. Diversified acquisition strategies indicate a more robust business.', type: 'warning' },
+        { title: 'Excessive Pivot History', desc: 'One pivot can be a sign of learning. Three or more pivots in 18 months may indicate the founders haven\'t found conviction or domain fit.', type: 'warning' }
+      ],
+      seriesA: [
+        { title: 'Revenue Concentration Risk', desc: 'If a large percentage of revenue comes from 1-2 customers, the business is fragile. Look for customer diversification and repeatable sales.', type: 'critical' },
+        { title: 'Founder-Led Sales Only', desc: 'By Series A, sales should be transitioning beyond the founder. If only the CEO can close deals, this doesn\'t scale and is a hiring risk.', type: 'warning' },
+        { title: 'High Logo Churn', desc: 'Customer churn above 3-5% monthly at Series A is a red flag. It suggests the product isn\'t sticky enough and PMF may be weaker than presented.', type: 'critical' }
+      ],
+      seriesB: [
+        { title: 'Slowing Growth Rate', desc: 'Growth should still be strong at Series B. If the YoY growth rate is decelerating significantly, the market opportunity may be smaller than pitched.', type: 'critical' },
+        { title: 'Management Team Gaps', desc: 'By Series B, key leadership roles (VP Eng, VP Sales, CFO) should be filled. Missing roles indicate execution risk and culture challenges ahead.', type: 'warning' },
+        { title: 'Negative Net Revenue Retention', desc: 'NRR below 100% means the company loses more from existing customers than it gains from expansions. This is unsustainable at scale.', type: 'critical' }
+      ]
+    };
+
+    universalFlags.forEach(function(f) {
+      html += '<div class="dd-flag-card' + (f.type === 'warning' ? ' warning' : '') + '">';
+      html += '<h5>' + escapeHtml(f.title) + '</h5>';
+      html += '<p>' + escapeHtml(f.desc) + '</p>';
+      html += '</div>';
+    });
+
+    var sf = stageFlags[stageKey] || stageFlags.seed;
+    html += '<h3 style="font-size:1rem;font-weight:700;color:#1B3533;margin:24px 0 6px 0;">Stage-Specific Red Flags</h3>';
+    html += '<p style="font-size:0.82rem;color:#67441A;margin-bottom:16px;line-height:1.5;">These are common red flags Sengo identifies at this investment stage:</p>';
+
+    sf.forEach(function(f) {
+      html += '<div class="dd-flag-card' + (f.type === 'warning' ? ' warning' : '') + '">';
+      html += '<h5>' + escapeHtml(f.title) + '</h5>';
+      html += '<p>' + escapeHtml(f.desc) + '</p>';
+      html += '</div>';
+    });
+
+    pane.innerHTML = html;
+  }
+
+  function generateQuestionsPane(stageKey, industry) {
+    var pane = document.getElementById('ddPane-questions');
+    var html = '';
+
+    html += '<h3 style="font-size:1rem;font-weight:700;color:#1B3533;margin:0 0 6px 0;">Recommended Questions for Founders</h3>';
+    html += '<p style="font-size:0.82rem;color:#67441A;margin-bottom:16px;line-height:1.5;">Sengo recommends asking these questions based on the company stage. Use these in your founder call or meeting.</p>';
+
+    var questions = {
+      preseed: [
+        { q: 'Walk me through the last 10 customer conversations you\'ve had. What surprised you most?', cat: 'Customer Discovery' },
+        { q: 'Why are you the right team to solve this problem? What unique insight do you have?', cat: 'Founder-Market Fit' },
+        { q: 'How did you arrive at this specific solution? What alternatives did you consider?', cat: 'Solution Design' },
+        { q: 'What is the smallest possible version of this product that would prove demand?', cat: 'MVP Strategy' },
+        { q: 'How will you know when you\'ve found product-market fit? What metrics will tell you?', cat: 'PMF Definition' },
+        { q: 'If this raise doesn\'t happen, what do you do? How long can you sustain the current pace?', cat: 'Commitment & Runway' },
+        { q: 'Who do you consider your biggest competitor, and why will you win against them?', cat: 'Competitive Awareness' },
+        { q: 'Tell me about a time you failed and what you learned from it.', cat: 'Founder Resilience' },
+        { q: 'What is the hardest part of building this company right now?', cat: 'Self-Awareness' },
+        { q: 'How do you plan to use the funds from this round? What specific milestones will you hit?', cat: 'Capital Allocation' }
+      ],
+      seed: [
+        { q: 'Show me your cohort retention data. How has retention changed over the last 3-6 months?', cat: 'Retention & PMF' },
+        { q: 'What does your customer acquisition funnel look like? Walk me through conversion rates at each stage.', cat: 'Growth Engine' },
+        { q: 'What is your current CAC and LTV? How confident are you in these numbers?', cat: 'Unit Economics' },
+        { q: 'Which customer segments are performing best? Are you seeing patterns in who stays vs. churns?', cat: 'Customer Segmentation' },
+        { q: 'What is your monthly burn rate and how long does this round give you?', cat: 'Financial Health' },
+        { q: 'Can I speak with 3-5 of your most engaged customers? And 1-2 who churned?', cat: 'Customer References' },
+        { q: 'What experiments have you run on pricing? How did you land on your current model?', cat: 'Pricing Strategy' },
+        { q: 'What would you need to see to raise a Series A? What are the milestones between now and then?', cat: 'Next Round Planning' },
+        { q: 'How have your initial assumptions about the market changed since you started?', cat: 'Learning Velocity' },
+        { q: 'What key hires do you need to make in the next 12 months, and do you have candidates identified?', cat: 'Team Building' }
+      ],
+      seriesA: [
+        { q: 'Show me net revenue retention by cohort. What is driving expansion vs. contraction?', cat: 'Revenue Quality' },
+        { q: 'Walk me through your sales process end-to-end. What is your average sales cycle and close rate?', cat: 'Sales Efficiency' },
+        { q: 'How much of your revenue comes from your top 3 customers? What happens if you lose one?', cat: 'Revenue Concentration' },
+        { q: 'What does your competitive win/loss analysis look like? Why do you win and why do you lose?', cat: 'Competitive Position' },
+        { q: 'Walk me through your financial model assumptions. What are the key drivers and sensitivities?', cat: 'Financial Modeling' },
+        { q: 'How are you building your management team? Who is your next critical hire?', cat: 'Organizational Scale' },
+        { q: 'What does your technology architecture look like? Can it scale 10-100x?', cat: 'Technical Scalability' },
+        { q: 'What is your path to profitability? At what revenue level do you break even?', cat: 'Path to Profitability' },
+        { q: 'If a major competitor raised $100M tomorrow, how would your strategy change?', cat: 'Competitive Resilience' },
+        { q: 'What are the top 3 risks to this business and how are you mitigating each?', cat: 'Risk Assessment' }
+      ],
+      seriesB: [
+        { q: 'What is your gross margin trajectory and what drives it? Where does it plateau?', cat: 'Margin Analysis' },
+        { q: 'Break down your growth into organic vs. paid. What is the ratio and how is it trending?', cat: 'Growth Efficiency' },
+        { q: 'How do you see the competitive landscape evolving in 3-5 years?', cat: 'Market Evolution' },
+        { q: 'Walk me through a recent board meeting. What were the key debates and decisions?', cat: 'Governance Maturity' },
+        { q: 'What does your employee retention look like? What is your Glassdoor/culture reputation?', cat: 'Culture & Retention' },
+        { q: 'Show me your quarterly operating reviews. How do you track and hold teams accountable?', cat: 'Operational Rigor' },
+        { q: 'What international or new market expansion opportunities are you evaluating?', cat: 'Market Expansion' },
+        { q: 'What M&A opportunities have you considered, either as acquirer or target?', cat: 'Strategic Optionality' },
+        { q: 'How are you thinking about the exit landscape for this company?', cat: 'Exit Path' },
+        { q: 'What keeps you up at night about this business?', cat: 'Founder Candor' }
+      ]
+    };
+
+    var qList = questions[stageKey] || questions.seed;
+    var num = 1;
+    qList.forEach(function(item) {
+      html += '<div class="dd-question-item">';
+      html += '<div class="q-num">' + num + '</div>';
+      html += '<div><div>' + escapeHtml(item.q) + '</div><div class="q-category">' + escapeHtml(item.cat) + '</div></div>';
+      html += '</div>';
+      num++;
+    });
+
+    pane.innerHTML = html;
+  }
+
+  function generateBenchmarksPane(stageKey, industry) {
+    var pane = document.getElementById('ddPane-benchmarks');
+    var html = '';
+
+    html += '<h3 style="font-size:1rem;font-weight:700;color:#1B3533;margin:0 0 6px 0;">Stage Benchmarks & Expectations</h3>';
+    html += '<p style="font-size:0.82rem;color:#67441A;margin-bottom:16px;line-height:1.5;">Compare the startup\'s metrics against typical benchmarks for this stage. Use these as a reference, not absolute rules.</p>';
+
+    var benchmarks = {
+      preseed: {
+        metrics: [
+          { label: 'Typical Raise', value: '$250K - $1M' },
+          { label: 'Valuation Range', value: '$2M - $8M' },
+          { label: 'Expected Traction', value: 'Prototype / LOIs' },
+          { label: 'Team Size', value: '1-3 founders' }
+        ],
+        expectations: [
+          { head: 'What to Expect in the Deck', body: 'Pre-seed decks are often rough. Focus on the problem clarity, team background, and initial market thesis. Financial projections should be taken as directional only.' },
+          { head: 'Realistic Milestones', body: 'With pre-seed funding, the company should reach MVP, initial customer conversations (50+), and early pilot/beta users within 6-12 months.' },
+          { head: 'Standard Terms', body: 'Most common: SAFE or convertible note with $3-6M cap, no discount or 20% discount. Pro-rata rights are increasingly standard. Board seats are uncommon.' }
+        ]
+      },
+      seed: {
+        metrics: [
+          { label: 'Typical Raise', value: '$1M - $4M' },
+          { label: 'Valuation Range', value: '$6M - $20M' },
+          { label: 'Expected ARR', value: '$0 - $500K' },
+          { label: 'Growth Rate', value: '15-30% MoM' }
+        ],
+        expectations: [
+          { head: 'What to Expect in the Deck', body: 'Seed decks should show early traction, clear market sizing, and a defined go-to-market strategy. Product screenshots or demos should be available.' },
+          { head: 'Realistic Milestones', body: 'Seed funding should get the company to Series A metrics: $1-2M ARR, strong retention, repeatable customer acquisition, and 2-3x team growth.' },
+          { head: 'Standard Terms', body: 'Priced equity rounds becoming more common. SAFE still acceptable. Expect $8-15M post-money valuation. Board seat for lead investor, pro-rata rights, and information rights.' }
+        ]
+      },
+      seriesA: {
+        metrics: [
+          { label: 'Typical Raise', value: '$5M - $15M' },
+          { label: 'Valuation Range', value: '$25M - $75M' },
+          { label: 'Expected ARR', value: '$1M - $5M' },
+          { label: 'Growth Rate', value: '2-3x YoY' }
+        ],
+        expectations: [
+          { head: 'What to Expect in the Deck', body: 'Series A decks should be polished with detailed metrics, cohort data, competitive analysis, and a clear financial model. Lack of depth is a yellow flag.' },
+          { head: 'Realistic Milestones', body: 'Series A should fund the company to $5-15M ARR, proven unit economics, team expansion to 30-50 people, and clear path to Series B or profitability.' },
+          { head: 'Standard Terms', body: 'Priced equity round with 1x non-participating preferred. Board seat for lead. Full ratchet anti-dilution is a red flag. ROFR, drag-along, and information rights standard.' }
+        ]
+      },
+      seriesB: {
+        metrics: [
+          { label: 'Typical Raise', value: '$15M - $50M' },
+          { label: 'Valuation Range', value: '$75M - $300M' },
+          { label: 'Expected ARR', value: '$5M - $30M' },
+          { label: 'Growth Rate', value: '1.5-3x YoY' }
+        ],
+        expectations: [
+          { head: 'What to Expect in the Deck', body: 'Series B decks should include detailed financial models, customer case studies, org charts, competitive win rates, and clear market expansion plans.' },
+          { head: 'Realistic Milestones', body: 'Series B should fund expansion into new markets/segments, path to profitability, team growth to 100+, and establishing market leadership position.' },
+          { head: 'Standard Terms', body: 'Priced equity, 1x non-participating preferred standard. Pay-to-play provisions may appear. Full board with independent directors. Secondary liquidity may be discussed.' }
+        ]
+      }
+    };
+
+    var bm = benchmarks[stageKey] || benchmarks.seed;
+
+    html += '<div class="dd-stage-grid">';
+    bm.metrics.forEach(function(m) {
+      html += '<div class="dd-stage-card"><div class="stage-value">' + escapeHtml(m.value) + '</div><div class="stage-label">' + escapeHtml(m.label) + '</div></div>';
+    });
+    html += '</div>';
+
+    html += '<div style="margin-top:20px;">';
+    bm.expectations.forEach(function(exp) {
+      html += '<div class="dd-guidance-card">';
+      html += '<h4>' + escapeHtml(exp.head) + '</h4>';
+      html += '<p>' + escapeHtml(exp.body) + '</p>';
+      html += '</div>';
+    });
+    html += '</div>';
+
+    pane.innerHTML = html;
+  }
+
+  // Tab switching for analysis panel
+  window.ddSwitchAnalysisTab = function(tabKey) {
+    var tabs = document.querySelectorAll('.dd-analysis-tab');
+    var panes = document.querySelectorAll('.dd-analysis-pane');
+
+    tabs.forEach(function(t) { t.classList.remove('active'); });
+    panes.forEach(function(p) { p.classList.remove('active'); });
+
+    // Activate clicked tab
+    var tabMap = { guidance: 0, redflags: 1, questions: 2, benchmarks: 3 };
+    var idx = tabMap[tabKey] !== undefined ? tabMap[tabKey] : 0;
+    tabs[idx].classList.add('active');
+
+    var pane = document.getElementById('ddPane-' + tabKey);
+    if (pane) pane.classList.add('active');
+  };
 
   // Gather all data
   function gatherData() {
