@@ -1,0 +1,2480 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo – Airtable Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Arimo:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Variables ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark-teal: #1B3533;
+      --orange: #D57028;
+      --cream: #F3EDE7;
+      --brown: #67441A;
+      --white: #FFFFFF;
+      --light-gray: #f7f5f2;
+      --mid-gray: #e0dbd5;
+      --text-dark: #1B3533;
+      --text-muted: #6b6560;
+      --shadow-sm: 0 1px 3px rgba(27,53,51,0.08);
+      --shadow-md: 0 4px 12px rgba(27,53,51,0.1);
+      --shadow-lg: 0 8px 30px rgba(27,53,51,0.15);
+      --shadow-xl: 0 16px 50px rgba(27,53,51,0.2);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Arimo', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Setup Screen ──────────────────────────────────────── */
+    .setup-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .setup-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 48px;
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .setup-card h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--dark-teal);
+      margin-bottom: 8px;
+    }
+
+    .setup-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .setup-card label {
+      display: block;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .setup-card input, .setup-card select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--mid-gray);
+      border-radius: var(--radius-sm);
+      font-family: 'Arimo', sans-serif;
+      font-size: 15px;
+      color: var(--text-dark);
+      background: var(--light-gray);
+      transition: border-color var(--transition);
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    .setup-card input:focus, .setup-card select:focus {
+      border-color: var(--orange);
+    }
+
+    .setup-card .pre-filled {
+      background: var(--cream);
+      color: var(--text-muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background: #c06220;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .setup-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 16px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .setup-hint a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .error-msg {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      display: none;
+      text-align: left;
+    }
+
+    /* ── Dashboard Layout ──────────────────────────────────── */
+    .dashboard { display: none; min-height: 100vh; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark-teal);
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-md);
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .topbar-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+
+    .topbar-table {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .view-toggle {
+      display: flex;
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .view-toggle button {
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Arimo', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .view-toggle button.active {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .view-toggle button:hover:not(.active) {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .btn-disconnect {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-disconnect:hover {
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+    }
+
+    /* ── Toolbar ───────────────────────────────────────────── */
+    .toolbar {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: var(--white);
+      border-bottom: 1px solid var(--mid-gray);
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      max-width: 360px;
+      position: relative;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 12px 10px 38px;
+      border: 2px solid var(--mid-gray);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-family: 'Arimo', sans-serif;
+      background: var(--light-gray);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .search-box input:focus {
+      border-color: var(--orange);
+    }
+
+    .record-count {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-left: auto;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .filter-select {
+      padding: 10px 32px 10px 12px;
+      border: 2px solid var(--mid-gray);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: 'Arimo', sans-serif;
+      background: var(--light-gray);
+      color: var(--text-dark);
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6560' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    .btn-toolbar {
+      padding: 10px 18px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--transition);
+    }
+
+    .btn-export {
+      background: var(--dark-teal);
+      color: var(--white);
+    }
+
+    .btn-export:hover {
+      background: #264a47;
+      transform: translateY(-1px);
+    }
+
+    .btn-publish {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .btn-publish:hover {
+      background: #c06220;
+      transform: translateY(-1px);
+    }
+
+    /* ── Snapshot / Live Banners ──────────────────────────── */
+    .snapshot-banner, .live-banner {
+      display: none;
+      padding: 10px 32px;
+      background: linear-gradient(135deg, var(--dark-teal), #2a5a56);
+      color: rgba(255,255,255,0.85);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .snapshot-banner strong, .live-banner strong {
+      color: var(--white);
+    }
+
+    .live-banner {
+      background: linear-gradient(135deg, #065f46, #0d9488);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .live-refresh-btn {
+      padding: 4px 12px;
+      background: rgba(255,255,255,0.2);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .live-refresh-btn:hover { background: rgba(255,255,255,0.3); }
+
+    /* ── Loading Spinner ───────────────────────────────────── */
+    .loading-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 20px;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--mid-gray);
+      border-top-color: var(--orange);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-screen p {
+      margin-top: 16px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* ── Portfolio (Grid) View ─────────────────────────────── */
+    .portfolio-view {
+      padding: 28px 32px;
+      display: none;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .portfolio-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: all var(--transition);
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .portfolio-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: var(--orange);
+    }
+
+    .portfolio-card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: linear-gradient(135deg, var(--dark-teal), #2a5a56);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portfolio-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .portfolio-card-image .placeholder-icon {
+      font-size: 48px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .portfolio-card-body {
+      padding: 20px;
+    }
+
+    .portfolio-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--dark-teal);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .portfolio-card-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .portfolio-card-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .field-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      background: var(--cream);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .field-chip .field-label {
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    .portfolio-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .tag-green { background: #ecfdf5; color: #065f46; }
+    .tag-blue { background: #eff6ff; color: #1e40af; }
+    .tag-orange { background: #fff7ed; color: #9a3412; }
+    .tag-purple { background: #f5f3ff; color: #5b21b6; }
+    .tag-red { background: #fef2f2; color: #991b1b; }
+    .tag-teal { background: #f0fdfa; color: #134e4a; }
+
+    /* ── Swipe View ────────────────────────────────────────── */
+    .swipe-view {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: calc(100vh - 64px);
+    }
+
+    .swipe-progress {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .swipe-progress-bar {
+      width: 300px;
+      max-width: 90%;
+      height: 4px;
+      background: var(--mid-gray);
+      border-radius: 2px;
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .swipe-progress-fill {
+      height: 100%;
+      background: var(--orange);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .swipe-container {
+      position: relative;
+      width: 420px;
+      max-width: 90vw;
+      height: 560px;
+      perspective: 1000px;
+    }
+
+    .swipe-card {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.5s ease;
+      cursor: grab;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .swipe-card:active { cursor: grabbing; }
+
+    .swipe-card.swiping-left {
+      transform: translateX(-120%) rotate(-15deg);
+      opacity: 0;
+    }
+
+    .swipe-card.swiping-right {
+      transform: translateX(120%) rotate(15deg);
+      opacity: 0;
+    }
+
+    .swipe-card-image {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, var(--dark-teal), #2a5a56);
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .swipe-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .swipe-card-image .placeholder-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 64px;
+      color: rgba(255,255,255,0.2);
+    }
+
+    .swipe-card-body {
+      padding: 24px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .swipe-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--dark-teal);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .swipe-card-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .swipe-card-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--light-gray);
+      font-size: 14px;
+    }
+
+    .swipe-card-detail:last-child { border-bottom: none; }
+
+    .swipe-card-detail .detail-label {
+      font-weight: 600;
+      color: var(--brown);
+      min-width: 100px;
+      flex-shrink: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      padding-top: 2px;
+    }
+
+    .swipe-card-detail .detail-value {
+      color: var(--text-dark);
+      line-height: 1.4;
+    }
+
+    .swipe-overlay {
+      position: absolute;
+      top: 20px;
+      padding: 8px 24px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .swipe-overlay-left {
+      right: 20px;
+      border: 3px solid #ef4444;
+      color: #ef4444;
+      transform: rotate(15deg);
+    }
+
+    .swipe-overlay-right {
+      left: 20px;
+      border: 3px solid #22c55e;
+      color: #22c55e;
+      transform: rotate(-15deg);
+    }
+
+    .swipe-actions {
+      display: flex;
+      gap: 24px;
+      margin-top: 28px;
+      align-items: center;
+    }
+
+    .swipe-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 3px solid;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .swipe-btn:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-md);
+    }
+
+    .swipe-btn-skip {
+      border-color: #ef4444;
+      color: #ef4444;
+    }
+
+    .swipe-btn-skip:hover { background: #fef2f2; }
+
+    .swipe-btn-save {
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+
+    .swipe-btn-save:hover { background: #f0fdf4; }
+
+    .swipe-btn-info {
+      width: 48px;
+      height: 48px;
+      border-color: var(--mid-gray);
+      color: var(--text-muted);
+    }
+
+    .swipe-btn-info:hover { background: var(--light-gray); }
+
+    .swipe-end-msg {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .swipe-end-msg h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--dark-teal);
+      margin-bottom: 8px;
+    }
+
+    .swipe-end-msg p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .btn-restart {
+      background: var(--orange);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ── Detail Modal ──────────────────────────────────────── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(27,53,51,0.5);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-backdrop.visible {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      max-width: 600px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from { transform: scale(0.95) translateY(20px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 240px;
+      background: linear-gradient(135deg, var(--dark-teal), #2a5a56);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.4);
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+
+    .modal-close:hover { background: rgba(0,0,0,0.6); }
+
+    .modal-body {
+      padding: 28px;
+    }
+
+    .modal-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--dark-teal);
+      margin-bottom: 20px;
+    }
+
+    .modal-field {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .modal-field:last-child { border-bottom: none; }
+
+    .modal-field-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .modal-field-value {
+      font-size: 15px;
+      color: var(--text-dark);
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .modal-field-value a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .modal-field-value a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Publish Toast ─────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--dark-teal);
+      color: var(--white);
+      padding: 16px 28px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: var(--shadow-xl);
+      z-index: 2000;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+
+    .toast.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .topbar { padding: 0 16px; }
+      .topbar-table { display: none; }
+      .toolbar { padding: 16px; }
+      .portfolio-view { padding: 16px; }
+      .portfolio-grid { grid-template-columns: 1fr; gap: 16px; }
+      .swipe-container { height: 480px; }
+      .swipe-card-body { padding: 16px; }
+      .swipe-card-title { font-size: 18px; }
+      .setup-card { padding: 28px; }
+      .filter-group { width: 100%; }
+      .filter-select { flex: 1; }
+      .search-box { max-width: 100%; }
+      .embed-view { height: calc(100vh - 64px); }
+    }
+
+    @media (max-width: 480px) {
+      .view-toggle button span.label-text { display: none; }
+      .swipe-container { height: 420px; }
+      .swipe-card-image { height: 160px; }
+    }
+
+    /* ── Embed View ───────────────────────────────────────── */
+    .embed-view {
+      display: none;
+      width: 100%;
+      height: calc(100vh - 64px);
+      padding: 0;
+    }
+
+    .embed-view iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── Setup Divider ────────────────────────────────────── */
+    .setup-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 24px 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .setup-divider::before,
+    .setup-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--mid-gray);
+    }
+
+    .btn-secondary {
+      background: var(--dark-teal);
+      color: var(--white);
+      width: 100%;
+    }
+
+    .btn-secondary:hover {
+      background: #264a47;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-secondary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .success-msg {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      display: none;
+      text-align: left;
+    }
+
+    /* ── Empty State ───────────────────────────────────────── */
+    .empty-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .empty-state svg {
+      color: var(--mid-gray);
+      margin-bottom: 16px;
+    }
+
+    .empty-state h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--dark-teal);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    ═══════════════════════════════════════════════════════════
+    EMBEDDED SNAPSHOT DATA
+    When this file is published as a viewable snapshot, the
+    data gets baked in below. If the script tag is empty,
+    the setup screen is shown instead.
+    ═══════════════════════════════════════════════════════════
+  -->
+  <script id="embeddedData" type="application/json"></script>
+  <script id="liveConfig" type="application/json">{"token":"patpBQcRI6cpGUQFz.49cafe1680340f9d0f27267f7d824e2c56086ddcfdc347d9533cc4c650f9b523","baseId":"appwqkwXRvE1lN2Rs","tableId":"tblmkUNfVFJkEnd3o","tableName":"Table 1"}</script>
+
+  <!-- ─── Setup Screen ────────────────────────────────────── -->
+  <div class="setup-screen" id="setupScreen" style="display: none;">
+    <div class="setup-card">
+      <h1>Connect to Airtable</h1>
+      <p>Paste your Personal Access Token and we'll automatically find your bases and tables. No IDs needed.</p>
+
+      <div class="error-msg" id="setupError" style="display: none;"></div>
+      <div class="success-msg" id="setupSuccess" style="display: block;">Found table: Table 1</div>
+
+      <label for="apiToken">Personal Access Token</label>
+      <input type="password" id="apiToken" placeholder="pat_xxxxxxxxxxxx.xxxxx" autocomplete="off">
+
+      <div id="basePicker" style="display: none;">
+        <label for="baseSelect">Select a Base</label>
+        <select id="baseSelect">
+          <option value="">-- Choose a base --</option>
+        </select>
+      </div>
+
+      <div id="tablePicker" style="display: none;">
+        <label for="tableSelect">Select a Table</label>
+        <select id="tableSelect">
+          <option value="">-- Choose a table --</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" id="btnConnect" onclick="connectToAirtable()" disabled="">Loading tables...</button>
+
+      <p class="setup-hint">
+        <strong>How to create your token:</strong><br>
+        1. Go to <a href="https://airtable.com/create/tokens" target="_blank">airtable.com/create/tokens</a><br>
+        2. Click "Create new token"<br>
+        3. Add scopes: <code>data.records:read</code> + <code>schema.bases:read</code><br>
+        4. Under "Access", click "Add a base" and select your base(s)<br>
+        5. Click "Create token" and paste it above
+      </p>
+
+      <div class="setup-divider">or</div>
+
+      <button class="btn btn-secondary" onclick="startEmbedOnly()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        View Airtable Embed (No Token Needed)
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── Dashboard ───────────────────────────────────────── -->
+  <div class="dashboard" id="dashboard" style="display: block;">
+    <!-- Snapshot Banner (shown only on published snapshots) -->
+    <div class="snapshot-banner" id="snapshotBanner" style="display: none;">
+      <strong>Snapshot</strong> — This is a static view of the data captured on <span id="snapshotDate"></span>
+    </div>
+
+    <!-- Live Banner (shown on live dashboards) -->
+    <div class="live-banner" id="liveBanner" style="display: none;">
+      <span class="live-dot"></span>
+      <span><strong>Live</strong> — Data refreshes from Airtable each time this page loads</span>
+      <span id="liveLastUpdated"></span>
+      <button class="live-refresh-btn" onclick="refreshLiveData()">Refresh Now</button>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-brand">Sengo</span>
+        <span class="topbar-table" id="topbarTable">Table 1</span>
+      </div>
+      <div class="topbar-right">
+        <div class="view-toggle">
+          <button class="active" onclick="switchView('portfolio')" id="btnPortfolio">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+            <span class="label-text">Portfolio</span>
+          </button>
+          <button onclick="switchView('swipe')" id="btnSwipe">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M12 9v6"></path><path d="M9 12l3 3 3-3"></path></svg>
+            <span class="label-text">Swipe</span>
+          </button>
+          <button onclick="switchView('embed')" id="btnEmbed">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <span class="label-text">Embed</span>
+          </button>
+        </div>
+        <button class="btn-disconnect" id="btnDisconnect" onclick="disconnect()" style="display: block;">Disconnect</button>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar" id="toolbar">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="searchInput" placeholder="Search records..." oninput="filterRecords()">
+      </div>
+      <div class="filter-group" id="filterGroup"><select class="filter-select" data-field-name="Status"><option value="">All Status</option><option value="Pre-Seed">Pre-Seed</option><option value="Seed">Seed</option></select><select class="filter-select" data-field-name="Submitted by company"><option value="">All Submitted by company</option><option value="Yes">Yes</option></select><select class="filter-select" data-field-name="Sector"><option value="">All Sector</option><option value="CPG">CPG</option><option value="Healthcare">Healthcare</option><option value="Other">Other</option><option value="Tech">Tech</option></select></div>
+      <span class="record-count" id="recordCount">6 of 6 records</span>
+      <button class="btn-toolbar btn-export" onclick="exportCSV()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Export CSV
+      </button>
+      <button class="btn-toolbar btn-publish" id="btnPublishSnapshot" onclick="publishSnapshot()" title="Download a static HTML file with today's data baked in" style="display: flex;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Publish Snapshot
+      </button>
+      <button class="btn-toolbar btn-export" id="btnPublishLive" onclick="publishLive()" title="Download an HTML file that auto-fetches fresh data on every page load" style="background: rgb(13, 148, 136); display: flex;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.32 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        Publish Live Dashboard
+      </button>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-screen" id="loadingScreen" style="display: none;">
+      <div class="spinner"></div>
+      <p>Loading records from Airtable...</p>
+    </div>
+
+    <!-- Portfolio View -->
+    <div class="portfolio-view" id="portfolioView" style="display: block;">
+      <div class="portfolio-grid" id="portfolioGrid"><div class="portfolio-card"><div class="portfolio-card-image"><div class="placeholder-icon" style="font-size: 40px; font-family: Montserrat, sans-serif; font-weight: 800; color: rgba(255, 255, 255, 0.3);">L</div></div><div class="portfolio-card-body"><div class="portfolio-card-title">Laurice</div><div class="portfolio-card-subtitle">https://docsend.com/view/ys24qfr4giqujkuu</div><div class="portfolio-card-fields"><span class="field-chip"><span class="field-label">Notes</span> LAURICE FOX is a luxury footwe...</span><span class="field-chip"><span class="field-label">Last Name</span> Fox</span><span class="field-chip"><span class="field-label">Email</span> hello@lauricefox.com</span><span class="field-chip"><span class="field-label">Company Name</span> REBELLE FOX INC DBA LAURICE FO...</span></div><div class="portfolio-card-tags"><span class="tag tag-green">Pre-Seed</span><span class="tag tag-blue">Yes</span><span class="tag tag-orange">CPG</span></div></div></div><div class="portfolio-card"><div class="portfolio-card-image"><div class="placeholder-icon" style="font-size: 40px; font-family: Montserrat, sans-serif; font-weight: 800; color: rgba(255, 255, 255, 0.3);">K</div></div><div class="portfolio-card-body"><div class="portfolio-card-title">Kyle</div><div class="portfolio-card-subtitle">https://docsend.com/v/6sygt/vala</div><div class="portfolio-card-fields"><span class="field-chip"><span class="field-label">Notes</span> Vala’s mission is to ensure ev...</span><span class="field-chip"><span class="field-label">Last Name</span> Aquino</span><span class="field-chip"><span class="field-label">Email</span> kyle@valaclaims.com</span><span class="field-chip"><span class="field-label">Company Name</span> Vala</span></div><div class="portfolio-card-tags"><span class="tag tag-green">Pre-Seed</span><span class="tag tag-blue">Yes</span><span class="tag tag-orange">Tech</span></div></div></div><div class="portfolio-card"><div class="portfolio-card-image"><div class="placeholder-icon" style="font-size: 40px; font-family: Montserrat, sans-serif; font-weight: 800; color: rgba(255, 255, 255, 0.3);">K</div></div><div class="portfolio-card-body"><div class="portfolio-card-title">Kyle</div><div class="portfolio-card-subtitle">https://docsend.com/v/6sygt/vala</div><div class="portfolio-card-fields"><span class="field-chip"><span class="field-label">Notes</span> Vala’s mission is to ensure ev...</span><span class="field-chip"><span class="field-label">Last Name</span> Aquino</span><span class="field-chip"><span class="field-label">Email</span> kyle@valaclaims.com</span><span class="field-chip"><span class="field-label">Company Name</span> Vala</span></div><div class="portfolio-card-tags"><span class="tag tag-green">Pre-Seed</span><span class="tag tag-blue">Yes</span><span class="tag tag-orange">Tech</span></div></div></div><div class="portfolio-card"><div class="portfolio-card-image"><div class="placeholder-icon" style="font-size: 40px; font-family: Montserrat, sans-serif; font-weight: 800; color: rgba(255, 255, 255, 0.3);">D</div></div><div class="portfolio-card-body"><div class="portfolio-card-title">Deanna </div><div class="portfolio-card-subtitle">https://docsend.com/v/q6ct3/psyflo</div><div class="portfolio-card-fields"><span class="field-chip"><span class="field-label">Notes</span> To transform the broken school...</span><span class="field-chip"><span class="field-label">Last Name</span> Oliver</span><span class="field-chip"><span class="field-label">Email</span> hello@psyflo.com</span><span class="field-chip"><span class="field-label">Company Name</span> Psyflo (Feelwell)</span></div><div class="portfolio-card-tags"><span class="tag tag-green">Pre-Seed</span><span class="tag tag-blue">Yes</span><span class="tag tag-orange">Healthcare</span><span class="tag tag-purple">Tech</span></div></div></div><div class="portfolio-card"><div class="portfolio-card-image"><div class="placeholder-icon" style="font-size: 40px; font-family: Montserrat, sans-serif; font-weight: 800; color: rgba(255, 255, 255, 0.3);">V</div></div><div class="portfolio-card-body"><div class="portfolio-card-title">Vanessa</div><div class="portfolio-card-subtitle">https://tilden.docsend.com/view/wehv2ztex9e34vzr</div><div class="portfolio-card-fields"><span class="field-chip"><span class="field-label">Notes</span> Tilden exists to redefine what...</span><span class="field-chip"><span class="field-label">Last Name</span> Royle</span><span class="field-chip"><span class="field-label">Email</span> vanessa@drinktilden.com</span><span class="field-chip"><span class="field-label">Company Name</span> Tilden</span></div><div class="portfolio-card-tags"><span class="tag tag-green">Seed</span><span class="tag tag-blue">Yes</span><span class="tag tag-orange">CPG</span></div></div></div><div class="portfolio-card"><div class="portfolio-card-image"><div class="placeholder-icon" style="font-size: 40px; font-family: Montserrat, sans-serif; font-weight: 800; color: rgba(255, 255, 255, 0.3);">B</div></div><div class="portfolio-card-body"><div class="portfolio-card-title">Bryant</div><div class="portfolio-card-subtitle">docsend.com/view/4462tu2genqbeqgi</div><div class="portfolio-card-fields"><span class="field-chip"><span class="field-label">Notes</span> We are using CRISPR technology...</span><span class="field-chip"><span class="field-label">Last Name</span> Williams</span><span class="field-chip"><span class="field-label">Email</span> bryant@hardcorepb.com</span><span class="field-chip"><span class="field-label">Company Name</span> Hardcore Peanut Butter Spread ...</span></div><div class="portfolio-card-tags"><span class="tag tag-green">Seed</span><span class="tag tag-blue">Yes</span><span class="tag tag-orange">CPG</span><span class="tag tag-purple">Other</span></div></div></div></div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="8" y1="15" x2="16" y2="15"></line><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+      <h3>No records found</h3>
+      <p>Try adjusting your search or filter criteria.</p>
+    </div>
+
+    <!-- Swipe View -->
+    <div class="swipe-view" id="swipeView" style="display: none;">
+      <div class="swipe-progress" id="swipeProgress">1 / 0</div>
+      <div class="swipe-progress-bar">
+        <div class="swipe-progress-fill" id="swipeProgressFill"></div>
+      </div>
+      <div class="swipe-container" id="swipeContainer"></div>
+      <div class="swipe-actions" id="swipeActions">
+        <button class="swipe-btn swipe-btn-skip" onclick="swipeAction('left')" title="Skip">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <button class="swipe-btn swipe-btn-info" onclick="openModal(filteredRecords[swipeIndex])" title="Details">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        </button>
+        <button class="swipe-btn swipe-btn-save" onclick="swipeAction('right')" title="Save">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </button>
+      </div>
+      <div class="swipe-end-msg" id="swipeEndMsg">
+        <h2>All Done!</h2>
+        <p id="swipeSummary"></p>
+        <button class="btn btn-restart" onclick="restartSwipe()">Start Over</button>
+      </div>
+    </div>
+
+    <!-- Embed View -->
+    <div class="embed-view" id="embedView" style="display: none;">
+      <iframe id="embedIframe" src="" allow="fullscreen"></iframe>
+    </div>
+  </div>
+
+  <!-- ─── Detail Modal ────────────────────────────────────── -->
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
+    <div class="modal" id="modal" onclick="event.stopPropagation()">
+      <div class="modal-image" id="modalImage">
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ─── Toast ───────────────────────────────────────────── -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* ─── State ───────────────────────────────────────────── */
+    let allRecords = [];
+    let filteredRecords = [];
+    let fields = [];
+    let fieldMap = {};
+    let currentView = 'portfolio';
+    let swipeIndex = 0;
+    let swipeSaved = [];
+    let swipeSkipped = [];
+    let apiToken = '';
+    let baseId = '';
+    let tableId = '';
+    let tableName = '';
+    let imageField = null;
+    let titleField = null;
+    let subtitleField = null;
+    let filterableFields = [];
+    let isSnapshot = false;
+    let isLive = false;
+    let isEmbedOnly = false;
+    let embedUrl = 'https://airtable.com/embed/appwqkwXRvE1lN2Rs/shroDtJ7aV6y155Sj?layout=card';
+    let tagColors = ['tag-green','tag-blue','tag-orange','tag-purple','tag-red','tag-teal'];
+
+    /* ─── Initialization ──────────────────────────────────── */
+    (function init() {
+      // 1. Check for live config (auto-fetches fresh data)
+      const liveEl = document.getElementById('liveConfig');
+      const liveRaw = (liveEl && liveEl.textContent) ? liveEl.textContent.trim() : '';
+
+      if (liveRaw) {
+        try {
+          const config = JSON.parse(liveRaw);
+          if (config.token && config.baseId && config.tableId) {
+            isLive = true;
+            loadFromLiveConfig(config);
+            return;
+          }
+        } catch(e) {
+          console.error('Failed to parse live config:', e);
+        }
+      }
+
+      // 2. Check for embedded snapshot data (static)
+      const embeddedEl = document.getElementById('embeddedData');
+      const raw = (embeddedEl && embeddedEl.textContent) ? embeddedEl.textContent.trim() : '';
+
+      if (raw) {
+        try {
+          const snapshot = JSON.parse(raw);
+          isSnapshot = true;
+          loadFromSnapshot(snapshot);
+          return;
+        } catch(e) {
+          console.error('Failed to parse embedded data:', e);
+        }
+      }
+
+      // 3. Otherwise show setup screen, pre-fill saved token
+      const saved = localStorage.getItem('sengo_airtable_session');
+      if (saved) {
+        try {
+          const s = JSON.parse(saved);
+          document.getElementById('apiToken').value = s.token || '';
+        } catch(e) {}
+      }
+    })();
+
+    function loadFromSnapshot(snapshot) {
+      allRecords = snapshot.records || [];
+      fields = snapshot.fields || [];
+      tableName = snapshot.tableName || 'Dashboard';
+      fieldMap = {};
+      fields.forEach(f => { fieldMap[f.id] = f; });
+
+      detectSpecialFields();
+
+      // Show dashboard, hide setup
+      document.getElementById('setupScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('topbarTable').textContent = tableName;
+
+      // Show snapshot banner
+      const banner = document.getElementById('snapshotBanner');
+      banner.style.display = 'block';
+      document.getElementById('snapshotDate').textContent = snapshot.exportedAt || 'unknown';
+
+      // Hide admin-only controls
+      document.getElementById('btnPublishSnapshot').style.display = 'none';
+      document.getElementById('btnPublishLive').style.display = 'none';
+      document.getElementById('btnDisconnect').style.display = 'none';
+
+      filteredRecords = [...allRecords];
+      buildFilterUI();
+      renderCurrentView();
+    }
+
+    /* ─── Live Mode ──────────────────────────────────────── */
+    async function loadFromLiveConfig(config) {
+      apiToken = config.token;
+      baseId = config.baseId;
+      tableId = config.tableId;
+      tableName = config.tableName || 'Dashboard';
+
+      // Show dashboard, hide setup
+      document.getElementById('setupScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('topbarTable').textContent = tableName;
+
+      // Show live banner, hide others
+      document.getElementById('liveBanner').style.display = 'flex';
+      document.getElementById('snapshotBanner').style.display = 'none';
+      document.getElementById('btnPublishSnapshot').style.display = 'none';
+      document.getElementById('btnPublishLive').style.display = 'none';
+      document.getElementById('btnDisconnect').style.display = 'none';
+
+      // Show loading
+      document.getElementById('loadingScreen').style.display = 'flex';
+
+      try {
+        // Fetch schema for field info
+        const schemaRes = await airtableFetch(`https://api.airtable.com/v0/meta/bases/${baseId}/tables`);
+        if (schemaRes.ok) {
+          const schema = await schemaRes.json();
+          const tbl = (schema.tables || []).find(t => t.id === tableId);
+          if (tbl) {
+            fields = tbl.fields || [];
+            fieldMap = {};
+            fields.forEach(f => { fieldMap[f.id] = f; });
+          }
+        }
+
+        // If schema fetch failed, use field names from records themselves
+        if (fields.length === 0) {
+          inferFieldsFromRecords();
+        } else {
+          detectSpecialFields();
+        }
+
+        allRecords = await fetchAllRecords();
+        if (fields.length === 0 && allRecords.length > 0) {
+          inferFieldsFromRecords();
+        }
+
+        filteredRecords = [...allRecords];
+        buildFilterUI();
+        renderCurrentView();
+        updateLiveTimestamp();
+
+      } catch(e) {
+        console.error('Live load failed:', e);
+        document.getElementById('loadingScreen').innerHTML =
+          `<p style="color: #b91c1c;">Failed to load data: ${e.message}</p>`;
+      }
+
+      document.getElementById('loadingScreen').style.display = 'none';
+    }
+
+    function inferFieldsFromRecords() {
+      // Build field list from record keys when schema isn't available
+      const fieldNames = new Set();
+      allRecords.forEach(r => {
+        Object.keys(r.fields).forEach(k => fieldNames.add(k));
+      });
+      fields = [...fieldNames].map(name => ({
+        id: name,
+        name: name,
+        type: guessFieldType(name)
+      }));
+      fieldMap = {};
+      fields.forEach(f => { fieldMap[f.id] = f; });
+      detectSpecialFields();
+    }
+
+    function guessFieldType(name) {
+      const n = name.toLowerCase();
+      if (n.includes('image') || n.includes('photo') || n.includes('logo') || n.includes('avatar')) return 'multipleAttachments';
+      if (n.includes('email')) return 'email';
+      if (n.includes('url') || n.includes('website') || n.includes('link')) return 'url';
+      return 'singleLineText';
+    }
+
+    async function refreshLiveData() {
+      const btn = document.querySelector('.live-refresh-btn');
+      btn.textContent = 'Refreshing...';
+      btn.disabled = true;
+
+      try {
+        allRecords = await fetchAllRecords();
+        filteredRecords = [...allRecords];
+        buildFilterUI();
+        renderCurrentView();
+        updateLiveTimestamp();
+        showToast('Data refreshed from Airtable.');
+      } catch(e) {
+        showToast('Refresh failed: ' + e.message);
+      }
+
+      btn.textContent = 'Refresh Now';
+      btn.disabled = false;
+    }
+
+    function updateLiveTimestamp() {
+      const el = document.getElementById('liveLastUpdated');
+      if (el) {
+        el.textContent = '— Updated ' + new Date().toLocaleTimeString('en-US', {
+          hour: 'numeric', minute: '2-digit'
+        });
+      }
+    }
+
+    /* ─── Setup / Connection ──────────────────────────────── */
+    let setupStep = 'token';  // 'token' | 'base' | 'table'
+    let discoveredBases = [];
+
+    async function connectToAirtable() {
+      const btn = document.getElementById('btnConnect');
+      const errEl = document.getElementById('setupError');
+      const successEl = document.getElementById('setupSuccess');
+      errEl.style.display = 'none';
+      successEl.style.display = 'none';
+
+      apiToken = document.getElementById('apiToken').value.trim();
+
+      if (!apiToken) return showSetupError('Please paste your Personal Access Token.');
+
+      // Validate token format
+      if (apiToken.startsWith('key')) {
+        return showSetupError(
+          'That looks like an old-style API key (starts with "key...").\n' +
+          'Airtable retired these. You need a Personal Access Token instead —\n' +
+          'go to airtable.com/create/tokens to generate one.'
+        );
+      }
+
+      if (!apiToken.startsWith('pat')) {
+        return showSetupError(
+          'Token should start with "pat".\n' +
+          'Go to airtable.com/create/tokens to create a Personal Access Token.'
+        );
+      }
+
+      btn.disabled = true;
+
+      // ─── Step: Pick a base if one is selected ───
+      if (setupStep === 'base') {
+        const selectedBase = document.getElementById('baseSelect').value;
+        if (!selectedBase) {
+          showSetupError('Please select a base.');
+          btn.disabled = false;
+          return;
+        }
+        baseId = selectedBase;
+        btn.textContent = 'Loading tables...';
+        try {
+          await discoverTables(baseId);
+        } catch(e) {
+          showSetupError(e.message);
+          btn.disabled = false;
+          btn.textContent = 'Connect & Load';
+        }
+        return;
+      }
+
+      // ─── Step: Pick a table if one is selected ───
+      if (setupStep === 'table') {
+        const selectedTable = document.getElementById('tableSelect').value;
+        if (!selectedTable) {
+          showSetupError('Please select a table.');
+          btn.disabled = false;
+          return;
+        }
+        btn.textContent = 'Loading records...';
+        try {
+          await loadTable(selectedTable);
+          localStorage.setItem('sengo_airtable_session', JSON.stringify({ token: apiToken }));
+        } catch(e) {
+          showSetupError(e.message);
+          btn.disabled = false;
+          btn.textContent = 'Connect & Load';
+        }
+        return;
+      }
+
+      // ─── Step: Validate token & discover bases ───
+      btn.textContent = 'Validating token...';
+
+      try {
+        // 1. Validate token
+        const whoamiRes = await airtableFetch('https://api.airtable.com/v0/meta/whoami');
+        if (!whoamiRes.ok) {
+          const errData = await whoamiRes.json().catch(() => ({}));
+          if (whoamiRes.status === 401) {
+            throw new Error(
+              'Invalid token — Airtable rejected it.\n' +
+              'Make sure you copied the full token (starts with "pat").\n' +
+              'Response: ' + (errData.error?.message || 'HTTP 401')
+            );
+          }
+          throw new Error(
+            'Token validation failed (HTTP ' + whoamiRes.status + ').\n' +
+            (errData.error?.message || '')
+          );
+        }
+
+        btn.textContent = 'Finding your bases...';
+
+        // 2. Discover bases
+        const basesRes = await airtableFetch('https://api.airtable.com/v0/meta/bases');
+        if (!basesRes.ok) {
+          const errData = await basesRes.json().catch(() => ({}));
+          throw new Error(
+            'Could not list bases (HTTP ' + basesRes.status + ').\n' +
+            'Your token needs the "schema.bases:read" scope.\n' +
+            'Edit it at airtable.com/create/tokens and add that scope.'
+          );
+        }
+
+        const basesData = await basesRes.json();
+        discoveredBases = basesData.bases || [];
+
+        if (discoveredBases.length === 0) {
+          throw new Error(
+            'No bases found. Your token may not have access to any bases.\n' +
+            'Edit your token at airtable.com/create/tokens and under "Access",\n' +
+            'add the base(s) you want to use.'
+          );
+        }
+
+        // If only one base, auto-select and discover its tables
+        if (discoveredBases.length === 1) {
+          baseId = discoveredBases[0].id;
+          showSetupSuccess('Found base: ' + discoveredBases[0].name);
+          btn.textContent = 'Loading tables...';
+          await discoverTables(baseId);
+          return;
+        }
+
+        // Multiple bases — show picker
+        setupStep = 'base';
+        const basePicker = document.getElementById('basePicker');
+        const baseSel = document.getElementById('baseSelect');
+        baseSel.innerHTML = '<option value="">-- Choose a base --</option>';
+        discoveredBases.forEach(b => {
+          const opt = document.createElement('option');
+          opt.value = b.id;
+          opt.textContent = b.name;
+          baseSel.appendChild(opt);
+        });
+        basePicker.style.display = 'block';
+
+        showSetupSuccess('Token valid! Found ' + discoveredBases.length + ' bases. Pick one below.');
+        btn.disabled = false;
+        btn.textContent = 'Continue';
+
+      } catch(e) {
+        showSetupError(e.message);
+        btn.disabled = false;
+        btn.textContent = 'Connect & Load';
+        setupStep = 'token';
+      }
+    }
+
+    async function discoverTables(forBaseId) {
+      const btn = document.getElementById('btnConnect');
+
+      const schemaRes = await airtableFetch(`https://api.airtable.com/v0/meta/bases/${forBaseId}/tables`);
+      if (!schemaRes.ok) {
+        const errData = await schemaRes.json().catch(() => ({}));
+        throw new Error(
+          'Could not list tables (HTTP ' + schemaRes.status + ').\n' +
+          'Your token needs "schema.bases:read" scope for this base.\n' +
+          (errData.error?.message || '')
+        );
+      }
+
+      const schema = await schemaRes.json();
+      const tables = schema.tables || [];
+
+      if (tables.length === 0) {
+        throw new Error('No tables found in this base.');
+      }
+
+      // Store schemas for later use
+      window._tableSchemas = {};
+      tables.forEach(t => { window._tableSchemas[t.id] = t; });
+
+      // If only one table, auto-load it
+      if (tables.length === 1) {
+        showSetupSuccess('Found table: ' + tables[0].name);
+        await loadTable(tables[0].id);
+        localStorage.setItem('sengo_airtable_session', JSON.stringify({ token: apiToken }));
+        return;
+      }
+
+      // Multiple tables — show picker
+      setupStep = 'table';
+      const tablePicker = document.getElementById('tablePicker');
+      const tableSel = document.getElementById('tableSelect');
+      tableSel.innerHTML = '<option value="">-- Choose a table --</option>';
+      tables.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t.id;
+        opt.textContent = t.name;
+        tableSel.appendChild(opt);
+      });
+      tablePicker.style.display = 'block';
+
+      const baseName = discoveredBases.find(b => b.id === forBaseId)?.name || forBaseId;
+      showSetupSuccess('Base: ' + baseName + ' — Found ' + tables.length + ' tables. Pick one below.');
+      btn.disabled = false;
+      btn.textContent = 'Load Table';
+    }
+
+    function showSetupError(msg) {
+      const el = document.getElementById('setupError');
+      const successEl = document.getElementById('setupSuccess');
+      if (successEl) successEl.style.display = 'none';
+      el.innerHTML = '';
+      msg.split('\n').forEach((line, i) => {
+        if (i > 0) el.appendChild(document.createElement('br'));
+        el.appendChild(document.createTextNode(line));
+      });
+      el.style.display = 'block';
+    }
+
+    function showSetupSuccess(msg) {
+      const el = document.getElementById('setupSuccess');
+      const errEl = document.getElementById('setupError');
+      errEl.style.display = 'none';
+      el.innerHTML = '';
+      msg.split('\n').forEach((line, i) => {
+        if (i > 0) el.appendChild(document.createElement('br'));
+        el.appendChild(document.createTextNode(line));
+      });
+      el.style.display = 'block';
+    }
+
+    async function loadTable(tblId) {
+      tableId = tblId;
+      const tableSchema = window._tableSchemas[tblId];
+      tableName = tableSchema.name;
+
+      fields = tableSchema.fields || [];
+      fieldMap = {};
+      fields.forEach(f => { fieldMap[f.id] = f; });
+
+      detectSpecialFields();
+
+      document.getElementById('setupScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('topbarTable').textContent = tableName;
+
+      document.getElementById('loadingScreen').style.display = 'flex';
+      document.getElementById('portfolioView').style.display = 'none';
+      document.getElementById('swipeView').style.display = 'none';
+
+      // Show admin controls
+      document.getElementById('btnPublishSnapshot').style.display = 'flex';
+      document.getElementById('btnPublishLive').style.display = 'flex';
+      document.getElementById('btnDisconnect').style.display = 'block';
+      document.getElementById('snapshotBanner').style.display = 'none';
+      document.getElementById('liveBanner').style.display = 'none';
+
+      try {
+        allRecords = await fetchAllRecords();
+        filteredRecords = [...allRecords];
+        buildFilterUI();
+        renderCurrentView();
+      } catch(e) {
+        console.error(e);
+        alert('Failed to load records: ' + e.message);
+      }
+
+      document.getElementById('loadingScreen').style.display = 'none';
+    }
+
+    function detectSpecialFields() {
+      imageField = null;
+      titleField = null;
+      subtitleField = null;
+      filterableFields = [];
+
+      for (const f of fields) {
+        const nameL = f.name.toLowerCase();
+
+        if (!imageField && (f.type === 'multipleAttachments' || f.type === 'singleAttachment' ||
+            nameL.includes('image') || nameL.includes('photo') || nameL.includes('logo') ||
+            nameL.includes('picture') || nameL.includes('headshot') || nameL.includes('avatar'))) {
+          imageField = f;
+        }
+
+        if (!titleField && (f.type === 'singleLineText' || f.type === 'formula') &&
+            (nameL.includes('name') || nameL.includes('title') || nameL.includes('company'))) {
+          titleField = f;
+        }
+
+        if (f.type === 'singleSelect' || f.type === 'multipleSelects') {
+          filterableFields.push(f);
+        }
+      }
+
+      if (!titleField) {
+        titleField = fields.find(f => f.type === 'singleLineText') || fields[0];
+      }
+
+      const textFields = fields.filter(f =>
+        (f.type === 'singleLineText' || f.type === 'email' || f.type === 'url' || f.type === 'formula')
+        && f !== titleField
+      );
+      subtitleField = textFields[0] || null;
+    }
+
+    /* ─── Airtable API Helpers ────────────────────────────── */
+    async function airtableFetch(url) {
+      return fetch(url, {
+        headers: { 'Authorization': `Bearer ${apiToken}` }
+      });
+    }
+
+    async function fetchAllRecords() {
+      let records = [];
+      let offset = null;
+
+      do {
+        let url = `https://api.airtable.com/v0/${baseId}/${tableId}?pageSize=100`;
+        if (offset) url += `&offset=${offset}`;
+
+        const res = await airtableFetch(url);
+        if (!res.ok) throw new Error(`Failed to fetch records (${res.status})`);
+
+        const data = await res.json();
+        records = records.concat(data.records || []);
+        offset = data.offset || null;
+      } while (offset);
+
+      return records;
+    }
+
+    /* ─── Publish Snapshot ────────────────────────────────── */
+    function publishSnapshot() {
+      if (allRecords.length === 0) {
+        showToast('No records to publish.');
+        return;
+      }
+
+      // Build the snapshot data object
+      const snapshot = {
+        tableName: tableName,
+        fields: fields,
+        records: allRecords,
+        exportedAt: new Date().toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        })
+      };
+
+      // Get the full HTML of this page
+      const html = document.documentElement.outerHTML;
+
+      // Find and replace the empty embedded data script with populated one
+      // We reconstruct the page from scratch to keep it clean
+      const snapshotJson = JSON.stringify(snapshot);
+
+      const newHtml = html.replace(
+        /<script id="embeddedData" type="application\/json">[^]*?<\/script>/,
+        `<script id="embeddedData" type="application/json">${snapshotJson}<\/script>`
+      );
+
+      // Create the full document
+      const fullDoc = `<!DOCTYPE html>\n<html lang="en">${newHtml.replace(/^<html[^>]*>/, '').replace(/<\/html>$/, '')}</html>`;
+
+      // Download
+      const blob = new Blob([fullDoc], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+
+      const safeName = tableName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+      a.download = `sengo-dashboard-${safeName}.html`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      showToast(`Snapshot published! Share "${a.download}" — no token needed.`);
+    }
+
+    /* ─── Publish Live Dashboard ──────────────────────────── */
+    function publishLive() {
+      if (allRecords.length === 0) {
+        showToast('No records loaded yet.');
+        return;
+      }
+
+      // Build the live config (includes read-only token)
+      const config = {
+        token: apiToken,
+        baseId: baseId,
+        tableId: tableId,
+        tableName: tableName
+      };
+
+      const configJson = JSON.stringify(config);
+
+      // Get the full HTML and inject the live config
+      const html = document.documentElement.outerHTML;
+
+      const newHtml = html
+        // Inject live config
+        .replace(
+          /<script id="liveConfig" type="application\/json">[^]*?<\/script>/,
+          `<script id="liveConfig" type="application/json">${configJson}<\/script>`
+        )
+        // Make sure embedded data is empty (live mode fetches fresh)
+        .replace(
+          /<script id="embeddedData" type="application\/json">[^]*?<\/script>/,
+          `<script id="embeddedData" type="application/json"><\/script>`
+        );
+
+      const fullDoc = `<!DOCTYPE html>\n<html lang="en">${newHtml.replace(/^<html[^>]*>/, '').replace(/<\/html>$/, '')}</html>`;
+
+      const blob = new Blob([fullDoc], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+
+      const safeName = tableName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+      a.download = `sengo-live-dashboard-${safeName}.html`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      showToast(`Live dashboard published! "${a.download}" will auto-refresh from Airtable.`);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 4000);
+    }
+
+    /* ─── Filter & Search ─────────────────────────────────── */
+    function buildFilterUI() {
+      const group = document.getElementById('filterGroup');
+      group.innerHTML = '';
+
+      filterableFields.slice(0, 3).forEach(f => {
+        const sel = document.createElement('select');
+        sel.className = 'filter-select';
+        sel.dataset.fieldName = f.name;
+
+        const allOpt = document.createElement('option');
+        allOpt.value = '';
+        allOpt.textContent = `All ${f.name}`;
+        sel.appendChild(allOpt);
+
+        const vals = new Set();
+        allRecords.forEach(r => {
+          const v = r.fields[f.name];
+          if (Array.isArray(v)) v.forEach(x => vals.add(x));
+          else if (v) vals.add(v);
+        });
+
+        [...vals].sort().forEach(v => {
+          const opt = document.createElement('option');
+          opt.value = v;
+          opt.textContent = v;
+          sel.appendChild(opt);
+        });
+
+        sel.onchange = () => filterRecords();
+        group.appendChild(sel);
+      });
+    }
+
+    function filterRecords() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filters = {};
+
+      document.querySelectorAll('.filter-select').forEach(sel => {
+        if (sel.value) filters[sel.dataset.fieldName] = sel.value;
+      });
+
+      filteredRecords = allRecords.filter(record => {
+        if (query) {
+          const text = Object.values(record.fields).map(v => {
+            if (Array.isArray(v)) return v.map(x => typeof x === 'object' ? (x.filename || '') : String(x)).join(' ');
+            if (typeof v === 'object' && v !== null) return JSON.stringify(v);
+            return String(v || '');
+          }).join(' ').toLowerCase();
+          if (!text.includes(query)) return false;
+        }
+
+        for (const [fieldName, filterVal] of Object.entries(filters)) {
+          const val = record.fields[fieldName];
+          if (Array.isArray(val)) {
+            if (!val.includes(filterVal)) return false;
+          } else if (val !== filterVal) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+
+      renderCurrentView();
+    }
+
+    /* ─── View Switching ──────────────────────────────────── */
+    function switchView(view) {
+      currentView = view;
+      document.getElementById('btnPortfolio').classList.toggle('active', view === 'portfolio');
+      document.getElementById('btnSwipe').classList.toggle('active', view === 'swipe');
+      document.getElementById('btnEmbed').classList.toggle('active', view === 'embed');
+      document.getElementById('toolbar').style.display = view === 'portfolio' ? 'flex' : 'none';
+      renderCurrentView();
+    }
+
+    function renderCurrentView() {
+      document.getElementById('portfolioView').style.display = 'none';
+      document.getElementById('swipeView').style.display = 'none';
+      document.getElementById('embedView').style.display = 'none';
+      document.getElementById('emptyState').style.display = 'none';
+
+      document.getElementById('recordCount').textContent =
+        `${filteredRecords.length} of ${allRecords.length} records`;
+
+      if (currentView === 'embed') {
+        renderEmbedView();
+      } else if (currentView === 'portfolio') {
+        if (filteredRecords.length === 0 && !isEmbedOnly) {
+          document.getElementById('emptyState').style.display = 'flex';
+        } else {
+          renderPortfolio();
+        }
+      } else {
+        renderSwipeView();
+      }
+    }
+
+    /* ─── Embed View ─────────────────────────────────────── */
+    function renderEmbedView() {
+      const embedView = document.getElementById('embedView');
+      const iframe = document.getElementById('embedIframe');
+      embedView.style.display = 'block';
+
+      // Only set src once to avoid reloading
+      if (!iframe.src || iframe.src === '' || iframe.src === window.location.href) {
+        iframe.src = embedUrl;
+      }
+    }
+
+    function startEmbedOnly() {
+      isEmbedOnly = true;
+      currentView = 'embed';
+
+      document.getElementById('setupScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('topbarTable').textContent = 'Airtable View';
+
+      // Hide data-dependent controls
+      document.getElementById('snapshotBanner').style.display = 'none';
+      document.getElementById('liveBanner').style.display = 'none';
+      document.getElementById('btnPublishSnapshot').style.display = 'none';
+      document.getElementById('btnPublishLive').style.display = 'none';
+      document.getElementById('btnDisconnect').style.display = 'block';
+
+      // Activate embed tab
+      document.getElementById('btnPortfolio').classList.remove('active');
+      document.getElementById('btnSwipe').classList.remove('active');
+      document.getElementById('btnEmbed').classList.add('active');
+
+      document.getElementById('toolbar').style.display = 'none';
+      renderCurrentView();
+    }
+
+    /* ─── Portfolio View Rendering ─────────────────────────── */
+    function renderPortfolio() {
+      const grid = document.getElementById('portfolioGrid');
+      grid.innerHTML = '';
+      document.getElementById('portfolioView').style.display = 'block';
+
+      filteredRecords.forEach((record, idx) => {
+        const card = document.createElement('div');
+        card.className = 'portfolio-card';
+        card.onclick = () => openModal(record);
+
+        const imgUrl = getImageUrl(record);
+        const imgDiv = document.createElement('div');
+        imgDiv.className = 'portfolio-card-image';
+        if (imgUrl) {
+          const img = document.createElement('img');
+          img.src = imgUrl;
+          img.alt = '';
+          img.loading = 'lazy';
+          imgDiv.appendChild(img);
+        } else {
+          const icon = document.createElement('div');
+          icon.className = 'placeholder-icon';
+          icon.textContent = getInitials(record);
+          icon.style.fontSize = '40px';
+          icon.style.fontFamily = 'Montserrat, sans-serif';
+          icon.style.fontWeight = '800';
+          icon.style.color = 'rgba(255,255,255,0.3)';
+          imgDiv.appendChild(icon);
+        }
+        card.appendChild(imgDiv);
+
+        const body = document.createElement('div');
+        body.className = 'portfolio-card-body';
+
+        const title = document.createElement('div');
+        title.className = 'portfolio-card-title';
+        title.textContent = getTitle(record);
+        body.appendChild(title);
+
+        if (subtitleField) {
+          const sub = document.createElement('div');
+          sub.className = 'portfolio-card-subtitle';
+          sub.textContent = record.fields[subtitleField.name] || '';
+          body.appendChild(sub);
+        }
+
+        const chipsDiv = document.createElement('div');
+        chipsDiv.className = 'portfolio-card-fields';
+        getDisplayFields(record).slice(0, 4).forEach(({label, value}) => {
+          const chip = document.createElement('span');
+          chip.className = 'field-chip';
+          chip.innerHTML = `<span class="field-label">${escHtml(label)}</span> ${escHtml(truncate(value, 30))}`;
+          chipsDiv.appendChild(chip);
+        });
+        body.appendChild(chipsDiv);
+
+        const tags = getSelectValues(record);
+        if (tags.length > 0) {
+          const tagsDiv = document.createElement('div');
+          tagsDiv.className = 'portfolio-card-tags';
+          tags.slice(0, 5).forEach((tag, i) => {
+            const el = document.createElement('span');
+            el.className = `tag ${tagColors[i % tagColors.length]}`;
+            el.textContent = tag;
+            tagsDiv.appendChild(el);
+          });
+          body.appendChild(tagsDiv);
+        }
+
+        card.appendChild(body);
+        grid.appendChild(card);
+      });
+    }
+
+    /* ─── Swipe View Rendering ─────────────────────────────── */
+    function renderSwipeView() {
+      const container = document.getElementById('swipeContainer');
+      const view = document.getElementById('swipeView');
+      const endMsg = document.getElementById('swipeEndMsg');
+      const actions = document.getElementById('swipeActions');
+
+      view.style.display = 'flex';
+
+      if (filteredRecords.length === 0) {
+        container.innerHTML = '';
+        endMsg.style.display = 'block';
+        actions.style.display = 'none';
+        document.getElementById('swipeSummary').textContent = 'No records to review.';
+        return;
+      }
+
+      if (swipeIndex >= filteredRecords.length) {
+        showSwipeEnd();
+        return;
+      }
+
+      endMsg.style.display = 'none';
+      actions.style.display = 'flex';
+      updateSwipeProgress();
+      renderSwipeCard();
+    }
+
+    function renderSwipeCard() {
+      const container = document.getElementById('swipeContainer');
+      container.innerHTML = '';
+
+      if (swipeIndex >= filteredRecords.length) return;
+
+      const record = filteredRecords[swipeIndex];
+      const card = document.createElement('div');
+      card.className = 'swipe-card';
+      card.id = 'currentSwipeCard';
+
+      card.innerHTML = `
+        <div class="swipe-overlay swipe-overlay-left" id="overlayLeft">SKIP</div>
+        <div class="swipe-overlay swipe-overlay-right" id="overlayRight">SAVE</div>
+      `;
+
+      const imgDiv = document.createElement('div');
+      imgDiv.className = 'swipe-card-image';
+      const imgUrl = getImageUrl(record);
+      if (imgUrl) {
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = '';
+        imgDiv.appendChild(img);
+      } else {
+        const icon = document.createElement('div');
+        icon.className = 'placeholder-icon';
+        icon.textContent = getInitials(record);
+        icon.style.fontFamily = 'Montserrat, sans-serif';
+        icon.style.fontWeight = '800';
+        imgDiv.appendChild(icon);
+      }
+      card.appendChild(imgDiv);
+
+      const body = document.createElement('div');
+      body.className = 'swipe-card-body';
+
+      const title = document.createElement('div');
+      title.className = 'swipe-card-title';
+      title.textContent = getTitle(record);
+      body.appendChild(title);
+
+      if (subtitleField) {
+        const sub = document.createElement('div');
+        sub.className = 'swipe-card-subtitle';
+        sub.textContent = record.fields[subtitleField.name] || '';
+        body.appendChild(sub);
+      }
+
+      getDisplayFields(record).slice(0, 6).forEach(({label, value}) => {
+        const row = document.createElement('div');
+        row.className = 'swipe-card-detail';
+        row.innerHTML = `<span class="detail-label">${escHtml(label)}</span><span class="detail-value">${escHtml(truncate(value, 60))}</span>`;
+        body.appendChild(row);
+      });
+
+      card.appendChild(body);
+      container.appendChild(card);
+
+      setupSwipeDrag(card);
+    }
+
+    function setupSwipeDrag(card) {
+      let startX = 0, currentX = 0, isDragging = false;
+
+      const onStart = (x) => {
+        isDragging = true;
+        startX = x;
+        card.style.transition = 'none';
+      };
+
+      const onMove = (x) => {
+        if (!isDragging) return;
+        currentX = x - startX;
+        const rotate = currentX * 0.08;
+        card.style.transform = `translateX(${currentX}px) rotate(${rotate}deg)`;
+
+        const opacity = Math.min(Math.abs(currentX) / 120, 1);
+        if (currentX < 0) {
+          document.getElementById('overlayLeft').style.opacity = opacity;
+          document.getElementById('overlayRight').style.opacity = 0;
+        } else {
+          document.getElementById('overlayRight').style.opacity = opacity;
+          document.getElementById('overlayLeft').style.opacity = 0;
+        }
+      };
+
+      const onEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        card.style.transition = '';
+
+        if (Math.abs(currentX) > 100) {
+          swipeAction(currentX > 0 ? 'right' : 'left');
+        } else {
+          card.style.transform = '';
+          document.getElementById('overlayLeft').style.opacity = 0;
+          document.getElementById('overlayRight').style.opacity = 0;
+        }
+      };
+
+      card.addEventListener('mousedown', e => { e.preventDefault(); onStart(e.clientX); });
+      document.addEventListener('mousemove', e => onMove(e.clientX));
+      document.addEventListener('mouseup', onEnd);
+
+      card.addEventListener('touchstart', e => onStart(e.touches[0].clientX), { passive: true });
+      card.addEventListener('touchmove', e => onMove(e.touches[0].clientX), { passive: true });
+      card.addEventListener('touchend', onEnd);
+    }
+
+    function swipeAction(direction) {
+      const card = document.getElementById('currentSwipeCard');
+      if (!card) return;
+
+      card.classList.add(direction === 'left' ? 'swiping-left' : 'swiping-right');
+
+      if (direction === 'right') {
+        swipeSaved.push(filteredRecords[swipeIndex]);
+      } else {
+        swipeSkipped.push(filteredRecords[swipeIndex]);
+      }
+
+      swipeIndex++;
+      updateSwipeProgress();
+
+      setTimeout(() => {
+        if (swipeIndex >= filteredRecords.length) {
+          showSwipeEnd();
+        } else {
+          renderSwipeCard();
+        }
+      }, 350);
+    }
+
+    function updateSwipeProgress() {
+      const total = filteredRecords.length;
+      const current = Math.min(swipeIndex + 1, total);
+      document.getElementById('swipeProgress').textContent = `${current} / ${total}`;
+      document.getElementById('swipeProgressFill').style.width = `${(current / total) * 100}%`;
+    }
+
+    function showSwipeEnd() {
+      document.getElementById('swipeContainer').innerHTML = '';
+      document.getElementById('swipeActions').style.display = 'none';
+      const endMsg = document.getElementById('swipeEndMsg');
+      endMsg.style.display = 'block';
+      document.getElementById('swipeSummary').textContent =
+        `You saved ${swipeSaved.length} and skipped ${swipeSkipped.length} records.`;
+    }
+
+    function restartSwipe() {
+      swipeIndex = 0;
+      swipeSaved = [];
+      swipeSkipped = [];
+      renderSwipeView();
+    }
+
+    /* ─── Modal ───────────────────────────────────────────── */
+    function openModal(record) {
+      if (!record) return;
+      const backdrop = document.getElementById('modalBackdrop');
+      const imgContainer = document.getElementById('modalImage');
+      const body = document.getElementById('modalBody');
+
+      const imgUrl = getImageUrl(record);
+      imgContainer.innerHTML = '<button class="modal-close" onclick="closeModal()">&times;</button>';
+      if (imgUrl) {
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = '';
+        imgContainer.insertBefore(img, imgContainer.firstChild);
+      }
+
+      body.innerHTML = `<div class="modal-title">${escHtml(getTitle(record))}</div>`;
+
+      fields.forEach(f => {
+        const val = record.fields[f.name];
+        if (val === undefined || val === null || val === '') return;
+        if (f === imageField) return;
+
+        const fieldDiv = document.createElement('div');
+        fieldDiv.className = 'modal-field';
+
+        const label = document.createElement('div');
+        label.className = 'modal-field-label';
+        label.textContent = f.name;
+        fieldDiv.appendChild(label);
+
+        const valueDiv = document.createElement('div');
+        valueDiv.className = 'modal-field-value';
+        valueDiv.innerHTML = formatFieldValue(f, val);
+        fieldDiv.appendChild(valueDiv);
+
+        body.appendChild(fieldDiv);
+      });
+
+      backdrop.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(event) {
+      if (event && event.target !== document.getElementById('modalBackdrop') && event.target !== document.querySelector('.modal-close')) return;
+      document.getElementById('modalBackdrop').classList.remove('visible');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+      if (currentView === 'swipe' && swipeIndex < filteredRecords.length) {
+        if (e.key === 'ArrowLeft') swipeAction('left');
+        if (e.key === 'ArrowRight') swipeAction('right');
+      }
+    });
+
+    /* ─── Export CSV ──────────────────────────────────────── */
+    function exportCSV() {
+      if (filteredRecords.length === 0) return;
+
+      const headers = fields.map(f => f.name);
+      const rows = filteredRecords.map(r =>
+        fields.map(f => {
+          const v = r.fields[f.name];
+          if (v === undefined || v === null) return '';
+          if (Array.isArray(v)) {
+            if (v.length > 0 && typeof v[0] === 'object') return v.map(x => x.url || x.filename || '').join('; ');
+            return v.join('; ');
+          }
+          if (typeof v === 'object') return JSON.stringify(v);
+          return String(v);
+        })
+      );
+
+      let csv = [headers, ...rows]
+        .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+        .join('\n');
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `airtable-export-${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    /* ─── Helpers ─────────────────────────────────────────── */
+    function getTitle(record) {
+      if (titleField) return record.fields[titleField.name] || 'Untitled';
+      const firstVal = Object.values(record.fields)[0];
+      return firstVal ? String(firstVal) : 'Untitled';
+    }
+
+    function getInitials(record) {
+      const t = getTitle(record);
+      return t.split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+    }
+
+    function getImageUrl(record) {
+      if (!imageField) return null;
+      const val = record.fields[imageField.name];
+      if (!val) return null;
+      if (Array.isArray(val) && val.length > 0) {
+        const att = val[0];
+        return att.thumbnails?.large?.url || att.url || null;
+      }
+      if (typeof val === 'string' && val.startsWith('http')) return val;
+      return null;
+    }
+
+    function getDisplayFields(record) {
+      const result = [];
+      for (const f of fields) {
+        if (f === titleField || f === subtitleField || f === imageField) continue;
+        const v = record.fields[f.name];
+        if (v === undefined || v === null || v === '') continue;
+        if (f.type === 'singleSelect' || f.type === 'multipleSelects') continue;
+
+        let display = '';
+        if (Array.isArray(v)) {
+          if (v.length > 0 && typeof v[0] === 'object') continue;
+          display = v.join(', ');
+        } else if (typeof v === 'object') {
+          continue;
+        } else {
+          display = String(v);
+        }
+
+        if (display) result.push({ label: f.name, value: display });
+      }
+      return result;
+    }
+
+    function getSelectValues(record) {
+      const vals = [];
+      for (const f of fields) {
+        if (f.type === 'singleSelect') {
+          const v = record.fields[f.name];
+          if (v) vals.push(v);
+        } else if (f.type === 'multipleSelects') {
+          const v = record.fields[f.name];
+          if (Array.isArray(v)) vals.push(...v);
+        }
+      }
+      return vals;
+    }
+
+    function formatFieldValue(field, value) {
+      if (Array.isArray(value)) {
+        if (value.length > 0 && typeof value[0] === 'object' && value[0].url) {
+          return value.map(a => `<a href="${escHtml(a.url)}" target="_blank">${escHtml(a.filename || 'Attachment')}</a>`).join(', ');
+        }
+        return escHtml(value.join(', '));
+      }
+
+      if (field.type === 'url' || (typeof value === 'string' && value.match(/^https?:\/\//))) {
+        return `<a href="${escHtml(value)}" target="_blank">${escHtml(truncate(value, 50))}</a>`;
+      }
+
+      if (field.type === 'email') {
+        return `<a href="mailto:${escHtml(value)}">${escHtml(value)}</a>`;
+      }
+
+      if (field.type === 'checkbox') {
+        return value ? '&#10003; Yes' : '&#10007; No';
+      }
+
+      if (field.type === 'number' || field.type === 'currency' || field.type === 'percent') {
+        if (field.type === 'currency') return '$' + Number(value).toLocaleString();
+        if (field.type === 'percent') return (Number(value) * 100).toFixed(1) + '%';
+        return Number(value).toLocaleString();
+      }
+
+      if (field.type === 'date' || field.type === 'dateTime') {
+        try { return new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }); }
+        catch(e) { return escHtml(String(value)); }
+      }
+
+      if (typeof value === 'object') return escHtml(JSON.stringify(value));
+
+      return escHtml(String(value));
+    }
+
+    function escHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function truncate(str, max) {
+      if (str.length <= max) return str;
+      return str.slice(0, max) + '...';
+    }
+
+    function disconnect() {
+      localStorage.removeItem('sengo_airtable_session');
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('setupScreen').style.display = 'flex';
+      document.getElementById('apiToken').value = '';
+      document.getElementById('btnConnect').disabled = false;
+      document.getElementById('btnConnect').textContent = 'Connect & Load';
+      document.getElementById('embedIframe').src = '';
+      document.getElementById('basePicker').style.display = 'none';
+      document.getElementById('tablePicker').style.display = 'none';
+      document.getElementById('setupError').style.display = 'none';
+      document.getElementById('setupSuccess').style.display = 'none';
+      setupStep = 'token';
+      isEmbedOnly = false;
+      currentView = 'portfolio';
+      allRecords = [];
+      filteredRecords = [];
+    }
+  </script>
+
+
+</body></html>
