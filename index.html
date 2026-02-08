@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClubStack - Investment Clubs, Reimagined</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ========== NAV ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="logo" onclick="showView('landing')">
+                <span class="logo-icon">CS</span>
+                <span class="logo-text">ClubStack</span>
+            </a>
+            <div class="nav-links">
+                <a href="#" onclick="showView('discover')" class="nav-link">Discover</a>
+                <a href="#" onclick="showView('create')" class="nav-link">Start a Club</a>
+                <a href="#" onclick="showView('dashboard')" class="nav-link">Dashboard</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-ghost" onclick="showView('discover')">Explore</button>
+                <button class="btn btn-primary" onclick="showView('create')">Launch Club</button>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#" onclick="showView('discover'); toggleMobileMenu()">Discover</a>
+            <a href="#" onclick="showView('create'); toggleMobileMenu()">Start a Club</a>
+            <a href="#" onclick="showView('dashboard'); toggleMobileMenu()">Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- ========== LANDING VIEW ========== -->
+    <section class="view active" id="view-landing">
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">Powered by Airtable</div>
+                <h1>Invest Together.<br><span class="gradient-text">Build Wealth Together.</span></h1>
+                <p class="hero-subtitle">
+                    Create or join investment clubs with friends, family, or like-minded investors.
+                    Pool resources, share knowledge, and grow your portfolio as a team.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-lg" onclick="showView('discover')">
+                        Browse Clubs
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                    <button class="btn btn-outline btn-lg" onclick="showView('create')">
+                        Start Your Club
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="stat-clubs">0</span>
+                        <span class="stat-label">Active Clubs</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="stat-members">0</span>
+                        <span class="stat-label">Members</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="stat-invested">$0</span>
+                        <span class="stat-label">Total Invested</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card-stack">
+                    <div class="hero-card card-back-2">
+                        <div class="mini-card-header">
+                            <span class="mini-avatar" style="background:#6366f1">TG</span>
+                            <span>Tech Growth Fund</span>
+                        </div>
+                    </div>
+                    <div class="hero-card card-back-1">
+                        <div class="mini-card-header">
+                            <span class="mini-avatar" style="background:#f59e0b">RE</span>
+                            <span>Real Estate Collective</span>
+                        </div>
+                    </div>
+                    <div class="hero-card card-front">
+                        <div class="mini-card-header">
+                            <span class="mini-avatar" style="background:#10b981">GI</span>
+                            <span>Green Impact Fund</span>
+                        </div>
+                        <div class="mini-card-body">
+                            <div class="mini-tag">ESG</div>
+                            <div class="mini-tag">Sustainable</div>
+                            <div class="mini-stat">$500/mo min</div>
+                            <div class="mini-stat">24 members</div>
+                        </div>
+                        <div class="mini-card-footer">
+                            <span class="mini-return">+18.4% YTD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="section how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>Create Your Club</h3>
+                    <p>Set your investment thesis, minimum buy-in, meeting schedule, and member cap.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                    </div>
+                    <h3>Attract Members</h3>
+                    <p>Investors swipe through clubs to find ones that match their goals and risk appetite.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3>Grow Together</h3>
+                    <p>Pool funds, vote on investments, track performance, and build wealth as a team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== DISCOVER / SWIPE VIEW ========== -->
+    <section class="view" id="view-discover">
+        <div class="discover-container">
+            <div class="discover-header">
+                <h2>Discover Clubs</h2>
+                <div class="discover-filters">
+                    <button class="filter-chip active" onclick="filterClubs('all', this)">All</button>
+                    <button class="filter-chip" onclick="filterClubs('stocks', this)">Stocks</button>
+                    <button class="filter-chip" onclick="filterClubs('real-estate', this)">Real Estate</button>
+                    <button class="filter-chip" onclick="filterClubs('crypto', this)">Crypto</button>
+                    <button class="filter-chip" onclick="filterClubs('startups', this)">Startups</button>
+                    <button class="filter-chip" onclick="filterClubs('esg', this)">ESG</button>
+                </div>
+            </div>
+
+            <div class="swipe-area">
+                <div class="card-stack" id="cardStack">
+                    <!-- Cards injected by JS -->
+                </div>
+
+                <div class="empty-state" id="emptyState" style="display:none;">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <h3>No more clubs to show</h3>
+                    <p>Check back later or adjust your filters</p>
+                    <button class="btn btn-primary" onclick="resetCards()">Reset</button>
+                </div>
+
+                <div class="swipe-actions" id="swipeActions">
+                    <button class="swipe-btn pass" onclick="swipeCard('left')" title="Pass">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                    <button class="swipe-btn info" onclick="showCardDetail()" title="More Info">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    </button>
+                    <button class="swipe-btn like" onclick="swipeCard('right')" title="Interested">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="swipe-hint">
+                <span>Swipe right to show interest, left to pass</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CLUB DETAIL MODAL ========== -->
+    <div class="modal-overlay" id="clubDetailModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('clubDetailModal')">&times;</button>
+            <div id="clubDetailBody">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== CREATE CLUB VIEW ========== -->
+    <section class="view" id="view-create">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Launch Your Investment Club</h2>
+                <p>Fill in the details below. Everything gets saved to Airtable so you can manage it from there.</p>
+            </div>
+
+            <div class="form-progress">
+                <div class="progress-step active" data-step="1"><span>1</span> Basics</div>
+                <div class="progress-step" data-step="2"><span>2</span> Investment</div>
+                <div class="progress-step" data-step="3"><span>3</span> Structure</div>
+                <div class="progress-step" data-step="4"><span>4</span> Publish</div>
+            </div>
+
+            <form id="createClubForm" onsubmit="submitClub(event)">
+                <!-- Step 1: Basics -->
+                <div class="form-step active" data-step="1">
+                    <div class="form-group">
+                        <label for="clubName">Club Name <span class="required">*</span></label>
+                        <input type="text" id="clubName" placeholder="e.g. Bay Area Growth Fund" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clubTagline">Tagline</label>
+                        <input type="text" id="clubTagline" placeholder="e.g. Investing in tomorrow's tech leaders" maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="clubDescription">Description <span class="required">*</span></label>
+                        <textarea id="clubDescription" rows="4" placeholder="Describe your club's mission, values, and what makes it unique..." required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="clubLocation">Location</label>
+                            <input type="text" id="clubLocation" placeholder="e.g. San Francisco, CA">
+                        </div>
+                        <div class="form-group">
+                            <label for="clubFormat">Meeting Format</label>
+                            <select id="clubFormat">
+                                <option value="virtual">Virtual Only</option>
+                                <option value="in-person">In-Person</option>
+                                <option value="hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clubImage">Cover Image URL</label>
+                        <input type="url" id="clubImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-nav">
+                        <span></span>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next: Investment Details</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Investment Details -->
+                <div class="form-step" data-step="2">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="clubFocus">Investment Focus <span class="required">*</span></label>
+                            <select id="clubFocus" required>
+                                <option value="">Select focus area</option>
+                                <option value="stocks">Public Stocks</option>
+                                <option value="real-estate">Real Estate</option>
+                                <option value="crypto">Crypto / Web3</option>
+                                <option value="startups">Startups / VC</option>
+                                <option value="esg">ESG / Impact</option>
+                                <option value="mixed">Mixed / Diversified</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="clubStrategy">Strategy</label>
+                            <select id="clubStrategy">
+                                <option value="growth">Growth</option>
+                                <option value="value">Value</option>
+                                <option value="income">Income / Dividend</option>
+                                <option value="aggressive">Aggressive</option>
+                                <option value="conservative">Conservative</option>
+                                <option value="balanced">Balanced</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="clubMinInvestment">Min Monthly Contribution <span class="required">*</span></label>
+                            <div class="input-prefix">
+                                <span>$</span>
+                                <input type="number" id="clubMinInvestment" placeholder="100" min="1" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="clubMaxInvestment">Max Monthly Contribution</label>
+                            <div class="input-prefix">
+                                <span>$</span>
+                                <input type="number" id="clubMaxInvestment" placeholder="5000" min="1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Tags (select all that apply)</label>
+                        <div class="tag-grid">
+                            <label class="tag-option"><input type="checkbox" value="tech"> Tech</label>
+                            <label class="tag-option"><input type="checkbox" value="healthcare"> Healthcare</label>
+                            <label class="tag-option"><input type="checkbox" value="energy"> Energy</label>
+                            <label class="tag-option"><input type="checkbox" value="finance"> Finance</label>
+                            <label class="tag-option"><input type="checkbox" value="consumer"> Consumer</label>
+                            <label class="tag-option"><input type="checkbox" value="international"> International</label>
+                            <label class="tag-option"><input type="checkbox" value="small-cap"> Small Cap</label>
+                            <label class="tag-option"><input type="checkbox" value="large-cap"> Large Cap</label>
+                            <label class="tag-option"><input type="checkbox" value="etf"> ETF</label>
+                            <label class="tag-option"><input type="checkbox" value="options"> Options</label>
+                            <label class="tag-option"><input type="checkbox" value="sustainable"> Sustainable</label>
+                            <label class="tag-option"><input type="checkbox" value="ai-ml"> AI / ML</label>
+                        </div>
+                    </div>
+                    <div class="form-nav">
+                        <button type="button" class="btn btn-ghost" onclick="prevStep(1)">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next: Structure</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Structure -->
+                <div class="form-step" data-step="3">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="clubMaxMembers">Max Members <span class="required">*</span></label>
+                            <input type="number" id="clubMaxMembers" placeholder="25" min="2" max="999" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clubMeetingFreq">Meeting Frequency</label>
+                            <select id="clubMeetingFreq">
+                                <option value="weekly">Weekly</option>
+                                <option value="biweekly" selected>Bi-Weekly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="quarterly">Quarterly</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clubVoting">Decision Making</label>
+                        <select id="clubVoting">
+                            <option value="majority">Majority Vote</option>
+                            <option value="supermajority">Super Majority (2/3)</option>
+                            <option value="unanimous">Unanimous</option>
+                            <option value="manager">Fund Manager Decides</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="clubExperience">Minimum Experience Level</label>
+                        <select id="clubExperience">
+                            <option value="beginner">Beginner Friendly</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="accredited">Accredited Investors Only</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="clubRules">Club Rules / Requirements</label>
+                        <textarea id="clubRules" rows="3" placeholder="Any special rules, requirements, or expectations for members..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="founderName">Your Name <span class="required">*</span></label>
+                        <input type="text" id="founderName" placeholder="Jane Smith" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="founderEmail">Your Email <span class="required">*</span></label>
+                        <input type="email" id="founderEmail" placeholder="jane@example.com" required>
+                    </div>
+                    <div class="form-nav">
+                        <button type="button" class="btn btn-ghost" onclick="prevStep(2)">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(4)">Review & Publish</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Review & Publish -->
+                <div class="form-step" data-step="4">
+                    <div class="review-card" id="reviewCard">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div class="form-nav">
+                        <button type="button" class="btn btn-ghost" onclick="prevStep(3)">Back to Edit</button>
+                        <button type="submit" class="btn btn-primary btn-lg" id="publishBtn">
+                            Publish to ClubStack
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="form-success" id="formSuccess" style="display:none;">
+                <div class="success-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h3>Your club is live!</h3>
+                <p>Investors can now discover your club. You'll receive an email when someone expresses interest.</p>
+                <div class="success-actions">
+                    <button class="btn btn-primary" onclick="showView('discover')">See It Live</button>
+                    <button class="btn btn-outline" onclick="showView('dashboard')">Go to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== DASHBOARD VIEW ========== -->
+    <section class="view" id="view-dashboard">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h2>Your Dashboard</h2>
+                <p>Manage your clubs and track interest from investors.</p>
+            </div>
+
+            <div class="dashboard-tabs">
+                <button class="dash-tab active" onclick="switchDashTab('my-clubs', this)">My Clubs</button>
+                <button class="dash-tab" onclick="switchDashTab('interested', this)">Interested In</button>
+            </div>
+
+            <div class="dash-panel active" id="panel-my-clubs">
+                <div class="dash-empty" id="myClubsEmpty">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                    <h3>No clubs yet</h3>
+                    <p>Start your first investment club and begin building your community.</p>
+                    <button class="btn btn-primary" onclick="showView('create')">Create Club</button>
+                </div>
+                <div class="dash-list" id="myClubsList"></div>
+            </div>
+
+            <div class="dash-panel" id="panel-interested">
+                <div class="dash-empty" id="interestedEmpty">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <h3>No liked clubs yet</h3>
+                    <p>Swipe through clubs to find ones that match your investment style.</p>
+                    <button class="btn btn-primary" onclick="showView('discover')">Discover Clubs</button>
+                </div>
+                <div class="dash-list" id="interestedList"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== JOIN MODAL ========== -->
+    <div class="modal-overlay" id="joinModal">
+        <div class="modal-content modal-sm">
+            <button class="modal-close" onclick="closeModal('joinModal')">&times;</button>
+            <h3>Express Interest</h3>
+            <p id="joinClubName"></p>
+            <form id="joinForm" onsubmit="submitInterest(event)">
+                <div class="form-group">
+                    <label for="joinName">Your Name</label>
+                    <input type="text" id="joinName" required>
+                </div>
+                <div class="form-group">
+                    <label for="joinEmail">Your Email</label>
+                    <input type="email" id="joinEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="joinMessage">Message (optional)</label>
+                    <textarea id="joinMessage" rows="3" placeholder="Tell the club organizer why you'd be a great member..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Send Interest</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========== SETTINGS MODAL (Airtable Config) ========== -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-content modal-sm">
+            <button class="modal-close" onclick="closeModal('settingsModal')">&times;</button>
+            <h3>Airtable Configuration</h3>
+            <p class="modal-desc">Connect your Airtable base to persist club data. See <a href="AIRTABLE_SETUP.md" target="_blank">setup guide</a>.</p>
+            <form onsubmit="saveAirtableConfig(event)">
+                <div class="form-group">
+                    <label for="airtableToken">Personal Access Token</label>
+                    <input type="password" id="airtableToken" placeholder="pat...">
+                </div>
+                <div class="form-group">
+                    <label for="airtableBaseId">Base ID</label>
+                    <input type="text" id="airtableBaseId" placeholder="app...">
+                </div>
+                <div class="form-group">
+                    <label for="airtableClubsTable">Clubs Table Name</label>
+                    <input type="text" id="airtableClubsTable" value="Clubs">
+                </div>
+                <div class="form-group">
+                    <label for="airtableInterestTable">Interest Table Name</label>
+                    <input type="text" id="airtableInterestTable" value="Interest">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Save & Connect</button>
+            </form>
+            <div class="config-status" id="configStatus"></div>
+        </div>
+    </div>
+
+    <!-- ========== TOAST ========== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer" id="mainFooter">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <span class="logo-icon">CS</span>
+                <span>ClubStack &copy; 2026</span>
+            </div>
+            <div class="footer-right">
+                <button class="btn btn-ghost btn-sm" onclick="openModal('settingsModal')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    Airtable Settings
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
