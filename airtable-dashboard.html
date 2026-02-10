@@ -730,12 +730,37 @@
       transform: rotate(-15deg);
     }
 
+    .swipe-hint {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 20px;
+      line-height: 1.4;
+    }
+
     .swipe-actions {
       display: flex;
       gap: 24px;
-      margin-top: 28px;
-      align-items: center;
+      margin-top: 12px;
+      align-items: flex-start;
     }
+
+    .swipe-btn-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .swipe-btn-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .swipe-btn-label-skip { color: #ef4444; }
+    .swipe-btn-label-save { color: #22c55e; }
 
     .swipe-btn {
       width: 64px;
@@ -1309,16 +1334,25 @@
         <div class="swipe-progress-fill" id="swipeProgressFill"></div>
       </div>
       <div class="swipe-container" id="swipeContainer"></div>
+      <div class="swipe-hint" id="swipeHint">Skipped companies are saved — you can always review them later</div>
       <div class="swipe-actions" id="swipeActions">
-        <button class="swipe-btn swipe-btn-skip" onclick="swipeAction('left')" title="Skip">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-        <button class="swipe-btn swipe-btn-info" onclick="openModal(filteredRecords[swipeIndex])" title="Details">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        </button>
-        <button class="swipe-btn swipe-btn-save" onclick="swipeAction('right')" title="Save">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        </button>
+        <div class="swipe-btn-wrap">
+          <button class="swipe-btn swipe-btn-skip" onclick="swipeAction('left')" title="Skip">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+          <span class="swipe-btn-label swipe-btn-label-skip">Skip</span>
+        </div>
+        <div class="swipe-btn-wrap">
+          <button class="swipe-btn swipe-btn-info" onclick="openModal(filteredRecords[swipeIndex])" title="Details">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </button>
+        </div>
+        <div class="swipe-btn-wrap">
+          <button class="swipe-btn swipe-btn-save" onclick="swipeAction('right')" title="Save">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+          <span class="swipe-btn-label swipe-btn-label-save">Save</span>
+        </div>
       </div>
       <div class="swipe-end-msg" id="swipeEndMsg">
         <h2>All Done!</h2>
@@ -2417,6 +2451,7 @@
       const view = document.getElementById('swipeView');
       const endMsg = document.getElementById('swipeEndMsg');
       const actions = document.getElementById('swipeActions');
+      const hint = document.getElementById('swipeHint');
 
       view.style.display = 'flex';
 
@@ -2424,6 +2459,7 @@
         container.innerHTML = '';
         endMsg.style.display = 'block';
         actions.style.display = 'none';
+        hint.style.display = 'none';
         document.getElementById('swipeSummary').textContent = 'No records to review.';
         return;
       }
@@ -2435,6 +2471,7 @@
 
       endMsg.style.display = 'none';
       actions.style.display = 'flex';
+      hint.style.display = 'block';
       updateSwipeProgress();
       renderSwipeCard();
     }
@@ -2597,10 +2634,11 @@
     function showSwipeEnd() {
       document.getElementById('swipeContainer').innerHTML = '';
       document.getElementById('swipeActions').style.display = 'none';
-      const endMsg = document.getElementById('swipeEndMsg');
+      document.getElementById('swipeHint').style.display = 'none';
+      var endMsg = document.getElementById('swipeEndMsg');
       endMsg.style.display = 'block';
       document.getElementById('swipeSummary').textContent =
-        `You saved ${swipeSaved.length} and skipped ${swipeSkipped.length} records.`;
+        'You saved ' + swipeSaved.length + ' and skipped ' + swipeSkipped.length + ' records. Check the Saved and Skipped tabs to review them anytime.';
     }
 
     function restartSwipe() {
