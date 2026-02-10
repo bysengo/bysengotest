@@ -377,7 +377,6 @@ async function initApp() {
 
 function loadConfig() {
     if (state.airtable) {
-        const el = document.getElementById;
         const token = document.getElementById('airtableToken');
         const baseId = document.getElementById('airtableBaseId');
         const clubsTable = document.getElementById('airtableClubsTable');
@@ -938,11 +937,17 @@ function renderDashboard() {
                         <p>${club.currentMembers || 1} member${(club.currentMembers || 1) === 1 ? '' : 's'} &bull; ${capitalize(club.focus)}</p>
                     </div>
                     <div class="dash-card-actions">
-                        <button class="btn btn-ghost btn-sm" onclick='showClubDetail(${JSON.stringify(club).replace(/'/g, "\\'")})'>View</button>
+                        <button class="btn btn-ghost btn-sm" data-view-club="${club.id}">View</button>
                     </div>
                 </div>
             `;
         }).join('');
+        myList.querySelectorAll('[data-view-club]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const c = state.clubs.find(x => x.id === btn.dataset.viewClub) || state.myClubs.find(x => x.id === btn.dataset.viewClub);
+                if (c) showClubDetail(c);
+            });
+        });
     } else {
         myEmpty.style.display = 'block';
         myList.innerHTML = '';
@@ -964,12 +969,21 @@ function renderDashboard() {
                         <p>$${club.minInvestment.toLocaleString()}/mo min &bull; ${capitalize(club.focus)}</p>
                     </div>
                     <div class="dash-card-actions">
-                        <button class="btn btn-ghost btn-sm" onclick='showClubDetail(${JSON.stringify(club).replace(/'/g, "\\'")})'>Details</button>
-                        <button class="btn btn-primary btn-sm" onclick="openJoinModal('${club.id}')">Join</button>
+                        <button class="btn btn-ghost btn-sm" data-detail-club="${club.id}">Details</button>
+                        <button class="btn btn-primary btn-sm" data-join-club="${club.id}">Join</button>
                     </div>
                 </div>
             `;
         }).join('');
+        intList.querySelectorAll('[data-detail-club]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const c = state.clubs.find(x => x.id === btn.dataset.detailClub) || state.likedClubs.find(x => x.id === btn.dataset.detailClub);
+                if (c) showClubDetail(c);
+            });
+        });
+        intList.querySelectorAll('[data-join-club]').forEach(btn => {
+            btn.addEventListener('click', () => openJoinModal(btn.dataset.joinClub));
+        });
     } else {
         intEmpty.style.display = 'block';
         intList.innerHTML = '';
