@@ -478,6 +478,19 @@
       object-fit: cover;
     }
 
+    .image-shimmer {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
     .portfolio-card-image .placeholder-icon {
       font-size: 48px;
       color: rgba(255,255,255,0.3);
@@ -1378,6 +1391,7 @@
     let imageField = null;
     let titleField = null;
     let subtitleField = null;
+    let websiteField = null;
     let filterableFields = [];
     let isSnapshot = false;
     let isLive = false;
@@ -1631,10 +1645,18 @@
     }
 
     function guessFieldType(name) {
-      const n = name.toLowerCase();
+      var n = name.toLowerCase();
       if (n.includes('image') || n.includes('photo') || n.includes('logo') || n.includes('avatar')) return 'multipleAttachments';
       if (n.includes('email')) return 'email';
-      if (n.includes('url') || n.includes('website') || n.includes('link')) return 'url';
+      if (n.includes('url') || n.includes('website') || n.includes('link') || n.includes('site') || n.includes('homepage')) return 'url';
+      // Check actual values — if most records have http URLs for this field, it's a URL
+      var urlCount = 0;
+      var checked = Math.min(allRecords.length, 10);
+      for (var i = 0; i < checked; i++) {
+        var val = allRecords[i].fields[name];
+        if (typeof val === 'string' && val.match(/^https?:\/\//)) urlCount++;
+      }
+      if (urlCount > checked / 2) return 'url';
       return 'singleLineText';
     }
 
@@ -1954,6 +1976,9 @@
         loadSwipeArchive();
         buildFilterUI();
         renderCurrentView();
+
+        // Proactively fetch website cover images in background
+        fetchAllOgImages();
       } catch(e) {
         console.error(e);
         alert('Failed to load records: ' + e.message);
@@ -1966,6 +1991,7 @@
       imageField = null;
       titleField = null;
       subtitleField = null;
+      websiteField = null;
       filterableFields = [];
 
       for (const f of fields) {
@@ -1982,6 +2008,14 @@
           titleField = f;
         }
 
+        // Detect website URL field
+        if (!websiteField && (f.type === 'url' ||
+            nameL.includes('website') || nameL.includes('site') || nameL.includes('homepage') ||
+            (nameL.includes('url') && !nameL.includes('image')) ||
+            (nameL.includes('link') && !nameL.includes('linkedin')))) {
+          websiteField = f;
+        }
+
         if (f.type === 'singleSelect' || f.type === 'multipleSelects') {
           filterableFields.push(f);
         }
@@ -1993,7 +2027,7 @@
 
       const textFields = fields.filter(f =>
         (f.type === 'singleLineText' || f.type === 'email' || f.type === 'url' || f.type === 'formula')
-        && f !== titleField
+        && f !== titleField && f !== websiteField
       );
       subtitleField = textFields[0] || null;
     }
@@ -2271,7 +2305,7 @@
 
     /* ─── Portfolio View Rendering ─────────────────────────── */
     function renderPortfolio() {
-      const grid = document.getElementById('portfolioGrid');
+      var grid = document.getElementById('portfolioGrid');
       grid.innerHTML = '';
       document.getElementById('portfolioView').style.display = 'block';
 
@@ -2289,6 +2323,12 @@
           img.alt = '';
           img.loading = 'lazy';
           imgDiv.appendChild(img);
+        } else if (getWebsiteUrl(record)) {
+          // Has a website — show shimmer while OG image loads
+          var shimmer = document.createElement('div');
+          shimmer.className = 'image-shimmer';
+          imgDiv.appendChild(shimmer);
+          fetchOgImageForRecord(record, imgDiv);
         } else {
           var icon = document.createElement('div');
           icon.className = 'placeholder-icon';
@@ -2298,7 +2338,6 @@
           icon.style.fontWeight = '800';
           icon.style.color = 'rgba(255,255,255,0.3)';
           imgDiv.appendChild(icon);
-          fetchOgImageForRecord(record, imgDiv);
         }
         card.appendChild(imgDiv);
 
@@ -2389,22 +2428,26 @@
         <div class="swipe-overlay swipe-overlay-right" id="overlayRight">SAVE</div>
       `;
 
-      const imgDiv = document.createElement('div');
+      var imgDiv = document.createElement('div');
       imgDiv.className = 'swipe-card-image';
-      const imgUrl = getImageUrl(record) || getOgImage(record);
+      var imgUrl = getImageUrl(record) || getOgImage(record);
       if (imgUrl) {
-        const img = document.createElement('img');
+        var img = document.createElement('img');
         img.src = imgUrl;
         img.alt = '';
         imgDiv.appendChild(img);
+      } else if (getWebsiteUrl(record)) {
+        var shimmer = document.createElement('div');
+        shimmer.className = 'image-shimmer';
+        imgDiv.appendChild(shimmer);
+        fetchOgImageForRecord(record, imgDiv);
       } else {
-        const icon = document.createElement('div');
+        var icon = document.createElement('div');
         icon.className = 'placeholder-icon';
         icon.textContent = getInitials(record);
         icon.style.fontFamily = 'Montserrat, sans-serif';
         icon.style.fontWeight = '800';
         imgDiv.appendChild(icon);
-        fetchOgImageForRecord(record, imgDiv);
       }
       card.appendChild(imgDiv);
 
@@ -2648,6 +2691,11 @@
           img.alt = '';
           img.loading = 'lazy';
           imgDiv.appendChild(img);
+        } else if (getWebsiteUrl(record)) {
+          var shimmer = document.createElement('div');
+          shimmer.className = 'image-shimmer';
+          imgDiv.appendChild(shimmer);
+          fetchOgImageForRecord(record, imgDiv);
         } else {
           var icon = document.createElement('div');
           icon.className = 'placeholder-icon';
@@ -2657,7 +2705,6 @@
           icon.style.fontWeight = '800';
           icon.style.color = 'rgba(255,255,255,0.3)';
           imgDiv.appendChild(icon);
-          fetchOgImageForRecord(record, imgDiv);
         }
         card.appendChild(imgDiv);
 
@@ -2706,54 +2753,126 @@
 
     /* ─── OG Image Fetching ──────────────────────────────── */
     function getWebsiteUrl(record) {
-      // Find a URL field in the record
-      for (const f of fields) {
+      // 1. Use the detected website field first
+      if (websiteField) {
+        var v = record.fields[websiteField.name];
+        if (typeof v === 'string' && v.match(/^https?:\/\//)) return v;
+        // Handle bare URLs without protocol
+        if (typeof v === 'string' && v.match(/^[\w.-]+\.\w{2,}/)) return 'https://' + v;
+      }
+      // 2. Check any URL-type or URL-named fields
+      for (var i = 0; i < fields.length; i++) {
+        var f = fields[i];
         if (f.type === 'url' || f.name.toLowerCase().match(/website|url|link|site/)) {
-          const v = record.fields[f.name];
-          if (typeof v === 'string' && v.match(/^https?:\/\//)) return v;
+          var val = record.fields[f.name];
+          if (typeof val === 'string' && val.match(/^https?:\/\//)) return val;
+          if (typeof val === 'string' && val.match(/^[\w.-]+\.\w{2,}/)) return 'https://' + val;
         }
       }
-      // Check all string fields for URLs
-      for (const [key, val] of Object.entries(record.fields)) {
-        if (typeof val === 'string' && val.match(/^https?:\/\//) && !val.match(/airtable\.com/)) {
-          return val;
+      // 3. Check all string fields for URLs
+      var entries = Object.entries(record.fields);
+      for (var j = 0; j < entries.length; j++) {
+        var key = entries[j][0], value = entries[j][1];
+        if (typeof value === 'string' && value.match(/^https?:\/\//) && !value.match(/airtable\.com/)) {
+          return value;
         }
       }
       return null;
     }
 
     function getOgImage(record) {
-      const url = getWebsiteUrl(record);
+      var url = getWebsiteUrl(record);
       return url ? (ogImageCache[url] || null) : null;
     }
 
+    // Fetch OG image for a single record, update card image div if provided
     async function fetchOgImageForRecord(record, imgDiv) {
-      const url = getWebsiteUrl(record);
-      if (!url) return;
-      if (ogImageCache[url] !== undefined) return;  // Already tried
+      var url = getWebsiteUrl(record);
+      if (!url) return null;
+      if (ogImageCache[url]) return ogImageCache[url];  // Already have it
+      if (ogImageCache[url] === null) return null;       // Already tried and failed
 
       ogImageCache[url] = null;  // Mark as in-progress
       try {
-        // Use a free metadata proxy to get OG image
-        const proxyUrl = `https://api.microlink.io?url=${encodeURIComponent(url)}`;
-        const res = await fetch(proxyUrl);
-        if (!res.ok) return;
-        const data = await res.json();
-        const ogImg = data.data?.image?.url || data.data?.logo?.url || null;
-        if (ogImg) {
-          ogImageCache[url] = ogImg;
-          // Update the card image if it's still showing the placeholder
-          if (imgDiv && imgDiv.querySelector('.placeholder-icon')) {
-            const img = document.createElement('img');
-            img.src = ogImg;
-            img.alt = '';
-            img.loading = 'lazy';
-            imgDiv.innerHTML = '';
-            imgDiv.appendChild(img);
+        // Try microlink.io for OG metadata
+        var proxyUrl = 'https://api.microlink.io?url=' + encodeURIComponent(url);
+        var res = await fetch(proxyUrl);
+        if (res.ok) {
+          var data = await res.json();
+          var ogImg = (data.data && data.data.image && data.data.image.url)
+            || (data.data && data.data.logo && data.data.logo.url)
+            || null;
+          if (ogImg) {
+            ogImageCache[url] = ogImg;
+            updateCardImage(imgDiv, ogImg);
+            return ogImg;
           }
         }
       } catch(e) {
-        // Silently fail — just show initials
+        // microlink failed, try fallback
+      }
+
+      // Fallback: Google favicon (at least shows something)
+      try {
+        var domain = new URL(url).hostname;
+        var faviconUrl = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=128';
+        ogImageCache[url] = faviconUrl;
+        updateCardImage(imgDiv, faviconUrl);
+        return faviconUrl;
+      } catch(e2) {
+        // Silently fail
+      }
+      return null;
+    }
+
+    // Helper: update a card's image div with a fetched image
+    function updateCardImage(imgDiv, imageUrl) {
+      if (!imgDiv) return;
+      if (imgDiv.querySelector('.placeholder-icon') || imgDiv.querySelector('.image-shimmer')) {
+        var img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = '';
+        img.loading = 'lazy';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        imgDiv.innerHTML = '';
+        imgDiv.appendChild(img);
+      }
+    }
+
+    // Proactive batch fetch: get OG images for all records after load
+    async function fetchAllOgImages() {
+      // Only fetch for records that have a website URL but no attachment image
+      var toFetch = [];
+      filteredRecords.forEach(function(record, idx) {
+        if (getImageUrl(record)) return;  // Already has an Airtable attachment
+        var url = getWebsiteUrl(record);
+        if (!url) return;
+        if (ogImageCache[url]) return;  // Already cached
+        toFetch.push({ record: record, idx: idx, url: url });
+      });
+
+      if (toFetch.length === 0) return;
+
+      // Fetch in batches of 5 to avoid rate limits
+      var batchSize = 5;
+      for (var i = 0; i < toFetch.length; i += batchSize) {
+        var batch = toFetch.slice(i, i + batchSize);
+        var promises = batch.map(function(item) {
+          // Find the card's image div in the current DOM
+          var grid = document.getElementById('portfolioGrid');
+          var cards = grid ? grid.querySelectorAll('.portfolio-card') : [];
+          var imgDiv = null;
+          for (var c = 0; c < cards.length; c++) {
+            if (cards[c].getAttribute('data-record-idx') === String(item.idx)) {
+              imgDiv = cards[c].querySelector('.portfolio-card-image');
+              break;
+            }
+          }
+          return fetchOgImageForRecord(item.record, imgDiv);
+        });
+        await Promise.all(promises);
       }
     }
 
