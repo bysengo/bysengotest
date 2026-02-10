@@ -434,6 +434,111 @@
     }
   }
 
+  /* Intro Slide */
+  .intro-layout {
+    display: flex;
+    gap: 36px;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+
+  .intro-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .intro-text .slide-subtitle {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+
+  .intro-highlight-stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .intro-stat {
+    background: rgba(243, 237, 231, 0.08);
+    border: 1px solid rgba(243, 237, 231, 0.12);
+    border-radius: 12px;
+    padding: 18px 22px;
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .intro-stat .stat-val {
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #D57028;
+    margin-bottom: 4px;
+  }
+
+  .intro-stat .stat-desc {
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+  }
+
+  .intro-media {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 220px;
+  }
+
+  .intro-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(213, 112, 40, 0.5);
+  }
+
+  .intro-investment {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .intro-investment img {
+    width: 90px;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid rgba(243, 237, 231, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    .intro-layout {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .intro-media {
+      max-width: 100%;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .intro-photo {
+      width: 110px;
+      height: 110px;
+    }
+
+    .intro-investment img {
+      width: 70px;
+    }
+  }
+
   /* Next Meetup Pulse */
   .next-pulse {
     display: inline-block;
@@ -602,7 +707,7 @@
 
     <!-- SLIDE 1: Title -->
     <div class="sengo-slide slide-dark active" data-slide="0">
-      <span class="slide-badge">Sengo Angel Investing Meet-Up</span>
+      <span class="slide-badge">Sengo Angel Investing Meet-Up &bull; 2/10</span>
       <h2 class="slide-title">Welcome to<br>the Table.</h2>
       <p class="slide-subtitle">
         A casual conversation about angel investing, alternative assets, and building a community of informed investors.
@@ -638,15 +743,33 @@
       </ul>
     </div>
 
-    <!-- SLIDE 3: Today's Goal -->
+    <!-- SLIDE 3: About Ila -->
     <div class="sengo-slide slide-gradient" data-slide="2">
-      <span class="slide-badge">Our Goal</span>
-      <h2 class="slide-title">Building<br>Connections.</h2>
-      <div class="goal-box">
-        <div class="goal-label">Today's Focus</div>
-        <p>
-          Today is about creating space for us to introduce ourselves to each other &mdash; especially for those who could not make it last time. Real conversations. Real connections. That's how strong investor communities are built.
-        </p>
+      <span class="slide-badge">Your Host</span>
+      <h2 class="slide-title">Hi, I'm Ila.</h2>
+      <div class="intro-layout">
+        <div class="intro-text">
+          <p class="slide-subtitle">
+            I made my first angel investment in 2024. I also started <strong>Sengo</strong> and we have deployed over <strong>$31,000</strong> in grants to founders who have gone on to raise <strong>$5M</strong>.
+          </p>
+          <div class="intro-highlight-stats">
+            <div class="intro-stat">
+              <div class="stat-val">$31K+</div>
+              <div class="stat-desc">Grants Deployed</div>
+            </div>
+            <div class="intro-stat">
+              <div class="stat-val">$5M</div>
+              <div class="stat-desc">Raised by Founders</div>
+            </div>
+          </div>
+        </div>
+        <div class="intro-media">
+          <img class="intro-photo" src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/94d0e6e9-dedc-4ac9-b199-4c951de04f42/IMG_3144.JPG?format=750w" alt="Ila">
+          <div class="intro-investment">
+            <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/d496a485-b9ea-450d-a09b-e47f06d20ae7/IMG_8087.PNG?format=750w" alt="Camp Chateau">
+            <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/ddf947a1-92db-45ec-a2bd-0c459a05e476/Video+Gif.gif?format=750w" alt="Camp Chateau">
+          </div>
+        </div>
       </div>
     </div>
 
