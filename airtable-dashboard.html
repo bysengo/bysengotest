@@ -1392,6 +1392,7 @@
     let titleField = null;
     let subtitleField = null;
     let websiteField = null;
+    let pitchDeckField = null;
     let filterableFields = [];
     let isSnapshot = false;
     let isLive = false;
@@ -1992,6 +1993,7 @@
       titleField = null;
       subtitleField = null;
       websiteField = null;
+      pitchDeckField = null;
       filterableFields = [];
 
       for (const f of fields) {
@@ -2008,16 +2010,35 @@
           titleField = f;
         }
 
-        // Detect website URL field
-        if (!websiteField && (f.type === 'url' ||
-            nameL.includes('website') || nameL.includes('site') || nameL.includes('homepage') ||
-            (nameL.includes('url') && !nameL.includes('image')) ||
-            (nameL.includes('link') && !nameL.includes('linkedin')))) {
+        // Detect pitch deck field (deck, pitch, presentation, demo)
+        if (!pitchDeckField &&
+            (nameL.includes('pitch') || nameL.includes('deck') || nameL.includes('presentation') || nameL.includes('demo'))) {
+          pitchDeckField = f;
+        }
+
+        // Detect website URL field (website, site, homepage — but NOT pitch/deck)
+        if (!websiteField &&
+            !nameL.includes('pitch') && !nameL.includes('deck') && !nameL.includes('presentation') && !nameL.includes('demo') &&
+            (nameL.includes('website') || nameL.includes('homepage') ||
+             (nameL.includes('site') && !nameL.includes('airtable')) ||
+             (f.type === 'url' && !pitchDeckField))) {
           websiteField = f;
         }
 
         if (f.type === 'singleSelect' || f.type === 'multipleSelects') {
           filterableFields.push(f);
+        }
+      }
+
+      // If we only found one URL field and it was tagged as pitchDeck, keep website empty
+      // so the screenshot comes from the actual website, not the deck
+      if (!websiteField && !pitchDeckField) {
+        // No specific match — look for any generic URL field
+        for (const f of fields) {
+          if (f.type === 'url' && f !== imageField) {
+            websiteField = f;
+            break;
+          }
         }
       }
 
@@ -2027,7 +2048,7 @@
 
       const textFields = fields.filter(f =>
         (f.type === 'singleLineText' || f.type === 'email' || f.type === 'url' || f.type === 'formula')
-        && f !== titleField && f !== websiteField
+        && f !== titleField && f !== websiteField && f !== pitchDeckField
       );
       subtitleField = textFields[0] || null;
     }
@@ -2767,30 +2788,56 @@
       });
     }
 
-    /* ─── OG Image Fetching ──────────────────────────────── */
+    /* ─── URL Field Helpers ──────────────────────────────── */
+    function normalizeUrl(val) {
+      if (typeof val !== 'string' || !val) return null;
+      if (val.match(/^https?:\/\//)) return val;
+      if (val.match(/^[\w.-]+\.\w{2,}/)) return 'https://' + val;
+      return null;
+    }
+
+    // Get the company website URL (for screenshot preview images)
     function getWebsiteUrl(record) {
-      // 1. Use the detected website field first
+      // 1. Use the detected website field
       if (websiteField) {
-        var v = record.fields[websiteField.name];
-        if (typeof v === 'string' && v.match(/^https?:\/\//)) return v;
-        // Handle bare URLs without protocol
-        if (typeof v === 'string' && v.match(/^[\w.-]+\.\w{2,}/)) return 'https://' + v;
+        var v = normalizeUrl(record.fields[websiteField.name]);
+        if (v) return v;
       }
-      // 2. Check any URL-type or URL-named fields
+      // 2. Fallback: scan URL fields but skip the pitch deck field
       for (var i = 0; i < fields.length; i++) {
         var f = fields[i];
-        if (f.type === 'url' || f.name.toLowerCase().match(/website|url|link|site/)) {
-          var val = record.fields[f.name];
-          if (typeof val === 'string' && val.match(/^https?:\/\//)) return val;
-          if (typeof val === 'string' && val.match(/^[\w.-]+\.\w{2,}/)) return 'https://' + val;
+        if (f === pitchDeckField) continue;  // Don't use pitch deck for screenshots
+        var nameL = f.name.toLowerCase();
+        if (f.type === 'url' || nameL.match(/website|site|homepage/)) {
+          var val = normalizeUrl(record.fields[f.name]);
+          if (val) return val;
         }
       }
-      // 3. Check all string fields for URLs
+      // 3. Last resort: any URL that isn't the pitch deck
       var entries = Object.entries(record.fields);
       for (var j = 0; j < entries.length; j++) {
         var key = entries[j][0], value = entries[j][1];
+        if (pitchDeckField && key === pitchDeckField.name) continue;
         if (typeof value === 'string' && value.match(/^https?:\/\//) && !value.match(/airtable\.com/)) {
           return value;
+        }
+      }
+      return null;
+    }
+
+    // Get the pitch deck URL (for the Pitch Deck button in modal)
+    function getPitchDeckUrl(record) {
+      // 1. Use the detected pitch deck field
+      if (pitchDeckField) {
+        var v = normalizeUrl(record.fields[pitchDeckField.name]);
+        if (v) return v;
+      }
+      // 2. Fallback: scan fields for pitch/deck/presentation keywords
+      for (var i = 0; i < fields.length; i++) {
+        var nameL = fields[i].name.toLowerCase();
+        if (nameL.includes('pitch') || nameL.includes('deck') || nameL.includes('presentation') || nameL.includes('demo')) {
+          var val = normalizeUrl(record.fields[fields[i].name]);
+          if (val) return val;
         }
       }
       return null;
@@ -2886,16 +2933,28 @@
           body.appendChild(fieldDiv);
         });
 
-        // Add pitch deck link button if available
-        var siteUrl = getWebsiteUrl(record);
-        if (siteUrl) {
-          var linkBtn = document.createElement('a');
-          linkBtn.href = siteUrl;
-          linkBtn.target = '_blank';
-          linkBtn.rel = 'noopener';
-          linkBtn.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:12px 24px;background:var(--orange);color:white;border-radius:var(--radius-sm);text-decoration:none;font-weight:700;font-size:14px;font-family:Montserrat,sans-serif;';
-          linkBtn.textContent = 'Pitch Deck';
-          body.appendChild(linkBtn);
+        // Add pitch deck button if available
+        var deckUrl = getPitchDeckUrl(record);
+        if (deckUrl) {
+          var deckBtn = document.createElement('a');
+          deckBtn.href = deckUrl;
+          deckBtn.target = '_blank';
+          deckBtn.rel = 'noopener';
+          deckBtn.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:12px 24px;background:var(--orange);color:white;border-radius:var(--radius-sm);text-decoration:none;font-weight:700;font-size:14px;font-family:Montserrat,sans-serif;';
+          deckBtn.textContent = 'Pitch Deck';
+          body.appendChild(deckBtn);
+        }
+
+        // Add website button if available (separate from pitch deck)
+        var webUrl = getWebsiteUrl(record);
+        if (webUrl && webUrl !== deckUrl) {
+          var webBtn = document.createElement('a');
+          webBtn.href = webUrl;
+          webBtn.target = '_blank';
+          webBtn.rel = 'noopener';
+          webBtn.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:12px 24px;background:var(--dark-teal);color:white;border-radius:var(--radius-sm);text-decoration:none;font-weight:700;font-size:14px;font-family:Montserrat,sans-serif;';
+          webBtn.textContent = 'Visit Website';
+          body.appendChild(webBtn);
         }
 
         backdrop.classList.add('visible');
