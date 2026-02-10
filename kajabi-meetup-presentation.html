@@ -1,0 +1,799 @@
+<!-- Sengo Meetup Presentation - Embed in Kajabi Custom Code Block -->
+<!-- Self-contained slide presentation with navigation -->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+  .sengo-deck * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sengo-deck {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    background: #F3EDE7;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(27, 53, 51, 0.15);
+  }
+
+  /* Slide Container */
+  .sengo-slides {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .sengo-slide {
+    display: none;
+    width: 100%;
+    min-height: 540px;
+    padding: 60px 60px 80px;
+    animation: slideFadeIn 0.5s ease;
+    position: relative;
+  }
+
+  .sengo-slide.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @keyframes slideFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Slide Backgrounds */
+  .slide-dark {
+    background: linear-gradient(135deg, #1B3533 0%, #264845 100%);
+    color: #F3EDE7;
+  }
+
+  .slide-light {
+    background: #F3EDE7;
+    color: #1B3533;
+  }
+
+  .slide-gradient {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: #F3EDE7;
+  }
+
+  .slide-accent {
+    background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
+    color: #F3EDE7;
+  }
+
+  .slide-highlight {
+    background: linear-gradient(135deg, #D57028 0%, #c45510 50%, #AF8145 100%);
+    color: #F3EDE7;
+    position: relative;
+  }
+
+  .slide-highlight::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Typography */
+  .slide-badge {
+    display: inline-block;
+    background: rgba(213, 112, 40, 0.15);
+    color: #D57028;
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .slide-dark .slide-badge,
+  .slide-gradient .slide-badge {
+    background: rgba(213, 112, 40, 0.25);
+    color: #D57028;
+  }
+
+  .slide-accent .slide-badge,
+  .slide-highlight .slide-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: #F3EDE7;
+  }
+
+  .slide-title {
+    font-family: 'Arimo', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 20px;
+  }
+
+  .slide-dark .slide-title,
+  .slide-gradient .slide-title,
+  .slide-accent .slide-title,
+  .slide-highlight .slide-title {
+    color: #F3EDE7;
+  }
+
+  .slide-light .slide-title {
+    color: #1B3533;
+  }
+
+  .slide-subtitle {
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.7;
+    opacity: 0.9;
+    max-width: 700px;
+  }
+
+  .slide-light .slide-subtitle {
+    color: #67441A;
+  }
+
+  /* Agenda Items */
+  .agenda-list {
+    list-style: none;
+    margin-top: 24px;
+  }
+
+  .agenda-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(243, 237, 231, 0.1);
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .agenda-list li:last-child {
+    border-bottom: none;
+  }
+
+  .agenda-number {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #D57028;
+    color: #F3EDE7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .agenda-text {
+    padding-top: 6px;
+  }
+
+  .agenda-text strong {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .agenda-text span {
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  /* Goal Section */
+  .goal-box {
+    margin-top: 30px;
+    padding: 30px 35px;
+    border-radius: 12px;
+    border-left: 4px solid #D57028;
+  }
+
+  .slide-dark .goal-box {
+    background: rgba(213, 112, 40, 0.1);
+  }
+
+  .slide-light .goal-box {
+    background: rgba(27, 53, 51, 0.05);
+    border-left-color: #1B3533;
+  }
+
+  .goal-box p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  .goal-box .goal-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #D57028;
+    margin-bottom: 8px;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .stat-box {
+    background: rgba(243, 237, 231, 0.08);
+    border: 1px solid rgba(243, 237, 231, 0.12);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .stat-box:hover {
+    transform: translateY(-3px);
+  }
+
+  .stat-box .stat-val {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #D57028;
+    margin-bottom: 6px;
+  }
+
+  .stat-box .stat-desc {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+  }
+
+  /* Source citation */
+  .source-note {
+    margin-top: 24px;
+    font-size: 0.75rem;
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+  /* Insight cards */
+  .insight-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .insight-card {
+    background: rgba(27, 53, 51, 0.05);
+    border-radius: 12px;
+    padding: 22px 28px;
+    border-left: 3px solid #D57028;
+  }
+
+  .slide-dark .insight-card,
+  .slide-gradient .insight-card {
+    background: rgba(243, 237, 231, 0.06);
+  }
+
+  .insight-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .insight-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.85;
+  }
+
+  /* Speaker Card */
+  .speaker-card {
+    margin-top: 28px;
+    padding: 35px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .speaker-name {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .speaker-role {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+    margin-bottom: 18px;
+  }
+
+  .speaker-stats {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+
+  .speaker-stat {
+    text-align: center;
+  }
+
+  .speaker-stat .num {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+  }
+
+  .speaker-stat .lbl {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0.7;
+    margin-top: 4px;
+    display: block;
+  }
+
+  .speaker-bio {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-top: 16px;
+  }
+
+  .speaker-detail {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 12px;
+    margin-right: 8px;
+  }
+
+  /* Next Meetup Pulse */
+  .next-pulse {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #F3EDE7;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  /* Navigation */
+  .sengo-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 30px;
+    background: #1B3533;
+    border-top: 1px solid rgba(243, 237, 231, 0.1);
+  }
+
+  .nav-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(243, 237, 231, 0.25);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .nav-dot.active {
+    background: #D57028;
+    transform: scale(1.2);
+  }
+
+  .nav-dot:hover {
+    background: rgba(243, 237, 231, 0.5);
+  }
+
+  .nav-arrows {
+    display: flex;
+    gap: 10px;
+  }
+
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(243, 237, 231, 0.1);
+    border: 1px solid rgba(243, 237, 231, 0.2);
+    color: #F3EDE7;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+
+  .nav-arrow:hover {
+    background: #D57028;
+    border-color: #D57028;
+    transform: scale(1.05);
+  }
+
+  .nav-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .nav-arrow:disabled:hover {
+    background: rgba(243, 237, 231, 0.1);
+    border-color: rgba(243, 237, 231, 0.2);
+  }
+
+  .slide-counter {
+    font-size: 0.75rem;
+    color: rgba(243, 237, 231, 0.5);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* Keyboard hint */
+  .kb-hint {
+    font-size: 0.65rem;
+    color: rgba(243, 237, 231, 0.3);
+    text-align: center;
+    padding: 6px 0 10px;
+    background: #1B3533;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sengo-slide {
+      padding: 40px 30px 60px;
+      min-height: 480px;
+    }
+
+    .slide-title {
+      font-size: 2.2rem;
+    }
+
+    .slide-subtitle {
+      font-size: 1rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .speaker-stats {
+      gap: 20px;
+    }
+
+    .speaker-stat .num {
+      font-size: 1.8rem;
+    }
+
+    .agenda-list li {
+      font-size: 0.95rem;
+    }
+
+    .speaker-card {
+      padding: 24px;
+    }
+
+    .speaker-name {
+      font-size: 1.6rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .sengo-slide {
+      padding: 30px 22px 50px;
+      min-height: 420px;
+    }
+
+    .slide-title {
+      font-size: 1.8rem;
+    }
+
+    .speaker-stats {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+</style>
+
+<div class="sengo-deck" id="sengoDeck">
+  <div class="sengo-slides">
+
+    <!-- SLIDE 1: Title -->
+    <div class="sengo-slide slide-dark active" data-slide="0">
+      <span class="slide-badge">Sengo Angel Investing Meet-Up</span>
+      <h2 class="slide-title">Welcome to<br>the Table.</h2>
+      <p class="slide-subtitle">
+        A casual conversation about angel investing, alternative assets, and building a community of informed investors.
+      </p>
+    </div>
+
+    <!-- SLIDE 2: Today's Agenda -->
+    <div class="sengo-slide slide-light" data-slide="1">
+      <span class="slide-badge">Today's Agenda</span>
+      <h2 class="slide-title" style="color:#1B3533;">What We'll Cover</h2>
+      <ul class="agenda-list" style="color:#1B3533;">
+        <li>
+          <div class="agenda-number">1</div>
+          <div class="agenda-text">
+            <strong>Introductions</strong>
+            <span>Meet the organizer + what inspired this group</span>
+          </div>
+        </li>
+        <li>
+          <div class="agenda-number">2</div>
+          <div class="agenda-text">
+            <strong>Member Roundtable</strong>
+            <span>Share about yourself, your career, and what drew you to angel investing</span>
+          </div>
+        </li>
+        <li>
+          <div class="agenda-number">3</div>
+          <div class="agenda-text">
+            <strong>Alternative Investing Landscape</strong>
+            <span>How alternatives fit into your portfolio &mdash; insights from Morgan Stanley &amp; other firms</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- SLIDE 3: Today's Goal -->
+    <div class="sengo-slide slide-gradient" data-slide="2">
+      <span class="slide-badge">Our Goal</span>
+      <h2 class="slide-title">Building<br>Connections.</h2>
+      <div class="goal-box">
+        <div class="goal-label">Today's Focus</div>
+        <p>
+          Today is about creating space for us to introduce ourselves to each other &mdash; especially for those who could not make it last time. Real conversations. Real connections. That's how strong investor communities are built.
+        </p>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Why Alternative Investments -->
+    <div class="sengo-slide slide-light" data-slide="3">
+      <span class="slide-badge">The Landscape</span>
+      <h2 class="slide-title" style="color:#1B3533;">Why Alternative<br>Investments?</h2>
+      <div class="insight-cards">
+        <div class="insight-card">
+          <h4 style="color:#1B3533;">Portfolio Diversification</h4>
+          <p style="color:#67441A;">Alternatives &mdash; including angel investments, private equity, and venture capital &mdash; have low correlation with public markets, helping reduce portfolio volatility.</p>
+        </div>
+        <div class="insight-card">
+          <h4 style="color:#1B3533;">Higher Return Potential</h4>
+          <p style="color:#67441A;">Private markets have historically outperformed public equities over long time horizons, with top-quartile VC funds returning 2&ndash;3x net of fees.</p>
+        </div>
+        <div class="insight-card">
+          <h4 style="color:#1B3533;">Growing Accessibility</h4>
+          <p style="color:#67441A;">Regulatory changes and new platforms are making it easier than ever for accredited and non-accredited investors to participate in private markets.</p>
+        </div>
+      </div>
+      <p class="source-note" style="color:#67441A;">Sources: Morgan Stanley Investment Management, KKR Global Institute, Cambridge Associates</p>
+    </div>
+
+    <!-- SLIDE 5: By the Numbers -->
+    <div class="sengo-slide slide-dark" data-slide="4">
+      <span class="slide-badge">By the Numbers</span>
+      <h2 class="slide-title">The Alternative<br>Investing Boom</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-val">$24.5T</div>
+          <div class="stat-desc">Global Alternative AUM (2024)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val">5&ndash;20%</div>
+          <div class="stat-desc">Recommended Portfolio Allocation</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val">15%+</div>
+          <div class="stat-desc">Avg. Top-Quartile VC Returns</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val">364K</div>
+          <div class="stat-desc">Active Angel Investors in the U.S.</div>
+        </div>
+      </div>
+      <p class="source-note">Sources: Preqin, Morgan Stanley, Angel Capital Association, PitchBook</p>
+    </div>
+
+    <!-- SLIDE 6: Where Angel Investing Fits -->
+    <div class="sengo-slide slide-light" data-slide="5">
+      <span class="slide-badge">Your Portfolio</span>
+      <h2 class="slide-title" style="color:#1B3533;">Where Angel Investing<br>Fits In</h2>
+      <p class="slide-subtitle" style="color:#67441A; margin-bottom: 24px;">
+        Angel investing is one slice of the alternatives pie. Here's how leading firms suggest thinking about allocation:
+      </p>
+      <div class="insight-cards">
+        <div class="insight-card">
+          <h4 style="color:#1B3533;">Core Portfolio (70&ndash;80%)</h4>
+          <p style="color:#67441A;">Public equities, bonds, index funds &mdash; the foundation of your wealth.</p>
+        </div>
+        <div class="insight-card">
+          <h4 style="color:#1B3533;">Alternative Allocation (10&ndash;20%)</h4>
+          <p style="color:#67441A;">Real estate, private equity, venture capital, and hedge funds for diversification and upside.</p>
+        </div>
+        <div class="insight-card">
+          <h4 style="color:#1B3533;">Angel &amp; Seed Investing (1&ndash;5%)</h4>
+          <p style="color:#67441A;">High-risk, high-reward. Invest what you can afford to lose. Build a portfolio of 10&ndash;20+ deals over time.</p>
+        </div>
+      </div>
+      <p class="source-note" style="color:#67441A;">Source: Morgan Stanley Wealth Management, Vanguard Research</p>
+    </div>
+
+    <!-- SLIDE 7: Coming Up Next — HIGHLIGHTED -->
+    <div class="sengo-slide slide-highlight" data-slide="6">
+      <span class="slide-badge"><span class="next-pulse"></span> Coming Up Next</span>
+      <h2 class="slide-title">Later This<br>Month</h2>
+      <div class="speaker-card">
+        <div class="speaker-name">Amiah Sheppard</div>
+        <div class="speaker-role">LP &bull; Angel Investor &bull; Founder Coach</div>
+        <div class="speaker-stats">
+          <div class="speaker-stat">
+            <span class="num">1,900</span>
+            <span class="lbl">Startups Reviewed</span>
+          </div>
+          <div class="speaker-stat">
+            <span class="num">24</span>
+            <span class="lbl">Startups Selected</span>
+          </div>
+        </div>
+        <p class="speaker-bio">
+          Amiah is a member of our meet-up group with deep experience on the institutional capital side. She previously worked at <strong>Backstage Capital</strong>, a fund started by Arlan Hamilton with notable LPs like <strong>Mark Cuban</strong>. Amiah brings a unique lens as an LP, angel investor, and founder coach.
+        </p>
+        <span class="speaker-detail">Backstage Capital Alum</span>
+        <span class="speaker-detail">Institutional &amp; Angel</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: Closing -->
+    <div class="sengo-slide slide-dark" data-slide="7">
+      <span class="slide-badge">Let's Connect</span>
+      <h2 class="slide-title">Thank You.</h2>
+      <p class="slide-subtitle" style="margin-bottom:28px;">
+        Welcome to the table. Let's build something together.
+      </p>
+      <div class="goal-box">
+        <div class="goal-label">Stay In Touch</div>
+        <p>
+          Connect with other members, share deal flow, and keep the conversation going between meet-ups. More sessions, speakers, and resources coming soon.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Navigation -->
+  <div class="sengo-nav">
+    <div class="nav-dots" id="navDots"></div>
+    <span class="slide-counter" id="slideCounter">1 / 8</span>
+    <div class="nav-arrows">
+      <button class="nav-arrow" id="prevBtn" aria-label="Previous slide">&#8592;</button>
+      <button class="nav-arrow" id="nextBtn" aria-label="Next slide">&#8594;</button>
+    </div>
+  </div>
+  <div class="kb-hint">Use arrow keys or swipe to navigate</div>
+</div>
+
+<script>
+(function() {
+  var currentSlide = 0;
+  var slides = document.querySelectorAll('#sengoDeck .sengo-slide');
+  var totalSlides = slides.length;
+  var dotsContainer = document.getElementById('navDots');
+  var counter = document.getElementById('slideCounter');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+
+  // Build dots
+  for (var i = 0; i < totalSlides; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.setAttribute('data-index', i);
+    dot.addEventListener('click', function() {
+      goToSlide(parseInt(this.getAttribute('data-index')));
+    });
+    dotsContainer.appendChild(dot);
+  }
+
+  function goToSlide(index) {
+    if (index < 0 || index >= totalSlides) return;
+    slides[currentSlide].classList.remove('active');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    updateNav();
+  }
+
+  function updateNav() {
+    // Update dots
+    var dots = dotsContainer.querySelectorAll('.nav-dot');
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === currentSlide);
+    });
+    // Update counter
+    counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+    // Update arrows
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === totalSlides - 1;
+  }
+
+  prevBtn.addEventListener('click', function() {
+    goToSlide(currentSlide - 1);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    goToSlide(currentSlide + 1);
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      goToSlide(currentSlide + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      goToSlide(currentSlide - 1);
+    }
+  });
+
+  // Touch/swipe support
+  var touchStartX = 0;
+  var touchEndX = 0;
+  var deck = document.getElementById('sengoDeck');
+
+  deck.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  deck.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    var diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        goToSlide(currentSlide + 1);
+      } else {
+        goToSlide(currentSlide - 1);
+      }
+    }
+  }, { passive: true });
+
+  updateNav();
+})();
+</script>
