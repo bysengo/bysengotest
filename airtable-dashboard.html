@@ -1977,8 +1977,8 @@
         buildFilterUI();
         renderCurrentView();
 
-        // Proactively fetch website cover images in background
-        fetchAllOgImages();
+        // Pre-populate screenshot URLs for website cover images
+        preloadWebsiteImages();
       } catch(e) {
         console.error(e);
         alert('Failed to load records: ' + e.message);
@@ -2322,13 +2322,19 @@
           img.src = imgUrl;
           img.alt = '';
           img.loading = 'lazy';
+          img.onerror = function() {
+            // If screenshot fails to load, show initials
+            imgDiv.innerHTML = '';
+            var fallback = document.createElement('div');
+            fallback.className = 'placeholder-icon';
+            fallback.textContent = getInitials(record);
+            fallback.style.fontSize = '40px';
+            fallback.style.fontFamily = 'Montserrat, sans-serif';
+            fallback.style.fontWeight = '800';
+            fallback.style.color = 'rgba(255,255,255,0.3)';
+            imgDiv.appendChild(fallback);
+          };
           imgDiv.appendChild(img);
-        } else if (getWebsiteUrl(record)) {
-          // Has a website — show shimmer while OG image loads
-          var shimmer = document.createElement('div');
-          shimmer.className = 'image-shimmer';
-          imgDiv.appendChild(shimmer);
-          fetchOgImageForRecord(record, imgDiv);
         } else {
           var icon = document.createElement('div');
           icon.className = 'placeholder-icon';
@@ -2435,12 +2441,16 @@
         var img = document.createElement('img');
         img.src = imgUrl;
         img.alt = '';
+        img.onerror = function() {
+          imgDiv.innerHTML = '';
+          var fallback = document.createElement('div');
+          fallback.className = 'placeholder-icon';
+          fallback.textContent = getInitials(record);
+          fallback.style.fontFamily = 'Montserrat, sans-serif';
+          fallback.style.fontWeight = '800';
+          imgDiv.appendChild(fallback);
+        };
         imgDiv.appendChild(img);
-      } else if (getWebsiteUrl(record)) {
-        var shimmer = document.createElement('div');
-        shimmer.className = 'image-shimmer';
-        imgDiv.appendChild(shimmer);
-        fetchOgImageForRecord(record, imgDiv);
       } else {
         var icon = document.createElement('div');
         icon.className = 'placeholder-icon';
@@ -2690,12 +2700,18 @@
           img.src = imgUrl;
           img.alt = '';
           img.loading = 'lazy';
+          img.onerror = function() {
+            imgDiv.innerHTML = '';
+            var fallback = document.createElement('div');
+            fallback.className = 'placeholder-icon';
+            fallback.textContent = getInitials(record);
+            fallback.style.fontSize = '40px';
+            fallback.style.fontFamily = 'Montserrat, sans-serif';
+            fallback.style.fontWeight = '800';
+            fallback.style.color = 'rgba(255,255,255,0.3)';
+            imgDiv.appendChild(fallback);
+          };
           imgDiv.appendChild(img);
-        } else if (getWebsiteUrl(record)) {
-          var shimmer = document.createElement('div');
-          shimmer.className = 'image-shimmer';
-          imgDiv.appendChild(shimmer);
-          fetchOgImageForRecord(record, imgDiv);
         } else {
           var icon = document.createElement('div');
           icon.className = 'placeholder-icon';
@@ -2780,100 +2796,28 @@
       return null;
     }
 
+    // Generate a screenshot preview URL for a website
+    function getScreenshotUrl(websiteUrl) {
+      if (!websiteUrl) return null;
+      return 'https://image.thum.io/get/width/600/' + websiteUrl;
+    }
+
     function getOgImage(record) {
       var url = getWebsiteUrl(record);
-      return url ? (ogImageCache[url] || null) : null;
-    }
-
-    // Fetch OG image for a single record, update card image div if provided
-    async function fetchOgImageForRecord(record, imgDiv) {
-      var url = getWebsiteUrl(record);
       if (!url) return null;
-      if (ogImageCache[url]) return ogImageCache[url];  // Already have it
-      if (ogImageCache[url] === null) return null;       // Already tried and failed
-
-      ogImageCache[url] = null;  // Mark as in-progress
-      try {
-        // Try microlink.io for OG metadata
-        var proxyUrl = 'https://api.microlink.io?url=' + encodeURIComponent(url);
-        var res = await fetch(proxyUrl);
-        if (res.ok) {
-          var data = await res.json();
-          var ogImg = (data.data && data.data.image && data.data.image.url)
-            || (data.data && data.data.logo && data.data.logo.url)
-            || null;
-          if (ogImg) {
-            ogImageCache[url] = ogImg;
-            updateCardImage(imgDiv, ogImg);
-            return ogImg;
-          }
-        }
-      } catch(e) {
-        // microlink failed, try fallback
-      }
-
-      // Fallback: Google favicon (at least shows something)
-      try {
-        var domain = new URL(url).hostname;
-        var faviconUrl = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=128';
-        ogImageCache[url] = faviconUrl;
-        updateCardImage(imgDiv, faviconUrl);
-        return faviconUrl;
-      } catch(e2) {
-        // Silently fail
-      }
-      return null;
+      // Return cached or generate screenshot URL
+      if (ogImageCache[url]) return ogImageCache[url];
+      return getScreenshotUrl(url);
     }
 
-    // Helper: update a card's image div with a fetched image
-    function updateCardImage(imgDiv, imageUrl) {
-      if (!imgDiv) return;
-      if (imgDiv.querySelector('.placeholder-icon') || imgDiv.querySelector('.image-shimmer')) {
-        var img = document.createElement('img');
-        img.src = imageUrl;
-        img.alt = '';
-        img.loading = 'lazy';
-        img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'cover';
-        imgDiv.innerHTML = '';
-        imgDiv.appendChild(img);
-      }
-    }
-
-    // Proactive batch fetch: get OG images for all records after load
-    async function fetchAllOgImages() {
-      // Only fetch for records that have a website URL but no attachment image
-      var toFetch = [];
-      filteredRecords.forEach(function(record, idx) {
+    // Pre-populate the cache with screenshot URLs for all records
+    function preloadWebsiteImages() {
+      filteredRecords.forEach(function(record) {
         if (getImageUrl(record)) return;  // Already has an Airtable attachment
         var url = getWebsiteUrl(record);
-        if (!url) return;
-        if (ogImageCache[url]) return;  // Already cached
-        toFetch.push({ record: record, idx: idx, url: url });
+        if (!url || ogImageCache[url]) return;
+        ogImageCache[url] = getScreenshotUrl(url);
       });
-
-      if (toFetch.length === 0) return;
-
-      // Fetch in batches of 5 to avoid rate limits
-      var batchSize = 5;
-      for (var i = 0; i < toFetch.length; i += batchSize) {
-        var batch = toFetch.slice(i, i + batchSize);
-        var promises = batch.map(function(item) {
-          // Find the card's image div in the current DOM
-          var grid = document.getElementById('portfolioGrid');
-          var cards = grid ? grid.querySelectorAll('.portfolio-card') : [];
-          var imgDiv = null;
-          for (var c = 0; c < cards.length; c++) {
-            if (cards[c].getAttribute('data-record-idx') === String(item.idx)) {
-              imgDiv = cards[c].querySelector('.portfolio-card-image');
-              break;
-            }
-          }
-          return fetchOgImageForRecord(item.record, imgDiv);
-        });
-        await Promise.all(promises);
-      }
     }
 
     /* ─── Modal ───────────────────────────────────────────── */
@@ -2942,7 +2886,7 @@
           body.appendChild(fieldDiv);
         });
 
-        // Add website link button if available
+        // Add pitch deck link button if available
         var siteUrl = getWebsiteUrl(record);
         if (siteUrl) {
           var linkBtn = document.createElement('a');
@@ -2950,7 +2894,7 @@
           linkBtn.target = '_blank';
           linkBtn.rel = 'noopener';
           linkBtn.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:12px 24px;background:var(--orange);color:white;border-radius:var(--radius-sm);text-decoration:none;font-weight:700;font-size:14px;font-family:Montserrat,sans-serif;';
-          linkBtn.textContent = 'Visit Website';
+          linkBtn.textContent = 'Pitch Deck';
           body.appendChild(linkBtn);
         }
 
