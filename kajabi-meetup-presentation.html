@@ -316,6 +316,38 @@
     border-radius: 16px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .speaker-photo-col {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .speaker-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .speaker-logo {
+    width: 110px;
+    height: auto;
+    border-radius: 8px;
+    opacity: 0.9;
+  }
+
+  .speaker-info {
+    flex: 1;
+    min-width: 0;
   }
 
   .speaker-name {
@@ -378,6 +410,28 @@
     font-weight: 600;
     margin-top: 12px;
     margin-right: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .speaker-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .speaker-photo-col {
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    .speaker-photo {
+      width: 100px;
+      height: 100px;
+    }
+
+    .speaker-logo {
+      width: 90px;
+    }
   }
 
   /* Next Meetup Pulse */
@@ -671,23 +725,29 @@
       <span class="slide-badge"><span class="next-pulse"></span> Coming Up Next</span>
       <h2 class="slide-title">Later This<br>Month</h2>
       <div class="speaker-card">
-        <div class="speaker-name">Amiah Sheppard</div>
-        <div class="speaker-role">LP &bull; Angel Investor &bull; Founder Coach</div>
-        <div class="speaker-stats">
-          <div class="speaker-stat">
-            <span class="num">1,900</span>
-            <span class="lbl">Startups Reviewed</span>
-          </div>
-          <div class="speaker-stat">
-            <span class="num">24</span>
-            <span class="lbl">Startups Selected</span>
-          </div>
+        <div class="speaker-photo-col">
+          <img class="speaker-photo" src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/4a649699-afce-4200-a08f-23ce1acbdd97/amiah.jpg?format=750w" alt="Amiah Sheppard">
+          <img class="speaker-logo" src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/27731b93-2767-48c5-b221-7c7a7792b016/download.jpg?format=750w" alt="Backstage Capital">
         </div>
-        <p class="speaker-bio">
-          Amiah is a member of our meet-up group with deep experience on the institutional capital side. She previously worked at <strong>Backstage Capital</strong>, a fund started by Arlan Hamilton with notable LPs like <strong>Mark Cuban</strong>. Amiah brings a unique lens as an LP, angel investor, and founder coach.
-        </p>
-        <span class="speaker-detail">Backstage Capital Alum</span>
-        <span class="speaker-detail">Institutional &amp; Angel</span>
+        <div class="speaker-info">
+          <div class="speaker-name">Amiah Sheppard</div>
+          <div class="speaker-role">LP &bull; Angel Investor &bull; Founder Coach</div>
+          <div class="speaker-stats">
+            <div class="speaker-stat">
+              <span class="num">1,900</span>
+              <span class="lbl">Startups Reviewed</span>
+            </div>
+            <div class="speaker-stat">
+              <span class="num">24</span>
+              <span class="lbl">Startups Selected</span>
+            </div>
+          </div>
+          <p class="speaker-bio">
+            Amiah is a member of our meet-up group with deep experience on the institutional capital side. She previously worked at <strong>Backstage Capital</strong>, a fund started by Arlan Hamilton with notable LPs like <strong>Mark Cuban</strong>. Amiah brings a unique lens as an LP, angel investor, and founder coach.
+          </p>
+          <span class="speaker-detail">Backstage Capital Alum</span>
+          <span class="speaker-detail">Institutional &amp; Angel</span>
+        </div>
       </div>
     </div>
 
