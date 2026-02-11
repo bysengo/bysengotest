@@ -573,6 +573,19 @@
     transform: translateY(-2px);
   }
 
+  .fxf-modal-link.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
+  .fxf-modal-link.instagram:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(225,48,108,0.4);
+  }
+
+  .fxf-modal-link.pitch { background: #1B3533; color: white; }
+  .fxf-modal-link.pitch:hover {
+    background: #2a4f4c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(27,53,51,0.3);
+  }
+
   .fxf-modal::-webkit-scrollbar { width: 6px; }
   .fxf-modal::-webkit-scrollbar-track { background: transparent; }
   .fxf-modal::-webkit-scrollbar-thumb { background: rgba(27,53,51,0.15); border-radius: 3px; }
@@ -1108,8 +1121,8 @@
 
     let linksHtml = '';
     if (brand.website) linksHtml += '<a href="' + brand.website + '" target="_blank" rel="noopener" class="fxf-modal-link primary">Visit Website &#8599;</a>';
-    if (brand.instagram) linksHtml += '<a href="' + brand.instagram + '" target="_blank" rel="noopener" class="fxf-modal-link secondary">Instagram &#8599;</a>';
-    if (brand.pitchDeck) linksHtml += '<a href="' + brand.pitchDeck + '" target="_blank" rel="noopener" class="fxf-modal-link secondary">View Pitch Deck &#8599;</a>';
+    if (brand.instagram) linksHtml += '<a href="' + brand.instagram + '" target="_blank" rel="noopener" class="fxf-modal-link instagram">Instagram &#8599;</a>';
+    if (brand.pitchDeck) linksHtml += '<a href="' + brand.pitchDeck + '" target="_blank" rel="noopener" class="fxf-modal-link pitch">View Pitch Deck &#8599;</a>';
     if (!brand.website && !brand.instagram && !brand.pitchDeck) linksHtml = '<span class="fxf-modal-link secondary" style="cursor:default;opacity:0.6;">Links coming soon</span>';
     document.getElementById('fxfMLinks').innerHTML = linksHtml;
 
