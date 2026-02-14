@@ -791,6 +791,37 @@
     font-weight: 500;
   }
 
+  /* ── Mobile View Toggle ── */
+  .fxf-view-toggle {
+    display: none;
+    justify-content: center;
+    gap: 0;
+    margin: 20px auto 0;
+    max-width: 260px;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1.5px solid #1B3533;
+  }
+
+  .fxf-view-toggle-btn {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    color: #1B3533;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .fxf-view-toggle-btn.active {
+    background: #1B3533;
+    color: #F3EDE7;
+  }
+
   /* ── Responsive ── */
   @media (max-width: 1024px) {
     .fxf-grid { grid-template-columns: repeat(3, 1fr); }
@@ -810,7 +841,13 @@
     .fxf-email-signup { max-width: 100%; text-align: center; width: 100%; }
     .fxf-summary.visible { padding: 20px 24px; }
     .fxf-brands { display: none; }
+    .fxf-brands.mobile-visible { display: block; padding: 20px 24px 60px; }
+    .fxf-brands.mobile-visible .fxf-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .fxf-brands.mobile-visible .fxf-tile { padding: 16px; }
+    .fxf-brands.mobile-visible .fxf-tile-overlay { display: none; }
     .fxf-swipe-container { display: block; }
+    .fxf-swipe-container.mobile-hidden { display: none; }
+    .fxf-view-toggle { display: flex; }
     .fxf-modal-head { padding: 28px 24px 0; }
     .fxf-modal-body { padding: 24px 24px 32px; }
     .fxf-modal-name { font-size: 1.5rem; }
@@ -839,7 +876,7 @@
     <div class="fxf-hero-inner">
       <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/7477c398-9e97-42bd-90c2-dd0d3ab56b9f/LANDNG-PAGE-LOGO.png?format=750w" alt="Sengo x RU - Fashion x Futures" class="fxf-hero-logo">
       <p>Meet the designers, makers, and visionaries building the future of fashion. Explore their stories and discover how you can support their journey.</p>
-      <div class="fxf-hero-count">21 Brands &mdash; One Community</div>
+      <div class="fxf-hero-count">22 Brands &mdash; One Community</div>
     </div>
   </section>
 
@@ -868,12 +905,18 @@
     <div class="fxf-summary-inner" id="fxfSummaryInner"></div>
   </section>
 
+  <!-- Mobile View Toggle -->
+  <div class="fxf-view-toggle" id="fxfViewToggle">
+    <button class="fxf-view-toggle-btn active" data-view="swipe">Swipe</button>
+    <button class="fxf-view-toggle-btn" data-view="grid">Portfolio</button>
+  </div>
+
   <!-- Mobile Swipe Interface -->
   <section class="fxf-swipe-container" id="fxfSwipe">
     <div class="fxf-swipe-stack" id="fxfSwipeStack"></div>
     <div class="fxf-swipe-nav">
       <button class="fxf-swipe-btn" id="fxfSwipePrev">&#8592;</button>
-      <div class="fxf-swipe-counter"><span id="fxfSwipeCurrent">1</span> / <span id="fxfSwipeTotal">21</span></div>
+      <div class="fxf-swipe-counter"><span id="fxfSwipeCurrent">1</span> / <span id="fxfSwipeTotal">22</span></div>
       <button class="fxf-swipe-btn" id="fxfSwipeNext">&#8594;</button>
     </div>
     <div class="fxf-swipe-hint">Swipe or tap to explore</div>
@@ -934,7 +977,8 @@
     { name:"Starfish Mrkt", founder:"Zarah Spencer", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/2d49da5f-293e-4ca7-89bf-7660030d2daf/STARFISH-MRKT-LOGO-logo-blk.png?format=750w", logoBg:"light", description:"A clothing brand for the cool girl.", products:"Women\u2019s clothing", funding:["Grant Funding"], raised:"No", website:"https://www.starfishmrkt.com", instagram:"https://www.instagram.com/starfishmrkt" },
     { name:"Studio Tana\u00efs", founder:"Tana\u00efs", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/d80e6fbc-58b3-413c-bbdf-c2ea29f62a6e/Untitled+design+%281%29.png?format=750w", logoBg:"light", description:"Sensual scentscapes inspired by ritual, the ancestral, the cosmic, the femme, and the future. Studio Tana\u00efs is a perfume house and design studio founded by the New York City-based, award-winning author and perfumer, Tana\u00efs. Surreal, psychedelic, sultry scentscapes \u2014 inspired by ancestral and spiritual homes: Bangladesh, New York City, India, Hawaii, Bali, and California. These are opulent, original works of art.", products:"Perfumes \u2014 curated for a sexy romantic vibe", funding:["Grant Funding","Crowdfunding (Reg CF / Community Raise)","Venture capital / angel investment"], raised:"Yes \u2014 debt/equity", website:"https://studiotanais.com", instagram:"https://www.instagram.com/studiotanais" },
     { name:"Verdictstillout", founder:"Jason Scott", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/33fbdd4e-b6cc-4cf2-a43a-500c8c45061e/VERDICT4.png?format=750w", logoBg:"light", description:"Verdictstillout is a non-binary clothing label born from the idea that individuality can never be labeled or put in a box. The label was started in fall 2018 by creative director Jason Scott and made its debut at Paris Fashion Week, where it immediately became a niche brand offering something different. Already pulled from showrooms for magazines such as L\u2019Officiel and Teen Vanity, it\u2019s positioning itself in the fashion industry.", products:"Moto jackets, cardigans, jeans, denim trucker jackets, nylon joggers", funding:["Grant Funding","Venture capital / angel investment"], raised:"No", website:"https://www.verdictstillout.com", instagram:"https://www.instagram.com/verdictstillout" },
-    { name:"Wildly Black", founder:"Siham Omer", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1564fe8e-cd81-4b83-9f91-d1e5495b5b6e/wildlyblack-black+%284%29.png?format=750w", logoBg:"light", description:"Wildly Black is a sustainable fashion brand helping women reconnect with the roots of their own sustainability stories through intentional, beautifully crafted essentials.", products:"Bodysuit", funding:["Grant Funding"], raised:"No", website:"https://www.wildlyblack.com", instagram:"https://www.instagram.com/wildlyblack" }
+    { name:"Wildly Black", founder:"Siham Omer", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1564fe8e-cd81-4b83-9f91-d1e5495b5b6e/wildlyblack-black+%284%29.png?format=750w", logoBg:"light", description:"Wildly Black is a sustainable fashion brand helping women reconnect with the roots of their own sustainability stories through intentional, beautifully crafted essentials.", products:"Bodysuit", funding:["Grant Funding"], raised:"No", website:"https://www.wildlyblack.com", instagram:"https://www.instagram.com/wildlyblack" },
+    { name:"Ru by Rupal", founder:"Rupal Banerjee", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/668c945a-a178-49e1-8a0e-3f6f2b144fad/ru-logo-upward.png?format=750w", logoBg:"dark", description:"Ru by Rupal was established in 2023 by Rupal Banerjee. The brand is rooted in self expression and confidence through design and infuses aspects of Rupal\u2019s Indian culture with modern streetwear styles. Her main inspiration is the strength she sees in the women around her, and she only hopes she can inspire other women to be driven, go-getters as well.", products:"Streetwear", funding:["Not sure yet/Not seeking"], raised:"No", website:"https://rupalbrand.com/", instagram:"https://www.instagram.com/rup.al.b/" }
   ];
 
   // ── Role definitions ──
@@ -942,7 +986,7 @@
     shopper: {
       label: "Shopper",
       match: () => true,
-      summary: "All 21 brands offer unique products you can shop right now \u2014 from luxury couture and handbags to streetwear, perfumes, and children\u2019s clothing. Click any brand to browse their collection.",
+      summary: "All 22 brands offer unique products you can shop right now \u2014 from luxury couture and handbags to streetwear, perfumes, and children\u2019s clothing. Click any brand to browse their collection.",
       stat: b => b.website ? 1 : 0,
       statLabel: "Shoppable Online",
       statDesc: "brands with live stores"
@@ -982,7 +1026,7 @@
     media: {
       label: "Media / Press",
       match: () => true,
-      summary: "21 stories worth telling \u2014 from Paris Fashion Week debuts and Brooklyn luxury to sustainable essentials and wearable art. Every brand here has a unique narrative ready for your next feature.",
+      summary: "22 stories worth telling \u2014 from Paris Fashion Week debuts and Brooklyn luxury to sustainable essentials and wearable art. Every brand here has a unique narrative ready for your next feature.",
       stat: () => 1,
       statLabel: "Brand Stories",
       statDesc: "unique narratives to feature"
@@ -1042,7 +1086,7 @@
       <div class="fxf-summary-title">Your personalized view</div>
       <div class="fxf-summary-cards">${cardsHtml}</div>
       <div class="fxf-summary-desc">${combinedSummary}</div>
-      <div class="fxf-brand-match-count"><strong>${matchCount}</strong> of 21 brands match your selection</div>
+      <div class="fxf-brand-match-count"><strong>${matchCount}</strong> of 22 brands match your selection</div>
     `;
 
     panel.classList.add('visible');
@@ -1282,6 +1326,24 @@
   // Swipe navigation buttons
   document.getElementById('fxfSwipePrev')?.addEventListener('click', swipePrev);
   document.getElementById('fxfSwipeNext')?.addEventListener('click', swipeNext);
+
+  // View toggle (swipe vs portfolio on mobile)
+  document.querySelectorAll('.fxf-view-toggle-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.fxf-view-toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var view = btn.dataset.view;
+      var swipeEl = document.getElementById('fxfSwipe');
+      var brandsEl = document.querySelector('.fxf-brands');
+      if (view === 'grid') {
+        swipeEl.classList.add('mobile-hidden');
+        brandsEl.classList.add('mobile-visible');
+      } else {
+        swipeEl.classList.remove('mobile-hidden');
+        brandsEl.classList.remove('mobile-visible');
+      }
+    });
+  });
 
   // Init
   renderGrid();
