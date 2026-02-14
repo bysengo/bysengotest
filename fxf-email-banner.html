@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>FxF Email Banner — Record as GIF</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: 'Montserrat', sans-serif; }
+
+  .instructions {
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.6;
+  }
+  .instructions strong { color: #D57028; }
+
+  /* Banner container — this is what you capture */
+  .banner {
+    width: 600px;
+    height: 250px;
+    background: #2d302f;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  /* Top & bottom accent lines */
+  .banner::before, .banner::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 3px;
+    background: #D57028;
+    z-index: 10;
+  }
+  .banner::before { top: 0; }
+  .banner::after { bottom: 0; }
+
+  /* Slide track */
+  .slide-track {
+    display: flex;
+    animation: slideTrack 66s linear infinite;
+    height: 100%;
+  }
+
+  @keyframes slideTrack {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Each brand slide */
+  .slide {
+    min-width: 600px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .slide-logo-card {
+    width: 160px;
+    height: 130px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .slide-logo-card.bg-light { background: #ffffff; }
+  .slide-logo-card.bg-dark { background: #2d302f; border: 1px solid rgba(255,255,255,0.1); }
+
+  .slide-logo-card img {
+    max-width: 120px;
+    max-height: 100px;
+    object-fit: contain;
+  }
+
+  .slide-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #F3EDE7;
+    letter-spacing: 0.5px;
+  }
+
+  .slide-sub {
+    font-size: 10px;
+    color: #D57028;
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  /* Alternate version: static swipe (for screen capture tools) */
+  .banner.static .slide-track {
+    animation: slideStatic 88s steps(22) infinite;
+  }
+
+  @keyframes slideStatic {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .controls {
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .controls button {
+    padding: 8px 20px;
+    border: 1px solid #D57028;
+    background: transparent;
+    color: #D57028;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .controls button:hover { background: #D57028; color: white; }
+  .controls button.active { background: #D57028; color: white; }
+</style>
+</head>
+<body>
+
+<div class="instructions">
+  <strong>Fashion x Futures — Email Banner Generator</strong><br>
+  Open this file in your browser, then use a screen recording tool to capture the banner as a GIF.<br>
+  Recommended: <strong>ezgif.com/video-to-gif</strong> or <strong>Kap</strong> (Mac) or <strong>ScreenToGif</strong> (Windows)
+</div>
+
+<div class="banner" id="banner">
+  <div class="slide-track" id="track">
+    <!-- Slides are duplicated for seamless loop -->
+  </div>
+</div>
+
+<div class="controls">
+  <button onclick="setSpeed('smooth')" class="active" id="btnSmooth">Smooth Scroll</button>
+  <button onclick="setSpeed('slow')" id="btnSlow">Slow (3s/brand)</button>
+  <button onclick="setSpeed('fast')" id="btnFast">Fast (1.5s/brand)</button>
+  <button onclick="togglePause()" id="btnPause">Pause</button>
+</div>
+
+<script>
+const brands = [
+  { name:"FAR FROM PRIVACY", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/44939674-65e3-4d6d-878f-7a1a62b6a5e0/FFP_DESIGN2_NY-BLK.png?format=750w", bg:"light" },
+  { name:"A Grimm Company", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/354f6120-c6ee-4c61-a02f-d5e6e5001f50/AGCtransparent-blk.png?format=750w", bg:"light" },
+  { name:"ar*ky*ved", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/8e860dbb-53c3-4e9e-8c48-84ba1e55533f/arkyvedlogo-blk.png?format=750w", bg:"light" },
+  { name:"Aworan", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/829c358f-c5db-4257-ad36-57f297eb38a0/Aworan+logo+blk.png?format=750w", bg:"light" },
+  { name:"Favelo World Wide", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/e03754e1-8509-4603-9836-e88858053dd9/favelo+logo.png?format=750w", bg:"light" },
+  { name:"Hause of Oninku", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/006761f3-ccde-478e-9db6-1f4c1b08eb87/oninku-logo-blk.png?format=750w", bg:"light" },
+  { name:"Hoop York City", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/ab8887f4-49c0-4c4c-b2a6-54ebe05a7644/HYC_Graphic.png?format=750w", bg:"light" },
+  { name:"J.Lew Atelier", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1baab940-2994-40c8-995f-27d318ef4cdc/LewLogo.png?format=750w", bg:"light" },
+  { name:"Justin Mensinger", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/316ba488-b8c0-44c8-99e4-a92ad4518e8b/Untitled+design.png?format=750w", bg:"light" },
+  { name:"Maddy Kelly", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/a86da67a-7a9e-466b-9b4a-a7b78eb42abc/Maddy+Kelly+transparent+logo.png?format=750w", bg:"light" },
+  { name:"Maison Ravi", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/39c321aa-516c-40ea-bb0b-1b51c3c75a23/MaisonRavi.png?format=750w", bg:"light" },
+  { name:"Maya Winston", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/cfc10aae-db7d-4b24-9fb3-c5b262889e8a/MAYA-WINSTON-logo-blk.png?format=750w", bg:"light" },
+  { name:"Michael Wright", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/8cbf6e6b-9b02-4d9b-aeb0-d177829ae39a/MIchael+Wright+logo+blk.png?format=750w", bg:"light" },
+  { name:"Mingo by Domingo", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/9516c573-83f2-48b6-a7b6-9cac60ef0e8d/Mingo+logo+blk.png?format=750w", bg:"light" },
+  { name:"SHOP NIKITA", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/afffa300-7d37-4e5a-8652-faaac9f37a91/SHOP+NIKITA+brand+logo.png?format=750w", bg:"light" },
+  { name:"Oberon Asscher", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/5014ed46-23eb-48be-bb44-a5099dd11b97/oa-logo-blk.png?format=750w", bg:"light" },
+  { name:"SoulMaison", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/b45be828-6785-42db-b2fa-a79fb73160cf/SoulMaison_MainLogo_Normal.png?format=750w", bg:"light" },
+  { name:"Starfish Mrkt", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/2d49da5f-293e-4ca7-89bf-7660030d2daf/STARFISH-MRKT-LOGO-logo-blk.png?format=750w", bg:"light" },
+  { name:"Studio Tanaïs", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/d80e6fbc-58b3-413c-bbdf-c2ea29f62a6e/Untitled+design+%281%29.png?format=750w", bg:"light" },
+  { name:"Verdictstillout", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/33fbdd4e-b6cc-4cf2-a43a-500c8c45061e/VERDICT4.png?format=750w", bg:"light" },
+  { name:"Wildly Black", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1564fe8e-cd81-4b83-9f91-d1e5495b5b6e/wildlyblack-black+%284%29.png?format=750w", bg:"light" },
+  { name:"Ru by Rupal", logo:"https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/668c945a-a178-49e1-8a0e-3f6f2b144fad/ru-logo-upward.png?format=750w", bg:"dark" }
+];
+
+function createSlide(brand) {
+  return `<div class="slide">
+    <div class="slide-logo-card bg-${brand.bg}">
+      <img src="${brand.logo}" alt="${brand.name}">
+    </div>
+    <div class="slide-name">${brand.name}</div>
+    <div class="slide-sub">Fashion x Futures  •  22 Brands</div>
+  </div>`;
+}
+
+// Build track with duplicate set for seamless loop
+const track = document.getElementById('track');
+const allSlides = brands.map(createSlide).join('');
+track.innerHTML = allSlides + allSlides;
+
+// Speed controls
+function setSpeed(mode) {
+  const track = document.getElementById('track');
+  document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+
+  if (mode === 'smooth') {
+    track.style.animationDuration = '66s';
+    track.style.animationTimingFunction = 'linear';
+    document.getElementById('btnSmooth').classList.add('active');
+  } else if (mode === 'slow') {
+    track.style.animationDuration = '132s';
+    track.style.animationTimingFunction = 'linear';
+    document.getElementById('btnSlow').classList.add('active');
+  } else if (mode === 'fast') {
+    track.style.animationDuration = '33s';
+    track.style.animationTimingFunction = 'linear';
+    document.getElementById('btnFast').classList.add('active');
+  }
+}
+
+let paused = false;
+function togglePause() {
+  paused = !paused;
+  const track = document.getElementById('track');
+  track.style.animationPlayState = paused ? 'paused' : 'running';
+  document.getElementById('btnPause').textContent = paused ? 'Play' : 'Pause';
+}
+</script>
+</body>
+</html>
