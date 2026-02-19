@@ -1,0 +1,719 @@
+<!-- Sengo Embeddable Presentation for Kajabi -->
+<!-- Embed via Kajabi Custom Code Block or iframe -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo — Funder Presentation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Arimo:wght@400;500;600;700&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #1B3533;
+    }
+
+    /* ── Slideshow Container ── */
+    .slideshow {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      background: #1B3533;
+    }
+
+    /* ── Individual Slides ── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 48px 56px;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .slide.exit-left {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+
+    /* ── Slide Themes ── */
+    .slide--dark {
+      background: linear-gradient(135deg, #1B3533 0%, #244240 50%, #1B3533 100%);
+      color: #F3EDE7;
+    }
+
+    .slide--cream {
+      background: linear-gradient(135deg, #F3EDE7 0%, #FAF7F4 100%);
+      color: #1B3533;
+    }
+
+    .slide--accent {
+      background: linear-gradient(135deg, #2A4F4C 0%, #1B3533 100%);
+      color: #F3EDE7;
+    }
+
+    /* ── Typography ── */
+    .slide-eyebrow {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      opacity: 0.7;
+    }
+
+    .slide--dark .slide-eyebrow { color: #C8B89A; }
+    .slide--cream .slide-eyebrow { color: #6B8A87; }
+    .slide--accent .slide-eyebrow { color: #C8B89A; }
+
+    .slide-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .slide-subtitle {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 600px;
+      text-align: center;
+      opacity: 0.85;
+    }
+
+    /* ── SLIDE 1: Title ── */
+    .slide-logo-mark {
+      width: 80px;
+      height: 52px;
+      margin-bottom: 24px;
+      opacity: 0.95;
+    }
+
+    .slide-logo-mark svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .title-divider {
+      width: 48px;
+      height: 2px;
+      background: #C8B89A;
+      margin: 20px 0;
+      border-radius: 1px;
+    }
+
+    .title-tagline {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
+
+    /* ── SLIDE 2: Mission & Vision ── */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      width: 100%;
+      max-width: 780px;
+      margin-top: 8px;
+    }
+
+    .mission-card {
+      background: rgba(27, 53, 51, 0.06);
+      border: 1px solid rgba(27, 53, 51, 0.1);
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: left;
+    }
+
+    .mission-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .mission-card h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #6B8A87;
+      margin-bottom: 10px;
+    }
+
+    .mission-card p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: #1B3533;
+      font-weight: 400;
+    }
+
+    /* ── SLIDE 3: KPIs ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: 780px;
+      margin-top: 8px;
+    }
+
+    .kpi-card {
+      background: rgba(243, 237, 231, 0.08);
+      border: 1px solid rgba(243, 237, 231, 0.12);
+      border-radius: 10px;
+      padding: 22px 18px;
+      text-align: center;
+      transition: background 0.3s ease;
+    }
+
+    .kpi-card:hover {
+      background: rgba(243, 237, 231, 0.12);
+    }
+
+    .kpi-value {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #F3EDE7;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .kpi-label {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #C8B89A;
+      line-height: 1.3;
+    }
+
+    .kpi-sublabel {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: rgba(243, 237, 231, 0.5);
+      margin-top: 4px;
+    }
+
+    /* ── SLIDE 4: Agenda ── */
+    .agenda-list {
+      width: 100%;
+      max-width: 640px;
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    .agenda-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(27, 53, 51, 0.08);
+    }
+
+    .agenda-item:last-child {
+      border-bottom: none;
+    }
+
+    .agenda-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1B3533;
+      color: #F3EDE7;
+      border-radius: 50%;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .agenda-text h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1B3533;
+      margin-bottom: 2px;
+    }
+
+    .agenda-text p {
+      font-size: 0.78rem;
+      color: #6B8A87;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    /* ── SLIDE 5: Closing CTA ── */
+    .cta-button {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 14px 36px;
+      background: #C8B89A;
+      color: #1B3533;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .cta-button:hover {
+      background: #B8A88A;
+      transform: translateY(-1px);
+    }
+
+    /* ── Navigation ── */
+    .nav-arrows {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 12px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .nav-arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(243, 237, 231, 0.15);
+      color: #F3EDE7;
+      font-size: 1.1rem;
+      cursor: pointer;
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease, opacity 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0.6;
+    }
+
+    .nav-arrow:hover {
+      background: rgba(243, 237, 231, 0.25);
+      opacity: 1;
+    }
+
+    .nav-arrow:disabled {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .nav-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(243, 237, 231, 0.25);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      padding: 0;
+    }
+
+    .nav-dot.active {
+      background: #C8B89A;
+      transform: scale(1.25);
+    }
+
+    .slide--cream .nav-dot {
+      background: rgba(27, 53, 51, 0.15);
+    }
+
+    /* Slide number */
+    .slide-counter {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      opacity: 0.4;
+      z-index: 10;
+      color: #F3EDE7;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .slideshow {
+        border-radius: 0;
+        aspect-ratio: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+      }
+
+      .slide {
+        padding: 40px 28px 60px;
+      }
+
+      .slide-title {
+        font-size: 1.6rem;
+      }
+
+      .slide-subtitle {
+        font-size: 0.88rem;
+      }
+
+      .mission-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .kpi-value {
+        font-size: 1.4rem;
+      }
+
+      .kpi-label {
+        font-size: 0.6rem;
+      }
+
+      .nav-arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .slide {
+        padding: 32px 20px 56px;
+      }
+
+      .slide-title {
+        font-size: 1.35rem;
+      }
+
+      .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .kpi-value {
+        font-size: 1.2rem;
+      }
+
+      .agenda-item {
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="slideshow" id="slideshow">
+
+  <!-- Slide Counter -->
+  <div class="slide-counter" id="slideCounter">1 / 5</div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- SLIDE 1 — Title -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="slide slide--dark active" data-slide="0">
+    <div class="slide-logo-mark">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" fill="none">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="#F3EDE7"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="#F3EDE7" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="#F3EDE7" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="#F3EDE7" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="#F3EDE7" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="slide-title">Sengo</div>
+    <div class="title-divider"></div>
+    <div class="title-tagline">Funder Presentation 2026</div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- SLIDE 2 — Mission & Vision -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="slide slide--cream" data-slide="1">
+    <div class="slide-eyebrow">Who We Are</div>
+    <div class="slide-title" style="color: #1B3533;">Mission &amp; Vision</div>
+    <div class="mission-grid">
+      <div class="mission-card">
+        <div class="mission-card-icon">&#9678;</div>
+        <h3>Our Mission</h3>
+        <p>To create accessible pathways for community-driven funding that empower underrepresented founders and amplify social impact through collective investment.</p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-card-icon">&#9670;</div>
+        <h3>Our Vision</h3>
+        <p>A world where funding flows equitably — where every community has the resources to build, grow, and sustain the ventures that serve them best.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- SLIDE 3 — Key Performance Indicators -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="slide slide--dark" data-slide="2">
+    <div class="slide-eyebrow">Metrics That Matter</div>
+    <div class="slide-title">Key Performance Indicators</div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-value">$2.4M</div>
+        <div class="kpi-label">Capital Deployed</div>
+        <div class="kpi-sublabel">Cumulative to date</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">340+</div>
+        <div class="kpi-label">Active Funders</div>
+        <div class="kpi-sublabel">Community members</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">87%</div>
+        <div class="kpi-label">Retention Rate</div>
+        <div class="kpi-sublabel">Year over year</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">52</div>
+        <div class="kpi-label">Ventures Funded</div>
+        <div class="kpi-sublabel">Across 12 sectors</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">3.2x</div>
+        <div class="kpi-label">Impact Multiple</div>
+        <div class="kpi-sublabel">Social return on investment</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">96%</div>
+        <div class="kpi-label">Funder Satisfaction</div>
+        <div class="kpi-sublabel">Latest survey results</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- SLIDE 4 — Agenda -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="slide slide--cream" data-slide="3">
+    <div class="slide-eyebrow">Today's Session</div>
+    <div class="slide-title" style="color: #1B3533;">Agenda</div>
+    <ul class="agenda-list">
+      <li class="agenda-item">
+        <span class="agenda-num">1</span>
+        <div class="agenda-text">
+          <h4>Welcome &amp; Introductions</h4>
+          <p>Opening remarks and community grounding</p>
+        </div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-num">2</span>
+        <div class="agenda-text">
+          <h4>Mission &amp; Vision Overview</h4>
+          <p>Where we've been and where we're headed</p>
+        </div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-num">3</span>
+        <div class="agenda-text">
+          <h4>KPI Review &amp; Impact Report</h4>
+          <p>Key metrics and portfolio performance</p>
+        </div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-num">4</span>
+        <div class="agenda-text">
+          <h4>2026 Roadmap &amp; Growth Strategy</h4>
+          <p>New initiatives and expansion plans</p>
+        </div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-num">5</span>
+        <div class="agenda-text">
+          <h4>Funder Opportunities</h4>
+          <p>How to get involved and increase your impact</p>
+        </div>
+      </li>
+      <li class="agenda-item">
+        <span class="agenda-num">6</span>
+        <div class="agenda-text">
+          <h4>Q&amp;A and Open Discussion</h4>
+          <p>Your questions, ideas, and feedback</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- SLIDE 5 — Closing / CTA -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="slide slide--accent" data-slide="4">
+    <div class="slide-eyebrow">Get Involved</div>
+    <div class="slide-title">Join the Movement</div>
+    <div class="slide-subtitle">
+      Become a Sengo funder and help build a more equitable future. Together, we invest in the communities and founders that need it most.
+    </div>
+    <a href="#" class="cta-button">Become a Funder</a>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- Navigation -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="nav-arrows">
+    <button class="nav-arrow" id="prevBtn" aria-label="Previous slide">&#8592;</button>
+    <button class="nav-arrow" id="nextBtn" aria-label="Next slide">&#8594;</button>
+  </div>
+
+  <div class="nav-dots" id="navDots"></div>
+</div>
+
+<script>
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  const counter = document.getElementById('slideCounter');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsContainer = document.getElementById('navDots');
+  let current = 0;
+
+  // Build dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', function() { goTo(i); });
+    dotsContainer.appendChild(dot);
+  }
+
+  function updateCounter() {
+    counter.textContent = (current + 1) + ' / ' + totalSlides;
+    // Adjust counter color for cream slides
+    const activeSlide = slides[current];
+    if (activeSlide.classList.contains('slide--cream')) {
+      counter.style.color = '#1B3533';
+    } else {
+      counter.style.color = '#F3EDE7';
+    }
+  }
+
+  function goTo(index) {
+    if (index === current || index < 0 || index >= totalSlides) return;
+    const direction = index > current ? 1 : -1;
+
+    // Remove active from current
+    slides[current].classList.remove('active');
+    slides[current].classList.add(direction > 0 ? 'exit-left' : '');
+
+    // Clean up after transition
+    const prev = current;
+    setTimeout(function() {
+      slides[prev].classList.remove('exit-left');
+    }, 500);
+
+    current = index;
+
+    // Set entry direction
+    slides[current].style.transform = direction > 0 ? 'translateX(40px)' : 'translateX(-40px)';
+    // Force reflow
+    slides[current].offsetHeight;
+    slides[current].classList.add('active');
+    slides[current].style.transform = '';
+
+    // Update dots
+    document.querySelectorAll('.nav-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+
+    // Update buttons
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === totalSlides - 1;
+
+    updateCounter();
+  }
+
+  prevBtn.addEventListener('click', function() { goTo(current - 1); });
+  nextBtn.addEventListener('click', function() { goTo(current + 1); });
+  prevBtn.disabled = true;
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { goTo(current - 1); }
+  });
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const slideshow = document.getElementById('slideshow');
+
+  slideshow.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  slideshow.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) { goTo(current + 1); }
+      else { goTo(current - 1); }
+    }
+  }, { passive: true });
+
+  updateCounter();
+})();
+</script>
+
+</body>
+</html>
