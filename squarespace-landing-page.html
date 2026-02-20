@@ -650,13 +650,19 @@
   }
 
   /* ===== SCROLL ANIMATIONS ===== */
+  /* Content is visible by default. JS adds .sbs-animated to enable hide/reveal. */
   .sbs-fade-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sbs-animated .sbs-fade-up {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
-  .sbs-fade-up.visible {
+  .sbs-animated .sbs-fade-up.visible {
     opacity: 1;
     transform: translateY(0);
   }
@@ -1065,20 +1071,48 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+  // Initialize scroll animations — works even if DOMContentLoaded already fired
+  function sbsInitAnimations() {
+    var page = document.querySelector('.sbs-page');
+    if (!page) return;
+
+    // Only enable hide/reveal animations if IntersectionObserver is supported
+    if ('IntersectionObserver' in window) {
+      page.classList.add('sbs-animated');
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+      document.querySelectorAll('.sbs-fade-up').forEach(function(el) {
+        observer.observe(el);
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.sbs-fade-up').forEach(function(el) {
-      observer.observe(el);
-    });
-  });
+      // Safety net: force everything visible after 2.5s if observer hasn't fired
+      setTimeout(function() {
+        document.querySelectorAll('.sbs-fade-up').forEach(function(el) {
+          el.classList.add('visible');
+        });
+      }, 2500);
+    }
+    // If no IntersectionObserver (old mobile browsers), content stays visible by default
+  }
 
+  // Run init: try immediately if DOM ready, otherwise wait for it
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', sbsInitAnimations);
+  } else {
+    // DOM already loaded (common in Squarespace embeds) — run now
+    sbsInitAnimations();
+  }
+  // Extra fallback for Squarespace embed timing quirks
+  setTimeout(sbsInitAnimations, 500);
+
+  // Modal functions
   function openModal(id) {
     var modal = document.getElementById(id);
     if (modal) {
