@@ -1199,12 +1199,52 @@
 </div>
 
 <script>
-  // Initialize scroll animations — works even if DOMContentLoaded already fired
+  // ===== WIX IFRAME AUTO-HEIGHT =====
+  // Sends content height to Wix parent so the iframe expands to fit content.
+  // Works with Wix Velo onMessage handler (see setup instructions below).
+  var sbsLastHeight = 0;
+
+  function sbsSendHeight() {
+    var height = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.scrollHeight
+    );
+    // Only send if height actually changed (avoid spam)
+    if (height !== sbsLastHeight && height > 0) {
+      sbsLastHeight = height;
+      // Wix Velo message format
+      window.parent.postMessage({ type: 'setHeight', height: height }, '*');
+      // Generic iframe resize format (works with some Wix configs)
+      window.parent.postMessage(JSON.stringify({ type: 'setHeight', height: height }), '*');
+    }
+  }
+
+  // Send height on load, after fonts load, and periodically
+  function sbsStartHeightSync() {
+    sbsSendHeight();
+    // Re-send after fonts finish loading (can change layout)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(sbsSendHeight);
+    }
+    // Re-send a few times as content renders
+    setTimeout(sbsSendHeight, 300);
+    setTimeout(sbsSendHeight, 1000);
+    setTimeout(sbsSendHeight, 3000);
+    // Watch for layout changes
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(sbsSendHeight).observe(document.body);
+    } else {
+      // Fallback: poll every 2s
+      setInterval(sbsSendHeight, 2000);
+    }
+  }
+
+  // ===== SCROLL ANIMATIONS =====
   function sbsInitAnimations() {
     var page = document.querySelector('.sbs-page');
     if (!page) return;
 
-    // Only enable hide/reveal animations if IntersectionObserver is supported
     if ('IntersectionObserver' in window) {
       page.classList.add('sbs-animated');
 
@@ -1220,33 +1260,34 @@
         observer.observe(el);
       });
 
-      // Safety net: force everything visible after 2.5s if observer hasn't fired
+      // Safety net: force everything visible after 2.5s
       setTimeout(function() {
         document.querySelectorAll('.sbs-fade-up').forEach(function(el) {
           el.classList.add('visible');
         });
       }, 2500);
     }
-    // If no IntersectionObserver (old mobile browsers), content stays visible by default
   }
 
-  // Run init: try immediately if DOM ready, otherwise wait for it
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', sbsInitAnimations);
-  } else {
-    // DOM already loaded (common in Squarespace embeds) — run now
+  // ===== INIT =====
+  function sbsInit() {
     sbsInitAnimations();
+    sbsStartHeightSync();
   }
-  // Extra fallback for Squarespace embed timing quirks
-  setTimeout(sbsInitAnimations, 500);
 
-  // Modal functions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', sbsInit);
+  } else {
+    sbsInit();
+  }
+  setTimeout(sbsInit, 500);
+
+  // ===== MODAL FUNCTIONS =====
   function openModal(id) {
     var modal = document.getElementById(id);
     if (modal) {
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
-      // Scroll iframe to top so fixed overlay is visible
       window.scrollTo(0, 0);
     }
   }
