@@ -1,13 +1,12 @@
 <!-- Soul Body Sports Landing Page for Squarespace -->
 <!-- College Football & Baseball Recruiting | Coach John Corcoran -->
-<!-- Colors: Black, Blue, Gold | Embed Block compatible -->
+<!-- Colors: Black, Blue, Gold | Full-viewport panel layout -->
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ===== COLOR SYSTEM ===== */
   :root {
     --black: #0A0A0A;
     --black-light: #1A1A1A;
@@ -22,48 +21,66 @@
   }
 
   .sbs-page {
-    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0;
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
     color: var(--white);
     background: var(--black);
   }
 
-  /* ===== HERO SECTION ===== */
-  .sbs-hero {
-    min-height: 70vh;
+  /* ===== FULL-VIEWPORT PANEL BASE ===== */
+  .sbs-panel {
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    padding: 80px 20px 60px;
+    padding: 60px 80px;
     position: relative;
+  }
+
+  /* ===== HERO SECTION — PANEL 1 ===== */
+  .sbs-hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+    gap: 60px;
+    padding: 60px 80px;
+    position: relative;
+  }
+
+  .sbs-hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .sbs-hero-badge {
     display: inline-block;
     background: var(--gold);
     color: var(--black);
-    padding: 8px 20px;
+    padding: 10px 24px;
     border-radius: 4px;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 24px;
+    letter-spacing: 2.5px;
+    margin-bottom: 28px;
+    width: fit-content;
   }
 
   .sbs-hero h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 4.5rem;
+    font-size: 5.5rem;
     font-weight: 900;
-    line-height: 1.0;
+    line-height: 0.95;
     color: var(--white);
     text-transform: uppercase;
-    letter-spacing: -0.02em;
-    margin-bottom: 8px;
-    max-width: 800px;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
   }
 
   .sbs-hero h1 span {
@@ -71,24 +88,97 @@
   }
 
   .sbs-hero-sub {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: var(--gray);
     font-weight: 400;
-    margin-bottom: 40px;
-    max-width: 580px;
-    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 540px;
+    line-height: 1.7;
   }
 
   .sbs-hero-urgency {
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--gold-light);
     font-weight: 600;
     font-style: italic;
-    margin-bottom: 32px;
-    max-width: 560px;
+    margin-bottom: 40px;
+    max-width: 500px;
     line-height: 1.5;
-    border-left: 3px solid var(--gold);
-    padding-left: 16px;
+    border-left: 4px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  /* Hero right — stats + problem */
+  .sbs-hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .sbs-hero-stats {
+    display: flex;
+    gap: 0;
+    border: 1px solid rgba(200, 164, 78, 0.25);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sbs-hero-stat {
+    flex: 1;
+    text-align: center;
+    padding: 40px 20px;
+    border-right: 1px solid rgba(200, 164, 78, 0.15);
+  }
+
+  .sbs-hero-stat:last-child {
+    border-right: none;
+  }
+
+  .sbs-hero-stat-number {
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .sbs-hero-stat-label {
+    font-size: 0.75rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+
+  .sbs-hero-problem {
+    background: var(--black-light);
+    border: 1px solid rgba(200, 164, 78, 0.15);
+    border-radius: 12px;
+    padding: 40px 36px;
+    text-align: center;
+  }
+
+  .sbs-hero-problem h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .sbs-hero-problem p {
+    font-size: 0.95rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  /* Stats strip at bottom of hero */
+  .sbs-hero-bottom {
+    grid-column: 1 / -1;
+    display: none; /* hidden — stats are in the right column now */
   }
 
   /* ===== BUTTONS ===== */
@@ -96,8 +186,8 @@
     display: inline-block;
     background: var(--gold);
     color: var(--black);
-    padding: 18px 44px;
-    font-size: 1rem;
+    padding: 20px 50px;
+    font-size: 1.05rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -111,16 +201,16 @@
 
   .sbs-btn-primary:hover {
     background: var(--gold-light);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(200, 164, 78, 0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(200, 164, 78, 0.35);
   }
 
   .sbs-btn-outline {
     display: inline-block;
     background: transparent;
     color: var(--gold);
-    padding: 14px 36px;
-    font-size: 0.9rem;
+    padding: 16px 40px;
+    font-size: 0.95rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -138,68 +228,9 @@
     transform: translateY(-2px);
   }
 
-  /* ===== STATS BAR ===== */
-  .sbs-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    margin: 0 0 60px;
-    border-top: 1px solid rgba(200, 164, 78, 0.2);
-    border-bottom: 1px solid rgba(200, 164, 78, 0.2);
-  }
-
-  .sbs-stat {
-    text-align: center;
-    padding: 36px 20px;
-    border-right: 1px solid rgba(200, 164, 78, 0.15);
-  }
-
-  .sbs-stat:last-child {
-    border-right: none;
-  }
-
-  .sbs-stat-number {
-    font-size: 2.8rem;
-    font-weight: 900;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  .sbs-stat-label {
-    font-size: 0.8rem;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
-  }
-
-  /* ===== PROBLEM SECTION ===== */
-  .sbs-problem {
-    text-align: center;
-    padding: 60px 20px;
-    margin-bottom: 60px;
-  }
-
-  .sbs-problem h2 {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--white);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-
-  .sbs-problem p {
-    font-size: 1.05rem;
-    color: var(--gray);
-    max-width: 620px;
-    margin: 0 auto 40px;
-    line-height: 1.7;
-  }
-
-  /* ===== SERVICES / WHAT YOU GET ===== */
+  /* ===== SERVICES PANEL — PANEL 2 ===== */
   .sbs-services {
-    margin: 0 0 80px;
+    background: var(--black-light);
   }
 
   .sbs-services-header {
@@ -208,11 +239,11 @@
   }
 
   .sbs-services-header h2 {
-    font-size: 2.5rem;
+    font-size: 3.2rem;
     font-weight: 900;
     color: var(--white);
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .sbs-services-header h2 span {
@@ -221,45 +252,51 @@
 
   .sbs-services-header p {
     color: var(--gray);
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .sbs-services-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
   .sbs-service-card {
-    background: var(--black-light);
+    background: var(--black);
     border: 1px solid rgba(200, 164, 78, 0.15);
-    border-radius: 8px;
-    padding: 36px 30px;
+    border-radius: 10px;
+    padding: 44px 32px;
     transition: all 0.3s ease;
-    position: relative;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px;
   }
 
   .sbs-service-card:hover {
     border-color: var(--gold);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5);
   }
 
   .sbs-service-card h3 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: var(--gold);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
   }
 
   .sbs-service-card p {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     color: var(--gray);
-    line-height: 1.6;
-    margin-bottom: 16px;
+    line-height: 1.65;
+    margin-bottom: 20px;
+    flex-grow: 1;
   }
 
   .sbs-learn-more {
@@ -274,14 +311,251 @@
     padding: 0;
     font-family: 'Montserrat', sans-serif;
     transition: color 0.2s;
+    text-align: left;
   }
 
-  .sbs-learn-more:hover {
-    color: var(--gold-light);
+  .sbs-learn-more:hover { color: var(--gold-light); }
+  .sbs-learn-more::after { content: ' +'; }
+
+  .sbs-services-cta {
+    text-align: center;
+    margin-top: 50px;
   }
 
-  .sbs-learn-more::after {
-    content: ' +';
+  /* ===== ABOUT + TESTIMONIALS — PANEL 3 ===== */
+  .sbs-about-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 100vh;
+  }
+
+  .sbs-about-left {
+    background: var(--blue-dark);
+    padding: 60px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .sbs-about-photo {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 3/4;
+    background: var(--blue);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+
+  .sbs-about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sbs-about-content h2 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .sbs-about-title {
+    font-size: 0.85rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .sbs-about-content p {
+    font-size: 0.95rem;
+    color: var(--white);
+    line-height: 1.8;
+    margin-bottom: 16px;
+    opacity: 0.9;
+  }
+
+  .sbs-about-credentials {
+    display: flex;
+    gap: 32px;
+    margin: 20px 0;
+    padding: 18px 0;
+    border-top: 1px solid rgba(200, 164, 78, 0.25);
+    border-bottom: 1px solid rgba(200, 164, 78, 0.25);
+  }
+
+  .sbs-credential { text-align: center; }
+
+  .sbs-credential-num {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--gold);
+  }
+
+  .sbs-credential-label {
+    font-size: 0.7rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  /* Right side — testimonials + offer */
+  .sbs-about-right {
+    background: var(--black);
+    padding: 60px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .sbs-testimonials-header h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  .sbs-testimonials-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .sbs-testimonial {
+    background: var(--black-light);
+    border: 1px solid rgba(200, 164, 78, 0.15);
+    border-radius: 8px;
+    padding: 28px 24px;
+  }
+
+  .sbs-testimonial-stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+
+  .sbs-testimonial p {
+    font-size: 0.9rem;
+    color: var(--white);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-style: italic;
+    opacity: 0.9;
+  }
+
+  .sbs-testimonial-author {
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Inline offer box */
+  .sbs-offer-inline {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    border: 1px solid rgba(200, 164, 78, 0.25);
+    border-radius: 12px;
+    padding: 36px 32px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .sbs-offer-inline-text h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .sbs-offer-inline-text p {
+    font-size: 0.85rem;
+    color: var(--white);
+    opacity: 0.8;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .sbs-qr-box {
+    width: 120px;
+    height: 120px;
+    min-width: 120px;
+    background: var(--white);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .sbs-qr-box img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+  }
+
+  /* ===== FINAL CTA — PANEL 4 ===== */
+  .sbs-final-cta {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px;
+    background: linear-gradient(180deg, var(--black) 0%, var(--blue-dark) 100%);
+  }
+
+  .sbs-final-cta h2 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .sbs-final-cta h2 span {
+    color: var(--gold);
+  }
+
+  .sbs-final-cta p {
+    font-size: 1.15rem;
+    color: var(--gray);
+    margin-bottom: 44px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  .sbs-final-cta .sbs-cta-url {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+
+  .sbs-footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(200, 164, 78, 0.1);
+  }
+
+  .sbs-footer p {
+    font-size: 0.75rem;
+    color: var(--gray);
+    letter-spacing: 1px;
   }
 
   /* ===== MODAL / POP-OUT ===== */
@@ -292,25 +566,23 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.88);
     z-index: 9999;
     justify-content: center;
     align-items: center;
     padding: 20px;
   }
 
-  .sbs-modal-overlay.active {
-    display: flex;
-  }
+  .sbs-modal-overlay.active { display: flex; }
 
   .sbs-modal {
     background: var(--black-light);
     border: 1px solid var(--gold);
     border-radius: 12px;
-    padding: 50px 40px;
-    max-width: 600px;
+    padding: 50px 44px;
+    max-width: 620px;
     width: 100%;
-    max-height: 80vh;
+    max-height: 85vh;
     overflow-y: auto;
     position: relative;
     animation: modalSlideUp 0.3s ease;
@@ -334,12 +606,10 @@
     transition: color 0.2s;
   }
 
-  .sbs-modal-close:hover {
-    color: var(--gold);
-  }
+  .sbs-modal-close:hover { color: var(--gold); }
 
   .sbs-modal h3 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: var(--gold);
     text-transform: uppercase;
@@ -360,10 +630,10 @@
   }
 
   .sbs-modal ul li {
-    padding: 8px 0;
-    padding-left: 24px;
+    padding: 10px 0;
+    padding-left: 26px;
     position: relative;
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     color: var(--white);
     line-height: 1.5;
   }
@@ -372,249 +642,11 @@
     content: '';
     position: absolute;
     left: 0;
-    top: 14px;
+    top: 16px;
     width: 10px;
     height: 10px;
     background: var(--gold);
     border-radius: 2px;
-  }
-
-  /* ===== ABOUT / BIO SECTION ===== */
-  .sbs-about {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 50px;
-    align-items: start;
-    margin: 0 0 80px;
-    padding: 60px 40px;
-    background: var(--blue-dark);
-    border-radius: 12px;
-    border: 1px solid rgba(200, 164, 78, 0.15);
-  }
-
-  .sbs-about-photo {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background: var(--blue);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray);
-    font-size: 0.85rem;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .sbs-about-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-
-  .sbs-about-content h2 {
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--white);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .sbs-about-content .sbs-about-title {
-    font-size: 0.85rem;
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    display: block;
-  }
-
-  .sbs-about-content p {
-    font-size: 0.95rem;
-    color: var(--white);
-    line-height: 1.8;
-    margin-bottom: 16px;
-    opacity: 0.9;
-  }
-
-  .sbs-about-credentials {
-    display: flex;
-    gap: 30px;
-    margin: 24px 0;
-    padding: 20px 0;
-    border-top: 1px solid rgba(200, 164, 78, 0.2);
-    border-bottom: 1px solid rgba(200, 164, 78, 0.2);
-  }
-
-  .sbs-credential {
-    text-align: center;
-  }
-
-  .sbs-credential-num {
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: var(--gold);
-  }
-
-  .sbs-credential-label {
-    font-size: 0.7rem;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-  }
-
-  /* ===== TESTIMONIALS ===== */
-  .sbs-testimonials {
-    margin: 0 0 80px;
-    text-align: center;
-  }
-
-  .sbs-testimonials h2 {
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--white);
-    text-transform: uppercase;
-    margin-bottom: 40px;
-  }
-
-  .sbs-testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .sbs-testimonial {
-    background: var(--black-light);
-    border: 1px solid rgba(200, 164, 78, 0.15);
-    border-radius: 8px;
-    padding: 30px 24px;
-    text-align: left;
-  }
-
-  .sbs-testimonial-stars {
-    color: var(--gold);
-    font-size: 0.9rem;
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-  }
-
-  .sbs-testimonial p {
-    font-size: 0.9rem;
-    color: var(--white);
-    line-height: 1.7;
-    margin-bottom: 16px;
-    font-style: italic;
-    opacity: 0.9;
-  }
-
-  .sbs-testimonial-author {
-    font-size: 0.8rem;
-    color: var(--gold);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* ===== CHECKLIST OFFER ===== */
-  .sbs-offer {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 40px;
-    align-items: center;
-    margin: 0 0 80px;
-    padding: 50px 40px;
-    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
-    border-radius: 12px;
-    border: 1px solid rgba(200, 164, 78, 0.2);
-  }
-
-  .sbs-offer h3 {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: var(--white);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .sbs-offer p {
-    font-size: 1rem;
-    color: var(--white);
-    opacity: 0.85;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-
-  .sbs-qr-box {
-    width: 160px;
-    height: 160px;
-    background: var(--white);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    overflow: hidden;
-  }
-
-  .sbs-qr-box img {
-    width: 140px;
-    height: 140px;
-    object-fit: contain;
-  }
-
-  /* ===== FINAL CTA ===== */
-  .sbs-final-cta {
-    text-align: center;
-    padding: 80px 20px;
-    margin-bottom: 40px;
-    border-top: 1px solid rgba(200, 164, 78, 0.2);
-  }
-
-  .sbs-final-cta h2 {
-    font-size: 3rem;
-    font-weight: 900;
-    color: var(--white);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .sbs-final-cta h2 span {
-    color: var(--gold);
-  }
-
-  .sbs-final-cta p {
-    font-size: 1.05rem;
-    color: var(--gray);
-    margin-bottom: 36px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-  }
-
-  .sbs-final-cta .sbs-cta-url {
-    display: block;
-    margin-top: 16px;
-    font-size: 0.8rem;
-    color: var(--gray);
-    letter-spacing: 1px;
-  }
-
-  /* ===== FOOTER ===== */
-  .sbs-footer {
-    text-align: center;
-    padding: 30px 20px;
-    border-top: 1px solid rgba(200, 164, 78, 0.1);
-    margin-top: 20px;
-  }
-
-  .sbs-footer p {
-    font-size: 0.75rem;
-    color: var(--gray);
-    letter-spacing: 1px;
   }
 
   /* ===== SCROLL ANIMATIONS ===== */
@@ -630,84 +662,105 @@
   }
 
   /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .sbs-hero {
+      grid-template-columns: 1fr;
+      padding: 60px 40px;
+      min-height: auto;
+    }
+
+    .sbs-hero-right {
+      gap: 24px;
+    }
+
+    .sbs-services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sbs-about-panel {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .sbs-panel {
+      padding: 50px 40px;
+      min-height: auto;
+    }
+  }
+
   @media (max-width: 768px) {
     .sbs-hero {
-      min-height: 50vh;
-      padding: 60px 10px 40px;
+      padding: 40px 20px;
     }
 
     .sbs-hero h1 {
-      font-size: 2.6rem;
+      font-size: 3rem;
     }
 
     .sbs-hero-sub {
       font-size: 1rem;
     }
 
-    .sbs-stats {
-      grid-template-columns: repeat(3, 1fr);
+    .sbs-hero-stat {
+      padding: 24px 12px;
     }
 
-    .sbs-stat {
-      padding: 24px 10px;
+    .sbs-hero-stat-number {
+      font-size: 2rem;
     }
 
-    .sbs-stat-number {
-      font-size: 1.8rem;
-    }
-
-    .sbs-stat-label {
+    .sbs-hero-stat-label {
       font-size: 0.65rem;
       letter-spacing: 1px;
+    }
+
+    .sbs-panel {
+      padding: 40px 20px;
+      min-height: auto;
+    }
+
+    .sbs-services-header h2 {
+      font-size: 2rem;
     }
 
     .sbs-services-grid {
       grid-template-columns: 1fr;
     }
 
-    .sbs-services-header h2 {
-      font-size: 1.8rem;
+    .sbs-about-panel {
+      grid-template-columns: 1fr;
+      min-height: auto;
     }
 
-    .sbs-about {
-      grid-template-columns: 1fr;
-      padding: 40px 24px;
-      gap: 30px;
+    .sbs-about-left,
+    .sbs-about-right {
+      padding: 40px 20px;
     }
 
     .sbs-about-photo {
-      max-width: 300px;
-      margin: 0 auto;
+      max-width: 260px;
     }
 
     .sbs-about-credentials {
       gap: 16px;
     }
 
-    .sbs-credential-num {
-      font-size: 1.3rem;
-    }
-
-    .sbs-testimonials-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .sbs-offer {
-      grid-template-columns: 1fr;
+    .sbs-offer-inline {
+      flex-direction: column;
       text-align: center;
-      padding: 40px 24px;
     }
 
-    .sbs-qr-box {
-      margin: 0 auto;
+    .sbs-final-cta {
+      padding: 60px 20px;
+      min-height: auto;
     }
 
     .sbs-final-cta h2 {
-      font-size: 2rem;
+      font-size: 2.2rem;
     }
 
     .sbs-modal {
-      padding: 40px 24px;
+      padding: 36px 22px;
       margin: 10px;
     }
   }
@@ -715,40 +768,40 @@
 
 <div class="sbs-page">
 
-  <!-- ===== HERO ===== -->
+  <!-- ===== PANEL 1: HERO + STATS + PROBLEM ===== -->
   <div class="sbs-hero sbs-fade-up">
-    <div class="sbs-hero-badge">College Football &amp; Baseball Recruiting</div>
-    <h1>Your Athlete Deserves a <span>Real Plan.</span></h1>
-    <p class="sbs-hero-sub">The most personal, customized, athlete-focused recruiting program available. 1-on-1 guidance from a 15-year recruiting veteran.</p>
-    <p class="sbs-hero-urgency">"Every day you wait, a less talented but more prepared athlete moves ahead."</p>
-    <a href="https://call.soulbodysports.com/call-scheduling" class="sbs-btn-primary">Schedule Your Evaluation Call</a>
+    <div class="sbs-hero-left">
+      <div class="sbs-hero-badge">College Football &amp; Baseball Recruiting</div>
+      <h1>Your Athlete Deserves a <span>Real Plan.</span></h1>
+      <p class="sbs-hero-sub">The most personal, customized, athlete-focused recruiting program available. 1-on-1 guidance from a 15-year recruiting veteran.</p>
+      <p class="sbs-hero-urgency">"Every day you wait, a less talented but more prepared athlete moves ahead."</p>
+      <a href="https://call.soulbodysports.com/call-scheduling" class="sbs-btn-primary">Schedule Your Evaluation Call</a>
+    </div>
+    <div class="sbs-hero-right">
+      <div class="sbs-hero-stats">
+        <div class="sbs-hero-stat">
+          <div class="sbs-hero-stat-number">15+</div>
+          <div class="sbs-hero-stat-label">Years in Recruiting</div>
+        </div>
+        <div class="sbs-hero-stat">
+          <div class="sbs-hero-stat-number">10K+</div>
+          <div class="sbs-hero-stat-label">Athletes Guided</div>
+        </div>
+        <div class="sbs-hero-stat">
+          <div class="sbs-hero-stat-number">13</div>
+          <div class="sbs-hero-stat-label">Years with NCSA</div>
+        </div>
+      </div>
+      <div class="sbs-hero-problem">
+        <h3>Recruiting Is Broken.</h3>
+        <p>It's impersonal, overwhelming, and packed with misinformation. Families are left guessing. You need a guide who's been in the trenches.</p>
+        <a href="https://call.soulbodysports.com/call-scheduling" class="sbs-btn-outline">Get Expert Guidance</a>
+      </div>
+    </div>
   </div>
 
-  <!-- ===== STATS BAR ===== -->
-  <div class="sbs-stats sbs-fade-up">
-    <div class="sbs-stat">
-      <div class="sbs-stat-number">15+</div>
-      <div class="sbs-stat-label">Years in Recruiting</div>
-    </div>
-    <div class="sbs-stat">
-      <div class="sbs-stat-number">10K+</div>
-      <div class="sbs-stat-label">Athletes Guided</div>
-    </div>
-    <div class="sbs-stat">
-      <div class="sbs-stat-number">13</div>
-      <div class="sbs-stat-label">Years with NCSA</div>
-    </div>
-  </div>
-
-  <!-- ===== PROBLEM STATEMENT ===== -->
-  <div class="sbs-problem sbs-fade-up">
-    <h2>Recruiting Is Broken.</h2>
-    <p>It's impersonal, overwhelming, and packed with misinformation. Families are left guessing where their athlete fits, how to talk to coaches, and which opportunities are real. You need a guide who's been in the trenches.</p>
-    <a href="https://call.soulbodysports.com/call-scheduling" class="sbs-btn-outline">Get Expert Guidance Now</a>
-  </div>
-
-  <!-- ===== WHAT YOU GET ===== -->
-  <div class="sbs-services sbs-fade-up">
+  <!-- ===== PANEL 2: SERVICES ===== -->
+  <div class="sbs-panel sbs-services sbs-fade-up">
     <div class="sbs-services-header">
       <h2>What <span>You Get</span></h2>
       <p>Every service is 1-on-1 with Coach John. No assistants. No hand-offs.</p>
@@ -757,111 +810,133 @@
     <div class="sbs-services-grid">
 
       <div class="sbs-service-card" onclick="openModal('modal-coaching')">
-        <h3>1-on-1 Recruiting Coaching</h3>
-        <p>Personalized weekly sessions focused on your athlete's specific academic, athletic, and cultural needs.</p>
+        <div>
+          <h3>1-on-1 Recruiting Coaching</h3>
+          <p>Personalized weekly sessions focused on your athlete's specific academic, athletic, and cultural needs.</p>
+        </div>
         <button class="sbs-learn-more">Learn More</button>
       </div>
 
       <div class="sbs-service-card" onclick="openModal('modal-plan')">
-        <h3>Customized Success Plan</h3>
-        <p>A tailored roadmap that evolves as your athlete develops, with quarterly video evaluations.</p>
+        <div>
+          <h3>Customized Success Plan</h3>
+          <p>A tailored roadmap that evolves as your athlete develops, with quarterly video evaluations.</p>
+        </div>
         <button class="sbs-learn-more">Learn More</button>
       </div>
 
       <div class="sbs-service-card" onclick="openModal('modal-matching')">
-        <h3>College Matchmaking</h3>
-        <p>Find the right academic, athletic, and cultural fit. Not just any school &mdash; the right school.</p>
+        <div>
+          <h3>College Matchmaking</h3>
+          <p>Find the right academic, athletic, and cultural fit. Not just any school &mdash; the right school.</p>
+        </div>
         <button class="sbs-learn-more">Learn More</button>
       </div>
 
       <div class="sbs-service-card" onclick="openModal('modal-comm')">
-        <h3>Coach Communication Training</h3>
-        <p>Teach your athlete to communicate like a leader and make lasting impressions on college coaches.</p>
+        <div>
+          <h3>Coach Communication Training</h3>
+          <p>Teach your athlete to communicate like a leader and make lasting impressions on college coaches.</p>
+        </div>
         <button class="sbs-learn-more">Learn More</button>
       </div>
 
       <div class="sbs-service-card" onclick="openModal('modal-scholarship')">
-        <h3>Scholarship &amp; Financial Strategy</h3>
-        <p>Expert guidance on maximizing athletic and academic scholarship opportunities and financial aid.</p>
+        <div>
+          <h3>Scholarship &amp; Financial Strategy</h3>
+          <p>Expert guidance on maximizing athletic and academic scholarship opportunities and financial aid.</p>
+        </div>
         <button class="sbs-learn-more">Learn More</button>
       </div>
 
       <div class="sbs-service-card" onclick="openModal('modal-performance')">
-        <h3>Performance &amp; Mindset Training</h3>
-        <p>Visualization techniques, mental training, and athletic performance guidance to elevate your athlete's game.</p>
+        <div>
+          <h3>Performance &amp; Mindset Training</h3>
+          <p>Visualization techniques, mental training, and athletic performance guidance to elevate your athlete's game.</p>
+        </div>
         <button class="sbs-learn-more">Learn More</button>
       </div>
 
     </div>
+
+    <div class="sbs-services-cta">
+      <a href="https://call.soulbodysports.com/call-scheduling" class="sbs-btn-primary">Schedule Your Evaluation Call</a>
+    </div>
   </div>
 
-  <!-- ===== ABOUT / BIO ===== -->
-  <div class="sbs-about sbs-fade-up">
-    <div class="sbs-about-photo">
-      <!-- Replace src with Coach John's photo URL -->
-      <img src="IMG_1637 (1).jpg" alt="Coach John Corcoran">
-    </div>
-    <div class="sbs-about-content">
-      <h2>Coach John Corcoran</h2>
-      <span class="sbs-about-title">Founder, Soul Body Sports</span>
-      <p>Former collegiate athlete who earned championships and All-Conference honors at Crespi Carmelite HS, Moorpark College, and Chico State. I made major mistakes in my own recruiting process &mdash; and spent the last 15 years making sure other athletes don't.</p>
-      <p>13 years with NCSA. Tens of thousands of families guided. I know what separates the athlete who gets recruited from the one who gets overlooked.</p>
+  <!-- ===== PANEL 3: ABOUT + TESTIMONIALS SIDE BY SIDE ===== -->
+  <div class="sbs-about-panel sbs-fade-up">
 
-      <div class="sbs-about-credentials">
-        <div class="sbs-credential">
-          <div class="sbs-credential-num">15+</div>
-          <div class="sbs-credential-label">Years</div>
+    <!-- Left: Bio -->
+    <div class="sbs-about-left">
+      <div class="sbs-about-photo">
+        <img src="IMG_1637 (1).jpg" alt="Coach John Corcoran">
+      </div>
+      <div class="sbs-about-content">
+        <h2>Coach John Corcoran</h2>
+        <span class="sbs-about-title">Founder, Soul Body Sports</span>
+        <p>Former collegiate athlete who earned championships and All-Conference honors at Crespi Carmelite HS, Moorpark College, and Chico State. I made major mistakes in my own recruiting process &mdash; and spent the last 15 years making sure other athletes don't.</p>
+        <p>13 years with NCSA. Tens of thousands of families guided. I know what separates the athlete who gets recruited from the one who gets overlooked.</p>
+
+        <div class="sbs-about-credentials">
+          <div class="sbs-credential">
+            <div class="sbs-credential-num">15+</div>
+            <div class="sbs-credential-label">Years</div>
+          </div>
+          <div class="sbs-credential">
+            <div class="sbs-credential-num">13</div>
+            <div class="sbs-credential-label">NCSA Years</div>
+          </div>
+          <div class="sbs-credential">
+            <div class="sbs-credential-num">10K+</div>
+            <div class="sbs-credential-label">Athletes</div>
+          </div>
         </div>
-        <div class="sbs-credential">
-          <div class="sbs-credential-num">13</div>
-          <div class="sbs-credential-label">NCSA Years</div>
+
+        <button class="sbs-btn-outline" onclick="openModal('modal-bio')">Read My Full Story</button>
+      </div>
+    </div>
+
+    <!-- Right: Testimonials + Checklist Offer -->
+    <div class="sbs-about-right">
+      <div class="sbs-testimonials-header">
+        <h2>What Families Say</h2>
+      </div>
+
+      <div class="sbs-testimonials-stack">
+        <div class="sbs-testimonial">
+          <div class="sbs-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"John's coaching transformed our approach to college recruiting. We couldn't be happier!"</p>
+          <div class="sbs-testimonial-author">B. Bennett &mdash; Los Angeles</div>
         </div>
-        <div class="sbs-credential">
-          <div class="sbs-credential-num">10K+</div>
-          <div class="sbs-credential-label">Athletes</div>
+        <div class="sbs-testimonial">
+          <div class="sbs-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Coach JC made it easy and we felt way less stress. My son really benefited from the one on one coaching."</p>
+          <div class="sbs-testimonial-author">T. Debs &mdash; San Fernando Valley</div>
+        </div>
+        <div class="sbs-testimonial">
+          <div class="sbs-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Totally personalized and tailored to my needs. Went Division 1! Thank you Coach Corcoran."</p>
+          <div class="sbs-testimonial-author">Derron Juarez &mdash; Bakersfield</div>
         </div>
       </div>
 
-      <button class="sbs-btn-outline" onclick="openModal('modal-bio')">Read My Full Story</button>
-    </div>
-  </div>
-
-  <!-- ===== TESTIMONIALS ===== -->
-  <div class="sbs-testimonials sbs-fade-up">
-    <h2>What Families Say</h2>
-    <div class="sbs-testimonials-grid">
-      <div class="sbs-testimonial">
-        <div class="sbs-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>"John's coaching transformed our approach to college recruiting. We couldn't be happier!"</p>
-        <div class="sbs-testimonial-author">B. Bennett &mdash; Los Angeles</div>
-      </div>
-      <div class="sbs-testimonial">
-        <div class="sbs-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>"Coach JC made it easy and we felt way less stress in the process. My son really benefited from the one on one coaching."</p>
-        <div class="sbs-testimonial-author">T. Debs &mdash; San Fernando Valley</div>
-      </div>
-      <div class="sbs-testimonial">
-        <div class="sbs-testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>"Totally personalized recruiting process tailored specifically to my needs. Went Division 1! Thank you Coach Corcoran."</p>
-        <div class="sbs-testimonial-author">Derron Juarez &mdash; Bakersfield</div>
+      <!-- Checklist offer inline -->
+      <div class="sbs-offer-inline">
+        <div class="sbs-offer-inline-text">
+          <h4>Free Success Checklist</h4>
+          <p>Download the step-by-step checklist to take control of the recruiting process.</p>
+          <a href="https://call.soulbodysports.com/call-scheduling" class="sbs-btn-primary" style="padding: 14px 32px; font-size: 0.85rem;">Get the Checklist</a>
+        </div>
+        <div class="sbs-qr-box">
+          <img src="sbs checklistoffer.png" alt="Scan for Success Checklist">
+        </div>
       </div>
     </div>
+
   </div>
 
-  <!-- ===== FREE CHECKLIST OFFER ===== -->
-  <div class="sbs-offer sbs-fade-up">
-    <div>
-      <h3>Free Recruiting Success Checklist</h3>
-      <p>Download the step-by-step checklist that helps families take control of the recruiting process. Scan the QR code or click below.</p>
-      <a href="https://call.soulbodysports.com/call-scheduling" class="sbs-btn-primary">Get the Checklist</a>
-    </div>
-    <div class="sbs-qr-box">
-      <!-- Replace src with your QR code image URL -->
-      <img src="sbs checklistoffer.png" alt="Scan for Success Checklist">
-    </div>
-  </div>
-
-  <!-- ===== FINAL CTA ===== -->
+  <!-- ===== PANEL 4: FINAL CTA ===== -->
   <div class="sbs-final-cta sbs-fade-up">
     <h2>Ready to <span>Get Started?</span></h2>
     <p>If your family wants clarity, guidance, and a proven recruiting strategy designed around your athlete &mdash; schedule your evaluation call today.</p>
@@ -869,7 +944,6 @@
     <span class="sbs-cta-url">call.soulbodysports.com/call-scheduling</span>
   </div>
 
-  <!-- ===== FOOTER ===== -->
   <div class="sbs-footer">
     <p>&copy; 2025 Soul Body Sports &mdash; Coach John Corcoran &mdash; College Football &amp; Baseball Recruiting</p>
   </div>
@@ -878,7 +952,6 @@
 
 <!-- ===== POP-OUT MODALS ===== -->
 
-<!-- 1-on-1 Coaching Modal -->
 <div class="sbs-modal-overlay" id="modal-coaching" onclick="closeModal(event, 'modal-coaching')">
   <div class="sbs-modal" onclick="event.stopPropagation()">
     <button class="sbs-modal-close" onclick="closeModalById('modal-coaching')">&times;</button>
@@ -895,7 +968,6 @@
   </div>
 </div>
 
-<!-- Customized Success Plan Modal -->
 <div class="sbs-modal-overlay" id="modal-plan" onclick="closeModal(event, 'modal-plan')">
   <div class="sbs-modal" onclick="event.stopPropagation()">
     <button class="sbs-modal-close" onclick="closeModalById('modal-plan')">&times;</button>
@@ -912,7 +984,6 @@
   </div>
 </div>
 
-<!-- College Matchmaking Modal -->
 <div class="sbs-modal-overlay" id="modal-matching" onclick="closeModal(event, 'modal-matching')">
   <div class="sbs-modal" onclick="event.stopPropagation()">
     <button class="sbs-modal-close" onclick="closeModalById('modal-matching')">&times;</button>
@@ -929,7 +1000,6 @@
   </div>
 </div>
 
-<!-- Coach Communication Modal -->
 <div class="sbs-modal-overlay" id="modal-comm" onclick="closeModal(event, 'modal-comm')">
   <div class="sbs-modal" onclick="event.stopPropagation()">
     <button class="sbs-modal-close" onclick="closeModalById('modal-comm')">&times;</button>
@@ -946,7 +1016,6 @@
   </div>
 </div>
 
-<!-- Scholarship Modal -->
 <div class="sbs-modal-overlay" id="modal-scholarship" onclick="closeModal(event, 'modal-scholarship')">
   <div class="sbs-modal" onclick="event.stopPropagation()">
     <button class="sbs-modal-close" onclick="closeModalById('modal-scholarship')">&times;</button>
@@ -963,7 +1032,6 @@
   </div>
 </div>
 
-<!-- Performance & Mindset Modal -->
 <div class="sbs-modal-overlay" id="modal-performance" onclick="closeModal(event, 'modal-performance')">
   <div class="sbs-modal" onclick="event.stopPropagation()">
     <button class="sbs-modal-close" onclick="closeModalById('modal-performance')">&times;</button>
@@ -980,7 +1048,6 @@
   </div>
 </div>
 
-<!-- Full Bio Modal -->
 <div class="sbs-modal-overlay" id="modal-bio" onclick="closeModal(event, 'modal-bio')">
   <div class="sbs-modal" onclick="event.stopPropagation()">
     <button class="sbs-modal-close" onclick="closeModalById('modal-bio')">&times;</button>
@@ -998,7 +1065,6 @@
 </div>
 
 <script>
-  // Scroll-triggered animations
   document.addEventListener('DOMContentLoaded', function() {
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
@@ -1006,14 +1072,13 @@
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.sbs-fade-up').forEach(function(el) {
       observer.observe(el);
     });
   });
 
-  // Modal open/close
   function openModal(id) {
     var modal = document.getElementById(id);
     if (modal) {
@@ -1036,7 +1101,6 @@
     }
   }
 
-  // Close modals on Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       document.querySelectorAll('.sbs-modal-overlay.active').forEach(function(modal) {
