@@ -73,48 +73,124 @@
     opacity: 1;
   }
 
-  /* What You Get Section */
-  .signup-benefits {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    margin: 40px 0 60px;
+  /* Intro Block */
+  .signup-intro {
+    text-align: center;
+    margin: 0 auto 60px;
+    max-width: 780px;
+    padding: 0 20px;
   }
 
-  .benefit-card {
+  .signup-intro p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #1B3533;
+    font-weight: 400;
+  }
+
+  /* What's Included Section */
+  .whats-included {
+    margin: 40px 0 60px;
+    padding: 60px 50px;
     background: #1B3533;
-    padding: 40px 30px;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .whats-included::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .whats-included-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .whats-included-header h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: #F3EDE7;
+    margin: 0;
+  }
+
+  .included-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .included-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px 28px;
+    background: rgba(243, 237, 231, 0.05);
     border-radius: 12px;
-    border: 2px solid rgba(213, 112, 40, 0.3);
+    border: 1px solid rgba(213, 112, 40, 0.2);
     transition: all 0.3s ease;
   }
 
-  .benefit-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(27, 53, 51, 0.3);
+  .included-item:hover {
     border-color: #D57028;
+    background: rgba(243, 237, 231, 0.08);
+    transform: translateY(-3px);
   }
 
-  .benefit-icon {
-    font-size: 2rem;
-    margin-bottom: 16px;
-    display: block;
+  .included-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: #D57028;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
   }
 
-  .benefit-card h3 {
+  .included-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: #F3EDE7;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .included-text h3 {
     font-family: 'Arimo', sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: #F3EDE7;
-    margin: 0 0 12px 0;
+    margin: 0 0 6px 0;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
   }
 
-  .benefit-card p {
-    font-size: 0.95rem;
+  .included-text p {
+    font-size: 0.9rem;
     color: #AF8145;
-    line-height: 1.7;
+    line-height: 1.6;
     margin: 0;
     font-weight: 400;
   }
@@ -454,6 +530,22 @@
       font-size: 1rem;
     }
 
+    .whats-included {
+      padding: 40px 24px;
+    }
+
+    .whats-included-header h2 {
+      font-size: 2.5rem;
+    }
+
+    .included-list {
+      grid-template-columns: 1fr;
+    }
+
+    .included-item[style] {
+      max-width: 100% !important;
+    }
+
     .signup-form-section {
       padding: 40px 24px;
     }
@@ -494,26 +586,86 @@
 
   <!-- Hero Section -->
   <div class="signup-hero fade-in">
-    <h1>Your fundraising roadmap starts here.</h1>
-    <p class="signup-hero-subtitle">Sign up to access your personalized fundraising roadmap, expert-guided resources, and a community of founders who are actively raising capital.</p>
+    <h1>I'm fundraising and I want 1:1 partnership.</h1>
+    <p class="signup-hero-subtitle">Some founders want strategic, personalized guidance as they prepare to raise&mdash;or decide whether they should. Our 1:1 support is designed to meet you where you are.</p>
   </div>
 
-  <!-- Benefits Section -->
-  <div class="signup-benefits fade-in-up">
-    <div class="benefit-card">
-      <span class="benefit-icon">&#9672;</span>
-      <h3>Fundraising Roadmap</h3>
-      <p>A step-by-step plan tailored to your stage, industry, and fundraising goals to get you investor-ready.</p>
+  <!-- Intro -->
+  <div class="signup-intro fade-in-up">
+    <span class="impact-badge">1:1 Fundraising Support</span>
+    <p>Whether you're pre-revenue preparing your first raise or a growth-stage founder navigating term sheets, we partner with you to build a fundraising strategy that actually works.</p>
+  </div>
+
+  <!-- What's Included -->
+  <div class="whats-included fade-in-up">
+    <div class="whats-included-header">
+      <span class="impact-badge">What's Included</span>
+      <h2>Your 1:1 Partnership</h2>
     </div>
-    <div class="benefit-card">
-      <span class="benefit-icon">&#9670;</span>
-      <h3>Pitch Prep & Review</h3>
-      <p>Get your pitch deck, financials, and data room reviewed by experienced founders and investors.</p>
-    </div>
-    <div class="benefit-card">
-      <span class="benefit-icon">&#9674;</span>
-      <h3>Investor Introductions</h3>
-      <p>Warm introductions to our network of angel investors, VCs, and fund managers actively deploying capital.</p>
+    <div class="included-list">
+      <div class="included-item">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="included-text">
+          <h3>Fundraising Roadmap</h3>
+          <p>A fundraising roadmap tied to your company's growth milestones</p>
+        </div>
+      </div>
+      <div class="included-item">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="included-text">
+          <h3>Valuation & Strategy</h3>
+          <p>Strategic support on valuation, tranche sizing, and use of funds</p>
+        </div>
+      </div>
+      <div class="included-item">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="included-text">
+          <h3>Pitch Deck Refinement</h3>
+          <p>Pitch deck and investor messaging refinement</p>
+        </div>
+      </div>
+      <div class="included-item">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="included-text">
+          <h3>Monthly Strategy Sessions</h3>
+          <p>Monthly strategy sessions to maintain momentum and adapt</p>
+        </div>
+      </div>
+      <div class="included-item">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="included-text">
+          <h3>Investor Introductions</h3>
+          <p>Curated introductions to aligned investors within Sengo's network</p>
+        </div>
+      </div>
+      <div class="included-item">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="included-text">
+          <h3>Investor Call Support</h3>
+          <p>Light support during investor calls and due diligence preparation</p>
+        </div>
+      </div>
+      <div class="included-item" style="grid-column: 1 / -1; max-width: 520px; margin: 0 auto;">
+        <div class="included-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="included-text">
+          <h3>Ongoing Advisory Access</h3>
+          <p>Ongoing advisory access between sessions (email / async support)</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -542,7 +694,7 @@
       <div class="signup-form-info">
         <span class="impact-badge">Get Started</span>
         <h2>Sign Up & Get Access</h2>
-        <p>Fill out the form and complete payment to unlock your fundraising roadmap and back-end tools. You'll get immediate access after checkout.</p>
+        <p>Fill out the form and complete payment to unlock your 1:1 fundraising partnership. You'll get immediate access to your roadmap and back-end tools after checkout.</p>
       </div>
       <form class="signup-form" id="fundraisingSignupForm">
         <div class="form-row">
@@ -583,8 +735,8 @@
   <!-- Bottom CTA -->
   <div class="signup-cta fade-in-up">
     <span class="impact-badge">Ready Now?</span>
-    <h3>Skip Ahead & Pay Now</h3>
-    <p>Already know you're in? Go straight to checkout and get instant access to your fundraising roadmap.</p>
+    <h3>Start Your 1:1 Partnership</h3>
+    <p>Already know you're in? Go straight to checkout and get instant access to your fundraising roadmap and 1:1 support.</p>
     <a href="https://app.bysengo.com/offers/RJvoQ2F9/checkout" target="_blank" rel="noopener" class="cta-btn"><span>Go to Checkout</span></a>
   </div>
 
