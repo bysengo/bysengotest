@@ -2088,8 +2088,10 @@
           imageField = f;
         }
 
+        // Detect title field — prioritize business/company name over person name
         if (!titleField && (f.type === 'singleLineText' || f.type === 'formula') &&
-            (nameL.includes('name') || nameL.includes('title') || nameL.includes('company'))) {
+            (nameL.includes('business') || nameL.includes('company') || nameL.includes('startup') ||
+             nameL.includes('venture') || nameL.includes('brand') || nameL.includes('organization'))) {
           titleField = f;
         }
 
@@ -2125,8 +2127,23 @@
         }
       }
 
+      // Fallback: try generic "name" or "title" fields, but skip person-name fields
       if (!titleField) {
-        titleField = fields.find(f => f.type === 'singleLineText') || fields[0];
+        var personKeywords = ['submitter', 'contact', 'founder', 'applicant', 'person', 'first', 'last', 'full name', 'your name', 'email'];
+        titleField = fields.find(function(f) {
+          var n = f.name.toLowerCase();
+          if (f.type !== 'singleLineText' && f.type !== 'formula') return false;
+          if (!(n.includes('name') || n.includes('title'))) return false;
+          // Skip fields that look like person names
+          for (var i = 0; i < personKeywords.length; i++) {
+            if (n.includes(personKeywords[i])) return false;
+          }
+          return true;
+        });
+      }
+      // Last resort: first text field
+      if (!titleField) {
+        titleField = fields.find(function(f) { return f.type === 'singleLineText'; }) || fields[0];
       }
 
       const textFields = fields.filter(f =>
