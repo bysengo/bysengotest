@@ -1,0 +1,651 @@
+<!-- Sengo Fundraising Signup Page for Squarespace -->
+<!-- Add this to an Embed Block on your Squarespace page -->
+<!-- Features a signup form that opens the payment portal for fundraising clients -->
+
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .signup-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Hero Section */
+  .signup-hero {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    padding: 40px 20px 20px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .signup-hero h1 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 5.5rem;
+    font-weight: 400;
+    line-height: 0.94;
+    color: #1B3533;
+    letter-spacing: -0.077em;
+    text-transform: none;
+    max-width: 900px;
+    margin: 0 0 20px 0;
+  }
+
+  .signup-hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #67441A;
+    margin: 0;
+    max-width: 650px;
+    line-height: 1.7;
+  }
+
+  /* Scroll animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in {
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+  }
+
+  /* What You Get Section */
+  .signup-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 40px 0 60px;
+  }
+
+  .benefit-card {
+    background: #1B3533;
+    padding: 40px 30px;
+    border-radius: 12px;
+    border: 2px solid rgba(213, 112, 40, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .benefit-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(27, 53, 51, 0.3);
+    border-color: #D57028;
+  }
+
+  .benefit-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .benefit-card h3 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #F3EDE7;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .benefit-card p {
+    font-size: 0.95rem;
+    color: #AF8145;
+    line-height: 1.7;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* Impact Badge */
+  .impact-badge {
+    display: inline-block;
+    background: #D57028;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  /* Signup Form Section */
+  .signup-form-section {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    color: #F3EDE7;
+    padding: 60px 50px;
+    border-radius: 16px;
+    margin: 60px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .signup-form-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .signup-form-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .signup-form-info h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: #F3EDE7;
+    margin: 0 0 20px 0;
+  }
+
+  .signup-form-info p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #AF8145;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 14px 18px;
+    border: 2px solid rgba(243, 237, 231, 0.2);
+    border-radius: 8px;
+    background: rgba(243, 237, 231, 0.08);
+    color: #F3EDE7;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  .form-group input::placeholder {
+    color: rgba(243, 237, 231, 0.4);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #D57028;
+    background: rgba(243, 237, 231, 0.12);
+    box-shadow: 0 0 0 3px rgba(213, 112, 40, 0.15);
+  }
+
+  .form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23F3EDE7' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  .form-group select option {
+    background: #1B3533;
+    color: #F3EDE7;
+  }
+
+  .signup-btn {
+    padding: 18px 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 3px solid #D57028;
+    background: #D57028;
+    color: #F3EDE7;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .signup-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #F3EDE7;
+    transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+
+  .signup-btn:hover::before {
+    width: 300%;
+    height: 300%;
+  }
+
+  .signup-btn:hover {
+    color: #1B3533;
+    border-color: #F3EDE7;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(213, 112, 40, 0.3);
+  }
+
+  .signup-btn span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .form-disclaimer {
+    font-size: 0.78rem;
+    color: rgba(243, 237, 231, 0.5);
+    text-align: center;
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* Testimonial / Social Proof */
+  .signup-social-proof {
+    text-align: center;
+    margin: 60px 0;
+    padding: 40px;
+  }
+
+  .signup-social-proof .impact-badge {
+    background: rgba(213, 112, 40, 0.12);
+    color: #D57028;
+    border: 1px solid rgba(213, 112, 40, 0.3);
+  }
+
+  .proof-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+
+  .proof-stat {
+    text-align: center;
+  }
+
+  .proof-stat-number {
+    font-family: 'Arimo', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1B3533;
+    line-height: 1;
+  }
+
+  .proof-stat-label {
+    font-size: 0.85rem;
+    color: #67441A;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 8px;
+  }
+
+  /* CTA Section */
+  .signup-cta {
+    text-align: center;
+    margin: 60px 0;
+    padding: 60px 50px;
+    background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(27, 53, 51, 0.25);
+  }
+
+  .signup-cta .impact-badge {
+    background: rgba(243, 237, 231, 0.15);
+    color: #F3EDE7;
+    border: 1px solid rgba(243, 237, 231, 0.3);
+  }
+
+  .signup-cta h3 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 5rem;
+    margin-bottom: 20px;
+    color: #F3EDE7;
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+  }
+
+  .signup-cta p {
+    font-size: 1.15rem;
+    color: #F3EDE7;
+    margin-bottom: 40px;
+    font-weight: 400;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 20px 60px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border: 3px solid #F3EDE7;
+    background: transparent;
+    color: #F3EDE7;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #F3EDE7;
+    transition: width 0.4s ease, height 0.4s ease, top 0.4s ease, left 0.4s ease;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+
+  .cta-btn:hover::before {
+    width: 300%;
+    height: 300%;
+  }
+
+  .cta-btn:hover {
+    color: #D57028;
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .cta-btn span {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .signup-content {
+      padding: 40px 20px 20px;
+    }
+
+    .signup-hero {
+      min-height: auto;
+      padding: 30px 20px 20px;
+    }
+
+    .signup-hero h1 {
+      font-size: 3rem;
+      line-height: 0.94;
+    }
+
+    .signup-hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .signup-form-section {
+      padding: 40px 24px;
+    }
+
+    .signup-form-layout {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .signup-form-info h2 {
+      font-size: 2.5rem;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .signup-cta {
+      padding: 40px 24px;
+    }
+
+    .signup-cta h3 {
+      font-size: 2.8rem;
+      line-height: 0.85;
+    }
+
+    .proof-stats {
+      gap: 30px;
+    }
+
+    .proof-stat-number {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+
+<div class="signup-content">
+
+  <!-- Hero Section -->
+  <div class="signup-hero fade-in">
+    <h1>Your fundraising roadmap starts here.</h1>
+    <p class="signup-hero-subtitle">Sign up to access your personalized fundraising roadmap, expert-guided resources, and a community of founders who are actively raising capital.</p>
+  </div>
+
+  <!-- Benefits Section -->
+  <div class="signup-benefits fade-in-up">
+    <div class="benefit-card">
+      <span class="benefit-icon">&#9672;</span>
+      <h3>Fundraising Roadmap</h3>
+      <p>A step-by-step plan tailored to your stage, industry, and fundraising goals to get you investor-ready.</p>
+    </div>
+    <div class="benefit-card">
+      <span class="benefit-icon">&#9670;</span>
+      <h3>Pitch Prep & Review</h3>
+      <p>Get your pitch deck, financials, and data room reviewed by experienced founders and investors.</p>
+    </div>
+    <div class="benefit-card">
+      <span class="benefit-icon">&#9674;</span>
+      <h3>Investor Introductions</h3>
+      <p>Warm introductions to our network of angel investors, VCs, and fund managers actively deploying capital.</p>
+    </div>
+  </div>
+
+  <!-- Social Proof -->
+  <div class="signup-social-proof fade-in-up">
+    <span class="impact-badge">Trusted by Founders</span>
+    <div class="proof-stats">
+      <div class="proof-stat">
+        <div class="proof-stat-number">$5M+</div>
+        <div class="proof-stat-label">Raised by Founders</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number">600+</div>
+        <div class="proof-stat-label">Community Members</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-stat-number">90+</div>
+        <div class="proof-stat-label">Annual Touchpoints</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup Form Section -->
+  <div class="signup-form-section fade-in-up">
+    <div class="signup-form-layout">
+      <div class="signup-form-info">
+        <span class="impact-badge">Get Started</span>
+        <h2>Sign Up & Get Access</h2>
+        <p>Fill out the form and complete payment to unlock your fundraising roadmap and back-end tools. You'll get immediate access after checkout.</p>
+      </div>
+      <form class="signup-form" id="fundraisingSignupForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="First name" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Last name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="company">Company Name</label>
+          <input type="text" id="company" name="company" placeholder="Your company or venture">
+        </div>
+        <div class="form-group">
+          <label for="stage">Fundraising Stage</label>
+          <select id="stage" name="stage" required>
+            <option value="" disabled selected>Select your stage</option>
+            <option value="pre-seed">Pre-Seed</option>
+            <option value="seed">Seed</option>
+            <option value="series-a">Series A</option>
+            <option value="series-b">Series B+</option>
+            <option value="not-sure">Not Sure Yet</option>
+          </select>
+        </div>
+        <button type="submit" class="signup-btn"><span>Continue to Payment</span></button>
+        <p class="form-disclaimer">You'll be redirected to our secure payment portal to complete your enrollment.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <div class="signup-cta fade-in-up">
+    <span class="impact-badge">Ready Now?</span>
+    <h3>Skip Ahead & Pay Now</h3>
+    <p>Already know you're in? Go straight to checkout and get instant access to your fundraising roadmap.</p>
+    <a href="https://app.bysengo.com/offers/RJvoQ2F9/checkout" target="_blank" rel="noopener" class="cta-btn"><span>Go to Checkout</span></a>
+  </div>
+
+</div>
+
+<script>
+  // Scroll-triggered animations
+  document.addEventListener('DOMContentLoaded', function() {
+    var observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    var animatedElements = document.querySelectorAll('.fade-in-up, .fade-in');
+    animatedElements.forEach(function(el) {
+      observer.observe(el);
+    });
+  });
+
+  // Form submission - redirects to payment portal
+  document.getElementById('fundraisingSignupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var firstName = document.getElementById('firstName').value.trim();
+    var lastName = document.getElementById('lastName').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var company = document.getElementById('company').value.trim();
+    var stage = document.getElementById('stage').value;
+
+    // Store signup info locally for reference
+    var signupData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      company: company,
+      stage: stage,
+      timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('sengoFundraisingSignup', JSON.stringify(signupData));
+
+    // Build the checkout URL with pre-filled info
+    var checkoutUrl = 'https://app.bysengo.com/offers/RJvoQ2F9/checkout';
+    var params = [];
+    if (firstName) params.push('first_name=' + encodeURIComponent(firstName));
+    if (lastName) params.push('last_name=' + encodeURIComponent(lastName));
+    if (email) params.push('email=' + encodeURIComponent(email));
+    if (params.length > 0) {
+      checkoutUrl += '?' + params.join('&');
+    }
+
+    console.log('Fundraising signup:', signupData);
+
+    // Redirect to payment portal
+    window.open(checkoutUrl, '_blank');
+  });
+</script>
