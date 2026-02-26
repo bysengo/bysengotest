@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo x Boston While Black — Recommended Proposal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark-teal: #1B3533;
+      --brown: #67441A;
+      --orange: #D57028;
+      --beige: #F3EDE7;
+      --white: #FFFFFF;
+      --light-gray: #E8E0D8;
+      --muted: #8A7D72;
+    }
+
+    @page {
+      size: letter;
+      margin: 0.6in 0.75in;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--white);
+      color: var(--dark-teal);
+      line-height: 1.6;
+      font-size: 10.5pt;
+    }
+
+    /* ── Print Controls ── */
+    .print-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 10px;
+    }
+    .print-btn {
+      background: var(--orange);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+    }
+    .print-btn:hover { transform: translateY(-1px); }
+
+    @media print {
+      .print-controls { display: none; }
+      body { background: white; }
+      .page-break { page-break-before: always; }
+    }
+
+    /* ── Page Container ── */
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    /* ── Cover Header ── */
+    .cover {
+      text-align: center;
+      padding: 60px 0 40px;
+      border-bottom: 3px solid var(--dark-teal);
+      margin-bottom: 40px;
+    }
+    .cover h1 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--dark-teal);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .cover .campaign-type {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+    .cover .meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .cover .meta strong {
+      color: var(--dark-teal);
+    }
+
+    /* ── Section Headers ── */
+    .section {
+      margin-bottom: 36px;
+    }
+    .section-title {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark-teal);
+      border-bottom: 2px solid var(--orange);
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+    }
+    .section p {
+      margin-bottom: 12px;
+      color: var(--brown);
+    }
+
+    /* ── Overview Grid ── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .overview-item {
+      background: var(--beige);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    .overview-item .label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .overview-item .value {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark-teal);
+    }
+
+    /* ── Phase Blocks ── */
+    .phase {
+      background: var(--beige);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--orange);
+    }
+    .phase h3 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark-teal);
+      margin-bottom: 4px;
+    }
+    .phase .timeline {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .phase ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .phase li {
+      font-size: 0.88rem;
+      color: var(--brown);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+
+    /* ── Compensation Table ── */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+    }
+    .comp-table th {
+      background: var(--dark-teal);
+      color: var(--beige);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 10px 16px;
+      text-align: left;
+    }
+    .comp-table td {
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table .amount {
+      font-family: 'Arimo', sans-serif;
+      font-weight: 700;
+      color: var(--dark-teal);
+      text-align: right;
+    }
+    .comp-total {
+      background: var(--dark-teal);
+      color: var(--beige);
+      padding: 14px 20px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .comp-total .label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .comp-total .value {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--orange);
+    }
+
+    /* ── Cards Grid ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .card {
+      background: var(--beige);
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    .card h4 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--dark-teal);
+      margin-bottom: 6px;
+    }
+    .card p {
+      font-size: 0.82rem;
+      color: var(--brown);
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    /* ── Risk List ── */
+    .risk-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .risk-item:last-child { border-bottom: none; }
+    .risk-item strong {
+      font-size: 0.88rem;
+      color: var(--dark-teal);
+    }
+    .risk-item p {
+      font-size: 0.82rem;
+      margin-top: 2px;
+      margin-bottom: 0;
+    }
+
+    /* ── Signature Block ── */
+    .signature-block {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 2px solid var(--dark-teal);
+    }
+    .sig-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 24px;
+    }
+    .sig-line {
+      border-bottom: 1px solid var(--dark-teal);
+      padding-bottom: 8px;
+      margin-bottom: 6px;
+      min-height: 40px;
+    }
+    .sig-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ── Footer ── */
+    .doc-footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid var(--light-gray);
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── Print-specific ── */
+    @media print {
+      .page { padding: 0; max-width: 100%; }
+      .cover { padding: 40px 0 30px; }
+      .section { margin-bottom: 28px; }
+      .phase { break-inside: avoid; }
+      .card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-controls">
+    <button class="print-btn" onclick="window.print()">Save as PDF / Print</button>
+  </div>
+
+  <div class="page">
+
+    <!-- ═══ COVER ═══ -->
+    <div class="cover">
+      <h1>Sengo &times; Boston While Black</h1>
+      <div class="campaign-type">$500K Community Crowdfunding Campaign</div>
+      <div class="meta">
+        <strong>Prepared by:</strong> Ila Sengupta<br>
+        <strong>Prepared for:</strong> Sengo Leadership<br>
+        <strong>Date:</strong> March 3, 2025<br>
+        <strong>Engagement Type:</strong> 90-Day Fractional Campaign Leadership
+      </div>
+    </div>
+
+    <!-- ═══ EXECUTIVE SUMMARY ═══ -->
+    <div class="section">
+      <h2 class="section-title">Executive Summary</h2>
+      <p>This proposal outlines a 90-day strategic engagement to plan, build, launch, and execute a $500,000 community crowdfunding campaign for Sengo in partnership with Boston While Black. The engagement is structured in three phases — strategy and foundation, buildout and pre-launch, and active campaign launch and execution — with clear deliverables, milestones, and accountability metrics at each stage.</p>
+      <p>At the conclusion of the 90-day period, a comprehensive assessment will determine whether and how to extend or expand the scope based on campaign progress toward the $500K goal.</p>
+    </div>
+
+    <!-- ═══ OVERVIEW ═══ -->
+    <div class="section">
+      <h2 class="section-title">Engagement Overview</h2>
+      <div class="overview-grid">
+        <div class="overview-item">
+          <div class="label">Campaign Goal</div>
+          <div class="value">$500K</div>
+        </div>
+        <div class="overview-item">
+          <div class="label">Duration</div>
+          <div class="value">13 Weeks</div>
+        </div>
+        <div class="overview-item">
+          <div class="label">Commitment</div>
+          <div class="value">20 hrs/wk</div>
+        </div>
+        <div class="overview-item">
+          <div class="label">Target Launch</div>
+          <div class="value">May 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCOPE OF WORK ═══ -->
+    <div class="section">
+      <h2 class="section-title">90-Day Scope of Work</h2>
+
+      <div class="phase">
+        <h3>Phase 1: Strategy &amp; Foundation</h3>
+        <div class="timeline">Weeks 1–4</div>
+        <ul>
+          <li>Campaign strategy &amp; positioning document</li>
+          <li>Investor persona mapping &amp; segmentation</li>
+          <li>Platform selection &amp; compliance review (Reg CF)</li>
+          <li>Narrative development &amp; messaging framework</li>
+          <li>Campaign page copywriting &amp; creative asset brief</li>
+          <li>Community ambassador identification &amp; outreach plan</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>Phase 2: Buildout &amp; Pre-Launch</h3>
+        <div class="timeline">Weeks 5–8</div>
+        <ul>
+          <li>Campaign page buildout (copy, visuals, video direction)</li>
+          <li>Email drip sequences &amp; social content calendar</li>
+          <li>Ambassador toolkit &amp; referral program design</li>
+          <li>Pre-launch "warm list" activation (target: 200+ qualified leads)</li>
+          <li>Soft launch to inner circle for early momentum</li>
+          <li>PR &amp; media outreach strategy</li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>Phase 3: Launch &amp; Active Execution</h3>
+        <div class="timeline">Weeks 9–13</div>
+        <ul>
+          <li>Public campaign launch &amp; first 72-hour push</li>
+          <li>Daily campaign monitoring &amp; optimization</li>
+          <li>Community engagement &amp; investor communications</li>
+          <li>Weekly momentum pushes (events, social proof, milestones)</li>
+          <li>Mid-campaign assessment &amp; pacing adjustments</li>
+          <li>End-of-engagement report &amp; extension recommendation</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ EXECUTION PLAN ═══ -->
+    <div class="section">
+      <h2 class="section-title">High-Level Execution Plan &amp; Milestones</h2>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Milestone</th>
+            <th>Target</th>
+            <th>Timing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Strategy document signed off</td>
+            <td>Approved by leadership</td>
+            <td>End of Week 3</td>
+          </tr>
+          <tr>
+            <td>Platform selected &amp; compliance filed</td>
+            <td>Reg CF submission</td>
+            <td>End of Week 4</td>
+          </tr>
+          <tr>
+            <td>Campaign page &amp; assets complete</td>
+            <td>Launch-ready</td>
+            <td>End of Week 7</td>
+          </tr>
+          <tr>
+            <td>Warm list target hit</td>
+            <td>200+ qualified leads</td>
+            <td>End of Week 8</td>
+          </tr>
+          <tr>
+            <td>Campaign live</td>
+            <td>Public launch</td>
+            <td>Week 9 (early May)</td>
+          </tr>
+          <tr>
+            <td>First funding milestone</td>
+            <td>$125K raised (25%)</td>
+            <td>Weeks 10–11</td>
+          </tr>
+          <tr>
+            <td>Mid-campaign checkpoint</td>
+            <td>$250K raised (50%)</td>
+            <td>Week 12–13</td>
+          </tr>
+          <tr>
+            <td>Engagement wrap &amp; extension decision</td>
+            <td>Final report delivered</td>
+            <td>End of Week 13</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══ CAMPAIGN PACING ═══ -->
+    <div class="section page-break">
+      <h2 class="section-title">Campaign Pacing &amp; Community Activation</h2>
+      <div class="cards-grid">
+        <div class="card">
+          <h4>Pre-Launch Activation (Weeks 1–8)</h4>
+          <p>Build anticipation through insider access, early-bird messaging, and ambassador recruitment. Goal: 200+ warm leads and a "Day 1 investor" cohort ready to commit on launch.</p>
+        </div>
+        <div class="card">
+          <h4>Launch Sprint (Weeks 9–10)</h4>
+          <p>High-intensity 72-hour opening push targeting 15–20% of goal. Leverage social proof, media hits, and BWB community events to generate urgency and momentum.</p>
+        </div>
+        <div class="card">
+          <h4>Sustained Push (Weeks 11–13)</h4>
+          <p>Weekly themed pushes: milestone celebrations, founder story series, investor spotlights. Daily pacing reviews with tactical adjustments based on conversion data.</p>
+        </div>
+        <div class="card">
+          <h4>Post-90-Day Handoff</h4>
+          <p>Comprehensive performance report with campaign health assessment, pacing projections, and clear recommendation on whether and how to extend engagement through campaign close.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CADENCE & REPORTING ═══ -->
+    <div class="section">
+      <h2 class="section-title">Cadence, Reporting &amp; Accountability</h2>
+      <div class="cards-grid">
+        <div class="card">
+          <h4>Weekly Strategy Sync</h4>
+          <p>60-minute standing call with Sengo leadership. Review progress, surface blockers, align on weekly priorities.</p>
+        </div>
+        <div class="card">
+          <h4>Bi-Weekly Dashboard Report</h4>
+          <p>Written report: funds raised, investor pipeline, conversion rates, community engagement metrics, pacing vs. target.</p>
+        </div>
+        <div class="card">
+          <h4>Monthly Executive Summary</h4>
+          <p>High-level strategic memo to leadership and advisors with risk flags and recommended course corrections.</p>
+        </div>
+        <div class="card">
+          <h4>Key Metrics Tracked</h4>
+          <p>Warm leads generated, email open/click rates, page conversion rate, funds vs. pacing target, ambassador activation, total investor count.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ RISK MANAGEMENT ═══ -->
+    <div class="section">
+      <h2 class="section-title">Risk Management</h2>
+      <div class="risk-item">
+        <strong>Slow Early Traction</strong>
+        <p>Pre-launch warm list ensures Day 1 commitments. If launch falls below 10% in first week, activate contingency outreach to secondary networks and increase paid promotion budget.</p>
+      </div>
+      <div class="risk-item">
+        <strong>Community Fatigue</strong>
+        <p>Varied content cadence (stories, data, events, testimonials) prevents message repetition. Ambassador program distributes outreach load across trusted community voices.</p>
+      </div>
+      <div class="risk-item">
+        <strong>Platform or Compliance Delays</strong>
+        <p>Platform selection and Reg CF review begins Week 1. Parallel-path two platform options to avoid single point of failure on timeline.</p>
+      </div>
+      <div class="risk-item">
+        <strong>Mid-Campaign Stall</strong>
+        <p>Weekly pacing reviews with pre-planned "momentum plays" (milestone events, media pushes, matching challenges) ready to deploy if velocity drops below target.</p>
+      </div>
+    </div>
+
+    <!-- ═══ COMPENSATION ═══ -->
+    <div class="section page-break">
+      <h2 class="section-title">Recommended Compensation Structure</h2>
+      <p>Based on a 13-week engagement at 20 hours per week with a $150/hour rate reflecting fractional fundraising leadership experience.</p>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Detail</th>
+            <th style="text-align:right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Weekly Retainer</strong></td>
+            <td>20 hrs/wk &times; $150/hr</td>
+            <td class="amount">$3,000/wk</td>
+          </tr>
+          <tr>
+            <td><strong>Monthly Equivalent</strong></td>
+            <td>~4.33 weeks per month</td>
+            <td class="amount">$13,000/mo</td>
+          </tr>
+          <tr>
+            <td><strong>Engagement Duration</strong></td>
+            <td>13 weeks (90 days)</td>
+            <td class="amount">—</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-total">
+        <span class="label">Total 90-Day Engagement</span>
+        <span class="value">$39,000</span>
+      </div>
+
+      <p style="font-size:0.82rem; margin-top:16px;"><strong>Payment Terms:</strong> Bi-weekly invoicing (every two weeks), net 15 days. First invoice due upon engagement kickoff.</p>
+
+      <p style="font-size:0.82rem;"><strong>Flexible Structures Available:</strong> This proposal includes an interactive calculator (provided separately) where you can explore alternative configurations including milestone-based payments (tying 30% of compensation to campaign performance gates) and equity offset arrangements (reducing cash compensation by 20% in exchange for 0.25–0.5% advisory equity). These options are available for discussion during our finalization meeting.</p>
+    </div>
+
+    <!-- ═══ TIME COMMITMENT ═══ -->
+    <div class="section">
+      <h2 class="section-title">Estimated Weekly Time Commitment</h2>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Activity</th>
+            <th style="text-align:right;">Hours/Week</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Strategy, planning &amp; creative direction</td>
+            <td class="amount">6 hrs</td>
+          </tr>
+          <tr>
+            <td>Campaign execution &amp; community management</td>
+            <td class="amount">6 hrs</td>
+          </tr>
+          <tr>
+            <td>Stakeholder communication &amp; reporting</td>
+            <td class="amount">3 hrs</td>
+          </tr>
+          <tr>
+            <td>Ambassador coordination &amp; outreach</td>
+            <td class="amount">3 hrs</td>
+          </tr>
+          <tr>
+            <td>Analytics, optimization &amp; admin</td>
+            <td class="amount">2 hrs</td>
+          </tr>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td class="amount"><strong>20 hrs</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ═══ NEXT STEPS ═══ -->
+    <div class="section">
+      <h2 class="section-title">Next Steps</h2>
+      <p><strong>1.</strong> Review this proposal and the interactive calculator by <strong>March 3, 2025</strong>.</p>
+      <p><strong>2.</strong> Schedule a 30-minute alignment call to finalize compensation structure and any scope adjustments.</p>
+      <p><strong>3.</strong> Target decision by <strong>mid-March 2025</strong>.</p>
+      <p><strong>4.</strong> If approved, engagement kicks off immediately with Week 1 strategy sprint.</p>
+      <p><strong>5.</strong> Campaign launch target: <strong>early May 2025</strong>.</p>
+    </div>
+
+    <!-- ═══ SIGNATURE ═══ -->
+    <div class="signature-block">
+      <p style="font-size:0.88rem; font-weight:600; margin-bottom:4px;">Acknowledgment &amp; Agreement</p>
+      <p style="font-size:0.82rem; color:var(--brown);">By signing below, both parties agree to the scope, terms, and compensation structure outlined in this proposal.</p>
+      <div class="sig-grid">
+        <div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Ila Sengupta — Date</div>
+        </div>
+        <div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Sengo Representative — Date</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <div class="doc-footer">
+      Sengo &times; Boston While Black — Community Crowdfunding Campaign Proposal &middot; Confidential
+    </div>
+
+  </div><!-- /page -->
+
+</body>
+</html>
