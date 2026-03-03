@@ -409,6 +409,45 @@
     }
     .summary-savings.visible { display: block; }
 
+    /* ── Sample Timeline ── */
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0;
+      margin-top: 16px;
+    }
+    .tl-week {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--orange);
+      padding: 10px 14px 10px 0;
+      border-right: 2px solid var(--light-gray);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .tl-item {
+      font-size: 0.82rem;
+      color: var(--brown);
+      padding: 10px 0 10px 14px;
+      border-bottom: 1px solid var(--light-gray);
+      line-height: 1.4;
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .scope-note {
+      background: #FFF8F3;
+      border: 1px solid var(--orange);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: var(--brown);
+      line-height: 1.5;
+    }
+    .scope-note strong {
+      color: var(--dark-teal);
+    }
+
     /* ── Cadence Grid ── */
     .cadence-grid {
       display: grid;
@@ -487,6 +526,22 @@
           <li>90-day review: performance report, pacing projection to $500K &amp; continuation recommendation</li>
         </ul>
       </div>
+    </div>
+
+    <!-- ═══ SAMPLE TIMELINE ═══ -->
+    <div class="section">
+      <h2 class="section-title">Sample 13-Week Timeline</h2>
+      <p class="section-desc">Key deliverables and milestones across the engagement. Dates assume mid-March start.</p>
+      <div class="timeline-grid" id="timelineGrid">
+        <div class="tl-week">Wk 1–2</div><div class="tl-item" id="tl1">Campaign strategy, positioning document &amp; investor persona mapping</div>
+        <div class="tl-week">Wk 3–4</div><div class="tl-item" id="tl2">Messaging framework, platform selection, Reg CF compliance &amp; campaign page copywriting</div>
+        <div class="tl-week">Wk 5–6</div><div class="tl-item" id="tl3">Campaign page buildout, email sequences &amp; ambassador toolkit</div>
+        <div class="tl-week">Wk 7–8</div><div class="tl-item" id="tl4">Pre-launch warm list activation (200+ leads), soft launch to inner circle &amp; PR strategy</div>
+        <div class="tl-week">Wk 9</div><div class="tl-item" id="tl5"><strong>Campaign goes live</strong> — 72-hour opening push</div>
+        <div class="tl-week">Wk 10–11</div><div class="tl-item" id="tl6">Daily monitoring, community engagement &amp; weekly momentum pushes</div>
+        <div class="tl-week">Wk 12–13</div><div class="tl-item" id="tl7">Pacing review, tactical adjustments &amp; 90-day engagement review with continuation recommendation</div>
+      </div>
+      <div class="scope-note" id="scopeNote" style="display:none;"></div>
     </div>
 
     <!-- ═══ CALCULATOR ═══ -->
@@ -795,6 +850,39 @@
         savingsEl.className = 'summary-savings visible';
       } else {
         savingsEl.className = 'summary-savings';
+      }
+
+      // Update timeline and scope note based on hours
+      const scopeNote = document.getElementById('scopeNote');
+      if (hours >= 15) {
+        document.getElementById('tl1').innerHTML = 'Campaign strategy, positioning document &amp; investor persona mapping';
+        document.getElementById('tl2').innerHTML = 'Messaging framework, platform selection, Reg CF compliance &amp; campaign page copywriting';
+        document.getElementById('tl3').innerHTML = 'Campaign page buildout, email sequences &amp; ambassador toolkit';
+        document.getElementById('tl4').innerHTML = 'Pre-launch warm list activation (200+ leads), soft launch to inner circle &amp; PR strategy';
+        document.getElementById('tl5').innerHTML = '<strong>Campaign goes live</strong> — 72-hour opening push';
+        document.getElementById('tl6').innerHTML = 'Daily monitoring, community engagement &amp; weekly momentum pushes';
+        document.getElementById('tl7').innerHTML = 'Pacing review, tactical adjustments &amp; 90-day engagement review with continuation recommendation';
+        scopeNote.style.display = 'none';
+      } else if (hours === 10) {
+        document.getElementById('tl1').innerHTML = 'Campaign strategy &amp; positioning document';
+        document.getElementById('tl2').innerHTML = 'Messaging framework, platform selection &amp; Reg CF compliance review';
+        document.getElementById('tl3').innerHTML = 'Campaign page direction &amp; email sequence strategy (BWB team builds)';
+        document.getElementById('tl4').innerHTML = 'Pre-launch strategy review, ambassador program design &amp; warm list coaching';
+        document.getElementById('tl5').innerHTML = '<strong>Campaign goes live</strong> — launch strategy &amp; 72-hour oversight';
+        document.getElementById('tl6').innerHTML = 'Weekly strategy calls, pacing reviews &amp; tactical recommendations';
+        document.getElementById('tl7').innerHTML = 'Campaign assessment &amp; 90-day review with continuation recommendation';
+        scopeNote.style.display = 'block';
+        scopeNote.innerHTML = '<strong>10 hrs/wk — Strategy + Advisory:</strong> I lead strategy, messaging, and campaign direction. Your team handles day-to-day execution (page buildout, emails, social posts, community replies). I review and optimize, but I\'m not hands-on-keyboard daily.';
+      } else {
+        document.getElementById('tl1').innerHTML = 'Campaign strategy review &amp; high-level positioning guidance';
+        document.getElementById('tl2').innerHTML = 'Platform &amp; compliance advisory, messaging review';
+        document.getElementById('tl3').innerHTML = 'Campaign page review &amp; launch readiness assessment';
+        document.getElementById('tl4').innerHTML = 'Pre-launch checklist review &amp; go/no-go recommendation';
+        document.getElementById('tl5').innerHTML = '<strong>Campaign goes live</strong> — launch advisory &amp; check-in';
+        document.getElementById('tl6').innerHTML = 'Weekly advisory calls &amp; pacing check-ins';
+        document.getElementById('tl7').innerHTML = '90-day review &amp; continuation recommendation';
+        scopeNote.style.display = 'block';
+        scopeNote.innerHTML = '<strong>5 hrs/wk — Advisory Only:</strong> I serve as a strategic advisor — weekly calls, campaign reviews, and guidance. All strategy development, execution, and day-to-day operations are handled by your team. Best suited if you have an internal team that can execute with light-touch guidance.';
       }
     }
 
