@@ -72,17 +72,16 @@
     /* ── Cover Header ── */
     .cover {
       text-align: center;
-      padding: 60px 0 40px;
+      padding: 48px 0 36px;
       border-bottom: 3px solid var(--dark-teal);
       margin-bottom: 40px;
     }
-    .cover h1 {
-      font-family: 'Arimo', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 700;
+    .cover-logo {
+      width: 200px;
+      height: auto;
+      margin: 0 auto 20px;
+      display: block;
       color: var(--dark-teal);
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
     }
     .cover .campaign-type {
       font-size: 1.1rem;
@@ -268,6 +267,78 @@
       margin-bottom: 0;
     }
 
+    /* ── Tradeoff Options ── */
+    .tradeoff-list {
+      margin-top: 16px;
+    }
+    .tradeoff {
+      background: var(--beige);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      border-left: 3px solid var(--light-gray);
+    }
+    .tradeoff.active-pick {
+      border-left-color: var(--orange);
+      background: #FFF8F3;
+    }
+    .tradeoff h4 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--dark-teal);
+      margin-bottom: 3px;
+    }
+    .tradeoff p {
+      font-size: 0.78rem;
+      color: var(--brown);
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    /* ── Milestone Tier ── */
+    .ms-tier {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .ms-tier:last-child { border-bottom: none; }
+    .ms-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Arimo', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      margin-right: 14px;
+    }
+    .ms-info {
+      flex: 1;
+    }
+    .ms-info .tier-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--dark-teal);
+    }
+    .ms-info .tier-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .ms-amount {
+      font-family: 'Arimo', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--orange);
+      margin-left: 12px;
+    }
+
     /* ── Signature Block ── */
     .signature-block {
       margin-top: 48px;
@@ -304,10 +375,12 @@
     /* ── Print-specific ── */
     @media print {
       .page { padding: 0; max-width: 100%; }
-      .cover { padding: 40px 0 30px; }
+      .cover { padding: 36px 0 28px; }
       .section { margin-bottom: 28px; }
       .phase { break-inside: avoid; }
       .card { break-inside: avoid; }
+      .tradeoff { break-inside: avoid; }
+      .ms-tier { break-inside: avoid; }
     }
   </style>
 </head>
@@ -321,7 +394,13 @@
 
     <!-- ═══ COVER ═══ -->
     <div class="cover">
-      <h1>Sengo &times; Boston While Black</h1>
+      <svg class="cover-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      </svg>
       <div class="campaign-type">$500K Community Crowdfunding Campaign</div>
       <div class="meta">
         <strong>Prepared by:</strong> Ila Sengupta<br>
@@ -352,7 +431,7 @@
         </div>
         <div class="overview-item">
           <div class="label">Commitment</div>
-          <div class="value">20 hrs/wk</div>
+          <div class="value">15 hrs/wk</div>
         </div>
         <div class="overview-item">
           <div class="label">Target Launch</div>
@@ -444,13 +523,13 @@
           </tr>
           <tr>
             <td>First funding milestone</td>
-            <td>$125K raised (25%)</td>
+            <td>$150K raised (30%)</td>
             <td>Weeks 10–11</td>
           </tr>
           <tr>
             <td>Mid-campaign checkpoint</td>
-            <td>$250K raised (50%)</td>
-            <td>Week 12–13</td>
+            <td>$300K raised (60%)</td>
+            <td>Weeks 12–13</td>
           </tr>
           <tr>
             <td>Engagement wrap &amp; extension decision</td>
@@ -528,10 +607,10 @@
       </div>
     </div>
 
-    <!-- ═══ COMPENSATION ═══ -->
+    <!-- ═══ COMPENSATION — RECOMMENDED STRUCTURE ═══ -->
     <div class="section page-break">
       <h2 class="section-title">Recommended Compensation Structure</h2>
-      <p>Based on a 13-week engagement at 20 hours per week with a $150/hour rate reflecting fractional fundraising leadership experience.</p>
+      <p>My recommended approach: a <strong>moderate retainer + milestone bonuses</strong>. This keeps my base predictable so I can commit fully, rewards success to align our incentives, and signals conviction without giving away equity. It's the cleanest structure — no deferred risk, no cap table impact, no legal complexity.</p>
 
       <table class="comp-table">
         <thead>
@@ -543,31 +622,86 @@
         </thead>
         <tbody>
           <tr>
+            <td><strong>Base Retainer (75%)</strong></td>
+            <td>15 hrs/wk &times; $150/hr &times; 13 weeks</td>
+            <td class="amount">$21,938</td>
+          </tr>
+          <tr>
             <td><strong>Weekly Retainer</strong></td>
-            <td>20 hrs/wk &times; $150/hr</td>
-            <td class="amount">$3,000/wk</td>
+            <td>Paid bi-weekly, net 15</td>
+            <td class="amount">$1,688/wk</td>
           </tr>
           <tr>
-            <td><strong>Monthly Equivalent</strong></td>
-            <td>~4.33 weeks per month</td>
-            <td class="amount">$13,000/mo</td>
-          </tr>
-          <tr>
-            <td><strong>Engagement Duration</strong></td>
-            <td>13 weeks (90 days)</td>
-            <td class="amount">—</td>
+            <td><strong>Milestone Bonus Pool (25%)</strong></td>
+            <td>Tied to campaign fundraising tiers</td>
+            <td class="amount">$7,313</td>
           </tr>
         </tbody>
       </table>
 
       <div class="comp-total">
         <span class="label">Total 90-Day Engagement</span>
-        <span class="value">$39,000</span>
+        <span class="value">$29,250</span>
       </div>
 
-      <p style="font-size:0.82rem; margin-top:16px;"><strong>Payment Terms:</strong> Bi-weekly invoicing (every two weeks), net 15 days. First invoice due upon engagement kickoff.</p>
+      <!-- Milestone Tiers -->
+      <p style="font-size:0.85rem; font-weight:600; color:var(--dark-teal); margin-top:20px; margin-bottom:12px;">Milestone Bonus Tiers</p>
 
-      <p style="font-size:0.82rem;"><strong>Flexible Structures Available:</strong> This proposal includes an interactive calculator (provided separately) where you can explore alternative configurations including milestone-based payments (tying 30% of compensation to campaign performance gates) and equity offset arrangements (reducing cash compensation by 20% in exchange for 0.25–0.5% advisory equity). These options are available for discussion during our finalization meeting.</p>
+      <div class="ms-tier">
+        <div class="ms-num">1</div>
+        <div class="ms-info">
+          <div class="tier-name">Campaign reaches $150K</div>
+          <div class="tier-desc">Validates strategy and community activation</div>
+        </div>
+        <div class="ms-amount">$2,194</div>
+      </div>
+      <div class="ms-tier">
+        <div class="ms-num">2</div>
+        <div class="ms-info">
+          <div class="tier-name">Campaign reaches $300K</div>
+          <div class="tier-desc">Momentum confirmed, on trajectory to goal</div>
+        </div>
+        <div class="ms-amount">$2,560</div>
+      </div>
+      <div class="ms-tier">
+        <div class="ms-num">3</div>
+        <div class="ms-info">
+          <div class="tier-name">Campaign reaches $500K</div>
+          <div class="tier-desc">Full goal achieved, campaign successfully closed</div>
+        </div>
+        <div class="ms-amount">$2,559</div>
+      </div>
+
+      <p style="font-size:0.82rem; margin-top:16px;"><strong>Payment Terms:</strong> Retainer invoiced bi-weekly, net 15 days. First invoice due upon engagement kickoff. Milestone bonuses invoiced upon achievement of each tier.</p>
+    </div>
+
+    <!-- ═══ ALTERNATIVE STRUCTURES ═══ -->
+    <div class="section">
+      <h2 class="section-title">Alternative Compensation Structures</h2>
+      <p>The recommended structure above is my preferred approach. However, I'm open to discussion on any of the following alternatives. An interactive calculator is provided separately where you can model each option in detail.</p>
+
+      <div class="tradeoff-list">
+        <div class="tradeoff">
+          <h4>Option 1: Cash &rarr; Equity Swap</h4>
+          <p>Lower the monthly retainer by 30–40% in exchange for a SAFE note or small equity stake (0.25–0.5%). Best if you're cash-constrained but believe in Sengo's long-term valuation. Requires legal documentation.</p>
+        </div>
+        <div class="tradeoff">
+          <h4>Option 2: Retainer &rarr; Milestone Conversion</h4>
+          <p>Move 25–35% of total compensation to success-based bonuses tied to campaign tiers ($150K, $300K, $500K raised). Shows confidence and aligns incentives, while protecting both sides since milestones aren't 100% in one person's control.</p>
+        </div>
+        <div class="tradeoff">
+          <h4>Option 3: Scope / Hours Reduction</h4>
+          <p>Drop from full execution (15 hrs/wk) to strategy + advisory (10 hrs/wk), where BWB's internal team handles day-to-day execution. Meaningfully lowers cost but shifts more operational responsibility to your team.</p>
+        </div>
+        <div class="tradeoff">
+          <h4>Option 4: Deferred Payment</h4>
+          <p>Defer 25–30% of the retainer to post-campaign close, paid from raise proceeds. Reduces your cash burn during the campaign without reducing total compensation. Simple to structure.</p>
+        </div>
+        <div class="tradeoff active-pick">
+          <h4>Option 5: Moderate Retainer + Milestones (Recommended)</h4>
+          <p>The structure detailed above. Predictable base + success bonuses. No equity dilution, no deferred risk. Clean, aligned, and signals mutual conviction.</p>
+        </div>
+      </div>
     </div>
 
     <!-- ═══ TIME COMMITMENT ═══ -->
@@ -583,11 +717,11 @@
         <tbody>
           <tr>
             <td>Strategy, planning &amp; creative direction</td>
-            <td class="amount">6 hrs</td>
+            <td class="amount">4 hrs</td>
           </tr>
           <tr>
             <td>Campaign execution &amp; community management</td>
-            <td class="amount">6 hrs</td>
+            <td class="amount">4 hrs</td>
           </tr>
           <tr>
             <td>Stakeholder communication &amp; reporting</td>
@@ -595,7 +729,7 @@
           </tr>
           <tr>
             <td>Ambassador coordination &amp; outreach</td>
-            <td class="amount">3 hrs</td>
+            <td class="amount">2 hrs</td>
           </tr>
           <tr>
             <td>Analytics, optimization &amp; admin</td>
@@ -603,7 +737,7 @@
           </tr>
           <tr>
             <td><strong>Total</strong></td>
-            <td class="amount"><strong>20 hrs</strong></td>
+            <td class="amount"><strong>15 hrs</strong></td>
           </tr>
         </tbody>
       </table>
