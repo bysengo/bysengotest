@@ -550,6 +550,7 @@
             <span class="val" id="totalVal">$29,250</span>
           </div>
           <div class="summary-note" id="summaryNote">$21,938 retainer + $7,313 milestone bonuses</div>
+          <div class="summary-note" id="pctNote" style="font-weight:600; color:var(--dark-teal);">That's 5.9% of your $500K campaign goal.</div>
           <div class="summary-savings" id="savingsNote"></div>
         </div>
 
@@ -594,6 +595,7 @@
     const WEEKS = 13;
     const BASE_HOURS = 15;
     const BASE_TOTAL = RATE * WEEKS * BASE_HOURS; // $29,250
+    const CAMPAIGN_GOAL = 500000;
 
     let hours = 15;
     let structure = 'recommended';
@@ -683,6 +685,10 @@
       const cashTotal = showEquity ? retainer : total;
       document.getElementById('totalVal').textContent = fmt(cashTotal);
       document.getElementById('summaryNote').textContent = noteText;
+
+      // Percentage of campaign goal
+      const pct = ((cashTotal / CAMPAIGN_GOAL) * 100).toFixed(1);
+      document.getElementById('pctNote').textContent = "That\u2019s " + pct + '% of your $500K campaign goal.';
 
       // Savings
       const savingsEl = document.getElementById('savingsNote');
