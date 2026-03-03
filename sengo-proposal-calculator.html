@@ -324,6 +324,78 @@
       color: var(--muted);
       margin-top: 10px;
     }
+
+    /* ── Goal Progress Bar ── */
+    .goal-bar-wrap {
+      margin-top: 14px;
+    }
+    .goal-bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .goal-bar-header .bar-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--dark-teal);
+    }
+    .goal-bar-header .bar-pct {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--dark-teal);
+    }
+    .goal-bar-track {
+      width: 100%;
+      height: 22px;
+      background: var(--light-gray);
+      border-radius: 11px;
+      overflow: hidden;
+      position: relative;
+    }
+    .goal-bar-fill-guaranteed {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      background: var(--orange);
+      border-radius: 11px 0 0 11px;
+      transition: width 0.35s ease;
+      z-index: 2;
+    }
+    .goal-bar-fill-milestone {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      background: var(--orange);
+      opacity: 0.35;
+      border-radius: 0 11px 11px 0;
+      transition: width 0.35s ease, left 0.35s ease;
+      z-index: 1;
+    }
+    .goal-bar-legend {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .goal-bar-legend .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .legend-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .legend-swatch.solid { background: var(--orange); }
+    .legend-swatch.faded { background: var(--orange); opacity: 0.35; }
+    .legend-swatch.remaining { background: var(--light-gray); }
+
     .summary-savings {
       text-align: center;
       font-size: 0.82rem;
@@ -550,7 +622,21 @@
             <span class="val" id="totalVal">$29,250</span>
           </div>
           <div class="summary-note" id="summaryNote">$21,938 retainer + $7,313 milestone bonuses</div>
-          <div class="summary-note" id="pctNote" style="font-weight:600; color:var(--dark-teal);">That's 5.9% of your $500K campaign goal.</div>
+          <div class="goal-bar-wrap" id="goalBarWrap">
+            <div class="goal-bar-header">
+              <span class="bar-label">% of $500K campaign goal</span>
+              <span class="bar-pct" id="barPct">5.9%</span>
+            </div>
+            <div class="goal-bar-track">
+              <div class="goal-bar-fill-guaranteed" id="barGuaranteed" style="width:4.4%"></div>
+              <div class="goal-bar-fill-milestone" id="barMilestone" style="left:4.4%; width:1.5%"></div>
+            </div>
+            <div class="goal-bar-legend" id="barLegend">
+              <span class="legend-item"><span class="legend-swatch solid"></span>Guaranteed</span>
+              <span class="legend-item"><span class="legend-swatch faded"></span>If milestones hit</span>
+              <span class="legend-item"><span class="legend-swatch remaining"></span>Remaining goal</span>
+            </div>
+          </div>
           <div class="summary-savings" id="savingsNote"></div>
         </div>
 
@@ -686,15 +772,41 @@
       document.getElementById('totalVal').textContent = fmt(cashTotal);
       document.getElementById('summaryNote').textContent = noteText;
 
-      // Percentage of campaign goal
-      const pctNote = document.getElementById('pctNote');
-      if (showMilestone) {
-        const guaranteedPct = ((retainer / CAMPAIGN_GOAL) * 100).toFixed(1);
-        const maxPct = ((total / CAMPAIGN_GOAL) * 100).toFixed(1);
-        pctNote.textContent = guaranteedPct + '% guaranteed, up to ' + maxPct + '% if all milestones hit.';
+      // Goal progress bar
+      const guaranteedAmt = showMilestone ? retainer : cashTotal;
+      const milestoneAmt = showMilestone ? Math.round(total * milestonePct) : 0;
+      const guaranteedPctVal = (guaranteedAmt / CAMPAIGN_GOAL) * 100;
+      const milestonePctVal = (milestoneAmt / CAMPAIGN_GOAL) * 100;
+      const totalPctVal = ((guaranteedAmt + milestoneAmt) / CAMPAIGN_GOAL) * 100;
+
+      document.getElementById('barGuaranteed').style.width = guaranteedPctVal + '%';
+      const barMs = document.getElementById('barMilestone');
+      if (showMilestone && milestonePctVal > 0) {
+        barMs.style.display = 'block';
+        barMs.style.left = guaranteedPctVal + '%';
+        barMs.style.width = milestonePctVal + '%';
       } else {
-        const pct = ((cashTotal / CAMPAIGN_GOAL) * 100).toFixed(1);
-        pctNote.textContent = "That\u2019s " + pct + '% of your $500K campaign goal.';
+        barMs.style.display = 'none';
+      }
+
+      const barPctEl = document.getElementById('barPct');
+      if (showMilestone) {
+        barPctEl.textContent = guaranteedPctVal.toFixed(1) + '% guaranteed, up to ' + totalPctVal.toFixed(1) + '%';
+      } else {
+        barPctEl.textContent = ((cashTotal / CAMPAIGN_GOAL) * 100).toFixed(1) + '%';
+      }
+
+      // Toggle legend items for milestone vs non-milestone
+      const legendEl = document.getElementById('barLegend');
+      if (showMilestone) {
+        legendEl.innerHTML =
+          '<span class="legend-item"><span class="legend-swatch solid"></span>Guaranteed</span>' +
+          '<span class="legend-item"><span class="legend-swatch faded"></span>If milestones hit</span>' +
+          '<span class="legend-item"><span class="legend-swatch remaining"></span>Remaining goal</span>';
+      } else {
+        legendEl.innerHTML =
+          '<span class="legend-item"><span class="legend-swatch solid"></span>Your investment</span>' +
+          '<span class="legend-item"><span class="legend-swatch remaining"></span>Remaining goal</span>';
       }
 
       // Savings
