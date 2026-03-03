@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo Platform - Key Features</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 0; background: #F3EDE7;">
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1B3533;
+  }
+
+  /* ===== HEADER ===== */
+  .artifact-header {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .artifact-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .artifact-header svg {
+    max-width: 160px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .artifact-header h1 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2.8rem;
+    color: #F3EDE7;
+    margin: 0 0 10px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .artifact-header p {
+    color: #F3EDE7;
+    opacity: 0.85;
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== CONTAINER ===== */
+  .artifact-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 30px 80px;
+  }
+
+  /* ===== SECTION TITLES ===== */
+  .section-label {
+    display: inline-block;
+    background: #D57028;
+    color: white;
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Arimo', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1B3533;
+    margin: 0 0 8px;
+  }
+
+  .section-desc {
+    color: #67441A;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 30px;
+    max-width: 600px;
+  }
+
+  /* ===== FEATURE CARDS ===== */
+  .feature-block {
+    margin-bottom: 70px;
+  }
+
+  .feature-screenshot {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px rgba(27, 53, 51, 0.12);
+    border: 1px solid rgba(27, 53, 51, 0.06);
+  }
+
+  /* ===== FEATURE 1: HERO ===== */
+  .screenshot-hero {
+    background: #F3EDE7;
+    padding: 60px 50px;
+    text-align: left;
+  }
+
+  .screenshot-hero h2 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 4.5rem;
+    font-weight: 400;
+    line-height: 0.94;
+    color: #1B3533;
+    letter-spacing: -0.077em;
+    margin: 0 0 16px;
+    max-width: 700px;
+  }
+
+  .screenshot-hero .subtitle {
+    font-size: 1.1rem;
+    color: #67441A;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  /* ===== FEATURE 2: FEATURED IN LOGOS ===== */
+  .screenshot-logos {
+    background: #1B3533;
+    padding: 35px 40px;
+    text-align: center;
+  }
+
+  .screenshot-logos .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #F3EDE7;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 45px;
+    flex-wrap: wrap;
+  }
+
+  .logo-row img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.75;
+  }
+
+  /* ===== FEATURE 3: IMPACT STATS ===== */
+  .screenshot-stats {
+    background: #F3EDE7;
+    padding: 50px 40px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .stat-card {
+    background: #1B3533;
+    padding: 40px 24px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid rgba(213, 112, 40, 0.3);
+    transition: transform 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    border-color: #D57028;
+  }
+
+  .stat-number {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #F3EDE7;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: #AF8145;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  /* ===== FEATURE 4: PATHWAY SELECTION ===== */
+  .screenshot-pathway {
+    background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+    padding: 60px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .screenshot-pathway::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(213, 112, 40, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .screenshot-pathway .badge {
+    display: inline-block;
+    background: #D57028;
+    color: white;
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .screenshot-pathway h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 4.5rem;
+    color: #F3EDE7;
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .screenshot-pathway p {
+    color: #F3EDE7;
+    opacity: 0.9;
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 650px;
+    margin: 0 auto 35px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pathway-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pathway-btns span {
+    padding: 16px 40px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: 3px solid #F3EDE7;
+    color: #F3EDE7;
+    border-radius: 60px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .pathway-btns span.active-demo {
+    background: #D57028;
+    border-color: #D57028;
+    color: white;
+  }
+
+  /* ===== FEATURE 5: ABOUT / SERVICES ===== */
+  .screenshot-about {
+    background: #F3EDE7;
+    padding: 50px 40px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .about-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+  }
+
+  .about-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.55);
+    transition: filter 0.4s ease;
+  }
+
+  .about-card:hover img {
+    filter: brightness(0.85);
+  }
+
+  .about-card .card-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 16px;
+    background: linear-gradient(to top, rgba(27, 53, 51, 0.9) 0%, transparent 100%);
+    color: #F3EDE7;
+    font-family: 'Arimo', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  /* ===== FEATURE 6: EMAIL CAPTURE ===== */
+  .screenshot-email {
+    background: linear-gradient(135deg, #D57028 20%, #AF8145 80%);
+    padding: 60px 50px;
+    text-align: center;
+  }
+
+  .screenshot-email .badge {
+    display: inline-block;
+    background: rgba(243, 237, 231, 0.15);
+    color: #F3EDE7;
+    padding: 8px 24px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(243, 237, 231, 0.3);
+  }
+
+  .screenshot-email h2 {
+    font-family: 'Arimo', sans-serif;
+    font-size: 4.5rem;
+    color: #F3EDE7;
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: -0.077em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+
+  .screenshot-email p {
+    color: #F3EDE7;
+    opacity: 0.9;
+    font-size: 1rem;
+    margin: 0 0 30px;
+  }
+
+  .email-form-demo {
+    max-width: 450px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .email-form-demo .input-demo {
+    padding: 16px 20px;
+    border: 2px solid rgba(243, 237, 231, 0.4);
+    border-radius: 10px;
+    background: rgba(243, 237, 231, 0.15);
+    color: #F3EDE7;
+    font-size: 0.95rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .email-form-demo .btn-demo {
+    padding: 18px;
+    background: #1B3533;
+    color: #F3EDE7;
+    border: none;
+    border-radius: 60px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* ===== FOOTER ===== */
+  .artifact-footer {
+    text-align: center;
+    padding: 40px;
+    background: #1B3533;
+    color: #F3EDE7;
+  }
+
+  .artifact-footer p {
+    margin: 0;
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .artifact-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .screenshot-hero h2 {
+      font-size: 2.5rem;
+    }
+
+    .screenshot-pathway h2,
+    .screenshot-email h2 {
+      font-size: 2.5rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pathway-btns {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-row {
+      gap: 25px;
+    }
+
+    .logo-row img {
+      height: 35px;
+    }
+  }
+</style>
+
+<!-- ===== HEADER ===== -->
+<div class="artifact-header">
+  <svg viewBox="0 0 1400 900" style="color: #F3EDE7;">
+    <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+    <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+    <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+  </svg>
+  <h1>Sengo Platform - Key Features</h1>
+  <p>A visual walkthrough of the platform's core sections</p>
+</div>
+
+<div class="artifact-container">
+
+  <!-- ===== 1. HERO SECTION ===== -->
+  <div class="feature-block">
+    <span class="section-label">Feature 1</span>
+    <h3 class="section-title">Hero Section</h3>
+    <p class="section-desc">
+      Bold, impactful headline with Sengo's mission statement. Sets the tone for the entire platform experience.
+    </p>
+    <div class="feature-screenshot">
+      <div class="screenshot-hero">
+        <h2>Reimagining fundraising and investing.</h2>
+        <p class="subtitle">Closing the wealth gap in private assets</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 2. FEATURED IN / PRESS LOGOS ===== -->
+  <div class="feature-block">
+    <span class="section-label">Feature 2</span>
+    <h3 class="section-title">Press & Media Recognition</h3>
+    <p class="section-desc">
+      Scrolling logo carousel highlighting Sengo's media features. Logos animate continuously and pause on hover.
+    </p>
+    <div class="feature-screenshot">
+      <div class="screenshot-logos">
+        <div class="label">As Featured In</div>
+        <div class="logo-row">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/8b90e9cb-7454-491d-95d3-07fb06e284d1/Social+Media+Squares+v2+%28Presentation+%2843%29%29.png?format=750w" alt="Forbes">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/34e27655-e182-4ac4-b8df-9bb9eb891719/3.png?format=750w" alt="NerdWallet">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/5ef4f0b5-fc3a-4614-a8d8-4903795b8d65/4.png?format=750w" alt="Build in Tulsa">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/95081a5b-b209-4ac8-83f8-33874282fd7d/2.png?format=750w" alt="Nasdaq">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/ff429dd9-458f-450c-9784-f0f2eb701da9/5.png?format=750w" alt="Black Girl Ventures">
+          <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/9a8a7346-142e-46fa-a453-2c4bf1b9b16f/1.png?format=750w" alt="Business Insider">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 3. IMPACT STATS ===== -->
+  <div class="feature-block">
+    <span class="section-label">Feature 3</span>
+    <h3 class="section-title">Impact Statistics</h3>
+    <p class="section-desc">
+      Three key metrics showcasing Sengo's community reach, member engagement, and capital impact. Cards lift on hover.
+    </p>
+    <div class="feature-screenshot">
+      <div class="screenshot-stats">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">90+</div>
+            <div class="stat-label">Annual Touchpoints</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">600</div>
+            <div class="stat-label">App Members</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">$5M+</div>
+            <div class="stat-label">Raised by Founders in 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 4. PATHWAY SELECTION ===== -->
+  <div class="feature-block">
+    <span class="section-label">Feature 4</span>
+    <h3 class="section-title">Dual Pathway Selection</h3>
+    <p class="section-desc">
+      Interactive pathway chooser that routes users to the right enrollment experience: Founder, Funder, or Both. Selection is saved and redirects to dedicated enrollment pages.
+    </p>
+    <div class="feature-screenshot">
+      <div class="screenshot-pathway">
+        <span class="badge">Choose Your Path</span>
+        <h2>Join the Movement</h2>
+        <p>Whether you're building the next big thing, investing in innovation, or doing both -- we're here to support your journey.</p>
+        <div class="pathway-btns">
+          <span>I'm a Founder</span>
+          <span class="active-demo">I'm a Funder</span>
+          <span>I'm Both</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 5. ABOUT / SERVICES ===== -->
+  <div class="feature-block">
+    <span class="section-label">Feature 5</span>
+    <h3 class="section-title">Core Services</h3>
+    <p class="section-desc">
+      Four pillars of the Sengo platform: Education, Dealflow, Funding Resources, and Events. Each card features a community photo with hover-to-reveal effects.
+    </p>
+    <div class="feature-screenshot">
+      <div class="screenshot-about">
+        <div class="about-grid">
+          <div class="about-card">
+            <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/edd89a8b-342f-49d5-9c44-625e9b481f32/IMG_4246.JPG?format=750w" alt="Education">
+            <div class="card-label">Education</div>
+          </div>
+          <div class="about-card">
+            <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/bc394ca7-6327-4d8f-baed-1ac86487a1a5/DSCF9476.jpg?format=750w" alt="Dealflow">
+            <div class="card-label">Dealflow</div>
+          </div>
+          <div class="about-card">
+            <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/c667dda3-5f76-4410-b198-73aae5de28c8/DSC_0218.jpg?format=750w" alt="Funding Resources">
+            <div class="card-label">Funding Resources</div>
+          </div>
+          <div class="about-card">
+            <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/50bd3f7e-5112-46f2-93d9-74338190df59/BGIMRetreat-DP+Jolly_83.jpg?format=750w" alt="Events">
+            <div class="card-label">Events</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 6. EMAIL CAPTURE ===== -->
+  <div class="feature-block">
+    <span class="section-label">Feature 6</span>
+    <h3 class="section-title">Email Capture & Community Signup</h3>
+    <p class="section-desc">
+      Newsletter signup section with warm gradient background. Captures name and email to grow the Sengo community.
+    </p>
+    <div class="feature-screenshot">
+      <div class="screenshot-email">
+        <span class="badge">Stay Connected</span>
+        <h2>Get In The Know</h2>
+        <p>Join our email list and be the first to know our latest news.</p>
+        <div class="email-form-demo">
+          <div class="input-demo">First Name</div>
+          <div class="input-demo">Email Address</div>
+          <div class="btn-demo">Join the Community</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="artifact-footer">
+  <p>Sengo Platform Features Artifact &middot; bysengo.com</p>
+</div>
+
+</body>
+</html>
