@@ -574,10 +574,10 @@
           </div>
           <hr class="summary-divider">
           <div class="summary-total">
-            <span class="label">Your total investment (13 weeks)</span>
-            <span class="val" id="totalVal">$29,250</span>
+            <span class="label">Guaranteed 90-day retainer</span>
+            <span class="val" id="totalVal">$21,938</span>
           </div>
-          <div class="summary-note" id="summaryNote">$21,938 retainer + $7,313 milestone bonuses</div>
+          <div class="summary-note" id="summaryNote">Milestone bonuses evaluated at 90-day review, not included above</div>
           <div class="goal-bar-wrap" id="goalBarWrap">
             <div class="goal-bar-header">
               <span class="bar-label">% of $500K campaign goal</span>
@@ -661,26 +661,26 @@
         case 'recommended':
           retainerPct = 0.75; milestonePct = 0.25;
           showMilestone = true;
-          noteText = fmt(Math.round(total * 0.75)) + ' guaranteed + ' + fmt(Math.round(total * 0.25)) + ' only if milestones hit';
+          noteText = 'Milestone bonuses (' + fmt(Math.round(total * 0.25)) + ') evaluated at 90-day review, not included above';
           break;
         case 'milestone':
           retainerPct = 0.65; milestonePct = 0.35;
           showMilestone = true;
-          noteText = fmt(Math.round(total * 0.65)) + ' guaranteed + ' + fmt(Math.round(total * 0.35)) + ' only if milestones hit';
+          noteText = 'Milestone bonuses (' + fmt(Math.round(total * 0.35)) + ') evaluated at 90-day review, not included above';
           break;
         case 'equity':
           retainerPct = 0.65; equityPct = 0.35;
           showEquity = true;
-          noteText = 'You pay ' + fmt(Math.round(total * 0.65)) + ' cash + offer 0.25–0.5% equity';
+          noteText = fmt(Math.round(total * 0.65)) + ' cash retainer + 0.25–0.5% equity in lieu of additional cash';
           break;
         case 'deferred':
           retainerPct = 0.75; deferredPct = 0.25;
           showDeferred = true;
-          noteText = 'You pay ' + fmt(Math.round(total * 0.75)) + ' now, ' + fmt(Math.round(total * 0.25)) + ' after campaign closes';
+          noteText = fmt(Math.round(total * 0.25)) + ' deferred until after campaign closes, paid from raise proceeds';
           break;
         case 'flat':
           retainerPct = 1.0;
-          noteText = 'You pay ' + fmt(weeklyGross) + '/wk × 13 weeks';
+          noteText = fmt(weeklyGross) + '/wk × 13 weeks — no milestone bonuses';
           break;
       }
 
@@ -716,14 +716,13 @@
         dfRow.style.display = 'none';
       }
 
-      // Total — show cash total (equity structure shows reduced cash)
-      const cashTotal = showEquity ? retainer : total;
-      document.getElementById('totalVal').textContent = fmt(cashTotal);
+      // Total — always show the guaranteed retainer (milestones/deferred not included)
+      document.getElementById('totalVal').textContent = fmt(retainer);
       document.getElementById('summaryNote').textContent = noteText;
 
-      // Goal progress bar
+      // Goal progress bar — based on guaranteed retainer only
       const showFadedBar = showMilestone || showDeferred;
-      const solidAmt = showFadedBar ? retainer : cashTotal;
+      const solidAmt = retainer;
       const fadedAmt = showMilestone ? Math.round(total * milestonePct)
                      : showDeferred  ? Math.round(total * deferredPct)
                      : 0;
@@ -747,7 +746,7 @@
       } else if (showDeferred) {
         barPctEl.textContent = solidPctVal.toFixed(1) + '% upfront, ' + fadedPctVal.toFixed(1) + '% deferred';
       } else {
-        barPctEl.textContent = ((cashTotal / CAMPAIGN_GOAL) * 100).toFixed(1) + '%';
+        barPctEl.textContent = ((retainer / CAMPAIGN_GOAL) * 100).toFixed(1) + '%';
       }
 
       // Toggle legend items
@@ -770,7 +769,7 @@
 
       // Savings
       const savingsEl = document.getElementById('savingsNote');
-      const diff = BASE_TOTAL - cashTotal;
+      const diff = BASE_TOTAL - retainer;
       if (diff > 0) {
         savingsEl.textContent = 'You save ' + fmt(diff) + ' vs. the 15 hr/wk recommended baseline.';
         savingsEl.className = 'summary-savings visible';
