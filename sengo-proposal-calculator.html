@@ -542,7 +542,7 @@
           <div class="radio"></div>
           <div class="text">
             <div class="name">Defer Part of Payment</div>
-            <div class="desc">Pay 75% during the engagement, defer 25% until after the campaign closes — paid from raise proceeds</div>
+            <div class="desc">Pay 75% during the engagement, defer 25% until after the campaign closes — 10% premium on deferred amount for the flexibility</div>
           </div>
         </div>
 
@@ -564,12 +564,17 @@
             <span class="label">Milestone bonuses (evaluated at 90-day review)</span>
             <span class="val" id="milestoneVal">$7,313</span>
           </div>
+          <div class="milestone-tiers" id="milestoneTiers" style="display:none; padding:8px 0 4px; font-size:0.75rem; color:var(--muted); line-height:1.6;">
+            <span id="tier1"></span><br>
+            <span id="tier2"></span><br>
+            <span id="tier3"></span>
+          </div>
           <div class="summary-row muted" id="equityRow" style="display:none;">
             <span class="label">Equity offered instead of cash</span>
             <span class="val" id="equityVal">0.25–0.5%</span>
           </div>
           <div class="summary-row muted" id="deferredRow" style="display:none;">
-            <span class="label">Deferred until after campaign</span>
+            <span class="label">Deferred until after campaign (includes 10% premium)</span>
             <span class="val" id="deferredVal">$0</span>
           </div>
           <hr class="summary-divider">
@@ -661,26 +666,21 @@
         case 'recommended':
           retainerPct = 0.75; milestonePct = 0.25;
           showMilestone = true;
-          noteText = 'Milestone bonuses (' + fmt(Math.round(total * 0.25)) + ') evaluated at 90-day review, not included above';
           break;
         case 'milestone':
           retainerPct = 0.65; milestonePct = 0.35;
           showMilestone = true;
-          noteText = 'Milestone bonuses (' + fmt(Math.round(total * 0.35)) + ') evaluated at 90-day review, not included above';
           break;
         case 'equity':
           retainerPct = 0.65; equityPct = 0.35;
           showEquity = true;
-          noteText = fmt(Math.round(total * 0.65)) + ' cash retainer + 0.25–0.5% equity in lieu of additional cash';
           break;
         case 'deferred':
           retainerPct = 0.75; deferredPct = 0.25;
           showDeferred = true;
-          noteText = fmt(Math.round(total * 0.25)) + ' deferred until after campaign closes, paid from raise proceeds';
           break;
         case 'flat':
           retainerPct = 1.0;
-          noteText = fmt(weeklyGross) + '/wk × 13 weeks — no milestone bonuses';
           break;
       }
 
@@ -689,13 +689,24 @@
 
       document.getElementById('retainerVal').textContent = fmt(weeklyRetainer) + '/wk';
 
-      // Milestone row
+      // Milestone row + tier breakdown
       const msRow = document.getElementById('milestoneRow');
+      const tierEl = document.getElementById('milestoneTiers');
       if (showMilestone) {
+        const pool = Math.round(total * milestonePct);
+        const t1 = Math.round(pool * 0.30);
+        const t2 = Math.round(pool * 0.35);
+        const t3 = pool - t1 - t2;
         msRow.style.display = 'flex';
-        document.getElementById('milestoneVal').textContent = fmt(Math.round(total * milestonePct));
+        document.getElementById('milestoneVal').textContent = fmt(pool);
+        tierEl.style.display = 'block';
+        document.getElementById('tier1').textContent = '→ ' + fmt(t1) + ' at $150K raised';
+        document.getElementById('tier2').textContent = '→ ' + fmt(t2) + ' at $300K raised';
+        document.getElementById('tier3').textContent = '→ ' + fmt(t3) + ' at $500K raised';
+        noteText = 'Milestone bonuses (' + fmt(pool) + ') evaluated at 90-day review, not included above';
       } else {
         msRow.style.display = 'none';
+        tierEl.style.display = 'none';
       }
 
       // Equity row
@@ -703,17 +714,26 @@
       if (showEquity) {
         eqRow.style.display = 'flex';
         document.getElementById('equityVal').textContent = '0.25–0.5% (SAFE)';
+        noteText = fmt(retainer) + ' cash retainer + 0.25–0.5% equity in lieu of additional cash';
       } else {
         eqRow.style.display = 'none';
       }
 
-      // Deferred row
+      // Deferred row — 10% premium on deferred portion
       const dfRow = document.getElementById('deferredRow');
       if (showDeferred) {
+        const deferredBase = Math.round(total * deferredPct);
+        const deferredWithPremium = Math.round(deferredBase * 1.10);
         dfRow.style.display = 'flex';
-        document.getElementById('deferredVal').textContent = fmt(Math.round(total * deferredPct));
+        document.getElementById('deferredVal').textContent = fmt(deferredWithPremium);
+        noteText = fmt(deferredWithPremium) + ' deferred (includes 10% premium) — total cost: ' + fmt(retainer + deferredWithPremium);
       } else {
         dfRow.style.display = 'none';
+      }
+
+      // Flat note
+      if (structure === 'flat') {
+        noteText = fmt(weeklyGross) + '/wk × 13 weeks — no milestone bonuses';
       }
 
       // Total — always show the guaranteed retainer (milestones/deferred not included)
@@ -724,7 +744,7 @@
       const showFadedBar = showMilestone || showDeferred;
       const solidAmt = retainer;
       const fadedAmt = showMilestone ? Math.round(total * milestonePct)
-                     : showDeferred  ? Math.round(total * deferredPct)
+                     : showDeferred  ? Math.round(Math.round(total * deferredPct) * 1.10)
                      : 0;
       const solidPctVal = (solidAmt / CAMPAIGN_GOAL) * 100;
       const fadedPctVal = (fadedAmt / CAMPAIGN_GOAL) * 100;
