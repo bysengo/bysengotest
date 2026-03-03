@@ -463,8 +463,8 @@
 
     <!-- ═══ CALCULATOR ═══ -->
     <div class="section">
-      <h2 class="section-title">Build Your Engagement</h2>
-      <p class="section-desc">Set your weekly hours, then choose how you'd like to structure compensation.</p>
+      <h2 class="section-title">Customize This Engagement</h2>
+      <p class="section-desc">Choose how many hours per week you'd like Ila dedicated to your campaign, then pick a payment structure that fits your budget.</p>
 
       <div class="calc-box">
 
@@ -474,79 +474,79 @@
             <span class="label">Weekly Hours</span>
             <span class="val" id="hoursVal">15 hrs/wk</span>
           </div>
-          <div class="hours-hint">15 hrs = full strategy + execution &middot; 10 hrs = strategy + advisory only</div>
+          <div class="hours-hint">15 hrs = full strategy + execution &middot; 10 hrs = strategy + advisory &middot; 5 hrs = advisory only</div>
           <input type="range" id="hoursSlider" min="5" max="20" step="5" value="15">
           <div class="weekly-stipend">
-            <span class="label">Weekly stipend at $150/hr</span>
+            <span class="label">Your weekly cost at $150/hr</span>
             <span class="amount" id="weeklyStipend">$2,250/wk</span>
           </div>
         </div>
 
         <!-- STRUCTURE OPTIONS -->
-        <div class="structure-label">How should we structure payment?</div>
+        <div class="structure-label">How would you like to pay?</div>
 
         <div class="option active" data-key="recommended" onclick="pick('recommended')">
           <div class="tag">Recommended</div>
           <div class="radio"></div>
           <div class="text">
-            <div class="name">Moderate Retainer + Milestone Bonuses</div>
-            <div class="desc">75% as weekly retainer, 25% tied to campaign hitting $150K / $300K / $500K</div>
+            <div class="name">Retainer + Milestone Bonuses</div>
+            <div class="desc">Pay 75% as a weekly retainer, 25% only when the campaign hits $150K / $300K / $500K</div>
           </div>
         </div>
 
         <div class="option" data-key="milestone" onclick="pick('milestone')">
           <div class="radio"></div>
           <div class="text">
-            <div class="name">Retainer &rarr; Milestone Conversion</div>
-            <div class="desc">65% retainer, 35% milestone bonuses — more upside risk, lower guaranteed cost</div>
+            <div class="name">More Pay-for-Performance</div>
+            <div class="desc">Pay 65% as retainer, 35% only when milestones are hit — lower guaranteed cost for you</div>
           </div>
         </div>
 
         <div class="option" data-key="equity" onclick="pick('equity')">
           <div class="radio"></div>
           <div class="text">
-            <div class="name">Cash &rarr; Equity Swap</div>
-            <div class="desc">Reduce cash retainer by 35% in exchange for 0.25–0.5% equity via SAFE note</div>
+            <div class="name">Lower Cash, Offer Equity</div>
+            <div class="desc">Reduce your cash cost by 35% by offering 0.25–0.5% equity via SAFE note instead</div>
           </div>
         </div>
 
         <div class="option" data-key="deferred" onclick="pick('deferred')">
           <div class="radio"></div>
           <div class="text">
-            <div class="name">Deferred Payment</div>
-            <div class="desc">75% paid during engagement, 25% deferred to post-campaign close from raise proceeds</div>
+            <div class="name">Defer Part of Payment</div>
+            <div class="desc">Pay 75% during the engagement, defer 25% until after the campaign closes — paid from raise proceeds</div>
           </div>
         </div>
 
         <div class="option" data-key="flat" onclick="pick('flat')">
           <div class="radio"></div>
           <div class="text">
-            <div class="name">Flat Retainer</div>
-            <div class="desc">100% as weekly retainer — simple, predictable, no performance component</div>
+            <div class="name">Flat Weekly Retainer</div>
+            <div class="desc">Pay 100% as a simple weekly retainer — straightforward, predictable, no bonuses</div>
           </div>
         </div>
 
         <!-- SUMMARY -->
         <div class="summary">
           <div class="summary-row" id="retainerRow">
-            <span class="label">Weekly retainer</span>
+            <span class="label">You pay weekly</span>
             <span class="val" id="retainerVal">$1,688/wk</span>
           </div>
           <div class="summary-row muted" id="milestoneRow">
-            <span class="label">Milestone bonus pool</span>
+            <span class="label">Paid only if milestones hit</span>
             <span class="val" id="milestoneVal">$7,313</span>
           </div>
           <div class="summary-row muted" id="equityRow" style="display:none;">
-            <span class="label">Equity component</span>
+            <span class="label">Equity offered instead of cash</span>
             <span class="val" id="equityVal">0.25–0.5%</span>
           </div>
           <div class="summary-row muted" id="deferredRow" style="display:none;">
-            <span class="label">Deferred to post-campaign</span>
+            <span class="label">Deferred until after campaign</span>
             <span class="val" id="deferredVal">$0</span>
           </div>
           <hr class="summary-divider">
           <div class="summary-total">
-            <span class="label">Total (13 weeks)</span>
+            <span class="label">Your total investment (13 weeks)</span>
             <span class="val" id="totalVal">$29,250</span>
           </div>
           <div class="summary-note" id="summaryNote">$21,938 retainer + $7,313 milestone bonuses</div>
@@ -624,26 +624,26 @@
         case 'recommended':
           retainerPct = 0.75; milestonePct = 0.25;
           showMilestone = true;
-          noteText = fmt(Math.round(total * 0.75)) + ' retainer + ' + fmt(Math.round(total * 0.25)) + ' milestone bonuses';
+          noteText = fmt(Math.round(total * 0.75)) + ' guaranteed + ' + fmt(Math.round(total * 0.25)) + ' only if milestones hit';
           break;
         case 'milestone':
           retainerPct = 0.65; milestonePct = 0.35;
           showMilestone = true;
-          noteText = fmt(Math.round(total * 0.65)) + ' retainer + ' + fmt(Math.round(total * 0.35)) + ' milestone bonuses';
+          noteText = fmt(Math.round(total * 0.65)) + ' guaranteed + ' + fmt(Math.round(total * 0.35)) + ' only if milestones hit';
           break;
         case 'equity':
           retainerPct = 0.65; equityPct = 0.35;
           showEquity = true;
-          noteText = fmt(Math.round(total * 0.65)) + ' cash + 0.25–0.5% equity (SAFE)';
+          noteText = 'You pay ' + fmt(Math.round(total * 0.65)) + ' cash + offer 0.25–0.5% equity';
           break;
         case 'deferred':
           retainerPct = 0.75; deferredPct = 0.25;
           showDeferred = true;
-          noteText = fmt(Math.round(total * 0.75)) + ' upfront + ' + fmt(Math.round(total * 0.25)) + ' deferred';
+          noteText = 'You pay ' + fmt(Math.round(total * 0.75)) + ' now, ' + fmt(Math.round(total * 0.25)) + ' after campaign closes';
           break;
         case 'flat':
           retainerPct = 1.0;
-          noteText = fmt(weeklyGross) + '/wk × 13 weeks — flat retainer';
+          noteText = 'You pay ' + fmt(weeklyGross) + '/wk × 13 weeks';
           break;
       }
 
@@ -688,7 +688,7 @@
       const savingsEl = document.getElementById('savingsNote');
       const diff = BASE_TOTAL - cashTotal;
       if (diff > 0) {
-        savingsEl.textContent = 'Saves ' + fmt(diff) + ' in cash vs. the recommended baseline.';
+        savingsEl.textContent = 'You save ' + fmt(diff) + ' vs. the 15 hr/wk recommended baseline.';
         savingsEl.className = 'summary-savings visible';
       } else {
         savingsEl.className = 'summary-savings';
