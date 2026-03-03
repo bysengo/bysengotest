@@ -743,9 +743,9 @@
         msRow.style.display = 'flex';
         document.getElementById('milestoneVal').textContent = fmt(pool);
         tierEl.style.display = 'block';
-        document.getElementById('tier1').textContent = '→ ' + fmt(t1) + ' at $150K raised or 30 days';
-        document.getElementById('tier2').textContent = '→ ' + fmt(t2) + ' at $300K raised or 60 days';
-        document.getElementById('tier3').textContent = '→ ' + fmt(t3) + ' at $500K raised or 90 days';
+        document.getElementById('tier1').textContent = '→ ' + fmt(t1) + ' at $150K raised or 30 days post-launch';
+        document.getElementById('tier2').textContent = '→ ' + fmt(t2) + ' at $300K raised or 60 days post-launch';
+        document.getElementById('tier3').textContent = '→ ' + fmt(t3) + ' at $500K raised or 90 days post-launch';
         noteText = 'Milestone bonuses (' + fmt(pool) + ') — each triggered by target or time, whichever comes first';
       } else {
         msRow.style.display = 'none';
@@ -830,15 +830,8 @@
           '<span class="legend-item"><span class="legend-swatch remaining"></span>Remaining goal</span>';
       }
 
-      // Savings
-      const savingsEl = document.getElementById('savingsNote');
-      const diff = BASE_TOTAL - retainer;
-      if (diff > 0) {
-        savingsEl.textContent = 'You save ' + fmt(diff) + ' vs. the 15 hr/wk recommended baseline.';
-        savingsEl.className = 'summary-savings visible';
-      } else {
-        savingsEl.className = 'summary-savings';
-      }
+      // Hide savings element (not applicable)
+      document.getElementById('savingsNote').className = 'summary-savings';
 
       // Update timeline and scope note based on hours
       const scopeNote = document.getElementById('scopeNote');
