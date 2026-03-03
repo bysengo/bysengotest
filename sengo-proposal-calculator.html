@@ -573,7 +573,7 @@
           <div class="radio"></div>
           <div class="text">
             <div class="name">Retainer + Milestone Bonuses</div>
-            <div class="desc">Pay 65% as a guaranteed weekly retainer for my time, 35% as milestone bonuses evaluated at 90-day review ($150K / $300K / $500K)</div>
+            <div class="desc">Pay 65% as a guaranteed weekly retainer for my time, 35% as milestone bonuses — each triggered by a fundraising target or time threshold, whichever comes first</div>
           </div>
         </div>
 
@@ -608,7 +608,7 @@
             <span class="val" id="retainerVal">$1,688/wk</span>
           </div>
           <div class="summary-row muted" id="milestoneRow">
-            <span class="label">Milestone bonuses (evaluated at 90-day review)</span>
+            <span class="label">Milestone bonuses (fundraising target or time threshold)</span>
             <span class="val" id="milestoneVal">$7,313</span>
           </div>
           <div class="milestone-tiers" id="milestoneTiers" style="display:none; padding:8px 0 4px; font-size:0.75rem; color:var(--muted); line-height:1.6;">
@@ -629,7 +629,7 @@
             <span class="label">Guaranteed 90-day retainer</span>
             <span class="val" id="totalVal">$21,938</span>
           </div>
-          <div class="summary-note" id="summaryNote">Milestone bonuses evaluated at 90-day review, not included above</div>
+          <div class="summary-note" id="summaryNote">Milestone bonuses — each triggered by target or time, whichever comes first</div>
           <div class="goal-bar-wrap" id="goalBarWrap">
             <div class="goal-bar-header">
               <span class="bar-label">% of $500K campaign goal</span>
@@ -743,10 +743,10 @@
         msRow.style.display = 'flex';
         document.getElementById('milestoneVal').textContent = fmt(pool);
         tierEl.style.display = 'block';
-        document.getElementById('tier1').textContent = '→ ' + fmt(t1) + ' at $150K raised';
-        document.getElementById('tier2').textContent = '→ ' + fmt(t2) + ' at $300K raised';
-        document.getElementById('tier3').textContent = '→ ' + fmt(t3) + ' at $500K raised';
-        noteText = 'Milestone bonuses (' + fmt(pool) + ') evaluated at 90-day review, not included above';
+        document.getElementById('tier1').textContent = '→ ' + fmt(t1) + ' at $150K raised or 30 days';
+        document.getElementById('tier2').textContent = '→ ' + fmt(t2) + ' at $300K raised or 60 days';
+        document.getElementById('tier3').textContent = '→ ' + fmt(t3) + ' at $500K raised or 90 days';
+        noteText = 'Milestone bonuses (' + fmt(pool) + ') — each triggered by target or time, whichever comes first';
       } else {
         msRow.style.display = 'none';
         tierEl.style.display = 'none';
