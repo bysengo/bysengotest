@@ -687,8 +687,15 @@
       document.getElementById('summaryNote').textContent = noteText;
 
       // Percentage of campaign goal
-      const pct = ((cashTotal / CAMPAIGN_GOAL) * 100).toFixed(1);
-      document.getElementById('pctNote').textContent = "That\u2019s " + pct + '% of your $500K campaign goal.';
+      const pctNote = document.getElementById('pctNote');
+      if (showMilestone) {
+        const guaranteedPct = ((retainer / CAMPAIGN_GOAL) * 100).toFixed(1);
+        const maxPct = ((total / CAMPAIGN_GOAL) * 100).toFixed(1);
+        pctNote.textContent = guaranteedPct + '% guaranteed, up to ' + maxPct + '% if all milestones hit.';
+      } else {
+        const pct = ((cashTotal / CAMPAIGN_GOAL) * 100).toFixed(1);
+        pctNote.textContent = "That\u2019s " + pct + '% of your $500K campaign goal.';
+      }
 
       // Savings
       const savingsEl = document.getElementById('savingsNote');
