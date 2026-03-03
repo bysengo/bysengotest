@@ -307,6 +307,31 @@
       margin-bottom: 0;
     }
 
+    /* ── Timeline Grid ── */
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0;
+    }
+    .tl-week {
+      font-family: 'Arimo', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--orange);
+      padding: 8px 12px 8px 0;
+      border-right: 2px solid var(--light-gray);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .tl-item {
+      font-size: 0.82rem;
+      color: var(--brown);
+      padding: 8px 0 8px 12px;
+      border-bottom: 1px solid var(--light-gray);
+      line-height: 1.4;
+    }
+    .tl-item:last-child { border-bottom: none; }
+
     /* ── Milestone Tiers Table ── */
     .ms-table {
       width: 100%;
@@ -500,60 +525,19 @@
       </div>
     </div>
 
-    <!-- ═══ EXECUTION PLAN ═══ -->
+    <!-- ═══ SAMPLE TIMELINE ═══ -->
     <div class="section">
-      <h2 class="section-title">High-Level Execution Plan &amp; Milestones</h2>
-      <table class="comp-table">
-        <thead>
-          <tr>
-            <th>Milestone</th>
-            <th>Target</th>
-            <th>Timing</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Strategy document signed off</td>
-            <td>Approved by leadership</td>
-            <td>End of Week 3</td>
-          </tr>
-          <tr>
-            <td>Platform selected &amp; compliance filed</td>
-            <td>Reg CF submission</td>
-            <td>End of Week 4</td>
-          </tr>
-          <tr>
-            <td>Campaign page &amp; assets complete</td>
-            <td>Launch-ready</td>
-            <td>End of Week 7</td>
-          </tr>
-          <tr>
-            <td>Warm list target hit</td>
-            <td>200+ qualified leads</td>
-            <td>End of Week 8</td>
-          </tr>
-          <tr>
-            <td>Campaign live</td>
-            <td>Public launch &amp; 72-hour push</td>
-            <td>Week 9 (early May)</td>
-          </tr>
-          <tr>
-            <td>Early traction confirmed</td>
-            <td>First investors converting, social proof building</td>
-            <td>Weeks 10–11</td>
-          </tr>
-          <tr>
-            <td>Campaign momentum &amp; pacing review</td>
-            <td>Assess velocity, adjust tactics for sustained growth</td>
-            <td>Weeks 12–13</td>
-          </tr>
-          <tr>
-            <td>90-day engagement review</td>
-            <td>Performance report, pacing projection &amp; continuation decision</td>
-            <td>End of Week 13</td>
-          </tr>
-        </tbody>
-      </table>
+      <h2 class="section-title">13-Week Timeline</h2>
+      <p>Key deliverables and milestones across the engagement. Dates assume mid-March start.</p>
+      <div class="timeline-grid">
+        <div class="tl-week">Wk 1–2</div><div class="tl-item">Campaign strategy, positioning document &amp; investor persona mapping</div>
+        <div class="tl-week">Wk 3–4</div><div class="tl-item">Messaging framework, platform selection, Reg CF compliance &amp; campaign page copywriting</div>
+        <div class="tl-week">Wk 5–6</div><div class="tl-item">Campaign page buildout, email sequences &amp; ambassador toolkit</div>
+        <div class="tl-week">Wk 7–8</div><div class="tl-item">Pre-launch warm list activation (200+ leads), soft launch to inner circle &amp; PR strategy</div>
+        <div class="tl-week">Wk 9</div><div class="tl-item"><strong>Campaign goes live</strong> — public launch &amp; 72-hour opening push</div>
+        <div class="tl-week">Wk 10–11</div><div class="tl-item">Daily monitoring, community engagement &amp; weekly momentum pushes</div>
+        <div class="tl-week">Wk 12–13</div><div class="tl-item">Pacing review, tactical adjustments &amp; <strong>90-day engagement review</strong> with continuation recommendation</div>
+      </div>
     </div>
 
     <!-- ═══ CAMPAIGN PACING ═══ -->
@@ -720,7 +704,7 @@
         </div>
         <div class="tradeoff">
           <h4>Option 4: Deferred Payment</h4>
-          <p>Defer 25–30% of the retainer to post-campaign close, paid from raise proceeds. Reduces your cash burn during the campaign without reducing total compensation. Simple to structure.</p>
+          <p>Defer 25% of the retainer to post-campaign close, paid from raise proceeds. A 10% premium applies to the deferred amount to compensate for the delayed payment risk. Reduces your cash burn during the campaign.</p>
         </div>
         <div class="tradeoff active-pick">
           <h4>Option 5: Moderate Retainer + Milestones (Recommended)</h4>
