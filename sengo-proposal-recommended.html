@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sengo x Boston While Black — Recommended Proposal</title>
   <style>
+    /* Google Fonts — loads in browser, falls back to system fonts in PDF */
     @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -76,12 +77,40 @@
       border-bottom: 3px solid var(--dark-teal);
       margin-bottom: 40px;
     }
-    .cover-logo {
-      width: 200px;
-      height: auto;
-      margin: 0 auto 20px;
-      display: block;
+    .cover-logos {
+      margin: 0 auto 24px;
+      border-collapse: separate;
+      border-spacing: 24px 0;
+    }
+    .cover-logos td {
+      vertical-align: middle;
+      text-align: center;
+    }
+    .cover-logos img {
+      height: 50px;
+      width: auto;
+    }
+    .cover-logos .bwb-wordmark {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
       color: var(--dark-teal);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .cover-logos .sengo-wordmark {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--dark-teal);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .cover-logos .logo-x {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--muted);
     }
     .cover .campaign-type {
       font-size: 1.1rem;
@@ -118,16 +147,18 @@
 
     /* ── Overview Grid ── */
     .overview-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 12px 0;
       margin-bottom: 24px;
+      margin-left: -12px;
     }
     .overview-item {
       background: var(--beige);
       border-radius: 8px;
       padding: 16px;
       text-align: center;
+      width: 25%;
     }
     .overview-item .label {
       font-size: 0.65rem;
@@ -204,38 +235,44 @@
       color: var(--dark-teal);
       text-align: right;
     }
-    .comp-total {
-      background: var(--dark-teal);
-      color: var(--beige);
-      padding: 14px 20px;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .comp-total-table {
+      width: 100%;
+      border-collapse: collapse;
       margin-bottom: 12px;
     }
-    .comp-total .label {
+    .comp-total-table td {
+      background: var(--dark-teal);
+      padding: 14px 20px;
+    }
+    .comp-total-table td:first-child {
+      border-radius: 8px 0 0 8px;
       font-size: 0.85rem;
       font-weight: 600;
+      color: var(--beige);
     }
-    .comp-total .value {
+    .comp-total-table td:last-child {
+      border-radius: 0 8px 8px 0;
       font-family: 'Arimo', sans-serif;
       font-size: 1.4rem;
       font-weight: 700;
       color: var(--orange);
+      text-align: right;
     }
 
     /* ── Cards Grid ── */
     .cards-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 12px 12px;
       margin-bottom: 16px;
+      margin-left: -12px;
     }
     .card {
       background: var(--beige);
       border-radius: 8px;
       padding: 16px 18px;
+      width: 50%;
+      vertical-align: top;
     }
     .card h4 {
       font-family: 'Arimo', sans-serif;
@@ -296,47 +333,51 @@
       margin-bottom: 0;
     }
 
-    /* ── Milestone Tier ── */
-    .ms-tier {
-      display: flex;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--light-gray);
+    /* ── Milestone Tiers Table ── */
+    .ms-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
     }
-    .ms-tier:last-child { border-bottom: none; }
-    .ms-num {
-      width: 28px;
-      height: 28px;
+    .ms-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--light-gray);
+      vertical-align: middle;
+    }
+    .ms-table tr:last-child td { border-bottom: none; }
+    .ms-table .ms-num-cell {
+      width: 36px;
+      text-align: center;
+    }
+    .ms-num-badge {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
       border-radius: 50%;
       background: var(--orange);
       color: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-family: 'Arimo', sans-serif;
       font-weight: 700;
       font-size: 0.75rem;
-      flex-shrink: 0;
-      margin-right: 14px;
+      text-align: center;
     }
-    .ms-info {
-      flex: 1;
-    }
-    .ms-info .tier-name {
+    .ms-table .tier-name {
       font-size: 0.88rem;
       font-weight: 600;
       color: var(--dark-teal);
     }
-    .ms-info .tier-desc {
+    .ms-table .tier-desc {
       font-size: 0.78rem;
       color: var(--muted);
     }
-    .ms-amount {
+    .ms-table .ms-amt {
       font-family: 'Arimo', sans-serif;
       font-weight: 700;
       font-size: 0.95rem;
       color: var(--orange);
-      margin-left: 12px;
+      text-align: right;
+      white-space: nowrap;
     }
 
     /* ── Signature Block ── */
@@ -346,10 +387,15 @@
       border-top: 2px solid var(--dark-teal);
     }
     .sig-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 40px 0;
       margin-top: 24px;
+      margin-left: -40px;
+    }
+    .sig-grid td {
+      width: 50%;
+      vertical-align: top;
     }
     .sig-line {
       border-bottom: 1px solid var(--dark-teal);
@@ -394,13 +440,13 @@
 
     <!-- ═══ COVER ═══ -->
     <div class="cover">
-      <svg class="cover-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
-        <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
-        <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
-        <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
-        <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
-        <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
-      </svg>
+      <table class="cover-logos">
+        <tr>
+          <td><span class="sengo-wordmark">Sengo</span></td>
+          <td><span class="logo-x">&times;</span></td>
+          <td><span class="bwb-wordmark">Boston<br>While Black</span></td>
+        </tr>
+      </table>
       <div class="campaign-type">$500K Community Crowdfunding Campaign</div>
       <div class="meta">
         <strong>Prepared by:</strong> Ila Corcoran<br>
@@ -420,24 +466,26 @@
     <!-- ═══ OVERVIEW ═══ -->
     <div class="section">
       <h2 class="section-title">Engagement Overview</h2>
-      <div class="overview-grid">
-        <div class="overview-item">
-          <div class="label">Campaign Goal</div>
-          <div class="value">$500K</div>
-        </div>
-        <div class="overview-item">
-          <div class="label">Duration</div>
-          <div class="value">13 Weeks</div>
-        </div>
-        <div class="overview-item">
-          <div class="label">Commitment</div>
-          <div class="value">15 hrs/wk</div>
-        </div>
-        <div class="overview-item">
-          <div class="label">Target Launch</div>
-          <div class="value">May 2025</div>
-        </div>
-      </div>
+      <table class="overview-grid">
+        <tr>
+          <td class="overview-item">
+            <div class="label">Campaign Goal</div>
+            <div class="value">$500K</div>
+          </td>
+          <td class="overview-item">
+            <div class="label">Duration</div>
+            <div class="value">13 Weeks</div>
+          </td>
+          <td class="overview-item">
+            <div class="label">Commitment</div>
+            <div class="value">15 hrs/wk</div>
+          </td>
+          <td class="overview-item">
+            <div class="label">Target Launch</div>
+            <div class="value">May 2025</div>
+          </td>
+        </tr>
+      </table>
     </div>
 
     <!-- ═══ SCOPE OF WORK ═══ -->
@@ -543,47 +591,55 @@
     <!-- ═══ CAMPAIGN PACING ═══ -->
     <div class="section page-break">
       <h2 class="section-title">Campaign Pacing &amp; Community Activation</h2>
-      <div class="cards-grid">
-        <div class="card">
-          <h4>Pre-Launch Activation (Weeks 1–8)</h4>
-          <p>Build anticipation through insider access, early-bird messaging, and ambassador recruitment. Goal: 200+ warm leads and a "Day 1 investor" cohort ready to commit on launch.</p>
-        </div>
-        <div class="card">
-          <h4>Launch Sprint (Weeks 9–10)</h4>
-          <p>High-intensity 72-hour opening push targeting 15–20% of goal. Leverage social proof, media hits, and BWB community events to generate urgency and momentum.</p>
-        </div>
-        <div class="card">
-          <h4>Sustained Push (Weeks 11–13)</h4>
-          <p>Weekly themed pushes: milestone celebrations, founder story series, investor spotlights. Daily pacing reviews with tactical adjustments based on conversion data.</p>
-        </div>
-        <div class="card">
-          <h4>Post-90-Day Handoff</h4>
-          <p>Comprehensive performance report with campaign health assessment, pacing projections, and clear recommendation on whether and how to extend engagement through campaign close.</p>
-        </div>
-      </div>
+      <table class="cards-grid">
+        <tr>
+          <td class="card">
+            <h4>Pre-Launch Activation (Weeks 1–8)</h4>
+            <p>Build anticipation through insider access, early-bird messaging, and ambassador recruitment. Goal: 200+ warm leads and a "Day 1 investor" cohort ready to commit on launch.</p>
+          </td>
+          <td class="card">
+            <h4>Launch Sprint (Weeks 9–10)</h4>
+            <p>High-intensity 72-hour opening push targeting 15–20% of goal. Leverage social proof, media hits, and BWB community events to generate urgency and momentum.</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="card">
+            <h4>Sustained Push (Weeks 11–13)</h4>
+            <p>Weekly themed pushes: milestone celebrations, founder story series, investor spotlights. Daily pacing reviews with tactical adjustments based on conversion data.</p>
+          </td>
+          <td class="card">
+            <h4>Post-90-Day Handoff</h4>
+            <p>Comprehensive performance report with campaign health assessment, pacing projections, and clear recommendation on whether and how to extend engagement through campaign close.</p>
+          </td>
+        </tr>
+      </table>
     </div>
 
     <!-- ═══ CADENCE & REPORTING ═══ -->
     <div class="section">
       <h2 class="section-title">Cadence, Reporting &amp; Accountability</h2>
-      <div class="cards-grid">
-        <div class="card">
-          <h4>Weekly Strategy Sync</h4>
-          <p>60-minute standing call with Sengo leadership. Review progress, surface blockers, align on weekly priorities.</p>
-        </div>
-        <div class="card">
-          <h4>Bi-Weekly Dashboard Report</h4>
-          <p>Written report: funds raised, investor pipeline, conversion rates, community engagement metrics, pacing vs. target.</p>
-        </div>
-        <div class="card">
-          <h4>Monthly Executive Summary</h4>
-          <p>High-level strategic memo to leadership and advisors with risk flags and recommended course corrections.</p>
-        </div>
-        <div class="card">
-          <h4>Key Metrics Tracked</h4>
-          <p>Warm leads generated, email open/click rates, page conversion rate, funds vs. pacing target, ambassador activation, total investor count.</p>
-        </div>
-      </div>
+      <table class="cards-grid">
+        <tr>
+          <td class="card">
+            <h4>Weekly Strategy Sync</h4>
+            <p>60-minute standing call with Sengo leadership. Review progress, surface blockers, align on weekly priorities.</p>
+          </td>
+          <td class="card">
+            <h4>Bi-Weekly Dashboard Report</h4>
+            <p>Written report: funds raised, investor pipeline, conversion rates, community engagement metrics, pacing vs. target.</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="card">
+            <h4>Monthly Executive Summary</h4>
+            <p>High-level strategic memo to leadership and advisors with risk flags and recommended course corrections.</p>
+          </td>
+          <td class="card">
+            <h4>Key Metrics Tracked</h4>
+            <p>Warm leads generated, email open/click rates, page conversion rate, funds vs. pacing target, ambassador activation, total investor count.</p>
+          </td>
+        </tr>
+      </table>
     </div>
 
     <!-- ═══ RISK MANAGEMENT ═══ -->
@@ -639,38 +695,42 @@
         </tbody>
       </table>
 
-      <div class="comp-total">
-        <span class="label">Total 90-Day Engagement</span>
-        <span class="value">$29,250</span>
-      </div>
+      <table class="comp-total-table">
+        <tr>
+          <td>Total 90-Day Engagement</td>
+          <td>$29,250</td>
+        </tr>
+      </table>
 
       <!-- Milestone Tiers -->
       <p style="font-size:0.85rem; font-weight:600; color:var(--dark-teal); margin-top:20px; margin-bottom:12px;">Milestone Bonus Tiers</p>
 
-      <div class="ms-tier">
-        <div class="ms-num">1</div>
-        <div class="ms-info">
-          <div class="tier-name">Campaign reaches $150K</div>
-          <div class="tier-desc">Validates strategy and community activation</div>
-        </div>
-        <div class="ms-amount">$2,194</div>
-      </div>
-      <div class="ms-tier">
-        <div class="ms-num">2</div>
-        <div class="ms-info">
-          <div class="tier-name">Campaign reaches $300K</div>
-          <div class="tier-desc">Momentum confirmed, on trajectory to goal</div>
-        </div>
-        <div class="ms-amount">$2,560</div>
-      </div>
-      <div class="ms-tier">
-        <div class="ms-num">3</div>
-        <div class="ms-info">
-          <div class="tier-name">Campaign reaches $500K</div>
-          <div class="tier-desc">Full goal achieved, campaign successfully closed</div>
-        </div>
-        <div class="ms-amount">$2,559</div>
-      </div>
+      <table class="ms-table">
+        <tr>
+          <td class="ms-num-cell"><span class="ms-num-badge">1</span></td>
+          <td>
+            <div class="tier-name">Campaign reaches $150K</div>
+            <div class="tier-desc">Validates strategy and community activation</div>
+          </td>
+          <td class="ms-amt">$2,194</td>
+        </tr>
+        <tr>
+          <td class="ms-num-cell"><span class="ms-num-badge">2</span></td>
+          <td>
+            <div class="tier-name">Campaign reaches $300K</div>
+            <div class="tier-desc">Momentum confirmed, on trajectory to goal</div>
+          </td>
+          <td class="ms-amt">$2,560</td>
+        </tr>
+        <tr>
+          <td class="ms-num-cell"><span class="ms-num-badge">3</span></td>
+          <td>
+            <div class="tier-name">Campaign reaches $500K</div>
+            <div class="tier-desc">Full goal achieved, campaign successfully closed</div>
+          </td>
+          <td class="ms-amt">$2,559</td>
+        </tr>
+      </table>
 
       <p style="font-size:0.82rem; margin-top:16px;"><strong>Payment Terms:</strong> Retainer invoiced bi-weekly, net 15 days. First invoice due upon engagement kickoff. Milestone bonuses invoiced upon achievement of each tier.</p>
     </div>
@@ -757,16 +817,18 @@
     <div class="signature-block">
       <p style="font-size:0.88rem; font-weight:600; margin-bottom:4px;">Acknowledgment &amp; Agreement</p>
       <p style="font-size:0.82rem; color:var(--brown);">By signing below, both parties agree to the scope, terms, and compensation structure outlined in this proposal.</p>
-      <div class="sig-grid">
-        <div>
-          <div class="sig-line"></div>
-          <div class="sig-label">Ila Corcoran — Date</div>
-        </div>
-        <div>
-          <div class="sig-line"></div>
-          <div class="sig-label">Boston While Black — Date</div>
-        </div>
-      </div>
+      <table class="sig-grid">
+        <tr>
+          <td>
+            <div class="sig-line"></div>
+            <div class="sig-label">Ila Corcoran — Date</div>
+          </td>
+          <td>
+            <div class="sig-line"></div>
+            <div class="sig-label">Boston While Black — Date</div>
+          </td>
+        </tr>
+      </table>
     </div>
 
     <!-- ═══ FOOTER ═══ -->
