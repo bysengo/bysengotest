@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sengo x Boston While Black — Proposal Calculator</title>
+  <title>Sengo x Boston While Black — Proposal</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -18,7 +18,6 @@
       --light-gray: #E8E0D8;
       --muted: #8A7D72;
       --success: #2E7D32;
-      --warning: #E65100;
     }
 
     body {
@@ -56,221 +55,93 @@
 
     /* ── Layout ── */
     .container {
-      max-width: 1120px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 0 24px;
     }
-
-    /* ── Section ── */
     .section {
-      padding: 48px 0;
+      padding: 44px 0;
       border-bottom: 1px solid var(--light-gray);
     }
     .section:last-child { border-bottom: none; }
-
     .section-title {
-      font-family: 'Arimo', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--dark-teal);
-      margin-bottom: 8px;
-    }
-    .section-desc {
-      font-size: 0.95rem;
-      color: var(--brown);
-      margin-bottom: 28px;
-      max-width: 720px;
-    }
-
-    /* ── Overview Cards ── */
-    .overview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-bottom: 32px;
-    }
-    .overview-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 24px;
-      border: 1px solid var(--light-gray);
-    }
-    .overview-card .label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-    .overview-card .value {
       font-family: 'Arimo', sans-serif;
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--dark-teal);
+      margin-bottom: 6px;
     }
-
-    /* ── Scope Table ── */
-    .scope-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      background: var(--white);
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--light-gray);
-      margin-bottom: 24px;
-    }
-    .scope-table th {
-      background: var(--dark-teal);
-      color: var(--beige);
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 14px 20px;
-      text-align: left;
-    }
-    .scope-table td {
-      padding: 16px 20px;
-      font-size: 0.9rem;
-      border-bottom: 1px solid var(--light-gray);
-      vertical-align: top;
-    }
-    .scope-table tr:last-child td { border-bottom: none; }
-    .scope-table .phase-name {
-      font-weight: 600;
-      color: var(--dark-teal);
-      white-space: nowrap;
-    }
-    .scope-table .deliverables {
+    .section-desc {
+      font-size: 0.92rem;
       color: var(--brown);
-      line-height: 1.7;
-    }
-    .scope-table .week-range {
-      color: var(--muted);
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    /* ── Structure Selector ── */
-    .structure-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
       margin-bottom: 28px;
+      max-width: 640px;
     }
-    .structure-card {
+
+    /* ── Scope Phases ── */
+    .phase {
       background: var(--white);
-      border: 2px solid var(--light-gray);
-      border-radius: 12px;
-      padding: 20px;
-      cursor: pointer;
-      transition: all 0.25s;
-      position: relative;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      border-left: 4px solid var(--orange);
     }
-    .structure-card:hover {
-      border-color: var(--orange);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    }
-    .structure-card.active {
-      border-color: var(--orange);
-      background: #FFF8F3;
-      box-shadow: 0 4px 16px rgba(213,112,40,0.15);
-    }
-    .structure-card.recommended {
-      border-color: var(--dark-teal);
-    }
-    .structure-card.recommended.active {
-      border-color: var(--orange);
-    }
-    .structure-card .badge {
-      position: absolute;
-      top: -10px;
-      right: 12px;
-      background: var(--orange);
-      color: var(--white);
-      font-size: 0.65rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 3px 10px;
-      border-radius: 20px;
-    }
-    .structure-card .card-num {
+    .phase h3 {
       font-family: 'Arimo', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--orange);
-      margin-bottom: 6px;
-    }
-    .structure-card .card-title {
-      font-family: 'Arimo', sans-serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--dark-teal);
-      margin-bottom: 6px;
-      line-height: 1.3;
+      margin-bottom: 2px;
     }
-    .structure-card .card-desc {
-      font-size: 0.78rem;
+    .phase .timeline {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+    .phase ul { margin: 0; padding-left: 18px; }
+    .phase li {
+      font-size: 0.85rem;
       color: var(--brown);
+      margin-bottom: 3px;
       line-height: 1.5;
     }
 
-    /* ── Detail Panel ── */
-    .detail-panel {
+    /* ── Calculator ── */
+    .calc-box {
       background: var(--white);
-      border-radius: 16px;
-      border: 2px solid var(--light-gray);
-      overflow: hidden;
-      margin-bottom: 28px;
-    }
-    .detail-header {
-      background: var(--dark-teal);
-      color: var(--beige);
-      padding: 20px 28px;
-    }
-    .detail-header h3 {
-      font-family: 'Arimo', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
-    .detail-header p {
-      font-size: 0.85rem;
-      color: var(--light-gray);
-      margin-top: 4px;
-    }
-    .detail-body {
-      padding: 28px;
+      border-radius: 14px;
+      padding: 32px;
+      border: 1px solid var(--light-gray);
     }
 
-    /* ── Slider Group ── */
-    .slider-group {
-      margin-bottom: 24px;
+    /* Hours Slider */
+    .hours-block {
+      margin-bottom: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--light-gray);
     }
-    .slider-label {
+    .hours-top {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       margin-bottom: 6px;
     }
-    .slider-label .name {
-      font-size: 0.88rem;
+    .hours-top .label {
+      font-size: 0.92rem;
       font-weight: 600;
       color: var(--dark-teal);
     }
-    .slider-label .val {
+    .hours-top .val {
       font-family: 'Arimo', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: var(--orange);
     }
-    .slider-hint {
+    .hours-hint {
       font-size: 0.76rem;
       color: var(--muted);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     input[type="range"] {
@@ -285,268 +156,230 @@
     }
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
-      appearance: none;
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: var(--orange);
       border: 3px solid var(--white);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       cursor: pointer;
     }
     input[type="range"]::-moz-range-thumb {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: var(--orange);
       border: 3px solid var(--white);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       cursor: pointer;
     }
 
-    /* ── Breakdown Table ── */
-    .breakdown-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    .breakdown-table th {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      padding: 8px 0;
-      text-align: left;
-      border-bottom: 2px solid var(--light-gray);
-    }
-    .breakdown-table th:last-child { text-align: right; }
-    .breakdown-table td {
-      padding: 12px 0;
-      font-size: 0.9rem;
-      border-bottom: 1px solid #F0EBE5;
-      color: var(--brown);
-    }
-    .breakdown-table td:last-child {
-      text-align: right;
-      font-family: 'Arimo', sans-serif;
-      font-weight: 700;
-      color: var(--dark-teal);
-    }
-    .breakdown-table tr:last-child td { border-bottom: none; }
-    .breakdown-table .muted-val { color: var(--muted); font-weight: 500; }
-
-    /* ── How It Works ── */
-    .how-it-works {
-      background: #F9F6F2;
-      border-radius: 10px;
-      padding: 18px 22px;
-      margin-bottom: 20px;
-    }
-    .how-it-works h4 {
-      font-family: 'Arimo', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--dark-teal);
-      margin-bottom: 8px;
-    }
-    .how-it-works p, .how-it-works li {
-      font-size: 0.82rem;
-      color: var(--brown);
-      line-height: 1.6;
-    }
-    .how-it-works ul {
-      padding-left: 18px;
-      margin-top: 6px;
-    }
-    .how-it-works li { margin-bottom: 4px; }
-    .how-it-works .pro { color: var(--success); font-weight: 600; }
-    .how-it-works .con { color: var(--warning); font-weight: 600; }
-
-    /* ── Total Bar ── */
-    .total-bar {
-      background: var(--dark-teal);
-      border-radius: 12px;
-      padding: 24px;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-    .total-bar .label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--light-gray);
-      margin-bottom: 4px;
-    }
-    .total-bar .amount {
-      font-family: 'Arimo', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--orange);
-    }
-    .total-bar .note {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .results-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .result-card {
-      background: #F9F6F2;
-      border-radius: 10px;
-      padding: 16px;
-      text-align: center;
-    }
-    .result-card .label {
-      font-size: 0.68rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-    .result-card .amount {
-      font-family: 'Arimo', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--dark-teal);
-    }
-    .result-card .sub {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .savings-bar {
-      text-align: center;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 12px;
+    .weekly-stipend {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: var(--beige);
       border-radius: 8px;
-      display: none;
     }
-    .savings-bar.visible { display: block; }
-    .savings-bar.save { background: #E8F5E9; color: var(--success); }
-    .savings-bar.info { background: #FFF3E0; color: var(--warning); }
+    .weekly-stipend .label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--brown);
+    }
+    .weekly-stipend .amount {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--dark-teal);
+    }
 
-    /* ── Milestones ── */
-    .milestone-list {
-      list-style: none;
-      padding: 0;
+    /* Structure Options */
+    .structure-label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--dark-teal);
+      margin-bottom: 14px;
     }
-    .milestone-list li {
+
+    .option {
       display: flex;
       align-items: flex-start;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--light-gray);
+      padding: 16px 18px;
+      border: 2px solid var(--light-gray);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
     }
-    .milestone-list li:last-child { border-bottom: none; }
-    .milestone-marker {
-      width: 34px;
-      height: 34px;
+    .option:hover {
+      border-color: var(--orange);
+      background: #FFFBF8;
+    }
+    .option.active {
+      border-color: var(--orange);
+      background: #FFF8F3;
+    }
+    .option .radio {
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
-      background: var(--orange);
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Arimo', sans-serif;
-      font-weight: 700;
-      font-size: 0.8rem;
+      border: 2px solid var(--light-gray);
       flex-shrink: 0;
       margin-right: 14px;
       margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
     }
-    .milestone-content .title {
-      font-weight: 600;
+    .option.active .radio {
+      border-color: var(--orange);
+    }
+    .option.active .radio::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+    .option .text .name {
+      font-family: 'Arimo', sans-serif;
       font-size: 0.92rem;
+      font-weight: 700;
       color: var(--dark-teal);
-      margin-bottom: 3px;
+      line-height: 1.3;
     }
-    .milestone-content .desc {
-      font-size: 0.82rem;
-      color: var(--brown);
-      line-height: 1.5;
-    }
-    .milestone-content .payment {
+    .option .text .desc {
       font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--orange);
-      margin-top: 4px;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.4;
     }
+    .option .tag {
+      position: absolute;
+      top: -9px;
+      right: 14px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+
+    /* Summary */
+    .summary {
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid var(--light-gray);
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      font-size: 0.9rem;
+    }
+    .summary-row .label { color: var(--brown); }
+    .summary-row .val {
+      font-family: 'Arimo', sans-serif;
+      font-weight: 700;
+      color: var(--dark-teal);
+    }
+    .summary-row.muted .label { color: var(--muted); font-size: 0.82rem; }
+    .summary-row.muted .val { color: var(--muted); font-size: 0.82rem; }
+    .summary-divider {
+      border: none;
+      border-top: 1px solid var(--light-gray);
+      margin: 4px 0;
+    }
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      background: var(--dark-teal);
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+    .summary-total .label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--light-gray);
+    }
+    .summary-total .val {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    .summary-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+    .summary-savings {
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--success);
+      background: #E8F5E9;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 10px;
+      display: none;
+    }
+    .summary-savings.visible { display: block; }
 
     /* ── Cadence Grid ── */
     .cadence-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
     .cadence-card {
       background: var(--white);
-      border-radius: 12px;
-      padding: 24px;
+      border-radius: 10px;
+      padding: 20px;
       border: 1px solid var(--light-gray);
     }
     .cadence-card h4 {
       font-family: 'Arimo', sans-serif;
-      font-size: 1rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: var(--dark-teal);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .cadence-card p {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--brown);
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
-    /* ── Risk Section ── */
-    .risk-list {
-      list-style: none;
-      padding: 0;
-    }
-    .risk-list li {
-      background: var(--white);
-      border-radius: 10px;
-      padding: 18px 20px;
-      margin-bottom: 12px;
-      border-left: 4px solid var(--orange);
-    }
-    .risk-list li strong {
-      display: block;
-      font-size: 0.9rem;
-      color: var(--dark-teal);
-      margin-bottom: 4px;
-    }
-    .risk-list li span {
-      font-size: 0.85rem;
-      color: var(--brown);
-    }
-
-    /* ── Footer CTA ── */
+    /* ── CTA ── */
     .cta-section {
       text-align: center;
-      padding: 56px 24px;
+      padding: 48px 24px;
       background: var(--dark-teal);
       color: var(--beige);
     }
     .cta-section h2 {
       font-family: 'Arimo', sans-serif;
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .cta-section p {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--light-gray);
-      margin-bottom: 28px;
-      max-width: 560px;
+      margin-bottom: 24px;
+      max-width: 500px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -557,7 +390,7 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 1rem;
       font-weight: 600;
-      padding: 16px 40px;
+      padding: 14px 36px;
       border-radius: 8px;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
@@ -568,11 +401,11 @@
     }
 
     /* ── Responsive ── */
-    @media (max-width: 768px) {
+    @media (max-width: 640px) {
       .header-logo { width: 140px; }
-      .structure-grid { grid-template-columns: 1fr; }
-      .results-row { grid-template-columns: 1fr; }
-      .total-bar .amount { font-size: 1.8rem; }
+      .calc-box { padding: 20px; }
+      .cadence-grid { grid-template-columns: 1fr; }
+      .summary-total .val { font-size: 1.3rem; }
       .section { padding: 32px 0; }
     }
   </style>
@@ -588,281 +421,163 @@
       <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
     </svg>
-    <div class="subtitle">Community Crowdfunding Campaign &mdash; Proposal</div>
-    <div class="tagline">Prepared by Ila Sengupta &middot; March 2025</div>
+    <div class="subtitle">$500K Community Crowdfunding Campaign</div>
+    <div class="tagline">Prepared by Ila Corcoran &middot; March 2025</div>
   </header>
 
   <div class="container">
 
-    <!-- ═══ ENGAGEMENT OVERVIEW ═══ -->
-    <div class="section">
-      <h2 class="section-title">Engagement Overview</h2>
-      <p class="section-desc">A 90-day strategic engagement to plan, build, launch, and execute a $500K community crowdfunding campaign — activating Boston While Black's community as investors in Sengo's mission.</p>
-      <div class="overview-grid">
-        <div class="overview-card">
-          <div class="label">Campaign Goal</div>
-          <div class="value">$500,000</div>
-        </div>
-        <div class="overview-card">
-          <div class="label">Engagement Length</div>
-          <div class="value">13 Weeks</div>
-        </div>
-        <div class="overview-card">
-          <div class="label">Weekly Commitment</div>
-          <div class="value" id="overviewHours">15 hrs/wk</div>
-        </div>
-        <div class="overview-card">
-          <div class="label">Target Launch</div>
-          <div class="value">Early May 2025</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ SCOPE OF WORK ═══ -->
+    <!-- ═══ SCOPE ═══ -->
     <div class="section">
       <h2 class="section-title">90-Day Scope of Work</h2>
-      <p class="section-desc">Three distinct phases, each with clear deliverables and milestones tied to campaign readiness and execution.</p>
-      <table class="scope-table">
-        <thead>
-          <tr>
-            <th>Phase</th>
-            <th>Timeline</th>
-            <th>Key Deliverables</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="phase-name">Phase 1: Strategy &amp; Foundation</td>
-            <td class="week-range">Weeks 1–4</td>
-            <td class="deliverables">
-              Campaign strategy &amp; positioning document<br>
-              Investor persona mapping &amp; segmentation<br>
-              Platform selection &amp; compliance review (Reg CF)<br>
-              Narrative development &amp; messaging framework<br>
-              Campaign page copywriting &amp; asset brief<br>
-              Community ambassador identification &amp; outreach plan
-            </td>
-          </tr>
-          <tr>
-            <td class="phase-name">Phase 2: Buildout &amp; Pre-Launch</td>
-            <td class="week-range">Weeks 5–8</td>
-            <td class="deliverables">
-              Campaign page buildout (copy, visuals, video direction)<br>
-              Email drip sequences &amp; social content calendar<br>
-              Ambassador toolkit &amp; referral program design<br>
-              Pre-launch "warm list" activation (target: 200+ leads)<br>
-              Soft launch to inner circle for early momentum<br>
-              PR &amp; media outreach strategy
-            </td>
-          </tr>
-          <tr>
-            <td class="phase-name">Phase 3: Launch &amp; Execution</td>
-            <td class="week-range">Weeks 9–13</td>
-            <td class="deliverables">
-              Public campaign launch &amp; first 72-hour push<br>
-              Daily campaign monitoring &amp; optimization<br>
-              Community engagement &amp; investor communications<br>
-              Weekly momentum pushes (events, social proof, milestones)<br>
-              Mid-campaign assessment &amp; pacing adjustments<br>
-              End-of-engagement report &amp; extension recommendation
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div id="scopeNote" style="display:none; background:#FFF3E0; border-radius:10px; padding:16px 20px; margin-top:16px; font-size:0.85rem; color:var(--warning); border-left:4px solid var(--orange);">
-        <strong>Scope Adjustment:</strong> With the Strategy + Advisory structure, your internal team handles day-to-day execution while I provide the framework, oversight, and strategic direction. Phase 3 deliverables shift from hands-on execution to weekly advisory sessions, campaign audits, and optimization recommendations.
+      <p class="section-desc">Three phases across 13 weeks — from strategy through live campaign execution.</p>
+
+      <div class="phase">
+        <h3>Phase 1: Strategy &amp; Foundation</h3>
+        <div class="timeline">Weeks 1–4</div>
+        <ul>
+          <li>Campaign strategy, positioning &amp; messaging framework</li>
+          <li>Investor personas, platform selection &amp; Reg CF compliance</li>
+          <li>Campaign page copywriting &amp; ambassador outreach plan</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <h3>Phase 2: Buildout &amp; Pre-Launch</h3>
+        <div class="timeline">Weeks 5–8</div>
+        <ul>
+          <li>Campaign page buildout, email sequences &amp; content calendar</li>
+          <li>Ambassador toolkit &amp; referral program</li>
+          <li>Pre-launch warm list activation (target: 200+ leads)</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <h3>Phase 3: Launch &amp; Execution</h3>
+        <div class="timeline">Weeks 9–13</div>
+        <ul>
+          <li>Public launch &amp; 72-hour opening push</li>
+          <li>Daily monitoring, community engagement &amp; momentum pushes</li>
+          <li>End-of-engagement report &amp; extension recommendation</li>
+        </ul>
       </div>
     </div>
 
-    <!-- ═══ COMPENSATION CALCULATOR ═══ -->
+    <!-- ═══ CALCULATOR ═══ -->
     <div class="section">
-      <h2 class="section-title">Compensation Structure</h2>
-      <p class="section-desc">Select a compensation structure below to see how it changes the engagement economics. Each structure has tradeoffs — choose the one that best fits your cash position and risk appetite.</p>
+      <h2 class="section-title">Build Your Engagement</h2>
+      <p class="section-desc">Set your weekly hours, then choose how you'd like to structure compensation.</p>
 
-      <!-- Structure Selection Cards -->
-      <div class="structure-grid">
-        <div class="structure-card" data-structure="equity" onclick="selectStructure('equity')">
-          <div class="card-num">Option 1</div>
-          <div class="card-title">Cash &rarr; Equity Swap</div>
-          <div class="card-desc">Lower monthly retainer (30–40% reduction) in exchange for a SAFE note or small equity stake.</div>
-        </div>
-        <div class="structure-card" data-structure="milestone" onclick="selectStructure('milestone')">
-          <div class="card-num">Option 2</div>
-          <div class="card-title">Retainer &rarr; Milestone</div>
-          <div class="card-desc">Move 25–35% of compensation to success bonuses tied to campaign tiers ($150K, $300K, $500K).</div>
-        </div>
-        <div class="structure-card" data-structure="scope" onclick="selectStructure('scope')">
-          <div class="card-num">Option 3</div>
-          <div class="card-title">Scope / Hours Reduction</div>
-          <div class="card-desc">Drop from full execution (15 hrs) to strategy + advisory (10 hrs). Your team handles day-to-day.</div>
-        </div>
-        <div class="structure-card" data-structure="deferred" onclick="selectStructure('deferred')">
-          <div class="card-num">Option 4</div>
-          <div class="card-title">Deferred Payment</div>
-          <div class="card-desc">Defer 25–30% of retainer to post-campaign close, paid from raise proceeds.</div>
-        </div>
-        <div class="structure-card recommended active" data-structure="recommended" onclick="selectStructure('recommended')">
-          <div class="badge">Recommended</div>
-          <div class="card-num">Option 5</div>
-          <div class="card-title">Moderate Retainer + Milestones</div>
-          <div class="card-desc">Predictable base + success bonuses. Signals conviction without giving away equity.</div>
-        </div>
-      </div>
+      <div class="calc-box">
 
-      <!-- Detail Panel -->
-      <div class="detail-panel">
-        <div class="detail-header">
-          <h3 id="detailTitle">Option 5: Moderate Retainer + Milestone Bonuses</h3>
-          <p id="detailSubtitle">Keeps your base predictable, rewards success, and signals conviction without giving away equity.</p>
+        <!-- HOURS SLIDER -->
+        <div class="hours-block">
+          <div class="hours-top">
+            <span class="label">Weekly Hours</span>
+            <span class="val" id="hoursVal">15 hrs/wk</span>
+          </div>
+          <div class="hours-hint">15 hrs = full strategy + execution &middot; 10 hrs = strategy + advisory only</div>
+          <input type="range" id="hoursSlider" min="5" max="20" step="5" value="15">
+          <div class="weekly-stipend">
+            <span class="label">Weekly stipend at $150/hr</span>
+            <span class="amount" id="weeklyStipend">$2,250/wk</span>
+          </div>
         </div>
-        <div class="detail-body">
 
-          <!-- Dynamic sliders area -->
-          <div id="sliderArea"></div>
+        <!-- STRUCTURE OPTIONS -->
+        <div class="structure-label">How should we structure payment?</div>
 
-          <!-- How It Works -->
-          <div class="how-it-works" id="howItWorks"></div>
-
-          <!-- Breakdown Table -->
-          <table class="breakdown-table" id="breakdownTable">
-            <thead>
-              <tr><th>Component</th><th>Amount</th></tr>
-            </thead>
-            <tbody id="breakdownBody"></tbody>
-          </table>
+        <div class="option active" data-key="recommended" onclick="pick('recommended')">
+          <div class="tag">Recommended</div>
+          <div class="radio"></div>
+          <div class="text">
+            <div class="name">Moderate Retainer + Milestone Bonuses</div>
+            <div class="desc">75% as weekly retainer, 25% tied to campaign hitting $150K / $300K / $500K</div>
+          </div>
         </div>
-      </div>
 
-      <!-- Results -->
-      <div class="results-row">
-        <div class="result-card">
-          <div class="label">Cash During Engagement</div>
-          <div class="amount" id="cashDuring">$21,938</div>
-          <div class="sub" id="cashDuringSub">retainer portion</div>
+        <div class="option" data-key="milestone" onclick="pick('milestone')">
+          <div class="radio"></div>
+          <div class="text">
+            <div class="name">Retainer &rarr; Milestone Conversion</div>
+            <div class="desc">65% retainer, 35% milestone bonuses — more upside risk, lower guaranteed cost</div>
+          </div>
         </div>
-        <div class="result-card">
-          <div class="label">Performance / Deferred</div>
-          <div class="amount" id="contingent">$7,313</div>
-          <div class="sub" id="contingentSub">milestone bonuses</div>
-        </div>
-        <div class="result-card">
-          <div class="label">Non-Cash Component</div>
-          <div class="amount" id="nonCash">None</div>
-          <div class="sub" id="nonCashSub">&nbsp;</div>
-        </div>
-      </div>
 
-      <div class="total-bar">
-        <div class="label">Total Cash Compensation</div>
-        <div class="amount" id="totalCost">$29,250</div>
-        <div class="note" id="totalNote">13 weeks &times; 15 hrs/wk &times; $150/hr</div>
-      </div>
+        <div class="option" data-key="equity" onclick="pick('equity')">
+          <div class="radio"></div>
+          <div class="text">
+            <div class="name">Cash &rarr; Equity Swap</div>
+            <div class="desc">Reduce cash retainer by 35% in exchange for 0.25–0.5% equity via SAFE note</div>
+          </div>
+        </div>
 
-      <div class="savings-bar" id="savingsBar"></div>
+        <div class="option" data-key="deferred" onclick="pick('deferred')">
+          <div class="radio"></div>
+          <div class="text">
+            <div class="name">Deferred Payment</div>
+            <div class="desc">75% paid during engagement, 25% deferred to post-campaign close from raise proceeds</div>
+          </div>
+        </div>
+
+        <div class="option" data-key="flat" onclick="pick('flat')">
+          <div class="radio"></div>
+          <div class="text">
+            <div class="name">Flat Retainer</div>
+            <div class="desc">100% as weekly retainer — simple, predictable, no performance component</div>
+          </div>
+        </div>
+
+        <!-- SUMMARY -->
+        <div class="summary">
+          <div class="summary-row" id="retainerRow">
+            <span class="label">Weekly retainer</span>
+            <span class="val" id="retainerVal">$1,688/wk</span>
+          </div>
+          <div class="summary-row muted" id="milestoneRow">
+            <span class="label">Milestone bonus pool</span>
+            <span class="val" id="milestoneVal">$7,313</span>
+          </div>
+          <div class="summary-row muted" id="equityRow" style="display:none;">
+            <span class="label">Equity component</span>
+            <span class="val" id="equityVal">0.25–0.5%</span>
+          </div>
+          <div class="summary-row muted" id="deferredRow" style="display:none;">
+            <span class="label">Deferred to post-campaign</span>
+            <span class="val" id="deferredVal">$0</span>
+          </div>
+          <hr class="summary-divider">
+          <div class="summary-total">
+            <span class="label">Total (13 weeks)</span>
+            <span class="val" id="totalVal">$29,250</span>
+          </div>
+          <div class="summary-note" id="summaryNote">$21,938 retainer + $7,313 milestone bonuses</div>
+          <div class="summary-savings" id="savingsNote"></div>
+        </div>
+
+      </div><!-- /calc-box -->
     </div>
 
-    <!-- ═══ MILESTONE TIERS (shown for milestone-based structures) ═══ -->
-    <div class="section" id="milestoneSection" style="display:none;">
-      <h2 class="section-title">Milestone Bonus Tiers</h2>
-      <p class="section-desc">Success bonuses are tied to campaign fundraising tiers — milestones I can influence but that aren't 100% in my control, which aligns our incentives honestly.</p>
-      <ul class="milestone-list">
-        <li>
-          <div class="milestone-marker">1</div>
-          <div class="milestone-content">
-            <div class="title">Campaign Reaches $150K</div>
-            <div class="desc">First major traction milestone — validates strategy, community activation, and early campaign pacing.</div>
-            <div class="payment" id="ms1pay"></div>
-          </div>
-        </li>
-        <li>
-          <div class="milestone-marker">2</div>
-          <div class="milestone-content">
-            <div class="title">Campaign Reaches $300K</div>
-            <div class="desc">Momentum confirmed — campaign is past the halfway mark and on trajectory to goal.</div>
-            <div class="payment" id="ms2pay"></div>
-          </div>
-        </li>
-        <li>
-          <div class="milestone-marker">3</div>
-          <div class="milestone-content">
-            <div class="title">Campaign Reaches $500K</div>
-            <div class="desc">Full goal achieved — community crowdfunding campaign successfully closed.</div>
-            <div class="payment" id="ms3pay"></div>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <!-- ═══ CAMPAIGN PACING ═══ -->
+    <!-- ═══ CADENCE ═══ -->
     <div class="section">
-      <h2 class="section-title">Campaign Pacing &amp; Community Activation</h2>
-      <p class="section-desc">A disciplined approach to building momentum before, during, and after launch.</p>
-      <div class="cadence-grid">
-        <div class="cadence-card">
-          <h4>Pre-Launch (Weeks 1–8)</h4>
-          <p>Build anticipation through insider access, early-bird messaging, and ambassador recruitment. Goal: 200+ warm leads and a "Day 1 investor" cohort ready to commit on launch.</p>
-        </div>
-        <div class="cadence-card">
-          <h4>Launch Sprint (Weeks 9–10)</h4>
-          <p>High-intensity 72-hour opening push targeting 15–20% of goal. Leverage social proof, media hits, and community events to create FOMO and early momentum.</p>
-        </div>
-        <div class="cadence-card">
-          <h4>Sustained Push (Weeks 11–13)</h4>
-          <p>Weekly themed pushes (milestone celebrations, founder story series, investor spotlights). Monitor pacing daily and adjust tactics based on conversion data.</p>
-        </div>
-        <div class="cadence-card">
-          <h4>Post-Engagement Review</h4>
-          <p>Comprehensive performance report with campaign health assessment, pacing projections, and recommendation on whether/how to extend engagement through campaign close.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ CADENCE & ACCOUNTABILITY ═══ -->
-    <div class="section">
-      <h2 class="section-title">Cadence, Reporting &amp; Accountability</h2>
-      <p class="section-desc">Structured communication to keep all stakeholders aligned and the campaign on track.</p>
+      <h2 class="section-title">Reporting &amp; Accountability</h2>
+      <p class="section-desc">Structured communication to keep the campaign on track.</p>
       <div class="cadence-grid">
         <div class="cadence-card">
           <h4>Weekly Strategy Sync</h4>
-          <p>60-minute standing meeting with Sengo leadership to review progress, surface blockers, and align on priorities for the coming week.</p>
+          <p>60-min standing call — progress, blockers, and priorities for the week ahead.</p>
         </div>
         <div class="cadence-card">
-          <h4>Bi-Weekly Dashboard Report</h4>
-          <p>Written report covering: funds raised to date, investor pipeline, conversion rates, community engagement metrics, and campaign pacing vs. target.</p>
+          <h4>Bi-Weekly Dashboard</h4>
+          <p>Funds raised, pipeline, conversion rates, community metrics, pacing vs. target.</p>
         </div>
         <div class="cadence-card">
-          <h4>Monthly Executive Summary</h4>
-          <p>High-level memo to leadership and advisors with strategic assessment, risk flags, and any recommended course corrections.</p>
+          <h4>Monthly Executive Memo</h4>
+          <p>Strategic assessment for leadership and advisors with risk flags and course corrections.</p>
         </div>
         <div class="cadence-card">
-          <h4>Key Accountability Metrics</h4>
-          <p>Warm leads generated, email open/click rates, campaign page conversion rate, funds raised vs. pacing target, ambassador activation rate, investor count.</p>
+          <h4>Key Metrics</h4>
+          <p>Warm leads, email rates, page conversion, funds vs. pacing, ambassador activation.</p>
         </div>
       </div>
-    </div>
-
-    <!-- ═══ RISK MANAGEMENT ═══ -->
-    <div class="section">
-      <h2 class="section-title">Risk Management</h2>
-      <p class="section-desc">Proactive identification and mitigation of common crowdfunding campaign risks.</p>
-      <ul class="risk-list">
-        <li>
-          <strong>Slow Early Traction</strong>
-          <span>Mitigation: Pre-launch warm list ensures Day 1 commitments. If launch falls below 10% in first week, activate contingency outreach to secondary networks and increase paid promotion.</span>
-        </li>
-        <li>
-          <strong>Community Fatigue</strong>
-          <span>Mitigation: Varied content cadence (stories, data, events, testimonials) prevents message repetition. Ambassador program distributes outreach load across trusted voices.</span>
-        </li>
-        <li>
-          <strong>Platform or Compliance Delays</strong>
-          <span>Mitigation: Platform selection and Reg CF review begins Week 1. Parallel-path two platform options to avoid single point of failure.</span>
-        </li>
-        <li>
-          <strong>Mid-Campaign Stall</strong>
-          <span>Mitigation: Weekly pacing reviews with pre-planned "momentum plays" (milestone events, media pushes, matching challenges) ready to deploy if velocity drops.</span>
-        </li>
-      </ul>
     </div>
 
   </div><!-- /container -->
@@ -870,359 +585,118 @@
   <!-- ═══ CTA ═══ -->
   <div class="cta-section">
     <h2>Ready to Activate Your Community?</h2>
-    <p>Let's finalize the engagement structure and hit the ground running. Decision by mid-March, launch by early May.</p>
-    <a href="mailto:ila@example.com?subject=Sengo%20x%20BWB%20Proposal%20—%20Let's%20Go" class="cta-btn">Let's Talk Next Steps</a>
+    <p>Decision by mid-March. Campaign launch by early May.</p>
+    <a href="mailto:ila@example.com?subject=Sengo%20x%20BWB%20—%20Let's%20Go" class="cta-btn">Let's Talk Next Steps</a>
   </div>
 
   <script>
-    // ════════════════════════════════════════
-    //  CONSTANTS
-    // ════════════════════════════════════════
     const RATE = 150;
     const WEEKS = 13;
-    const FULL_HOURS = 15;
-    const ADVISORY_HOURS = 10;
-    const BASE_TOTAL = RATE * WEEKS * FULL_HOURS; // $29,250
+    const BASE_HOURS = 15;
+    const BASE_TOTAL = RATE * WEEKS * BASE_HOURS; // $29,250
 
-    // ════════════════════════════════════════
-    //  STATE
-    // ════════════════════════════════════════
-    let currentStructure = 'recommended';
-    let params = {
-      equityReduction: 35,  // 30-40%
-      milestonePercent: 30, // 25-35%
-      deferralPercent: 25,  // 25-30%
-      recoMilestone: 25     // fixed for recommended
-    };
+    let hours = 15;
+    let structure = 'recommended';
 
-    function fmt(n) {
-      return '$' + Math.round(n).toLocaleString('en-US');
+    function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+
+    function pick(key) {
+      structure = key;
+      document.querySelectorAll('.option').forEach(o => o.classList.remove('active'));
+      document.querySelector('[data-key="' + key + '"]').classList.add('active');
+      recalc();
     }
 
-    // ════════════════════════════════════════
-    //  STRUCTURE DEFINITIONS
-    // ════════════════════════════════════════
-    const structures = {
-      equity: {
-        title: 'Option 1: Cash → Equity Swap',
-        subtitle: 'Lower your monthly cash outlay by exchanging a portion of retainer for a SAFE note or small equity stake (0.25–0.5%). Best if you\'re cash-strapped but confident in long-term valuation.',
-        sliders: [
-          { id: 'equityReduction', label: 'Cash Reduction', min: 30, max: 40, step: 5, unit: '%', hint: 'Percentage of retainer converted to equity' }
-        ],
-        howItWorks: `
-          <h4>How It Works</h4>
-          <p>Your cash retainer is reduced by the selected percentage. In exchange, I receive a SAFE note or advisory equity stake of 0.25–0.5%, vesting over the engagement period.</p>
-          <ul>
-            <li class="pro">Pro: Significantly lowers your cash burn during the campaign</li>
-            <li class="pro">Pro: Aligns my long-term incentive with Sengo's success</li>
-            <li class="con">Con: Dilutive — gives away a small piece of the cap table</li>
-            <li class="con">Con: Requires legal docs (SAFE or equity agreement)</li>
-          </ul>
-        `,
-        calc: function() {
-          const reduction = params.equityReduction / 100;
-          const cash = Math.round(BASE_TOTAL * (1 - reduction));
-          const equityValue = Math.round(BASE_TOTAL * reduction);
-          return {
-            rows: [
-              ['Full engagement value', fmt(BASE_TOTAL)],
-              ['Cash reduction (' + params.equityReduction + '%)', '−' + fmt(equityValue)],
-              ['Cash retainer (13 weeks)', fmt(cash)],
-              ['Weekly retainer', fmt(Math.round(cash / WEEKS))],
-              ['Equity component', '0.25–0.5% (SAFE)']
-            ],
-            cashDuring: cash,
-            cashDuringSub: 'reduced retainer',
-            contingent: 0,
-            contingentSub: 'n/a',
-            nonCash: '0.25–0.5%',
-            nonCashSub: 'SAFE / equity',
-            totalCash: cash,
-            totalNote: fmt(cash) + ' cash + equity stake',
-            hours: FULL_HOURS
-          };
-        }
-      },
+    function recalc() {
+      hours = parseInt(document.getElementById('hoursSlider').value);
+      const total = hours * RATE * WEEKS;
+      const weeklyGross = hours * RATE;
 
-      milestone: {
-        title: 'Option 2: Retainer → Milestone Conversion',
-        subtitle: 'Move a portion of total compensation to success-based bonuses tied to campaign fundraising tiers. Shows confidence and aligns incentives — but milestones aren\'t 100% in my control.',
-        sliders: [
-          { id: 'milestonePercent', label: 'Milestone Portion', min: 25, max: 35, step: 5, unit: '%', hint: 'Percentage of total compensation moved to milestone bonuses' }
-        ],
-        howItWorks: `
-          <h4>How It Works</h4>
-          <p>A portion of the total engagement fee is moved from guaranteed retainer to performance bonuses triggered at three campaign tiers: $150K, $300K, and $500K raised.</p>
-          <ul>
-            <li class="pro">Pro: Lowers your guaranteed cash outlay</li>
-            <li class="pro">Pro: Aligns incentives — I'm rewarded for campaign performance</li>
-            <li class="pro">Pro: Signals mutual conviction without equity dilution</li>
-            <li class="con">Con: Milestones aren't 100% in my control (market, timing, community response)</li>
-          </ul>
-        `,
-        calc: function() {
-          const msPct = params.milestonePercent / 100;
-          const milestonePool = Math.round(BASE_TOTAL * msPct);
-          const retainer = BASE_TOTAL - milestonePool;
-          const ms1 = Math.round(milestonePool * 0.30);
-          const ms2 = Math.round(milestonePool * 0.35);
-          const ms3 = milestonePool - ms1 - ms2;
-          return {
-            rows: [
-              ['Full engagement value', fmt(BASE_TOTAL)],
-              ['Retainer portion (' + (100 - params.milestonePercent) + '%)', fmt(retainer)],
-              ['Weekly retainer', fmt(Math.round(retainer / WEEKS))],
-              ['Milestone pool (' + params.milestonePercent + '%)', fmt(milestonePool)],
-              ['  → $150K tier (30%)', fmt(ms1)],
-              ['  → $300K tier (35%)', fmt(ms2)],
-              ['  → $500K tier (35%)', fmt(ms3)]
-            ],
-            cashDuring: retainer,
-            cashDuringSub: 'guaranteed retainer',
-            contingent: milestonePool,
-            contingentSub: 'milestone bonuses',
-            nonCash: 'None',
-            nonCashSub: ' ',
-            totalCash: BASE_TOTAL,
-            totalNote: fmt(retainer) + ' retainer + ' + fmt(milestonePool) + ' milestone pool',
-            hours: FULL_HOURS,
-            milestones: { ms1, ms2, ms3 }
-          };
-        }
-      },
+      // Hours display
+      document.getElementById('hoursVal').textContent = hours + ' hrs/wk';
+      document.getElementById('weeklyStipend').textContent = fmt(weeklyGross) + '/wk';
 
-      scope: {
-        title: 'Option 3: Scope / Hours Reduction',
-        subtitle: 'Drop from full execution (15 hrs/wk) to strategy + advisory (10 hrs/wk). BWB\'s internal team handles day-to-day execution while I provide the framework and oversight.',
-        sliders: [],
-        howItWorks: `
-          <h4>How It Works</h4>
-          <p>I shift from hands-on campaign execution to strategic advisory. I deliver the strategy framework, campaign architecture, and ongoing oversight — your team handles daily execution, content posting, and community management.</p>
-          <ul>
-            <li class="pro">Pro: Meaningfully lowers total engagement cost</li>
-            <li class="pro">Pro: Builds internal capacity on your team</li>
-            <li class="con">Con: Shifts more day-to-day responsibility to your team</li>
-            <li class="con">Con: Requires a capable internal operator to handle execution</li>
-          </ul>
-        `,
-        calc: function() {
-          const reduced = RATE * WEEKS * ADVISORY_HOURS;
-          const savings = BASE_TOTAL - reduced;
-          return {
-            rows: [
-              ['Full execution value (15 hrs/wk)', fmt(BASE_TOTAL)],
-              ['Advisory scope (10 hrs/wk)', fmt(reduced)],
-              ['Weekly retainer', fmt(Math.round(reduced / WEEKS))],
-              ['Your cash savings', '−' + fmt(savings)]
-            ],
-            cashDuring: reduced,
-            cashDuringSub: 'advisory retainer',
-            contingent: 0,
-            contingentSub: 'n/a',
-            nonCash: 'None',
-            nonCashSub: ' ',
-            totalCash: reduced,
-            totalNote: '13 weeks × 10 hrs/wk × ' + fmt(RATE) + '/hr',
-            hours: ADVISORY_HOURS
-          };
-        }
-      },
+      let retainerPct, milestonePct, equityPct, deferredPct;
+      let showMilestone = false, showEquity = false, showDeferred = false;
+      let noteText = '';
 
-      deferred: {
-        title: 'Option 4: Deferred Payment',
-        subtitle: 'Defer a portion of the retainer to post-campaign close, paid from raise proceeds. Reduces your cash burn during the campaign without reducing my total compensation.',
-        sliders: [
-          { id: 'deferralPercent', label: 'Deferral Percentage', min: 25, max: 30, step: 5, unit: '%', hint: 'Percentage of retainer deferred to post-campaign close' }
-        ],
-        howItWorks: `
-          <h4>How It Works</h4>
-          <p>A portion of each retainer payment is deferred and paid in a lump sum after the campaign closes, funded from the raise proceeds. Total compensation stays the same — the timing shifts.</p>
-          <ul>
-            <li class="pro">Pro: Reduces your cash burn during the active campaign</li>
-            <li class="pro">Pro: Total compensation unchanged — no discount, no equity</li>
-            <li class="pro">Pro: Simple structure, easy to document</li>
-            <li class="con">Con: I carry risk if the campaign underperforms and proceeds are limited</li>
-          </ul>
-        `,
-        calc: function() {
-          const defPct = params.deferralPercent / 100;
-          const deferred = Math.round(BASE_TOTAL * defPct);
-          const upfront = BASE_TOTAL - deferred;
-          return {
-            rows: [
-              ['Full engagement value', fmt(BASE_TOTAL)],
-              ['Paid during engagement (' + (100 - params.deferralPercent) + '%)', fmt(upfront)],
-              ['Weekly retainer (during)', fmt(Math.round(upfront / WEEKS))],
-              ['Deferred to post-campaign (' + params.deferralPercent + '%)', fmt(deferred)],
-              ['Total compensation', fmt(BASE_TOTAL)]
-            ],
-            cashDuring: upfront,
-            cashDuringSub: 'during engagement',
-            contingent: deferred,
-            contingentSub: 'deferred post-close',
-            nonCash: 'None',
-            nonCashSub: ' ',
-            totalCash: BASE_TOTAL,
-            totalNote: fmt(upfront) + ' upfront + ' + fmt(deferred) + ' deferred',
-            hours: FULL_HOURS
-          };
-        }
-      },
-
-      recommended: {
-        title: 'Option 5: Moderate Retainer + Milestone Bonuses',
-        subtitle: 'Keeps your base predictable, rewards success, and signals conviction without giving away equity. My recommended structure.',
-        sliders: [],
-        howItWorks: `
-          <h4>Why I Recommend This</h4>
-          <p>This structure gives you a predictable weekly retainer that keeps me fully engaged, plus milestone bonuses that align our incentives around campaign performance. You don't give up equity, my base is protected, and we both win when the campaign succeeds.</p>
-          <ul>
-            <li class="pro">Pro: Predictable base cost you can budget around</li>
-            <li class="pro">Pro: Success bonuses align incentives without dilution</li>
-            <li class="pro">Pro: Signals mutual conviction to investors and community</li>
-            <li class="pro">Pro: Clean structure — no deferred risk, no legal complexity</li>
-          </ul>
-        `,
-        calc: function() {
-          const msPct = 0.25;
-          const milestonePool = Math.round(BASE_TOTAL * msPct);
-          const retainer = BASE_TOTAL - milestonePool;
-          const ms1 = Math.round(milestonePool * 0.30);
-          const ms2 = Math.round(milestonePool * 0.35);
-          const ms3 = milestonePool - ms1 - ms2;
-          return {
-            rows: [
-              ['Full engagement value', fmt(BASE_TOTAL)],
-              ['Retainer portion (75%)', fmt(retainer)],
-              ['Weekly retainer', fmt(Math.round(retainer / WEEKS))],
-              ['Milestone bonus pool (25%)', fmt(milestonePool)],
-              ['  → $150K tier (30%)', fmt(ms1)],
-              ['  → $300K tier (35%)', fmt(ms2)],
-              ['  → $500K tier (35%)', fmt(ms3)]
-            ],
-            cashDuring: retainer,
-            cashDuringSub: 'guaranteed retainer',
-            contingent: milestonePool,
-            contingentSub: 'milestone bonuses',
-            nonCash: 'None',
-            nonCashSub: ' ',
-            totalCash: BASE_TOTAL,
-            totalNote: fmt(retainer) + ' retainer + ' + fmt(milestonePool) + ' milestone pool',
-            hours: FULL_HOURS,
-            milestones: { ms1, ms2, ms3 }
-          };
-        }
+      switch (structure) {
+        case 'recommended':
+          retainerPct = 0.75; milestonePct = 0.25;
+          showMilestone = true;
+          noteText = fmt(Math.round(total * 0.75)) + ' retainer + ' + fmt(Math.round(total * 0.25)) + ' milestone bonuses';
+          break;
+        case 'milestone':
+          retainerPct = 0.65; milestonePct = 0.35;
+          showMilestone = true;
+          noteText = fmt(Math.round(total * 0.65)) + ' retainer + ' + fmt(Math.round(total * 0.35)) + ' milestone bonuses';
+          break;
+        case 'equity':
+          retainerPct = 0.65; equityPct = 0.35;
+          showEquity = true;
+          noteText = fmt(Math.round(total * 0.65)) + ' cash + 0.25–0.5% equity (SAFE)';
+          break;
+        case 'deferred':
+          retainerPct = 0.75; deferredPct = 0.25;
+          showDeferred = true;
+          noteText = fmt(Math.round(total * 0.75)) + ' upfront + ' + fmt(Math.round(total * 0.25)) + ' deferred';
+          break;
+        case 'flat':
+          retainerPct = 1.0;
+          noteText = fmt(weeklyGross) + '/wk × 13 weeks — flat retainer';
+          break;
       }
-    };
 
-    // ════════════════════════════════════════
-    //  RENDER
-    // ════════════════════════════════════════
-    function selectStructure(key) {
-      currentStructure = key;
+      const retainer = Math.round(total * retainerPct);
+      const weeklyRetainer = Math.round(retainer / WEEKS);
 
-      // Update active card
-      document.querySelectorAll('.structure-card').forEach(c => c.classList.remove('active'));
-      document.querySelector('[data-structure="' + key + '"]').classList.add('active');
+      document.getElementById('retainerVal').textContent = fmt(weeklyRetainer) + '/wk';
 
-      render();
-    }
-
-    function render() {
-      const s = structures[currentStructure];
-      const result = s.calc();
-
-      // Header
-      document.getElementById('detailTitle').textContent = s.title;
-      document.getElementById('detailSubtitle').textContent = s.subtitle;
-
-      // Sliders
-      const sliderArea = document.getElementById('sliderArea');
-      if (s.sliders.length === 0) {
-        sliderArea.innerHTML = '';
+      // Milestone row
+      const msRow = document.getElementById('milestoneRow');
+      if (showMilestone) {
+        msRow.style.display = 'flex';
+        document.getElementById('milestoneVal').textContent = fmt(Math.round(total * milestonePct));
       } else {
-        sliderArea.innerHTML = s.sliders.map(sl => `
-          <div class="slider-group">
-            <div class="slider-label">
-              <span class="name">${sl.label}</span>
-              <span class="val" id="${sl.id}Val">${params[sl.id]}${sl.unit}</span>
-            </div>
-            <div class="slider-hint">${sl.hint}</div>
-            <input type="range" id="${sl.id}Slider" min="${sl.min}" max="${sl.max}" step="${sl.step}" value="${params[sl.id]}">
-          </div>
-        `).join('');
-
-        // Attach listeners
-        s.sliders.forEach(sl => {
-          const slider = document.getElementById(sl.id + 'Slider');
-          slider.addEventListener('input', function() {
-            params[sl.id] = parseInt(this.value);
-            document.getElementById(sl.id + 'Val').textContent = params[sl.id] + sl.unit;
-            render();
-          });
-        });
+        msRow.style.display = 'none';
       }
 
-      // How It Works
-      document.getElementById('howItWorks').innerHTML = s.howItWorks;
+      // Equity row
+      const eqRow = document.getElementById('equityRow');
+      if (showEquity) {
+        eqRow.style.display = 'flex';
+        document.getElementById('equityVal').textContent = '0.25–0.5% (SAFE)';
+      } else {
+        eqRow.style.display = 'none';
+      }
 
-      // Breakdown table
-      const tbody = document.getElementById('breakdownBody');
-      tbody.innerHTML = result.rows.map(r => {
-        const isIndented = r[0].startsWith('  →');
-        const label = isIndented ? '&nbsp;&nbsp;&nbsp;&nbsp;' + r[0].substring(3) : r[0];
-        const cls = isIndented ? ' class="muted-val"' : '';
-        return `<tr><td${isIndented ? ' style="padding-left:20px;color:var(--muted)"' : ''}>${label}</td><td${cls}>${r[1]}</td></tr>`;
-      }).join('');
+      // Deferred row
+      const dfRow = document.getElementById('deferredRow');
+      if (showDeferred) {
+        dfRow.style.display = 'flex';
+        document.getElementById('deferredVal').textContent = fmt(Math.round(total * deferredPct));
+      } else {
+        dfRow.style.display = 'none';
+      }
 
-      // Result cards
-      document.getElementById('cashDuring').textContent = fmt(result.cashDuring);
-      document.getElementById('cashDuringSub').textContent = result.cashDuringSub;
-      document.getElementById('contingent').textContent = result.contingent > 0 ? fmt(result.contingent) : '$0';
-      document.getElementById('contingentSub').textContent = result.contingentSub;
-      document.getElementById('nonCash').textContent = result.nonCash;
-      document.getElementById('nonCashSub').textContent = result.nonCashSub;
+      // Total — show cash total (equity structure shows reduced cash)
+      const cashTotal = showEquity ? retainer : total;
+      document.getElementById('totalVal').textContent = fmt(cashTotal);
+      document.getElementById('summaryNote').textContent = noteText;
 
-      // Total
-      document.getElementById('totalCost').textContent = fmt(result.totalCash);
-      document.getElementById('totalNote').textContent = result.totalNote;
-
-      // Overview hours
-      document.getElementById('overviewHours').textContent = result.hours + ' hrs/wk';
-
-      // Savings bar
-      const savingsBar = document.getElementById('savingsBar');
-      const diff = BASE_TOTAL - result.totalCash;
+      // Savings
+      const savingsEl = document.getElementById('savingsNote');
+      const diff = BASE_TOTAL - cashTotal;
       if (diff > 0) {
-        savingsBar.textContent = 'This structure saves ' + fmt(diff) + ' in total cash outlay vs. full retainer.';
-        savingsBar.className = 'savings-bar visible save';
-      } else if (currentStructure === 'equity') {
-        savingsBar.textContent = 'Cash savings of ' + fmt(BASE_TOTAL - result.cashDuring) + ' — offset by equity component.';
-        savingsBar.className = 'savings-bar visible save';
-      } else if (currentStructure === 'deferred') {
-        savingsBar.textContent = 'Same total cost — ' + fmt(result.contingent) + ' deferred to post-campaign, reducing your cash burn during the engagement.';
-        savingsBar.className = 'savings-bar visible info';
+        savingsEl.textContent = 'Saves ' + fmt(diff) + ' in cash vs. the recommended baseline.';
+        savingsEl.className = 'summary-savings visible';
       } else {
-        savingsBar.className = 'savings-bar';
+        savingsEl.className = 'summary-savings';
       }
-
-      // Milestone section
-      const msSection = document.getElementById('milestoneSection');
-      if (result.milestones) {
-        msSection.style.display = 'block';
-        document.getElementById('ms1pay').textContent = fmt(result.milestones.ms1) + ' bonus at $150K raised';
-        document.getElementById('ms2pay').textContent = fmt(result.milestones.ms2) + ' bonus at $300K raised';
-        document.getElementById('ms3pay').textContent = fmt(result.milestones.ms3) + ' bonus at $500K raised';
-      } else {
-        msSection.style.display = 'none';
-      }
-
-      // Scope note
-      document.getElementById('scopeNote').style.display = currentStructure === 'scope' ? 'block' : 'none';
     }
 
-    // Initial render
-    render();
+    document.getElementById('hoursSlider').addEventListener('input', recalc);
+    recalc();
   </script>
 
 </body>
