@@ -568,20 +568,12 @@
         <!-- STRUCTURE OPTIONS -->
         <div class="structure-label">How would you like to pay?</div>
 
-        <div class="option active" data-key="recommended" onclick="pick('recommended')">
+        <div class="option active" data-key="milestone" onclick="pick('milestone')">
           <div class="tag">Recommended</div>
           <div class="radio"></div>
           <div class="text">
             <div class="name">Retainer + Milestone Bonuses</div>
-            <div class="desc">Pay 75% as a guaranteed weekly retainer for my time, 25% as milestone bonuses evaluated at 90-day review ($150K / $300K / $500K)</div>
-          </div>
-        </div>
-
-        <div class="option" data-key="milestone" onclick="pick('milestone')">
-          <div class="radio"></div>
-          <div class="text">
-            <div class="name">More Pay-for-Performance</div>
-            <div class="desc">Pay 65% as guaranteed weekly retainer, 35% as milestone bonuses — lower guaranteed cost for you</div>
+            <div class="desc">Pay 65% as a guaranteed weekly retainer for my time, 35% as milestone bonuses evaluated at 90-day review ($150K / $300K / $500K)</div>
           </div>
         </div>
 
@@ -693,7 +685,7 @@
     const CAMPAIGN_GOAL = 500000;
 
     let hours = 15;
-    let structure = 'recommended';
+    let structure = 'milestone';
 
     function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
 
@@ -718,10 +710,6 @@
       let noteText = '';
 
       switch (structure) {
-        case 'recommended':
-          retainerPct = 0.75; milestonePct = 0.25;
-          showMilestone = true;
-          break;
         case 'milestone':
           retainerPct = 0.65; milestonePct = 0.35;
           showMilestone = true;
