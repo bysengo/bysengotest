@@ -272,6 +272,12 @@
       .stat-row { gap: 6px; }
       .stat-num { font-size: 1rem; }
     }
+
+    /* TAM/SAM/SOM animation */
+    .tam-ring { opacity: 0; transform: scale(0.6); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .tam-ring.animate { opacity: 1; transform: scale(1); }
+    .tam-detail { opacity: 0; transform: translateX(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .tam-detail.animate { opacity: 1; transform: translateX(0); }
   </style>
 </head>
 <body>
@@ -349,7 +355,51 @@
           </ul>
         </div>
 
-        <!-- SLIDE 4: THE SOLUTION -->
+        <!-- SLIDE 4: TAM SAM SOM (animated) -->
+        <div class="slide slide-dark" id="slide-tam">
+          <span class="s-badge s-badge-light">Market Sizing</span>
+          <h2 class="s-title s-title-lg">TAM &middot; SAM &middot; SOM</h2>
+          <div style="display:flex; align-items:center; gap:clamp(16px,3vw,40px); margin-top:12px;">
+            <!-- Animated concentric circles -->
+            <div style="position:relative; width:clamp(160px,28vw,320px); height:clamp(160px,28vw,320px); flex-shrink:0;">
+              <div class="tam-circle tam-ring" style="position:absolute; inset:0; border-radius:50%; border:3px solid rgba(213,112,40,0.3); display:flex; align-items:center; justify-content:center;">
+                <span style="position:absolute; top:6%; font-size:clamp(0.5rem,0.8vw,0.7rem); font-weight:700; color:#D57028; text-transform:uppercase; letter-spacing:1px;">TAM</span>
+              </div>
+              <div class="sam-circle tam-ring" style="position:absolute; top:18%; left:18%; right:18%; bottom:18%; border-radius:50%; border:3px solid rgba(213,112,40,0.5); display:flex; align-items:center; justify-content:center;">
+                <span style="position:absolute; top:8%; font-size:clamp(0.5rem,0.8vw,0.7rem); font-weight:700; color:#D57028; text-transform:uppercase; letter-spacing:1px;">SAM</span>
+              </div>
+              <div class="som-circle tam-ring" style="position:absolute; top:36%; left:36%; right:36%; bottom:36%; border-radius:50%; background:rgba(213,112,40,0.15); border:3px solid #D57028; display:flex; align-items:center; justify-content:center;">
+                <span style="font-size:clamp(0.5rem,0.8vw,0.7rem); font-weight:700; color:#D57028; text-transform:uppercase; letter-spacing:1px;">SOM</span>
+              </div>
+            </div>
+            <!-- Market details -->
+            <div style="flex:1;">
+              <div class="tam-detail" style="margin-bottom:clamp(10px,1.5vw,18px);">
+                <div style="display:flex; align-items:baseline; gap:8px;">
+                  <span style="font-family:'Arimo',sans-serif; font-size:clamp(1.4rem,3vw,2.8rem); font-weight:700; color:#D57028;">$14.9T</span>
+                  <span style="font-size:clamp(0.55rem,0.8vw,0.75rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; opacity:0.6;">Total Addressable</span>
+                </div>
+                <p class="s-sub s-sub-sm" style="opacity:0.6; margin:2px 0 0;">Global private market AUM &mdash; alternative investments, private equity, venture capital, real assets</p>
+              </div>
+              <div class="tam-detail" style="margin-bottom:clamp(10px,1.5vw,18px);">
+                <div style="display:flex; align-items:baseline; gap:8px;">
+                  <span style="font-family:'Arimo',sans-serif; font-size:clamp(1.2rem,2.5vw,2.2rem); font-weight:700; color:#D57028;">$2.8B</span>
+                  <span style="font-size:clamp(0.55rem,0.8vw,0.75rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; opacity:0.6;">Serviceable Addressable</span>
+                </div>
+                <p class="s-sub s-sub-sm" style="opacity:0.6; margin:2px 0 0;">U.S. investment crowdfunding + fintech education + community-driven capital platforms</p>
+              </div>
+              <div class="tam-detail">
+                <div style="display:flex; align-items:baseline; gap:8px;">
+                  <span style="font-family:'Arimo',sans-serif; font-size:clamp(1rem,2vw,1.8rem); font-weight:700; color:#D57028;">$18M</span>
+                  <span style="font-size:clamp(0.55rem,0.8vw,0.75rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; opacity:0.6;">Serviceable Obtainable</span>
+                </div>
+                <p class="s-sub s-sub-sm" style="opacity:0.6; margin:2px 0 0;">Year 3 target: 3,600 subscribers + B2B sponsorships + coaching + events at current conversion rates</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 5: THE SOLUTION -->
         <div class="slide slide-orange">
           <span class="s-badge s-badge-light">The Solution</span>
           <h2 class="s-title s-title-lg">Sengo: Education,<br>Community, Access</h2>
@@ -524,19 +574,34 @@
           <p class="s-sub s-sub-sm" style="opacity:0.6; margin-top:10px;">Strong unit economics driven by organic community growth, high-engagement newsletter (46.5% open rate), and compounding network effects. Paid channels launch post-raise to accelerate an already-proven flywheel.</p>
         </div>
 
-        <!-- SLIDE 10: COMPETITIVE LANDSCAPE -->
+        <!-- SLIDE: COMPETITIVE LANDSCAPE + M&A -->
         <div class="slide slide-light">
           <span class="s-badge">Competitive Landscape</span>
           <h2 class="s-title s-title-md" style="color:#1B3533;">Full-Stack Advantage</h2>
-          <table class="s-table" style="margin-top:8px;">
-            <tr><th>Competitor</th><th>Focus</th><th>Gap</th></tr>
-            <tr><td>Republic, WeFunder, StartEngine</td><td>Transaction platforms (Reg CF)</td><td>No education, community, or founder support</td></tr>
-            <tr><td>AngelList, Allocations</td><td>Accredited investors & syndicates</td><td>Excludes non-accredited; narrow base</td></tr>
-            <tr><td>Cherub</td><td>Angel matchmaking ($79/mo)</td><td>No education, events, or deal infrastructure</td></tr>
-            <tr><td>YC, Techstars</td><td>Selective accelerators (&lt;3%)</td><td>No community wealth-building</td></tr>
-            <tr class="highlight-row"><td><strong>Sengo</strong></td><td><strong>Education + Community + Access</strong></td><td><strong>Full-stack: advisory, events, platform, deal flow</strong></td></tr>
-          </table>
-          <p class="s-sub s-sub-sm s-text-brown" style="margin-top:10px;"><strong>Key differentiator:</strong> Sengo is the education and community layer that sits <em>beneath</em> the transaction platforms. We prepare founders to raise and investors to participate. Built on knowledge and trust&mdash;not tools that AI can replace.</p>
+          <div class="s-cols" style="margin-top:6px;">
+            <div class="s-col">
+              <table class="s-table">
+                <tr><th>Competitor</th><th>Focus</th><th>Gap</th></tr>
+                <tr><td>Republic / WeFunder / StartEngine</td><td>Transaction (Reg CF)</td><td>No education or community</td></tr>
+                <tr><td>AngelList / Allocations</td><td>Accredited syndicates</td><td>Excludes non-accredited</td></tr>
+                <tr><td>Cherub</td><td>Angel matching ($79/mo)</td><td>No events/education</td></tr>
+                <tr><td>YC / Techstars</td><td>Elite accelerators (&lt;3%)</td><td>No community wealth</td></tr>
+                <tr class="highlight-row"><td><strong>Sengo</strong></td><td><strong>Edu + Community + Access</strong></td><td><strong>Full-stack platform</strong></td></tr>
+              </table>
+            </div>
+            <div class="s-col">
+              <p class="s-sub s-sub-sm s-text-brown" style="font-weight:700; margin-bottom:4px;">Recent M&amp;A &amp; Fundraising Activity</p>
+              <table class="s-table">
+                <tr><th>Deal</th><th>Details</th></tr>
+                <tr><td>Republic acquired by INX</td><td>$60M+ deal (2024); validates tokenized securities + community capital convergence</td></tr>
+                <tr><td>StartEngine secondary market</td><td>$58M raised to date; building resale marketplace&mdash;still no education layer</td></tr>
+                <tr><td>Hello Alice Series B</td><td>$25M raise at $130M val; identical B2B+community model for SMBs</td></tr>
+                <tr><td>KingsCrowd acquisition by DealMaker</td><td>Data + analytics bolt-on; signals demand for intelligence layer</td></tr>
+                <tr><td>Carta acquires Vauban</td><td>$80M+ deal; expanding from cap tables to full fund admin</td></tr>
+              </table>
+              <p class="s-sub s-sub-sm s-text-brown" style="opacity:0.7; margin-top:4px;"><strong>Signal:</strong> Acquirers are buying education, data, and community layers&mdash;exactly what Sengo builds.</p>
+            </div>
+          </div>
         </div>
 
         <!-- SLIDE 11: VALUATION COMPS -->
@@ -583,30 +648,83 @@
           </div>
         </div>
 
-        <!-- SLIDE 13: MILESTONES & EXIT -->
+        <!-- SLIDE: MILESTONES -->
         <div class="slide slide-light">
-          <span class="s-badge">Milestones &amp; Returns</span>
+          <span class="s-badge">Milestones</span>
           <h2 class="s-title s-title-md" style="color:#1B3533;">12&ndash;18 Month Roadmap</h2>
-          <div class="s-cols" style="margin-top:8px;">
-            <div class="s-col">
-              <table class="s-table">
-                <tr><th>Timeline</th><th>Milestone</th></tr>
-                <tr><td><strong>Mo 1&ndash;4</strong></td><td>Ship v2 platform, launch brand campaign, hire sales lead, 500 new members</td></tr>
-                <tr><td><strong>Mo 5&ndash;8</strong></td><td>Matchmaking + investor modules, 8 coaching clients, 3 institutional partners, 2K members</td></tr>
-                <tr><td><strong>Mo 9&ndash;12</strong></td><td>4K members, $600K+ ARR, flagship Sengo Summit, expand sales team</td></tr>
-                <tr><td><strong>Mo 13&ndash;18</strong></td><td>$1.2M+ ARR, 30K email subs, 10+ B2B partners, Series A metrics</td></tr>
-              </table>
+          <table class="s-table" style="margin-top:8px;">
+            <tr><th>Timeline</th><th>Milestone</th><th>Key Metrics</th></tr>
+            <tr><td><strong>Mo 1&ndash;4</strong></td><td>Ship v2 platform, launch brand campaign, hire sales lead</td><td>500 new members, 3 sponsors</td></tr>
+            <tr><td><strong>Mo 5&ndash;8</strong></td><td>Matchmaking + investor modules, coaching cohorts live</td><td>2K members, 8 coaching clients, 3 institutional partners</td></tr>
+            <tr><td><strong>Mo 9&ndash;12</strong></td><td>Flagship Sengo Summit, expand sales team</td><td>4K members, $600K+ ARR</td></tr>
+            <tr><td><strong>Mo 13&ndash;18</strong></td><td>Series A readiness, national expansion</td><td>$1.2M+ ARR, 30K email subs, 10+ B2B partners</td></tr>
+          </table>
+        </div>
+
+        <!-- SLIDE: INTERACTIVE VALUATION / EXIT CALCULATOR -->
+        <div class="slide slide-cream" id="slide-calc">
+          <span class="s-badge">Exit Scenarios</span>
+          <h2 class="s-title s-title-md" style="color:#1B3533;">Interactive Valuation Calculator</h2>
+          <div class="s-cols" style="margin-top:8px; align-items:flex-start;">
+            <div class="s-col" style="flex:0 0 42%;">
+              <div style="background:#fff; border-radius:12px; padding:clamp(10px,1.5vw,18px); box-shadow:0 4px 20px rgba(27,53,51,0.08);">
+                <label style="display:block; margin-bottom:clamp(8px,1vw,14px);">
+                  <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">Exit Year Revenue</span>
+                  <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+                    <input type="range" id="calc-revenue" min="1" max="15" step="0.5" value="5.5" style="flex:1; accent-color:#D57028;">
+                    <span id="calc-revenue-val" style="font-family:'Arimo',sans-serif; font-weight:700; font-size:clamp(0.9rem,1.5vw,1.3rem); color:#D57028; min-width:55px;">$5.5M</span>
+                  </div>
+                </label>
+                <label style="display:block; margin-bottom:clamp(8px,1vw,14px);">
+                  <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">Revenue Multiple</span>
+                  <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+                    <input type="range" id="calc-multiple" min="3" max="20" step="0.5" value="8" style="flex:1; accent-color:#D57028;">
+                    <span id="calc-multiple-val" style="font-family:'Arimo',sans-serif; font-weight:700; font-size:clamp(0.9rem,1.5vw,1.3rem); color:#D57028; min-width:40px;">8x</span>
+                  </div>
+                </label>
+                <label style="display:block; margin-bottom:clamp(8px,1vw,14px);">
+                  <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">SAFE Cap</span>
+                  <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+                    <input type="range" id="calc-cap" min="3" max="8" step="0.5" value="5" style="flex:1; accent-color:#D57028;">
+                    <span id="calc-cap-val" style="font-family:'Arimo',sans-serif; font-weight:700; font-size:clamp(0.9rem,1.5vw,1.3rem); color:#D57028; min-width:40px;">$5M</span>
+                  </div>
+                </label>
+                <label style="display:block;">
+                  <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">Exit Timeline</span>
+                  <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
+                    <input type="range" id="calc-years" min="3" max="8" step="1" value="5" style="flex:1; accent-color:#D57028;">
+                    <span id="calc-years-val" style="font-family:'Arimo',sans-serif; font-weight:700; font-size:clamp(0.9rem,1.5vw,1.3rem); color:#D57028; min-width:55px;">5 yrs</span>
+                  </div>
+                </label>
+              </div>
             </div>
             <div class="s-col">
-              <p class="s-sub s-sub-sm s-text-brown" style="font-weight:700; margin-bottom:6px;">Exit Analysis (2031, 8x Multiple)</p>
-              <table class="s-table">
-                <tr><th>Year</th><th>Revenue</th><th>8x Valuation</th></tr>
-                <tr><td>2028</td><td>$1.8M</td><td>$14.4M</td></tr>
-                <tr><td>2029</td><td>$2.7M</td><td>$21.6M</td></tr>
-                <tr><td>2030</td><td>$4.0M</td><td>$32.0M</td></tr>
-                <tr class="highlight-row"><td>2031</td><td>$5.5M</td><td>$44.0M</td></tr>
-              </table>
-              <p class="s-sub s-sub-sm s-text-brown" style="margin-top:6px;">$250K SAFE at $5M cap &rarr; 5% equity<br>At $44M exit: <strong>$2.2M payout = 8.8X ROI</strong></p>
+              <div class="stat-row">
+                <div class="stat-box stat-box-light" style="text-align:center;">
+                  <div class="stat-num s-text-orange" id="calc-valuation">$44M</div>
+                  <div class="stat-label">Exit Valuation</div>
+                </div>
+                <div class="stat-box stat-box-light" style="text-align:center;">
+                  <div class="stat-num s-text-orange" id="calc-equity">5.0%</div>
+                  <div class="stat-label">Investor Equity ($250K)</div>
+                </div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-box stat-box-light" style="text-align:center;">
+                  <div class="stat-num s-text-orange" id="calc-payout">$2.2M</div>
+                  <div class="stat-label">Investor Payout</div>
+                </div>
+                <div class="stat-box stat-box-light" style="text-align:center;">
+                  <div class="stat-num s-text-orange" id="calc-roi">8.8x</div>
+                  <div class="stat-label">Return on $250K SAFE</div>
+                </div>
+              </div>
+              <!-- Visual ROI bar -->
+              <div style="margin-top:clamp(6px,1vw,12px); background:rgba(27,53,51,0.06); border-radius:8px; height:clamp(20px,2.5vw,32px); overflow:hidden; position:relative;">
+                <div id="calc-bar" style="height:100%; background:linear-gradient(90deg,#D57028,#AF8145); border-radius:8px; width:44%; transition:width 0.4s ease;"></div>
+                <span id="calc-bar-label" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); font-size:clamp(0.5rem,0.7vw,0.65rem); font-weight:700; color:#1B3533;">8.8x return</span>
+              </div>
+              <p class="s-sub s-sub-sm s-text-brown" style="opacity:0.5; margin-top:6px;">Drag the sliders to model different scenarios. Based on $250K SAFE investment.</p>
             </div>
           </div>
         </div>
@@ -627,11 +745,11 @@
     <!-- Slide Navigation -->
     <div class="deck-nav">
       <button class="deck-nav-btn" id="btn-prev" disabled>&larr; Prev</button>
-      <span class="deck-counter" id="deck-counter">1 / 15</span>
+      <span class="deck-counter" id="deck-counter">1 / 17</span>
       <button class="deck-nav-btn" id="btn-next">Next &rarr;</button>
     </div>
     <div class="deck-progress">
-      <div class="deck-progress-bar" id="deck-progress-bar" style="width:6.67%;"></div>
+      <div class="deck-progress-bar" id="deck-progress-bar" style="width:5.88%;"></div>
     </div>
 
     <!-- CTA below deck -->
@@ -669,6 +787,61 @@
         if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goToSlide(current + 1); }
         if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(current - 1); }
       });
+
+      // TAM/SAM/SOM animation on slide enter
+      function animateTAM() {
+        var rings = document.querySelectorAll('.tam-ring');
+        var details = document.querySelectorAll('.tam-detail');
+        rings.forEach(function(r) { r.classList.remove('animate'); });
+        details.forEach(function(d) { d.classList.remove('animate'); });
+        setTimeout(function() { if (rings[0]) rings[0].classList.add('animate'); }, 100);
+        setTimeout(function() { if (rings[1]) rings[1].classList.add('animate'); }, 400);
+        setTimeout(function() { if (rings[2]) rings[2].classList.add('animate'); }, 700);
+        setTimeout(function() { if (details[0]) details[0].classList.add('animate'); }, 200);
+        setTimeout(function() { if (details[1]) details[1].classList.add('animate'); }, 500);
+        setTimeout(function() { if (details[2]) details[2].classList.add('animate'); }, 800);
+      }
+
+      // Interactive calculator
+      var calcRevenue = document.getElementById('calc-revenue');
+      var calcMultiple = document.getElementById('calc-multiple');
+      var calcCap = document.getElementById('calc-cap');
+      var calcYears = document.getElementById('calc-years');
+      function updateCalc() {
+        if (!calcRevenue) return;
+        var rev = parseFloat(calcRevenue.value);
+        var mult = parseFloat(calcMultiple.value);
+        var cap = parseFloat(calcCap.value);
+        var yrs = parseInt(calcYears.value);
+        var valuation = rev * mult;
+        var equity = (250000 / (cap * 1000000)) * 100;
+        var payout = valuation * (equity / 100);
+        var roi = payout / 0.25;
+        document.getElementById('calc-revenue-val').textContent = '$' + rev.toFixed(1) + 'M';
+        document.getElementById('calc-multiple-val').textContent = mult + 'x';
+        document.getElementById('calc-cap-val').textContent = '$' + cap + 'M';
+        document.getElementById('calc-years-val').textContent = yrs + ' yrs';
+        document.getElementById('calc-valuation').textContent = '$' + valuation.toFixed(0) + 'M';
+        document.getElementById('calc-equity').textContent = equity.toFixed(1) + '%';
+        document.getElementById('calc-payout').textContent = '$' + payout.toFixed(1) + 'M';
+        document.getElementById('calc-roi').textContent = roi.toFixed(1) + 'x';
+        var barW = Math.min(roi / 20 * 100, 100);
+        document.getElementById('calc-bar').style.width = barW + '%';
+        document.getElementById('calc-bar-label').textContent = roi.toFixed(1) + 'x return';
+      }
+      if (calcRevenue) {
+        calcRevenue.addEventListener('input', updateCalc);
+        calcMultiple.addEventListener('input', updateCalc);
+        calcCap.addEventListener('input', updateCalc);
+        calcYears.addEventListener('input', updateCalc);
+      }
+
+      // Hook into slide navigation for TAM animation
+      var origGoToSlide = goToSlide;
+      goToSlide = function(n) {
+        origGoToSlide(n);
+        if (slides[n] && slides[n].id === 'slide-tam') { animateTAM(); }
+      };
 
       var startX = 0;
       var deckEl = document.getElementById('deck-slides');
