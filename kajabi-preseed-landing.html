@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo | Pre-Seed Investment Deck</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F3EDE7;
+      color: #1B3533;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===================== */
+    /* EMAIL GATE SCREEN     */
+    /* ===================== */
+    #email-gate {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    #email-gate.hiding {
+      opacity: 0;
+      transform: scale(0.97);
+      pointer-events: none;
+    }
+
+    /* Decorative background gradient */
+    #email-gate::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(circle, rgba(213, 112, 40, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    #email-gate::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -15%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(27, 53, 51, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .gate-logo {
+      width: 80px;
+      height: auto;
+      margin-bottom: 40px;
+      color: #1B3533;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gate-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 60px 50px;
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 25px 80px rgba(27, 53, 51, 0.12);
+      position: relative;
+      z-index: 1;
+    }
+
+    .gate-badge {
+      display: inline-block;
+      background: rgba(213, 112, 40, 0.1);
+      color: #D57028;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+    }
+
+    .gate-card h1 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: #1B3533;
+      margin-bottom: 16px;
+    }
+
+    .gate-card p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #67441A;
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+
+    /* Kajabi form container - paste embed code here */
+    .kajabi-form-container {
+      width: 100%;
+      min-height: 80px;
+    }
+
+    /* Kajabi form style overrides to blend with the card design */
+    .kajabi-form-container form {
+      font-family: 'Montserrat', sans-serif !important;
+    }
+
+    .kajabi-form-container input[type="email"],
+    .kajabi-form-container input[type="text"] {
+      border: 2px solid rgba(27, 53, 51, 0.15) !important;
+      border-radius: 12px !important;
+      padding: 14px 18px !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 1rem !important;
+      background: #F3EDE7 !important;
+      color: #1B3533 !important;
+      transition: border-color 0.3s ease !important;
+    }
+
+    .kajabi-form-container input:focus {
+      border-color: #D57028 !important;
+      outline: none !important;
+    }
+
+    .kajabi-form-container button[type="submit"],
+    .kajabi-form-container input[type="submit"] {
+      width: 100% !important;
+      padding: 16px 20px !important;
+      background: linear-gradient(135deg, #D57028 0%, #AF8145 100%) !important;
+      color: #F3EDE7 !important;
+      border: none !important;
+      border-radius: 12px !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 1rem !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1.5px !important;
+      cursor: pointer !important;
+      transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    }
+
+    .kajabi-form-container button[type="submit"]:hover,
+    .kajabi-form-container input[type="submit"]:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 30px rgba(213, 112, 40, 0.3) !important;
+    }
+
+    .gate-footer {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: #AF8145;
+      opacity: 0.7;
+    }
+
+    .gate-footer a {
+      color: #D57028;
+      text-decoration: none;
+    }
+
+    /* ======================== */
+    /* PRESENTATION SCREEN      */
+    /* ======================== */
+    #presentation-screen {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    #presentation-screen.active {
+      display: flex;
+    }
+
+    /* Top bar */
+    .pres-header {
+      background: #1B3533;
+      padding: 16px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pres-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pres-logo {
+      width: 40px;
+      height: auto;
+      color: #F3EDE7;
+    }
+
+    .pres-title {
+      font-family: 'Arimo', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #F3EDE7;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .pres-badge {
+      background: #D57028;
+      color: #F3EDE7;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* Presentation container */
+    .pres-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px 40px;
+      background: linear-gradient(180deg, #F3EDE7 0%, #e8dfd6 100%);
+    }
+
+    .pres-embed-wrapper {
+      width: 100%;
+      max-width: 1100px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(27, 53, 51, 0.15);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 16:9 aspect ratio container for slides */
+    .pres-embed-aspect {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+    }
+
+    .pres-embed-aspect > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Placeholder shown until you add real deck content */
+    .pres-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      color: #F3EDE7;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .pres-placeholder h2 {
+      font-family: 'Arimo', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .pres-placeholder p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      max-width: 500px;
+    }
+
+    /* Bottom CTA bar under the deck */
+    .pres-cta-bar {
+      max-width: 1100px;
+      width: 100%;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .pres-cta-text {
+      font-size: 0.95rem;
+      color: #67441A;
+      font-weight: 500;
+    }
+
+    .pres-cta-btn {
+      display: inline-block;
+      padding: 14px 36px;
+      background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
+      color: #F3EDE7;
+      border: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .pres-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(213, 112, 40, 0.3);
+    }
+
+    /* ======================== */
+    /* RESPONSIVE               */
+    /* ======================== */
+    @media (max-width: 640px) {
+      .gate-card {
+        padding: 40px 28px;
+      }
+
+      .gate-card h1 {
+        font-size: 2rem;
+      }
+
+      .gate-card p {
+        font-size: 0.95rem;
+      }
+
+      .pres-header {
+        padding: 12px 16px;
+      }
+
+      .pres-title {
+        font-size: 0.9rem;
+      }
+
+      .pres-body {
+        padding: 16px 12px 30px;
+      }
+
+      .pres-placeholder h2 {
+        font-size: 1.8rem;
+      }
+
+      .pres-cta-bar {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================= -->
+  <!-- SCREEN 1: EMAIL GATE          -->
+  <!-- ============================= -->
+  <div id="email-gate">
+
+    <!-- Sengo Logo -->
+    <svg class="gate-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+      <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+      <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+      <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+    </svg>
+
+    <div class="gate-card">
+      <span class="gate-badge">Investor Preview</span>
+      <h1>Pre-Seed<br>Pitch Deck</h1>
+      <p>Enter your email to access the Sengo pre-seed investment presentation.</p>
+
+      <!-- ============================================== -->
+      <!-- KAJABI FORM: Replace this section with your    -->
+      <!-- Kajabi embed code. The form should live inside -->
+      <!-- the .kajabi-form-container div.                -->
+      <!-- ============================================== -->
+      <div class="kajabi-form-container" id="kajabi-form-wrapper">
+        <script src="https://app.bysengo.com/forms/2149477022/embed.js"></script>
+      </div>
+
+      <p class="gate-footer">
+        By entering your email you agree to our
+        <a href="#">Privacy Policy</a>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- SCREEN 2: PRESENTATION DECK   -->
+  <!-- ============================= -->
+  <div id="presentation-screen">
+
+    <div class="pres-header">
+      <div class="pres-header-left">
+        <svg class="pres-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+          <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
+          <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+          <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+          <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+          <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="pres-title">Sengo Pre-Seed Deck</span>
+      </div>
+      <span class="pres-badge">Confidential</span>
+    </div>
+
+    <div class="pres-body">
+      <div class="pres-embed-wrapper">
+        <div class="pres-embed-aspect">
+
+          <!-- ============================================== -->
+          <!-- DECK EMBED: Replace the placeholder below with -->
+          <!-- your presentation embed (Google Slides, Canva, -->
+          <!-- Pitch, PDF viewer, etc.)                       -->
+          <!--                                                -->
+          <!-- Example Google Slides embed:                   -->
+          <!-- <iframe src="https://docs.google.com/presentation/d/e/XXXX/embed?start=false&loop=false&delayms=3000" allowfullscreen></iframe> -->
+          <!--                                                -->
+          <!-- Example Canva embed:                           -->
+          <!-- <div style="position:relative;width:100%;height:0;padding-top:56.25%"><iframe src="https://www.canva.com/design/XXXX/view?embed" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen></iframe></div> -->
+          <!-- ============================================== -->
+
+          <div class="pres-placeholder">
+            <h2>Pitch Deck</h2>
+            <p>Replace this placeholder with your presentation embed code (Google Slides, Canva, Pitch, etc.)</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CTA below the deck -->
+      <div class="pres-cta-bar">
+        <span class="pres-cta-text">Interested in learning more about our pre-seed round?</span>
+        <a href="#" class="pres-cta-btn">Schedule a Call</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var gate = document.getElementById('email-gate');
+      var presentation = document.getElementById('presentation-screen');
+
+      /**
+       * Reveal the presentation screen with a smooth transition.
+       */
+      function showPresentation() {
+        gate.classList.add('hiding');
+        setTimeout(function() {
+          gate.style.display = 'none';
+          presentation.classList.add('active');
+          window.scrollTo(0, 0);
+        }, 600);
+      }
+
+      // Expose globally so Kajabi can call it
+      window.sengoShowDeck = showPresentation;
+
+      // Auto-unlock if URL contains ?access=granted (Kajabi redirect flow)
+      if (window.location.search.indexOf('access=granted') !== -1) {
+        gate.style.display = 'none';
+        presentation.classList.add('active');
+      }
+
+      /**
+       * KAJABI FORM DETECTION
+       * ---------------------
+       * Kajabi embedded forms don't fire a JS callback, so we use a
+       * MutationObserver to detect when the form submits and Kajabi
+       * replaces the form content with a success/thank-you message.
+       *
+       * We watch for:
+       *  1. The form element disappearing from the container
+       *  2. A success/thank-you element appearing
+       *  3. Any significant DOM change inside the form wrapper
+       */
+      var formWrapper = document.getElementById('kajabi-form-wrapper');
+      var formDetected = false;
+      var hasSubmitted = false;
+
+      var observer = new MutationObserver(function(mutations) {
+        if (hasSubmitted) return;
+
+        // Check if a Kajabi form exists in the wrapper
+        var kajabiForm = formWrapper.querySelector('form');
+        if (kajabiForm && !formDetected) {
+          formDetected = true;
+
+          // Listen for the native form submit event
+          kajabiForm.addEventListener('submit', function() {
+            // Give Kajabi a moment to process, then reveal the deck
+            setTimeout(function() {
+              if (!hasSubmitted) {
+                hasSubmitted = true;
+                showPresentation();
+              }
+            }, 1500);
+          });
+        }
+
+        // Also detect if Kajabi swaps the form for a thank-you message
+        mutations.forEach(function(mutation) {
+          if (!formDetected) return;
+          mutation.addedNodes.forEach(function(node) {
+            if (node.nodeType === 1) {
+              var text = (node.textContent || '').toLowerCase();
+              if (text.indexOf('thank') !== -1 || text.indexOf('success') !== -1 || text.indexOf('confirmed') !== -1) {
+                if (!hasSubmitted) {
+                  hasSubmitted = true;
+                  showPresentation();
+                }
+              }
+            }
+          });
+        });
+      });
+
+      observer.observe(formWrapper, {
+        childList: true,
+        subtree: true,
+        attributes: true
+      });
+    })();
+  </script>
+
+</body>
+</html>
