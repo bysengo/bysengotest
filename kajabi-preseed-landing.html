@@ -4,7 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sengo | Pre-Seed Investment Deck</title>
+  <script>
+    // Instantly hide gate if returning from Kajabi redirect — prevents flicker
+    if (window.location.search.indexOf('access=granted') !== -1) {
+      document.documentElement.classList.add('deck-unlocked');
+    }
+  </script>
   <style>
+    /* When deck is unlocked via redirect, hide gate and show deck before paint */
+    html.deck-unlocked #email-gate { display: none !important; }
+    html.deck-unlocked #presentation-screen { display: flex !important; }
     @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
