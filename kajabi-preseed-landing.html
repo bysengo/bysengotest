@@ -491,7 +491,11 @@
       <h1>Pre-Seed<br>Pitch Deck</h1>
       <p>Enter your email to access the Sengo pre-seed investment presentation.</p>
       <div class="kajabi-form-container" id="kajabi-form-wrapper">
-        <script src="https://app.bysengo.com/forms/2149477022/embed.js"></script>
+        <iframe id="kajabi-iframe"
+          src="about:blank"
+          style="width:100%; min-height:200px; border:none; overflow:hidden;"
+          scrolling="no">
+        </iframe>
       </div>
       <p class="gate-footer">
         By entering your email you agree to our
@@ -991,8 +995,11 @@
       /* EMAIL GATE LOGIC */
       var gate = document.getElementById('email-gate');
       var presentation = document.getElementById('presentation-screen');
+      var hasSubmitted = false;
 
       function showPresentation() {
+        if (hasSubmitted) return;
+        hasSubmitted = true;
         gate.classList.add('hiding');
         setTimeout(function() {
           gate.style.display = 'none';
@@ -1003,40 +1010,93 @@
 
       window.sengoShowDeck = showPresentation;
 
+      // Auto-unlock via URL param
       if (window.location.search.indexOf('access=granted') !== -1) {
         gate.style.display = 'none';
         presentation.classList.add('active');
+        hasSubmitted = true;
       }
 
-      var formWrapper = document.getElementById('kajabi-form-wrapper');
-      var formDetected = false;
-      var hasSubmitted = false;
+      /*
+       * KAJABI IFRAME STRATEGY
+       * ----------------------
+       * Kajabi's embed script hijacks the page and redirects to its own
+       * thank_you URL on submit. By loading the form inside an iframe,
+       * the redirect is contained. We build a small HTML wrapper that
+       * loads the Kajabi embed script, and poll the iframe to detect
+       * when it navigates to the thank_you page.
+       */
+      var iframe = document.getElementById('kajabi-iframe');
 
-      var observer = new MutationObserver(function(mutations) {
-        if (hasSubmitted) return;
-        var kajabiForm = formWrapper.querySelector('form');
-        if (kajabiForm && !formDetected) {
-          formDetected = true;
-          kajabiForm.addEventListener('submit', function() {
-            setTimeout(function() {
-              if (!hasSubmitted) { hasSubmitted = true; showPresentation(); }
-            }, 1500);
-          });
+      // Build a self-contained HTML page that loads the Kajabi form
+      var iframeHTML = [
+        '<!DOCTYPE html><html><head>',
+        '<meta name="viewport" content="width=device-width,initial-scale=1">',
+        '<style>',
+        'body{margin:0;padding:0;font-family:Montserrat,-apple-system,sans-serif;background:transparent;}',
+        'form{display:flex;flex-direction:column;gap:12px;padding:4px;}',
+        'input[type="email"],input[type="text"]{',
+        '  width:100%;padding:14px 18px;border:2px solid rgba(27,53,51,0.15);border-radius:12px;',
+        '  font-family:Montserrat,sans-serif;font-size:16px;background:#F3EDE7;color:#1B3533;',
+        '  box-sizing:border-box;-webkit-appearance:none;',
+        '}',
+        'input:focus{border-color:#D57028;outline:none;}',
+        'button[type="submit"],input[type="submit"]{',
+        '  width:100%;padding:16px 20px;',
+        '  background:linear-gradient(135deg,#D57028 0%,#AF8145 100%);',
+        '  color:#F3EDE7;border:none;border-radius:12px;',
+        '  font-family:Montserrat,sans-serif;font-size:16px;font-weight:700;',
+        '  text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;',
+        '}',
+        'button[type="submit"]:hover,input[type="submit"]:hover{opacity:0.9;}',
+        '</style>',
+        '</head><body>',
+        '<script src="https://app.bysengo.com/forms/2149477022/embed.js"><\/script>',
+        '</body></html>'
+      ].join('');
+
+      // Write the HTML into the iframe
+      iframe.onload = function() {
+        // Only write on initial about:blank load
+        if (!iframe._written) {
+          iframe._written = true;
+          var doc = iframe.contentDocument || iframe.contentWindow.document;
+          doc.open();
+          doc.write(iframeHTML);
+          doc.close();
         }
-        mutations.forEach(function(mutation) {
-          if (!formDetected) return;
-          mutation.addedNodes.forEach(function(node) {
-            if (node.nodeType === 1) {
-              var text = (node.textContent || '').toLowerCase();
-              if (text.indexOf('thank') !== -1 || text.indexOf('success') !== -1 || text.indexOf('confirmed') !== -1) {
-                if (!hasSubmitted) { hasSubmitted = true; showPresentation(); }
-              }
-            }
-          });
-        });
-      });
+      };
+      // Trigger initial load
+      iframe.src = 'about:blank';
 
-      observer.observe(formWrapper, { childList: true, subtree: true, attributes: true });
+      // Poll the iframe to detect navigation to thank_you page
+      var pollInterval = setInterval(function() {
+        if (hasSubmitted) { clearInterval(pollInterval); return; }
+        try {
+          var iframeSrc = iframe.contentWindow.location.href;
+          if (iframeSrc.indexOf('thank_you') !== -1 || iframeSrc.indexOf('thank-you') !== -1) {
+            clearInterval(pollInterval);
+            showPresentation();
+          }
+        } catch (e) {
+          // Cross-origin error means iframe navigated to Kajabi domain = form submitted
+          clearInterval(pollInterval);
+          showPresentation();
+        }
+      }, 500);
+
+      // Also auto-resize iframe to fit form content
+      function resizeIframe() {
+        try {
+          var body = iframe.contentDocument.body;
+          if (body) {
+            var h = body.scrollHeight;
+            if (h > 50) iframe.style.height = h + 'px';
+          }
+        } catch(e) { /* cross-origin, stop resizing */ }
+      }
+      var resizeInterval = setInterval(resizeIframe, 300);
+      setTimeout(function() { clearInterval(resizeInterval); }, 15000);
 
       /* SLIDE DECK ENGINE */
       var slides = document.querySelectorAll('.slide');
