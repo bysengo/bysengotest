@@ -7,11 +7,7 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -35,45 +31,28 @@
       overflow: hidden;
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-
     #email-gate.hiding {
       opacity: 0;
       transform: scale(0.97);
       pointer-events: none;
     }
-
-    /* Decorative background gradient */
     #email-gate::before {
       content: '';
       position: absolute;
-      top: -30%;
-      right: -20%;
-      width: 70%;
-      height: 70%;
-      background: radial-gradient(circle, rgba(213, 112, 40, 0.08) 0%, transparent 70%);
+      top: -30%; right: -20%;
+      width: 70%; height: 70%;
+      background: radial-gradient(circle, rgba(213,112,40,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
-
     #email-gate::after {
       content: '';
       position: absolute;
-      bottom: -20%;
-      left: -15%;
-      width: 60%;
-      height: 60%;
-      background: radial-gradient(circle, rgba(27, 53, 51, 0.06) 0%, transparent 70%);
+      bottom: -20%; left: -15%;
+      width: 60%; height: 60%;
+      background: radial-gradient(circle, rgba(27,53,51,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
-
-    .gate-logo {
-      width: 80px;
-      height: auto;
-      margin-bottom: 40px;
-      color: #1B3533;
-      position: relative;
-      z-index: 1;
-    }
-
+    .gate-logo { width: 80px; height: auto; margin-bottom: 40px; color: #1B3533; position: relative; z-index: 1; }
     .gate-card {
       background: #fff;
       border-radius: 20px;
@@ -81,14 +60,13 @@
       max-width: 560px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 25px 80px rgba(27, 53, 51, 0.12);
+      box-shadow: 0 25px 80px rgba(27,53,51,0.12);
       position: relative;
       z-index: 1;
     }
-
     .gate-badge {
       display: inline-block;
-      background: rgba(213, 112, 40, 0.1);
+      background: rgba(213,112,40,0.1);
       color: #D57028;
       padding: 8px 20px;
       border-radius: 40px;
@@ -98,7 +76,6 @@
       letter-spacing: 2px;
       margin-bottom: 24px;
     }
-
     .gate-card h1 {
       font-family: 'Arimo', sans-serif;
       font-size: 2.8rem;
@@ -109,7 +86,6 @@
       color: #1B3533;
       margin-bottom: 16px;
     }
-
     .gate-card p {
       font-size: 1.05rem;
       line-height: 1.6;
@@ -117,21 +93,11 @@
       margin-bottom: 36px;
       font-weight: 400;
     }
-
-    /* Kajabi form container - paste embed code here */
-    .kajabi-form-container {
-      width: 100%;
-      min-height: 80px;
-    }
-
-    /* Kajabi form style overrides to blend with the card design */
-    .kajabi-form-container form {
-      font-family: 'Montserrat', sans-serif !important;
-    }
-
+    .kajabi-form-container { width: 100%; min-height: 80px; }
+    .kajabi-form-container form { font-family: 'Montserrat', sans-serif !important; }
     .kajabi-form-container input[type="email"],
     .kajabi-form-container input[type="text"] {
-      border: 2px solid rgba(27, 53, 51, 0.15) !important;
+      border: 2px solid rgba(27,53,51,0.15) !important;
       border-radius: 12px !important;
       padding: 14px 18px !important;
       font-family: 'Montserrat', sans-serif !important;
@@ -140,12 +106,7 @@
       color: #1B3533 !important;
       transition: border-color 0.3s ease !important;
     }
-
-    .kajabi-form-container input:focus {
-      border-color: #D57028 !important;
-      outline: none !important;
-    }
-
+    .kajabi-form-container input:focus { border-color: #D57028 !important; outline: none !important; }
     .kajabi-form-container button[type="submit"],
     .kajabi-form-container input[type="submit"] {
       width: 100% !important;
@@ -162,176 +123,154 @@
       cursor: pointer !important;
       transition: transform 0.3s ease, box-shadow 0.3s ease !important;
     }
-
     .kajabi-form-container button[type="submit"]:hover,
     .kajabi-form-container input[type="submit"]:hover {
       transform: translateY(-2px) !important;
-      box-shadow: 0 10px 30px rgba(213, 112, 40, 0.3) !important;
+      box-shadow: 0 10px 30px rgba(213,112,40,0.3) !important;
     }
-
-    .gate-footer {
-      margin-top: 24px;
-      font-size: 0.8rem;
-      color: #AF8145;
-      opacity: 0.7;
-    }
-
-    .gate-footer a {
-      color: #D57028;
-      text-decoration: none;
-    }
+    .gate-footer { margin-top: 24px; font-size: 0.8rem; color: #AF8145; opacity: 0.7; }
+    .gate-footer a { color: #D57028; text-decoration: none; }
 
     /* ======================== */
     /* PRESENTATION SCREEN      */
     /* ======================== */
-    #presentation-screen {
-      display: none;
-      min-height: 100vh;
-      flex-direction: column;
-    }
+    #presentation-screen { display: none; min-height: 100vh; flex-direction: column; }
+    #presentation-screen.active { display: flex; }
 
-    #presentation-screen.active {
-      display: flex;
-    }
-
-    /* Top bar */
     .pres-header {
       background: #1B3533;
-      padding: 16px 30px;
+      padding: 12px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-
-    .pres-header-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .pres-logo {
-      width: 40px;
-      height: auto;
-      color: #F3EDE7;
-    }
-
+    .pres-header-left { display: flex; align-items: center; gap: 12px; }
+    .pres-logo { width: 32px; height: auto; color: #F3EDE7; }
     .pres-title {
       font-family: 'Arimo', sans-serif;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: #F3EDE7;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
     .pres-badge {
       background: #D57028;
       color: #F3EDE7;
-      padding: 6px 16px;
+      padding: 5px 14px;
       border-radius: 30px;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
     }
 
-    /* Presentation container */
-    .pres-body {
+    /* SLIDE ENGINE */
+    .deck-container {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 30px 20px 40px;
+      padding: 24px 16px 20px;
       background: linear-gradient(180deg, #F3EDE7 0%, #e8dfd6 100%);
     }
-
-    .pres-embed-wrapper {
+    .deck-viewport {
       width: 100%;
       max-width: 1100px;
+      position: relative;
       background: #fff;
       border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(27, 53, 51, 0.15);
+      box-shadow: 0 20px 60px rgba(27,53,51,0.15);
       overflow: hidden;
-      position: relative;
     }
-
-    /* 16:9 aspect ratio container for slides */
-    .pres-embed-aspect {
+    .deck-slides {
       position: relative;
       width: 100%;
-      padding-top: 56.25%; /* 16:9 */
+      padding-top: 56.25%;
     }
-
-    .pres-embed-aspect > * {
+    .slide {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Placeholder shown until you add real deck content */
-    .pres-placeholder {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: none;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
-      color: #F3EDE7;
-      text-align: center;
-      padding: 40px;
+      padding: 5% 7%;
+      overflow-y: auto;
     }
+    .slide.active { display: flex; }
 
-    .pres-placeholder h2 {
-      font-family: 'Arimo', sans-serif;
-      font-size: 3rem;
+    /* Slide nav */
+    .deck-nav {
+      max-width: 1100px;
+      width: 100%;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .deck-nav-btn {
+      padding: 10px 28px;
+      background: #1B3533;
+      color: #F3EDE7;
+      border: none;
+      border-radius: 60px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .deck-nav-btn:hover { background: #D57028; }
+    .deck-nav-btn:disabled { opacity: 0.3; cursor: default; background: #1B3533; }
+    .deck-counter {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #67441A;
+    }
+    .deck-progress {
+      max-width: 1100px;
+      width: 100%;
+      height: 3px;
+      background: rgba(27,53,51,0.1);
+      border-radius: 2px;
+      margin-top: 10px;
+    }
+    .deck-progress-bar {
+      height: 100%;
+      background: #D57028;
+      border-radius: 2px;
+      transition: width 0.3s ease;
     }
 
-    .pres-placeholder p {
-      font-size: 1.1rem;
-      opacity: 0.8;
-      max-width: 500px;
-    }
-
-    /* Bottom CTA bar under the deck */
+    /* CTA bar */
     .pres-cta-bar {
       max-width: 1100px;
       width: 100%;
-      margin-top: 24px;
+      margin-top: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
     }
-
-    .pres-cta-text {
-      font-size: 0.95rem;
-      color: #67441A;
-      font-weight: 500;
-    }
-
+    .pres-cta-text { font-size: 0.9rem; color: #67441A; font-weight: 500; }
     .pres-cta-btn {
       display: inline-block;
-      padding: 14px 36px;
+      padding: 12px 32px;
       background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
       color: #F3EDE7;
       border: none;
       border-radius: 60px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -339,48 +278,189 @@
       text-decoration: none;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    .pres-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(213,112,40,0.3); }
 
-    .pres-cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(213, 112, 40, 0.3);
+    /* ======================== */
+    /* SLIDE TYPOGRAPHY         */
+    /* ======================== */
+    .s-badge {
+      display: inline-block;
+      background: rgba(213,112,40,0.12);
+      color: #D57028;
+      padding: 5px 16px;
+      border-radius: 30px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .s-badge-light {
+      background: rgba(243,237,231,0.15);
+      color: #F3EDE7;
+      border: 1px solid rgba(243,237,231,0.2);
+    }
+    .s-title {
+      font-family: 'Arimo', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 0.92;
+      margin-bottom: 10px;
+    }
+    .s-title-xl { font-size: clamp(2rem, 5vw, 4.5rem); }
+    .s-title-lg { font-size: clamp(1.6rem, 3.5vw, 3rem); }
+    .s-title-md { font-size: clamp(1.3rem, 2.5vw, 2rem); }
+    .s-sub {
+      font-size: clamp(0.7rem, 1.2vw, 1rem);
+      line-height: 1.6;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+    .s-sub-sm { font-size: clamp(0.6rem, 1vw, 0.85rem); }
+    .s-text-cream { color: #F3EDE7; }
+    .s-text-brown { color: #67441A; }
+    .s-text-orange { color: #D57028; }
+
+    /* Slide layouts */
+    .slide-dark {
+      background: linear-gradient(135deg, #1B3533 0%, #2a4a47 100%);
+      color: #F3EDE7;
+    }
+    .slide-gradient {
+      background: linear-gradient(135deg, #1B3533 0%, #67441A 100%);
+      color: #F3EDE7;
+    }
+    .slide-orange {
+      background: linear-gradient(135deg, #D57028 0%, #AF8145 100%);
+      color: #F3EDE7;
+    }
+    .slide-light {
+      background: #fff;
+      color: #1B3533;
+    }
+    .slide-cream {
+      background: #F3EDE7;
+      color: #1B3533;
+    }
+
+    /* Stat grids */
+    .stat-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 10px 0;
+    }
+    .stat-box {
+      flex: 1;
+      min-width: 100px;
+      background: rgba(243,237,231,0.08);
+      border: 1px solid rgba(243,237,231,0.12);
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-align: center;
+    }
+    .stat-box-light {
+      background: rgba(27,53,51,0.04);
+      border-color: rgba(27,53,51,0.08);
+    }
+    .stat-num {
+      font-family: 'Arimo', sans-serif;
+      font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: clamp(0.5rem, 0.7vw, 0.65rem);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      margin-top: 4px;
+      opacity: 0.7;
+    }
+
+    /* Tables */
+    .s-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: clamp(0.55rem, 0.85vw, 0.78rem);
+      margin: 8px 0;
+    }
+    .s-table th {
+      background: #1B3533;
+      color: #F3EDE7;
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: clamp(0.5rem, 0.7vw, 0.65rem);
+    }
+    .s-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid rgba(27,53,51,0.08);
+    }
+    .s-table tr:nth-child(even) td { background: rgba(27,53,51,0.02); }
+    .s-table .highlight-row td { background: rgba(213,112,40,0.08); font-weight: 600; }
+
+    /* Two-column */
+    .s-cols {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .s-col { flex: 1; }
+
+    /* Lists */
+    .s-list {
+      list-style: none;
+      padding: 0;
+      font-size: clamp(0.6rem, 0.95vw, 0.85rem);
+    }
+    .s-list li {
+      padding: 5px 0 5px 18px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .s-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D57028;
+    }
+
+    /* Divider */
+    .s-divider {
+      width: 50px;
+      height: 3px;
+      background: #D57028;
+      border-radius: 2px;
+      margin: 8px 0;
     }
 
     /* ======================== */
     /* RESPONSIVE               */
     /* ======================== */
-    @media (max-width: 640px) {
-      .gate-card {
-        padding: 40px 28px;
-      }
-
-      .gate-card h1 {
-        font-size: 2rem;
-      }
-
-      .gate-card p {
-        font-size: 0.95rem;
-      }
-
-      .pres-header {
-        padding: 12px 16px;
-      }
-
-      .pres-title {
-        font-size: 0.9rem;
-      }
-
-      .pres-body {
-        padding: 16px 12px 30px;
-      }
-
-      .pres-placeholder h2 {
-        font-size: 1.8rem;
-      }
-
-      .pres-cta-bar {
-        flex-direction: column;
-        text-align: center;
-      }
+    @media (max-width: 768px) {
+      .gate-card { padding: 40px 28px; }
+      .gate-card h1 { font-size: 2rem; }
+      .gate-card p { font-size: 0.95rem; }
+      .pres-header { padding: 10px 12px; }
+      .pres-title { font-size: 0.8rem; }
+      .deck-container { padding: 12px 8px 16px; }
+      .slide { padding: 4% 5%; }
+      .s-cols { flex-direction: column; gap: 10px; }
+      .stat-box { min-width: 70px; padding: 8px 6px; }
+      .deck-nav-btn { padding: 8px 18px; font-size: 0.7rem; }
+      .pres-cta-bar { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .stat-row { gap: 6px; }
+      .stat-num { font-size: 1rem; }
     }
   </style>
 </head>
@@ -390,8 +470,6 @@
   <!-- SCREEN 1: EMAIL GATE          -->
   <!-- ============================= -->
   <div id="email-gate">
-
-    <!-- Sengo Logo -->
     <svg class="gate-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
       <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z" fill="currentColor"/>
       <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
@@ -399,21 +477,13 @@
       <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
       <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
     </svg>
-
     <div class="gate-card">
       <span class="gate-badge">Investor Preview</span>
       <h1>Pre-Seed<br>Pitch Deck</h1>
       <p>Enter your email to access the Sengo pre-seed investment presentation.</p>
-
-      <!-- ============================================== -->
-      <!-- KAJABI FORM: Replace this section with your    -->
-      <!-- Kajabi embed code. The form should live inside -->
-      <!-- the .kajabi-form-container div.                -->
-      <!-- ============================================== -->
       <div class="kajabi-form-container" id="kajabi-form-wrapper">
         <script src="https://app.bysengo.com/forms/2149477022/embed.js"></script>
       </div>
-
       <p class="gate-footer">
         By entering your email you agree to our
         <a href="#">Privacy Policy</a>.
@@ -425,7 +495,6 @@
   <!-- SCREEN 2: PRESENTATION DECK   -->
   <!-- ============================= -->
   <div id="presentation-screen">
-
     <div class="pres-header">
       <div class="pres-header-left">
         <svg class="pres-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
@@ -440,31 +509,467 @@
       <span class="pres-badge">Confidential</span>
     </div>
 
-    <div class="pres-body">
-      <div class="pres-embed-wrapper">
-        <div class="pres-embed-aspect">
+    <div class="deck-container">
+      <div class="deck-viewport">
+        <div class="deck-slides" id="deck-slides">
 
-          <!-- ============================================== -->
-          <!-- DECK EMBED: Replace the placeholder below with -->
-          <!-- your presentation embed (Google Slides, Canva, -->
-          <!-- Pitch, PDF viewer, etc.)                       -->
-          <!--                                                -->
-          <!-- Example Google Slides embed:                   -->
-          <!-- <iframe src="https://docs.google.com/presentation/d/e/XXXX/embed?start=false&loop=false&delayms=3000" allowfullscreen></iframe> -->
-          <!--                                                -->
-          <!-- Example Canva embed:                           -->
-          <!-- <div style="position:relative;width:100%;height:0;padding-top:56.25%"><iframe src="https://www.canva.com/design/XXXX/view?embed" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen></iframe></div> -->
-          <!-- ============================================== -->
+          <!-- SLIDE 1: COVER -->
+          <div class="slide slide-gradient active" data-slide="0">
+            <span class="s-badge s-badge-light">Pre-Seed Investment Opportunity</span>
+            <h1 class="s-title s-title-xl">Reimagining<br>Fundraising<br>& Investing</h1>
+            <div class="s-divider" style="background:#F3EDE7;"></div>
+            <p class="s-sub" style="opacity:0.8;">Education &middot; Community &middot; Access</p>
+            <p class="s-sub s-sub-sm" style="opacity:0.5; margin-top: auto;">Confidential &middot; March 2026</p>
+          </div>
 
-          <div class="pres-placeholder">
-            <h2>Pitch Deck</h2>
-            <p>Replace this placeholder with your presentation embed code (Google Slides, Canva, Pitch, etc.)</p>
+          <!-- SLIDE 2: THE PROBLEM -->
+          <div class="slide slide-dark" data-slide="1">
+            <span class="s-badge s-badge-light">The Problem</span>
+            <h2 class="s-title s-title-lg">A $14 Trillion<br>Wealth Gap</h2>
+            <div class="s-cols" style="margin-top:12px;">
+              <div class="s-col">
+                <p class="s-sub s-sub-sm" style="opacity:0.6; text-transform:uppercase; letter-spacing:1px; font-weight:700; margin-bottom:6px;">Founder Side</p>
+                <ul class="s-list" style="color:#F3EDE7;">
+                  <li>5.5M businesses start annually; <strong>&lt;3% receive venture funding</strong></li>
+                  <li>Women & POC receive <strong>&lt;2% of VC dollars</strong> despite founding nearly half of all new businesses</li>
+                </ul>
+              </div>
+              <div class="s-col">
+                <p class="s-sub s-sub-sm" style="opacity:0.6; text-transform:uppercase; letter-spacing:1px; font-weight:700; margin-bottom:6px;">Investor Side</p>
+                <ul class="s-list" style="color:#F3EDE7;">
+                  <li>49M Americans eligible to invest in private companies; <strong>&lt;2% actually do</strong></li>
+                  <li>Locked out of the <strong>fastest-growing asset class</strong>&mdash;$14.9T in private market AUM</li>
+                </ul>
+              </div>
+            </div>
+            <p class="s-sub s-sub-sm" style="opacity:0.6; margin-top:8px;">Private companies grew 67% to 35M since 1997. Public companies declined 55% to ~4,000. The wealth is in private markets&mdash;and communities are shut out.</p>
+          </div>
+
+          <!-- SLIDE 3: MARKET OPPORTUNITY -->
+          <div class="slide slide-light" data-slide="2">
+            <span class="s-badge">Market Opportunity</span>
+            <h2 class="s-title s-title-lg" style="color:#1B3533;">The Private Markets<br>Revolution</h2>
+            <div class="stat-row">
+              <div class="stat-box stat-box-light">
+                <div class="stat-num s-text-orange">$14.9T</div>
+                <div class="stat-label">Private Market AUM</div>
+              </div>
+              <div class="stat-box stat-box-light">
+                <div class="stat-num s-text-orange">$30T+</div>
+                <div class="stat-label">Projected within 5 Years</div>
+              </div>
+              <div class="stat-box stat-box-light">
+                <div class="stat-num s-text-orange">58%</div>
+                <div class="stat-label">Crowdfunding Surge in 2025</div>
+              </div>
+              <div class="stat-box stat-box-light">
+                <div class="stat-num s-text-orange">$925M</div>
+                <div class="stat-label">Investment Crowdfunding 2025</div>
+              </div>
+            </div>
+            <ul class="s-list" style="margin-top:8px;">
+              <li>Executive Order opened $12.5T defined-contribution market to alternative assets (Aug 2025)</li>
+              <li>Accredited investor expansion bill passed House 397&ndash;12&mdash;qualifying via expertise, not just wealth</li>
+              <li>BlackRock launching 401(k) target-date fund with 5&ndash;20% private allocation in 2026</li>
+            </ul>
+          </div>
+
+          <!-- SLIDE 4: THE SOLUTION -->
+          <div class="slide slide-orange" data-slide="3">
+            <span class="s-badge s-badge-light">The Solution</span>
+            <h2 class="s-title s-title-lg">Sengo: Education,<br>Community, Access</h2>
+            <p class="s-sub" style="opacity:0.9;">A SaaS platform reimagining fundraising and investing through three pillars:</p>
+            <div class="s-cols" style="margin-top: 6px;">
+              <div class="s-col" style="background:rgba(255,255,255,0.1); border-radius:10px; padding:14px;">
+                <p class="s-sub s-sub-sm" style="font-weight:700; margin-bottom:4px;">For Founders</p>
+                <p class="s-sub s-sub-sm" style="opacity:0.85;">Coaching programs, strategy sessions, and evergreen education to prepare founders to raise capital successfully</p>
+              </div>
+              <div class="s-col" style="background:rgba(255,255,255,0.1); border-radius:10px; padding:14px;">
+                <p class="s-sub s-sub-sm" style="font-weight:700; margin-bottom:4px;">For Funders</p>
+                <p class="s-sub s-sub-sm" style="opacity:0.85;">Modular learning, gamified deal flow, and transparent investment pathways to confidently navigate private markets</p>
+              </div>
+              <div class="s-col" style="background:rgba(255,255,255,0.1); border-radius:10px; padding:14px;">
+                <p class="s-sub s-sub-sm" style="font-weight:700; margin-bottom:4px;">For the Community</p>
+                <p class="s-sub s-sub-sm" style="opacity:0.85;">Digital hub, curated events blending culture & capital, social learning that turns supporters into active participants</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 5: FOUNDER STORY -->
+          <div class="slide slide-cream" data-slide="4">
+            <span class="s-badge">Founder</span>
+            <h2 class="s-title s-title-lg" style="color:#1B3533;">Ila Corcoran</h2>
+            <div class="s-divider"></div>
+            <p class="s-sub s-text-brown">At 13, Ila began searching for homes online to support her family. Real estate and alternative assets became her path forward, leading to <strong>$100M+ in transactions by age 24</strong>.</p>
+            <p class="s-sub s-text-brown">But success often meant winning alone&mdash;within systems built for individual gain and designed to extract rather than sustain generational wealth.</p>
+            <p class="s-sub s-text-brown"><strong>Sengo was created to change that</strong>&mdash;born from lived experience and the belief that wealth, opportunity, and ownership should be shared.</p>
+            <p class="s-sub s-sub-sm s-text-brown" style="opacity:0.6; margin-top:8px;"><em>In Japanese, Sengo (&#25126;&#24460;) means &ldquo;postwar&rdquo;&mdash;the era of renewal and rebuilding. A new era in capital markets, where communities become capital engines.</em></p>
+          </div>
+
+          <!-- SLIDE 6: TRACTION -->
+          <div class="slide slide-dark" data-slide="5">
+            <span class="s-badge s-badge-light">Traction &amp; Validation</span>
+            <h2 class="s-title s-title-lg">First 365 Days</h2>
+            <div class="stat-row">
+              <div class="stat-box">
+                <div class="stat-num">$212K</div>
+                <div class="stat-label">2025 Revenue</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num">4X</div>
+                <div class="stat-label">YoY Revenue Growth</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num">43%</div>
+                <div class="stat-label">Net Margin</div>
+              </div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-box">
+                <div class="stat-num">600+</div>
+                <div class="stat-label">Platform Members</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num">10K+</div>
+                <div class="stat-label">Email Subscribers</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num">46.5%</div>
+                <div class="stat-label">Open Rate (4X Avg)</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num">167X</div>
+                <div class="stat-label">Grant Multiplier</div>
+              </div>
+            </div>
+            <p class="s-sub s-sub-sm" style="opacity:0.6; margin-top:4px;">$32,150 in grants deployed to 19 founders &rarr; $5M+ raised by Sengo-supported founders. 30+ events hosted. All bootstrapped.</p>
+          </div>
+
+          <!-- SLIDE 7: BUSINESS MODEL -->
+          <div class="slide slide-light" data-slide="6">
+            <span class="s-badge">Business Model</span>
+            <h2 class="s-title s-title-md" style="color:#1B3533;">Five Revenue Streams</h2>
+            <div class="s-cols" style="margin-top:8px;">
+              <div class="s-col">
+                <table class="s-table">
+                  <tr><th colspan="3">Platform Subscriptions</th></tr>
+                  <tr><td>Founder Tier</td><td>$15/mo</td><td>Resources, advisory, deal showcase</td></tr>
+                  <tr><td>Investor Tier</td><td>$10/mo</td><td>Deal flow, education, community</td></tr>
+                  <tr><td>All Access</td><td>$25/mo</td><td>Full platform + priority events</td></tr>
+                </table>
+                <table class="s-table" style="margin-top:8px;">
+                  <tr><th colspan="3">Coaching Programs</th></tr>
+                  <tr><td>Foundation</td><td>$1,000/mo</td><td>12-week cohort, pitch prep</td></tr>
+                  <tr><td>Accelerator</td><td>$2,000/mo</td><td>1:1 intensive, campaign dev</td></tr>
+                </table>
+              </div>
+              <div class="s-col">
+                <table class="s-table">
+                  <tr><th colspan="2">B2B Sponsorship Tiers</th></tr>
+                  <tr><td>Event Partners</td><td>$10K&ndash;$25K</td></tr>
+                  <tr><td>Media Partners</td><td>$2K&ndash;$5K</td></tr>
+                  <tr><td>Platform Partners</td><td>$10K&ndash;$50K</td></tr>
+                  <tr><td>Ecosystem Partners</td><td>$75K+</td></tr>
+                </table>
+                <div style="margin-top:10px;">
+                  <p class="s-sub s-sub-sm s-text-brown"><strong>Events &amp; Experiences:</strong> Fashion X Futures, The Village retreats, virtual pitch events</p>
+                  <p class="s-sub s-sub-sm s-text-brown"><strong>Current MRR:</strong> $5,886 across 136 paying subscribers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 8: FINANCIAL PROJECTIONS -->
+          <div class="slide slide-light" data-slide="7">
+            <span class="s-badge">Financial Projections</span>
+            <h2 class="s-title s-title-md" style="color:#1B3533;">3-Year Revenue Trajectory</h2>
+            <table class="s-table">
+              <tr>
+                <th></th>
+                <th>2025 (Actual)</th>
+                <th>2026 (Proj)</th>
+                <th>2027 (Proj)</th>
+                <th>2028 (Proj)</th>
+              </tr>
+              <tr>
+                <td><strong>SaaS Subscriptions</strong></td>
+                <td>$18,230</td>
+                <td>$59,346</td>
+                <td>$205,530</td>
+                <td>$502,500</td>
+              </tr>
+              <tr>
+                <td><strong>Coaching Programs</strong></td>
+                <td>$2,000</td>
+                <td>$79,000</td>
+                <td>$177,000</td>
+                <td>$420,000</td>
+              </tr>
+              <tr>
+                <td><strong>Events &amp; Sales</strong></td>
+                <td>$73,890</td>
+                <td>$100,000</td>
+                <td>$160,000</td>
+                <td>$240,000</td>
+              </tr>
+              <tr>
+                <td><strong>B2B / Sponsorships</strong></td>
+                <td>&mdash;</td>
+                <td>$50,000</td>
+                <td>$255,000</td>
+                <td>$635,000</td>
+              </tr>
+              <tr>
+                <td><strong>Grants</strong></td>
+                <td>$69,656</td>
+                <td>$40,000</td>
+                <td>$20,000</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr class="highlight-row">
+                <td><strong>Total Revenue</strong></td>
+                <td><strong>$212K</strong></td>
+                <td><strong>$328K</strong></td>
+                <td><strong>$818K</strong></td>
+                <td><strong>$1.8M</strong></td>
+              </tr>
+              <tr>
+                <td>Gross Margin</td>
+                <td>90.7%</td>
+                <td>90%</td>
+                <td>90%</td>
+                <td>91%</td>
+              </tr>
+              <tr>
+                <td>Operating Margin</td>
+                <td>43.4%</td>
+                <td>(82%)</td>
+                <td>(3.5%)</td>
+                <td>32.8%</td>
+              </tr>
+              <tr>
+                <td>Paying Subscribers</td>
+                <td>132</td>
+                <td>515</td>
+                <td>1,650</td>
+                <td>3,600</td>
+              </tr>
+              <tr>
+                <td>Email Subscribers</td>
+                <td>10,000</td>
+                <td>25,000</td>
+                <td>60,000</td>
+                <td>120,000</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- SLIDE 9: UNIT ECONOMICS -->
+          <div class="slide slide-dark" data-slide="8">
+            <span class="s-badge s-badge-light">Unit Economics</span>
+            <h2 class="s-title s-title-md">Capital-Efficient Growth</h2>
+            <div class="stat-row" style="margin-top:12px;">
+              <div class="stat-box">
+                <div class="stat-num">$40&ndash;65</div>
+                <div class="stat-label">Blended CAC</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num">$540&ndash;900</div>
+                <div class="stat-label">Lifetime Value</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num">10&ndash;14X</div>
+                <div class="stat-label">LTV:CAC Ratio</div>
+              </div>
+            </div>
+            <div class="stat-row">
+              <div class="stat-box">
+                <div class="stat-num">1.3%</div>
+                <div class="stat-label">Email &rarr; Paid (Current)</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num">4&ndash;6%</div>
+                <div class="stat-label">Email &rarr; Paid (Target)</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-num">2.5%</div>
+                <div class="stat-label">Monthly Churn</div>
+              </div>
+            </div>
+            <p class="s-sub s-sub-sm" style="opacity:0.6; margin-top:10px;">Strong unit economics driven by organic community growth, high-engagement newsletter (46.5% open rate), and compounding network effects. Paid channels launch post-raise to accelerate an already-proven flywheel.</p>
+          </div>
+
+          <!-- SLIDE 10: COMPETITIVE LANDSCAPE -->
+          <div class="slide slide-light" data-slide="9">
+            <span class="s-badge">Competitive Landscape</span>
+            <h2 class="s-title s-title-md" style="color:#1B3533;">Full-Stack Advantage</h2>
+            <table class="s-table" style="margin-top:8px;">
+              <tr>
+                <th>Competitor</th>
+                <th>Focus</th>
+                <th>Gap</th>
+              </tr>
+              <tr>
+                <td>Republic, WeFunder, StartEngine</td>
+                <td>Transaction platforms (Reg CF)</td>
+                <td>No education, community, or founder support</td>
+              </tr>
+              <tr>
+                <td>AngelList, Allocations</td>
+                <td>Accredited investors & syndicates</td>
+                <td>Excludes non-accredited; narrow base</td>
+              </tr>
+              <tr>
+                <td>Cherub</td>
+                <td>Angel matchmaking ($79/mo)</td>
+                <td>No education, events, or deal infrastructure</td>
+              </tr>
+              <tr>
+                <td>YC, Techstars</td>
+                <td>Selective accelerators (&lt;3%)</td>
+                <td>No community wealth-building</td>
+              </tr>
+              <tr class="highlight-row">
+                <td><strong>Sengo</strong></td>
+                <td><strong>Education + Community + Access</strong></td>
+                <td><strong>Full-stack: advisory, events, platform, deal flow</strong></td>
+              </tr>
+            </table>
+            <p class="s-sub s-sub-sm s-text-brown" style="margin-top:10px;"><strong>Key differentiator:</strong> Sengo is the education and community layer that sits <em>beneath</em> the transaction platforms. We prepare founders to raise and investors to participate. Built on knowledge and trust&mdash;not tools that AI can replace.</p>
+          </div>
+
+          <!-- SLIDE 11: VALUATION COMPS -->
+          <div class="slide slide-cream" data-slide="10">
+            <span class="s-badge">Valuation Benchmarks</span>
+            <h2 class="s-title s-title-md" style="color:#1B3533;">Comparable Companies</h2>
+            <table class="s-table" style="margin-top:6px;">
+              <tr>
+                <th>Metric</th>
+                <th>Hello Alice</th>
+                <th>KingsCrowd</th>
+                <th>Cherub</th>
+                <th>Sengo</th>
+              </tr>
+              <tr>
+                <td>Valuation</td>
+                <td>$130M</td>
+                <td>$13.93M</td>
+                <td>N/D</td>
+                <td>$4&ndash;5M cap</td>
+              </tr>
+              <tr>
+                <td>Revenue</td>
+                <td>~$12.5M</td>
+                <td>$1.7M</td>
+                <td>~$50K</td>
+                <td>$217K</td>
+              </tr>
+              <tr>
+                <td>Total Raised</td>
+                <td>$43M</td>
+                <td>$7.4&ndash;22.6M</td>
+                <td>~$2M</td>
+                <td>$500K tgt</td>
+              </tr>
+              <tr>
+                <td>Community</td>
+                <td>1.5M+</td>
+                <td>8K+ raises</td>
+                <td>1K+ angels</td>
+                <td>10K+ subs</td>
+              </tr>
+              <tr>
+                <td>Model</td>
+                <td>B2B + community</td>
+                <td>Data + SaaS</td>
+                <td>Subscription</td>
+                <td>B2B + SaaS</td>
+              </tr>
+            </table>
+            <p class="s-sub s-sub-sm s-text-brown" style="margin-top:8px;">Hello Alice (Houston-based, identical B2B model) validates our approach at scale. Cherub raised ~$2M with ~$50K revenue&mdash;<strong>Sengo has 4X the revenue</strong> and a broader product offering. KingsCrowd's 8.2x revenue multiple benchmarks our valuation range.</p>
+          </div>
+
+          <!-- SLIDE 12: THE ASK -->
+          <div class="slide slide-gradient" data-slide="11">
+            <span class="s-badge s-badge-light">The Ask</span>
+            <h2 class="s-title s-title-lg">$500K Pre-Seed</h2>
+            <p class="s-sub" style="opacity:0.9;">Blended capital strategy: equity + non-dilutive financing</p>
+            <div class="s-cols" style="margin-top:10px;">
+              <div class="s-col">
+                <table class="s-table" style="background:rgba(255,255,255,0.05);">
+                  <tr><th>Instrument</th><th>Terms</th></tr>
+                  <tr style="color:#F3EDE7;"><td>SAFE (Post-Money)</td><td>$250K at $4&ndash;5M cap</td></tr>
+                  <tr style="color:#F3EDE7;"><td>Revenue-Based Financing</td><td>$150K at 5% rev share, 1.5x cap</td></tr>
+                  <tr style="color:#F3EDE7;"><td>CDFI / Non-Dilutive Loan</td><td>$100K at 2&ndash;6%, 5-year term</td></tr>
+                </table>
+                <p class="s-sub s-sub-sm" style="opacity:0.6; margin-top:8px;">Founder dilution: 5&ndash;6.3% | Annual debt service: ~$40K<br>RBF max repayment: $225K | 95% founder ownership retained</p>
+              </div>
+              <div class="s-col">
+                <table class="s-table" style="background:rgba(255,255,255,0.05);">
+                  <tr><th>Use of Funds</th><th>%</th></tr>
+                  <tr style="color:#F3EDE7;"><td>Technology &amp; Platform</td><td>30% &middot; $150K</td></tr>
+                  <tr style="color:#F3EDE7;"><td>Marketing &amp; Public Presence</td><td>25% &middot; $125K</td></tr>
+                  <tr style="color:#F3EDE7;"><td>Personnel</td><td>20% &middot; $100K</td></tr>
+                  <tr style="color:#F3EDE7;"><td>Compliance &amp; Legal</td><td>10% &middot; $50K</td></tr>
+                  <tr style="color:#F3EDE7;"><td>Events &amp; Community</td><td>10% &middot; $50K</td></tr>
+                  <tr style="color:#F3EDE7;"><td>Operations</td><td>5% &middot; $25K</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 13: MILESTONES & EXIT -->
+          <div class="slide slide-light" data-slide="12">
+            <span class="s-badge">Milestones &amp; Returns</span>
+            <h2 class="s-title s-title-md" style="color:#1B3533;">12&ndash;18 Month Roadmap</h2>
+            <div class="s-cols" style="margin-top:8px;">
+              <div class="s-col">
+                <table class="s-table">
+                  <tr><th>Timeline</th><th>Milestone</th></tr>
+                  <tr><td><strong>Mo 1&ndash;4</strong></td><td>Ship v2 platform, launch brand campaign, hire sales lead, 500 new members</td></tr>
+                  <tr><td><strong>Mo 5&ndash;8</strong></td><td>Matchmaking + investor modules, 8 coaching clients, 3 institutional partners, 2K members</td></tr>
+                  <tr><td><strong>Mo 9&ndash;12</strong></td><td>4K members, $600K+ ARR, flagship Sengo Summit, expand sales team</td></tr>
+                  <tr><td><strong>Mo 13&ndash;18</strong></td><td>$1.2M+ ARR, 30K email subs, 10+ B2B partners, Series A metrics</td></tr>
+                </table>
+              </div>
+              <div class="s-col">
+                <p class="s-sub s-sub-sm s-text-brown" style="font-weight:700; margin-bottom:6px;">Exit Analysis (2031, 8x Multiple)</p>
+                <table class="s-table">
+                  <tr><th>Year</th><th>Revenue</th><th>8x Valuation</th></tr>
+                  <tr><td>2028</td><td>$1.8M</td><td>$14.4M</td></tr>
+                  <tr><td>2029</td><td>$2.7M</td><td>$21.6M</td></tr>
+                  <tr><td>2030</td><td>$4.0M</td><td>$32.0M</td></tr>
+                  <tr class="highlight-row"><td>2031</td><td>$5.5M</td><td>$44.0M</td></tr>
+                </table>
+                <p class="s-sub s-sub-sm s-text-brown" style="margin-top:6px;">$250K SAFE at $5M cap &rarr; 5% equity<br>At $44M exit: <strong>$2.2M payout = 8.8X ROI</strong></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 14: CLOSING -->
+          <div class="slide slide-gradient" data-slide="13" style="text-align:center; align-items:center;">
+            <span class="s-badge s-badge-light">Join the Movement</span>
+            <h2 class="s-title s-title-xl" style="margin-bottom:16px;">Building the<br>Infrastructure for<br>Community Capital</h2>
+            <div class="s-divider" style="background:#F3EDE7; margin:0 auto 16px;"></div>
+            <p class="s-sub" style="max-width:600px; opacity:0.85;">We're not building another crowdfunding portal. We're building the infrastructure that makes private markets work for everyone&mdash;the education, community, and trust layer that the entire ecosystem needs.</p>
+            <p class="s-sub" style="font-weight:700; margin-top:16px; font-size:clamp(0.8rem, 1.3vw, 1.1rem);">$500K Pre-Seed &middot; $4&ndash;5M Cap &middot; 5&ndash;6% Dilution</p>
+            <p class="s-sub s-sub-sm" style="opacity:0.5; margin-top:auto;">sengo &middot; &#25126;&#24460; &middot; Confidential 2026</p>
           </div>
 
         </div>
       </div>
 
-      <!-- CTA below the deck -->
+      <!-- Slide Navigation -->
+      <div class="deck-nav">
+        <button class="deck-nav-btn" id="btn-prev" disabled>&larr; Prev</button>
+        <span class="deck-counter" id="deck-counter">1 / 14</span>
+        <button class="deck-nav-btn" id="btn-next">Next &rarr;</button>
+      </div>
+      <div class="deck-progress">
+        <div class="deck-progress-bar" id="deck-progress-bar" style="width:7.14%;"></div>
+      </div>
+
+      <!-- CTA below deck -->
       <div class="pres-cta-bar">
         <span class="pres-cta-text">Interested in learning more about our pre-seed round?</span>
         <a href="#" class="pres-cta-btn">Schedule a Call</a>
@@ -474,12 +979,10 @@
 
   <script>
     (function() {
+      /* EMAIL GATE LOGIC */
       var gate = document.getElementById('email-gate');
       var presentation = document.getElementById('presentation-screen');
 
-      /**
-       * Reveal the presentation screen with a smooth transition.
-       */
       function showPresentation() {
         gate.classList.add('hiding');
         setTimeout(function() {
@@ -489,73 +992,82 @@
         }, 600);
       }
 
-      // Expose globally so Kajabi can call it
       window.sengoShowDeck = showPresentation;
 
-      // Auto-unlock if URL contains ?access=granted (Kajabi redirect flow)
       if (window.location.search.indexOf('access=granted') !== -1) {
         gate.style.display = 'none';
         presentation.classList.add('active');
       }
 
-      /**
-       * KAJABI FORM DETECTION
-       * ---------------------
-       * Kajabi embedded forms don't fire a JS callback, so we use a
-       * MutationObserver to detect when the form submits and Kajabi
-       * replaces the form content with a success/thank-you message.
-       *
-       * We watch for:
-       *  1. The form element disappearing from the container
-       *  2. A success/thank-you element appearing
-       *  3. Any significant DOM change inside the form wrapper
-       */
       var formWrapper = document.getElementById('kajabi-form-wrapper');
       var formDetected = false;
       var hasSubmitted = false;
 
       var observer = new MutationObserver(function(mutations) {
         if (hasSubmitted) return;
-
-        // Check if a Kajabi form exists in the wrapper
         var kajabiForm = formWrapper.querySelector('form');
         if (kajabiForm && !formDetected) {
           formDetected = true;
-
-          // Listen for the native form submit event
           kajabiForm.addEventListener('submit', function() {
-            // Give Kajabi a moment to process, then reveal the deck
             setTimeout(function() {
-              if (!hasSubmitted) {
-                hasSubmitted = true;
-                showPresentation();
-              }
+              if (!hasSubmitted) { hasSubmitted = true; showPresentation(); }
             }, 1500);
           });
         }
-
-        // Also detect if Kajabi swaps the form for a thank-you message
         mutations.forEach(function(mutation) {
           if (!formDetected) return;
           mutation.addedNodes.forEach(function(node) {
             if (node.nodeType === 1) {
               var text = (node.textContent || '').toLowerCase();
               if (text.indexOf('thank') !== -1 || text.indexOf('success') !== -1 || text.indexOf('confirmed') !== -1) {
-                if (!hasSubmitted) {
-                  hasSubmitted = true;
-                  showPresentation();
-                }
+                if (!hasSubmitted) { hasSubmitted = true; showPresentation(); }
               }
             }
           });
         });
       });
 
-      observer.observe(formWrapper, {
-        childList: true,
-        subtree: true,
-        attributes: true
+      observer.observe(formWrapper, { childList: true, subtree: true, attributes: true });
+
+      /* SLIDE DECK ENGINE */
+      var slides = document.querySelectorAll('.slide');
+      var total = slides.length;
+      var current = 0;
+      var btnPrev = document.getElementById('btn-prev');
+      var btnNext = document.getElementById('btn-next');
+      var counter = document.getElementById('deck-counter');
+      var progressBar = document.getElementById('deck-progress-bar');
+
+      function goToSlide(n) {
+        if (n < 0 || n >= total) return;
+        slides[current].classList.remove('active');
+        current = n;
+        slides[current].classList.add('active');
+        btnPrev.disabled = current === 0;
+        btnNext.disabled = current === total - 1;
+        counter.textContent = (current + 1) + ' / ' + total;
+        progressBar.style.width = ((current + 1) / total * 100) + '%';
+      }
+
+      btnPrev.addEventListener('click', function() { goToSlide(current - 1); });
+      btnNext.addEventListener('click', function() { goToSlide(current + 1); });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goToSlide(current + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(current - 1); }
       });
+
+      /* Touch/swipe support */
+      var startX = 0;
+      var deckEl = document.getElementById('deck-slides');
+      deckEl.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+      deckEl.addEventListener('touchend', function(e) {
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) goToSlide(current + 1);
+          else goToSlide(current - 1);
+        }
+      }, { passive: true });
     })();
   </script>
 
