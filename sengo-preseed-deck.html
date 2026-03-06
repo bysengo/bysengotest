@@ -277,6 +277,82 @@
     .product-card:hover { flex: 2.5 !important; box-shadow: 0 12px 40px rgba(27,53,51,0.2) !important; z-index: 2; }
     .product-card:hover img { object-position: top center !important; }
 
+    /* Expand/collapse toggle button */
+    .deck-view-toggle {
+      padding: 6px 16px;
+      background: rgba(243,237,231,0.12);
+      border: 1px solid rgba(243,237,231,0.2);
+      border-radius: 30px;
+      color: #F3EDE7;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .deck-view-toggle:hover { background: #D57028; border-color: #D57028; }
+
+    /* Expanded mode */
+    body.expanded-mode .deck-viewport { overflow: visible; border-radius: 0; box-shadow: none; background: transparent; }
+    body.expanded-mode .deck-slides { padding-top: 0; display: flex; flex-direction: column; gap: 12px; }
+    body.expanded-mode .slide {
+      position: relative;
+      display: none;
+      min-height: 0;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(27,53,51,0.1);
+      padding: 5% 7%;
+      cursor: default;
+      overflow: hidden;
+    }
+    body.expanded-mode .slide.expanded { display: flex; }
+    body.expanded-mode .slide.active { display: none; }
+    body.expanded-mode .slide.expanded.active { display: flex; }
+
+    /* Section headers in expanded mode */
+    .section-header {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(27,53,51,0.08);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .section-header:hover { box-shadow: 0 4px 20px rgba(27,53,51,0.15); }
+    body.expanded-mode .section-header { display: flex; }
+    .section-header-num {
+      width: 28px; height: 28px;
+      background: #1B3533;
+      color: #F3EDE7;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .section-header-title {
+      flex: 1;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #1B3533;
+    }
+    .section-header-chevron {
+      font-size: 1rem;
+      color: #D57028;
+      transition: transform 0.3s ease;
+      font-weight: 700;
+    }
+    .section-header.open .section-header-chevron { transform: rotate(180deg); }
+
+    body.expanded-mode .deck-nav,
+    body.expanded-mode .deck-progress { display: none; }
+
     /* TAM/SAM/SOM animation */
     .tam-ring { opacity: 0; transform: scale(0.6); transition: opacity 0.6s ease, transform 0.6s ease; }
     .tam-ring.animate { opacity: 1; transform: scale(1); }
@@ -291,7 +367,10 @@
       <img class="pres-logo" src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/f28e57cc-eb1f-4898-a4fd-476adda1265a/4.png?format=1000w" alt="Sengo" style="filter: brightness(0) invert(1);">
       <span class="pres-title">Sengo Pre-Seed Deck</span>
     </div>
-    <span class="pres-badge">Confidential</span>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button class="deck-view-toggle" id="view-toggle" onclick="toggleExpandedView()">Expand All</button>
+      <span class="pres-badge">Confidential</span>
+    </div>
   </div>
 
   <div class="deck-container">
@@ -395,10 +474,10 @@
               </div>
               <div class="tam-detail">
                 <div style="display:flex; align-items:baseline; gap:8px;">
-                  <span style="font-family:'Arimo',sans-serif; font-size:clamp(1rem,2vw,1.8rem); font-weight:700; color:#D57028;">$18M</span>
+                  <span style="font-family:'Arimo',sans-serif; font-size:clamp(1rem,2vw,1.8rem); font-weight:700; color:#D57028;">$1.8M</span>
                   <span style="font-size:clamp(0.55rem,0.8vw,0.75rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; opacity:0.6;">Serviceable Obtainable</span>
                 </div>
-                <p class="s-sub s-sub-sm" style="opacity:0.6; margin:2px 0 0;">Year 3 target: 3,600 subscribers + B2B sponsorships + coaching + events at current conversion rates</p>
+                <p class="s-sub s-sub-sm" style="opacity:0.6; margin:2px 0 0;">Year 3 target: 3,600 subscribers + B2B sponsorships + coaching + events at projected conversion rates</p>
               </div>
             </div>
           </div>
@@ -922,6 +1001,60 @@
           else goToSlide(current - 1);
         }
       }, { passive: true });
+    })();
+
+    // Expanded accordion view
+    (function() {
+      var slidesContainer = document.getElementById('deck-slides');
+      var slides = slidesContainer.querySelectorAll('.slide');
+      var toggleBtn = document.getElementById('view-toggle');
+      var isExpanded = false;
+      var headers = [];
+
+      // Extract title from each slide's first s-badge
+      function getSlideTitle(slide) {
+        var badge = slide.querySelector('.s-badge, .s-badge-light');
+        return badge ? badge.textContent : 'Slide';
+      }
+
+      // Create section headers for each slide
+      slides.forEach(function(slide, i) {
+        var header = document.createElement('div');
+        header.className = 'section-header';
+        header.innerHTML =
+          '<span class="section-header-num">' + (i + 1) + '</span>' +
+          '<span class="section-header-title">' + getSlideTitle(slide) + '</span>' +
+          '<span class="section-header-chevron">&#9660;</span>';
+        header.setAttribute('data-slide-index', i);
+        header.addEventListener('click', function() {
+          var isOpen = header.classList.contains('open');
+          if (isOpen) {
+            header.classList.remove('open');
+            slide.classList.remove('expanded');
+          } else {
+            header.classList.add('open');
+            slide.classList.add('expanded');
+          }
+        });
+        slidesContainer.insertBefore(header, slide);
+        headers.push(header);
+      });
+
+      window.toggleExpandedView = function() {
+        isExpanded = !isExpanded;
+        if (isExpanded) {
+          document.body.classList.add('expanded-mode');
+          toggleBtn.textContent = 'Slideshow';
+          // Expand all by default
+          headers.forEach(function(h) { h.classList.add('open'); });
+          slides.forEach(function(s) { s.classList.add('expanded'); });
+        } else {
+          document.body.classList.remove('expanded-mode');
+          toggleBtn.textContent = 'Expand All';
+          headers.forEach(function(h) { h.classList.remove('open'); });
+          slides.forEach(function(s) { s.classList.remove('expanded'); });
+        }
+      };
     })();
   </script>
 
