@@ -771,8 +771,9 @@
                   <div class="stat-label">Investor Payout</div>
                 </div>
                 <div class="stat-box stat-box-light" style="text-align:center;">
-                  <div class="stat-num s-text-orange" id="calc-roi">8.8x</div>
-                  <div class="stat-label">Return on $250K SAFE</div>
+                  <div class="stat-num s-text-orange" id="calc-irr">55%</div>
+                  <div class="stat-label">Annualized Return (IRR)</div>
+                  <div id="calc-roi-sub" style="font-size:clamp(0.45rem,0.65vw,0.58rem); color:#AF8145; margin-top:2px;">8.8x total return on $250K</div>
                 </div>
               </div>
               <!-- Visual ROI bar -->
@@ -880,10 +881,12 @@
         document.getElementById('calc-valuation').textContent = '$' + valuation.toFixed(0) + 'M';
         document.getElementById('calc-equity').textContent = equity.toFixed(1) + '%';
         document.getElementById('calc-payout').textContent = '$' + payout.toFixed(1) + 'M';
-        document.getElementById('calc-roi').textContent = roi.toFixed(1) + 'x';
-        var barW = Math.min(roi / 20 * 100, 100);
+        var irr = (Math.pow(roi, 1 / yrs) - 1) * 100;
+        document.getElementById('calc-irr').textContent = irr.toFixed(0) + '%';
+        document.getElementById('calc-roi-sub').textContent = roi.toFixed(1) + 'x total return on $250K';
+        var barW = Math.min(irr / 100 * 100, 100);
         document.getElementById('calc-bar').style.width = barW + '%';
-        document.getElementById('calc-bar-label').textContent = roi.toFixed(1) + 'x return';
+        document.getElementById('calc-bar-label').textContent = irr.toFixed(0) + '% IRR · ' + roi.toFixed(1) + 'x total';
       }
       if (calcRevenue) {
         calcRevenue.addEventListener('input', updateCalc);
