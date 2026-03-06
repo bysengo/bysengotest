@@ -273,6 +273,10 @@
       .stat-num { font-size: 1rem; }
     }
 
+    /* Product card hover expand */
+    .product-card:hover { flex: 2.5 !important; box-shadow: 0 12px 40px rgba(27,53,51,0.2) !important; z-index: 2; }
+    .product-card:hover img { object-position: top center !important; }
+
     /* TAM/SAM/SOM animation */
     .tam-ring { opacity: 0; transform: scale(0.6); transition: opacity 0.6s ease, transform 0.6s ease; }
     .tam-ring.animate { opacity: 1; transform: scale(1); }
@@ -420,22 +424,37 @@
           </div>
         </div>
 
-        <!-- SLIDE: PRODUCT (Sengo platform screenshots) -->
+        <!-- SLIDE: PRODUCT (Sengo platform screenshots + tools) -->
         <div class="slide slide-light">
           <span class="s-badge">The Platform</span>
-          <h2 class="s-title s-title-md" style="color:#1B3533;">Sengo in Action</h2>
-          <div style="display:flex; gap:clamp(8px,1.5vw,16px); margin-top:10px; flex:1; min-height:0;">
-            <div style="flex:1; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(27,53,51,0.12); position:relative;">
-              <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1e6b8f5a-baa3-40a0-afad-1a6bd8771ae4/Screenshot+2026-02-09+at+7.58.19%E2%80%AFPM.png?format=1000w" alt="Sengo Platform" style="width:100%; height:100%; object-fit:cover; object-position:top;">
-              <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 12px; background:linear-gradient(transparent,rgba(27,53,51,0.7));">
-                <p style="font-size:clamp(0.5rem,0.7vw,0.65rem); color:#F3EDE7; font-weight:600; margin:0;">Community Dashboard</p>
+          <h2 class="s-title s-title-md" style="color:#1B3533;">AI-Powered Tools</h2>
+          <div style="display:flex; gap:clamp(8px,1.5vw,16px); margin-top:8px; flex:1; min-height:0;">
+            <div class="product-card" style="flex:1; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(27,53,51,0.12); position:relative; cursor:pointer; transition:flex 0.4s ease, box-shadow 0.3s ease;">
+              <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/1e6b8f5a-baa3-40a0-afad-1a6bd8771ae4/Screenshot+2026-02-09+at+7.58.19%E2%80%AFPM.png?format=1000w" alt="Dealflow Feed" style="width:100%; height:100%; object-fit:cover; object-position:top left; transition:object-position 0.4s ease;">
+              <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 12px; background:linear-gradient(transparent,rgba(27,53,51,0.8));">
+                <p style="font-size:clamp(0.5rem,0.7vw,0.65rem); color:#F3EDE7; font-weight:600; margin:0;">Dealflow Feed for Founders</p>
               </div>
             </div>
-            <div style="flex:1; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(27,53,51,0.12); position:relative;">
-              <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/fd96bf5e-b409-474e-b0a9-a3ab21bed38f/Screenshot+2026-02-09+at+7.13.10%E2%80%AFPM.png?format=1000w" alt="Sengo Platform" style="width:100%; height:100%; object-fit:cover; object-position:top;">
-              <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 12px; background:linear-gradient(transparent,rgba(27,53,51,0.7));">
-                <p style="font-size:clamp(0.5rem,0.7vw,0.65rem); color:#F3EDE7; font-weight:600; margin:0;">Learning &amp; Deal Flow</p>
+            <div class="product-card" style="flex:1; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(27,53,51,0.12); position:relative; cursor:pointer; transition:flex 0.4s ease, box-shadow 0.3s ease;">
+              <img src="https://images.squarespace-cdn.com/content/v1/64bef9c843c01a1201d98873/fd96bf5e-b409-474e-b0a9-a3ab21bed38f/Screenshot+2026-02-09+at+7.13.10%E2%80%AFPM.png?format=1000w" alt="International Capital Navigator" style="width:100%; height:100%; object-fit:cover; object-position:top left; transition:object-position 0.4s ease;">
+              <div style="position:absolute; bottom:0; left:0; right:0; padding:8px 12px; background:linear-gradient(transparent,rgba(27,53,51,0.8));">
+                <p style="font-size:clamp(0.5rem,0.7vw,0.65rem); color:#F3EDE7; font-weight:600; margin:0;">International Capital Compatibility Tool</p>
               </div>
+            </div>
+          </div>
+          <!-- Additional AI tools listed below -->
+          <div style="display:flex; gap:clamp(6px,1vw,12px); margin-top:clamp(6px,1vw,10px); flex-wrap:wrap;">
+            <div style="flex:1; min-width:120px; background:rgba(27,53,51,0.04); border:1px solid rgba(27,53,51,0.08); border-radius:8px; padding:clamp(6px,0.8vw,10px) clamp(8px,1vw,12px);">
+              <p class="s-sub s-sub-sm s-text-orange" style="font-weight:700; margin:0 0 2px;">Due Diligence Tool</p>
+              <p class="s-sub s-sub-sm s-text-brown" style="opacity:0.7; margin:0; font-size:clamp(0.45rem,0.65vw,0.6rem);">AI-powered analysis helping angels run comprehensive due diligence on deal opportunities</p>
+            </div>
+            <div style="flex:1; min-width:120px; background:rgba(27,53,51,0.04); border:1px solid rgba(27,53,51,0.08); border-radius:8px; padding:clamp(6px,0.8vw,10px) clamp(8px,1vw,12px);">
+              <p class="s-sub s-sub-sm s-text-orange" style="font-weight:700; margin:0 0 2px;">Fundraise Readiness Calculator</p>
+              <p class="s-sub s-sub-sm s-text-brown" style="opacity:0.7; margin:0; font-size:clamp(0.45rem,0.65vw,0.6rem);">Score and benchmark founder readiness before launching a capital raise</p>
+            </div>
+            <div style="flex:1; min-width:120px; background:rgba(27,53,51,0.04); border:1px solid rgba(27,53,51,0.08); border-radius:8px; padding:clamp(6px,0.8vw,10px) clamp(8px,1vw,12px);">
+              <p class="s-sub s-sub-sm s-text-orange" style="font-weight:700; margin:0 0 2px;">Int'l Capital Pathways Navigator</p>
+              <p class="s-sub s-sub-sm s-text-brown" style="opacity:0.7; margin:0; font-size:clamp(0.45rem,0.65vw,0.6rem);">Map cross-border investment routes and regulatory compatibility in real-time</p>
             </div>
           </div>
         </div>
