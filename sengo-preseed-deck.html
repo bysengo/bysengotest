@@ -277,8 +277,8 @@
     .product-card:hover { flex: 2.5 !important; box-shadow: 0 12px 40px rgba(27,53,51,0.2) !important; z-index: 2; }
     .product-card:hover img { object-position: top center !important; }
 
-    /* Expand/collapse toggle button */
-    .deck-view-toggle {
+    /* Fullscreen toggle button */
+    .deck-fullscreen-btn {
       padding: 6px 16px;
       background: rgba(243,237,231,0.12);
       border: 1px solid rgba(243,237,231,0.2);
@@ -291,67 +291,53 @@
       letter-spacing: 1px;
       cursor: pointer;
       transition: all 0.2s ease;
+      display: flex; align-items: center; gap: 6px;
     }
-    .deck-view-toggle:hover { background: #D57028; border-color: #D57028; }
+    .deck-fullscreen-btn:hover { background: #D57028; border-color: #D57028; }
 
-    /* Expanded mode */
-    body.expanded-mode .deck-viewport { overflow: visible; border-radius: 0; box-shadow: none; background: transparent; }
-    body.expanded-mode .deck-slides { padding-top: 0; display: flex; flex-direction: column; gap: 12px; }
-    body.expanded-mode .slide {
-      position: relative;
-      display: none;
-      min-height: 0;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(27,53,51,0.1);
-      padding: 5% 7%;
-      cursor: default;
-      overflow: hidden;
-    }
-    body.expanded-mode .slide.expanded { display: flex; }
-    body.expanded-mode .slide.active { display: none; }
-    body.expanded-mode .slide.expanded.active { display: flex; }
-
-    /* Section headers in expanded mode */
-    .section-header {
-      display: none;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 20px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(27,53,51,0.08);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      user-select: none;
-    }
-    .section-header:hover { box-shadow: 0 4px 20px rgba(27,53,51,0.15); }
-    body.expanded-mode .section-header { display: flex; }
-    .section-header-num {
-      width: 28px; height: 28px;
+    /* Fullscreen mode */
+    .deck-container:fullscreen,
+    .deck-container:-webkit-full-screen {
       background: #1B3533;
-      color: #F3EDE7;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.7rem; font-weight: 700;
-      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
     }
-    .section-header-title {
-      flex: 1;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #1B3533;
+    .deck-container:fullscreen .deck-viewport,
+    .deck-container:-webkit-full-screen .deck-viewport {
+      width: 100%;
+      max-width: 100%;
+      height: 100vh;
+      border-radius: 0;
+      box-shadow: none;
     }
-    .section-header-chevron {
-      font-size: 1rem;
-      color: #D57028;
-      transition: transform 0.3s ease;
-      font-weight: 700;
+    .deck-container:fullscreen .slide,
+    .deck-container:-webkit-full-screen .slide {
+      padding: 5% 8%;
     }
-    .section-header.open .section-header-chevron { transform: rotate(180deg); }
-
-    body.expanded-mode .deck-nav,
-    body.expanded-mode .deck-progress { display: none; }
+    .deck-container:fullscreen .deck-nav,
+    .deck-container:-webkit-full-screen .deck-nav {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      background: rgba(27,53,51,0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 40px;
+      padding: 8px 20px;
+    }
+    .deck-container:fullscreen .deck-progress,
+    .deck-container:-webkit-full-screen .deck-progress {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      border-radius: 0;
+    }
 
     /* TAM/SAM/SOM animation */
     .tam-ring { opacity: 0; transform: scale(0.6); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -368,7 +354,7 @@
       <span class="pres-title">Sengo Pre-Seed Deck</span>
     </div>
     <div style="display:flex; align-items:center; gap:10px;">
-      <button class="deck-view-toggle" id="view-toggle" onclick="toggleExpandedView()">Expand All</button>
+      <button class="deck-fullscreen-btn" id="fullscreen-btn" onclick="toggleFullscreen()">&#x26F6; Present</button>
       <span class="pres-badge">Confidential</span>
     </div>
   </div>
@@ -1003,58 +989,34 @@
       }, { passive: true });
     })();
 
-    // Expanded accordion view
+    // Fullscreen presentation mode
     (function() {
-      var slidesContainer = document.getElementById('deck-slides');
-      var slides = slidesContainer.querySelectorAll('.slide');
-      var toggleBtn = document.getElementById('view-toggle');
-      var isExpanded = false;
-      var headers = [];
+      var container = document.querySelector('.deck-container');
+      var btn = document.getElementById('fullscreen-btn');
 
-      // Extract title from each slide's first s-badge
-      function getSlideTitle(slide) {
-        var badge = slide.querySelector('.s-badge, .s-badge-light');
-        return badge ? badge.textContent : 'Slide';
-      }
-
-      // Create section headers for each slide
-      slides.forEach(function(slide, i) {
-        var header = document.createElement('div');
-        header.className = 'section-header';
-        header.innerHTML =
-          '<span class="section-header-num">' + (i + 1) + '</span>' +
-          '<span class="section-header-title">' + getSlideTitle(slide) + '</span>' +
-          '<span class="section-header-chevron">&#9660;</span>';
-        header.setAttribute('data-slide-index', i);
-        header.addEventListener('click', function() {
-          var isOpen = header.classList.contains('open');
-          if (isOpen) {
-            header.classList.remove('open');
-            slide.classList.remove('expanded');
-          } else {
-            header.classList.add('open');
-            slide.classList.add('expanded');
-          }
-        });
-        slidesContainer.insertBefore(header, slide);
-        headers.push(header);
-      });
-
-      window.toggleExpandedView = function() {
-        isExpanded = !isExpanded;
-        if (isExpanded) {
-          document.body.classList.add('expanded-mode');
-          toggleBtn.textContent = 'Slideshow';
-          // Expand all by default
-          headers.forEach(function(h) { h.classList.add('open'); });
-          slides.forEach(function(s) { s.classList.add('expanded'); });
+      window.toggleFullscreen = function() {
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+          if (container.requestFullscreen) container.requestFullscreen();
+          else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
         } else {
-          document.body.classList.remove('expanded-mode');
-          toggleBtn.textContent = 'Expand All';
-          headers.forEach(function(h) { h.classList.remove('open'); });
-          slides.forEach(function(s) { s.classList.remove('expanded'); });
+          if (document.exitFullscreen) document.exitFullscreen();
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
         }
       };
+
+      function onFSChange() {
+        var isFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        btn.innerHTML = isFS ? '&#x2716; Exit' : '&#x26F6; Present';
+      }
+      document.addEventListener('fullscreenchange', onFSChange);
+      document.addEventListener('webkitfullscreenchange', onFSChange);
+
+      // ESC key also exits via browser, but add keyboard nav in fullscreen
+      document.addEventListener('keydown', function(e) {
+        if (!(document.fullscreenElement || document.webkitFullscreenElement)) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); document.getElementById('btn-next').click(); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); document.getElementById('btn-prev').click(); }
+      });
     })();
   </script>
 
