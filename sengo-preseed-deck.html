@@ -706,33 +706,51 @@
             <div class="s-col" style="flex:0 0 42%;">
               <div style="background:#fff; border-radius:12px; padding:clamp(10px,1.5vw,18px); box-shadow:0 4px 20px rgba(27,53,51,0.08);">
                 <label style="display:block; margin-bottom:clamp(8px,1vw,14px);">
-                  <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">Exit Year Revenue</span>
+                  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                    <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">Exit Year Revenue</span>
+                    <span style="font-size:clamp(0.4rem,0.6vw,0.55rem); color:#AF8145; opacity:0.7;">Our model: $1.8M yr3, $5.5M yr5</span>
+                  </div>
                   <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
                     <input type="range" id="calc-revenue" min="1" max="15" step="0.5" value="5.5" style="flex:1; accent-color:#D57028;">
                     <span id="calc-revenue-val" style="font-family:'Arimo',sans-serif; font-weight:700; font-size:clamp(0.9rem,1.5vw,1.3rem); color:#D57028; min-width:55px;">$5.5M</span>
                   </div>
                 </label>
                 <label style="display:block; margin-bottom:clamp(8px,1vw,14px);">
-                  <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">Revenue Multiple</span>
+                  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                    <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">Revenue Multiple</span>
+                    <span style="font-size:clamp(0.4rem,0.6vw,0.55rem); color:#AF8145; opacity:0.7;">SaaS avg 6&ndash;12x &middot; High-growth 15&ndash;20x</span>
+                  </div>
                   <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
                     <input type="range" id="calc-multiple" min="3" max="20" step="0.5" value="8" style="flex:1; accent-color:#D57028;">
                     <span id="calc-multiple-val" style="font-family:'Arimo',sans-serif; font-weight:700; font-size:clamp(0.9rem,1.5vw,1.3rem); color:#D57028; min-width:40px;">8x</span>
                   </div>
                 </label>
                 <label style="display:block; margin-bottom:clamp(8px,1vw,14px);">
-                  <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">SAFE Cap</span>
+                  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                    <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">SAFE Cap</span>
+                    <span style="font-size:clamp(0.4rem,0.6vw,0.55rem); color:#AF8145; opacity:0.7;">Lower cap = more equity for investor</span>
+                  </div>
                   <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
                     <input type="range" id="calc-cap" min="3" max="8" step="0.5" value="5" style="flex:1; accent-color:#D57028;">
                     <span id="calc-cap-val" style="font-family:'Arimo',sans-serif; font-weight:700; font-size:clamp(0.9rem,1.5vw,1.3rem); color:#D57028; min-width:40px;">$5M</span>
                   </div>
                 </label>
                 <label style="display:block;">
-                  <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">Exit Timeline</span>
+                  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                    <span style="font-size:clamp(0.55rem,0.8vw,0.72rem); font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#67441A;">Exit Timeline</span>
+                    <span style="font-size:clamp(0.4rem,0.6vw,0.55rem); color:#AF8145; opacity:0.7;">Typical pre-seed: 5&ndash;7 years</span>
+                  </div>
                   <div style="display:flex; align-items:center; gap:6px; margin-top:4px;">
                     <input type="range" id="calc-years" min="3" max="8" step="1" value="5" style="flex:1; accent-color:#D57028;">
                     <span id="calc-years-val" style="font-family:'Arimo',sans-serif; font-weight:700; font-size:clamp(0.9rem,1.5vw,1.3rem); color:#D57028; min-width:55px;">5 yrs</span>
                   </div>
                 </label>
+              </div>
+              <!-- Preset scenario buttons -->
+              <div style="display:flex; gap:clamp(4px,0.5vw,6px); margin-top:clamp(6px,0.8vw,10px);">
+                <button onclick="setScenario(1.8,6,5,3)" style="flex:1; padding:clamp(4px,0.5vw,6px) 4px; background:rgba(27,53,51,0.06); border:1px solid rgba(27,53,51,0.12); border-radius:6px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:clamp(0.4rem,0.6vw,0.55rem); font-weight:600; color:#67441A; text-align:center;">Conservative<br><span style="color:#D57028; font-weight:700;">3.6x</span></button>
+                <button onclick="setScenario(5.5,8,5,5)" style="flex:1; padding:clamp(4px,0.5vw,6px) 4px; background:rgba(213,112,40,0.08); border:1px solid rgba(213,112,40,0.2); border-radius:6px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:clamp(0.4rem,0.6vw,0.55rem); font-weight:600; color:#67441A; text-align:center;">Base Case<br><span style="color:#D57028; font-weight:700;">8.8x</span></button>
+                <button onclick="setScenario(10,12,4,6)" style="flex:1; padding:clamp(4px,0.5vw,6px) 4px; background:rgba(27,53,51,0.06); border:1px solid rgba(27,53,51,0.12); border-radius:6px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:clamp(0.4rem,0.6vw,0.55rem); font-weight:600; color:#67441A; text-align:center;">Upside<br><span style="color:#D57028; font-weight:700;">30x</span></button>
               </div>
             </div>
             <div class="s-col">
@@ -761,7 +779,7 @@
                 <div id="calc-bar" style="height:100%; background:linear-gradient(90deg,#D57028,#AF8145); border-radius:8px; width:44%; transition:width 0.4s ease;"></div>
                 <span id="calc-bar-label" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); font-size:clamp(0.5rem,0.7vw,0.65rem); font-weight:700; color:#1B3533;">8.8x return</span>
               </div>
-              <p class="s-sub s-sub-sm s-text-brown" style="opacity:0.5; margin-top:6px;">Drag the sliders to model different scenarios. Based on $250K SAFE investment.</p>
+              <p class="s-sub s-sub-sm s-text-brown" style="opacity:0.5; margin-top:6px;">Drag sliders or pick a scenario. Based on $250K SAFE investment. Revenue from our 3-year financial model.</p>
             </div>
           </div>
         </div>
@@ -872,6 +890,16 @@
         calcCap.addEventListener('input', updateCalc);
         calcYears.addEventListener('input', updateCalc);
       }
+
+      // Preset scenario loader
+      window.setScenario = function(rev, mult, cap, yrs) {
+        if (!calcRevenue) return;
+        calcRevenue.value = rev;
+        calcMultiple.value = mult;
+        calcCap.value = cap;
+        calcYears.value = yrs;
+        updateCalc();
+      };
 
       // Hook into slide navigation for TAM animation
       var origGoToSlide = goToSlide;
