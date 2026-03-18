@@ -267,10 +267,95 @@
       .stat-box { min-width: 70px; padding: 8px 6px; }
       .deck-nav-btn { padding: 8px 18px; font-size: 0.7rem; }
       .pres-cta-bar { flex-direction: column; text-align: center; }
+      /* Table scroll on tablet */
+      .s-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .s-table { min-width: 420px; }
     }
     @media (max-width: 480px) {
       .stat-row { gap: 6px; }
       .stat-num { font-size: 1rem; }
+      /* Mobile: compact header */
+      .pres-header { padding: 6px 10px; gap: 6px; }
+      .pres-title { font-size: 0.7rem; letter-spacing: 0.5px; }
+      .pres-badge { font-size: 0.55rem; padding: 3px 10px; }
+      .pres-logo { width: 24px; }
+      .deck-fullscreen-btn { font-size: 0.55rem; padding: 4px 10px; }
+      /* Mobile: edge-to-edge slides */
+      .deck-container { padding: 8px 4px 12px; min-height: calc(100vh - 36px); }
+      .deck-viewport { border-radius: 8px; }
+      .slide { padding: 5% 5%; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+      /* Mobile: bigger touch nav buttons */
+      .deck-nav { margin-top: 10px; gap: 8px; }
+      .deck-nav-btn { padding: 12px 20px; font-size: 0.7rem; min-height: 44px; }
+      .deck-counter { font-size: 0.75rem; }
+      /* Mobile: stat boxes 2-col grid */
+      .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+      .stat-box { min-width: 0; }
+      .stat-num { font-size: clamp(0.9rem, 4vw, 1.2rem); }
+      .stat-label { font-size: clamp(0.4rem, 1.8vw, 0.55rem); }
+      /* Mobile: table scroll */
+      .s-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 4px -2%; padding: 0 2%; }
+      .s-table { min-width: 360px; font-size: clamp(0.5rem, 2.5vw, 0.7rem); }
+      .s-table th, .s-table td { padding: 5px 6px; }
+      /* Mobile: title sizes */
+      .s-title-xl { font-size: clamp(1.6rem, 8vw, 2.5rem); }
+      .s-title-lg { font-size: clamp(1.3rem, 6vw, 2rem); }
+      .s-title-md { font-size: clamp(1.1rem, 5vw, 1.6rem); }
+      .s-sub { font-size: clamp(0.65rem, 3vw, 0.85rem); margin-bottom: 8px; }
+      .s-sub-sm { font-size: clamp(0.55rem, 2.5vw, 0.75rem); }
+      .s-badge { font-size: 0.5rem; padding: 3px 10px; letter-spacing: 1.5px; margin-bottom: 8px; }
+      .s-divider { margin: 6px 0; }
+      /* Mobile: CTA bar */
+      .pres-cta-bar { margin-top: 14px; gap: 10px; }
+      .pres-cta-text { font-size: 0.75rem; }
+      .pres-cta-btn { padding: 10px 24px; font-size: 0.75rem; }
+      /* Mobile: lists */
+      .s-list li { padding: 3px 0 3px 14px; font-size: clamp(0.55rem, 2.8vw, 0.78rem); }
+      .s-list li::before { top: 9px; width: 6px; height: 6px; }
+    }
+
+    /* Mobile tap zones for advancing slides */
+    .slide-tap-zone {
+      position: absolute; top: 0; height: 100%; width: 20%; z-index: 10; cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .slide-tap-zone--left { left: 0; }
+    .slide-tap-zone--right { right: 0; }
+    .slide-tap-zone:active { background: rgba(255,255,255,0.05); }
+
+    /* Mobile present mode: hide header, full viewport */
+    body.mobile-present .pres-header { display: none; }
+    body.mobile-present .deck-container {
+      padding: 0; min-height: 100vh; background: #1B3533;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    body.mobile-present .deck-viewport {
+      max-width: 100%; border-radius: 0; box-shadow: none; flex: 1; display: flex; flex-direction: column;
+    }
+    body.mobile-present .deck-slides { flex: 1; padding-top: 0; }
+    body.mobile-present .slide { position: relative; height: 100%; }
+    body.mobile-present .deck-nav {
+      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+      background: rgba(27,53,51,0.85); backdrop-filter: blur(10px);
+      border-radius: 40px; padding: 6px 16px; z-index: 100; max-width: 90%;
+    }
+    body.mobile-present .deck-nav-btn { background: transparent; color: #F3EDE7; padding: 8px 14px; }
+    body.mobile-present .deck-progress {
+      position: fixed; bottom: 0; left: 0; width: 100%; z-index: 100; border-radius: 0;
+    }
+    body.mobile-present .pres-cta-bar { display: none; }
+
+    /* Swipe hint animation */
+    @keyframes swipeHint {
+      0%, 100% { opacity: 0; transform: translateX(0); }
+      30% { opacity: 0.6; transform: translateX(-12px); }
+      70% { opacity: 0.6; transform: translateX(12px); }
+    }
+    .swipe-hint {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      font-size: 0.6rem; color: rgba(255,255,255,0.5); font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase; pointer-events: none;
+      animation: swipeHint 2.5s ease-in-out 1s 2;
     }
 
     /* Product card hover expand */
@@ -354,7 +439,7 @@
       <span class="pres-title">Sengo Pre-Seed Deck</span>
     </div>
     <div style="display:flex; align-items:center; gap:10px;">
-      <button class="deck-fullscreen-btn" id="fullscreen-btn" onclick="toggleFullscreen()">&#x26F6; Present</button>
+      <button class="deck-fullscreen-btn" id="fullscreen-btn" onclick="togglePresent()">&#x26F6; Present</button>
       <span class="pres-badge">Confidential</span>
     </div>
   </div>
@@ -362,6 +447,9 @@
   <div class="deck-container">
     <div class="deck-viewport">
       <div class="deck-slides" id="deck-slides">
+        <!-- Mobile tap zones -->
+        <div class="slide-tap-zone slide-tap-zone--left" id="tap-prev"></div>
+        <div class="slide-tap-zone slide-tap-zone--right" id="tap-next"></div>
 
         <!-- SLIDE 1: COVER -->
         <div class="slide slide-gradient active">
@@ -584,26 +672,26 @@
           <h2 class="s-title s-title-md" style="color:#1B3533;">Five Revenue Streams</h2>
           <div class="s-cols" style="margin-top:8px;">
             <div class="s-col">
-              <table class="s-table">
+              <div class="s-table-wrap"><table class="s-table">
                 <tr><th colspan="3">Platform Subscriptions</th></tr>
                 <tr><td>Founder Tier</td><td>$15/mo</td><td>Resources, advisory, deal showcase</td></tr>
                 <tr><td>Investor Tier</td><td>$10/mo</td><td>Deal flow, education, community</td></tr>
                 <tr><td>All Access</td><td>$25/mo</td><td>Full platform + priority events</td></tr>
-              </table>
-              <table class="s-table" style="margin-top:8px;">
+              </table></div>
+              <div class="s-table-wrap"><table class="s-table" style="margin-top:8px;">
                 <tr><th colspan="3">Coaching Programs</th></tr>
                 <tr><td>Foundation</td><td>$1,000/mo</td><td>12-week cohort, pitch prep</td></tr>
                 <tr><td>Accelerator</td><td>$2,000/mo</td><td>1:1 intensive, campaign dev</td></tr>
-              </table>
+              </table></div>
             </div>
             <div class="s-col">
-              <table class="s-table">
+              <div class="s-table-wrap"><table class="s-table">
                 <tr><th colspan="2">B2B Sponsorship Tiers</th></tr>
                 <tr><td>Event Partners</td><td>$10K&ndash;$25K</td></tr>
                 <tr><td>Media Partners</td><td>$2K&ndash;$5K</td></tr>
                 <tr><td>Platform Partners</td><td>$10K&ndash;$50K</td></tr>
                 <tr><td>Ecosystem Partners</td><td>$75K+</td></tr>
-              </table>
+              </table></div>
               <div style="margin-top:10px;">
                 <p class="s-sub s-sub-sm s-text-brown"><strong>Events &amp; Experiences:</strong> Fashion X Futures, The Village retreats, virtual pitch events</p>
                 <p class="s-sub s-sub-sm s-text-brown"><strong>Current MRR:</strong> $5,886 across 136 paying subscribers</p>
@@ -616,7 +704,7 @@
         <div class="slide slide-light">
           <span class="s-badge">Financial Projections</span>
           <h2 class="s-title s-title-md" style="color:#1B3533;">3-Year Revenue Trajectory</h2>
-          <table class="s-table">
+          <div class="s-table-wrap"><table class="s-table">
             <tr><th></th><th>2025 (Actual)</th><th>2026 (Proj)</th><th>2027 (Proj)</th><th>2028 (Proj)</th></tr>
             <tr><td><strong>SaaS Subscriptions</strong></td><td>$18,230</td><td>$59,346</td><td>$205,530</td><td>$502,500</td></tr>
             <tr><td><strong>Coaching Programs</strong></td><td>$2,000</td><td>$79,000</td><td>$177,000</td><td>$420,000</td></tr>
@@ -628,7 +716,7 @@
             <tr><td>Operating Margin</td><td>43.4%</td><td>(82%)</td><td>(3.5%)</td><td>32.8%</td></tr>
             <tr><td>Paying Subscribers</td><td>132</td><td>515</td><td>1,650</td><td>3,600</td></tr>
             <tr><td>Email Subscribers</td><td>10,000</td><td>25,000</td><td>60,000</td><td>120,000</td></tr>
-          </table>
+          </table></div>
         </div>
 
         <!-- SLIDE 9: DETAILED FINANCIAL MODEL -->
@@ -637,7 +725,7 @@
           <h2 class="s-title s-title-md" style="color:#1B3533;">Operating Expense &amp; Profitability</h2>
           <div class="s-cols" style="margin-top:6px;">
             <div class="s-col">
-              <table class="s-table">
+              <div class="s-table-wrap"><table class="s-table">
                 <tr><th>Operating Expenses</th><th>2025</th><th>2026</th><th>2027</th><th>2028</th></tr>
                 <tr><td>Personnel</td><td>$17K</td><td>$180K</td><td>$340K</td><td>$480K</td></tr>
                 <tr><td>Technology &amp; Platform</td><td>$12K</td><td>$85K</td><td>$120K</td><td>$150K</td></tr>
@@ -646,17 +734,17 @@
                 <tr><td>Compliance &amp; Legal</td><td>$5K</td><td>$45K</td><td>$50K</td><td>$55K</td></tr>
                 <tr><td>Operations &amp; Admin</td><td>$12K</td><td>$18K</td><td>$28K</td><td>$35K</td></tr>
                 <tr class="highlight-row"><td><strong>Total OpEx</strong></td><td><strong>$96K</strong></td><td><strong>$498K</strong></td><td><strong>$778K</strong></td><td><strong>$1.02M</strong></td></tr>
-              </table>
+              </table></div>
             </div>
             <div class="s-col">
-              <table class="s-table">
+              <div class="s-table-wrap"><table class="s-table">
                 <tr><th>Profitability Path</th><th>2025</th><th>2026</th><th>2027</th><th>2028</th></tr>
                 <tr><td>Revenue</td><td>$212K</td><td>$328K</td><td>$818K</td><td>$1.8M</td></tr>
                 <tr><td>Gross Profit (90%)</td><td>$192K</td><td>$295K</td><td>$736K</td><td>$1.64M</td></tr>
                 <tr><td>Total OpEx</td><td>$96K</td><td>$498K</td><td>$778K</td><td>$1.02M</td></tr>
                 <tr class="highlight-row"><td><strong>Net Income</strong></td><td><strong>$96K</strong></td><td><strong>($203K)</strong></td><td><strong>($42K)</strong></td><td><strong>$620K</strong></td></tr>
                 <tr><td>Cash Runway</td><td>&mdash;</td><td>18 mo</td><td>12 mo</td><td>Self-sust.</td></tr>
-              </table>
+              </table></div>
               <div style="margin-top:8px;">
                 <p class="s-sub s-sub-sm s-text-brown"><strong>Key assumptions:</strong></p>
                 <ul class="s-list" style="font-size:clamp(0.5rem,0.8vw,0.7rem);">
@@ -693,25 +781,25 @@
           <h2 class="s-title s-title-md" style="color:#1B3533;">Full-Stack Advantage</h2>
           <div class="s-cols" style="margin-top:6px;">
             <div class="s-col">
-              <table class="s-table">
+              <div class="s-table-wrap"><table class="s-table">
                 <tr><th>Competitor</th><th>Focus</th><th>Gap</th></tr>
                 <tr><td>Republic / WeFunder / StartEngine</td><td>Transaction (Reg CF)</td><td>No education or community</td></tr>
                 <tr><td>AngelList / Allocations</td><td>Accredited syndicates</td><td>Excludes non-accredited</td></tr>
                 <tr><td>Cherub</td><td>Angel matching ($79/mo)</td><td>No events/education</td></tr>
                 <tr><td>YC / Techstars</td><td>Elite accelerators (&lt;3%)</td><td>No community wealth</td></tr>
                 <tr class="highlight-row"><td><strong>Sengo</strong></td><td><strong>AI + Edu + Community + Access</strong></td><td><strong>Full-stack platform</strong></td></tr>
-              </table>
+              </table></div>
             </div>
             <div class="s-col">
               <p class="s-sub s-sub-sm s-text-brown" style="font-weight:700; margin-bottom:4px;">Recent M&amp;A &amp; Fundraising Activity</p>
-              <table class="s-table">
+              <div class="s-table-wrap"><table class="s-table">
                 <tr><th>Deal</th><th>Details</th></tr>
                 <tr><td>Republic acquired by INX</td><td>$60M+ deal (2024); validates tokenized securities + community capital convergence</td></tr>
                 <tr><td>StartEngine secondary market</td><td>$58M raised to date; building resale marketplace&mdash;still no education layer</td></tr>
                 <tr><td>Hello Alice Series B</td><td>$25M raise at $130M val; identical B2B+community model for SMBs</td></tr>
                 <tr><td>KingsCrowd acquisition by DealMaker</td><td>Data + analytics bolt-on; signals demand for intelligence layer</td></tr>
                 <tr><td>Carta acquires Vauban</td><td>$80M+ deal; expanding from cap tables to full fund admin</td></tr>
-              </table>
+              </table></div>
               <p class="s-sub s-sub-sm s-text-brown" style="opacity:0.7; margin-top:4px;"><strong>Signal:</strong> Acquirers are buying AI-powered education, data, and community layers&mdash;exactly what Sengo builds.</p>
             </div>
           </div>
@@ -721,14 +809,14 @@
         <div class="slide slide-cream">
           <span class="s-badge">Valuation Benchmarks</span>
           <h2 class="s-title s-title-md" style="color:#1B3533;">Comparable Companies</h2>
-          <table class="s-table" style="margin-top:6px;">
+          <div class="s-table-wrap"><table class="s-table" style="margin-top:6px;">
             <tr><th>Metric</th><th>Hello Alice</th><th>KingsCrowd</th><th>Cherub</th><th>Sengo</th></tr>
             <tr><td>Valuation</td><td>$130M</td><td>$13.93M</td><td>N/D</td><td>$4&ndash;5M cap</td></tr>
             <tr><td>Revenue</td><td>~$12.5M</td><td>$1.7M</td><td>~$50K</td><td>$217K</td></tr>
             <tr><td>Total Raised</td><td>$43M</td><td>$7.4&ndash;22.6M</td><td>~$2M</td><td>$500K tgt</td></tr>
             <tr><td>Community</td><td>1.5M+</td><td>8K+ raises</td><td>1K+ angels</td><td>10K+ subs</td></tr>
             <tr><td>Model</td><td>B2B + community</td><td>Data + SaaS</td><td>Subscription</td><td>B2B + SaaS</td></tr>
-          </table>
+          </table></div>
           <p class="s-sub s-sub-sm s-text-brown" style="margin-top:8px;">Hello Alice (Houston-based, identical B2B model) validates our approach at scale. Cherub raised ~$2M with ~$50K revenue&mdash;<strong>Sengo has 4X the revenue</strong> and a broader product offering. KingsCrowd's 8.2x revenue multiple benchmarks our valuation range.</p>
         </div>
 
@@ -739,16 +827,16 @@
           <p class="s-sub" style="opacity:0.9;">Blended capital strategy: equity + non-dilutive financing</p>
           <div class="s-cols" style="margin-top:10px;">
             <div class="s-col">
-              <table class="s-table" style="background:rgba(255,255,255,0.05);">
+              <div class="s-table-wrap"><table class="s-table" style="background:rgba(255,255,255,0.05);">
                 <tr><th>Instrument</th><th>Terms</th></tr>
                 <tr style="color:#F3EDE7;"><td>SAFE (Post-Money)</td><td>$250K at $4&ndash;5M cap</td></tr>
                 <tr style="color:#F3EDE7;"><td>Revenue-Based Financing</td><td>$150K at 5% rev share, 1.5x cap</td></tr>
                 <tr style="color:#F3EDE7;"><td>CDFI / Non-Dilutive Loan</td><td>$100K at 2&ndash;6%, 5-year term</td></tr>
-              </table>
+              </table></div>
               <p class="s-sub s-sub-sm" style="opacity:0.6; margin-top:8px;">Founder dilution: 5&ndash;6.3% | Annual debt service: ~$40K<br>RBF max repayment: $225K | 95% founder ownership retained</p>
             </div>
             <div class="s-col">
-              <table class="s-table" style="background:rgba(255,255,255,0.05);">
+              <div class="s-table-wrap"><table class="s-table" style="background:rgba(255,255,255,0.05);">
                 <tr><th>Use of Funds</th><th>%</th></tr>
                 <tr style="color:#F3EDE7;"><td>AI &amp; Platform Technology</td><td>30% &middot; $150K</td></tr>
                 <tr style="color:#F3EDE7;"><td>Marketing &amp; Public Presence</td><td>25% &middot; $125K</td></tr>
@@ -756,7 +844,7 @@
                 <tr style="color:#F3EDE7;"><td>Compliance &amp; Legal</td><td>10% &middot; $50K</td></tr>
                 <tr style="color:#F3EDE7;"><td>Events &amp; Community</td><td>10% &middot; $50K</td></tr>
                 <tr style="color:#F3EDE7;"><td>Operations</td><td>5% &middot; $25K</td></tr>
-              </table>
+              </table></div>
             </div>
           </div>
         </div>
@@ -765,13 +853,13 @@
         <div class="slide slide-light">
           <span class="s-badge">Milestones</span>
           <h2 class="s-title s-title-md" style="color:#1B3533;">12&ndash;18 Month Roadmap</h2>
-          <table class="s-table" style="margin-top:8px;">
+          <div class="s-table-wrap"><table class="s-table" style="margin-top:8px;">
             <tr><th>Timeline</th><th>Milestone</th><th>Key Metrics</th></tr>
             <tr><td><strong>Mo 1&ndash;4</strong></td><td>Ship v2 platform, launch brand campaign, hire sales lead</td><td>500 new members, 3 sponsors</td></tr>
             <tr><td><strong>Mo 5&ndash;8</strong></td><td>AI matchmaking + investor modules, coaching cohorts live</td><td>2K members, 8 coaching clients, 3 institutional partners</td></tr>
             <tr><td><strong>Mo 9&ndash;12</strong></td><td>Flagship Sengo Summit, expand sales team</td><td>4K members, $600K+ ARR</td></tr>
             <tr><td><strong>Mo 13&ndash;18</strong></td><td>Series A readiness, national expansion</td><td>$1.2M+ ARR, 30K email subs, 10+ B2B partners</td></tr>
-          </table>
+          </table></div>
         </div>
 
         <!-- SLIDE: INTERACTIVE VALUATION / EXIT CALCULATOR -->
@@ -999,18 +1087,40 @@
       }, { passive: true });
     })();
 
-    // Fullscreen presentation mode
+    // Present mode (fullscreen on desktop, mobile-present class on mobile)
     (function() {
       var container = document.querySelector('.deck-container');
       var btn = document.getElementById('fullscreen-btn');
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
 
-      window.toggleFullscreen = function() {
-        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-          if (container.requestFullscreen) container.requestFullscreen();
-          else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+      window.togglePresent = function() {
+        if (isMobile || !document.fullscreenEnabled) {
+          // Mobile: toggle CSS-based present mode
+          document.body.classList.toggle('mobile-present');
+          var isPresenting = document.body.classList.contains('mobile-present');
+          btn.innerHTML = isPresenting ? '&#x2716; Exit' : '&#x26F6; Present';
+          if (isPresenting) {
+            window.scrollTo(0, 0);
+            // Lock scroll
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            document.body.style.height = '100%';
+          } else {
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+            document.body.style.height = '';
+          }
         } else {
-          if (document.exitFullscreen) document.exitFullscreen();
-          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          // Desktop: use native fullscreen
+          if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+            if (container.requestFullscreen) container.requestFullscreen();
+            else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+          } else {
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          }
         }
       };
 
@@ -1021,12 +1131,24 @@
       document.addEventListener('fullscreenchange', onFSChange);
       document.addEventListener('webkitfullscreenchange', onFSChange);
 
-      // ESC key also exits via browser, but add keyboard nav in fullscreen
+      // Keyboard nav in fullscreen
       document.addEventListener('keydown', function(e) {
         if (!(document.fullscreenElement || document.webkitFullscreenElement)) return;
         if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); document.getElementById('btn-next').click(); }
         if (e.key === 'ArrowLeft') { e.preventDefault(); document.getElementById('btn-prev').click(); }
       });
+
+      // Tap zones for mobile
+      var tapPrev = document.getElementById('tap-prev');
+      var tapNext = document.getElementById('tap-next');
+      if (tapPrev) tapPrev.addEventListener('click', function() { document.getElementById('btn-prev').click(); });
+      if (tapNext) tapNext.addEventListener('click', function() { document.getElementById('btn-next').click(); });
+
+      // Only show tap zones on touch devices
+      if (!('ontouchstart' in window)) {
+        if (tapPrev) tapPrev.style.display = 'none';
+        if (tapNext) tapNext.style.display = 'none';
+      }
     })();
   </script>
 
