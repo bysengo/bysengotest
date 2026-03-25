@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo — Empowering the Next Generation of Founders</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #111111;
+      --bg-card-hover: #1a1a1a;
+      --border: #222222;
+      --border-hover: #333333;
+      --text: #f5f5f5;
+      --text-muted: #888888;
+      --accent: #D57028;
+      --accent-glow: rgba(213, 112, 40, 0.15);
+      --green: #717E36;
+      --green-glow: rgba(113, 126, 54, 0.15);
+      --cream: #F3EDE7;
+      --teal: #1B3533;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* --- NAV --- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo svg {
+      width: 36px;
+      height: 24px;
+    }
+
+    .nav-logo span {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    /* --- HERO --- */
+    .hero {
+      padding: 10rem 2rem 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(213, 112, 40, 0.1);
+      border: 1px solid rgba(213, 112, 40, 0.25);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent), #e8944a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card);
+    }
+
+    /* --- LOGO BAR --- */
+    .logos {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logos p {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .logo-track {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3.5rem;
+      flex-wrap: wrap;
+      opacity: 0.4;
+    }
+
+    .logo-track span {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    /* --- STATS --- */
+    .stats {
+      padding: 5rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--text), var(--text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+      font-weight: 500;
+    }
+
+    /* --- SECTION HEADINGS --- */
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* --- PRICING --- */
+    .pricing {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* --- CARD --- */
+    .card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--border);
+      transition: background 0.35s;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .card:hover::before {
+      background: var(--accent);
+    }
+
+    .card-featured {
+      border-color: rgba(213, 112, 40, 0.3);
+    }
+
+    .card-featured::before {
+      background: var(--accent);
+    }
+
+    .card-featured:hover {
+      border-color: rgba(213, 112, 40, 0.5);
+      box-shadow: 0 20px 60px rgba(213, 112, 40, 0.1);
+    }
+
+    .card-enterprise {
+      border-color: rgba(113, 126, 54, 0.3);
+    }
+
+    .card-enterprise::before {
+      background: var(--green);
+    }
+
+    .card-enterprise:hover {
+      border-color: rgba(113, 126, 54, 0.5);
+      box-shadow: 0 20px 60px rgba(113, 126, 54, 0.1);
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      margin-bottom: 1.25rem;
+      width: fit-content;
+    }
+
+    .tag-starter {
+      background: rgba(245, 245, 245, 0.06);
+      color: var(--text-muted);
+    }
+
+    .tag-growth {
+      background: rgba(213, 112, 40, 0.12);
+      color: var(--accent);
+    }
+
+    .tag-popular {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .tag-advisory {
+      background: rgba(113, 126, 54, 0.12);
+      color: #a3b34a;
+    }
+
+    .card-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .card-price {
+      margin-bottom: 1.75rem;
+    }
+
+    .card-price .amount {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .card-price .period {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .card-price .custom {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .card-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 1.75rem;
+    }
+
+    /* --- HOVER DETAILS --- */
+    .card-features {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .card-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding: 0.45rem 0;
+      transition: color 0.25s;
+    }
+
+    .card:hover .card-features li {
+      color: var(--text);
+    }
+
+    .card-features li .check {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(113, 126, 54, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .card-features li .check svg {
+      width: 10px;
+      height: 10px;
+      stroke: var(--green);
+    }
+
+    /* --- HOVER EXAMPLES PANEL --- */
+    .card-examples {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s, margin 0.35s;
+      opacity: 0;
+      margin-top: 0;
+    }
+
+    .card:hover .card-examples {
+      max-height: 400px;
+      opacity: 1;
+      margin-top: 0.5rem;
+    }
+
+    .examples-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .example-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.6rem 0.8rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .example-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .example-item .example-text {
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .example-item .example-text strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 1px;
+    }
+
+    .example-item .example-text span {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    .card-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 0.85rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+      margin-top: auto;
+    }
+
+    .btn-default {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-default:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-hover);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-accent:hover {
+      box-shadow: 0 6px 24px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    .btn-green {
+      background: rgba(113, 126, 54, 0.15);
+      color: #a3b34a;
+      border: 1px solid rgba(113, 126, 54, 0.3);
+    }
+
+    .btn-green:hover {
+      background: rgba(113, 126, 54, 0.25);
+    }
+
+    /* --- CTA SECTION --- */
+    .cta-section {
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box {
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-box h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .cta-box p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .email-form {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .email-form input {
+      flex: 1;
+      padding: 0.85rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .email-form input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .email-form input:focus {
+      border-color: var(--accent);
+    }
+
+    .email-form button {
+      padding: 0.85rem 1.8rem;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+
+    .email-form button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px var(--accent-glow);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--text); }
+
+    /* --- MOBILE --- */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .hero { padding: 8rem 1.25rem 4rem; }
+      .stats { gap: 2rem; padding: 3rem 1.25rem; }
+      .stat-num { font-size: 2.25rem; }
+      .pricing { padding: 4rem 1.25rem; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .email-form { flex-direction: column; }
+      .logo-track { gap: 2rem; }
+    }
+
+    /* --- ANIMATIONS --- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hover hint pulse */
+    .hover-hint {
+      display: inline-block;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      opacity: 0.6;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    .card:hover .hover-hint { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 1400 900" fill="currentColor">
+      <path d="M380 170 Q480 180 680 230 Q660 240 680 250 L680 800 Q420 700 150 550 Q140 540 150 520 Z"/>
+      <path d="M620 480 Q640 460 720 480 Q780 490 840 520 Q900 550 940 580 Q980 600 1040 640 Q1100 680 1140 720 Q1160 740 1180 770 Q1200 800 1220 830" stroke="currentColor" stroke-width="25" fill="none" stroke-linecap="round"/>
+      <path d="M720 500 Q760 480 800 480 Q820 480 840 490 Q860 500 880 520 Q900 540 900 560 Q900 580 880 600 Q860 620 840 630 Q820 640 800 640 Q780 640 760 630" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      <path d="M880 520 Q920 500 960 500 Q1000 500 1040 520 Q1080 540 1100 560" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+      <path d="M1020 540 Q1040 520 1080 520 Q1120 520 1160 540 Q1200 560 1240 600 Q1260 620 1280 650" stroke="currentColor" stroke-width="20" fill="none" stroke-linecap="round"/>
+    </svg>
+    <span>Sengo</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#pricing">Products</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#join" class="nav-cta">Join Sengo</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">&#10022; Building the future of founder funding</div>
+  <h1>Empowering the <span class="highlight">Next Generation</span> of Founders</h1>
+  <p>Sengo connects founders and funders through community, education, and strategic advisory — so you can raise smarter and build faster.</p>
+  <div class="hero-cta">
+    <a href="#pricing" class="btn btn-primary">View Products &#8595;</a>
+    <a href="#join" class="btn btn-secondary">Join the Community</a>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<section class="logos">
+  <p>Featured In</p>
+  <div class="logo-track">
+    <span>Forbes</span>
+    <span>NerdWallet</span>
+    <span>Nasdaq</span>
+    <span>Black Girl Ventures</span>
+    <span>Business Insider</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat fade-up">
+    <div class="stat-num">90+</div>
+    <div class="stat-label">Annual Touchpoints</div>
+  </div>
+  <div class="stat fade-up">
+    <div class="stat-num">600</div>
+    <div class="stat-label">App Members</div>
+  </div>
+  <div class="stat fade-up">
+    <div class="stat-num">$5M+</div>
+    <div class="stat-label">Capital Raised</div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-header fade-up">
+    <h2>Choose Your Path</h2>
+    <p>From community access to hands-on advisory — find the tier that matches where you are in your journey.</p>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- FOUNDER -->
+    <div class="card fade-up">
+      <span class="card-tag tag-starter">Community</span>
+      <h3 class="card-name">Founder</h3>
+      <p class="card-desc">Essential community access, curated content, and peer networking for early-stage founders.</p>
+      <div class="card-price">
+        <span class="amount">$25</span><span class="period">/mo</span>
+      </div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Access to Sengo community app</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Curated founder resources</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Monthly virtual workshops</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Peer networking events</li>
+      </ul>
+      <div class="card-examples">
+        <div class="examples-label">What you get — examples</div>
+        <div class="example-item">
+          <span class="example-icon">&#128218;</span>
+          <div class="example-text">
+            <strong>Pitch Deck Templates</strong>
+            <span>Proven frameworks used by funded founders</span>
+          </div>
+        </div>
+        <div class="example-item">
+          <span class="example-icon">&#127908;</span>
+          <div class="example-text">
+            <strong>Monthly AMA Sessions</strong>
+            <span>Live Q&A with VCs and seasoned entrepreneurs</span>
+          </div>
+        </div>
+        <div class="example-item">
+          <span class="example-icon">&#129309;</span>
+          <div class="example-text">
+            <strong>Peer Matching</strong>
+            <span>Get paired with founders at your stage</span>
+          </div>
+        </div>
+      </div>
+      <span class="hover-hint">&#8593; Hover to see examples</span>
+      <a href="#join" class="card-btn btn-default">Get Started</a>
+    </div>
+
+    <!-- INVESTOR -->
+    <div class="card fade-up">
+      <span class="card-tag tag-growth">Funder Access</span>
+      <h3 class="card-name">Investor</h3>
+      <p class="card-desc">Deal flow, founder introductions, and exclusive funder community for active and aspiring investors.</p>
+      <div class="card-price">
+        <span class="amount">$30</span><span class="period">/mo</span>
+      </div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Curated deal flow pipeline</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Founder intro requests</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Investor-only events</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Due diligence resources</li>
+      </ul>
+      <div class="card-examples">
+        <div class="examples-label">What you get — examples</div>
+        <div class="example-item">
+          <span class="example-icon">&#128200;</span>
+          <div class="example-text">
+            <strong>Monthly Deal Flow Digest</strong>
+            <span>Vetted startups across sectors seeking funding</span>
+          </div>
+        </div>
+        <div class="example-item">
+          <span class="example-icon">&#127793;</span>
+          <div class="example-text">
+            <strong>Investor Roundtables</strong>
+            <span>Small-group sessions with active angel investors</span>
+          </div>
+        </div>
+        <div class="example-item">
+          <span class="example-icon">&#128270;</span>
+          <div class="example-text">
+            <strong>DD Checklists & Frameworks</strong>
+            <span>Standardized due diligence process templates</span>
+          </div>
+        </div>
+      </div>
+      <span class="hover-hint">&#8593; Hover to see examples</span>
+      <a href="#join" class="card-btn btn-default">Get Started</a>
+    </div>
+
+    <!-- ALL ACCESS -->
+    <div class="card card-featured fade-up">
+      <span class="card-tag tag-popular">Most Popular</span>
+      <h3 class="card-name">All Access</h3>
+      <p class="card-desc">Full community access for founders and funders — everything in one membership, both sides of the table.</p>
+      <div class="card-price">
+        <span class="amount">$50</span><span class="period">/mo</span>
+      </div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Everything in Founder + Investor</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Cross-community networking</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Priority event access</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Exclusive founder-funder mixers</li>
+      </ul>
+      <div class="card-examples">
+        <div class="examples-label">What you get — examples</div>
+        <div class="example-item">
+          <span class="example-icon">&#128165;</span>
+          <div class="example-text">
+            <strong>Founder-Funder Speed Dating</strong>
+            <span>Quarterly matchmaking events for warm intros</span>
+          </div>
+        </div>
+        <div class="example-item">
+          <span class="example-icon">&#127942;</span>
+          <div class="example-text">
+            <strong>Demo Day Access</strong>
+            <span>Pitch or scout at exclusive showcase events</span>
+          </div>
+        </div>
+        <div class="example-item">
+          <span class="example-icon">&#128273;</span>
+          <div class="example-text">
+            <strong>Full Resource Vault</strong>
+            <span>Every template, playbook, and toolkit we offer</span>
+          </div>
+        </div>
+      </div>
+      <span class="hover-hint">&#8593; Hover to see examples</span>
+      <a href="#join" class="card-btn btn-accent">Get All Access</a>
+    </div>
+
+    <!-- FOUNDATION -->
+    <div class="card card-enterprise fade-up">
+      <span class="card-tag tag-advisory">Advisory</span>
+      <h3 class="card-name">Foundation</h3>
+      <p class="card-desc">Hands-on fundraise advisory for founders ready to raise their next round with expert guidance.</p>
+      <div class="card-price">
+        <span class="custom">Priced Upon Request</span>
+      </div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Fundraise advisory</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Investor intro strategy</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Pitch deck review &amp; coaching</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Financial narrative development</li>
+      </ul>
+      <div class="card-examples">
+        <div class="examples-label">What you get — examples</div>
+        <div class="example-item">
+          <span class="example-icon">&#127919;</span>
+          <div class="example-text">
+            <strong>Raise Readiness Audit</strong>
+            <span>Full assessment of your fundraise positioning</span>
+          </div>
+        </div>
+        <div class="example-item">
+          <span class="example-icon">&#128172;</span>
+          <div class="example-text">
+            <strong>1:1 Pitch Coaching</strong>
+            <span>Practice rounds with real investor feedback</span>
+          </div>
+        </div>
+        <div class="example-item">
+          <span class="example-icon">&#128203;</span>
+          <div class="example-text">
+            <strong>Investor Target List</strong>
+            <span>Curated list of 30+ aligned investors for your raise</span>
+          </div>
+        </div>
+      </div>
+      <span class="hover-hint">&#8593; Hover to see examples</span>
+      <a href="#join" class="card-btn btn-green">Request Info</a>
+    </div>
+
+    <!-- ACCELERATOR -->
+    <div class="card card-enterprise fade-up">
+      <span class="card-tag tag-advisory">Premium Advisory</span>
+      <h3 class="card-name">Accelerator</h3>
+      <p class="card-desc">Fractional CFO and fundraise advisory — full-spectrum financial leadership for high-growth founders.</p>
+      <div class="card-price">
+        <span class="custom">Priced Upon Request</span>
+      </div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Everything in Foundation</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Fractional CFO services</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Financial modeling &amp; forecasting</li>
+        <li><span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg></span>Board &amp; investor reporting</li>
+      </ul>
+      <div class="card-examples">
+        <div class="examples-label">What you get — examples</div>
+        <div class="example-item">
+          <span class="example-icon">&#128202;</span>
+          <div class="example-text">
+            <strong>Financial Model Build</strong>
+            <span>Investor-grade 3-year financial projections</span>
+          </div>
+        </div>
+        <div class="example-item">
+          <span class="example-icon">&#128176;</span>
+          <div class="example-text">
+            <strong>Cash Flow Management</strong>
+            <span>Runway tracking, burn analysis, and scenario planning</span>
+          </div>
+        </div>
+        <div class="example-item">
+          <span class="example-icon">&#128188;</span>
+          <div class="example-text">
+            <strong>Board Deck Preparation</strong>
+            <span>Monthly board-ready financial reports and KPIs</span>
+          </div>
+        </div>
+      </div>
+      <span class="hover-hint">&#8593; Hover to see examples</span>
+      <a href="#join" class="card-btn btn-green">Request Info</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="join">
+  <div class="cta-box fade-up">
+    <h2>Ready to Build Your Future?</h2>
+    <p>Join 600+ founders and funders already in the Sengo community. Drop your email and we'll reach out.</p>
+    <form class="email-form" onsubmit="event.preventDefault(); alert('Thanks! We\'ll be in touch.');">
+      <input type="email" placeholder="you@company.com" required>
+      <button type="submit">Join Sengo</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Sengo. All rights reserved. &nbsp;|&nbsp; <a href="#">Privacy</a> &nbsp;|&nbsp; <a href="#">Terms</a></p>
+</footer>
+
+<script>
+  // Scroll-triggered fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
