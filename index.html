@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sengo — Empowering the Next Generation of Founders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fefefe;
+      --surface: #ffffff;
+      --surface-2: #f4f0ff;
+      --border: #e2ddf5;
+      --text: #1a1035;
+      --text-dim: #6b6290;
+      --accent: #7c3aed;
+      --accent-light: #a78bfa;
+      --accent-glow: rgba(124, 58, 237, 0.15);
+      --green: #059669;
+      --green-light: #34d399;
+      --green-glow: rgba(5, 150, 105, 0.1);
+      --gold: #d97706;
+      --gold-light: #fbbf24;
+      --gold-glow: rgba(217, 119, 6, 0.08);
+      --orange: #ea580c;
+      --orange-light: #fb923c;
+      --orange-glow: rgba(234, 88, 12, 0.08);
+      --blue: #2563eb;
+      --blue-light: #60a5fa;
+      --blue-glow: rgba(37, 99, 235, 0.08);
+      --rose: #e11d48;
+      --rose-light: #fb7185;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--accent), var(--rose));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      color: var(--text-dim); text-decoration: none; font-size: 0.875rem;
+      font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent) !important; color: #fff !important;
+      padding: 8px 20px; border-radius: 8px; font-weight: 600;
+      transition: box-shadow 0.3s, transform 0.2s !important;
+    }
+    .nav-cta:hover {
+      box-shadow: 0 4px 20px var(--accent-glow); transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 120px 24px 80px; position: relative;
+      background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 25%, #fff7ed 50%, #f0fdf4 75%, #eff6ff 100%);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 500px 350px at 20% 30%, rgba(124,58,237,0.08), transparent),
+        radial-gradient(ellipse 400px 300px at 80% 60%, rgba(225,29,72,0.06), transparent),
+        radial-gradient(ellipse 300px 200px at 50% 80%, rgba(37,99,235,0.05), transparent);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white; border: 1px solid var(--border);
+      border-radius: 100px; padding: 6px 16px; font-size: 0.8rem;
+      color: var(--accent); font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 32px;
+      box-shadow: 0 2px 12px rgba(124,58,237,0.08);
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 8px var(--green-light);
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900;
+      line-height: 1.05; letter-spacing: -0.04em; max-width: 900px;
+      margin-bottom: 24px;
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--accent), var(--rose), var(--orange));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.2rem; color: var(--text-dim); max-width: 600px;
+      margin-bottom: 48px; line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 12px; font-size: 1rem;
+      font-weight: 600; text-decoration: none; transition: all 0.3s;
+      cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #9333ea);
+      color: #fff; box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,58,237,0.25); }
+    .btn-outline {
+      background: white; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); box-shadow: 0 4px 16px var(--accent-glow); }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 120px 24px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      display: inline-block; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 20px;
+    }
+    .section-subtitle {
+      font-size: 1.1rem; color: var(--text-dim); max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* ── WHAT WE DO ── */
+    #features {
+      background: linear-gradient(180deg, #fff 0%, #f5f3ff 50%, #fdf2f8 100%);
+    }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px; margin-top: 64px;
+    }
+    .feature-card {
+      background: white; border: 1px solid var(--border);
+      border-radius: 16px; padding: 36px;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .feature-card:hover {
+      border-color: var(--accent-light); transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(124,58,237,0.1);
+    }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 20px;
+    }
+    .feature-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+    .feature-card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; }
+
+    /* ── PRICING ── */
+    #pricing {
+      background: linear-gradient(180deg, #fdf2f8 0%, #f5f3ff 30%, #eff6ff 60%, #f0fdf4 100%);
+    }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 24px; margin-top: 64px;
+    }
+    .pricing-card {
+      position: relative; background: white; border: 1px solid var(--border);
+      border-radius: 20px; padding: 40px; overflow: hidden;
+      transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-6px);
+    }
+    .pricing-card.founder:hover { border-color: var(--green); box-shadow: 0 20px 60px rgba(5,150,105,0.12), 0 0 0 1px var(--green); }
+    .pricing-card.investor:hover { border-color: var(--blue); box-shadow: 0 20px 60px rgba(37,99,235,0.12), 0 0 0 1px var(--blue); }
+    .pricing-card.all-access:hover { border-color: var(--gold); box-shadow: 0 20px 60px rgba(217,119,6,0.12), 0 0 0 1px var(--gold); }
+    .pricing-card.foundation:hover { border-color: var(--accent); box-shadow: 0 20px 60px rgba(124,58,237,0.12), 0 0 0 1px var(--accent); }
+    .pricing-card.accelerator:hover { border-color: var(--orange); box-shadow: 0 20px 60px rgba(234,88,12,0.12), 0 0 0 1px var(--orange); }
+
+    .pricing-card .card-glow {
+      position: absolute; top: -80px; right: -80px;
+      width: 200px; height: 200px; border-radius: 50%;
+      opacity: 0; transition: opacity 0.5s; pointer-events: none; filter: blur(40px);
+    }
+    .pricing-card:hover .card-glow { opacity: 1; }
+    .pricing-card.founder .card-glow { background: rgba(52, 211, 153, 0.2); }
+    .pricing-card.investor .card-glow { background: rgba(96, 165, 250, 0.2); }
+    .pricing-card.all-access .card-glow { background: rgba(251, 191, 36, 0.2); }
+    .pricing-card.foundation .card-glow { background: rgba(167, 139, 250, 0.2); }
+    .pricing-card.accelerator .card-glow { background: rgba(251, 146, 60, 0.2); }
+
+    .pricing-tier {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .pricing-card.founder .pricing-tier { color: var(--green); }
+    .pricing-card.investor .pricing-tier { color: var(--blue); }
+    .pricing-card.all-access .pricing-tier { color: var(--gold); }
+    .pricing-card.foundation .pricing-tier { color: var(--accent); }
+    .pricing-card.accelerator .pricing-tier { color: var(--orange); }
+
+    .pricing-name { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .pricing-desc { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 24px; line-height: 1.6; }
+    .pricing-amount {
+      font-size: 2.8rem; font-weight: 900; letter-spacing: -0.03em;
+      margin-bottom: 4px;
+    }
+    .pricing-amount span { font-size: 1rem; font-weight: 500; color: var(--text-dim); }
+    .pricing-period { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 32px; }
+
+    .pricing-features { list-style: none; margin-bottom: 32px; }
+    .pricing-features li {
+      padding: 8px 0; font-size: 0.9rem; color: var(--text-dim);
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .pricing-features li::before {
+      content: '✓'; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .pricing-card.founder .pricing-features li::before { color: var(--green); }
+    .pricing-card.investor .pricing-features li::before { color: var(--blue); }
+    .pricing-card.all-access .pricing-features li::before { color: var(--gold); }
+    .pricing-card.foundation .pricing-features li::before { color: var(--accent); }
+    .pricing-card.accelerator .pricing-features li::before { color: var(--orange); }
+
+    .pricing-btn {
+      display: block; width: 100%; padding: 14px; border-radius: 12px;
+      text-align: center; font-size: 0.95rem; font-weight: 600;
+      text-decoration: none; transition: all 0.3s; border: none; cursor: pointer;
+    }
+    .pricing-card.founder .pricing-btn { background: var(--green); color: #fff; }
+    .pricing-card.founder .pricing-btn:hover { box-shadow: 0 4px 20px var(--green-glow); }
+    .pricing-card.investor .pricing-btn { background: var(--blue); color: #fff; }
+    .pricing-card.investor .pricing-btn:hover { box-shadow: 0 4px 20px var(--blue-glow); }
+    .pricing-card.all-access .pricing-btn {
+      background: linear-gradient(135deg, var(--accent), var(--rose), var(--orange));
+      color: #fff;
+    }
+    .pricing-card.all-access .pricing-btn:hover { box-shadow: 0 4px 20px rgba(124,58,237,0.2); }
+    .pricing-card.foundation .pricing-btn { background: var(--accent); color: #fff; }
+    .pricing-card.foundation .pricing-btn:hover { box-shadow: 0 4px 20px var(--accent-glow); }
+    .pricing-card.accelerator .pricing-btn { background: var(--orange); color: #fff; }
+    .pricing-card.accelerator .pricing-btn:hover { box-shadow: 0 4px 20px var(--orange-glow); }
+
+    /* Hover detail panel */
+    .hover-details {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s, margin 0.4s;
+      margin-top: 0;
+    }
+    .pricing-card:hover .hover-details {
+      max-height: 500px; opacity: 1; margin-top: 24px;
+    }
+    .hover-details-inner {
+      background: linear-gradient(135deg, #f5f3ff, #fdf2f8);
+      border-radius: 12px; padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .hover-details-title {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .example-list { list-style: none; }
+    .example-list li {
+      padding: 10px 0; font-size: 0.85rem; color: var(--text);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .example-list li:last-child { border-bottom: none; }
+    .example-list .ex-icon { font-size: 1rem; flex-shrink: 0; }
+
+    /* Popular badge */
+    .popular-badge {
+      position: absolute; top: 20px; right: 20px;
+      background: linear-gradient(135deg, var(--accent), var(--rose));
+      color: #fff; font-size: 0.7rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 100px; letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Advisory row */
+    .advisory-row {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 24px; margin-top: 24px;
+    }
+
+    /* ── STATS ── */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 32px; padding: 80px 24px; text-align: center;
+      background: white;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .stat-number {
+      font-size: 2.5rem; font-weight: 900; letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--accent), var(--rose));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { color: var(--text-dim); font-size: 0.85rem; margin-top: 4px; }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center; padding: 120px 24px;
+      position: relative;
+      background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 50%, #fff7ed 100%);
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 600px 350px at 50% 50%, rgba(124,58,237,0.06), transparent);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800;
+      margin-bottom: 20px; letter-spacing: -0.03em;
+    }
+    .cta-section p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 48px 24px;
+      text-align: center; background: white;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--rose));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    footer p { color: var(--text-dim); font-size: 0.85rem; }
+    .footer-links { display: flex; gap: 24px; justify-content: center; margin-top: 16px; }
+    .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .pricing-grid, .advisory-row { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      nav { padding: 0 20px; }
+      .nav-links { gap: 16px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav>
+  <div class="nav-logo">sengo</div>
+  <div class="nav-links">
+    <a href="#features">What We Do</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#cta" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="hero-badge">Now Enrolling</div>
+  <h1>Empowering the<br>Next Generation of <span class="gradient">Founders</span></h1>
+  <p>Sengo gives startup founders and investors the tools, community, and advisory they need to build, fundraise, and scale — all in one platform.</p>
+  <div class="hero-actions">
+    <a href="#pricing" class="btn btn-primary">View Plans ↓</a>
+    <a href="#features" class="btn btn-outline">Learn More</a>
+  </div>
+</section>
+
+<!-- ═══════ STATS ═══════ -->
+<div class="stats-bar" style="max-width:100%;">
+  <div><div class="stat-number">500+</div><div class="stat-label">Founders Supported</div></div>
+  <div><div class="stat-number">$12M+</div><div class="stat-label">Capital Raised</div></div>
+  <div><div class="stat-number">50+</div><div class="stat-label">Investor Partners</div></div>
+  <div><div class="stat-number">3</div><div class="stat-label">Continents</div></div>
+</div>
+
+<!-- ═══════ WHAT WE DO ═══════ -->
+<section id="features">
+  <div class="container">
+    <div class="section-label">// what we do</div>
+    <h2 class="section-title">Everything founders and<br>investors need to win</h2>
+    <p class="section-subtitle">From pitch deck reviews to fractional CFO services, Sengo covers every stage of the startup journey.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(5,150,105,0.08);color:var(--green);">📊</div>
+        <h3>Fundraise Advisory</h3>
+        <p>Expert guidance on building pitch decks, financial models, and investor outreach strategies to close your round.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(124,58,237,0.08);color:var(--accent);">💼</div>
+        <h3>Fractional CFO</h3>
+        <p>On-demand financial leadership — budgeting, forecasting, and board-ready reporting without the full-time hire.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(217,119,6,0.08);color:var(--gold);">🤝</div>
+        <h3>Community & Network</h3>
+        <p>Connect with vetted founders and investors in a private community built for accountability and collaboration.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(37,99,235,0.08);color:var(--blue);">📈</div>
+        <h3>Investor Deal Flow</h3>
+        <p>Access curated startup deal flow, diligence frameworks, and co-investment opportunities within the Sengo ecosystem.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(234,88,12,0.08);color:var(--orange);">🎓</div>
+        <h3>Courses & Workshops</h3>
+        <p>Self-paced courses and live workshops on fundraising, financial modeling, term sheets, and investor relations.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(0,0,0,0.04);color:var(--text);">⚡</div>
+        <h3>Templates & Tools</h3>
+        <p>Plug-and-play financial models, pitch deck templates, cap table calculators, and investor CRM tools.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PRICING ═══════ -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-label">// pricing</div>
+    <h2 class="section-title">Choose your path</h2>
+    <p class="section-subtitle">Whether you're building or investing, there's a Sengo plan designed for you. Hover any card to see what's included.</p>
+
+    <!-- Row 1: Subscription tiers -->
+    <div class="pricing-grid">
+
+      <!-- FOUNDER -->
+      <div class="pricing-card founder">
+        <div class="card-glow"></div>
+        <div class="pricing-tier">Founder Track</div>
+        <div class="pricing-name">Founder</div>
+        <div class="pricing-desc">For early-stage founders building their first or next startup.</div>
+        <div class="pricing-amount">$25<span>/mo</span></div>
+        <div class="pricing-period">Billed monthly · Cancel anytime</div>
+        <ul class="pricing-features">
+          <li>Founder community access</li>
+          <li>Pitch deck templates & tools</li>
+          <li>Financial model library</li>
+          <li>Monthly founder workshops</li>
+          <li>Fundraise readiness assessments</li>
+        </ul>
+        <a href="#cta" class="pricing-btn">Start as Founder</a>
+
+        <div class="hover-details">
+          <div class="hover-details-inner">
+            <div class="hover-details-title">What you get — examples</div>
+            <ul class="example-list">
+              <li><span class="ex-icon">📄</span> Investor-ready pitch deck template (10 slides, narrative framework)</li>
+              <li><span class="ex-icon">📊</span> SaaS financial model with 3-year projections & unit economics</li>
+              <li><span class="ex-icon">🗓️</span> Weekly "Ask Me Anything" sessions with active VCs</li>
+              <li><span class="ex-icon">🔍</span> Fundraise readiness scorecard with personalized action items</li>
+              <li><span class="ex-icon">💬</span> Private Slack community with 500+ founders for real-time feedback</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- INVESTOR -->
+      <div class="pricing-card investor">
+        <div class="card-glow"></div>
+        <div class="pricing-tier">Investor Track</div>
+        <div class="pricing-name">Investor</div>
+        <div class="pricing-desc">For angel investors and emerging fund managers seeking quality deal flow.</div>
+        <div class="pricing-amount">$30<span>/mo</span></div>
+        <div class="pricing-period">Billed monthly · Cancel anytime</div>
+        <ul class="pricing-features">
+          <li>Curated startup deal flow</li>
+          <li>Due diligence frameworks</li>
+          <li>Investor community access</li>
+          <li>Co-investment opportunities</li>
+          <li>Portfolio tracking tools</li>
+        </ul>
+        <a href="#cta" class="pricing-btn">Start as Investor</a>
+
+        <div class="hover-details">
+          <div class="hover-details-inner">
+            <div class="hover-details-title">What you get — examples</div>
+            <ul class="example-list">
+              <li><span class="ex-icon">🎯</span> Monthly curated deal memo with 5-8 pre-vetted startups</li>
+              <li><span class="ex-icon">📋</span> Due diligence checklist & red-flag framework (100+ criteria)</li>
+              <li><span class="ex-icon">🤝</span> Access to syndicate co-investment rounds ($5K–$25K checks)</li>
+              <li><span class="ex-icon">📈</span> Portfolio dashboard with valuation tracking & MOIC calculations</li>
+              <li><span class="ex-icon">🎙️</span> Monthly investor roundtable with experienced LPs & GPs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALL ACCESS -->
+      <div class="pricing-card all-access" style="grid-column: 1 / -1;">
+        <div class="card-glow"></div>
+        <div class="popular-badge">Most Popular</div>
+        <div class="pricing-tier">Full Platform</div>
+        <div class="pricing-name">All Access</div>
+        <div class="pricing-desc">The complete Sengo experience — both founder and investor tools, community, and resources.</div>
+        <div class="pricing-amount">$50<span>/mo</span></div>
+        <div class="pricing-period">Billed monthly · Cancel anytime</div>
+        <ul class="pricing-features" style="columns:2;column-gap:40px;">
+          <li>Everything in Founder</li>
+          <li>Everything in Investor</li>
+          <li>Priority workshop access</li>
+          <li>1-on-1 monthly strategy call</li>
+          <li>Exclusive founder-investor mixers</li>
+          <li>Early access to new features</li>
+        </ul>
+        <a href="#cta" class="pricing-btn" style="max-width:400px;">Get All Access</a>
+
+        <div class="hover-details">
+          <div class="hover-details-inner">
+            <div class="hover-details-title">What you get — examples</div>
+            <ul class="example-list" style="columns:2;column-gap:32px;">
+              <li><span class="ex-icon">🌟</span> Everything in Founder + Investor tiers, combined</li>
+              <li><span class="ex-icon">📞</span> 30-min monthly 1-on-1 strategy call with a Sengo advisor</li>
+              <li><span class="ex-icon">🎉</span> Quarterly founder-investor networking events (virtual & IRL)</li>
+              <li><span class="ex-icon">🚀</span> Early beta access to all new Sengo platform tools</li>
+              <li><span class="ex-icon">🏅</span> Priority queue for live workshops & bootcamps</li>
+              <li><span class="ex-icon">📬</span> Direct intro requests to investors or founders in the network</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Advisory tiers -->
+    <div class="advisory-row">
+
+      <!-- FOUNDATION -->
+      <div class="pricing-card foundation">
+        <div class="card-glow"></div>
+        <div class="pricing-tier">Advisory</div>
+        <div class="pricing-name">Foundation</div>
+        <div class="pricing-desc">Fundraise advisory for founders preparing to raise their next round.</div>
+        <div class="pricing-amount" style="font-size:2rem;">Priced Upon Request</div>
+        <div class="pricing-period">Custom engagement · Scoped to your raise</div>
+        <ul class="pricing-features">
+          <li>Fundraise strategy & timeline</li>
+          <li>Pitch deck development</li>
+          <li>Financial model review</li>
+          <li>Investor targeting & outreach</li>
+          <li>Term sheet negotiation support</li>
+        </ul>
+        <a href="#cta" class="pricing-btn">Request Consultation</a>
+
+        <div class="hover-details">
+          <div class="hover-details-inner">
+            <div class="hover-details-title">Fundraise Advisory — examples</div>
+            <ul class="example-list">
+              <li><span class="ex-icon">🗺️</span> Custom fundraise roadmap: timing, milestones, and target raise amount</li>
+              <li><span class="ex-icon">📑</span> Full pitch deck teardown & rebuild with narrative coaching</li>
+              <li><span class="ex-icon">📊</span> Investor-grade financial model with sensitivity analysis</li>
+              <li><span class="ex-icon">🎯</span> Curated investor target list (50+ matched VCs/angels) with warm intros</li>
+              <li><span class="ex-icon">⚖️</span> Side-by-side term sheet comparison & negotiation playbook</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACCELERATOR -->
+      <div class="pricing-card accelerator">
+        <div class="card-glow"></div>
+        <div class="pricing-tier">Advisory+</div>
+        <div class="pricing-name">Accelerator</div>
+        <div class="pricing-desc">Fractional CFO + fundraise advisory for growth-stage startups ready to scale.</div>
+        <div class="pricing-amount" style="font-size:2rem;">Priced Upon Request</div>
+        <div class="pricing-period">Custom engagement · Ongoing or project-based</div>
+        <ul class="pricing-features">
+          <li>Everything in Foundation</li>
+          <li>Fractional CFO services</li>
+          <li>Board reporting & governance</li>
+          <li>Financial operations setup</li>
+          <li>Budgeting & cash flow management</li>
+        </ul>
+        <a href="#cta" class="pricing-btn">Request Consultation</a>
+
+        <div class="hover-details">
+          <div class="hover-details-inner">
+            <div class="hover-details-title">Fractional CFO + Fundraise — examples</div>
+            <ul class="example-list">
+              <li><span class="ex-icon">💼</span> Monthly CFO report: P&L, cash runway, burn rate, and KPI dashboard</li>
+              <li><span class="ex-icon">📋</span> Board deck preparation with investor-facing metrics & narrative</li>
+              <li><span class="ex-icon">🏗️</span> Financial ops setup: accounting stack, billing, payroll, compliance</li>
+              <li><span class="ex-icon">💰</span> 18-month cash flow forecast with scenario planning (base/bull/bear)</li>
+              <li><span class="ex-icon">🤝</span> Full fundraise support: deck, model, outreach, and close coordination</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<section id="cta" class="cta-section">
+  <h2>Ready to level up?</h2>
+  <p>Join hundreds of founders and investors already building with Sengo.</p>
+  <div class="hero-actions">
+    <a href="#pricing" class="btn btn-primary">Choose Your Plan</a>
+    <a href="mailto:hello@bysengo.com" class="btn btn-outline">Contact Us</a>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="footer-brand">sengo</div>
+  <p>&copy; 2026 Sengo. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="mailto:hello@bysengo.com">Contact</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#features">Features</a>
+  </div>
+</footer>
+
+</body>
+</html>
