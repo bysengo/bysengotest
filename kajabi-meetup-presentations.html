@@ -1503,6 +1503,20 @@
       else { goToSlide(currentSlide - 1); }
     }
   }, { passive: true });
+  var wheelTimeout = false;
+  deck.addEventListener('wheel', function(e) {
+    if (wheelTimeout) return;
+    var atFirst = currentSlide === 0 && e.deltaY < 0;
+    var atLast = currentSlide === totalSlides - 1 && e.deltaY > 0;
+    if (atFirst || atLast) return;
+    if (Math.abs(e.deltaY) > 30) {
+      e.preventDefault();
+      wheelTimeout = true;
+      if (e.deltaY > 0) { goToSlide(currentSlide + 1); }
+      else { goToSlide(currentSlide - 1); }
+      setTimeout(function() { wheelTimeout = false; }, 400);
+    }
+  }, { passive: false });
   updateNav();
 })();
 </script>
@@ -1579,6 +1593,20 @@
       else { goToSlide(currentSlide - 1); }
     }
   }, { passive: true });
+  var wheelTimeout = false;
+  deck.addEventListener('wheel', function(e) {
+    if (wheelTimeout) return;
+    var atFirst = currentSlide === 0 && e.deltaY < 0;
+    var atLast = currentSlide === totalSlides - 1 && e.deltaY > 0;
+    if (atFirst || atLast) return;
+    if (Math.abs(e.deltaY) > 30) {
+      e.preventDefault();
+      wheelTimeout = true;
+      if (e.deltaY > 0) { goToSlide(currentSlide + 1); }
+      else { goToSlide(currentSlide - 1); }
+      setTimeout(function() { wheelTimeout = false; }, 400);
+    }
+  }, { passive: false });
   updateNav();
 })();
 </script>
@@ -1655,6 +1683,20 @@
       else { goToSlide(currentSlide - 1); }
     }
   }, { passive: true });
+  var wheelTimeout = false;
+  deck.addEventListener('wheel', function(e) {
+    if (wheelTimeout) return;
+    var atFirst = currentSlide === 0 && e.deltaY < 0;
+    var atLast = currentSlide === totalSlides - 1 && e.deltaY > 0;
+    if (atFirst || atLast) return;
+    if (Math.abs(e.deltaY) > 30) {
+      e.preventDefault();
+      wheelTimeout = true;
+      if (e.deltaY > 0) { goToSlide(currentSlide + 1); }
+      else { goToSlide(currentSlide - 1); }
+      setTimeout(function() { wheelTimeout = false; }, 400);
+    }
+  }, { passive: false });
   updateNav();
 })();
 </script>
@@ -1749,6 +1791,20 @@
       }
     }
   }, { passive: true });
+  var wheelTimeout = false;
+  deck.addEventListener('wheel', function(e) {
+    if (wheelTimeout) return;
+    var atFirst = currentSlide === 0 && e.deltaY < 0;
+    var atLast = currentSlide === totalSlides - 1 && e.deltaY > 0;
+    if (atFirst || atLast) return;
+    if (Math.abs(e.deltaY) > 30) {
+      e.preventDefault();
+      wheelTimeout = true;
+      if (e.deltaY > 0) { goToSlide(currentSlide + 1); }
+      else { goToSlide(currentSlide - 1); }
+      setTimeout(function() { wheelTimeout = false; }, 400);
+    }
+  }, { passive: false });
   updateNav();
 })();
 </script>
