@@ -11,29 +11,29 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #fefefe;
+      --bg: #F3EDE7;
       --surface: #ffffff;
-      --surface-2: #f4f0ff;
-      --border: #e2ddf5;
-      --text: #1a1035;
-      --text-dim: #6b6290;
-      --accent: #7c3aed;
-      --accent-light: #a78bfa;
-      --accent-glow: rgba(124, 58, 237, 0.15);
-      --green: #059669;
-      --green-light: #34d399;
-      --green-glow: rgba(5, 150, 105, 0.1);
-      --gold: #d97706;
-      --gold-light: #fbbf24;
-      --gold-glow: rgba(217, 119, 6, 0.08);
-      --orange: #ea580c;
-      --orange-light: #fb923c;
-      --orange-glow: rgba(234, 88, 12, 0.08);
-      --blue: #2563eb;
-      --blue-light: #60a5fa;
-      --blue-glow: rgba(37, 99, 235, 0.08);
-      --rose: #e11d48;
-      --rose-light: #fb7185;
+      --surface-2: #EDE5DB;
+      --border: #d9cfc3;
+      --text: #1B3533;
+      --text-dim: #67441A;
+      --accent: #744D1F;
+      --accent-light: #AF8145;
+      --accent-glow: rgba(116, 77, 31, 0.15);
+      --green: #717E36;
+      --green-light: #8fa044;
+      --green-glow: rgba(113, 126, 54, 0.12);
+      --gold: #AF8145;
+      --gold-light: #c9a06a;
+      --gold-glow: rgba(175, 129, 69, 0.12);
+      --orange: #D57028;
+      --orange-light: #e08a4d;
+      --orange-glow: rgba(213, 112, 40, 0.12);
+      --blue: #1B3533;
+      --blue-light: #2a5350;
+      --blue-glow: rgba(27, 53, 51, 0.12);
+      --rose: #D57028;
+      --rose-light: #e08a4d;
     }
 
     html { scroll-behavior: smooth; }
@@ -49,7 +49,7 @@
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(243, 237, 231, 0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       padding: 0 40px;
@@ -58,7 +58,7 @@
     }
     .nav-logo {
       font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em;
-      background: linear-gradient(135deg, var(--accent), var(--rose));
+      background: linear-gradient(135deg, var(--accent), var(--orange));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -82,14 +82,14 @@
       min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; justify-content: center; text-align: center;
       padding: 120px 24px 80px; position: relative;
-      background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 25%, #fff7ed 50%, #f0fdf4 75%, #eff6ff 100%);
+      background: linear-gradient(135deg, #F3EDE7 0%, #f0e6d8 25%, #ebe0d0 50%, #e8e4d8 75%, #F3EDE7 100%);
     }
     .hero::before {
       content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 500px 350px at 20% 30%, rgba(124,58,237,0.08), transparent),
-        radial-gradient(ellipse 400px 300px at 80% 60%, rgba(225,29,72,0.06), transparent),
-        radial-gradient(ellipse 300px 200px at 50% 80%, rgba(37,99,235,0.05), transparent);
+        radial-gradient(ellipse 500px 350px at 20% 30%, rgba(175,129,69,0.12), transparent),
+        radial-gradient(ellipse 400px 300px at 80% 60%, rgba(213,112,40,0.1), transparent),
+        radial-gradient(ellipse 300px 200px at 50% 80%, rgba(113,126,54,0.08), transparent);
       pointer-events: none;
     }
     .hero-badge {
@@ -98,7 +98,7 @@
       border-radius: 100px; padding: 6px 16px; font-size: 0.8rem;
       color: var(--accent); font-weight: 600; letter-spacing: 0.05em;
       text-transform: uppercase; margin-bottom: 32px;
-      box-shadow: 0 2px 12px rgba(124,58,237,0.08);
+      box-shadow: 0 2px 12px rgba(175,129,69,0.12);
     }
     .hero-badge::before {
       content: ''; width: 6px; height: 6px; border-radius: 50%;
@@ -110,7 +110,7 @@
       margin-bottom: 24px;
     }
     .hero h1 .gradient {
-      background: linear-gradient(135deg, var(--accent), var(--rose), var(--orange));
+      background: linear-gradient(135deg, var(--orange), var(--gold), var(--green));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -126,15 +126,15 @@
       cursor: pointer; border: none;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #9333ea);
+      background: linear-gradient(135deg, var(--accent), var(--orange));
       color: #fff; box-shadow: 0 4px 20px var(--accent-glow);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,58,237,0.25); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(116,77,31,0.25); }
     .btn-outline {
-      background: white; color: var(--text);
+      background: #fff; color: var(--text);
       border: 1px solid var(--border);
     }
-    .btn-outline:hover { border-color: var(--accent); box-shadow: 0 4px 16px var(--accent-glow); }
+    .btn-outline:hover { border-color: var(--gold); box-shadow: 0 4px 16px var(--gold-glow); }
 
     /* ── SECTION SHARED ── */
     section { padding: 120px 24px; }
@@ -156,7 +156,7 @@
 
     /* ── WHAT WE DO ── */
     #features {
-      background: linear-gradient(180deg, #fff 0%, #f5f3ff 50%, #fdf2f8 100%);
+      background: linear-gradient(180deg, #F3EDE7 0%, #ece3d6 50%, #e8ddd0 100%);
     }
     .features-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -169,7 +169,7 @@
     }
     .feature-card:hover {
       border-color: var(--accent-light); transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(124,58,237,0.1);
+      box-shadow: 0 12px 40px rgba(175,129,69,0.15);
     }
     .feature-icon {
       width: 48px; height: 48px; border-radius: 12px;
@@ -181,7 +181,7 @@
 
     /* ── PRICING ── */
     #pricing {
-      background: linear-gradient(180deg, #fdf2f8 0%, #f5f3ff 30%, #eff6ff 60%, #f0fdf4 100%);
+      background: linear-gradient(180deg, #e8ddd0 0%, #ece3d6 30%, #e5dfd5 60%, #F3EDE7 100%);
     }
     .pricing-grid {
       display: grid; grid-template-columns: repeat(2, 1fr);
@@ -195,11 +195,11 @@
     .pricing-card:hover {
       transform: translateY(-6px);
     }
-    .pricing-card.founder:hover { border-color: var(--green); box-shadow: 0 20px 60px rgba(5,150,105,0.12), 0 0 0 1px var(--green); }
-    .pricing-card.investor:hover { border-color: var(--blue); box-shadow: 0 20px 60px rgba(37,99,235,0.12), 0 0 0 1px var(--blue); }
-    .pricing-card.all-access:hover { border-color: var(--gold); box-shadow: 0 20px 60px rgba(217,119,6,0.12), 0 0 0 1px var(--gold); }
-    .pricing-card.foundation:hover { border-color: var(--accent); box-shadow: 0 20px 60px rgba(124,58,237,0.12), 0 0 0 1px var(--accent); }
-    .pricing-card.accelerator:hover { border-color: var(--orange); box-shadow: 0 20px 60px rgba(234,88,12,0.12), 0 0 0 1px var(--orange); }
+    .pricing-card.founder:hover { border-color: var(--green); box-shadow: 0 20px 60px rgba(113,126,54,0.15), 0 0 0 1px var(--green); }
+    .pricing-card.investor:hover { border-color: var(--blue); box-shadow: 0 20px 60px rgba(27,53,51,0.15), 0 0 0 1px var(--blue); }
+    .pricing-card.all-access:hover { border-color: var(--gold); box-shadow: 0 20px 60px rgba(175,129,69,0.18), 0 0 0 1px var(--gold); }
+    .pricing-card.foundation:hover { border-color: var(--accent); box-shadow: 0 20px 60px rgba(116,77,31,0.15), 0 0 0 1px var(--accent); }
+    .pricing-card.accelerator:hover { border-color: var(--orange); box-shadow: 0 20px 60px rgba(213,112,40,0.15), 0 0 0 1px var(--orange); }
 
     .pricing-card .card-glow {
       position: absolute; top: -80px; right: -80px;
@@ -207,11 +207,11 @@
       opacity: 0; transition: opacity 0.5s; pointer-events: none; filter: blur(40px);
     }
     .pricing-card:hover .card-glow { opacity: 1; }
-    .pricing-card.founder .card-glow { background: rgba(52, 211, 153, 0.2); }
-    .pricing-card.investor .card-glow { background: rgba(96, 165, 250, 0.2); }
-    .pricing-card.all-access .card-glow { background: rgba(251, 191, 36, 0.2); }
-    .pricing-card.foundation .card-glow { background: rgba(167, 139, 250, 0.2); }
-    .pricing-card.accelerator .card-glow { background: rgba(251, 146, 60, 0.2); }
+    .pricing-card.founder .card-glow { background: rgba(113, 126, 54, 0.2); }
+    .pricing-card.investor .card-glow { background: rgba(27, 53, 51, 0.15); }
+    .pricing-card.all-access .card-glow { background: rgba(175, 129, 69, 0.2); }
+    .pricing-card.foundation .card-glow { background: rgba(116, 77, 31, 0.2); }
+    .pricing-card.accelerator .card-glow { background: rgba(213, 112, 40, 0.2); }
 
     .pricing-tier {
       font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
@@ -257,10 +257,10 @@
     .pricing-card.investor .pricing-btn { background: var(--blue); color: #fff; }
     .pricing-card.investor .pricing-btn:hover { box-shadow: 0 4px 20px var(--blue-glow); }
     .pricing-card.all-access .pricing-btn {
-      background: linear-gradient(135deg, var(--accent), var(--rose), var(--orange));
+      background: linear-gradient(135deg, var(--accent), var(--orange), var(--gold));
       color: #fff;
     }
-    .pricing-card.all-access .pricing-btn:hover { box-shadow: 0 4px 20px rgba(124,58,237,0.2); }
+    .pricing-card.all-access .pricing-btn:hover { box-shadow: 0 4px 20px rgba(175,129,69,0.25); }
     .pricing-card.foundation .pricing-btn { background: var(--accent); color: #fff; }
     .pricing-card.foundation .pricing-btn:hover { box-shadow: 0 4px 20px var(--accent-glow); }
     .pricing-card.accelerator .pricing-btn { background: var(--orange); color: #fff; }
@@ -276,7 +276,7 @@
       max-height: 500px; opacity: 1; margin-top: 24px;
     }
     .hover-details-inner {
-      background: linear-gradient(135deg, #f5f3ff, #fdf2f8);
+      background: linear-gradient(135deg, #ede5db, #f3ede7);
       border-radius: 12px; padding: 24px;
       border: 1px solid var(--border);
     }
@@ -297,7 +297,7 @@
     /* Popular badge */
     .popular-badge {
       position: absolute; top: 20px; right: 20px;
-      background: linear-gradient(135deg, var(--accent), var(--rose));
+      background: linear-gradient(135deg, var(--orange), var(--gold));
       color: #fff; font-size: 0.7rem; font-weight: 700;
       padding: 4px 12px; border-radius: 100px; letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -313,12 +313,12 @@
     .stats-bar {
       display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 32px; padding: 80px 24px; text-align: center;
-      background: white;
+      background: #fff;
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
     .stat-number {
       font-size: 2.5rem; font-weight: 900; letter-spacing: -0.03em;
-      background: linear-gradient(135deg, var(--accent), var(--rose));
+      background: linear-gradient(135deg, var(--accent), var(--orange));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -328,11 +328,11 @@
     .cta-section {
       text-align: center; padding: 120px 24px;
       position: relative;
-      background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 50%, #fff7ed 100%);
+      background: linear-gradient(135deg, #F3EDE7 0%, #ece3d6 50%, #e8ddd0 100%);
     }
     .cta-section::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 600px 350px at 50% 50%, rgba(124,58,237,0.06), transparent);
+      background: radial-gradient(ellipse 600px 350px at 50% 50%, rgba(175,129,69,0.1), transparent);
       pointer-events: none;
     }
     .cta-section h2 {
@@ -344,7 +344,7 @@
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border); padding: 48px 24px;
-      text-align: center; background: white;
+      text-align: center; background: #F3EDE7;
     }
     .footer-brand { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px;
       background: linear-gradient(135deg, var(--accent), var(--rose));
@@ -353,7 +353,7 @@
     footer p { color: var(--text-dim); font-size: 0.85rem; }
     .footer-links { display: flex; gap: 24px; justify-content: center; margin-top: 16px; }
     .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--accent); }
+    .footer-links a:hover { color: var(--orange); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
@@ -410,32 +410,32 @@
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(5,150,105,0.08);color:var(--green);">📊</div>
+        <div class="feature-icon" style="background:rgba(113,126,54,0.1);color:var(--green);">📊</div>
         <h3>Fundraise Advisory</h3>
         <p>Expert guidance on building pitch decks, financial models, and investor outreach strategies to close your round.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(124,58,237,0.08);color:var(--accent);">💼</div>
+        <div class="feature-icon" style="background:rgba(116,77,31,0.1);color:var(--accent);">💼</div>
         <h3>Fractional CFO</h3>
         <p>On-demand financial leadership — budgeting, forecasting, and board-ready reporting without the full-time hire.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(217,119,6,0.08);color:var(--gold);">🤝</div>
+        <div class="feature-icon" style="background:rgba(175,129,69,0.1);color:var(--gold);">🤝</div>
         <h3>Community & Network</h3>
         <p>Connect with vetted founders and investors in a private community built for accountability and collaboration.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(37,99,235,0.08);color:var(--blue);">📈</div>
+        <div class="feature-icon" style="background:rgba(27,53,51,0.1);color:var(--blue);">📈</div>
         <h3>Investor Deal Flow</h3>
         <p>Access curated startup deal flow, diligence frameworks, and co-investment opportunities within the Sengo ecosystem.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(234,88,12,0.08);color:var(--orange);">🎓</div>
+        <div class="feature-icon" style="background:rgba(213,112,40,0.1);color:var(--orange);">🎓</div>
         <h3>Courses & Workshops</h3>
         <p>Self-paced courses and live workshops on fundraising, financial modeling, term sheets, and investor relations.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(0,0,0,0.04);color:var(--text);">⚡</div>
+        <div class="feature-icon" style="background:rgba(27,53,51,0.06);color:var(--text);">⚡</div>
         <h3>Templates & Tools</h3>
         <p>Plug-and-play financial models, pitch deck templates, cap table calculators, and investor CRM tools.</p>
       </div>
